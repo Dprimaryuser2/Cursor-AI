@@ -1,0 +1,10 @@
+pos_terminal_link = '//span[text()="POS Terminals"]//preceding-sibling::i[normalize-space(@class="fa fa-fw fa-money")]'
+pos_heading = '//h4[text()="POS Terminals "]'
+tagged_device_edit_link = '//td[contains(text(),"Serial_Key")]//ancestor::tr//i'    # Replace Serial_Key with id
+remove_device_icon = '//i[@class="fa fa-times fs-2x text-danger"]'
+update_button = '//button[@class="btn pull-right btn-primary"]'
+edit_modal_body = '//div[@id="show___BV_modal_content_"]'
+edit_modal_title = '//h5[@id="show___BV_modal_title_" and text()="Edit POS Terminal"]'
+pos_search_bar = '//input[@placeholder="Enter search query.."]'
+remove_modal_body = '//div[contains(@id,"BV_modal_content_")]'
+remove_button = '//button[@class="btn btn-primary" and text()="Remove"]'
