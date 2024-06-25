@@ -108,7 +108,7 @@ check_inventory_button = '//button[@id="check-inventory-btn"]'
 inventory_modal_heading = '//h5[contains(text(),"Inventory")]'
 inventory_close_button = '//h5[contains(text(),"Inventory")]//following-sibling::button'
 update_product_button = '//button[@id="update-product-btn"]'
-
+quantity= "//input[@id='qtyInput' and @placeholder='Enter Weight']"
 # Carry Bags
 carry_bag_heading = '//h5[contains(text(),"Select Carry Bags")]'
 carry_bag_input_field = '//h6[@id="label-undefined" and text()="Sync39"]//ancestor::div[@class="row mb-2"]//input'
@@ -117,10 +117,15 @@ close_button = '//button[@class="close"]'
 
 open_session_link = '//div[@class="fadein col-md-6 col-lg-6" and not(@style="display: none;")]//div[@id="session-info"]//a'
 
+select_mrp="//h5[@class='modal-title' and contains(text(),'Select MRP')]"
+select_mrp_refresh="//button[@class='btn add-to-cart serve-refresh btn-light btn-sm' and contains(text(),'Refresh')]"
+add_to_cart_mrp="//button[@id='multiple-mrp-add-to-cart' and @class='btn m-0 custom-btn btn-secondary']"
+
 # Discard after half payment
 discard_payment_bill = '//p[contains(normalize-space(),"Discard Bill")]'
 discard_confirm = '//span[text()="Yes, Discard"]'
-
+cart_0="//span[@class='quantity h5 mb-0 mr-1' and contains(text(),'(0)')]"
+back_icon_on_checkout = '//img[@class="icon text-white"]'
 # Manual Discount assertion fields
 update_product_subtotal = '//label[contains(text(),"Subtotal")]//following-sibling::p'
 update_product_cumulative_discount = '//label[contains(text(),"Cumulative Discount")]//following-sibling::p'

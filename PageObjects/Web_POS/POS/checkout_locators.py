@@ -54,3 +54,25 @@ checkout_net_price_column = '//span[contains(text(),"barcode")]//ancestor::tr//t
 # Billing locators
 bill_discount = '//button[contains(text(),"Bill Discount")]'
 checkout_page_manual_discount = '//span[contains(normalize-space(),"Manual Discount")]//ancestor::div[@class="row mb-1"]/div[@class="col text-right"]/p'
+
+#split payment
+enter_split_amount='//label[@id="label-amt-pay"]//following-sibling::input[@class="form-control amtpay"]'
+enter_cash='//input[@id="input-for-customer-paid" and @placeholder="Enter Amount"]'
+continue_cash_button='//button[@id="process-payment-btn" and @class="btn float-right mt-4 btn-primary"]'
+enter_paytm_transaction_id='//input[@id="trxn-ref-id" and @class="form-control form-control-sm"]'
+continue_paytm_button='//button[@id="process-payment-btn" and @class="btn float-right mt-4 btn-primary"]'
+cancel='//button[@class="btn mr-1 btn-outline-primary btn-block"]'
+redeem_voucher_transactionId="//input[@id='trxn-ref-id' and @placeholder='Enter reference id']"
+voucher_continue_button="//button[@id='process-payment-btn' and @class='btn float-right mt-4 btn-primary']"
+redeem_voucher='//button[@id="pay-method-undefined" and contains(text(),"Redeem Voucher")]'
+
+account_on_sale="//button[@class='btn text-center p-0 h-25 mb-2 btn-outline-secondary btn-block' and contains(text(),'On-Account Sale')]"
+remark_account_on_sale="//textarea[@id='input-account-remark']"
+continue_account_on_sale_button="//button[@id='confirm-account-sale' and @class='btn w-20 btn-primary']"
+#payment complete
+print_invoice="//button[@id='print-invoice-btn' and @class='btn mt-2 btn-primary btn-block']"
+share_invoice="//button[@id='share-invoice-btn' and @class='btn mt-4 mt-md-2 btn-primary btn-block']"
+
+no_payment_required="//header[@id='__BVID__1628___BV_modal_header_']//child::h5[contains(text(),'No Payment Required')]"
+no_payment_required_confirm_button="//button[@class='btn ml-1 btn-primary btn-block']//child::span[contains(text(),'Confirm')]"
+checkout_split_payment='//div[@class="v-switch-button"]'
