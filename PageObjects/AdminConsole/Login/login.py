@@ -1,0 +1,7 @@
+email = '//input[@id="emailInput"]'
+password = '//input[@id="passwordInput"]'
+continue_button = '//button[@id="continueBtn"]'
+dashboard = '//h3[@data-toggle="modal" and text()="Dashboard"]'
+invoice_icon = '//i[@class="fa fa-fw fa-shopping-cart "]'
+product_icon = '//i[@class="fa fa-fw fa-book "]'
+promotion_icon = '//i[@class="fa fa-fw fa-bullhorn "]'
