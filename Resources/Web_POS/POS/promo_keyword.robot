@@ -3852,4 +3852,3 @@ Select Cart Mode
         Click Element    ${order_option}
     END
     Click Button    ${switch_confirm_button}
-

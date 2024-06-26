@@ -13,6 +13,23 @@ Test Teardown   Close Browser
 ${POS_TD}=    ${CURDIR}${/}..${/}..${/}TestData${/}POS${/}Billing${/}billing_test_data.xlsx
 
 *** Test Cases ***
+Zwing_B_1 Auto Switch To Billing
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_66
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Change Billing Mode    ${pos_data}
+   Auto Switch To Billing
+   Verify Auto Switched To Billing
+
+Zwing_B_2 Add Product to cart by scanning barcode
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_64
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Click On First Product Row
+   Verify Item Added In Cart
 
 Zwing_B_5 Add Multiple price products to cart
      ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_05
@@ -90,6 +107,34 @@ Zwing_B_16 Apply manual Discount | item level
     ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
     Apply Item Manual Discount | Select From List    ${discount_data}
     Verify Item Manual Discount   ${product_price}
+
+Zwing_B_17 Add Carry Bag
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_63
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Add Carry Bags    ${pos_data}
+   Verify Item Added In Cart
+
+Zwing_B_19 Reset Bill
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_65
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Verify Item Added In Cart
+   Reset Bill | Billing Module
+   Verify Bill Is Reset
+
+Zwing_B_20 Navigate To CheckOut Page
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_71
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Verify Item Added In Cart
+   Add Customer Details    ${pos_data}
+   Verify Billing Checkout
 
 Zwing_B_21 Collect payment by cash
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_21
@@ -206,6 +251,20 @@ Zwing_B_30 Discard Bill after Partial payment
     Discard Bill | Checkout
     Verify Discard Bill After Partial Payment
 
+Zwing_B_31 Automatic Invoice Generation
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_84
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Verify Item Added In Cart
+   Add Customer Details    ${pos_data}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Payment By Cash   ${value}
+   Automatic Invoice Generation
+   Verify Invoice Generated Automatically
+
 Zwing_B_32 Generate Invoice with Zero bill amount
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_32
     Login With Valid Username And Password | POS   ${pos_data}
@@ -231,3 +290,152 @@ Zwing_B_34 Apply Bill level discount
     ${bill_level}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
     Verify Bill Level Manual Discount    ${bill_level}
 
+Zwing_B_35 Add Bill Remark
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_70
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Verify Item Added In Cart
+   Add Customer Details    ${pos_data}
+   Verify Billing Checkout
+   Add Bill Remarks   ${pos_data}
+   Verify Bill Remark Added
+
+Zwing_B_36 Apply Bill Level Coupon
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_69
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Verify Item Added In Cart
+   Add Customer Details    ${pos_data}
+   Verify Billing Checkout
+   Apply Bill Coupon
+
+Zwing_B_37 Apply Bill Level Loyalty
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_68
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Verify Item Added In Cart
+   Add Customer Details    ${pos_data}
+   Verify Billing Checkout
+   Apply Bill Loyalty
+
+Zwing_B_41 Auto Switch To Billing From Return Mode
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_72
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Change Billing Mode    ${pos_data}
+   Auto Switch To Billing
+   Verify Auto Switched To Billing
+
+Zwing_B_42 Auto Switch To Billing From Exchange Mode
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_73
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Change Billing Mode    ${pos_data}
+   Auto Switch To Billing
+   Verify Auto Switched To Billing
+
+Zwing_B_43 Click on Confirm button on switch to Order popup box
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_74
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Change Billing Mode    ${pos_data}
+
+Zwing_B_44 Click on Cancel button on switch to Order popup box
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_75
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Verify Cancel Button While Switching Mode  ${pos_data}
+   Verify Auto Switched To Billing
+
+Zwing_B_45 Switching Between Billing to Order Will Give Confirmation Popup
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_76
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Verify Cancel Button While Switching Mode  ${pos_data}
+
+Zwing_B_46 Click on Confirm button on switch to Return popup box
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_77
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Change Billing Mode    ${pos_data}
+
+Zwing_B_47 Click on Cancel button on switch to Return popup box
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_78
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Verify Cancel Button While Switching Mode  ${pos_data}
+   Verify Auto Switched To Billing
+
+Zwing_B_48 Switching Between Billing to Return Will Give Confirmation Popup
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_79
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Verify Cancel Button While Switching Mode  ${pos_data}
+
+Zwing_B_49 Set variance limit and enter price override less or more than total price but within variance limit
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_80
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Click On First Product Row
+   Verify Item Added In Cart
+   Price Override | Billing    ${pos_data}
+   Verify Price Overriden | Billing
+
+Zwing_B_50 Set variance limit and enter price override less or more than total price but out of variance limit
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_81
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Click On First Product Row
+   Verify Item Added In Cart
+   Price Override | Billing    ${pos_data}
+   Verify Alert Message for Price Overriden | Billing
+
+Zwing_B_51 Set variance limit and enter price override less or more than total price but equal to variance limit
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_67
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Verify Item Added In Cart
+   Click On First Product Row
+   Price Override | Billing    ${pos_data}
+   Verify Price Overriden | Billing
+
+Zwing_B_52 Set variance limit and enter price override less or more than total price but within variance limit. Then try again price override and check the response
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_82
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Click On First Product Row
+   Verify Item Added In Cart
+   Price Override | Billing    ${pos_data}
+   Verify Price Override Link Is Disabled
+
+Zwing_B_53 Disable price override and try price overriding then check the response
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_83
+   Open Application | POS
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Click On First Product Row
+   Verify Item Added In Cart
+   Verify Price Override Link Is Disabled

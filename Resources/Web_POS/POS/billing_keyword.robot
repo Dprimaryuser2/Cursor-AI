@@ -390,3 +390,298 @@ Collect Payment Using Store Credit
     Element Should Be Enabled    ${store_credit_continue_button}
     Click Element    ${store_credit_continue_button}
     Wait Until Page Contains Element    ${store_credit_validation_message}
+
+
+Change Billing Mode
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    Wait Until Page Contains Element    ${switch_billing_dropdown}
+    Click Element    ${switch_billing_dropdown}
+    Click Element    //a[contains(text(),"${my_dict.Mode}")]
+    Wait Until Page Contains Element    ${switch_modal_text}
+    Wait Until Page Contains Element    ${switch_confirm_button}
+    Page Should Contain Element    ${switch_modal_text}
+    Element Should Be Enabled    ${switch_confirm_button}
+    Element Should Be Enabled    ${switch_cancel_button}
+    Click Element    ${switch_confirm_button}
+    Wait Until Page Contains Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Mode}"]
+
+
+Auto Switch To Billing
+    Click Element    ${order_management_option_sidebar}
+    Wait Until Page Contains Element    ${order_management_option_sidebar}
+    Click Element    ${pos_option_sidebar}
+    Wait Until Page Contains Element    ${switch_modal_text}
+    Wait Until Page Contains Element    ${switch_modal_proceed_button}
+    Click Element    ${switch_modal_proceed_button}
+
+Price Override | Billing
+    [Arguments]    ${price_override}
+    ${my_dict}    Create Dictionary   &{price_override}
+    Wait Until Page Contains Element    ${price_override_link}
+    Click Element    ${price_override_link}
+    Wait Until Page Contains Element    ${price_override_heading}
+    ${test_data_price}  Convert To Integer    ${my_dict.Price_Override}
+    ${price}  Evaluate  ${unit_price_amount} + ${test_data_price}
+    Input Text    ${price_override_custom_price_field}    ${price}
+    Click Element    ${apply_override_button}
+
+Apply Bill Loyalty
+    Wait Until Page Contains Element    ${checkout_loyalty}
+    Click Element  ${checkout_loyalty}
+    Wait Until Page Contains Element    ${loyalty_modal_heading}
+    Page Should Contain Element     ${loyalty_modal_heading}
+    #need to ask client for further process
+
+Apply Bill Coupon
+    Wait Until Page Contains Element    ${checkout_coupon}
+    Click Element  ${checkout_coupon}
+    Wait Until Page Contains Element    ${loyalty_modal_heading}
+    Page Should Contain Element     ${loyalty_modal_heading}
+    #need to ask client for further process
+
+Add Bill Remarks
+   [Arguments]    ${bill_remark}
+   ${my_dict}    Create Dictionary   &{bill_remark}
+   Wait Until Page Contains Element    ${checkout_billing_options}
+   Click Element    ${checkout_billing_options}
+   ${remark}  Run Keyword And Return Status    Element Should Be Visible    ${checkout_billing_add_bill_remark}
+   IF    ${remark}
+       Wait Until Page Contains Element    ${checkout_billing_add_bill_remark}
+       Click Element    ${checkout_billing_add_bill_remark}
+       Input Text    ${add_bill_remark_textarea}    ${my_dict.Remark}
+       Click Element    ${add_bill_remark_save_button}
+   ELSE
+        Click Element    ${checkout_billing_edit_remark}
+        Input Text    ${add_bill_remark_textarea}    ${my_dict.Remark}
+        Click Element    ${add_bill_remark_save_button}
+   END
+   Capture Page Screenshot
+
+Automatic Invoice Generation
+   Wait Until Page Contains Element    ${payment_complete_heading}
+   Click Element    ${print_invoice_button}
+   Wait Until Page Contains Element    ${invoice_modal_heading}
+
+Verify The Product Are Added In Cart
+    Wait Until Page Contains Element    ${in_store}
+    Page Should Contain Element    ${in_store}
+    Page Should Contain Element    ${delivery}
+    Wait Until Page Contains Element    ${cart_last_element}  timeout=5s
+    Wait Until Page Contains Element    //span[@class='quantity h5 mb-0 mr-1' and contains(text(),'${cart_count}')]
+    Page Should Contain Element     //span[@class='quantity h5 mb-0 mr-1' and contains(text(),'${cart_count}')]
+    Wait Until Page Contains Element    ${payable_amount}
+    Page Should Contain Element    ${payable_amount}
+    Element Should Be Enabled    ${checkout_button}
+    Element Should Be Enabled    ${clear_all_items}
+
+Verify Carry Bag Added In Cart
+    Wait Until Page Contains Element    ${in_store}
+    Page Should Contain Element    ${in_store}
+    Page Should Contain Element    ${delivery}
+    Wait Until Page Contains Element    ${cart_last_element}  timeout=5s
+    ${cart_count}  Get Text   ${cart_last_element}
+    Wait Until Page Contains Element    //span[@class='quantity h5 mb-0 mr-1' and contains(text(),'${cart_count}')]
+    Page Should Contain Element     //span[@class='quantity h5 mb-0 mr-1' and contains(text(),'${cart_count}')]
+    Wait Until Page Contains Element    ${payable_amount}
+    Page Should Contain Element    ${payable_amount}
+    Element Should Be Enabled    ${checkout_button}
+    Element Should Be Enabled    ${clear_all_items}
+
+Verify Bill Is Reset
+    Wait Until Page Contains Element    ${in_store}
+    Page Should Contain Element    ${in_store}
+    Wait Until Page Contains Element    ${delivery}
+    Page Should Contain Element    ${delivery}
+    Page Should Contain Element    ${cart_0}
+    Page Should Contain Element    ${payable_amount}
+    Page Should Not Contain Element    ${clear_all_items}
+    Page Should Not Contain Element    ${checkout_button}
+
+Verify Auto Switched To Billing
+    ${switch_option}  Get Text    ${switch_billing_dropdown}
+    Should Be Equal    ${switch_option}    Billing
+    Page Should Contain Element    ${cart_0}
+    Page Should Not Contain Element    ${clear_all_items}
+    Page Should Not Contain Element    ${checkout_button}
+
+Verify Price Overriden | Billing
+    Wait Until Element Is Visible    ${price_override_successful}
+    Element Should Be Visible    ${price_override_successful}
+    Wait Until Page Contains Element    ${first_item_product_name}  timeout=15s
+    Click Element  ${first_item_product_name}
+    Wait Until Page Contains Element    ${update_product_button}
+    Page Should Not Contain Element   ${price_override_link}
+
+Verify Bill Remark Added
+   Wait Until Element Is Visible    ${remark_added_successful}   timeout=15s
+   Page Should Contain Element   ${remark_added_successful}
+   Click Element    ${checkout_billing_options}
+   Wait Until Page Contains Element    ${checkout_billing_edit_remark}
+   Page Should Contain Element    ${checkout_billing_edit_remark}
+
+Verify Invoice Generated Automatically
+   Wait Until Page Contains Element    ${invoice_modal_heading}
+   Page Should Contain Element    ${invoice_modal_heading}
+   Page Should Contain Element    ${close_invoice_modal_button}
+   Page Should Contain Element    ${print_invoice_modal_button}
+
+Verify Cancel Button While Switching Mode
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    Wait Until Page Contains Element    ${switch_billing_dropdown}
+    Click Element    ${switch_billing_dropdown}
+    Click Element    //a[contains(text(),"${my_dict.Mode}")]
+    Wait Until Page Contains Element    ${switch_modal_text}
+    Wait Until Page Contains Element    ${switch_cancel_button}
+    Element Should Be Enabled    ${switch_confirm_button}
+    Element Should Be Enabled    ${switch_cancel_button}
+    Click Element    ${switch_cancel_button}
+
+Verify Item Added In Cart
+    Wait Until Page Contains Element    ${in_store}
+    Page Should Contain Element    ${in_store}
+    Page Should Contain Element    ${delivery}
+    Wait Until Page Contains Element    ${cart_last_element}  timeout=5s
+    ${cart_count}  Get Text   ${cart_last_element}
+    Convert To Integer    ${cart_count}
+    ${i}=  Set Variable    1
+    ${product_count_for_test}    Set Variable    0
+    FOR  ${i}  IN RANGE    1    ${cart_count}+1
+           ${is_a_button}    Run Keyword And Return Status    Element Should Be Visible    ${quantity_column_buttons}
+           IF    ${is_a_button}
+               ${product_count_for_test}=    Evaluate    ${product_count_for_test}+1
+               Log    ${product_count_for_test}
+           ELSE
+               Wait Until Page Contains Element    (${product_name_in_cart_row})[${i}]
+               Click Element    (${product_name_in_cart_row})[${i}]
+               Wait Until Page Contains Element    ${quantity_product_window}
+               ${count}    Get Text    ${quantity_product_window}
+               Convert To Integer    ${count}
+               ${product_count_for_test}    Evaluate    ${count}+${product_count_for_test}
+               Wait Until Page Contains Element    ${close_product_window_button}
+               Click Element    ${close_product_window_button}
+           END
+    END
+    ${temp}    Get Text    ${item_quantity_in_cart}
+    ${temp}    Remove Characters    ${temp}
+    Convert To Integer    ${temp}
+    Should Be Equal As Integers     ${temp}    ${product_count_for_test}
+    Wait Until Page Contains Element    ${payable_amount}
+    Page Should Contain Element    ${payable_amount}
+    Element Should Be Enabled    ${checkout_button}
+    Element Should Be Enabled    ${clear_all_items}
+
+Verify Alert Message for Price Overriden | Billing
+    Wait Until Element Is Visible    ${amount_limit_message}
+    Element Should Be Visible    ${amount_limit_message}
+    Page Should Contain Element    ${apply_override_button}
+
+Verify Price Override Link Is Disabled
+    ${status}  Run Keyword And Return Status    Element Should Be Visible     ${price_override_link}
+    IF    ${status}
+        Wait Until Element Is Visible    ${price_override_successful}
+        Element Should Be Visible    ${price_override_successful}
+        Wait Until Page Contains Element    ${first_item_product_name}  timeout=15s
+        Click Element  ${first_item_product_name}
+        Wait Until Page Contains Element    ${update_product_button}
+        Page Should Not Contain Element   ${price_override_link}
+    ELSE
+          Wait Until Page Does Not Contain Element    ${price_override_link}
+          Page Should Not Contain Element    ${price_override_link}
+    END
+
+Add Product By Scan Only
+   [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    Click Element    ${scan_only}
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Input Text    ${product_search_bar}    ${key}
+        Press Keys    ${product_search_bar}    ENTER
+        Wait Until Element Contains     ${table}    ${key}    timeout=20s
+        Element Should Contain    ${item_cart_table}    ${key}
+        ${unit_price_amount}=    Get Text    ${price}
+        ${unit_price_amount}=    Remove Characters    ${unit_price_amount}
+        ${unit_price_amount}=    Convert To Number    ${unit_price_amount}
+        Set Test Variable    ${unit_price_amount}
+        ${quantity_in_piece}=    Run Keyword And Return Status    Element Should Contain    ${quantity_row}    Piece
+        IF    ${quantity_in_piece}
+            Wait Until Element Is Enabled    ${quantity_in_piece_button}    timeout=20s
+            Click Button    ${quantity_in_piece_button}
+            Wait Until Element Is Visible    ${piece_modal}    timeout=10s
+            Clear Element Text    ${quantity_input}
+            Input Text    ${quantity_input}    ${value}
+            Wait Until Element Is Visible    ${update_cart_quantity}    timeout=20s
+            Click Button    ${update_cart_quantity}
+        ELSE
+            Click Element    ${custom_select_quantity_button}
+            ${custom_select_option}=    Replace String    ${custom_select_quantity}    option_value    ${value}
+            ${custom_select_option}=    Replace String    ${custom_select_option}    ITEM    ${key}
+            Wait Until Element Is Visible    ${custom_select_option}    timeout=20s
+            Click Element    ${custom_select_option}
+        END
+        Wait Until Element Is Enabled    ${product_search_bar}    timeout=10s
+    END
+    Set Test Variable   ${unit_price_amount}
+    Set Test Variable  ${values}
+
+Click On First Product Row
+    Wait Until Page Contains Element    ${first_item_product_name}  timeout=15s
+    Click Element  ${first_item_product_name}
+    ${cart_count}   Get Text  //span[text()='${values}']
+    Wait Until Page Contains Element   ${update_product_button}
+    Click Element    ${update_product_button}
+    Set Test Variable     ${cart_count}
+
+Add Carry Bags
+    [Arguments]    ${carrybag_data}
+    ${carrybag_td}=    Create Dictionary    &{carrybag_data}
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    Click Element    ${add_carry_bag_button}
+    ${carry_bag}=   Run Keyword And Return Status    Element Should Be Visible    ${carry_bag_all_input_fields}
+    ${items_list}=    Convert Items To List    ${carrybag_td.carry_bag}
+    ${items_dict} =    Convert Item List To Dictionary    ${items_list}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To Integer    ${values}
+        ${carry_bag_option}=   Replace String   ${carry_bag_input_field}    Carry bag   ${key}
+        Wait Until Page Contains Element    ${carry_bag_option}
+        Input Text    ${carry_bag_option}    ${value}
+    END
+    Click Element    ${carry_bag_add}
+    Set Test Variable    ${values}
+
+Reset Bill | Billing Module
+   Wait Until Page Contains Element    ${clear_all_items}
+   Click Element    ${clear_all_items}
+   Wait Until Page Does Not Contain Element    ${clear_all_items}
+   Wait Until Page Does Not Contain Element    ${checkout_button}
+   Page Should Not Contain Element    ${clear_all_items}
+   Page Should Not Contain Element    ${checkout_button}
