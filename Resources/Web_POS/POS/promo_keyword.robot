@@ -119,6 +119,37 @@ Scan Barcode To Add Item And Quantity To Cart
         END
     END
 
+
+Scan Barcode To Add Item And Quantity To Cart | Multiple MRP
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    0.5s
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    0.5s
+        Click Element    ${search_add_button}
+        Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+        Click Element    ${add_to_cart_mrp}
+#        Wait Until Page Contains Element    @{quantity_input}   timeout=10s
+        Input Text    ${quantity}   1
+        Click Element   ${update_cart_quantity}
+        sleep   1
+    END
+
 Add Items In Cart | Catalog
     [Arguments]    ${quantity_data}
     ${my_dict}    Create Dictionary   &{quantity_data}
@@ -3825,4 +3856,3 @@ Select Cart Mode
         Click Element    ${order_option}
     END
     Click Button    ${switch_confirm_button}
-

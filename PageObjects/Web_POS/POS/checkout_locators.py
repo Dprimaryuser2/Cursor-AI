@@ -1,6 +1,9 @@
-checkout_button = "(//button[@id='checkout-btn'])[2]"
+checkout_button = "(//button[@class='btn mr-1 btn-success btn-block'])[2]"
 checkout_heading = '//div[@class="col-md-4 col-lg-6 col-4"]/h5'
 checkout_payable_amount = '//label[@id="label-amt-pay"]//following-sibling::input'
+checkout_loyalty='//button[@class="btn add-to-cart w-auto m-1 btn-light" and contains(text(),"Loyalty")]'
+checkout_coupon='//button[@class="btn add-to-cart w-auto m-1 btn-light" and contains(text(),"Coupon")]'
+
 # payment method
 payment_method_cash = '//button[@id="pay-method-cash"]'
 upi_payment = '//button[@id="pay-method-undefined"]'
@@ -54,3 +57,66 @@ checkout_net_price_column = '//span[contains(text(),"barcode")]//ancestor::tr//t
 # Billing locators
 bill_discount = '//button[contains(text(),"Bill Discount")]'
 checkout_page_manual_discount = '//span[contains(normalize-space(),"Manual Discount")]//ancestor::div[@class="row mb-1"]/div[@class="col text-right"]/p'
+
+#split payment
+enter_split_amount='//label[@id="label-amt-pay"]//following-sibling::input[@class="form-control amtpay"]'
+enter_cash='//input[@id="input-for-customer-paid" and @placeholder="Enter Amount"]'
+continue_cash_button='//button[@id="process-payment-btn" and @class="btn float-right mt-4 btn-primary"]'
+enter_paytm_transaction_id='//input[@id="trxn-ref-id" and @class="form-control form-control-sm"]'
+continue_paytm_button='//button[@id="process-payment-btn" and @class="btn float-right mt-4 btn-primary"]'
+cancel='//button[@class="btn mr-1 btn-outline-primary btn-block"]'
+redeem_voucher_transactionId="//input[@id='trxn-ref-id' and @placeholder='Enter reference id']"
+voucher_continue_button="//button[@id='process-payment-btn' and @class='btn float-right mt-4 btn-primary']"
+redeem_voucher='//button[@id="pay-method-undefined" and contains(text(),"Redeem Voucher")]'
+
+account_on_sale="//button[@class='btn text-center p-0 h-25 mb-2 btn-outline-secondary btn-block' and contains(text(),'On-Account Sale')]"
+remark_account_on_sale="//textarea[@id='input-account-remark']"
+continue_account_on_sale_button="//button[@id='confirm-account-sale' and @class='btn w-20 btn-primary']"
+#payment complete
+print_invoice="//button[@id='print-invoice-btn' and @class='btn mt-2 btn-primary btn-block']"
+share_invoice="//button[@id='share-invoice-btn' and @class='btn mt-4 mt-md-2 btn-primary btn-block']"
+
+no_payment_required="//header[@id='__BVID__1628___BV_modal_header_']//child::h5[contains(text(),'No Payment Required')]"
+no_payment_required_confirm_button="//button[@class='btn ml-1 btn-primary btn-block']//child::span[contains(text(),'Confirm')]"
+checkout_split_payment='//div[@class="v-switch-button"]'
+checkout_billing_options='//button[@class="btn dropdown-toggle btn-light btn-sm" and contains(text(),"Billing Options")]'
+loyalty_modal_heading= '//h5[@class="modal-title" and contains(text(),"Redeem Loyalty")]'
+
+checkout_billing_add_bill_remark ='(//a[@class="dropdown-item text-dark" and contains(text(),"Add Bill Remark")])[2]'
+add_bill_remark_textarea = '//textarea[@placeholder="Add remark... "]'
+add_bill_remark_save_button = '//button[@class="btn ml-1 btn-primary"]//span[text()="Save"]'
+add_bill_remark_clear_button = '//button[@class="btn mr-1 btn-outline-primary"]//span[text()="Clear"]'
+checkout_billing_edit_remark = '(//a[@class="dropdown-item text-dark" and contains(text(),"Edit Remark")])[2]'
+
+checkout_order_summary = '//h6[@class="mb-0 fw-normal" and contains(text(),"Order Summary")]'
+# payment method
+
+payment_method_credit_card='//button[@id="pay-method-pinelab"]//img[@alt="Credit Card"]'
+remark_added_successful = '//div[@class="alert alert-dismissible alert-success" and contains(text(),"Remark added successfully.")]'
+checkout_bill_promos='//button[@class="btn add-to-cart w-auto m-1 btn-light" and contains(text(),"Bill Promos")]'
+checkout_bill_discount='//button[@class="btn add-to-cart w-auto m-1 btn-light" and contains(text(),"Bill Discount")]'
+
+#bill discount
+bill_discount_select_from_list='//a[@class="nav-link active" and contains(text(),"Select from List")]'
+bill_discount_select_from_list_option='//li[@class="py-3" and contains(text(),"abv")]' #change the text according to test data
+bill_discount_select_from_list_option_selected='//li[@class="py-3 active" and contains(text(),"sdy")]' #change the text according to test data
+select_from_list_option_apply_disc_button='(//button[@class="btn float-right btn-primary"]//span[text()="Apply Discount"])[1]'
+
+# Payment successful page
+print_invoice_button = '//button[@id="print-invoice-btn" and contains(text(),"Print Invoice")]'
+share_invoice_button = '//button[@id="share-invoice-btn" and contains(text(),"Share Invoice")]'
+invoice_modal_heading = '//h3[@class="modal-title" and contains(text(),"Invoice")]'
+print_invoice_modal_button = '//button[@class="btn float-right btn-primary" and contains(text(),"Print")]'
+close_invoice_modal_button = '//button[@class="btn float-right btn-secondary" and contains(text(),"Close")]'
+
+#redeem store credit
+redeem_store_credit_button = '//button[@class="btn text-center p-0 h-25 mb-2 btn-outline-secondary btn-block" and text()="Redeem Store Credit"]'
+redeem_with_dropdown = '//select[@id="redeem-types"]'
+redeem_with_credit_option = '//select[@id="redeem-types"]//option[@value="voucher"]'
+redeem_with_number_option = '//select[@id="redeem-types"]//option[@value="number"]'
+input_voucher_code = '//input[@id="voucher-input"]'
+store_credit_continue_button = '//button[@id="store-credit-Continue"]'
+input_store_credit_opt = '//input[@class="active text-center form-control"]'
+store_credit_verify_button = '//button[@id="verify-otp-btn"]'
+store_credit_resend_otp_button = '//button[@id="store-credit-Resend OTP"]'
+store_credit_validation_message = '//div[@class="alert alert-dismissible alert-danger"]'

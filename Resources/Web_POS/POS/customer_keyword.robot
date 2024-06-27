@@ -136,6 +136,7 @@ Edit Customer Group
 
 Verify Customer Tagging
     [Arguments]    ${customer_info}
+    Log    ${customer_info}
     ${customer_group_info}=    Create Dictionary    &{customer_info}
     ${customer_name}=    Get Text    ${tagged_customer_name}
     ${customer_phone_no}=    Get Text    ${tagged_customer_phone_no}
