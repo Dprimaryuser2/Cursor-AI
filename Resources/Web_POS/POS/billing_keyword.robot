@@ -424,6 +424,8 @@ Auto Switch To Billing
 Price Override | Billing
     [Arguments]    ${price_override}
     ${my_dict}    Create Dictionary   &{price_override}
+    Wait Until Page Contains Element    ${first_item_product_name}  timeout=5s
+    Click Element  ${first_item_product_name}
     Wait Until Page Contains Element    ${price_override_link}
     Click Element    ${price_override_link}
     Wait Until Page Contains Element    ${price_override_heading}
@@ -517,7 +519,7 @@ Verify Price Overriden | Billing
     Wait Until Page Contains Element    ${first_item_product_name}  timeout=15s
     Click Element  ${first_item_product_name}
     Wait Until Page Contains Element    ${update_product_button}
-    Page Should Not Contain Element   ${price_override_link}
+    Page Should Contain Element   ${price_override_link_disable}
 
 Verify Bill Remark Added
    Wait Until Element Is Visible    ${remark_added_successful}   timeout=15s
@@ -550,7 +552,7 @@ Verify Cancel Button While Switching Mode
     Click Element    ${switch_cancel_button}
 
 Verify Item Added In Cart
-    Wait Until Page Contains Element    ${in_store}
+    Wait Until Page Contains Element    ${in_store}   timeout=10s
     Page Should Contain Element    ${in_store}
     Page Should Contain Element    ${delivery}
     Wait Until Page Contains Element    ${cart_last_element}  timeout=5s
@@ -589,18 +591,10 @@ Verify Alert Message for Price Overriden | Billing
     Page Should Contain Element    ${apply_override_button}
 
 Verify Price Override Link Is Disabled
-    ${status}  Run Keyword And Return Status    Element Should Be Visible     ${price_override_link}
-    IF    ${status}
-        Wait Until Element Is Visible    ${price_override_successful}
-        Element Should Be Visible    ${price_override_successful}
-        Wait Until Page Contains Element    ${first_item_product_name}  timeout=15s
-        Click Element  ${first_item_product_name}
-        Wait Until Page Contains Element    ${update_product_button}
-        Page Should Not Contain Element   ${price_override_link}
-    ELSE
-          Wait Until Page Does Not Contain Element    ${price_override_link}
-          Page Should Not Contain Element    ${price_override_link}
-    END
+     Wait Until Page Contains Element    ${first_item_product_name}  timeout=5s
+     Click Element  ${first_item_product_name}
+     Wait Until Page Contains Element    ${price_override_link_disable}
+     Page Should Contain Element   ${price_override_link_disable}
 
 Add Product By Scan Only
    [Arguments]    ${products}
