@@ -158,6 +158,7 @@ Add Customer Details for partial payment
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
     Click Button    ${start_billing_button}
 
+
 Split Payment By Paytm
     [Arguments]    ${paytm_value}
     Clear Element Text    ${enter_split_amount}
@@ -679,7 +680,7 @@ Add Carry Bags
     Set Test Variable    ${values}
 
 Reset Bill | Billing Module
-   Wait Until Page Contains Element    ${clear_all_items}
+   Wait Until Page Contains Element    ${clear_all_items}  timeout=3s
    Click Element    ${clear_all_items}
    Wait Until Page Does Not Contain Element    ${clear_all_items}
    Wait Until Page Does Not Contain Element    ${checkout_button}

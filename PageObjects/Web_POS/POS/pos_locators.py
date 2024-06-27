@@ -111,7 +111,7 @@ update_product_button = '//button[@id="update-product-btn"]'
 quantity= "//input[@id='qtyInput' and @placeholder='Enter Weight']"
 # Carry Bags
 carry_bag_heading = '//h5[contains(text(),"Select Carry Bags")]'
-carry_bag_input_field = '//h6[@id="label-undefined" and text()="Carry Bag"]//ancestor::div[@class="row mb-2"]//input'
+carry_bag_input_field = '//h6[@id="label-undefined" and text()="Carry bag"]//ancestor::div[@class="row mb-2"]//input'
 add_carry_bag_unit_button = '//button[@id="add-carry-bags"]'
 close_button = '//button[@class="close"]'
 open_session_link = '//div[@class="fadein col-md-6 col-lg-6" and not(@style="display: none;")]//div[@id="session-info"]//a'
@@ -145,7 +145,7 @@ order_management_option_sidebar = "//a[@title='Order Management']//img"
 cash_management_heading = "//h5[text()='Cash Management']"
 billing_option_switch_default = '//button[@class="btn dropdown-toggle btn-light" and contains(text(),"Billing")]'
 amount_limit_message = '//p[text()="Amount is greater than limit"]'
-item_name="//a[@class='product-name text-danger']"
+item_name = "//a[@class='product-name text-danger']"
 cart_last_element = '(//td[@class="text-center align-middle w-5"])[last()]'
 product_name_in_cart_row = '//br[@data-v-24c05cb9]//preceding-sibling::a[@data-v-24c05cb9]'
 close_product_window_button = '//button[@class="close"]'
@@ -155,9 +155,11 @@ quantity_column_count = '//td[@aria-colindex="3"]'
 quantity_column_buttons = '//button[@class="btn btn-outline-primary btn-block"]'
 select_list_discount_div='//ul[@class="custom-checklist list-unstyled"]'
 product_modal_close="//button[@class='close' and contains(text(),'×')]"
-carry_bag_all_input_fields ='//div[@class="row mb-2"]//input[@placeholder="0"]'
-carry_bag_option_label='//h6[@id="label-undefined" and text()="Sync39"]'
+carry_bag_all_input_fields = '//div[@class="row mb-2"]//input[@placeholder="0"]'
+carry_bag_option_label ='//h6[@id="label-undefined" and text()="Sync39"]'
 
 # customer_info_icon = "//body/div[@id='app']/div[@id='theme']/div[@class='dashboard']/section/div[@class='container-fluid']/div[@class='row']/div[@class='fadein col-md-6 col-lg-6']/div[@class='row mt-2']/div[@class='col-md-6 col-lg-6']/div[@id='customer-info']//a"
 customer_info_icon = "//div[normalize-space(text())='Customer Information']/a[@id='get-customer-info']"
 switch_modal_proceed_button = "//button[@class='btn ml-1 btn-primary btn-block']//span"
+
+update_product_md = "//button[@id='update-product-btn' and @class='btn ml-2 btn-primary']//span"

@@ -92,7 +92,7 @@ checkout_order_summary = '//h6[@class="mb-0 fw-normal" and contains(text(),"Orde
 # payment method
 
 payment_method_credit_card='//button[@id="pay-method-pinelab"]//img[@alt="Credit Card"]'
-
+remark_added_successful = '//div[@class="alert alert-dismissible alert-success" and contains(text(),"Remark added successfully.")]'
 checkout_bill_promos='//button[@class="btn add-to-cart w-auto m-1 btn-light" and contains(text(),"Bill Promos")]'
 checkout_bill_discount='//button[@class="btn add-to-cart w-auto m-1 btn-light" and contains(text(),"Bill Discount")]'
 
@@ -108,3 +108,15 @@ share_invoice_button = '//button[@id="share-invoice-btn" and contains(text(),"Sh
 invoice_modal_heading = '//h3[@class="modal-title" and contains(text(),"Invoice")]'
 print_invoice_modal_button = '//button[@class="btn float-right btn-primary" and contains(text(),"Print")]'
 close_invoice_modal_button = '//button[@class="btn float-right btn-secondary" and contains(text(),"Close")]'
+
+#redeem store credit
+redeem_store_credit_button = '//button[@class="btn text-center p-0 h-25 mb-2 btn-outline-secondary btn-block" and text()="Redeem Store Credit"]'
+redeem_with_dropdown = '//select[@id="redeem-types"]'
+redeem_with_credit_option = '//select[@id="redeem-types"]//option[@value="voucher"]'
+redeem_with_number_option = '//select[@id="redeem-types"]//option[@value="number"]'
+input_voucher_code = '//input[@id="voucher-input"]'
+store_credit_continue_button = '//button[@id="store-credit-Continue"]'
+input_store_credit_opt = '//input[@class="active text-center form-control"]'
+store_credit_verify_button = '//button[@id="verify-otp-btn"]'
+store_credit_resend_otp_button = '//button[@id="store-credit-Resend OTP"]'
+store_credit_validation_message = '//div[@class="alert alert-dismissible alert-danger"]'
