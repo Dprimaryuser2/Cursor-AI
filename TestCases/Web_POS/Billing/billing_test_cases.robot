@@ -6,16 +6,15 @@ Resource    ../../../Resources/Web_POS/POS/billing_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
 
-Test Setup    Open Application | POS
+Test Setup  Open Application | POS
 Test Teardown   Close Browser
 
 *** Variables ***
-${POS_TD}=    ${CURDIR}${/}..${/}..${/}TestData${/}POS${/}Billing${/}billing_test_data.xlsx
+${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}billing_test_data.xlsx
 
 *** Test Cases ***
 Zwing_B_1 Auto Switch To Billing
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_66
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -24,7 +23,6 @@ Zwing_B_1 Auto Switch To Billing
 
 Zwing_B_2 Add Product to cart by scanning barcode
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_64
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Add Product By Scan Only   ${pos_data}
@@ -110,7 +108,6 @@ Zwing_B_16 Apply manual Discount | item level
 
 Zwing_B_17 Add Carry Bag
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_63
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Add Carry Bags    ${pos_data}
@@ -118,7 +115,6 @@ Zwing_B_17 Add Carry Bag
 
 Zwing_B_19 Reset Bill
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_65
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Add Product By Scan Only   ${pos_data}
@@ -128,7 +124,6 @@ Zwing_B_19 Reset Bill
 
 Zwing_B_20 Navigate To CheckOut Page
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_71
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Add Product By Scan Only   ${pos_data}
@@ -253,7 +248,6 @@ Zwing_B_30 Discard Bill after Partial payment
 
 Zwing_B_31 Automatic Invoice Generation
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_84
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Add Product By Scan Only   ${pos_data}
@@ -292,7 +286,6 @@ Zwing_B_34 Apply Bill level discount
 
 Zwing_B_35 Add Bill Remark
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_70
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Add Product By Scan Only   ${pos_data}
@@ -304,7 +297,6 @@ Zwing_B_35 Add Bill Remark
 
 Zwing_B_36 Apply Bill Level Coupon
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_69
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Add Product By Scan Only   ${pos_data}
@@ -315,7 +307,6 @@ Zwing_B_36 Apply Bill Level Coupon
 
 Zwing_B_37 Apply Bill Level Loyalty
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_68
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Add Product By Scan Only   ${pos_data}
@@ -326,7 +317,6 @@ Zwing_B_37 Apply Bill Level Loyalty
 
 Zwing_B_41 Auto Switch To Billing From Return Mode
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_72
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -335,7 +325,6 @@ Zwing_B_41 Auto Switch To Billing From Return Mode
 
 Zwing_B_42 Auto Switch To Billing From Exchange Mode
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_73
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -344,14 +333,12 @@ Zwing_B_42 Auto Switch To Billing From Exchange Mode
 
 Zwing_B_43 Click on Confirm button on switch to Order popup box
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_74
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
 
 Zwing_B_44 Click on Cancel button on switch to Order popup box
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_75
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Verify Cancel Button While Switching Mode  ${pos_data}
@@ -359,21 +346,18 @@ Zwing_B_44 Click on Cancel button on switch to Order popup box
 
 Zwing_B_45 Switching Between Billing to Order Will Give Confirmation Popup
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_76
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Verify Cancel Button While Switching Mode  ${pos_data}
 
 Zwing_B_46 Click on Confirm button on switch to Return popup box
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_77
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
 
 Zwing_B_47 Click on Cancel button on switch to Return popup box
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_78
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Verify Cancel Button While Switching Mode  ${pos_data}
@@ -381,14 +365,12 @@ Zwing_B_47 Click on Cancel button on switch to Return popup box
 
 Zwing_B_48 Switching Between Billing to Return Will Give Confirmation Popup
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_79
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Verify Cancel Button While Switching Mode  ${pos_data}
 
 Zwing_B_49 Set variance limit and enter price override less or more than total price but within variance limit
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_80
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Add Product By Scan Only   ${pos_data}
@@ -399,7 +381,6 @@ Zwing_B_49 Set variance limit and enter price override less or more than total p
 
 Zwing_B_50 Set variance limit and enter price override less or more than total price but out of variance limit
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_81
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Add Product By Scan Only   ${pos_data}
@@ -410,7 +391,6 @@ Zwing_B_50 Set variance limit and enter price override less or more than total p
 
 Zwing_B_51 Set variance limit and enter price override less or more than total price but equal to variance limit
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_67
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Add Product By Scan Only   ${pos_data}
@@ -421,7 +401,6 @@ Zwing_B_51 Set variance limit and enter price override less or more than total p
 
 Zwing_B_52 Set variance limit and enter price override less or more than total price but within variance limit. Then try again price override and check the response
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_82
-   Open Application | POS
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Add Product By Scan Only   ${pos_data}
@@ -432,8 +411,7 @@ Zwing_B_52 Set variance limit and enter price override less or more than total p
 
 Zwing_B_53 Disable price override and try price overriding then check the response
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_83
-   Open Application | POS
-   Login With Valid Username And Password | POS    ${pos_data}
+   Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
    Add Product By Scan Only   ${pos_data}
    Click On First Product Row

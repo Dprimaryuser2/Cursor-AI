@@ -15,7 +15,7 @@ exchange_option = '//ul[@class="dropdown-menu show"]//a[text()="Exchange"]'
 switch_confirm_button = '//button[@id="switch-mode-confirm"]'
 switch_cancel_button = '//button[@id="switch-mode-cancel"]'
 switch_modal_text = '//div[@class="modal-body"]//span'
-clear_all_items = "(//button[@id='clear-all'])[2]"
+clear_all_items = "(//button[@class='btn mr-1 btn-danger btn-block'])[2]"
 view_catalog_button = '//button[@id="view-catalog"]'
 categories_button = '//ul[@id="infinite-categories"]//li[@class="nav-item"]/a[contains(text(),"Body Oil")]'     # replace body oil with desired data
 sub_categories_first_option = '((//div[@class="w-100 position-relative"]//ul[@id="infinite-list"]//div)[1]/h6)[1]'
@@ -111,7 +111,7 @@ update_product_button = '//button[@id="update-product-btn"]'
 quantity= "//input[@id='qtyInput' and @placeholder='Enter Weight']"
 # Carry Bags
 carry_bag_heading = '//h5[contains(text(),"Select Carry Bags")]'
-carry_bag_input_field = '//h6[@id="label-undefined" and text()="Sync39"]//ancestor::div[@class="row mb-2"]//input'
+carry_bag_input_field = '//h6[@id="label-undefined" and text()="Carry Bag"]//ancestor::div[@class="row mb-2"]//input'
 add_carry_bag_unit_button = '//button[@id="add-carry-bags"]'
 close_button = '//button[@class="close"]'
 open_session_link = '//div[@class="fadein col-md-6 col-lg-6" and not(@style="display: none;")]//div[@id="session-info"]//a'

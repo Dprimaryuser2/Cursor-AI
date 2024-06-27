@@ -1,7 +1,7 @@
 *** Settings ***
 Library    SeleniumLibrary
 Variables    ../../../Environment/environment.py
-Variables    ../../../PageObjects/POS/Login/login_locators.py
+Variables    ../../../PageObjects/Web_POS/Login/login_locators.py
 
 
 *** Keywords ***
