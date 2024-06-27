@@ -131,6 +131,16 @@ update_product_cumulative_discount = '//label[contains(text(),"Cumulative Discou
 update_product_taxes = '//label[contains(text(),"Product Taxes")]//following-sibling::p'
 update_product_total = '//label[contains(text(),"Product Total")]//following-sibling::p'
 
+disabled_select_from_list_tab = '//a[contains(normalize-space(),"Select from List") and @aria-disabled="true"]'
+disabled_custom_discount_tab = '//a[contains(normalize-space(),"Custom Discount") and @aria-disabled="true"]'
+disabled_item_level_discount_alert = '//div[@class="popup-notification"]/div[contains(text(),"Item level manual discount is disabled from policy.")]'
+
+catalog_update_failed_heading = '//h5[contains(text(),"Catalog Update Failed")]'
+catalog_close_button = '//button[@id="close-progress"]'
+catalog_retry_button = '//button[@id="retry-progress"]'
+manual_close_button = '//h5[text()="Manual Discount(Item)"]//following-sibling::button[@aria-label="Close"]'
+
+
 add_carry_bag_button='//button[@id="category-add-carrybags"]'
 carry_bag_add='//button[@id="add-carry-bags"]'
 product_added_successfully = '//div[@class="alert alert-dismissible alert-success" and contains(text(),"Product was successfully added to your cart")]'

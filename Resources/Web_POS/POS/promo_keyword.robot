@@ -16,6 +16,10 @@ Open The Session
     ${my_dict}    Create Dictionary   &{search_data}
 #    Wait Until Element Is Visible    ${pos_dashboard}
     Sleep    2s
+    ${catalog_update_failed}=    Run Keyword And Return Status    Element Should Be Visible    ${catalog_update_failed_heading}
+    IF    ${catalog_update_failed}
+        Click Button    ${catalog_close_button}
+    END
     ${catalog_update}=    Run Keyword And Return Status    Element Should Be Visible    ${done_progress}
     IF    ${catalog_update}
         Click Button    ${done_progress}
