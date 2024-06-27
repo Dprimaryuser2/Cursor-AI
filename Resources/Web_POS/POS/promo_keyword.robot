@@ -525,6 +525,7 @@ Verify Billing Checkout
         Click Button    ${checkout_button}
     END
     Wait Until Element Is Visible    ${checkout_heading}    timeout=20s
+    Page Should Contain Element    ${checkout_heading}
 
 Verify Promo Discount On Modal | Checkout Page
     [Arguments]    ${promo_data}
