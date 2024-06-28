@@ -105,6 +105,9 @@ salesperson_refresh = "//button[text()='Refresh']"
 salesperson_dropdown = '//span[contains(text(),"Select Salesperson")]'
 salesperson_search_field = '//input[@placeholder="Search..."]'
 salesperson = '//input[@placeholder="Search..."]//ancestor::div[@class="dropdown-body w-100"]//li'
+
+salesperson_tagged_message = '//div[@class="alert alert-dismissible alert-success" and contains(text(),"Salesperson tagged successfully")]'
+salesperson_below_product = '//span[@class="pt-2 fs-12 text-grey"]'
 check_inventory_button = '//button[@id="check-inventory-btn"]'
 inventory_modal_heading = '//h5[contains(text(),"Inventory")]'
 inventory_close_button = '//h5[contains(text(),"Inventory")]//following-sibling::button'
@@ -174,3 +177,13 @@ customer_info_icon = "//div[normalize-space(text())='Customer Information']/a[@i
 switch_modal_proceed_button = "//button[@class='btn ml-1 btn-primary btn-block']//span"
 
 update_product_md = "//button[@id='update-product-btn' and @class='btn ml-2 btn-primary']//span"
+
+
+#product preview locators
+preview_salesperson_name = '(//p[@class="fs-12"])[2]'
+product_preview = '//span[@class="offer text-muted"]'
+
+row_in_salesperson_dropdown = '//li[@data-v-59cb0948]'
+
+product_row_in_cart = '//tr[@class="b-table-row-selected table-active"]'
+product_name_in_cart_row = '//br[@data-v-24c05cb9]//preceding-sibling::a[@data-v-24c05cb9]'
