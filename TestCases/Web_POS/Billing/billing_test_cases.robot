@@ -28,6 +28,21 @@ Zwing_B_2 Add Product to cart by scanning barcode
    Add Product By Scan Only   ${pos_data}
    Verify Item Added In Cart
 
+Zwing_B_03 Add Product to cart by searching Product Name / barcode
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_08
+    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Verify Item Added In Cart
+
+
+Zwing_B_04 Add product from catalog
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_08
+    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Add Items In Cart | Catalog   ${pos_data}
+    Verify Item Added In Cart
+
 Zwing_B_5 Add Multiple price products to cart
      ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_05
      Login With Valid Username And Password | POS   ${pos_data}
@@ -50,6 +65,27 @@ Zwing_B_7 Tag a Existing customer to a bill
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     ${customer_info}    Add Customer Details for partial payment    ${pos_data}
     Verify Customer Tagging    ${customer_info}
+
+
+Zwing_B_08 Tag Single Sales Person To A Bill With Respect To Items
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_08
+    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Add Items In Cart | Catalog   ${pos_data}
+    Assign A Salesperson To An Item  ${pos_data}
+    Verify If Salesperson Is Assigned To An Item    ${pos_data}
+
+
+Zwing_B_09 Tag Multiple Sales Person To A Bill With Respect To Items
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_09
+    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Add Items In Cart | Catalog   ${pos_data}
+    Assign A different Salesperson To Each Item  ${pos_data}
+    Verify If Different Salesperson Was Assigned To Each Person
+
 
 Zwing_B_10 Hold On-going Bill | Billing
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_10
@@ -95,6 +131,14 @@ Zwing_B_14 Return to bill
     Return To Bill
     Verify Return To Bill
 
+Zwing_B_15 Apply Item level Promos
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_15
+    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Apply Item Level Promos
+    Verify If Item Level Promos Applied
+
 Zwing_B_16 Apply manual Discount | item level
     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_16
     Login With Valid Username And Password | POS   ${discount_data}
@@ -111,6 +155,13 @@ Zwing_B_17 Add Carry Bag
    Open The Session    ${pos_data}
    Add Carry Bags    ${pos_data}
    Verify Item Added In Cart
+
+Zwing_B_18 Validate Bill calculation
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_18
+    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Verify If Bill Was Calculated | Net Price Same As Payable Amount
 
 Zwing_B_19 Reset Bill
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_19
@@ -160,7 +211,7 @@ Zwing_B_23 Collect payment by redeem voucher
     Add Customer Details    ${pos_data}
     ${value}    Get payable amount
     Verify Billing Checkout
-    Split Payment By Reedem Voucher
+    Split Payment By Redeem Voucher
     Verify If Payment is Complete Or Not
 
 Zwing_B_24 Collect payment using Credit Score
@@ -194,7 +245,7 @@ Zwing_B_26 Payable amount should become editable when split payment toggle is en
     ${value}    Get payable amount
     Verify Billing Checkout
     Enable Split payment mode
-    Verify split payment toggle button is eneabled
+    Verify split payment toggle button is enabled
 
 Zwing_B_27 Payable amount should be disabled when split payment toggle is disabled.
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_27
@@ -216,7 +267,7 @@ Zwing_B_28 Pay Bill Amount With multiple MOP
     ${value}    Get payable amount
     Verify Billing Checkout
     Enable Split payment mode
-    Split Payment By Diffrent Modes     ${pos_data}
+    Split Payment By Different Modes     ${pos_data}
     Verify If Payment is Complete Or Not
 
 Zwing_B_29 Pay Bill Amount With single MOP
@@ -314,6 +365,29 @@ Zwing_B_37 Apply Bill Level Loyalty
    Verify Billing Checkout
    Apply Bill Loyalty
 
+Zwing_B_38 Validate Account balance
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_38
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   ${customer_info}    Add Customer Details    ${pos_data}
+   Validate Account Balance Are Equal On Tagged Customer Details and Checkout Page
+
+Zwing_B_39 Validate Store Credit
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_39
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   ${customer_info}    Add Customer Details    ${pos_data}
+   Validate Store Credit Are Equal On Tagged Customer Details and Checkout Page
+
+Zwing_B_40 Validate Loyalty Points
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_40
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   ${customer_info}    Add Customer Details    ${pos_data}
+   Validate Loyalty Points Are Equal On Tagged Customer Details and Checkout Page
+
 Zwing_B_41 Auto Switch To Billing From Return Mode
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_41
    Login With Valid Username And Password | POS    ${pos_data}
@@ -375,7 +449,7 @@ Zwing_B_49 Set variance limit and enter price override less or more than total p
    Add Product By Scan Only   ${pos_data}
    Verify Item Added In Cart
    Price Override | Billing    ${pos_data}
-   Verify Price Overriden | Billing
+   Verify Price Overridden | Billing
 
 Zwing_B_50 Set variance limit and enter price override less or more than total price but out of variance limit
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_50
@@ -384,7 +458,7 @@ Zwing_B_50 Set variance limit and enter price override less or more than total p
    Add Product By Scan Only   ${pos_data}
    Verify Item Added In Cart
    Price Override | Billing    ${pos_data}
-   Verify Alert Message for Price Overriden | Billing
+   Verify Alert Message for Price Overridden | Billing
 
 Zwing_B_51 Set variance limit and enter price override less or more than total price but equal to variance limit
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_51
@@ -393,7 +467,7 @@ Zwing_B_51 Set variance limit and enter price override less or more than total p
    Add Product By Scan Only   ${pos_data}
    Verify Item Added In Cart
    Price Override | Billing    ${pos_data}
-   Verify Price Overriden | Billing
+   Verify Price Overridden | Billing
 
 Zwing_B_52 Set variance limit and enter price override less or more than total price but within variance limit. Then try again price override and check the response
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_52

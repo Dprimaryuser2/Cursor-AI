@@ -81,7 +81,7 @@ Enable Split payment mode
     Wait Until Page Contains Element    ${checkout_split_payment}
     Click Element    ${checkout_split_payment}
 
-Split Payment By Diffrent Modes
+Split Payment By Different Modes
     [Arguments]    ${products}
     ${my_dict}    Create Dictionary   &{products}
     ${items_list}=    Convert Items To List    ${my_dict.payment}
@@ -179,7 +179,7 @@ Payment By Paytm
     Input Text      ${enter_paytm_transaction_id}   ${id}
     Click Element    ${continue_paytm_button}
 
-Split Payment By Reedem Voucher
+Split Payment By Redeem Voucher
     Click Element    ${redeem_voucher}
     ${id}=  Generate Random Phone Number
     Wait Until Page Contains Element    ${redeem_voucher_transactionId}
@@ -195,7 +195,7 @@ Payment By Account On Sales
     Input Text      ${remark_account_on_sale}   ${id}
     Click Element    ${continue_account_on_sale_button}
 
-Verify split payment toggle button is eneabled
+Verify split payment toggle button is enabled
     Wait Until Page Contains Element   ${enter_split_amount}
     Page Should Contain Element     ${enter_split_amount}
 
@@ -513,7 +513,7 @@ Verify Auto Switched To Billing
     Page Should Not Contain Element    ${clear_all_items}
     Page Should Not Contain Element    ${checkout_button}
 
-Verify Price Overriden | Billing
+Verify Price Overridden | Billing
     Wait Until Element Is Visible    ${price_override_successful}
     Element Should Be Visible    ${price_override_successful}
     Wait Until Page Contains Element    ${first_item_product_name}  timeout=15s
@@ -585,7 +585,7 @@ Verify Item Added In Cart
     Element Should Be Enabled    ${checkout_button}
     Element Should Be Enabled    ${clear_all_items}
 
-Verify Alert Message for Price Overriden | Billing
+Verify Alert Message for Price Overridden | Billing
     Wait Until Element Is Visible    ${amount_limit_message}
     Element Should Be Visible    ${amount_limit_message}
     Page Should Contain Element    ${apply_override_button}
@@ -651,8 +651,8 @@ Click On First Product Row
     Set Test Variable     ${cart_count}
 
 Add Carry Bags
-    [Arguments]    ${carrybag_data}
-    ${carrybag_td}=    Create Dictionary    &{carrybag_data}
+    [Arguments]    ${carry_bag_data}
+    ${carry_bag_td}=    Create Dictionary    &{carry_bag_data}
     ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
@@ -660,7 +660,7 @@ Add Carry Bags
     END
     Click Element    ${add_carry_bag_button}
     ${carry_bag}=   Run Keyword And Return Status    Element Should Be Visible    ${carry_bag_all_input_fields}
-    ${items_list}=    Convert Items To List    ${carrybag_td.carry_bag}
+    ${items_list}=    Convert Items To List    ${carry_bag_td.carry_bag}
     ${items_dict} =    Convert Item List To Dictionary    ${items_list}
     FOR    ${item}    IN    @{items_dict.items()}
         ${key}=    Set Variable    ${item}[0]
@@ -680,3 +680,157 @@ Reset Bill | Billing Module
    Wait Until Page Does Not Contain Element    ${checkout_button}
    Page Should Not Contain Element    ${clear_all_items}
    Page Should Not Contain Element    ${checkout_button}
+
+
+Validate Account Balance Are Equal On Tagged Customer Details and Checkout Page
+    Wait Until Page Contains Element    ${customer_info_icon}
+    Click Element    ${customer_info_icon}
+    Element Should Be Enabled    ${customer_edit_info_button}
+    Element Should Be Enabled    ${customer_edit_groups_button}
+    Element Should Be Enabled    ${customer_untag_button}
+    ${account_limit}    Get Text    ${available_on_account_limit}
+    Click Element    ${close_customer_window}
+    Wait Until Element Is Enabled    ${checkout_button}
+    Click Element    ${checkout_button}
+    ${feedback_window}=  Run Keyword And Return Status    Page Should Contain Element    ${checkout_customer_feedback}
+    IF    ${feedback_window}
+        Input Text    ${checkout_customer_feedback}    Good!
+        Wait Until Element Is Enabled    ${checkout_save_feedback_button}
+        Click Element    ${checkout_save_feedback_button}
+        Wait Until Element Is Enabled    ${checkout_heading}
+    ELSE
+        ${grand_total}    Get Text    ${checkout_account_balance}
+    END
+    Should Be Equal    ${grand_total}     ${account_limit}
+
+
+Validate Store Credit Are Equal On Tagged Customer Details and Checkout Page
+    Wait Until Page Contains Element    ${customer_info_icon}
+    Click Element    ${customer_info_icon}
+    Element Should Be Enabled    ${customer_edit_info_button}
+    Element Should Be Enabled    ${customer_edit_groups_button}
+    Element Should Be Enabled    ${customer_untag_button}
+    ${store_credit}    Get Text    ${store_credit_issue}
+    Click Element    ${close_customer_window}
+    Wait Until Element Is Enabled    ${checkout_button}
+    Click Element    ${checkout_button}
+    ${feedback_window}=  Run Keyword And Return Status    Page Should Contain Element    ${checkout_customer_feedback}
+    IF    ${feedback_window}
+        Input Text    ${checkout_customer_feedback}    Good!
+        Wait Until Element Is Enabled    ${checkout_save_feedback_button}
+        Click Element    ${checkout_save_feedback_button}
+        Wait Until Element Is Enabled    ${checkout_heading}
+    ELSE
+        ${c_store_credit}    Get Text    ${checkout_store_credit}
+    END
+    Should Be Equal    ${c_store_credit}     ${store_credit}
+
+Validate Loyalty Points Are Equal On Tagged Customer Details and Checkout Page
+    Wait Until Page Contains Element    ${customer_info_icon}
+    Click Element    ${customer_info_icon}
+    Element Should Be Enabled    ${customer_edit_info_button}
+    Element Should Be Enabled    ${customer_edit_groups_button}
+    Element Should Be Enabled    ${customer_untag_button}
+    ${loyalty_points}    Get Text    ${customer_info_loyalty_points}
+    Click Element    ${close_customer_window}
+    Wait Until Element Is Enabled    ${checkout_button}
+    Click Element    ${checkout_button}
+    ${feedback_window}=  Run Keyword And Return Status    Page Should Contain Element    ${checkout_customer_feedback}
+    IF    ${feedback_window}
+        Input Text    ${checkout_customer_feedback}    Good!
+        Wait Until Element Is Enabled    ${checkout_save_feedback_button}
+        Click Element    ${checkout_save_feedback_button}
+        Wait Until Element Is Enabled    ${checkout_heading}
+    ELSE
+        ${c_loyalty_points}    Get Text    ${checkout_loyalty_points}
+    END
+    Should Be Equal    ${c_loyalty_points}     ${loyalty_points}
+
+
+Verify If Bill Was Calculated | Net Price Same As Payable Amount
+    Wait Until Page Contains Element    ${net_price}
+    ${n_price}    Get Text    ${net_price}
+#    ${hide_button_present}    Run Keyword And Return Status    Page Should Contain Element    ${hide_catalog_button}
+#    IF    ${hide_button_present}
+#        Click Element    ${hide_catalog_button}
+#    END
+    Sleep    1
+    ${p_amount}    Get Text    ${payable_amount}
+    Should Be Equal As Strings    ${n_price}    ${p_amount}
+
+
+Apply Item Level Promos
+    Wait Until Element Is Enabled    ${product_name_in_cart_row}
+    Click Element    ${product_name_in_cart_row}
+    Sleep    1
+    Wait Until Page Contains Element    ${active_promotion}
+    Click Element    ${active_promotion}
+    Wait Until Page Contains Element    ${active_promo_dropdown_row}
+    Click Element    ${active_promo_dropdown_row}
+    Wait Until Element Is Enabled    ${update_product_button}
+    Click Element    ${update_product_button}
+
+Verify If Item Level Promos Applied
+    Wait Until Element Is Enabled    ${promo_name_in_product_row}
+    Page Should Contain Element    ${promo_name_in_product_row}
+
+Assign A Salesperson To An Item
+    [Arguments]    ${pos_data}
+    Set Selenium Speed    1
+    ${details_dict}    Create Dictionary    &{pos_data}
+    Wait Until Page Contains Element   ${first_item_product_name}
+    Click Element    ${first_item_product_name}
+    Wait Until Page Contains Element    ${salesperson_dropdown}
+    Click Element    ${salesperson_dropdown}
+    Wait Until Page Contains Element    ${salesperson_search_field}
+    Click Element    ${salesperson_search_field}
+    Input Text    ${salesperson_search_field}    ${details_dict.salesperson_name}
+    Click Element    ${row_in_salesperson_dropdown}
+    Wait Until Page Contains Element    ${salesperson_tagged_message}
+    Element Should Be Enabled    ${update_product_button}
+    Click Element    ${update_product_button}
+    Element Should Contain    ${salesperson_below_product}    ${details_dict.salesperson_name}
+
+Assign A different Salesperson To Each Item
+    [Arguments]    ${pos_data}
+    ${products_list}    Get Webelements    ${product_name_in_cart_row}
+    ${product_count}    Get Text    ${cart_last_element}
+    ${item}=  Set Variable    1
+    FOR  ${item}  IN RANGE    1    ${product_count}+1
+           Set Selenium Speed    0.3
+           Wait Until Page Contains Element    (${product_name_in_cart_row})[${item}]
+           Click Element    (${product_name_in_cart_row})[${item}]
+           Wait Until Page Contains Element    ${salesperson_dropdown}
+           Click Element    ${salesperson_dropdown}
+           Wait Until Page Contains Element    (${row_in_salesperson_dropdown})[${item}]
+           Click Element    (${row_in_salesperson_dropdown})[${item}]
+           Wait Until Page Contains Element    ${salesperson_tagged_message}
+           Element Should Be Enabled    ${update_product_button}
+           Click Element    ${update_product_button}
+           Wait Until Page Contains Element    ${salesperson_tagged_message}
+    END
+
+Verify If Salesperson Is Assigned To An Item
+    [Arguments]    ${pos_data}
+    ${details_dict}    Create Dictionary    &{pos_data}
+    ${hide_button_present}    Run Keyword And Return Status    Page Should Contain Element    ${hide_catalog_button}
+    IF    ${hide_button_present}
+        Click Element    ${hide_catalog_button}
+    END
+    Page Should Contain Element    ${first_item_product_name}
+    Click Element    ${product_preview}
+    Page Should Contain Element    ${preview_salesperson_name}
+    Element Should Contain   ${preview_salesperson_name}    ${details_dict.salesperson_name}
+
+Verify If Different Salesperson Was Assigned To Each Person
+    Wait Until Page Contains Element    ${salesperson_below_product}
+    ${salesperson_list}    Get Webelements    ${salesperson_below_product}
+    ${salesperson_count}    Get Length    ${salesperson_list}
+    ${new_list}    Create List
+    FOR  ${item}   IN RANGE    1    ${salesperson_count}+1
+        Wait Until Page Contains Element    (${salesperson_below_product})[${item}]
+        ${temp}   Get Text    (${salesperson_below_product})[${item}]
+        Should Not Contain    ${new_list}    ${temp}
+        Append To List    ${new_list}    ${temp}
+    END
+    List Should Not Contain Duplicates    ${new_list}
