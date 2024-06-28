@@ -424,7 +424,8 @@ Auto Switch To Billing
 Price Override | Billing
     [Arguments]    ${price_override}
     ${my_dict}    Create Dictionary   &{price_override}
-    Wait Until Page Contains Element    ${first_item_product_name}  timeout=5s
+    Wait Until Page Contains Element    ${first_item_product_name}  timeout=15s
+    Sleep  2s
     Click Element  ${first_item_product_name}
     Wait Until Page Contains Element    ${price_override_link}
     Click Element    ${price_override_link}
@@ -591,7 +592,8 @@ Verify Alert Message for Price Overridden | Billing
     Page Should Contain Element    ${apply_override_button}
 
 Verify Price Override Link Is Disabled
-     Wait Until Page Contains Element    ${first_item_product_name}  timeout=5s
+     Wait Until Page Contains Element    ${first_item_product_name}  timeout=15s
+     Sleep  2s
      Click Element  ${first_item_product_name}
      Wait Until Page Contains Element    ${price_override_link_disable}
      Page Should Contain Element   ${price_override_link_disable}
