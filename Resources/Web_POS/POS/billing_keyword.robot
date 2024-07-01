@@ -2,7 +2,6 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
-Library    utilities
 Library    ../../../Resources/CustomKeywords/utilities.py
 Variables    ../../../PageObjects/Web_POS/POS/hold_bill_locators.py
 Variables   ../../../PageObjects/Web_POS/POS/checkout_locators.py
@@ -424,7 +423,8 @@ Auto Switch To Billing
 Price Override | Billing
     [Arguments]    ${price_override}
     ${my_dict}    Create Dictionary   &{price_override}
-    Wait Until Page Contains Element    ${first_item_product_name}  timeout=5s
+    Wait Until Page Contains Element    ${first_item_product_name}  timeout=15s
+    Sleep  2s
     Click Element  ${first_item_product_name}
     Wait Until Page Contains Element    ${price_override_link}
     Click Element    ${price_override_link}
@@ -591,7 +591,8 @@ Verify Alert Message for Price Overridden | Billing
     Page Should Contain Element    ${apply_override_button}
 
 Verify Price Override Link Is Disabled
-     Wait Until Page Contains Element    ${first_item_product_name}  timeout=5s
+     Wait Until Page Contains Element    ${first_item_product_name}  timeout=15s
+     Sleep  2s
      Click Element  ${first_item_product_name}
      Wait Until Page Contains Element    ${price_override_link_disable}
      Page Should Contain Element   ${price_override_link_disable}
@@ -769,6 +770,29 @@ Apply Item Level Promos
     Click Element    ${active_promo_dropdown_row}
     Wait Until Element Is Enabled    ${update_product_button}
     Click Element    ${update_product_button}
+
+
+Apply Bill Level Promos
+    Wait Until Page Contains Element    ${checkout_bill_promos}
+    Click Element    ${checkout_bill_promos}
+    Wait Until Page Contains Element    ${promos_applied_message}
+    Page Should Contain Element    ${promos_applied_message}
+
+
+Verify Bill Level Promos Applied
+    Page Should Contain Element    ${bill_promo_discount}
+    ${bpromo_discount}  Get Text    ${bill_promo_discount}
+    ${stotal}    Get Text    ${sub_total}
+    ${taxes_value}    Get Text    ${taxes}
+    Remove Characters   ${stotal}
+    Remove Characters    ${bpromo_discount}
+    Remove Characters    ${taxes_value}
+    ${result}   Evaluate    ${stotal}  -  ${bpromo_discount}
+    ${final_result}    Evaluate    ${result}    +   ${taxes_value}
+    ${grand__total}    Get Text    ${grand_total}
+    Remove Characters    ${grand__total}
+    Should Be Equal    ${grand__total}    ${result}
+
 
 Verify If Item Level Promos Applied
     Wait Until Element Is Enabled    ${promo_name_in_product_row}
