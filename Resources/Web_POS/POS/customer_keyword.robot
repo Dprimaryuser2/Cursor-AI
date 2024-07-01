@@ -11,6 +11,7 @@ Variables    ../../../PageObjects/Web_POS/POS/checkout_locators.py
 Add Customer Details
     [Arguments]    ${customer_data}
     ${my_dict}    Create Dictionary   &{customer_data}
+    Wait Until Element Is Enabled    ${add_customer_link}
     Click Element    ${add_customer_link}
     Wait Until Element Is Visible    ${customer_phone_field}
     ${mobile}=     Generate Random Phone Number

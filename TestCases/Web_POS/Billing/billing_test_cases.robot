@@ -1,11 +1,12 @@
 *** Settings ***
 Library    SeleniumLibrary
-Library    ../../Resources/CustomKeywords/utilities.py
+
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/billing_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
+Library    ../../../Resources/CustomKeywords/utilities.py
 
 Test Setup  Open Application | POS
 Test Teardown   Close Browser
@@ -152,7 +153,7 @@ Zwing_B_15 Apply Item level Promos
     Revoke Serial Key    ${pos_data}
 
 Zwing_B_16 Apply manual Discount | item level
-    ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_16
+    ${discount_data}=    Fetch Testdata By Id    ${pos_data}    TC_16
     Login With Valid Username And Password | POS   ${discount_data}
     Open The Session    ${discount_data}
     Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
@@ -353,8 +354,23 @@ Zwing_B_32 Generate Invoice with Zero bill amount
     Verify If Payment is Complete Or Not
     Revoke Serial Key    ${pos_data}
 
+
+Zwing_B_33 Apply Bill level Promos
+   ${pos_data}=    Fetch Testdata By Id   ${POS_TD}    TC_33
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Verify Item Added In Cart
+   Add Customer Details    ${pos_data}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Apply Bill Level Promos
+   Verify Bill Level Promos Applied
+   Revoke Serial Key    ${pos_data}
+
+
 Zwing_B_34 Apply Bill level discount
-    ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_34
+    ${discount_data}=    Fetch Testdata By Id    ${pos_data}    TC_34
     Login With Valid Username And Password | POS   ${discount_data}
     Open The Session    ${discount_data}
     Scan Barcode To Add Item And Quantity To Cart    ${discount_data}

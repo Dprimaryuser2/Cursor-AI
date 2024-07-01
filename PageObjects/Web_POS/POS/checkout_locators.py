@@ -100,7 +100,7 @@ payment_method_credit_card='//button[@id="pay-method-pinelab"]//img[@alt="Credit
 remark_added_successful = '//div[@class="alert alert-dismissible alert-success" and contains(text(),"Remark added successfully.")]'
 checkout_bill_promos='//button[@class="btn add-to-cart w-auto m-1 btn-light" and contains(text(),"Bill Promos")]'
 checkout_bill_discount='//button[@class="btn add-to-cart w-auto m-1 btn-light" and contains(text(),"Bill Discount")]'
-
+promos_applied_message = '//div[@class="alert alert-dismissible alert-success" and  text()="Promo applied successfully"]'
 #bill discount
 bill_discount_select_from_list='//a[@class="nav-link active" and contains(text(),"Select from List")]'
 bill_discount_select_from_list_option='//li[@class="py-3" and contains(text(),"abv")]' #change the text according to test data
