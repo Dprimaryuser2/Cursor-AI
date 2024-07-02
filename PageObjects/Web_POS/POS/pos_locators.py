@@ -40,6 +40,8 @@ piece_modal = '//div[@class="modal-content"]'
 quantity_input = '//input[@id="qtyInput"]'
 update_cart_quantity = '//div[@class="modal-content"]//button[@class="btn btn-primary btn-block"]'
 switch_edit_add_toggle = '//div[@class="modal-body"]//div[@class="v-switch-button"]'    # This switches between edit cart and add to cart
+edit_toggle_on = '//div[@class="modal-body"]//label[@class="my-auto vue-js-switch toggled"]'
+add_toggle_button = '//div[@class="modal-body"]//label[@class="my-auto vue-js-switch"]'
 # units
 custom_select_quantity_button = '(//select[@class="custom-select custom-select-sm"])[1]'      # change the number
 custom_select_options = '//select[@class="custom-select custom-select-sm"]//option[@value="option_value"]'     # change the option to the number you want to select

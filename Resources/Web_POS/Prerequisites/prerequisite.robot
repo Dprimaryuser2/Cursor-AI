@@ -5,6 +5,8 @@ Library    Collections
 Library    ../../../Resources/CustomKeywords/utilities.py
 Variables    ../../../Environment/environment.py
 Variables    ../../../PageObjects/Web_POS/Settings/serial_information_locators.py
+Variables    ../../../PageObjects/AdminConsole/POSTerminal/pos_terminal.py
+Resource    ../../../Resources/AdminConsole/Login/login_keyword.robot
 
 *** Keywords ***
 Revoke Serial Key
@@ -29,3 +31,32 @@ Revoke Serial Key
     Input Text    ${license_key_input}    ${serial_key_number}
     Click Button    ${revoke_license_confirm_button}
     Wait Until Element Is Visible    ${activate_device_heading}    timeout=20s
+
+Tear It Down If Test Case Failed
+    [Arguments]    ${discount_data}
+    Run Keyword If Test Failed    Revoke The Licence Key From Console     ${discount_data}
+
+Revoke The Licence Key From Console
+    [Arguments]    ${serial_key}
+    ${serial_key_info}    Create Dictionary   &{serial_key}
+    ${serial_key_number}=    Set Variable    ${serial_key_info.serial_key}
+    Open Application | Admin
+    Login Into Admin | Zwing
+    Wait Until Keyword Succeeds    5    2    Go To Pos Terminal
+    Wait Until Element Is Visible    ${pos_heading}    timeout=20s
+    Wait Until Element Is Visible    ${pos_search_bar}    timeout=20s
+    Input Text    ${pos_search_bar}    ${serial_key_number}
+    Sleep    0.5s
+    ${tagged_device}=    Replace String    ${tagged_device_edit_link}    Serial_Key    ${serial_key_number}
+    Click Element    ${tagged_device}
+    Wait Until Element Is Visible    ${remove_device_icon}    timeout=10s
+    Click Element    ${remove_device_icon}
+    Wait Until Element Is Visible    ${remove_modal_body}    timeout=10s
+    Click Button    ${remove_button}
+    Wait Until Element Is Not Visible    ${remove_modal_body}    timeout=10s
+    Close Browser
+
+Go To Pos Terminal        
+    Click Element    ${pos_terminal_logo}
+    Wait Until Element Is Visible    ${pos_terminal_link}
+    Click Element    ${pos_terminal_link}
