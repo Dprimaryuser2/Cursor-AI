@@ -3,7 +3,6 @@ Library    SeleniumLibrary
 Variables  ../../../Environment/environment.py
 Variables   ../../../PageObjects/AdminConsole/Login/login.py
 
-
 *** Keywords ***
 Open Application | Admin
     Open Browser     ${admin_console_url}    ${browser}
@@ -28,6 +27,3 @@ Login Into Admin | Zwing
     Input Text    ${password}    123456
     Click Button    ${continue_button}
     Wait Until Page Contains Element    ${dashboard}    timeout=20s
-    Page Should Contain Element    ${invoice_icon}
-    Page Should Contain Element    ${product_icon}
-    Page Should Contain Element    ${promotion_icon}

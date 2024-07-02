@@ -1,4 +1,4 @@
-pos_terminal_link = '//span[text()="POS Terminals"]//preceding-sibling::i[normalize-space(@class="fa fa-fw fa-money")]'
+pos_terminal_link = '//span[text()="POS Terminals"]//ancestor::a'
 pos_heading = '//h4[text()="POS Terminals "]'
 tagged_device_edit_link = '//td[contains(text(),"Serial_Key")]//ancestor::tr//i'    # Replace Serial_Key with id
 remove_device_icon = '//i[@class="fa fa-times fs-2x text-danger"]'

@@ -119,7 +119,6 @@ Scan Barcode To Add Item And Quantity To Cart
         END
     END
 
-
 Scan Barcode To Add Item And Quantity To Cart | Multiple MRP
     [Arguments]    ${products}
     ${my_dict}    Create Dictionary   &{products}
@@ -184,8 +183,6 @@ Change Quantity Of Item
         Wait Until Element Is Visible    ${custom_select_options}    timeout=20s
         Click Element    ${custom_select_options}
     END
-
-
 
 Verify Invoice Details After Payment
     Wait Until Element Is Visible    ${upi_payment}    timeout=10s
