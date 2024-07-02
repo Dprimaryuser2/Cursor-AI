@@ -5,6 +5,7 @@ Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/manual_discount_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
+Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 
 Test Setup    Open Application | POS
 Test Teardown   Close Browser
@@ -393,8 +394,8 @@ Zwing_MD_25 Apply Manual Discount Button |Policy : Allows cashier to apply manua
      [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 >>>>>>> Stashed changes
 
-Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manual discount on bill level | Enable bill level discount
-     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_26
+Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
+     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_33
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}

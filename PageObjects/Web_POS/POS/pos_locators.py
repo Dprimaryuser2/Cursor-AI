@@ -53,13 +53,15 @@ cancel_item = '(//td[@aria-colindex="6"])[1]'
 item_cart_table = '//table[@class="table b-table table cart-table mt-0 table-dark table-dark-bg b-table-row-selected td:first-child border-bottom-0 b-table-selectable b-table-select-single"]'
 table = '//td[@aria-colindex="2"]//ancestor::tbody[@role="rowgroup"]'
 first_item_product_name = '(//a[contains(@class,"product-name")])[1]'
-sub_total = '//p[contains(text(),"Sub Total")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
+sub_total = '//p//span[contains(text(),"Sub Total")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
+taxes = '//p//span[contains(text(),"Taxes")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
+bill_promo_discount = '//span[contains(text(),"Bill Promo Discount")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 promo_discount = '//p[contains(text(),"Item Promo Discount")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 included_tax_text = '//p[contains(text(),"Tax Total (Included)")]'
 excluded_tax_text = '//p[contains(text(),"Tax Total (Excluded)")]'
 round_off_text = '//p[contains(text(),"Round Off")]'
 round_off_element = '//p[contains(text(),"Round Off")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
-tax_amount = '//p[contains(text(),"Tax Total (Included)")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
+tax_amount = '//p[contains(text(),"Tax Total ")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 tax_amount_excluded = '//p[contains(text(),"Tax Total (Excluded)")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 payable_amount = "//p[text()='Payable Amount']//ancestor::div[@class='col light t_amt']//following-sibling::div[@class='col text-right']//h6[@class='mb-0']"
 available_promotions_link = '//img[@src="/img/info.1c91eacc.svg"]'
@@ -85,6 +87,7 @@ modal_qty = '//div[contains(@class,"dropdown-body")]//li/span[text()="Quantity"]
 select_batch_arrow = '//input[@placeholder="Select/change batch"]//following-sibling::div'
 price_field = '//label[@id="label-price-override-productpopup"]//following-sibling::input'
 price_override_link = '//a[@id="price-override-productpopup"]'
+price_override_link_disable = '//a[@id="price-override-productpopup" and @class="disabled"]'
 price_override_heading = '//h5[contains(text(),"Price Override")]'
 price_override_custom_price_field = '//input[@id="Cust-Price"]'
 apply_override_button = '//button[@id="apply-price-override-btn"]'
@@ -106,6 +109,9 @@ salesperson_refresh = "//button[text()='Refresh']"
 salesperson_dropdown = '//span[contains(text(),"Select Salesperson")]'
 salesperson_search_field = '//input[@placeholder="Search..."]'
 salesperson = '//input[@placeholder="Search..."]//ancestor::div[@class="dropdown-body w-100"]//li'
+
+salesperson_tagged_message = '//div[@class="alert alert-dismissible alert-success" and contains(text(),"Salesperson tagged successfully")]'
+salesperson_below_product = '//span[@class="pt-2 fs-12 text-grey"]'
 check_inventory_button = '//button[@id="check-inventory-btn"]'
 inventory_modal_heading = '//h5[contains(text(),"Inventory")]'
 inventory_close_button = '//h5[contains(text(),"Inventory")]//following-sibling::button'
@@ -175,3 +181,13 @@ customer_info_icon = "//div[normalize-space(text())='Customer Information']/a[@i
 switch_modal_proceed_button = "//button[@class='btn ml-1 btn-primary btn-block']//span"
 
 update_product_md = "//button[@id='update-product-btn' and @class='btn ml-2 btn-primary']//span"
+
+
+#product preview locators
+preview_salesperson_name = '(//p[@class="fs-12"])[2]'
+product_preview = '//span[@class="offer text-muted"]'
+
+row_in_salesperson_dropdown = '//li[@data-v-59cb0948]'
+
+product_row_in_cart = '//tr[@class="b-table-row-selected table-active"]'
+product_name_in_cart_row = '//br[@data-v-24c05cb9]//preceding-sibling::a[@data-v-24c05cb9]'
