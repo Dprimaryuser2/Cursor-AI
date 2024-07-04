@@ -36,6 +36,7 @@ promo_name = '//span[@class="offer active text-green"]'
 quantity_row = '(//td[@aria-colindex="3"])[1]'
 # piece
 quantity_in_piece_button = '(//td[@aria-colindex="3"]//button[@id="weight-btn-null"])[1]'    # this is button which selects the piece of item and a modal comes after clicking this
+piece_quantity_value = '(//td[@aria-colindex="3"]//button[@id="weight-btn-null"])[1]/span'
 piece_modal = '//div[@class="modal-content"]'
 quantity_input = '//input[@id="qtyInput"]'
 update_cart_quantity = '//div[@class="modal-content"]//button[@class="btn btn-primary btn-block"]'
@@ -124,6 +125,7 @@ discard_payment_bill = '//p[contains(normalize-space(),"Discard Bill")]'
 discard_confirm = '//span[text()="Yes, Discard"]'
 cart_0 = "//span[@class='quantity h5 mb-0 mr-1' and contains(text(),'(0)')]"
 back_icon_on_checkout = '//img[@class="icon text-white"]'
+cart_quantity = "//span[@class='quantity h5 mb-0 mr-1']"
 # Manual Discount assertion fields
 update_product_subtotal = '//label[contains(text(),"Subtotal")]//following-sibling::p'
 update_product_cumulative_discount = '//label[contains(text(),"Cumulative Discount")]//following-sibling::p'
@@ -171,5 +173,31 @@ carry_bag_option_label ='//h6[@id="label-undefined" and text()="Sync39"]'
 # customer_info_icon = "//body/div[@id='app']/div[@id='theme']/div[@class='dashboard']/section/div[@class='container-fluid']/div[@class='row']/div[@class='fadein col-md-6 col-lg-6']/div[@class='row mt-2']/div[@class='col-md-6 col-lg-6']/div[@id='customer-info']//a"
 customer_info_icon = "//div[normalize-space(text())='Customer Information']/a[@id='get-customer-info']"
 switch_modal_proceed_button = "//button[@class='btn ml-1 btn-primary btn-block']//span"
-
 update_product_md = "//button[@id='update-product-btn' and @class='btn ml-2 btn-primary']//span"
+
+#product preview locators
+preview_salesperson_name = '(//p[@class="fs-12"])[2]'
+product_preview = '//span[@class="offer text-muted"]'
+row_in_salesperson_dropdown = '//li[@data-v-59cb0948]'
+
+product_row_in_cart = '//tr[@class="b-table-row-selected table-active"]'
+negative_inventory_alert = '//div[@role="alert" and contains(text(),"Negative stock billing is not allowed")]'
+close_session_icon = '//a[@id="nav-close-session" and contains(text(),"Close Session")]/img'
+close_session_header = '//header[@id="session-box___BV_modal_header_"]//h5[text()="Close Session"]'
+closing_balance_field = '//input[@id="session-input"]'
+close_session_button = '//button[@id="session-cont"]'
+session_closed_popup = '//div[@id="session-box___BV_modal_body_"]//p[contains(text(),"Session Closed")]'
+session_close_button = '//button[@id="session-close"]'
+session_print_slip_button = '//button[@id="print-session-slip"]'
+logout_link = '//a[@id="logout_btn_nav"]/img'
+logout_modal = '//div[@id="log_out___BV_modal_body_"]'
+logout_cancel_button = '//div[@id="log_out___BV_modal_body_"]//button[contains(text(),"Cancel")]'
+logout_button = '//span[contains(text(),"Logout")]//ancestor::button'
+
+# previous session
+add_items_from_previous_session = '//div[@class="modal-body"]//h6[contains(text(),"Add items from previous session?")]'
+discard_button = '//span[contains(text(),"Discard Items")]//ancestor::button'
+add_items_to_cart = '//span[contains(text(),"Add items to cart")]//ancestor::button'
+products_from_previous_session = '//ul[@class="list-unstyled"]//li'
+products_found = '//div[@class="modal-body"]//p'
+

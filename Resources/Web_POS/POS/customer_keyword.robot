@@ -49,7 +49,7 @@ Add Customer Details
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=20s
     Wait Until Element Is Not Visible    //div[@class="popup-notification"]     timeout=10s
 #    Wait Until Element Is Visible    //div[contains(text(),"Customer tagged successfully.")]
-     ${customer_information}=    Create Dictionary    first_name=${first_name}    last_name=${last_name}    phone_number= ${mobile}    email=${email}    gender=${gender}    add_line_one= ${add_line1}    add_line_two= ${add_line2}
+     ${customer_information}=    Create Dictionary    first_name=${first_name}    last_name=${last_name}    phone_number= ${mobile}    email=${email}    gender=${gender}    add_line_one= ${add_line1}    add_line_two= ${add_line2}    mobile_no=${mobile}
     [Return]    ${customer_information}
 
 Add DOB
