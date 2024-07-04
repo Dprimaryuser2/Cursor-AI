@@ -52,6 +52,9 @@ item_cart_table = '//table[@class="table b-table table cart-table mt-0 table-dar
 table = '//td[@aria-colindex="2"]//ancestor::tbody[@role="rowgroup"]'
 first_item_product_name = '(//a[contains(@class,"product-name")])[1]'
 sub_total = '//p[contains(text(),"Sub Total")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
+sub_total = '//p[contains(text(),"Sub Total")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
+taxes = '//p//span[contains(text(),"Taxes")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
+bill_promo_discount = '//span[contains(text(),"Bill Promo Discount")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 promo_discount = '//p[contains(text(),"Item Promo Discount")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 included_tax_text = '//p[contains(text(),"Tax Total (Included)")]'
 excluded_tax_text = '//p[contains(text(),"Tax Total (Excluded)")]'
@@ -70,8 +73,8 @@ second_category = '(//ul[@id="infinite-categories"]/li)[2]'
 
 # dynamic
 quantity_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="3"]'    # change barcode
-price_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="4"]'    # change barcode
-discount_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="5"]'     # change barcode
+price_column = '=//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="4"]'    # change barcode
+discount_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex"5"]'     # change barcode
 net_price_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="6"]'    # change barcode
 item_link = '//span[contains(text(),"barcode")]//preceding-sibling::a'   # change barcode
 
@@ -113,6 +116,7 @@ quantity= "//input[@id='qtyInput' and @placeholder='Enter Weight']"
 # Carry Bags
 carry_bag_heading = '//h5[contains(text(),"Select Carry Bags")]'
 carry_bag_input_field = '//h6[@id="label-undefined" and text()="Carry bag"]//ancestor::div[@class="row mb-2"]//input'
+carry_bag_amount_field = '//h6[@id="label-undefined" and text()="Carry bag"]//ancestor::div[@class="row mb-2"]//span'
 add_carry_bag_unit_button = '//button[@id="add-carry-bags"]'
 close_button = '//button[@class="close"]'
 open_session_link = '//div[@class="fadein col-md-6 col-lg-6" and not(@style="display: none;")]//div[@id="session-info"]//a'
@@ -139,7 +143,6 @@ catalog_update_failed_heading = '//h5[contains(text(),"Catalog Update Failed")]'
 catalog_close_button = '//button[@id="close-progress"]'
 catalog_retry_button = '//button[@id="retry-progress"]'
 manual_close_button = '//h5[text()="Manual Discount(Item)"]//following-sibling::button[@aria-label="Close"]'
-
 
 add_carry_bag_button='//button[@id="category-add-carrybags"]'
 carry_bag_add='//button[@id="add-carry-bags"]'
@@ -172,5 +175,17 @@ carry_bag_option_label ='//h6[@id="label-undefined" and text()="Sync39"]'
 # customer_info_icon = "//body/div[@id='app']/div[@id='theme']/div[@class='dashboard']/section/div[@class='container-fluid']/div[@class='row']/div[@class='fadein col-md-6 col-lg-6']/div[@class='row mt-2']/div[@class='col-md-6 col-lg-6']/div[@id='customer-info']//a"
 customer_info_icon = "//div[normalize-space(text())='Customer Information']/a[@id='get-customer-info']"
 switch_modal_proceed_button = "//button[@class='btn ml-1 btn-primary btn-block']//span"
-
 update_product_md = "//button[@id='update-product-btn' and @class='btn ml-2 btn-primary']//span"
+
+
+#product preview locators
+preview_salesperson_name = '(//p[@class="fs-12"])[2]'
+product_preview = '//span[@class="offer text-muted"]'
+row_in_salesperson_dropdown = '//li[@data-v-59cb0948]'
+product_row_in_cart = '//tr[@class="b-table-row-selected table-active"]'
+category_sidebar = '//ul[@class="nav nav-pills card-header-pills list-group vertical-scroll horizontal-scroll w-30"]'
+store_name_pos = '//h6[@class="m-0"]'
+cart_quantity = "//span[@class='quantity h5 mb-0 mr-1']"
+negative_inventory_alert = '//div[@role="alert" and contains(text(),"Negative stock billing is not allowed")]'
+category_sidebar_option = '//li[@class="nav-item"]//a[@class="nav-link de-active" and contains(text(),"Body Scrub")]'
+product_catalog_body = '//ul[@class="list-group vertical-scroll horizontal-scroll"]'

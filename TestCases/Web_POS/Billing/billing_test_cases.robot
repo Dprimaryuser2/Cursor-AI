@@ -1,6 +1,5 @@
 *** Settings ***
 Library    SeleniumLibrary
-Library    ../../Resources/CustomKeywords/utilities.py
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/billing_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
@@ -96,13 +95,13 @@ Zwing_B_14 Return to bill
     Verify Return To Bill
 
 Zwing_B_16 Apply manual Discount | item level
-    ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_16
-    Login With Valid Username And Password | POS   ${discount_data}
-    Open The Session    ${discount_data}
-    Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
-    Navigate To Update Product Window    ${discount_data}
-    ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
-    Apply Item Manual Discount | Select From List    ${discount_data}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_16
+    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Navigate To Update Product Window    ${pos_data}
+    ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
+    Apply Item Manual Discount | Select From List    ${pos_data}
     Verify Item Manual Discount   ${product_price}
 
 Zwing_B_17 Add Carry Bag
@@ -272,15 +271,30 @@ Zwing_B_32 Generate Invoice with Zero bill amount
     Verify Billing Checkout
     No Payment Required | Checkout Page
     Verify If Payment is Complete Or Not
+    Revoke Serial Key    ${pos_data}
+
+
+Zwing_B_33 Apply Bill level Promos
+   ${pos_data}=    Fetch Testdata By Id   ${POS_TD}    TC_33
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Verify Item Added In Cart
+   Add Customer Details    ${pos_data}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Apply Bill Level Promos
+   Verify Bill Level Promos Applied
+   Revoke Serial Key    ${pos_data}
 
 Zwing_B_34 Apply Bill level discount
-    ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_34
-    Login With Valid Username And Password | POS   ${discount_data}
-    Open The Session    ${discount_data}
-    Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
-    Add Customer Details    ${discount_data}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_34
+    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    ${bill_level}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
+    ${bill_level}    Apply Bill Manual Discount | Custom Discount    ${pos_data}
     Verify Bill Level Manual Discount    ${bill_level}
 
 Zwing_B_35 Add Bill Remark
