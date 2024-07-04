@@ -75,8 +75,8 @@ second_category = '(//ul[@id="infinite-categories"]/li)[2]'
 
 # dynamic
 quantity_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="3"]'    # change barcode
-price_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="4"]'    # change barcode
-discount_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="5"]'     # change barcode
+price_column = '=//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="4"]'    # change barcode
+discount_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex"5"]'     # change barcode
 net_price_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="6"]'    # change barcode
 item_link = '//span[contains(text(),"barcode")]//preceding-sibling::a'   # change barcode
 
@@ -121,6 +121,7 @@ quantity= "//input[@id='qtyInput' and @placeholder='Enter Weight']"
 # Carry Bags
 carry_bag_heading = '//h5[contains(text(),"Select Carry Bags")]'
 carry_bag_input_field = '//h6[@id="label-undefined" and text()="Carry bag"]//ancestor::div[@class="row mb-2"]//input'
+carry_bag_amount_field = '//h6[@id="label-undefined" and text()="Carry bag"]//ancestor::div[@class="row mb-2"]//span'
 add_carry_bag_unit_button = '//button[@id="add-carry-bags"]'
 close_button = '//button[@class="close"]'
 open_session_link = '//div[@class="fadein col-md-6 col-lg-6" and not(@style="display: none;")]//div[@id="session-info"]//a'
@@ -148,7 +149,6 @@ catalog_update_failed_heading = '//h5[contains(text(),"Catalog Update Failed")]'
 catalog_close_button = '//button[@id="close-progress"]'
 catalog_retry_button = '//button[@id="retry-progress"]'
 manual_close_button = '//h5[text()="Manual Discount(Item)"]//following-sibling::button[@aria-label="Close"]'
-
 
 add_carry_bag_button='//button[@id="category-add-carrybags"]'
 carry_bag_add='//button[@id="add-carry-bags"]'
@@ -209,3 +209,7 @@ add_items_to_cart = '//span[contains(text(),"Add items to cart")]//ancestor::but
 products_from_previous_session = '//ul[@class="list-unstyled"]//li'
 products_found = '//div[@class="modal-body"]//p'
 
+store_name_pos = '//div[@class="pt-1 left col-md-6"]//h6'
+category_sidebar = '//ul[@class="nav nav-pills card-header-pills list-group vertical-scroll horizontal-scroll w-30"]'
+category_sidebar_option = '//li//a[@class="nav-link de-active" and contains(text(),"Body Scrub")]'
+product_catalog_body = '//div[@class="w-100 position-relative"]'

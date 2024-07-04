@@ -1,6 +1,5 @@
 *** Settings ***
 Library    SeleniumLibrary
-
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/billing_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
@@ -416,16 +415,16 @@ Zwing_B_33 Apply Bill level Promos
 
 
 Zwing_B_34 Apply Bill level discount
-    ${discount_data}=    Fetch Testdata By Id    ${POS_TD}    TC_34
-    Login With Valid Username And Password | POS   ${discount_data}
-    Open The Session    ${discount_data}
-    Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
-    Add Customer Details    ${discount_data}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_34
+    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    ${bill_level}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
+    ${bill_level}    Apply Bill Manual Discount | Custom Discount    ${pos_data}
     Verify Bill Level Manual Discount    ${bill_level}
-    Revoke Serial Key    ${discount_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_35 Add Bill Remark
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_35
@@ -571,8 +570,7 @@ Zwing_B_49 Set variance limit and enter price override less or more than total p
    Add Product By Scan Only   ${pos_data}
    Verify Item Added In Cart
    Price Override | Billing    ${pos_data}
-<<<<<<< Updated upstream
-   Verify Price Overriden | Billing
+   Verify Price Overridden | Billing
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -583,8 +581,7 @@ Zwing_B_50 Set variance limit and enter price override less or more than total p
    Add Product By Scan Only   ${pos_data}
    Verify Item Added In Cart
    Price Override | Billing    ${pos_data}
-<<<<<<< Updated upstream
-   Verify Alert Message for Price Overriden | Billing
+   Verify Alert Message for Price Overridden | Billing
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
