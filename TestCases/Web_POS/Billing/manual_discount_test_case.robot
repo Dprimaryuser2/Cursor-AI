@@ -5,6 +5,7 @@ Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/manual_discount_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
+Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 
 Test Setup    Open Application | POS
 Test Teardown   Close Browser
@@ -159,6 +160,11 @@ Zwing_MD_11 Manual Discount button | Stores
 
 
      
+=======
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+
+>>>>>>> Stashed changes
 Zwing_MD_12 Select the effective and valid up to date
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_12
      Login With Valid Username And Password | POS   ${discount_data}
@@ -173,6 +179,11 @@ Zwing_MD_12 Select the effective and valid up to date
 
 
      
+=======
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+
+>>>>>>> Stashed changes
 Zwing_MD_13 Item level custom Discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_13
      Login With Valid Username And Password | POS   ${discount_data}
@@ -343,11 +354,12 @@ Zwing_MD_25 Apply Manual Discount Button |Policy : Allows cashier to apply manua
      [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 
-Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manual discount on bill level | Enable bill level discount
-     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_26
+Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
+     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_33
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
+<<<<<<< Updated upstream
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
      Verify Bill Level Discount Button Is Enabled
@@ -427,6 +439,7 @@ Zwing_MD_32 Apply Manual Discount Button Policy : Discount capping (amount) Bill
      Verify Billing Checkout
      ${bill_data}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
      Verify Bill Level Custom Discount More Than Capping Amount Limit    ${bill_data}
+<<<<<<< Updated upstream
 
 Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_33
@@ -481,6 +494,7 @@ Zwing_MD_37 Apply Manual Discount Button | Enable Item level discount | Enable C
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      Verify Enabled Item Level Discount
+<<<<<<< Updated upstream
      Verify Enable Item Level Discount List
      Verify Enable Custom Item Level Discount
      Revoke Serial Key    ${discount_data}

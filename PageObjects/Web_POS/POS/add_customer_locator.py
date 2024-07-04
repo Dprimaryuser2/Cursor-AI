@@ -76,9 +76,14 @@ account_active_store_credit="(//div[@class='cust-summary-dark col-md-6 col-lg-6'
 customer_info_update_button = '//button[@id="update-details"]'
 customer_tagged_popup = '//div[@class="alert alert-dismissible alert-success" and text()="Customer tagged successfully."]'
 customer_untagged = '//div[@class="alert alert-dismissible alert-success fade show" and text()="Customer untagged."]'
-
+available_on_account_limit = '(//p[@class="float-right mb-1"])[1]'
+close_customer_window = '//button[@class="close"]'
 # tagged customer info at cart page
 tagged_customer_phone_no = '(//div[@class="c-number"]//p)[1]'
 tagged_customer_name = '(//div[@class="c-number"]//following-sibling::div//p)[1]'
 customer_tagging_mandatory_alert = '//div[@role="alert"]//h6[text()="Customer tagging is mandatory"]'
 customer_info_close_element = '//button[@class="close"]'
+
+
+store_credit_issue = '(//p[@class="float-right mb-1"])[13]'
+customer_info_loyalty_points = '(//p[@class="float-right mb-1"])[12]'

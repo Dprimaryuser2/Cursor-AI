@@ -198,8 +198,6 @@ Change Quantity Of Item
         Click Element    ${custom_select_options}
     END
 
-
-
 Verify Invoice Details After Payment
     Wait Until Element Is Visible    ${upi_payment}    timeout=10s
     Click Button    ${upi_payment}
@@ -538,6 +536,7 @@ Verify Billing Checkout
         Click Button    ${checkout_button}
     END
     Wait Until Element Is Visible    ${checkout_heading}    timeout=20s
+    Page Should Contain Element    ${checkout_heading}
 
 Verify Promo Discount On Modal | Checkout Page
     [Arguments]    ${promo_data}
