@@ -5,7 +5,15 @@ Variables   ../../../PageObjects/AdminConsole/Login/login.py
 
 *** Keywords ***
 Open Application | Admin
-    Open Browser     ${admin_console_url}    ${browser}
+    ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
+    Call Method  ${options}  add_argument  --disable-notifications
+    Call Method  ${options}  add_argument  --disable-infobars
+    Call Method  ${options}  add_argument  --disable-extensions
+    Call Method  ${options}  add_argument  --no-sandbox
+    Call Method  ${options}  add_argument  --headless
+    Call Method  ${options}  add_argument  --disable-dev-shm-usage
+    Open Browser     ${admin_console_url}    ${browser}   options=${options}
+#    Open Browser     ${admin_console_url}    ${browser}
 #    Open Browser     ${admin_console_url}    ${browser}    options=add_argument("--headless")
     Set Window Size    ${window_width}    ${window_height}
 

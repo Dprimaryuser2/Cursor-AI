@@ -1,0 +1,8 @@
+datasources:cbaffac5be003fb69d68845f97af041f18c86714
+commandlineoptions:65f95c924ba97541f47949701c4e3c51192a5b43
+suitesfrom:no-suites-from-option
+file:ebb799d2e806de0fe0c5fc6c7c37a0324f79e2a8
+--test Manual Discount Test Case.Zwing_MD_36 Apply Manual Discount Button | Enable Item level discount | Enable Item level discount list
+--test Manual Discount Test Case.Zwing_MD_40 Apply Manual Discount Button | Apply Item level discount percentage less than or equal to Limit on discount percentage(Item level)
+--test Manual Discount Test Case.Zwing_MD_44 Apply Manual Discount Button | Apply Bill level custom discount less than or equal to bill amount when limit is greater than Bill amount
+--test Manual Discount Test Case.Zwing_MD_46 Apply Manual Discount Button | Apply item level custom discount less than or equal to line item amount when limit is greater than line item amount

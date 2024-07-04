@@ -60,6 +60,10 @@ Scan Barcode To Add Item And Quantity To Cart
         Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
         Sleep    1s
         Click Element    ${search_add_button}
+        ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
+        IF    ${multiple_product_present}
+            Add Multiple MRP Products
+        END
         Wait Until Element Contains     ${table}    ${key}    timeout=20s
         Element Should Contain    ${item_cart_table}    ${key}
         ${unit_price_amount}=    Get Text    ${price}
@@ -98,6 +102,10 @@ Scan Barcode To Add Item And Quantity To Cart
             Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
             Sleep    1s
             Click Element    ${search_add_button}
+            ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
+            IF    ${multiple_product_present}
+                Add Multiple MRP Products
+            END
             Wait Until Element Contains     ${table}    ${key}    timeout=20s
             Element Should Contain    ${item_cart_table}    ${key}
             ${quantity_in_piece}=    Run Keyword And Return Status    Element Should Contain    ${quantity_row}    Piece
@@ -118,6 +126,12 @@ Scan Barcode To Add Item And Quantity To Cart
             Wait Until Element Is Enabled    ${product_search_bar}    timeout=10s
         END
     END
+
+Add Multiple MRP Products
+    Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+    Click Element    ${add_to_cart_mrp}
+    Wait Until Page Does Not Contain Element    ${select_mrp}
+
 
 Scan Barcode To Add Item And Quantity To Cart | Multiple MRP
     [Arguments]    ${products}
