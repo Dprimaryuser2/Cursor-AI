@@ -209,3 +209,7 @@ add_items_to_cart = '//span[contains(text(),"Add items to cart")]//ancestor::but
 products_from_previous_session = '//ul[@class="list-unstyled"]//li'
 products_found = '//div[@class="modal-body"]//p'
 
+store_name_pos = '//div[@class="pt-1 left col-md-6"]//h6'
+category_sidebar = '//ul[@class="nav nav-pills card-header-pills list-group vertical-scroll horizontal-scroll w-30"]'
+category_sidebar_option = '//li//a[@class="nav-link de-active" and contains(text(),"Body Scrub")]'
+product_catalog_body = '//div[@class="w-100 position-relative"]'

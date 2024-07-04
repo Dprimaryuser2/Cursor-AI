@@ -859,3 +859,9 @@ Verify If Different Salesperson Was Assigned To Each Person
         Append To List    ${new_list}    ${temp}
     END
     List Should Not Contain Duplicates    ${new_list}
+
+Get Store Name | Web POS
+   Click Element    ${pos_option_sidebar}
+   Wait Until Page Contains Element    ${store_name_pos}  timeout=20s
+   ${store_name}  Get Text    ${store_name_pos}
+   RETURN  ${store_name}
