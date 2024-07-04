@@ -2,7 +2,6 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
-Library    utilities
 Library    ../../../Resources/CustomKeywords/utilities.py
 Variables    ../../../PageObjects/Web_POS/POS/hold_bill_locators.py
 Variables   ../../../PageObjects/Web_POS/POS/checkout_locators.py
@@ -81,7 +80,7 @@ Enable Split payment mode
     Wait Until Page Contains Element    ${checkout_split_payment}
     Click Element    ${checkout_split_payment}
 
-Split Payment By Diffrent Modes
+Split Payment By Different Modes
     [Arguments]    ${products}
     ${my_dict}    Create Dictionary   &{products}
     ${items_list}=    Convert Items To List    ${my_dict.payment}
@@ -179,7 +178,7 @@ Payment By Paytm
     Input Text      ${enter_paytm_transaction_id}   ${id}
     Click Element    ${continue_paytm_button}
 
-Split Payment By Reedem Voucher
+Split Payment By Redeem Voucher
     Click Element    ${redeem_voucher}
     ${id}=  Generate Random Phone Number
     Wait Until Page Contains Element    ${redeem_voucher_transactionId}
@@ -195,7 +194,7 @@ Payment By Account On Sales
     Input Text      ${remark_account_on_sale}   ${id}
     Click Element    ${continue_account_on_sale_button}
 
-Verify split payment toggle button is eneabled
+Verify split payment toggle button is enabled
     Wait Until Page Contains Element   ${enter_split_amount}
     Page Should Contain Element     ${enter_split_amount}
 
@@ -424,7 +423,8 @@ Auto Switch To Billing
 Price Override | Billing
     [Arguments]    ${price_override}
     ${my_dict}    Create Dictionary   &{price_override}
-    Wait Until Page Contains Element    ${first_item_product_name}  timeout=5s
+    Wait Until Page Contains Element    ${first_item_product_name}  timeout=15s
+    Sleep  2s
     Click Element  ${first_item_product_name}
     Wait Until Page Contains Element    ${price_override_link}
     Click Element    ${price_override_link}
@@ -513,7 +513,7 @@ Verify Auto Switched To Billing
     Page Should Not Contain Element    ${clear_all_items}
     Page Should Not Contain Element    ${checkout_button}
 
-Verify Price Overriden | Billing
+Verify Price Overridden | Billing
     Wait Until Element Is Visible    ${price_override_successful}
     Element Should Be Visible    ${price_override_successful}
     Wait Until Page Contains Element    ${first_item_product_name}  timeout=15s
@@ -585,13 +585,14 @@ Verify Item Added In Cart
     Element Should Be Enabled    ${checkout_button}
     Element Should Be Enabled    ${clear_all_items}
 
-Verify Alert Message for Price Overriden | Billing
+Verify Alert Message for Price Overridden | Billing
     Wait Until Element Is Visible    ${amount_limit_message}
     Element Should Be Visible    ${amount_limit_message}
     Page Should Contain Element    ${apply_override_button}
 
 Verify Price Override Link Is Disabled
-     Wait Until Page Contains Element    ${first_item_product_name}  timeout=5s
+     Wait Until Page Contains Element    ${first_item_product_name}  timeout=15s
+     Sleep  2s
      Click Element  ${first_item_product_name}
      Wait Until Page Contains Element    ${price_override_link_disable}
      Page Should Contain Element   ${price_override_link_disable}
@@ -651,8 +652,8 @@ Click On First Product Row
     Set Test Variable     ${cart_count}
 
 Add Carry Bags
-    [Arguments]    ${carrybag_data}
-    ${carrybag_td}=    Create Dictionary    &{carrybag_data}
+    [Arguments]    ${carry_bag_data}
+    ${carry_bag_td}=    Create Dictionary    &{carry_bag_data}
     ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
@@ -661,7 +662,7 @@ Add Carry Bags
     Click Element    ${add_carry_bag_button}
     Sleep  3s
     ${carry_bag}=   Run Keyword And Return Status    Element Should Be Visible    ${carry_bag_all_input_fields}
-    ${items_list}=    Convert Items To List    ${carrybag_td.carry_bag}
+    ${items_list}=    Convert Items To List    ${carry_bag_td.carry_bag}
     ${items_dict} =    Convert Item List To Dictionary    ${items_list}
     FOR    ${item}    IN    @{items_dict.items()}
         ${key}=    Set Variable    ${item}[0]
@@ -858,9 +859,3 @@ Verify If Different Salesperson Was Assigned To Each Person
         Append To List    ${new_list}    ${temp}
     END
     List Should Not Contain Duplicates    ${new_list}
-
-Get Store Name | Web POS
-   Click Element    ${pos_option_sidebar}
-   Wait Until Page Contains Element    ${store_name_pos}  timeout=20s
-   ${store_name}  Get Text    ${store_name_pos}
-   RETURN  ${store_name}

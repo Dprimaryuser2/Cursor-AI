@@ -36,10 +36,13 @@ promo_name = '//span[@class="offer active text-green"]'
 quantity_row = '(//td[@aria-colindex="3"])[1]'
 # piece
 quantity_in_piece_button = '(//td[@aria-colindex="3"]//button[@id="weight-btn-null"])[1]'    # this is button which selects the piece of item and a modal comes after clicking this
+piece_quantity_value = '(//td[@aria-colindex="3"]//button[@id="weight-btn-null"])[1]/span'
 piece_modal = '//div[@class="modal-content"]'
 quantity_input = '//input[@id="qtyInput"]'
 update_cart_quantity = '//div[@class="modal-content"]//button[@class="btn btn-primary btn-block"]'
 switch_edit_add_toggle = '//div[@class="modal-body"]//div[@class="v-switch-button"]'    # This switches between edit cart and add to cart
+edit_toggle_on = '//div[@class="modal-body"]//label[@class="my-auto vue-js-switch toggled"]'
+add_toggle_button = '//div[@class="modal-body"]//label[@class="my-auto vue-js-switch"]'
 # units
 custom_select_quantity_button = '(//select[@class="custom-select custom-select-sm"])[1]'      # change the number
 custom_select_options = '//select[@class="custom-select custom-select-sm"]//option[@value="option_value"]'     # change the option to the number you want to select
@@ -51,8 +54,7 @@ cancel_item = '(//td[@aria-colindex="6"])[1]'
 item_cart_table = '//table[@class="table b-table table cart-table mt-0 table-dark table-dark-bg b-table-row-selected td:first-child border-bottom-0 b-table-selectable b-table-select-single"]'
 table = '//td[@aria-colindex="2"]//ancestor::tbody[@role="rowgroup"]'
 first_item_product_name = '(//a[contains(@class,"product-name")])[1]'
-sub_total = '//p[contains(text(),"Sub Total")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
-sub_total = '//p[contains(text(),"Sub Total")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
+sub_total = '//p//span[contains(text(),"Sub Total")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 taxes = '//p//span[contains(text(),"Taxes")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 bill_promo_discount = '//span[contains(text(),"Bill Promo Discount")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 promo_discount = '//p[contains(text(),"Item Promo Discount")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
@@ -108,6 +110,9 @@ salesperson_refresh = "//button[text()='Refresh']"
 salesperson_dropdown = '//span[contains(text(),"Select Salesperson")]'
 salesperson_search_field = '//input[@placeholder="Search..."]'
 salesperson = '//input[@placeholder="Search..."]//ancestor::div[@class="dropdown-body w-100"]//li'
+
+salesperson_tagged_message = '//div[@class="alert alert-dismissible alert-success" and contains(text(),"Salesperson tagged successfully")]'
+salesperson_below_product = '//span[@class="pt-2 fs-12 text-grey"]'
 check_inventory_button = '//button[@id="check-inventory-btn"]'
 inventory_modal_heading = '//h5[contains(text(),"Inventory")]'
 inventory_close_button = '//h5[contains(text(),"Inventory")]//following-sibling::button'
@@ -129,6 +134,7 @@ discard_payment_bill = '//p[contains(normalize-space(),"Discard Bill")]'
 discard_confirm = '//span[text()="Yes, Discard"]'
 cart_0 = "//span[@class='quantity h5 mb-0 mr-1' and contains(text(),'(0)')]"
 back_icon_on_checkout = '//img[@class="icon text-white"]'
+cart_quantity = "//span[@class='quantity h5 mb-0 mr-1']"
 # Manual Discount assertion fields
 update_product_subtotal = '//label[contains(text(),"Subtotal")]//following-sibling::p'
 update_product_cumulative_discount = '//label[contains(text(),"Cumulative Discount")]//following-sibling::p'
@@ -177,15 +183,29 @@ customer_info_icon = "//div[normalize-space(text())='Customer Information']/a[@i
 switch_modal_proceed_button = "//button[@class='btn ml-1 btn-primary btn-block']//span"
 update_product_md = "//button[@id='update-product-btn' and @class='btn ml-2 btn-primary']//span"
 
-
 #product preview locators
 preview_salesperson_name = '(//p[@class="fs-12"])[2]'
 product_preview = '//span[@class="offer text-muted"]'
 row_in_salesperson_dropdown = '//li[@data-v-59cb0948]'
+
 product_row_in_cart = '//tr[@class="b-table-row-selected table-active"]'
-category_sidebar = '//ul[@class="nav nav-pills card-header-pills list-group vertical-scroll horizontal-scroll w-30"]'
-store_name_pos = '//h6[@class="m-0"]'
-cart_quantity = "//span[@class='quantity h5 mb-0 mr-1']"
 negative_inventory_alert = '//div[@role="alert" and contains(text(),"Negative stock billing is not allowed")]'
-category_sidebar_option = '//li[@class="nav-item"]//a[@class="nav-link de-active" and contains(text(),"Body Scrub")]'
-product_catalog_body = '//ul[@class="list-group vertical-scroll horizontal-scroll"]'
+close_session_icon = '//a[@id="nav-close-session" and contains(text(),"Close Session")]/img'
+close_session_header = '//header[@id="session-box___BV_modal_header_"]//h5[text()="Close Session"]'
+closing_balance_field = '//input[@id="session-input"]'
+close_session_button = '//button[@id="session-cont"]'
+session_closed_popup = '//div[@id="session-box___BV_modal_body_"]//p[contains(text(),"Session Closed")]'
+session_close_button = '//button[@id="session-close"]'
+session_print_slip_button = '//button[@id="print-session-slip"]'
+logout_link = '//a[@id="logout_btn_nav"]/img'
+logout_modal = '//div[@id="log_out___BV_modal_body_"]'
+logout_cancel_button = '//div[@id="log_out___BV_modal_body_"]//button[contains(text(),"Cancel")]'
+logout_button = '//span[contains(text(),"Logout")]//ancestor::button'
+
+# previous session
+add_items_from_previous_session = '//div[@class="modal-body"]//h6[contains(text(),"Add items from previous session?")]'
+discard_button = '//span[contains(text(),"Discard Items")]//ancestor::button'
+add_items_to_cart = '//span[contains(text(),"Add items to cart")]//ancestor::button'
+products_from_previous_session = '//ul[@class="list-unstyled"]//li'
+products_found = '//div[@class="modal-body"]//p'
+

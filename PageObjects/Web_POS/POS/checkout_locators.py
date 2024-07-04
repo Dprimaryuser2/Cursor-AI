@@ -3,6 +3,11 @@ checkout_heading = '//div[@class="col-md-4 col-lg-6 col-4"]/h5'
 checkout_payable_amount = '//label[@id="label-amt-pay"]//following-sibling::input'
 checkout_loyalty='//button[@class="btn add-to-cart w-auto m-1 btn-light" and contains(text(),"Loyalty")]'
 checkout_coupon='//button[@class="btn add-to-cart w-auto m-1 btn-light" and contains(text(),"Coupon")]'
+checkout_customer_feedback = '//input[@placeholder="To capture the customer feedback"]'
+checkout_save_feedback_button = '//button//span[@class="px-2"]'
+checkout_account_balance = '(//p[@class="mb-3"])[1]'
+checkout_store_credit = '(//p[@class="mb-3"])[2]'
+checkout_loyalty_points = '(//p[@class="mb-3"])[3]'
 
 # payment method
 payment_method_cash = '//button[@id="pay-method-cash"]'
@@ -95,7 +100,7 @@ payment_method_credit_card='//button[@id="pay-method-pinelab"]//img[@alt="Credit
 remark_added_successful = '//div[@class="alert alert-dismissible alert-success" and contains(text(),"Remark added successfully.")]'
 checkout_bill_promos='//button[@class="btn add-to-cart w-auto m-1 btn-light" and contains(text(),"Bill Promos")]'
 checkout_bill_discount='//button[@class="btn add-to-cart w-auto m-1 btn-light" and contains(text(),"Bill Discount")]'
-
+promos_applied_message = '//div[@class="alert alert-dismissible alert-success" and  text()="Promo applied successfully"]'
 #bill discount
 bill_discount_select_from_list='//a[@class="nav-link active" and contains(text(),"Select from List")]'
 bill_discount_select_from_list_option='//li[@class="py-3" and contains(text(),"abv")]' #change the text according to test data
@@ -120,3 +125,6 @@ input_store_credit_opt = '//input[@class="active text-center form-control"]'
 store_credit_verify_button = '//button[@id="verify-otp-btn"]'
 store_credit_resend_otp_button = '//button[@id="store-credit-Resend OTP"]'
 store_credit_validation_message = '//div[@class="alert alert-dismissible alert-danger"]'
+
+active_promo_dropdown_row = '//ul[@class="m-0 filter-dropdown list-unstyled"]//li//span'
+promo_name_in_product_row = '//span[@class="offer active text-green"]'
