@@ -1,8 +1,10 @@
 *** Settings ***
 Library    SeleniumLibrary
+Library    ../../../Resources/CustomKeywords/utilities.py
 Variables    ../../../Environment/environment.py
 Variables    ../../../PageObjects/Web_POS/Login/login_locators.py
-
+Resource     ../../../Resources/Web_POS/POS/promo_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/add_to_cart_keyword.robot
 
 *** Keywords ***
 Open Application | POS
@@ -26,4 +28,14 @@ Login With Valid Username And Password | POS
     Page Should Contain Element    ${catalog_update}
 #    Page Should Contain Element    ${pos_dashboard}
 
-
+Login Again With Same User Id And Password
+    [Arguments]     ${search_data}
+    ${my_dict}    Create Dictionary   &{search_data}
+    Wait Until Element Is Visible    ${pos_username}    timeout=20s
+    Input Text    ${pos_username}     ${my_dict.username_pos}
+    Click Button    ${pos_continue_button}
+    Wait Until Element Is Visible    ${pos_password}    timeout=20s
+    Input Text    ${pos_password}    ${my_dict.password_pos}
+    Click Button    ${pos_continue_button}
+    Open The Session    ${my_dict}
+    Clear All Products

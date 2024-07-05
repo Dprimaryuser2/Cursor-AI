@@ -92,7 +92,7 @@ Split Payment By Different Modes
         ${value}=    Convert To String    ${values}
     Run Keyword If    '${key}' == 'cash'    Split Payment By Cash    ${value}
         ...    ELSE IF    '${key}' == 'paytm'    Split Payment By Paytm    ${value}
-         ...    ELSE IF    '${key}' == 'voucher'    Split Payment By Reedem Voucher
+         ...    ELSE IF    '${key}' == 'voucher'    Split Payment By Redeem Voucher
     END
 
 Split Payment By Cash
@@ -189,7 +189,7 @@ Split Payment By Redeem Voucher
 Payment By Account On Sales
     Input Text    ${enter_split_amount}    ${account_on_sale}
     Click Element   ${payment_method_cash}
-    ${id}=  Generate Random Address
+    ${id}=  Generate Random Street Address
     Wait Until Page Contains Element    ${remark_account_on_sale}
     Input Text      ${remark_account_on_sale}   ${id}
     Click Element    ${continue_account_on_sale_button}
@@ -598,7 +598,7 @@ Verify Price Override Link Is Disabled
      Page Should Contain Element   ${price_override_link_disable}
 
 Add Product By Scan Only
-   [Arguments]    ${products}
+    [Arguments]    ${products}
     ${my_dict}    Create Dictionary   &{products}
     Log    ${my_dict.buy_items}
     Wait Until Element Is Visible    ${scan_only}    timeout=20s
@@ -660,6 +660,7 @@ Add Carry Bags
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
     END
     Click Element    ${add_carry_bag_button}
+    Sleep  3s
     ${carry_bag}=   Run Keyword And Return Status    Element Should Be Visible    ${carry_bag_all_input_fields}
     ${items_list}=    Convert Items To List    ${carry_bag_td.carry_bag}
     ${items_dict} =    Convert Item List To Dictionary    ${items_list}
@@ -860,3 +861,8 @@ Verify If Different Salesperson Was Assigned To Each Person
 
 Verify Salesperson Tagging is Disabled
     Element Should Be Disabled    ${salesperson_button}
+Get Store Name | Web POS
+   Click Element    ${pos_option_sidebar}
+   Wait Until Page Contains Element    ${store_name_pos}  timeout=40s
+   ${store_name}  Get Text    ${store_name_pos}
+   RETURN  ${store_name}

@@ -34,12 +34,16 @@ apply_manual_discount = '//button[@id="category-apply-discount"]'
 add_carry_bags = '//button[@id="category-add-carrybags"]'
 promo_name = '//span[@class="offer active text-green"]'
 quantity_row = '(//td[@aria-colindex="3"])[1]'
+weighted_quantity = '//button[@id="weight-btn-null"]'
 # piece
 quantity_in_piece_button = '(//td[@aria-colindex="3"]//button[@id="weight-btn-null"])[1]'    # this is button which selects the piece of item and a modal comes after clicking this
+piece_quantity_value = '(//td[@aria-colindex="3"]//button[@id="weight-btn-null"])[1]/span'
 piece_modal = '//div[@class="modal-content"]'
 quantity_input = '//input[@id="qtyInput"]'
 update_cart_quantity = '//div[@class="modal-content"]//button[@class="btn btn-primary btn-block"]'
 switch_edit_add_toggle = '//div[@class="modal-body"]//div[@class="v-switch-button"]'    # This switches between edit cart and add to cart
+edit_toggle_on = '//div[@class="modal-body"]//label[@class="my-auto vue-js-switch toggled"]'
+add_toggle_button = '//div[@class="modal-body"]//label[@class="my-auto vue-js-switch"]'
 # units
 custom_select_quantity_button = '(//select[@class="custom-select custom-select-sm"])[1]'      # change the number
 custom_select_options = '//select[@class="custom-select custom-select-sm"]//option[@value="option_value"]'     # change the option to the number you want to select
@@ -51,7 +55,7 @@ cancel_item = '(//td[@aria-colindex="6"])[1]'
 item_cart_table = '//table[@class="table b-table table cart-table mt-0 table-dark table-dark-bg b-table-row-selected td:first-child border-bottom-0 b-table-selectable b-table-select-single"]'
 table = '//td[@aria-colindex="2"]//ancestor::tbody[@role="rowgroup"]'
 first_item_product_name = '(//a[contains(@class,"product-name")])[1]'
-sub_total = '//p//span[contains(text(),"Sub Total")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
+sub_total = '//p[contains(text(),"Sub Total")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 taxes = '//p//span[contains(text(),"Taxes")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 bill_promo_discount = '//span[contains(text(),"Bill Promo Discount")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 promo_discount = '//p[contains(text(),"Item Promo Discount")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
@@ -72,8 +76,8 @@ second_category = '(//ul[@id="infinite-categories"]/li)[2]'
 
 # dynamic
 quantity_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="3"]'    # change barcode
-price_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="4"]'    # change barcode
-discount_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="5"]'     # change barcode
+price_column = '=//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="4"]'    # change barcode
+discount_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex"5"]'     # change barcode
 net_price_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="6"]'    # change barcode
 item_link = '//span[contains(text(),"barcode")]//preceding-sibling::a'   # change barcode
 
@@ -127,6 +131,7 @@ cart_product_checkbox = '//div[@class="custom-check pt-0"]//span//input[@type="c
 # Carry Bags
 carry_bag_heading = '//h5[contains(text(),"Select Carry Bags")]'
 carry_bag_input_field = '//h6[@id="label-undefined" and text()="Carry bag"]//ancestor::div[@class="row mb-2"]//input'
+carry_bag_amount_field = '//h6[@id="label-undefined" and text()="Carry bag"]//ancestor::div[@class="row mb-2"]//span'
 add_carry_bag_unit_button = '//button[@id="add-carry-bags"]'
 close_button = '//button[@class="close"]'
 open_session_link = '//div[@class="fadein col-md-6 col-lg-6" and not(@style="display: none;")]//div[@id="session-info"]//a'
@@ -139,6 +144,7 @@ discard_payment_bill = '//p[contains(normalize-space(),"Discard Bill")]'
 discard_confirm = '//span[text()="Yes, Discard"]'
 cart_0 = "//span[@class='quantity h5 mb-0 mr-1' and contains(text(),'(0)')]"
 back_icon_on_checkout = '//img[@class="icon text-white"]'
+cart_quantity = "//span[@class='quantity h5 mb-0 mr-1']"
 # Manual Discount assertion fields
 update_product_subtotal = '//label[contains(text(),"Subtotal")]//following-sibling::p'
 update_product_cumulative_discount = '//label[contains(text(),"Cumulative Discount")]//following-sibling::p'
@@ -153,7 +159,6 @@ catalog_update_failed_heading = '//h5[contains(text(),"Catalog Update Failed")]'
 catalog_close_button = '//button[@id="close-progress"]'
 catalog_retry_button = '//button[@id="retry-progress"]'
 manual_close_button = '//h5[text()="Manual Discount(Item)"]//following-sibling::button[@aria-label="Close"]'
-
 
 add_carry_bag_button='//button[@id="category-add-carrybags"]'
 carry_bag_add='//button[@id="add-carry-bags"]'
@@ -187,14 +192,11 @@ carry_bag_option_label ='//h6[@id="label-undefined" and text()="Sync39"]'
 # customer_info_icon = "//body/div[@id='app']/div[@id='theme']/div[@class='dashboard']/section/div[@class='container-fluid']/div[@class='row']/div[@class='fadein col-md-6 col-lg-6']/div[@class='row mt-2']/div[@class='col-md-6 col-lg-6']/div[@id='customer-info']//a"
 customer_info_icon = "//div[normalize-space(text())='Customer Information']/a[@id='get-customer-info']"
 switch_modal_proceed_button = "//button[@class='btn ml-1 btn-primary btn-block']//span"
-
 update_product_md = "//button[@id='update-product-btn' and @class='btn ml-2 btn-primary']//span"
-
 
 #product preview locators
 preview_salesperson_name = '//small[text()="Salesperson"]//following::*[1]'
 product_preview = '//span[@class="offer text-muted"]'
-
 row_in_salesperson_dropdown = '//li[@data-v-59cb0948]'
 
 product_row_in_cart = '//tr[@class="b-table-row-selected table-active"]'
@@ -202,3 +204,32 @@ pos_settings = '//img[@id="nav-settings"]'
 pos_settings_profile_info = '//h5[@class="fw-normal mb-3" and text()="Profile Information"]'
 pos_settings_quick_actions = '//a[@class="nav-link" and text()="Quick Actions"]'
 get_new_settings = '//h5[@class="mb-0" and text()="Get new settings"]'
+negative_inventory_alert = '//div[@role="alert" and contains(text(),"Negative stock billing is not allowed")]'
+close_session_icon = '//a[@id="nav-close-session" and contains(text(),"Close Session")]/img'
+close_session_header = '//header[@id="session-box___BV_modal_header_"]//h5[text()="Close Session"]'
+closing_balance_field = '//input[@id="session-input"]'
+close_session_button = '//button[@id="session-cont"]'
+session_closed_popup = '//div[@id="session-box___BV_modal_body_"]//p[contains(text(),"Session Closed")]'
+session_close_button = '//button[@id="session-close"]'
+session_print_slip_button = '//button[@id="print-session-slip"]'
+logout_link = '//a[@id="logout_btn_nav"]/img'
+logout_modal = '//div[@id="log_out___BV_modal_body_"]'
+logout_cancel_button = '//div[@id="log_out___BV_modal_body_"]//button[contains(text(),"Cancel")]'
+logout_button = '//span[contains(text(),"Logout")]//ancestor::button'
+
+# previous session
+add_items_from_previous_session = '//div[@class="modal-body"]//h6[contains(text(),"Add items from previous session?")]'
+discard_button = '//span[contains(text(),"Discard Items")]//ancestor::button'
+add_items_to_cart = '//span[contains(text(),"Add items to cart")]//ancestor::button'
+products_from_previous_session = '//ul[@class="list-unstyled"]//li'
+products_found = '//div[@class="modal-body"]//p'
+
+store_name_pos = '//div[@class="pt-1 left col-md-6"]//h6'
+category_sidebar = '//ul[@class="nav nav-pills card-header-pills list-group vertical-scroll horizontal-scroll w-30"]'
+category_sidebar_option = '//li//a[contains(text(),"Body Scrub")]'
+product_catalog_body = '//div[@class="w-100 position-relative"]'
+product_name_in_catalog = '//h6[@class="mb-0" and contains(text(),"Ranger Alex")]'
+product_with_some_inventory = '//div[@class="product-info pull-left"]//h6[text()="Carry bag"]'
+
+ssp_price = ' //td[@aria-colindex="4"]/p'
+mrp_table = '//table[@class="table b-table table-cutom widthfixed b-table-selectable b-table-select-single"]'
