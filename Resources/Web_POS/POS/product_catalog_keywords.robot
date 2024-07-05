@@ -222,11 +222,8 @@ Verify Items Allocated With Some Inventory To Store Are Normal
      Page Should Contain Element    ${sub_categories_first_option}
      Wait Until Page Contains Element    ${category_sidebar}  timeout=15s
      Element Should Contain    ${category_sidebar}    ${product_dict.new_category_admin}
-     ${product_name}=    Convert To String    ${product_dict.product_name}
-     ${inventory_product}=    Replace String    ${product_with_some_inventory}    Carry bag     ${product_name}
      ${custom_category}=    Replace String    ${category_sidebar_option}    Body Scrub     ${product_dict.new_category_admin}
      Click Element    ${custom_category}
-     Element Should Contain    ${product_catalog_body}     ${product_dict.product_name}
      ${inventory_product}=    Replace String    ${product_with_some_inventory}    Carry bag     ${product_dict.product_name}
      Page Should Contain Element    ${inventory_product}
 
