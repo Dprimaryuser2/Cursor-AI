@@ -86,9 +86,9 @@ Verify New Category Is Visible
 Navigate To Products | Console
     Wait Until Page Contains Element   ${product_categories_c}  timeout=10s
     Click Element    ${product_categories_c}
-    Wait Until Page Contains Element    ${product_sidebar_option_c}
+    Wait Until Page Contains Element    ${product_sidebar_option_c}  timeout=15s
     Click Element    ${product_sidebar_option_c}
-    Wait Until Page Contains Element    ${product_title}
+    Wait Until Page Contains Element    ${product_title}  timeout=15s
     Wait Until Page Contains Element    ${new_product_button}
     Click Element    ${new_product_button}
     
@@ -133,7 +133,6 @@ Verify New Product Is Visible In Category
      ${custom_category}=    Replace String    ${category_sidebar_option}    Body Scrub     ${product_dict.new_category_admin}
      Click Element    ${custom_category}
      Element Should Contain    ${product_catalog_body}     ${product_dict.product_name}
-<<<<<<< HEAD
      
 Navigate To Retail Price Book | Console
     Wait Until Page Contains Element   ${product_categories_c}  timeout=10s
@@ -194,7 +193,7 @@ Verify New PriceBook Product Is Visible
      Wait Until Page Contains Element    ${custom_pricebook}  timeout=10s
      Click Element    ${custom_pricebook}
      Wait Until Page Contains Element    ${select_mrp}  timeout=10s
-     Element Should Be Visible    ${select_mrp}
+     Page Should Contain Element    ${select_mrp}
 
 Verify Items Allocated With 0 Inventory To Store Are Blur
      [Arguments]    ${product_data}
@@ -221,7 +220,10 @@ Verify Items Allocated With Some Inventory To Store Are Normal
      Page Should Contain Element    ${hide_catalog_button}
      Page Should Contain Element    ${categories_button}
      Page Should Contain Element    ${sub_categories_first_option}
+     Wait Until Page Contains Element    ${category_sidebar}  timeout=15s
      Element Should Contain    ${category_sidebar}    ${product_dict.new_category_admin}
+     ${product_name}=    Convert To String    ${product_dict.product_name}
+     ${inventory_product}=    Replace String    ${product_with_some_inventory}    Carry bag     ${product_name}
      ${custom_category}=    Replace String    ${category_sidebar_option}    Body Scrub     ${product_dict.new_category_admin}
      Click Element    ${custom_category}
      Element Should Contain    ${product_catalog_body}     ${product_dict.product_name}

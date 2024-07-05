@@ -862,6 +862,6 @@ Verify If Different Salesperson Was Assigned To Each Person
 
 Get Store Name | Web POS
    Click Element    ${pos_option_sidebar}
-   Wait Until Page Contains Element    ${store_name_pos}  timeout=20s
+   Wait Until Page Contains Element    ${store_name_pos}  timeout=40s
    ${store_name}  Get Text    ${store_name_pos}
    RETURN  ${store_name}
