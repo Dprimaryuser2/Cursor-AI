@@ -327,6 +327,13 @@ Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      Verify Disabled Item Level Discount
+<<<<<<< Updated upstream
+=======
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+
+
+>>>>>>> Stashed changes
      
 Zwing_MD_34 Apply Manual Discount Button | Enable Item level discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_34
