@@ -8,3 +8,18 @@ edit_modal_title = '//h5[@id="show___BV_modal_title_" and text()="Edit POS Termi
 pos_search_bar = '//input[@placeholder="Enter search query.."]'
 remove_modal_body = '//div[contains(@id,"BV_modal_content_")]'
 remove_button = '//button[@class="btn btn-primary" and text()="Remove"]'
+
+
+#Setup and more
+setup_and_more = '//li[@class="treeview"][4]'
+policies = '//ul[@class="treeview-menu"]//following-sibling::span[text()="Policies"]'
+template_update_message = '//div[@role="alert"]//div[@class="toast-body" and  contains(text(),"Template updated successfully")]'
+template_name_in_policies_row = '//tr[@class="collapse show"]//td[2]'
+pencil_icon_in_policies_row = '//tr[@class="collapse show"]//td//following::i[@class="fa fa-pencil"]'
+pencil_icon_in_policy_p1 = '(//tr[@class="collapse show"]//td[text()=" Policy P1"]//following::i[@class="fa fa-pencil"])[1]'
+pos_dropdown_in_policies = '//h5[@class="panel-title mb-0" and text()="Pos"]'
+tag_salesperson_toggle_on = '//div[text()="Tagging salesperson at POS"]//ancestor::div[@class="row mb-3 align-items-center mx-2"]//div[@class="col-md-1"]/div/span[@aria-checked="true"]/span[@class="toggle-indicator"]'
+tag_salesperson_toggle_off = '//div[text()="Tagging salesperson at POS"]//ancestor::div[@class="row mb-3 align-items-center mx-2"]//div[@class="col-md-1"]/div/span[@aria-checked="false"]/span[@class="toggle-indicator"]'
+radio_tag_sp_optional = '//div[text()="Tagging salesperson at POS"]//ancestor::div[@class="row mb-3 align-items-center mx-2"]//label[@class="checkbtn" and contains(text(),"Optional")]'
+radio_tag_sp_mandatory = '//div[text()="Tagging salesperson at POS"]//ancestor::div[@class="row mb-3 align-items-center mx-2"]//label[@class="checkbtn" and contains(text(),"Mandatory")]'
+save_policies = '//button[@class="btn btn btn-primary btn-md pull-right btn-primary" and text()="Save"]'

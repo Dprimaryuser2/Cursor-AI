@@ -15,7 +15,9 @@ Revoke Serial Key
     ${serial_key_number}=    Set Variable    ${serial_key_info.serial_key}
     Go To    ${pos_url}
     Wait Until Element Is Visible    ${settings_tab}    timeout=20s
+    Set Focus To Element    ${settings_tab}
     Click Element    ${settings_tab}
+    Set Focus To Element    ${settings_tab}
     ${serial_info_visible}    Run Keyword And Return Status    Element Should Not Be Visible    ${serial_information_tab}
     IF    ${serial_info_visible}
         Click Element    ${settings_tab}

@@ -94,6 +94,7 @@ add_bill_remark_clear_button = '//button[@class="btn mr-1 btn-outline-primary"]/
 checkout_billing_edit_remark = '(//a[@class="dropdown-item text-dark" and contains(text(),"Edit Remark")])[2]'
 
 checkout_order_summary = '//h6[@class="mb-0 fw-normal" and contains(text(),"Order Summary")]'
+checkout_salesperson_name = '(//span[@class="pt-2 fs-12 text-grey"])'
 # payment method
 
 payment_method_credit_card='//button[@id="pay-method-pinelab"]//img[@alt="Credit Card"]'

@@ -241,7 +241,7 @@ def convert_item_list_to_dictionary(item_list):
 
 def remove_characters(data):
     # Define characters to remove
-    chars_to_remove = ["-", ",", "₹", "+","(",")"]
+    chars_to_remove = ["-", ",", "₹", "+", "(", ")"]
 
     # Iterate over each character to remove
     for char in chars_to_remove:
