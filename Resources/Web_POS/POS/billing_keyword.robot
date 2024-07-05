@@ -800,7 +800,6 @@ Verify If Item Level Promos Applied
 
 Assign A Salesperson To An Item
     [Arguments]    ${pos_data}
-    Set Selenium Speed    1
     ${details_dict}    Create Dictionary    &{pos_data}
     Wait Until Page Contains Element   ${first_item_product_name}
     Click Element    ${first_item_product_name}
@@ -858,3 +857,6 @@ Verify If Different Salesperson Was Assigned To Each Person
         Append To List    ${new_list}    ${temp}
     END
     List Should Not Contain Duplicates    ${new_list}
+
+Verify Salesperson Tagging is Disabled
+    Element Should Be Disabled    ${salesperson_button}

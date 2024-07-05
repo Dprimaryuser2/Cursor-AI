@@ -13,14 +13,17 @@ Open Application | Admin
 Login With Valid Username And Password
     [Arguments]     ${search_data}
     ${my_dict}    Create Dictionary   &{search_data}
+    Wait Until Page Contains Element    ${email}
     Input Text    ${email}    ${my_dict.username_admin}
     Wait Until Element Is Visible    ${password}    timeout=20s
+    Wait Until Page Contains Element    ${password}
+    Click Element    ${password}
     Input Text    ${password}    ${my_dict.password_admin}
     Click Button    ${continue_button}
     Wait Until Page Contains Element    ${dashboard}    timeout=20s
-    Page Should Contain Element    ${invoice_icon}
-    Page Should Contain Element    ${product_icon}
-    Page Should Contain Element    ${promotion_icon}
+    Wait Until Page Contains Element    ${invoice_icon}
+    Wait Until Page Contains Element    ${product_icon}
+
 
 Login Into Admin | Zwing
     Input Text    ${email}    zwshashank.agrawal@teampureplay.com

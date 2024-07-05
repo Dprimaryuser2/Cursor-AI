@@ -19,7 +19,7 @@ clear_all_items = "(//button[@class='btn mr-1 btn-danger btn-block'])[2]"
 view_catalog_button = '//button[@id="view-catalog"]'
 categories_button = '//ul[@id="infinite-categories"]//li[@class="nav-item"]/a[contains(text(),"Body Oil")]'     # replace body oil with desired data
 sub_categories_first_option = '((//div[@class="w-100 position-relative"]//ul[@id="infinite-list"]//div)[1]/h6)[1]'
-hide_catalog_button = '//button[@id="hide-catalog"]//ancestor::div[@class="catlog-search-pl-6p col-md-3 col-lg-3"]'
+hide_catalog_button = '//div[@class="catlog-search-pl-6p col-md-3 col-lg-3"]//button[text()="Hide" and @style="padding: 0.61rem 1rem;"]'
 refresh_button = '//button[@id="refresh-catalog"]'
 product_search_bar = '//input[@id="product-search"]'
 search_add_button = '//button[@class="btn alternative add-to-cart btn-info"]'
@@ -95,6 +95,7 @@ select_from_list_tab = '//a[contains(normalize-space(),"Select from List")]'
 list_discount_radio = '//li[@id="disc"]'  # change disc with Manual Discount name
 custom_discount_tab = '//a[contains(normalize-space(),"Custom Discount")]'
 apply_manual_discount_button = '//button[@id="apply-manual-discount"]'
+manual_discount_applied_message = '//div[@class="alert alert-dismissible alert-danger" and @contains(text(),"Applied")]'
 discount_type_amount = '//span[contains(text(),"Amount")]//ancestor::div[@class="custom-control custom-control-inline custom-radio"]'
 discount_type_percentage = '//span[contains(text(),"Percentage")]//ancestor::div[@class="custom-control custom-control-inline custom-radio"]'
 discount_value = '//input[@id="discount-value"]'
@@ -107,14 +108,22 @@ salesperson_refresh = "//button[text()='Refresh']"
 salesperson_dropdown = '//span[contains(text(),"Select Salesperson")]'
 salesperson_search_field = '//input[@placeholder="Search..."]'
 salesperson = '//input[@placeholder="Search..."]//ancestor::div[@class="dropdown-body w-100"]//li'
-
+assign_salesperson_window_heading = '//p[@class="mb-0"]//b[text()="Assign Salesperson"]'
+assign_salesperson_search = '//input[@class="search pl-0 form-control"]'
+name_in_assign_salesperson_row = '//tr[@tabindex="0"]//td[@class="text-left align-middle"]'
+assign_to_all_button = '//button[@class="btn btn-primary"]//span[text()="Assign to All"]'
+close_assign_salesperson_window = '//div[@class="col-md-6"]//*[name()="svg"]'
 salesperson_tagged_message = '//div[@class="alert alert-dismissible alert-success" and contains(text(),"Salesperson tagged successfully")]'
+salesperson_mandatory_message = '//div[@class="alert alert-dismissible alert-danger" and text()="Sales Person is Mandatory"]'
 salesperson_below_product = '//span[@class="pt-2 fs-12 text-grey"]'
+close_icon_salesperson_dropdown = '//div[@class="w-100"]//div//*[name()="svg"]'
+salesperson_untagged_message = '//div[@class="alert alert-dismissible alert-success" and text()="Salesperson untagged."]'
 check_inventory_button = '//button[@id="check-inventory-btn"]'
 inventory_modal_heading = '//h5[contains(text(),"Inventory")]'
 inventory_close_button = '//h5[contains(text(),"Inventory")]//following-sibling::button'
 update_product_button = '//button[@id="update-product-btn"]'
 quantity= "//input[@id='qtyInput' and @placeholder='Enter Weight']"
+cart_product_checkbox = '//div[@class="custom-check pt-0"]//span//input[@type="checkbox"]'
 # Carry Bags
 carry_bag_heading = '//h5[contains(text(),"Select Carry Bags")]'
 carry_bag_input_field = '//h6[@id="label-undefined" and text()="Carry bag"]//ancestor::div[@class="row mb-2"]//input'
@@ -148,6 +157,7 @@ manual_close_button = '//h5[text()="Manual Discount(Item)"]//following-sibling::
 
 add_carry_bag_button='//button[@id="category-add-carrybags"]'
 carry_bag_add='//button[@id="add-carry-bags"]'
+carry_bag_added_message = '//div[@class="alert alert-dismissible alert-success" and text()="Carry bag(s) added successfully."]'
 product_added_successfully = '//div[@class="alert alert-dismissible alert-success" and contains(text(),"Product was successfully added to your cart")]'
 product_quantity_updated = '//div[@class="alert alert-dismissible alert-success" and contains(text(),"Product quantity successfully Updated")]'
 price_override_successful = '//div[@class="alert alert-dismissible alert-success" and contains(text(),"Price overridden successfully.")]'
@@ -155,7 +165,7 @@ price_override_successful = '//div[@class="alert alert-dismissible alert-success
 # sidebar locators
 inventory_option_sidebar = "//a[@title='Inventory']"
 cash_management_option_sidebar = "//li[@title='Cash Management']//a//img"
-pos_option_sidebar = "//a[@id='nav-pos']"
+pos_option_sidebar = "//a[@id='nav-pos']//img"
 order_management_option_sidebar = "//a[@title='Order Management']//img"
 # cash management locators
 cash_management_heading = "//h5[text()='Cash Management']"
@@ -182,10 +192,13 @@ update_product_md = "//button[@id='update-product-btn' and @class='btn ml-2 btn-
 
 
 #product preview locators
-preview_salesperson_name = '(//p[@class="fs-12"])[2]'
+preview_salesperson_name = '//small[text()="Salesperson"]//following::*[1]'
 product_preview = '//span[@class="offer text-muted"]'
 
 row_in_salesperson_dropdown = '//li[@data-v-59cb0948]'
 
 product_row_in_cart = '//tr[@class="b-table-row-selected table-active"]'
-product_name_in_cart_row = '//br[@data-v-24c05cb9]//preceding-sibling::a[@data-v-24c05cb9]'
+pos_settings = '//img[@id="nav-settings"]'
+pos_settings_profile_info = '//h5[@class="fw-normal mb-3" and text()="Profile Information"]'
+pos_settings_quick_actions = '//a[@class="nav-link" and text()="Quick Actions"]'
+get_new_settings = '//h5[@class="mb-0" and text()="Get new settings"]'
