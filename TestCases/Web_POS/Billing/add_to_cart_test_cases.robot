@@ -8,7 +8,7 @@ Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
 
 Test Setup    Open Application | POS
-Test Teardown   Close Browser
+Test Teardown   Close All Browsers
 
 *** Variables ***
 ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}add_to_cart_test_data.xlsx

@@ -180,15 +180,15 @@ Verify 0 Inventory To Cart With Disable Negative Inventory
     ${my_dict}    Create Dictionary   &{products}
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
-    ${expected_cart_quantity}=    Set Variable    0
+    Wait Until Page Contains Element    ${negative_inventory_alert}    timeout=10s
+    Page Should Contain Element    ${negative_inventory_alert}
+    Page Should Contain Element    ${cart_0}
     FOR    ${item}    IN    @{items_dict.items()}
         ${key}=    Set Variable    ${item}[0]
         ${values}=    Set Variable    ${item}[1]
         ${value}=    Convert To String    ${values}
-        Element Should Not Contain    ${table}    ${key}
+        Page Should Not Contain Element    ${table}
     END
-    Page Should Contain Element    ${negative_inventory_alert}
-    Page Should Contain Element    ${cart_0}
 
 Verify 0 Inventory To Cart With Enable Negative Inventory
     [Arguments]    ${products}
@@ -201,7 +201,8 @@ Verify 0 Inventory To Cart With Enable Negative Inventory
         ${key}=    Set Variable    ${item}[0]
         ${values}=    Set Variable    ${item}[1]
         ${value}=    Convert To String    ${values}
-        ${quantity_in_piece}=    Run Keyword And Return Status    Element Should Contain    ${quantity_row}    Piece
+        Sleep    1s
+        ${quantity_in_piece}=    Run Keyword And Return Status    Page Should Contain Element    ${weighted_quantity}
         IF    ${quantity_in_piece}
             ${expected_cart_quantity}=    Evaluate    ${expected_cart_quantity}+1
         ELSE
