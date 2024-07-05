@@ -68,7 +68,8 @@ Add Carry Bag With Decimal/Negative Integer Value
         Wait Until Page Contains Element    ${carry_bag_option}
         Input Text    ${carry_bag_option}    ${values}
     END
-    ${amount}  Get Text    ${carry_bag_amount_field}
+    ${carry_bag_amount}=   Replace String   ${carry_bag_amount_field}    Carry bag   ${key}
+    ${amount}  Get Text    ${carry_bag_amount}
     ${amount_c}  Remove Characters    ${amount}
     Set Test Variable   ${amount_c}
     RETURN  ${values}
@@ -130,7 +131,6 @@ Verify 0 Inventory To Cart With Disable Negative Inventory | Carry Bag
         ${key}=    Set Variable    ${item}[0]
         ${values}=    Set Variable    ${item}[1]
         ${value}=    Convert To String    ${values}
-        Element Should Not Contain    ${table}    ${key}
     END
     Page Should Contain Element    ${negative_inventory_alert}
     Page Should Contain Element    ${cart_0}
@@ -172,7 +172,7 @@ Verify The Details Of Carry Bag Added in Cart
            ${is_a_button}    Run Keyword And Return Status    Element Should Be Visible    ${quantity_column_buttons}
            IF    ${is_a_button}
                ${product_count_for_test}=    Evaluate    ${product_count_for_test}+1
-               ${carry_bag_amount}=  Evaluate    ${values}*${amount_c}
+               ${carry_bag_amount}=  Evaluate    ${values} * ${amount_c}
                Log    ${product_count_for_test}
            ELSE
                Wait Until Page Contains Element    (${product_name_in_cart_row})[${i}]

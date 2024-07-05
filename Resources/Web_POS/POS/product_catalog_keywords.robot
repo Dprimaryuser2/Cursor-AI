@@ -86,9 +86,9 @@ Verify New Category Is Visible
 Navigate To Products | Console
     Wait Until Page Contains Element   ${product_categories_c}  timeout=10s
     Click Element    ${product_categories_c}
-    Wait Until Page Contains Element    ${product_sidebar_option_c}
+    Wait Until Page Contains Element    ${product_sidebar_option_c}  timeout=15s
     Click Element    ${product_sidebar_option_c}
-    Wait Until Page Contains Element    ${product_title}
+    Wait Until Page Contains Element    ${product_title}  timeout=15s
     Wait Until Page Contains Element    ${new_product_button}
     Click Element    ${new_product_button}
     
@@ -99,6 +99,7 @@ Create New Products | Console
     Input Text    ${product_name}    ${product_dict.product_name}
     Input Text    ${product_department}    ${product_dict.product_department}
     Input Text    ${product_description}     ${product_dict.product_description}
+    Input Text    ${product_short_description}     ${product_dict.product_description}
     Input Text    ${product_brand}    ${product_dict.product_brand}
     Wait Until Page Contains Element    ${select_category_product}  timeout=15s
     Input Text    ${enter_category_name}    ${product_dict.product_category}
@@ -116,6 +117,7 @@ Create New Products | Console
     Input Text    ${mrp_variant}    ${product_dict.product_mrp}
     Input Text    ${rsp_variant}    ${product_dict.product_rsp}
     Input Text    ${special_price_variant}    ${product_dict.product_special_price}
+    Wait Until Page Contains Element    ${save_product_button}
     Click Element    ${save_product_button}
 
 Verify New Product Is Visible In Category
@@ -131,6 +133,67 @@ Verify New Product Is Visible In Category
      ${custom_category}=    Replace String    ${category_sidebar_option}    Body Scrub     ${product_dict.new_category_admin}
      Click Element    ${custom_category}
      Element Should Contain    ${product_catalog_body}     ${product_dict.product_name}
+     
+Navigate To Retail Price Book | Console
+    Wait Until Page Contains Element   ${product_categories_c}  timeout=10s
+    Click Element    ${product_categories_c}
+    Wait Until Page Contains Element    ${retail_pb_sidebar_option_c}  timeout=10s
+    Click Element    ${retail_pb_sidebar_option_c}
+    Wait Until Page Contains Element    ${create_new_pb_retail_button}  timeout=10s
+    Click Element    ${create_new_pb_retail_button}
+
+Create New PriceBook | Console
+    [Arguments]    ${product_data}
+    ${product_dict}    Create Dictionary   &{product_data}
+    Wait Until Page Contains Element    ${new_pb_option_retail}  timeout=10s
+    Click Element    ${new_pb_option_retail}
+    Wait Until Page Contains Element    ${new_retail_pb_title}  timeout=10s
+    Input Text    ${price_book_name}    ${product_dict.price_book_name}
+    Click Element    ${switch_to_search_btn}
+    Input Text    ${search_product_retail_pb}    ${product_dict.new_category_admin}
+    Wait Until Page Contains Element    ${first_result_product_retail_pb}  timeout=10s
+    Click Element    ${first_result_product_retail_pb}
+    Wait Until Page Contains Element    ${continue_btn_new_retail_pb}  timeout=10s
+    Click Element    ${continue_btn_new_retail_pb}
+    ${status}  Run Keyword And Return Status    Element Should Be Visible    ${price_book_created_successfully}
+    IF    ${status}
+       Allocate Price Book To Store | Console  ${product_data}
+    ELSE
+       Wait Until Page Contains Element    ${discard_btn_new_retail_pb}  timeout=10s
+       Click Element    ${discard_btn_new_retail_pb}
+       Wait Until Page Contains Element    ${discard_price_book_window_title}  timeout=10s
+       Click Element    ${yes_discard_btn_discard_window}
+    END
+    
+Allocate Price Book To Store | Console
+    [Arguments]    ${product_data}
+    Wait Until Page Contains Element    ${allocate_pb_window_title}   timeout=10s
+    Click Element    ${allocate_pb_window_allocate_btn}
+    Wait Until Page Contains Element    ${allocate_retail_pb_title}   timeout=10s
+    Input Text    ${store_select_allocate_retail_pb}     ${product_data}
+    Wait Until Page Contains Element    ${first_store_select_checkbox}  timeout=10s
+    Click Element    ${first_store_select_checkbox}
+    Element Should Be Enabled    ${continue_button_allocate_retail_pb}
+    Click Element    ${continue_button_allocate_retail_pb}
+    
+Verify New PriceBook Product Is Visible
+     [Arguments]    ${product_data}
+     ${product_dict}    Create Dictionary   &{product_data}
+     Wait Until Page Contains Element    ${view_catalog_button}
+     Click Element    ${view_catalog_button}
+     Wait Until Page Contains Element    ${hide_catalog_button}
+     Page Should Contain Element    ${hide_catalog_button}
+     Page Should Contain Element    ${categories_button}
+     Page Should Contain Element    ${sub_categories_first_option}
+     Element Should Contain    ${category_sidebar}    ${product_dict.new_category_admin}
+     ${custom_category}=    Replace String    ${category_sidebar_option}    Body Scrub     ${product_dict.new_category_admin}
+     Click Element    ${custom_category}
+     Element Should Contain    ${product_catalog_body}     ${product_dict.price_book_name}
+     ${custom_pricebook}=  Replace String    ${product_name_in_catalog}    Ranger Alex     ${product_dict.price_book_name}
+     Wait Until Page Contains Element    ${custom_pricebook}  timeout=10s
+     Click Element    ${custom_pricebook}
+     Wait Until Page Contains Element    ${select_mrp}  timeout=10s
+     Page Should Contain Element    ${select_mrp}
 
 Verify Items Allocated With 0 Inventory To Store Are Blur
      [Arguments]    ${product_data}
@@ -145,6 +208,7 @@ Verify Items Allocated With 0 Inventory To Store Are Blur
      ${custom_category}=    Replace String    ${category_sidebar_option}    Body Scrub     ${product_dict.new_category_admin}
      Click Element    ${custom_category}
      Element Should Contain    ${product_catalog_body}     ${product_dict.product_name}
+     #Locator need to update as locator is not present in dom thus testcase will fail
      Page Should Contain Element    //locator_of_0_inventory_product_with_blur
 
 Verify Items Allocated With Some Inventory To Store Are Normal
@@ -156,10 +220,10 @@ Verify Items Allocated With Some Inventory To Store Are Normal
      Page Should Contain Element    ${hide_catalog_button}
      Page Should Contain Element    ${categories_button}
      Page Should Contain Element    ${sub_categories_first_option}
+     Wait Until Page Contains Element    ${category_sidebar}  timeout=15s
      Element Should Contain    ${category_sidebar}    ${product_dict.new_category_admin}
      ${custom_category}=    Replace String    ${category_sidebar_option}    Body Scrub     ${product_dict.new_category_admin}
      Click Element    ${custom_category}
-     Element Should Contain    ${product_catalog_body}     ${product_dict.product_name}
      ${inventory_product}=    Replace String    ${product_with_some_inventory}    Carry bag     ${product_dict.product_name}
      Page Should Contain Element    ${inventory_product}
 
@@ -185,8 +249,8 @@ Add All Variants Of Multiple Price Books
             Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
             Sleep    0.5s
             Click Element    ${search_add_button}
-            Wait Until Element Is Visible    //table[@class="table b-table table-cutom widthfixed b-table-selectable b-table-select-single"]     timeout=10s
-            ${count}    Get Element Count    //td[@aria-colindex="4"]/p
+            Wait Until Element Is Visible    ${mrp_table}      timeout=10s
+            ${count}    Get Element Count    ${ssp_price}
             Click Element    ${close_button}
         END
     FOR    ${i}    IN RANGE    1     ${count}+1

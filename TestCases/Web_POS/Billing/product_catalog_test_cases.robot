@@ -80,6 +80,21 @@ Zwing_CP_6 Item With Multiple Price(existing prices)
 
 Zwing_CP_7 Item With Multiple Price Creating New Price books
     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_7
+    Login With Valid Username And Password | POS    ${pc_data}
+    Open The Session    ${pc_data}
+    ${storename}  Get Store Name | Web POS
+    Close Browser
+    Open Application | Admin
+    Login With Valid Username And Password  ${pc_data}
+    Navigate To Retail Price Book | Console
+    Create New PriceBook | Console  ${pc_data}
+    Close Browser
+    Open Application | POS
+    Login With Valid Username And Password | POS    ${pc_data}
+    Open The Session    ${pc_data}
+    Verify New PriceBook Product Is Visible  ${pc_data}
+    Revoke Serial Key    ${pc_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_8 All Items in Item With multiple prices added
     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_8
@@ -104,3 +119,4 @@ Zwing_CP_10 Items with some inventory on the store
     Verify Items Allocated With Some Inventory To Store Are Normal    ${pc_data}
     Revoke Serial Key    ${pc_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
+
