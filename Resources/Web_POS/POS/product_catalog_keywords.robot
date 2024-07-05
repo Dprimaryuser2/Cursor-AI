@@ -133,6 +133,7 @@ Verify New Product Is Visible In Category
      ${custom_category}=    Replace String    ${category_sidebar_option}    Body Scrub     ${product_dict.new_category_admin}
      Click Element    ${custom_category}
      Element Should Contain    ${product_catalog_body}     ${product_dict.product_name}
+<<<<<<< HEAD
      
 Navigate To Retail Price Book | Console
     Wait Until Page Contains Element   ${product_categories_c}  timeout=10s
@@ -195,3 +196,89 @@ Verify New PriceBook Product Is Visible
      Wait Until Page Contains Element    ${select_mrp}  timeout=10s
      Element Should Be Visible    ${select_mrp}
 
+Verify Items Allocated With 0 Inventory To Store Are Blur
+     [Arguments]    ${product_data}
+     ${product_dict}    Create Dictionary   &{product_data}
+     Wait Until Page Contains Element    ${view_catalog_button}
+     Click Element    ${view_catalog_button}
+     Wait Until Page Contains Element    ${hide_catalog_button}
+     Page Should Contain Element    ${hide_catalog_button}
+     Page Should Contain Element    ${categories_button}
+     Page Should Contain Element    ${sub_categories_first_option}
+     Element Should Contain    ${category_sidebar}    ${product_dict.new_category_admin}
+     ${custom_category}=    Replace String    ${category_sidebar_option}    Body Scrub     ${product_dict.new_category_admin}
+     Click Element    ${custom_category}
+     Element Should Contain    ${product_catalog_body}     ${product_dict.product_name}
+     Page Should Contain Element    //locator_of_0_inventory_product_with_blur
+
+Verify Items Allocated With Some Inventory To Store Are Normal
+     [Arguments]    ${product_data}
+     ${product_dict}    Create Dictionary   &{product_data}
+     Wait Until Page Contains Element    ${view_catalog_button}
+     Click Element    ${view_catalog_button}
+     Wait Until Page Contains Element    ${hide_catalog_button}
+     Page Should Contain Element    ${hide_catalog_button}
+     Page Should Contain Element    ${categories_button}
+     Page Should Contain Element    ${sub_categories_first_option}
+     Element Should Contain    ${category_sidebar}    ${product_dict.new_category_admin}
+     ${custom_category}=    Replace String    ${category_sidebar_option}    Body Scrub     ${product_dict.new_category_admin}
+     Click Element    ${custom_category}
+     Element Should Contain    ${product_catalog_body}     ${product_dict.product_name}
+     ${inventory_product}=    Replace String    ${product_with_some_inventory}    Carry bag     ${product_dict.product_name}
+     Page Should Contain Element    ${inventory_product}
+
+Add All Variants Of Multiple Price Books
+    [Arguments]    ${product_data}
+    ${product_dict}    Create Dictionary   &{product_data}
+    ${price_list}=    Create List    
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    ${items_list}=    Convert Items To List    ${product_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${product_dict.buy_items}
+    FOR    ${item}    IN    @{items_dict.items()}
+            ${key}=    Set Variable    ${item}[0]
+            ${values}=    Set Variable    ${item}[1]
+            ${value}=    Convert To String    ${values}
+            Sleep    0.5s
+            Click Element    ${product_search_bar}
+            Input Text    ${product_search_bar}    ${key}
+            Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+            Sleep    0.5s
+            Click Element    ${search_add_button}
+            Wait Until Element Is Visible    //table[@class="table b-table table-cutom widthfixed b-table-selectable b-table-select-single"]     timeout=10s
+            ${count}    Get Element Count    //td[@aria-colindex="4"]/p
+            Click Element    ${close_button}
+        END
+    FOR    ${i}    IN RANGE    1     ${count}+1
+        FOR    ${item}    IN    @{items_dict.items()}
+            ${key}=    Set Variable    ${item}[0]
+            ${values}=    Set Variable    ${item}[1]
+            ${value}=    Convert To String    ${values}
+            Sleep    0.5s
+            Click Element    ${product_search_bar}
+            Input Text    ${product_search_bar}    ${key}
+            Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+            Sleep    0.5s
+            Click Element    ${search_add_button}
+        END
+        Wait Until Element Is Visible    (//td[@aria-colindex="4"]/p)[${i}]    timeout=20s
+        ${price}=    Get Text    (//td[@aria-colindex="4"]/p)[${i}]
+        ${price}    Remove Characters    ${price}
+        ${price}    Convert To Number    ${price}
+        ${values}    Convert To Number    ${values}
+        ${price}    Evaluate    ${price}*${values}
+        ${price}    Convert To String    ${price}
+        Append To List    ${price_list}    ${price}
+        Click Element    (//td[@aria-colindex="4"]/p)[${i}]
+        Click Button    ${add_to_cart_mrp}
+        Wait Until Element Is Visible    ${add_toggle_button}    timeout=10s
+        Input Text    ${quantity_input}    ${value}
+        Click Element    ${update_cart_quantity}
+        Wait Until Element Is Visible    ${table}    timeout=10s
+        Sleep    1s
+        Element Should Contain    ${table}    ${price}
+    END
