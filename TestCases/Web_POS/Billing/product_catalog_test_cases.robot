@@ -20,6 +20,8 @@ Zwing_CP_1 View Catalog using Catalog button in WebPOS
    Login With Valid Username And Password | POS    ${pc_data}
    Open The Session    ${pc_data}
    Verify View Catalog Using Catalog Button In WebPOS
+   Revoke Serial Key    ${pc_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_2 Hide Catalog using Hide button in WebPOS
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_2
@@ -27,6 +29,8 @@ Zwing_CP_2 Hide Catalog using Hide button in WebPOS
    Open The Session    ${pc_data}
    Verify View Catalog Using Catalog Button In WebPOS
    Verify Hide Catalog using Hide button in WebPOS
+   Revoke Serial Key    ${pc_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_3 Refresh Catalog using Refresh button
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_3
@@ -34,6 +38,8 @@ Zwing_CP_3 Refresh Catalog using Refresh button
    Open The Session    ${pc_data}
    Verify View Catalog Using Catalog Button In WebPOS
    Verify Refresh catalog using refresh button
+   Revoke Serial Key    ${pc_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_4 A new category item is allocated to a store
      ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_4
@@ -46,6 +52,8 @@ Zwing_CP_4 A new category item is allocated to a store
      Login With Valid Username And Password | POS    ${pc_data}
      Open The Session    ${pc_data}
      Verify New Category Is Visible   ${pc_data}
+     Revoke Serial Key    ${pc_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_5 A New Item Of Existing Category That Is Already Listed Is Allocated To The Store
      ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_5
@@ -58,6 +66,8 @@ Zwing_CP_5 A New Item Of Existing Category That Is Already Listed Is Allocated T
      Login With Valid Username And Password | POS    ${pc_data}
      Open The Session    ${pc_data}
      Verify New Product Is Visible In Category  ${pc_data}
+     Revoke Serial Key    ${pc_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_6 Item With Multiple Price(existing prices)
      ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_6
@@ -65,7 +75,32 @@ Zwing_CP_6 Item With Multiple Price(existing prices)
      Open The Session    ${pc_data}
      Scan Barcode To Add Item And Quantity To Cart | Multiple MRP    ${pc_data}
      Verify Multiple Price Product Is Added
+     Revoke Serial Key    ${pc_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
-Zwing_CP_7 Item With Multiple Price Creating New Pricebooks
+Zwing_CP_7 Item With Multiple Price Creating New Price books
     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_7
 
+Zwing_CP_8 All Items in Item With multiple prices added
+    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_8
+    Login With Valid Username And Password | POS   ${pc_data}
+    Open The Session    ${pc_data}
+    Add All Variants Of Multiple Price Books    ${pc_data}
+    Revoke Serial Key    ${pc_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
+
+Zwing_CP_9 Items allocated with 0 inventory to store
+    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_9
+    Login With Valid Username And Password | POS   ${pc_data}
+    Open The Session    ${pc_data}
+    Verify Items Allocated With 0 Inventory To Store Are Blur    ${pc_data}
+    Revoke Serial Key    ${pc_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
+
+Zwing_CP_10 Items with some inventory on the store
+    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_10
+    Login With Valid Username And Password | POS   ${pc_data}
+    Open The Session    ${pc_data}
+    Verify Items Allocated With Some Inventory To Store Are Normal    ${pc_data}
+    Revoke Serial Key    ${pc_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}

@@ -34,6 +34,7 @@ apply_manual_discount = '//button[@id="category-apply-discount"]'
 add_carry_bags = '//button[@id="category-add-carrybags"]'
 promo_name = '//span[@class="offer active text-green"]'
 quantity_row = '(//td[@aria-colindex="3"])[1]'
+weighted_quantity = '//button[@id="weight-btn-null"]'
 # piece
 quantity_in_piece_button = '(//td[@aria-colindex="3"]//button[@id="weight-btn-null"])[1]'    # this is button which selects the piece of item and a modal comes after clicking this
 piece_quantity_value = '(//td[@aria-colindex="3"]//button[@id="weight-btn-null"])[1]/span'
@@ -211,5 +212,6 @@ products_found = '//div[@class="modal-body"]//p'
 
 store_name_pos = '//div[@class="pt-1 left col-md-6"]//h6'
 category_sidebar = '//ul[@class="nav nav-pills card-header-pills list-group vertical-scroll horizontal-scroll w-30"]'
-category_sidebar_option = '//li//a[@class="nav-link de-active" and contains(text(),"Body Scrub")]'
+category_sidebar_option = '//li//a[contains(text(),"Body Scrub")]'
 product_catalog_body = '//div[@class="w-100 position-relative"]'
+product_with_some_inventory = '//div[@class="product-info pull-left"]//h6[text()="Carry bag"]'
