@@ -209,6 +209,7 @@ Verify Items Allocated With 0 Inventory To Store Are Blur
      ${custom_category}=    Replace String    ${category_sidebar_option}    Body Scrub     ${product_dict.new_category_admin}
      Click Element    ${custom_category}
      Element Should Contain    ${product_catalog_body}     ${product_dict.product_name}
+     #Locator need to update as locator is not present in dom thus testcase will fail
      Page Should Contain Element    //locator_of_0_inventory_product_with_blur
 
 Verify Items Allocated With Some Inventory To Store Are Normal
@@ -249,8 +250,8 @@ Add All Variants Of Multiple Price Books
             Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
             Sleep    0.5s
             Click Element    ${search_add_button}
-            Wait Until Element Is Visible    //table[@class="table b-table table-cutom widthfixed b-table-selectable b-table-select-single"]     timeout=10s
-            ${count}    Get Element Count    //td[@aria-colindex="4"]/p
+            Wait Until Element Is Visible    ${mrp_table}      timeout=10s
+            ${count}    Get Element Count    ${ssp_price}
             Click Element    ${close_button}
         END
     FOR    ${i}    IN RANGE    1     ${count}+1

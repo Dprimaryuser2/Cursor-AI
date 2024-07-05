@@ -217,3 +217,5 @@ product_catalog_body = '//div[@class="w-100 position-relative"]'
 product_name_in_catalog = '//h6[@class="mb-0" and contains(text(),"Ranger Alex")]'
 product_with_some_inventory = '//div[@class="product-info pull-left"]//h6[text()="Carry bag"]'
 
+ssp_price = ' //td[@aria-colindex="4"]/p'
+mrp_table = '//table[@class="table b-table table-cutom widthfixed b-table-selectable b-table-select-single"]'
