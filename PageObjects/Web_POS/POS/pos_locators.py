@@ -173,4 +173,3 @@ customer_info_icon = "//div[normalize-space(text())='Customer Information']/a[@i
 switch_modal_proceed_button = "//button[@class='btn ml-1 btn-primary btn-block']//span"
 
 update_product_md = "//button[@id='update-product-btn' and @class='btn ml-2 btn-primary']//span"
-disabled_product = '//a[@class="d-flex isDisabled"]'

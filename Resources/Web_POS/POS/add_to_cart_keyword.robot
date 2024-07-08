@@ -31,7 +31,11 @@ Add Weighted UOM Products to Cart | Edit Cart Quantity Mode
         Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
         Sleep    0.5s
         Click Element    ${search_add_button}
+<<<<<<< HEAD
         Sleep    2s
+=======
+        Sleep    1s
+>>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
         ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
         IF    ${multiple_product_present}
             Wait Until Page Contains Element    ${select_mrp}   timeout=10s
@@ -69,7 +73,11 @@ Add Weighted UOM Products to Cart | Add Cart Quantity Mode
         Input Text    ${product_search_bar}    ${key}
         Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
         Click Element    ${search_add_button}
+<<<<<<< HEAD
         Sleep    2s
+=======
+        Sleep    1s
+>>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
         ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
         IF    ${multiple_product_present}
             Wait Until Page Contains Element    ${select_mrp}   timeout=10s

@@ -8,12 +8,7 @@ Variables   ../../../PageObjects/AdminConsole/Login/login.py
 Open Application | Admin
     Open Browser     ${admin_console_url}    ${browser}
 #    Open Browser     ${admin_console_url}    ${browser}    options=add_argument("--headless")
-<<<<<<< Updated upstream
     Set Window Size    ${window_width}    ${window_height}
-=======
-#    Set Window Size    ${window_width}    ${window_height}
-    Maximize Browser Window
->>>>>>> Stashed changes
 
 Login With Valid Username And Password
     [Arguments]     ${search_data}

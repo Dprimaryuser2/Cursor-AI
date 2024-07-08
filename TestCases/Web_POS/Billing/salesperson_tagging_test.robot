@@ -5,7 +5,11 @@ Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/billing_keyword.robot
 #Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
+<<<<<<< HEAD
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
+=======
+#Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
+>>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
 Resource    ../../../Resources/Web_POS/POS/salesperson_keyword.robot
 Library    ../../../Resources/CustomKeywords/utilities.py
 
@@ -23,7 +27,10 @@ Zwing_ST_1 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory i
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Policies
    Revoke Serial Key    ${pos_data}
+<<<<<<< HEAD
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+=======
+>>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
 
 
 Zwing_ST_2 Salesperson Tagging is Enabled and Salesperson Tagging is Optional in Policies
@@ -34,7 +41,10 @@ Zwing_ST_2 Salesperson Tagging is Enabled and Salesperson Tagging is Optional in
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Verify Salesperson Tagging is Enabled and Salesperson Tagging is Optional in Policies    ${pos_data}
    Revoke Serial Key    ${pos_data}
+<<<<<<< HEAD
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+=======
+>>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
 
 
 Zwing_ST_3 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory after adding the product in Policies
@@ -45,7 +55,10 @@ Zwing_ST_3 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory a
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Policies after adding the product    ${pos_data}
     Revoke Serial Key    ${pos_data}
+<<<<<<< HEAD
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+=======
+>>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
 
 Zwing_ST_4 Salesperson Tagging Item Level
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_4
@@ -55,7 +68,10 @@ Zwing_ST_4 Salesperson Tagging Item Level
     Assign A Salesperson To An Item  ${pos_data}
     Verify If Salesperson Is Assigned To An Item    ${pos_data}
     Revoke Serial Key    ${pos_data}
+<<<<<<< HEAD
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+=======
+>>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
 
 Zwing_ST_5 Salesperson Tagging Bill Level
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_5
@@ -65,8 +81,11 @@ Zwing_ST_5 Salesperson Tagging Bill Level
     Assign A Salesperson All Items   ${pos_data}
     Set Selenium Speed    1
     Verify Salesperson Tagged At Bill Level    ${pos_data}
+<<<<<<< HEAD
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+=======
+>>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
 
 Zwing_ST_6 Tag Single Salesperson To multiple Items
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_6
@@ -74,8 +93,11 @@ Zwing_ST_6 Tag Single Salesperson To multiple Items
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Assign Same Salesperson To All Products Except Last Product And Verify   ${pos_data}
+<<<<<<< HEAD
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+=======
+>>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
 
 Zwing_ST_7 Tag Different salesperson for each item
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_7
@@ -84,8 +106,11 @@ Zwing_ST_7 Tag Different salesperson for each item
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Assign A different Salesperson To Each Item  ${pos_data}
     Verify If Different Salesperson Was Assigned To Each Person
+<<<<<<< HEAD
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+=======
+>>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
 
 Zwing_ST_8 Change Salesperson tagging for item
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_8
@@ -94,8 +119,11 @@ Zwing_ST_8 Change Salesperson tagging for item
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Change Salesperson tagging for item    ${pos_data}
+<<<<<<< HEAD
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+=======
+>>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
 
 Zwing_ST_9 Change Salesperson tagging for bill
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_9
@@ -104,8 +132,11 @@ Zwing_ST_9 Change Salesperson tagging for bill
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Change Salesperson tagging for bill   ${pos_data}
+<<<<<<< HEAD
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+=======
+>>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
 
 Zwing_ST_10 Tagged Sales person view below the tagged Item
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_10
@@ -115,8 +146,11 @@ Zwing_ST_10 Tagged Sales person view below the tagged Item
     Assign A Salesperson All Items   ${pos_data}
     Set Selenium Speed    1
     Verify Salesperson Tagged At Bill Level    ${pos_data}
+<<<<<<< HEAD
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+=======
+>>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
 
 Zwing_ST_11
     Pass Execution
@@ -127,5 +161,8 @@ Zwing_ST_12 Salesperson Tagging is Disabled in policies
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Verify Salesperson Tagging is Disabled
+<<<<<<< HEAD
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+=======
+>>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
