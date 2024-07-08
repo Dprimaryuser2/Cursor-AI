@@ -50,11 +50,12 @@ Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Po
     [Arguments]    ${pos_data}
     ${my_dict}    Create Dictionary    &{pos_data}
     Wait Until Page Contains Element    ${product_name_in_cart_row}    timeout=20
-    Open Browser    ${admin_console_url}    ${browser}    alias=FIRST
+    Open Browser    ${admin_console_url}    ${browser}
+    ${admin_id}    Get Browser Ids
     Maximize Browser Window
     Login With Valid Username And Password    ${my_dict}
     Change Salesperson Tagging To Mandatory In POS
-    Switch Browser    SECOND
+    Switch Browser    1
     Wait Until Page Contains Element    ${pos_settings}    timeout=20
     Click Element    ${pos_settings}
     Click Element    ${pos_settings_profile_info}
@@ -68,7 +69,7 @@ Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Po
     Wait Until Page Contains Element    ${checkout_button}    timeout=20
     Click Element    ${checkout_button}
     Page Should Not Contain Element    ${checkout_heading}    timeout=20
-    Switch Browser    FIRST
+    Switch Browser    2
     Sleep    2
     Change Salesperson Tagging To Optional In POS
     
