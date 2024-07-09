@@ -32,6 +32,8 @@ Zwing_MD_2 Apply Item Level Manual Discount | Discount type as Fixed Amount
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
      Apply Item Manual Discount | Select From List    ${discount_data}
      Verify Item Manual Discount   ${product_price}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_3 Apply Item Level Manual Discount | Discount type as percentage
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_03
@@ -42,6 +44,8 @@ Zwing_MD_3 Apply Item Level Manual Discount | Discount type as percentage
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
      Apply Item Manual Discount | Select From List    ${discount_data}
      Verify Item Manual Discount   ${product_price}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_4 Apply Item Level Manual Discount | Discount to Customer Group
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_04
@@ -53,6 +57,8 @@ Zwing_MD_4 Apply Item Level Manual Discount | Discount to Customer Group
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
      Apply Item Manual Discount | Select From List    ${discount_data}
      Verify Item Manual Discount   ${product_price}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_5 Apply Item Level Manual Discount | Discount to Store
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_05
@@ -63,6 +69,8 @@ Zwing_MD_5 Apply Item Level Manual Discount | Discount to Store
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
      Apply Item Manual Discount | Select From List    ${discount_data}
      Verify Item Manual Discount   ${product_price}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_6 Apply Item Level Manual Discount | Effective date and valid up to date
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_06
@@ -74,6 +82,8 @@ Zwing_MD_6 Apply Item Level Manual Discount | Effective date and valid up to dat
      Apply Item Manual Discount | Select From List    ${discount_data}
      Verify Item Manual Discount   ${product_price}
      Verify Item Manual Discount At Cart    ${product_price}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_7 Bill Level manual discount
     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_07
@@ -84,6 +94,8 @@ Zwing_MD_7 Bill Level manual discount
      Verify Billing Checkout
      ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
      Verify Bill Level Manual Discount    ${bill_data}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_8 Bill Level manual discount as Fixed Amount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_08
@@ -94,6 +106,8 @@ Zwing_MD_8 Bill Level manual discount as Fixed Amount
      Verify Billing Checkout
      ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
      Verify Bill Level Manual Discount    ${bill_data}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_9 Bill level manual discount as Percentage
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_09
@@ -104,6 +118,8 @@ Zwing_MD_9 Bill level manual discount as Percentage
      Verify Billing Checkout
      ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
      Verify Bill Level Manual Discount    ${bill_data}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_10 Allocate Discount to Customer Group
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_10
@@ -114,6 +130,8 @@ Zwing_MD_10 Allocate Discount to Customer Group
      Verify Billing Checkout
      ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
      Verify Bill Level Manual Discount    ${bill_data}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_11 Manual Discount button | Stores
     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_11
@@ -124,7 +142,9 @@ Zwing_MD_11 Manual Discount button | Stores
      Verify Billing Checkout
      ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
      Verify Bill Level Manual Discount    ${bill_data}
-     
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+
 Zwing_MD_12 Select the effective and valid up to date
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_12
      Login With Valid Username And Password | POS   ${discount_data}
@@ -134,7 +154,9 @@ Zwing_MD_12 Select the effective and valid up to date
      Verify Billing Checkout
      ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
      Verify Bill Level Manual Discount    ${bill_data}
-     
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+
 Zwing_MD_13 Item level custom Discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_13
      Login With Valid Username And Password | POS   ${discount_data}
@@ -145,6 +167,8 @@ Zwing_MD_13 Item level custom Discount
      Apply Item Manual Discount | Custom Discount    ${discount_data}
      Verify Item Manual Discount   ${product_price}
      Verify Item Manual Discount At Cart    ${product_price}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_14 Custom Discount with discount type as amount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_14
@@ -156,6 +180,8 @@ Zwing_MD_14 Custom Discount with discount type as amount
      Apply Item Manual Discount | Custom Discount    ${discount_data}
      Verify Item Manual Discount   ${product_price}
      Verify Item Manual Discount At Cart    ${product_price}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_15 Custom Discount with discount type as Percentage
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_15
@@ -167,6 +193,8 @@ Zwing_MD_15 Custom Discount with discount type as Percentage
      Apply Item Manual Discount | Custom Discount    ${discount_data}
      Verify Item Manual Discount   ${product_price}
      Verify Item Manual Discount At Cart    ${product_price}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_16 Bill level custom discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_16
@@ -177,6 +205,8 @@ Zwing_MD_16 Bill level custom discount
      Verify Billing Checkout
      ${bill_level}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
      Verify Bill Level Manual Discount    ${bill_level}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_17 Bill Level Custom Discount with discount type as amount
     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_17
@@ -187,6 +217,8 @@ Zwing_MD_17 Bill Level Custom Discount with discount type as amount
      Verify Billing Checkout
      ${bill_level}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
      Verify Bill Level Manual Discount    ${bill_level}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_18 Bill Level Custom Discount with discount type as Percentage
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_18
@@ -197,6 +229,8 @@ Zwing_MD_18 Bill Level Custom Discount with discount type as Percentage
      Verify Billing Checkout
      ${bill_level}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
      Verify Bill Level Manual Discount    ${bill_level}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_19 Apply Manual Discount Button | Assortment Wise | Button
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_19
@@ -205,6 +239,8 @@ Zwing_MD_19 Apply Manual Discount Button | Assortment Wise | Button
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Apply Item Manual Discount | Button
      Verify Item Manual Discount | Button    ${discount_data}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_20 Apply Manual Discount Button, Use Discount type as Fixed Amount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_20
@@ -213,6 +249,8 @@ Zwing_MD_20 Apply Manual Discount Button, Use Discount type as Fixed Amount
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Apply Item Manual Discount | Button
      Verify Item Manual Discount | Button    ${discount_data}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_21 Apply Manual Discount Button | discount type as percentage
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_21
@@ -221,6 +259,8 @@ Zwing_MD_21 Apply Manual Discount Button | discount type as percentage
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Apply Item Manual Discount | Button
      Verify Item Manual Discount | Button    ${discount_data}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_22 Apply Manual Discount Button | Discount to Customer Group
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_22
@@ -229,6 +269,8 @@ Zwing_MD_22 Apply Manual Discount Button | Discount to Customer Group
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Apply Item Manual Discount | Button
      Verify Item Manual Discount | Button    ${discount_data}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_23 Apply Manual Discount Button | Allocate Discount to Stores
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_23
@@ -237,6 +279,8 @@ Zwing_MD_23 Apply Manual Discount Button | Allocate Discount to Stores
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Apply Item Manual Discount | Button
      Verify Item Manual Discount | Button    ${discount_data}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_24 Apply Manual Discount Button | Select the effective date and valid upto date
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_24
@@ -245,6 +289,40 @@ Zwing_MD_24 Apply Manual Discount Button | Select the effective date and valid u
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Apply Item Manual Discount | Button
      Verify Item Manual Discount | Button    ${discount_data}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+
+Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manual discount on bill level | Enable bill level discount
+     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_26
+     Login With Valid Username And Password | POS   ${discount_data}
+     Open The Session    ${discount_data}
+     Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
+     Add Customer Details    ${discount_data}
+     Verify Billing Checkout
+     Verify Bill Level Discount Button Is Enabled
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+
+Zwing_MD_25 Apply Manual Discount Button |Policy : Allows cashier to apply manual discount on bill level | Disable bill level discount
+     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_25
+     Login With Valid Username And Password | POS   ${discount_data}
+     Open The Session    ${discount_data}
+     Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
+     Add Customer Details    ${discount_data}
+     Verify Billing Checkout
+     Verify Bill Level Discount Button Is Disabled
+
+Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
+     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_33
+     Login With Valid Username And Password | POS   ${discount_data}
+     Open The Session    ${discount_data}
+     Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
+     Add Customer Details    ${discount_data}
+     Verify Billing Checkout
+     Verify Bill Level Discount Button Is Enabled
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+
 
 Zwing_MD_25 Apply Manual Discount Button |Policy : Allows cashier to apply manual discount on bill level | Disable bill level discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_25
@@ -263,6 +341,10 @@ Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manua
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
      Verify Bill Level Discount Button Is Enabled
+     Navigate To Update Product Window    ${discount_data}
+     Verify Disabled Item Level Discount
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_27 Apply Manual Discount Button Policy : Allow cashier to select bill level discount from given list | Disable bill level discount list
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_27
@@ -272,6 +354,8 @@ Zwing_MD_27 Apply Manual Discount Button Policy : Allow cashier to select bill l
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
      Verify Disable Bill Level Discount List
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_28 Apply Manual Discount Button Policy : Allow cashier to select bill level discount from given list | Enable bill level discount list
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_28
@@ -281,6 +365,8 @@ Zwing_MD_28 Apply Manual Discount Button Policy : Allow cashier to select bill l
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
      Verify Enable Bill Level Discount List
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_29 Apply Manual Discount Button Policy : Allow cashier to enter bill level manual discount as percentage or amount | enable custom bill level discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_29
@@ -290,6 +376,8 @@ Zwing_MD_29 Apply Manual Discount Button Policy : Allow cashier to enter bill le
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
      Verify Enable Bill Level Custom Discount
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_30 Apply Manual Discount Button Policy : Allow cashier to enter bill level manual discount as percentage or amount | disable custom bill level discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_30
@@ -299,6 +387,8 @@ Zwing_MD_30 Apply Manual Discount Button Policy : Allow cashier to enter bill le
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
      Verify Disable Bill Level Custom Discount
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_31 Apply Manual Discount Button Policy : Discount capping (amount) Bill level | Apply Bill level discount percentage more than Limit on discount percentage(Bill level)
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_31
@@ -309,6 +399,8 @@ Zwing_MD_31 Apply Manual Discount Button Policy : Discount capping (amount) Bill
      Verify Billing Checkout
      ${bill_data}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
      Verify Bill Level Custom Discount More Than Percentage Limit    ${bill_data}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_32 Apply Manual Discount Button Policy : Discount capping (amount) Bill level | Apply Bill level discount percentage less than or equal to Limit on discount percentage(Bill level)
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_32
@@ -320,6 +412,7 @@ Zwing_MD_32 Apply Manual Discount Button Policy : Discount capping (amount) Bill
      ${bill_data}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
      Verify Bill Level Custom Discount More Than Capping Amount Limit    ${bill_data}
 
+
 Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_33
      Login With Valid Username And Password | POS   ${discount_data}
@@ -327,7 +420,9 @@ Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      Verify Disabled Item Level Discount
-     
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+
 Zwing_MD_34 Apply Manual Discount Button | Enable Item level discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_34
      Login With Valid Username And Password | POS   ${discount_data}
@@ -335,6 +430,8 @@ Zwing_MD_34 Apply Manual Discount Button | Enable Item level discount
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      Verify Enabled Item Level Discount
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_35 Apply Manual Discount Button | Enable Item level discount | Disable Item level discount list
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_35

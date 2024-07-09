@@ -6,8 +6,10 @@ Variables    ../../../PageObjects/Web_POS/Login/login_locators.py
 
 *** Keywords ***
 Open Application | POS
-    Open Browser     ${pos_url}    ${browser}
+    Open Browser     ${pos_url}    ${browser}    alias=SECOND    options=add_argument("--headless")
+#    Open Browser     ${pos_url}    ${browser}    alias=SECOND    options=add_argument("--headless")
 #    Open Browser     ${pos_url}    ${browser}    options=add_argument("--headless")
+    Open Browser     ${pos_url}    ${browser}
     Maximize Browser Window
 #    Set Window Size    ${window_width}    ${window_height}
 

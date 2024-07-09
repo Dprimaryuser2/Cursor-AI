@@ -87,7 +87,7 @@ add_bill_remark_textarea = '//textarea[@placeholder="Add remark... "]'
 add_bill_remark_save_button = '//button[@class="btn ml-1 btn-primary"]//span[text()="Save"]'
 add_bill_remark_clear_button = '//button[@class="btn mr-1 btn-outline-primary"]//span[text()="Clear"]'
 checkout_billing_edit_remark = '(//a[@class="dropdown-item text-dark" and contains(text(),"Edit Remark")])[2]'
-
+add_bill_remark_close_icon = '//button[@class="close"]'
 checkout_order_summary = '//h6[@class="mb-0 fw-normal" and contains(text(),"Order Summary")]'
 # payment method
 
@@ -108,6 +108,14 @@ share_invoice_button = '//button[@id="share-invoice-btn" and contains(text(),"Sh
 invoice_modal_heading = '//h3[@class="modal-title" and contains(text(),"Invoice")]'
 print_invoice_modal_button = '//button[@class="btn float-right btn-primary" and contains(text(),"Print")]'
 close_invoice_modal_button = '//button[@class="btn float-right btn-secondary" and contains(text(),"Close")]'
+new_bill_button = '//button[@class="btn mr-2 btn-primary btn-block"]'
+share_invoice_title = '//h5[@class="modal-title" and contains(text(),"Share Invoice")]'
+cust_number_share_invoice = '//input[@placeholder="Enter your phone number"]'
+sms_tab_share_invoice = '//div[@class="row pl-2 pr-2"]//div[@class="col-md-6 border-active"]//p[text()="SMS"]'
+email_tab_share_invoice = '//div[@class="row pl-2 pr-2"]//div[@class="col-md-6 border-inactive"]//p[text()="E-Mail"]'
+cust_email_share_invoice = '//input[@placeholder="Enter your E-mail address"]'
+send_button_share_invoice = '//button[@class="btn btn-primary btn-block"]'
+close_icon_share_invoice = '//button[@class="close"]'
 
 #redeem store credit
 redeem_store_credit_button = '//button[@class="btn text-center p-0 h-25 mb-2 btn-outline-secondary btn-block" and text()="Redeem Store Credit"]'
@@ -120,3 +128,9 @@ input_store_credit_opt = '//input[@class="active text-center form-control"]'
 store_credit_verify_button = '//button[@id="verify-otp-btn"]'
 store_credit_resend_otp_button = '//button[@id="store-credit-Resend OTP"]'
 store_credit_validation_message = '//div[@class="alert alert-dismissible alert-danger"]'
+
+active_promo_dropdown_row = '//ul[@class="m-0 filter-dropdown list-unstyled"]//li//span'
+promo_name_in_product_row = '//span[@class="offer active text-green"]'
+
+bill_container = '//div[@class="container p-0"]'
+

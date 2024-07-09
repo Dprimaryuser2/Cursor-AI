@@ -572,15 +572,15 @@ Verify Item Added In Cart
                ${count}    Get Text    ${quantity_product_window}
                Convert To Integer    ${count}
                ${product_count_for_test}    Evaluate    ${count}+${product_count_for_test}
-               Wait Until Page Contains Element    ${close_product_window_button}
-               Click Element    ${close_product_window_button}
+               Wait Until Page Contains Element    ${update_product_button}
+               Click Element    ${update_product_button}
            END
     END
     ${temp}    Get Text    ${item_quantity_in_cart}
     ${temp}    Remove Characters    ${temp}
     Convert To Integer    ${temp}
     Should Be Equal As Integers     ${temp}    ${product_count_for_test}
-    Wait Until Page Contains Element    ${payable_amount}
+    Wait Until Page Contains Element    ${payable_amount}   timeout=15s
     Page Should Contain Element    ${payable_amount}
     Element Should Be Enabled    ${checkout_button}
     Element Should Be Enabled    ${clear_all_items}
