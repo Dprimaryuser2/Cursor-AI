@@ -9,6 +9,7 @@ Variables   ../../../PageObjects/Web_POS/POS/pos_locators.py
 Variables   ../../../PageObjects/Web_POS/POS/add_customer_locator.py
 Resource    ../../AdminConsole/Login/login_keyword.robot
 Variables   ../../../PageObjects/AdminConsole/ProductCategories/product_categories.py
+Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
 
 
 *** Keywords ***
@@ -107,14 +108,14 @@ Verify The Close Icon | Share Invoice
    Page Should Contain Element    ${payment_complete_heading}
 
 Navigate from email id tab to phone No. tab
-   [Arguments]    ${bill_remark}
-   ${my_dict}    Create Dictionary   &{bill_remark}
+   [Arguments]    ${share_invoice}
+   ${my_dict}    Create Dictionary   &{share_invoice}
    Wait Until Page Contains Element    ${share_invoice_title}
    ${button_status}  Run Keyword And Return Status    Element Should Be Enabled    ${sms_tab_share_invoice}
    IF     ${button_status} 
        Click Element    ${email_tab_share_invoice}
        Wait Until Page Contains Element    ${cust_email_share_invoice}  timeout=10s
-       Input Text    ${cust_email_share_invoice}    ${my_dict.email}
+       Input Text    ${cust_email_share_invoice}    ${my_dict.cust_email}
        Wait Until Page Contains Element    ${send_button_share_invoice}  timeout=10s
        Element Should Be Enabled    ${send_button_share_invoice}
        Click Element    ${sms_tab_share_invoice}
@@ -130,4 +131,105 @@ Navigate from email id tab to phone No. tab
 Verify Customer Number Is Auto-Populated | Share Invoice
    Wait Until Page Contains Element    ${cust_number_share_invoice}  timeout=10s
    Page Should Contain Element     ${cust_number_share_invoice}   ${mobile}
- 
+
+Verify Customer Email Is Auto-Populated | Share Invoice
+   [Arguments]    ${share_invoice}
+   ${my_dict}    Create Dictionary   &{share_invoice}
+   Click Element    ${email_tab_share_invoice}
+   Wait Until Page Contains Element    ${cust_email_share_invoice}  timeout=10s
+   Page Should Contain Element    ${cust_email_share_invoice}   ${my_dict.cust_email}
+
+Update The Phone No. While Sharing The Invoice
+   [Arguments]    ${share_invoice}
+   ${my_dict}    Create Dictionary   &{share_invoice}
+   Wait Until Page Contains Element    ${cust_number_share_invoice}  timeout=10s
+   Clear Element Text    ${cust_number_share_invoice}
+   Input Text    ${cust_number_share_invoice}    ${my_dict.mobile}
+   Page Should Contain Element    ${cust_number_share_invoice}    ${my_dict.mobile}
+   Element Should Be Enabled    ${send_button_share_invoice}
+   
+Verify Alert Message Is Displayed For Invalid Number | Share Invoice
+   [Arguments]    ${share_invoice}
+   ${my_dict}    Create Dictionary   &{share_invoice}
+   Wait Until Page Contains Element    ${cust_number_share_invoice}  timeout=10s
+   Clear Element Text    ${cust_number_share_invoice}
+   Input Text    ${cust_number_share_invoice}    ${my_dict.mobile}
+   Page Should Contain Element    ${cust_number_share_invoice}    ${my_dict.mobile}
+   Wait Until Page Contains Element    ${share_invoice_alert_number}
+   Element Should Be Visible     ${share_invoice_alert_number}
+   
+Update The Email While Sharing The Invoice
+   [Arguments]    ${share_invoice}
+   ${my_dict}    Create Dictionary   &{share_invoice}
+   Click Element    ${email_tab_share_invoice}
+   Wait Until Page Contains Element    ${cust_email_share_invoice}  timeout=10s
+   Click Element    ${cust_email_share_invoice}
+   Clear Element Text    ${cust_email_share_invoice}
+   Input Text    ${cust_email_share_invoice}    ${my_dict.update_email}
+   Page Should Contain Element    ${cust_email_share_invoice}    ${my_dict.update_email}
+   Element Should Be Enabled    ${send_button_share_invoice}
+
+Verify Alert Message Is Displayed For Invalid Email | Share Invoice
+   [Arguments]    ${share_invoice}
+   ${my_dict}    Create Dictionary   &{share_invoice}
+   Click Element    ${email_tab_share_invoice}
+   Wait Until Page Contains Element    ${cust_email_share_invoice}  timeout=10s
+   Clear Element Text    ${cust_email_share_invoice}
+   Input Text    ${cust_email_share_invoice}    ${my_dict.cust_email}
+   Page Should Contain Element    ${cust_email_share_invoice}    ${my_dict.cust_email}
+   Wait Until Page Contains Element    ${share_invoice_alert_email}
+   Element Should Be Visible   ${share_invoice_alert_email}
+
+Add Customer Details | Share Invoice
+    [Arguments]    ${customer_data}
+    ${my_dict}    Create Dictionary   &{customer_data}
+    Wait Until Element Is Enabled    ${add_customer_link}   timeout=40s
+    Click Element    ${add_customer_link}
+    Wait Until Element Is Visible    ${customer_phone_field}
+    ${mobile}=     Generate Random Phone Number
+    Set Test Variable    ${mobile}
+    Input Text    ${customer_phone_field}    ${mobile}
+    Click Button    ${continue_billing_button}
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
+    ${first_name}=    Generate Random First Name
+    Set Test Variable    ${first_name}
+    Input Text    ${customer_first_name_field}    ${first_name}
+    ${last_name}=    Generate Random Last Name
+    Set Test Variable    ${last_name}
+    Input Text    ${customer_last_name_field}    ${last_name}
+    Input Text    ${customer_email_field}    ${my_dict.cust_email}
+    Click Element    ${gender_select_field}
+    ${gender}=    Generate Random Gender
+    IF    '${gender}' == 'male'
+        Click Element    ${male}
+    ELSE IF    '${gender}' == 'female'
+        Click Element    ${female}
+    END
+    Add DOB    ${my_dict.dob}
+    ${add_line1}=    Generate Random Street Address
+    Input Text    ${address_line1}    ${add_line1}
+    ${add_line2}=    Generate Random Street Address
+    Input Text    ${address_line2}    ${add_line2}
+#    Input Text    ${pincode}    ${my_dict.pincode}
+    Add Customer Group    ${my_dict}
+    Select State And City    ${my_dict}
+    Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
+    Click Button    ${start_billing_button}
+    Wait Until Element Is Visible    //div[@class="popup-notification"]    timeout=10s
+    Wait Until Element Is Visible    ${payable_amount}
+    Wait Until Element Is Visible    ${checkout_button}    timeout=20s
+    Wait Until Element Is Visible    ${customer_info_icon}    timeout=20s
+    Wait Until Element Is Not Visible    //div[@class="popup-notification"]     timeout=10s
+#    Wait Until Element Is Visible    //div[contains(text(),"Customer tagged successfully.")]
+     ${customer_information}=    Create Dictionary    first_name=${first_name}    last_name=${last_name}    phone_number= ${mobile}    email=${email}    gender=${gender}    add_line_one= ${add_line1}    add_line_two= ${add_line2}    mobile_no=${mobile}
+     [Return]    ${customer_information}
+
+Verify New Bill Button
+   Wait Until Page Contains Element    ${print_invoice_modal_button}  timeout=20s
+   Click Element    ${close_invoice_modal_button}
+   Wait Until Page Contains Element    ${new_bill_button}   timeout=20s
+   Click Element    ${new_bill_button}
+   Wait Until Page Contains Element    ${in_store}  timeout=20s
+   Page Should Contain Element    ${in_store}
+   Page Should Contain Element    ${delivery}
+

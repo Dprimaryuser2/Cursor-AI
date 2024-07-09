@@ -122,6 +122,8 @@ email_tab_share_invoice = '//div[@class="row pl-2 pr-2"]//div[@class="col-md-6 b
 cust_email_share_invoice = '//input[@placeholder="Enter your E-mail address"]'
 send_button_share_invoice = '//button[@class="btn btn-primary btn-block"]'
 close_icon_share_invoice = '//button[@class="close"]'
+share_invoice_alert_number = '//span[text()="Phone number must be 10 characters long."]'
+share_invoice_alert_email = '//div[@class="invalid-feedback" and contains(text(),"Invalid Email")]'
 
 #redeem store credit
 redeem_store_credit_button = '//button[@class="btn text-center p-0 h-25 mb-2 btn-outline-secondary btn-block" and text()="Redeem Store Credit"]'

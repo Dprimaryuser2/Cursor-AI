@@ -189,3 +189,132 @@ Zwing_SI_12 Validate the phone No. should get auto populated with the no. tagged
    Verify Customer Number Is Auto-Populated | Share Invoice
    Revoke Serial Key    ${share_data}
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
+
+Zwing_SI_13 Validate the Email address should get auto populated with the Email id tagged while customer tagging
+   ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_13
+   Login With Valid Username And Password | POS    ${share_data}
+   Open The Session    ${share_data}
+   Add Product By Scan Only   ${share_data}
+   Verify Item Added In Cart
+   Add Customer Details    ${share_data}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Payment By Cash   ${value}
+   Automatic Invoice Generation
+   Verify The Share Invoice Button
+   Verify Customer Email Is Auto-Populated | Share Invoice   ${share_data}
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}
+
+Zwing_SI_14 Update the phone No. while sharing the Invoice
+   ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_14
+   Login With Valid Username And Password | POS    ${share_data}
+   Open The Session    ${share_data}
+   Add Product By Scan Only   ${share_data}
+   Verify Item Added In Cart
+   Add Customer Details    ${share_data}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Payment By Cash   ${value}
+   Automatic Invoice Generation
+   Verify The Share Invoice Button
+   Update The Phone No. While Sharing The Invoice  ${share_data}
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}
+
+Zwing_SI_15 While updating the phoneNo, send button should be disabled and error message should be displayed if phoneNo is not of 10 characters
+   ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_15
+   Login With Valid Username And Password | POS    ${share_data}
+   Open The Session    ${share_data}
+   Add Product By Scan Only   ${share_data}
+   Verify Item Added In Cart
+   Add Customer Details    ${share_data}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Payment By Cash   ${value}
+   Automatic Invoice Generation
+   Verify The Share Invoice Button
+   Verify Alert Message Is Displayed For Invalid Number | Share Invoice   ${share_data}
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}
+
+Zwing_SI_16 Update the Email address while sharing the Invoice
+   ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_16
+   Login With Valid Username And Password | POS    ${share_data}
+   Open The Session    ${share_data}
+   Add Product By Scan Only   ${share_data}
+   Verify Item Added In Cart
+   Add Customer Details    ${share_data}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Payment By Cash   ${value}
+   Automatic Invoice Generation
+   Verify The Share Invoice Button
+   Update The Email While Sharing The Invoice  ${share_data}
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}
+
+Zwing_SI_17 While updating the Email address, send button should be disabled and error message should be displayed if emailId is not valid. Valid format.
+   ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_17
+   Login With Valid Username And Password | POS    ${share_data}
+   Open The Session    ${share_data}
+   Add Product By Scan Only   ${share_data}
+   Verify Item Added In Cart
+   Add Customer Details    ${share_data}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Payment By Cash   ${value}
+   Automatic Invoice Generation
+   Verify The Share Invoice Button
+   Verify Alert Message Is Displayed For Invalid Email | Share Invoice  ${share_data}
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}
+
+#Zwing_SI_18 Send Invoice using phone No.
+
+Zwing_SI_19 Send Invoice using email Id.
+   ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_19
+   Login With Valid Username And Password | POS    ${share_data}
+   Open The Session    ${share_data}
+   Add Product By Scan Only   ${share_data}
+   Verify Item Added In Cart
+   Add Customer Details | Share Invoice    ${share_data}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Payment By Cash   ${value}
+   Automatic Invoice Generation
+   Verify The Share Invoice Button
+   Verify Customer Email Is Auto-Populated | Share Invoice   ${share_data}
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}
+
+Zwing_SI_20 Navigate to billing page using new bill button on checkout page
+   ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_20
+   Login With Valid Username And Password | POS    ${share_data}
+   Open The Session    ${share_data}
+   Add Product By Scan Only   ${share_data}
+   Verify Item Added In Cart
+   Add Customer Details | Share Invoice    ${share_data}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Payment By Cash   ${value}
+   Automatic Invoice Generation
+   Verify New Bill Button
+
+Zwing_SI_21 Update the Email address while sharing the Invoice and send invoice
+   ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_21
+   Login With Valid Username And Password | POS    ${share_data}
+   Open The Session    ${share_data}
+   Add Product By Scan Only   ${share_data}
+   Verify Item Added In Cart
+   Add Customer Details | Share Invoice    ${share_data}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Payment By Cash   ${value}
+   Automatic Invoice Generation
+   Verify The Share Invoice Button
+   Update The Email While Sharing The Invoice  ${share_data}
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}
+
+#Zwing_SI_22 Update the phone No. while sharing the Invoice and send invoice
