@@ -42,7 +42,7 @@ Zwing_SP_2 Split Payment Policy Is Unavailable If Policy Is Disabled
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_3 split payment toggle is enabled.
-     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_3
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_3
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -64,7 +64,7 @@ Zwing_SP_4 split payment toggle is disabled.
     Verify Billing Checkout
     Verify split payment toggle button is disabled.
     Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_5 complete payment by MOP as cash
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_5
@@ -110,8 +110,6 @@ Zwing_SP_7 complete payment by MOP as On Account sale
 
 #Zwing_SP_8 complete payment by MOP as card
 #Due to Physical Card Payment
-
-
 
 Zwing_SP_9 complete payment by combination of Cash, on Account sale
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_9
@@ -210,7 +208,6 @@ Zwing_B_18 Redeem Store credit with credit voucher with split payment
     Verify If Payment is Complete Or Not
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
 
 #Zwing_B_19 Redeem Store credit with Phone number with split payment
 #Due to Phone number otp

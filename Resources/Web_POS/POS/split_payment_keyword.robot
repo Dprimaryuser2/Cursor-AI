@@ -54,7 +54,6 @@ Validate Account Balance Are Equal On Tagged Customer Split Payment
     Sleep    1s
     ${account_limit}    Get Text    ${available_on_account_limit}
     Click Element    ${close_customer_window}
-#    Wait Until Element Is Enabled    ${checkout_button}
     [Return]    ${account_limit}
 
 Verify Split By Single MOP
@@ -92,7 +91,6 @@ Split Payment By Different Modes
            ...    ELSE IF    '${key}' == 'store-credit'    Collect Payment Using Store Credit   ${my_dict}
             ...    ELSE IF    '${key}' == 'card'    Payment By credit_card
     END
-
 
 Split Payment By Cash
     Sleep    0.3
@@ -165,7 +163,6 @@ Collect Payment Using Store Credit
     Input Text    ${input_voucher_code}    ${details.voucher_code}
 #    Element Should Be Enabled    ${apply_store_credit_voucher}
     Wait Until Keyword Succeeds    4    2   Click Element    ${apply_store_credit_voucher}
-#    Wait Until Page Contains Element    ${store_credit_validation_message}
 
 Collect Payment Using Store Credit Using Phone Number
     [Arguments]    ${pos_dict}
