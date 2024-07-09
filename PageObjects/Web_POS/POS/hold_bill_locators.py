@@ -4,6 +4,7 @@ recall_bill_confirmation="//button[@class='btn ml-1 btn-primary btn-block']//chi
 discard_bill='(//button[@class="btn mt-1 btn-danger" and contains(text(),"Discard Bill")])[1]'
 hold_bill = '//button[@id="category-hold-bill"]'
 hold_bill_confirmation = '//button[@id="put-hold-bill"]'
+bill_held_successful_message = '//div[@class="alert alert-dismissible alert-success" and text()="Current bill held successfully."]'
 hold_bill_cancel = '//button[@id="cancel-hold-bill"]'
 discard_bill_confirmation="//button[@class='btn ml-1 btn-danger btn-block']//child::span"
 return_to_bill="//button[@class='btn float-right btn-dark btn-sm' and contains(text(),'Return to Bill')]"

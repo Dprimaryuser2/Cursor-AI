@@ -60,3 +60,4 @@ TC_C6 Edit Customer Information
      ${customer_info}    Add Customer Details    ${pos_data}
      ${customer_info}    Edit Customer Information
      Verify Customer Tagging    ${customer_info}
+

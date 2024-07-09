@@ -10,6 +10,7 @@ Variables   ../../../PageObjects/Web_POS/POS/add_customer_locator.py
 Resource    ../../AdminConsole/Login/login_keyword.robot
 Variables   ../../../PageObjects/AdminConsole/ProductCategories/product_categories.py
 
+
 *** Keywords ***
 Verify Bill Remark Added Is Visible In Bill Remark Textarea
    [Arguments]    ${bill_remark}

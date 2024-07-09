@@ -319,7 +319,10 @@ Verify Disable Item Level Discount List
 Verify Enable Item Level Discount List
     Wait Until Element Is Visible    ${select_from_list_tab}
     Page Should Not Contain Element    ${disabled_select_from_list_tab}
-    Page Should Not Contain    ${select_from_list_tab}
+
+Verify Enable Custom Item Level Discount
+    Wait Until Element Is Visible    ${custom_discount_tab}
+    Page Should Not Contain Element    ${disabled_custom_discount_tab}
 
 Verify Enable Item Level Custom Discount
     Wait Until Element Is Visible    ${custom_discount_tab}
