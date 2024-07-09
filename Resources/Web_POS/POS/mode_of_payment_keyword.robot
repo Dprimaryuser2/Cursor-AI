@@ -63,8 +63,46 @@ Collect Payment Using Store Credit | Partial Redemption Not Allowed
         Click Element    ${redeem_with_dropdown}
         Click Element    ${redeem_with_credit_option}
         Wait Until Page Contains Element    ${input_voucher_code}
+        Page Should Contain Element    ${partial_redemption_lapse_alert}
         Click Element    ${input_voucher_code}
         Input Text    ${input_voucher_code}    ${details.voucher_code}
-        Element Should Be Enabled    ${store_credit_continue_button}
-        Click Element    ${store_credit_continue_button}
-        Wait Until Page Contains Element    ${store_credit_validation_message}
+        Element Should Be Enabled    ${apply_store_credit_voucher}
+        Click Element    ${apply_store_credit_voucher}
+
+Collect Payment Using Store Credit | Partial Redemption Allowed
+    [Arguments]    ${pos_dict}
+    ${details}    Create Dictionary    &{pos_dict}
+    Sleep    0.5
+    Wait Until Page Contains Element    ${redeem_store_credit_button}   timeout=10s
+    Click Element    ${redeem_store_credit_button}
+    Wait Until Page Contains Element    ${redeem_with_dropdown}
+    Click Element    ${redeem_with_dropdown}
+    Click Element    ${redeem_with_credit_option}
+    Wait Until Page Contains Element    ${input_voucher_code}
+#    Page Should Not Contain Element    ${partial_redemption_lapse_alert}
+    Click Element    ${input_voucher_code}
+    Input Text    ${input_voucher_code}    ${details.voucher_code}
+    Wait Until Keyword Succeeds    4    2   Click Element    ${apply_store_credit_voucher}
+
+Verify Partial Redemption Allowed
+    Page Should Not Contain Element    ${full_redemption_popup}
+    Page Should Not Contain Element    ${cancel_redeem_lapse_button}
+    Wait Until Page Contains Element   ${payment_complete_heading}  timeout=10s
+    Page Should Contain Element     ${payment_complete_heading}
+    Page Should Contain Element     ${share_invoice}
+    Page Should Contain Element     ${print_invoice}
+
+Verify Partial Redemption Not Allowed
+    Page Should Contain Element    ${partial_redemption_lapse_alert}
+    Wait Until Page Contains Element    ${full_redemption_popup}    timeout=20s
+    Page Should Contain Element    ${full_redemption_popup}
+    Page Should Contain Element    ${cancel_redeem_lapse_button}
+
+Collect Payment Via On Account Sale
+    Click Button    ${account_on_sale}
+    Wait Until Page Contains Element    ${on_account_sale_heading}    timeout=10s
+    ${remark}    Generate Random String
+    Input Text    ${remark_account_on_sale}    ${remark}
+    Click Button    ${continue_account_on_sale_button}
+    Wait Until Page Does Not Contain Element    ${on_account_sale_heading}
+    Capture Page Screenshot

@@ -86,8 +86,8 @@ Zwing_MOP_17 Collecting Payment by Redeem Store Credit using voucher code | Part
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
-    Collect Payment Using Store Credit
-#    Verify Partial Redemption Allowed
+    Collect Payment Using Store Credit | Partial Redemption Allowed    ${mop_data}
+    Verify Partial Redemption Allowed
     Verify If Payment Is Complete Or Not
     Verify Successful Payment    ${value}    ${customer_details}
 
@@ -99,4 +99,51 @@ Zwing_MOP_18 Collecting Payment by Redeem Store Credit using voucher | Partially
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
-    Collect Payment Using Store Credit | Partial Redemption Not Allowed
+    Collect Payment Using Store Credit | Partial Redemption Not Allowed    ${mop_data}
+    Verify Partial Redemption Not Allowed
+
+#Zwing_MOP_19 Collecting Paymnet by Redeem Store Credit using mobile number | Partially Redeemption Allowed
+
+#Zwing_MOP_20 Collecting Paymnet by Redeem Store Credit using mobile number | Partially Redeemption not Allowed
+
+#Zwing_MOP_21 Redeem Store Credit against Mobile Number | OTP Authentication is allowed
+
+Zwing_MOP_22 Payment by using on Account Sale
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_22
+    Login With Valid Username And Password | POS   ${mop_data}
+    Open The Session    ${mop_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
+    ${customer_details}    Add Customer Details    ${mop_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Collect Payment Via On Account Sale
+    Verify If Payment Is Complete Or Not
+    Verify Successful Payment    ${value}    ${customer_details}
+
+Zwing_MOP_23 Payment by using on Account Sale | Account Balance is Greater or Equal to payable amount
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_23
+    Login With Valid Username And Password | POS   ${mop_data}
+    Open The Session    ${mop_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
+    ${customer_details}    Add Customer Details    ${mop_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+
+Zwing_MOP_24 Payment by using on Account Sale | Account Balance is less than payable amount
+
+Zwing_MOP_25 Additional MOP's | Validate additional MOP's available.
+
+Zwing_MOP_26 Clicking on a MOP should open a popup to enter transaction reference id
+
+Zwing_MOP_27 Additional MOP's | Enter transaction id
+
+Zwing_MOP_28 Validate the amount auto-populated in customer paid field.
+
+Zwing_MOP_29 Close the transaction reference id popup using X button.
+
+Zwing_MOP_30 Customer paid field should be non - editable
+
+Zwing_MOP_31 Complete payment by clicking on continue button, without entering transaction reference id
+
+Zwing_MOP_32 complete payment by clicking on continue button after entering transaction reference id.
+    

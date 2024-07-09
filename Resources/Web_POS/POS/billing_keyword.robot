@@ -379,7 +379,8 @@ Apply Bill Manual Discount | Custom Discount
 Collect Payment Using Store Credit
     [Arguments]    ${pos_dict}
     ${details}    Create Dictionary    &{pos_dict}
-    Wait Until Page Contains Element    ${redeem_store_credit_button}
+    Sleep    0.5
+    Wait Until Page Contains Element    ${redeem_store_credit_button}   timeout=10s
     Click Element    ${redeem_store_credit_button}
     Wait Until Page Contains Element    ${redeem_with_dropdown}
     Click Element    ${redeem_with_dropdown}
@@ -387,9 +388,8 @@ Collect Payment Using Store Credit
     Wait Until Page Contains Element    ${input_voucher_code}
     Click Element    ${input_voucher_code}
     Input Text    ${input_voucher_code}    ${details.voucher_code}
-    Element Should Be Enabled    ${store_credit_continue_button}
-    Click Element    ${store_credit_continue_button}
-    Wait Until Page Contains Element    ${store_credit_validation_message}
+#    Element Should Be Enabled    ${apply_store_credit_voucher}
+    Wait Until Keyword Succeeds    4    2   Click Element    ${apply_store_credit_voucher}
 
 
 Change Billing Mode

@@ -75,6 +75,7 @@ voucher_continue_button="//button[@id='process-payment-btn' and @class='btn floa
 redeem_voucher='//button[@id="pay-method-undefined" and contains(text(),"Redeem Voucher")]'
 
 account_on_sale="//button[@class='btn text-center p-0 h-25 mb-2 btn-outline-secondary btn-block' and contains(text(),'On-Account Sale')]"
+on_account_sale_heading = '//header[@id="on_account_sale___BV_modal_header_"]'
 remark_account_on_sale="//textarea[@id='input-account-remark']"
 continue_account_on_sale_button="//button[@id='confirm-account-sale' and @class='btn w-20 btn-primary']"
 #payment complete
@@ -126,6 +127,7 @@ input_store_credit_opt = '//input[@class="active text-center form-control"]'
 store_credit_verify_button = '//button[@id="verify-otp-btn"]'
 store_credit_resend_otp_button = '//button[@id="store-credit-Resend OTP"]'
 store_credit_validation_message = '//div[@class="alert alert-dismissible alert-danger"]'
+apply_store_credit_voucher='//button[@id="apply-voucher-storecredit"]'
 
 active_promo_dropdown_row = '//ul[@class="m-0 filter-dropdown list-unstyled"]//li//span'
 promo_name_in_product_row = '//span[@class="offer active text-green"]'
@@ -134,3 +136,9 @@ payment_mode_label = '(//div[@class="col light"])[1]//span'
 paid_amount_by_mop = '(//div[@class="col text-right"])[1]//p'
 amount_paid_by_customer = '(//div[@class="col text-right p-0"])[1]//h6'
 amount_paid_at_checkout = '(//div[@class="col text-right p-0"])[2]//h6'
+
+# Store Credit
+partial_redemption_lapse_alert = '//span[contains(text(),"Partial redemption not allowed")]'
+full_redemption_popup = '//div[@id="redeemconfrim___BV_modal_content_"]'
+cancel_redeem_lapse_button = '//button[@id="cacnel-redeem-btn"]'
+continue_redeem_lapse_button = '//button[@id="confirm-redeem-btn"]'
