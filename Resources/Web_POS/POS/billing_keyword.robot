@@ -378,7 +378,7 @@ Apply Bill Manual Discount | Custom Discount
 
 Collect Payment Using Store Credit
     [Arguments]    ${pos_dict}
-    ${details}    Create Dictionary    ${pos_dict}
+    ${details}    Create Dictionary    &{pos_dict}
     Wait Until Page Contains Element    ${redeem_store_credit_button}
     Click Element    ${redeem_store_credit_button}
     Wait Until Page Contains Element    ${redeem_with_dropdown}

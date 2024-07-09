@@ -129,3 +129,8 @@ store_credit_validation_message = '//div[@class="alert alert-dismissible alert-d
 
 active_promo_dropdown_row = '//ul[@class="m-0 filter-dropdown list-unstyled"]//li//span'
 promo_name_in_product_row = '//span[@class="offer active text-green"]'
+disabled_cash_continue_button = '//span[text()="Continue"]//ancestor::button[@disabled="disabled"]'
+payment_mode_label = '(//div[@class="col light"])[1]//span'
+paid_amount_by_mop = '(//div[@class="col text-right"])[1]//p'
+amount_paid_by_customer = '(//div[@class="col text-right p-0"])[1]//h6'
+amount_paid_at_checkout = '(//div[@class="col text-right p-0"])[2]//h6'
