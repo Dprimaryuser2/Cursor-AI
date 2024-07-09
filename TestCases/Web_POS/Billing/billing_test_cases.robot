@@ -6,6 +6,8 @@ Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Library    ../../../Resources/CustomKeywords/utilities.py
+Resource    ../../../Resources/Web_POS/POS/split_payment_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/manual_discount_keyword.robot
 
 Test Setup  Open Application | POS
 Test Teardown   Close Browser
@@ -425,6 +427,7 @@ Zwing_B_34 Apply Bill level discount
     Verify Bill Level Manual Discount    ${bill_level}
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
 
 Zwing_B_35 Add Bill Remark
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_35
