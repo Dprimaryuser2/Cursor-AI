@@ -103,7 +103,7 @@ Zwing_ST_10 Tagged Sales person view below the tagged Item
     Verify Salesperson Tagged At Bill Level    ${pos_data}
 
 Zwing_ST_11
-    Pass Execution
+    Pass Execution    pass
     #on hold from client side
 
 Zwing_ST_12 Salesperson Tagging is Disabled in policies

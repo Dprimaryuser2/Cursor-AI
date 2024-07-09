@@ -33,7 +33,7 @@ Revoke Serial Key
     Input Text    ${license_key_input}    ${serial_key_number}
     Wait Until Keyword Succeeds    5    2     Click Button    ${revoke_license_confirm_button}
     Wait Until Element Is Visible    ${activate_device_heading}    timeout=20s
-    Sleep    1
+    Close Browser
 
 Tear It Down If Test Case Failed
     [Arguments]    ${discount_data}
@@ -64,9 +64,9 @@ Revoke The Licence Key From Console
     Wait Until Element Is Visible    ${remove_modal_body}    timeout=10s
     Wait Until Keyword Succeeds    5    2     Click Button    ${remove_button}
     Wait Until Element Is Not Visible    ${remove_modal_body}    timeout=10s
-#    Close Browser
+    Close Browser
     END
-    Sleep    1
+
 
 Go To Pos Terminal
     Wait Until Keyword Succeeds    5    2     Click Element    ${pos_terminal_logo}
