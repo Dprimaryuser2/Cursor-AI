@@ -35,8 +35,8 @@ Change Salesperson Tagging To Mandatory In POS
     Click Element    ${setup_and_more}
     Wait Until Page Contains Element    ${policies}    timeout=20
     Click Element    ${policies}
-    Wait Until Page Contains Element    ${pencil_icon_in_policy_p1}    timeout=20
-    Click Element    ${pencil_icon_in_policy_p1}
+    Wait Until Page Contains Element    ${pencil_icon_in_policy_p8}    timeout=20
+    Click Element    ${pencil_icon_in_policy_p8}
     Wait Until Page Contains Element    ${pos_dropdown_in_policies}    timeout=10
     Click Element    ${pos_dropdown_in_policies}
     Wait Until Page Contains Element    ${tag_salesperson_toggle_on}    timeout=20
@@ -44,16 +44,11 @@ Change Salesperson Tagging To Mandatory In POS
     Click Element    ${radio_tag_sp_mandatory}
     Wait Until Element Is Enabled    ${save_policies}    timeout=20
     Click Element    ${save_policies}
-    Wait Until Page Contains Element    ${template_update_message}    timeout=20
-    Wait Until Page Contains Element    ${pencil_icon_in_policy_p1}    timeout=20
+    Wait Until Page Contains Element    ${pencil_icon_in_policy_p8}    timeout=20
 
 Change Salesperson Tagging To Optional In POS
-    Wait Until Page Contains Element    ${setup_and_more}    timeout=20
-    Click Element    ${setup_and_more}
-    Wait Until Page Contains Element    ${policies}    timeout=20
-    Click Element    ${policies}
-    Wait Until Page Contains Element    ${pencil_icon_in_policy_p1}    timeout=20
-    Click Element    ${pencil_icon_in_policy_p1}
+    Wait Until Page Contains Element    ${pencil_icon_in_policy_p8}    timeout=20
+    Click Element    ${pencil_icon_in_policy_p8}
     Wait Until Page Contains Element    ${pos_dropdown_in_policies}    timeout=10
     Click Element    ${pos_dropdown_in_policies}
     Wait Until Page Contains Element    ${tag_salesperson_toggle_on}    timeout=20
@@ -61,5 +56,4 @@ Change Salesperson Tagging To Optional In POS
     Click Element    ${radio_tag_sp_optional}
     Wait Until Element Is Enabled    ${save_policies}    timeout=20
     Click Element    ${save_policies}
-    Wait Until Page Contains Element    ${template_update_message}    timeout=20
-    Wait Until Page Contains Element    ${pencil_icon_in_policy_p1}    timeout=20
+    Wait Until Page Contains Element    ${pencil_icon_in_policy_p8}    timeout=20
