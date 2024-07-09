@@ -106,3 +106,28 @@ Verify The Close Icon | Share Invoice
    Wait Until Page Contains Element    ${payment_complete_heading}
    Page Should Contain Element    ${payment_complete_heading}
 
+Navigate from email id tab to phone No. tab
+   [Arguments]    ${bill_remark}
+   ${my_dict}    Create Dictionary   &{bill_remark}
+   Wait Until Page Contains Element    ${share_invoice_title}
+   ${button_status}  Run Keyword And Return Status    Element Should Be Enabled    ${sms_tab_share_invoice}
+   IF     ${button_status} 
+       Click Element    ${email_tab_share_invoice}
+       Wait Until Page Contains Element    ${cust_email_share_invoice}  timeout=10s
+       Input Text    ${cust_email_share_invoice}    ${my_dict.email}
+       Wait Until Page Contains Element    ${send_button_share_invoice}  timeout=10s
+       Element Should Be Enabled    ${send_button_share_invoice}
+       Click Element    ${sms_tab_share_invoice}
+   ELSE
+       Click Element    ${sms_tab_share_invoice}
+       Wait Until Page Contains Element    ${cust_number_share_invoice}  timeout=10s
+       Input Text    ${cust_number_share_invoice}    ${my_dict.mobile}
+       Wait Until Page Contains Element    ${send_button_share_invoice}  timeout=10s
+       Element Should Be Enabled    ${send_button_share_invoice}
+       Click Element    ${cust_email_share_invoice}
+   END
+    
+Verify Customer Number Is Auto-Populated | Share Invoice
+   Wait Until Page Contains Element    ${cust_number_share_invoice}  timeout=10s
+   Page Should Contain Element     ${cust_number_share_invoice}   ${mobile}
+ 

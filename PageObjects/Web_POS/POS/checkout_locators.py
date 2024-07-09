@@ -117,7 +117,7 @@ close_invoice_modal_button = '//button[@class="btn float-right btn-secondary" an
 new_bill_button = '//button[@class="btn mr-2 btn-primary btn-block"]'
 share_invoice_title = '//h5[@class="modal-title" and contains(text(),"Share Invoice")]'
 cust_number_share_invoice = '//input[@placeholder="Enter your phone number"]'
-sms_tab_share_invoice = '//div[@class="row pl-2 pr-2"]//div[@class="col-md-6 border-active"]//p[text()="SMS"]'
+sms_tab_share_invoice = '//p[text()="SMS"]'
 email_tab_share_invoice = '//div[@class="row pl-2 pr-2"]//div[@class="col-md-6 border-inactive"]//p[text()="E-Mail"]'
 cust_email_share_invoice = '//input[@placeholder="Enter your E-mail address"]'
 send_button_share_invoice = '//button[@class="btn btn-primary btn-block"]'

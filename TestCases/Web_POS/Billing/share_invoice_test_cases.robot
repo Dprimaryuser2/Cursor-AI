@@ -92,6 +92,8 @@ Zwing_SI_6 After checkout click on Print Invoice button
    Payment By Cash   ${value}
    Automatic Invoice Generation
    Verify The Print Invoice Button
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_7 Close the Invoice preview using close button
    ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_07
@@ -106,6 +108,8 @@ Zwing_SI_7 Close the Invoice preview using close button
    Automatic Invoice Generation
    Verify The Print Invoice Button
    Verify The Close Invoice Button
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_8 Click on Print button in Invoice preview popup to redirect to final print preview page
    ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_08
@@ -120,6 +124,8 @@ Zwing_SI_8 Click on Print button in Invoice preview popup to redirect to final p
    Automatic Invoice Generation
    Verify The Print Invoice Button
    Verify The Print Button | Print Invoice
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_9 Click on share invoice button to open share invoice popup
    ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_09
@@ -133,6 +139,8 @@ Zwing_SI_9 Click on share invoice button to open share invoice popup
    Payment By Cash   ${value}
    Automatic Invoice Generation
    Verify The Share Invoice Button
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_10 Close share invoice pop up using X button
    ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_10
@@ -147,5 +155,37 @@ Zwing_SI_10 Close share invoice pop up using X button
    Automatic Invoice Generation
    Verify The Share Invoice Button
    Verify The Close Icon | Share Invoice
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
-Zwing_SI_11
+Zwing_SI_11 Navigate from email id tab to phone No. tab and vice versa in share invoice popup
+   ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_11
+   Login With Valid Username And Password | POS    ${share_data}
+   Open The Session    ${share_data}
+   Add Product By Scan Only   ${share_data}
+   Verify Item Added In Cart
+   Add Customer Details    ${share_data}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Payment By Cash   ${value}
+   Automatic Invoice Generation
+   Verify The Share Invoice Button
+   Navigate from email id tab to phone No. tab  ${share_data}
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}
+
+Zwing_SI_12 Validate the phone No. should get auto populated with the no. tagged while customer tagging
+   ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_12
+   Login With Valid Username And Password | POS    ${share_data}
+   Open The Session    ${share_data}
+   Add Product By Scan Only   ${share_data}
+   Verify Item Added In Cart
+   Add Customer Details    ${share_data}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Payment By Cash   ${value}
+   Automatic Invoice Generation
+   Verify The Share Invoice Button
+   Verify Customer Number Is Auto-Populated | Share Invoice
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}

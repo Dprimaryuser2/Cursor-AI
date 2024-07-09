@@ -14,7 +14,7 @@ Revoke Serial Key
     ${serial_key_info}    Create Dictionary   &{serial_key}
     ${serial_key_number}=    Set Variable    ${serial_key_info.serial_key}
     Go To    ${pos_url}
-    Wait Until Element Is Visible    ${settings_tab}    timeout=20s
+    Wait Until Element Is Visible    ${settings_tab}    timeout=40s
     Set Focus To Element    ${settings_tab}
     Wait Until Keyword Succeeds    5    2     Click Element    ${settings_tab}
     Set Focus To Element    ${settings_tab}
@@ -34,6 +34,7 @@ Revoke Serial Key
     Wait Until Keyword Succeeds    5    2     Click Button    ${revoke_license_confirm_button}
     Wait Until Element Is Visible    ${activate_device_heading}    timeout=20s
     Sleep    1
+    Close Browser
 
 Tear It Down If Test Case Failed
     [Arguments]    ${discount_data}
@@ -64,7 +65,7 @@ Revoke The Licence Key From Console
     Wait Until Element Is Visible    ${remove_modal_body}    timeout=10s
     Wait Until Keyword Succeeds    5    2     Click Button    ${remove_button}
     Wait Until Element Is Not Visible    ${remove_modal_body}    timeout=10s
-#    Close Browser
+    Close Browser
     END
     Sleep    1
 

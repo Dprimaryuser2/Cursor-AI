@@ -8,11 +8,8 @@ Resource    ../../../Resources/Web_POS/POS/add_to_cart_keyword.robot
 
 *** Keywords ***
 Open Application | POS
-    Open Browser     ${pos_url}    ${browser}    alias=SECOND    options=add_argument("--headless")
-<<<<<<< HEAD
 #    Open Browser     ${pos_url}    ${browser}    alias=SECOND    options=add_argument("--headless")
-=======
->>>>>>> d7a5d456614dbe81aec34bf9f90f5a848cddb00f
+#    Open Browser     ${pos_url}    ${browser}    alias=SECOND    options=add_argument("--headless")
 #    Open Browser     ${pos_url}    ${browser}    options=add_argument("--headless")
     Open Browser     ${pos_url}    ${browser}
     Maximize Browser Window
