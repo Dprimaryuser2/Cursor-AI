@@ -107,7 +107,7 @@ Zwing_ST_11
     #on hold from client side
 
 Zwing_ST_12 Salesperson Tagging is Disabled in policies
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_10
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_12
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Verify Salesperson Tagging is Disabled
