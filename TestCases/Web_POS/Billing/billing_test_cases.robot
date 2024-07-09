@@ -15,6 +15,7 @@ ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}b
 
 *** Test Cases ***
 Zwing_B_1 Auto Switch To Billing
+    [Tags]    Demo
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_1
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}

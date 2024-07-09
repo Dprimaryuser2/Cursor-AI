@@ -16,6 +16,7 @@ ${Product_td}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing$
 
 *** Test Cases ***
 Zwing_CP_1 View Catalog using Catalog button in WebPOS
+    [Tags]    Demo
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_1
    Login With Valid Username And Password | POS    ${pc_data}
    Open The Session    ${pc_data}
