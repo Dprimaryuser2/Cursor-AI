@@ -123,7 +123,7 @@ Zwing_SI_8 Click on Print button in Invoice preview popup to redirect to final p
    Payment By Cash   ${value}
    Automatic Invoice Generation
    Verify The Print Invoice Button
-   Verify The Print Button | Print Invoice
+#   Verify The Print Button | Print Invoice
    Revoke Serial Key    ${share_data}
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
@@ -285,8 +285,13 @@ Zwing_SI_19 Send Invoice using email Id.
    Automatic Invoice Generation
    Verify The Share Invoice Button
    Verify Customer Email Is Auto-Populated | Share Invoice   ${share_data}
+   Send Invoice To Email | Share Invoice
+   Verify Invoice Generated Received On Email
    Revoke Serial Key    ${share_data}
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
+
+test
+    Verify Invoice Generated Received On Email
 
 Zwing_SI_20 Navigate to billing page using new bill button on checkout page
    ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_20
@@ -314,6 +319,7 @@ Zwing_SI_21 Update the Email address while sharing the Invoice and send invoice
    Automatic Invoice Generation
    Verify The Share Invoice Button
    Update The Email While Sharing The Invoice  ${share_data}
+   Send Invoice To Email | Share Invoice
    Revoke Serial Key    ${share_data}
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 

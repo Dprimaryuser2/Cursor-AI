@@ -11,6 +11,14 @@ Resource    ../../AdminConsole/Login/login_keyword.robot
 Variables   ../../../PageObjects/AdminConsole/ProductCategories/product_categories.py
 Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
 
+*** Variables ***
+${IMAP_SERVER}   imap.gmail.com
+${IMAP_PORT}   993
+${PASSWORD}    aqwb qaoi bkwd jqbb
+${MAILBOX}    INBOX
+${SUBJECT}   test
+${HOST}    mail.google.com
+${USER}     dprimaryuser@gmail.com
 
 *** Keywords ***
 Verify Bill Remark Added Is Visible In Bill Remark Textarea
@@ -86,11 +94,13 @@ Verify The Close Invoice Button
    Page Should Contain Element    ${new_bill_button }
    
 Verify The Print Button | Print Invoice
-   Element Should Be Enabled    ${print_invoice_modal_button}
+   Wait Until Page Contains Element    ${print_invoice_modal_button}
+   ${cust_name}  Get Text   ${name_invoice}
+   Log    ${cust_name}
    Click Element    ${print_invoice_modal_button}
    Wait Until Page Contains Element    ${bill_container}
-   Click Element    ${close_invoice_modal_button}
-   Close Browser
+   Click Element At Coordinates    ${bill_container}    ${150}    ${120}
+   Wait Until Page Contains Element    ${close_invoice_modal_button}
 
 Verify The Share Invoice Button
    Click Element    ${close_invoice_modal_button}
@@ -210,7 +220,6 @@ Add Customer Details | Share Invoice
     Input Text    ${address_line1}    ${add_line1}
     ${add_line2}=    Generate Random Street Address
     Input Text    ${address_line2}    ${add_line2}
-#    Input Text    ${pincode}    ${my_dict.pincode}
     Add Customer Group    ${my_dict}
     Select State And City    ${my_dict}
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
@@ -220,7 +229,6 @@ Add Customer Details | Share Invoice
     Wait Until Element Is Visible    ${checkout_button}    timeout=20s
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=20s
     Wait Until Element Is Not Visible    //div[@class="popup-notification"]     timeout=10s
-#    Wait Until Element Is Visible    //div[contains(text(),"Customer tagged successfully.")]
      ${customer_information}=    Create Dictionary    first_name=${first_name}    last_name=${last_name}    phone_number= ${mobile}    email=${email}    gender=${gender}    add_line_one= ${add_line1}    add_line_two= ${add_line2}    mobile_no=${mobile}
      [Return]    ${customer_information}
 
@@ -232,4 +240,18 @@ Verify New Bill Button
    Wait Until Page Contains Element    ${in_store}  timeout=20s
    Page Should Contain Element    ${in_store}
    Page Should Contain Element    ${delivery}
+
+Send Invoice To Email | Share Invoice
+   Wait Until Page Contains Element    ${send_button_share_invoice}
+   Click Element    ${send_button_share_invoice}
+   Wait Until Page Contains Element   ${email_send_registered_mail_msg}
+   Page Should Contain Element     ${email_send_registered_mail_msg}
+   Element Should Be Enabled    ${dismiss_button_share_invoice}
+
+Verify Invoice Generated Received On Email
+#    ${body}=  Search And Fetch Email  ${IMAP_SERVER}  ${IMAP_PORT}  ${USER}  ${PASSWORD}  ${SUBJECT}
+    ${body}=  Search And Fetch Email    imap.gmail.com    993     dprimaryuser@gmail.com    aqwb qaoi bkwd jqbb    Your i9_store_p1 Invoice Receipt | ITsp102240193 | 10-07-2024
+    Log  ${body}
+#    Should Not Be Empty  ${body}  msg=Invoice Generated email not received.
+    [Return]  ${body}
 

@@ -124,6 +124,8 @@ send_button_share_invoice = '//button[@class="btn btn-primary btn-block"]'
 close_icon_share_invoice = '//button[@class="close"]'
 share_invoice_alert_number = '//span[text()="Phone number must be 10 characters long."]'
 share_invoice_alert_email = '//div[@class="invalid-feedback" and contains(text(),"Invalid Email")]'
+email_send_registered_mail_msg = '//p[contains(text(),"An E-mail with the invoice has been sent to ")]'
+dismiss_button_share_invoice = '//button[@id="dismiss-invoice-sms"]'
 
 #redeem store credit
 redeem_store_credit_button = '//button[@class="btn text-center p-0 h-25 mb-2 btn-outline-secondary btn-block" and text()="Redeem Store Credit"]'
@@ -141,3 +143,4 @@ active_promo_dropdown_row = '//ul[@class="m-0 filter-dropdown list-unstyled"]//l
 promo_name_in_product_row = '//span[@class="offer active text-green"]'
 
 bill_container = '//div[@class="container p-0"]'
+name_invoice = '//div[@class="modal-content"]//td[contains(text(),"Name")]/span'

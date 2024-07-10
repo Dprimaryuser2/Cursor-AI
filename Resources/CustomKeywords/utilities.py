@@ -1,3 +1,6 @@
+import email
+import imaplib
+
 from robot.api.deco import keyword
 from openpyxl import load_workbook
 from datetime import datetime, timedelta
@@ -278,3 +281,118 @@ def count_table_body_rows(locator):
     rows = table_body.find_elements_by_tag_name("tr")
 
     return len(rows)
+
+@keyword
+
+def search_and_fetch_email(server, port, email_address, password, subject):
+    try:
+        # Connect to the email server
+        mail = imaplib.IMAP4_SSL(server, port)
+        print(f"Connecting to {server}:{port}")
+
+        mail.login(email_address, password)
+        print(f"Logged in as {email_address}")
+
+        mail.select('inbox')
+        print("Selected inbox")
+
+        # Search for emails with the specified subject
+        result, data = mail.search(None, f'(SUBJECT "{subject}")')
+        if result != "OK":
+            print(f"Search failed: {result}")
+            return None
+        email_ids = data[0].split()
+        print(f"Email IDs found: {email_ids}")
+
+        # Fetch the latest email and extract the body
+        if email_ids:
+            latest_email_id = email_ids[-1]
+            result, data = mail.fetch(latest_email_id, '(RFC822)')
+            if result != "OK":
+                print(f"Fetch failed: {result}")
+                return None
+            raw_email = data[0][1]  # Get the raw email content
+
+            # Parse the raw email into a message object
+            email_message = email.message_from_bytes(raw_email)
+
+            # Initialize email body variable
+            email_body = ""
+
+            # Function to recursively extract text from email parts
+            def extract_text_from_email_part(email_part):
+                content_type = email_part.get_content_type()
+                if content_type == "text/plain":
+                    return email_part.get_payload(decode=True).decode()
+                elif content_type == "text/html":
+                    # You can add handling for HTML content here if needed
+                    return ""  # Returning empty for now
+                elif email_part.is_multipart():
+                    for part in email_part.get_payload():
+                        text = extract_text_from_email_part(part)
+                        if text:
+                            return text
+                return ""
+
+            # Call the function with the root email message
+            email_body = extract_text_from_email_part(email_message)
+
+            print(f"Email body: {email_body[:100]}...")  # Print a snippet of the email body for debugging
+            return email_body.strip()  # Strip any extra whitespace
+
+        # If no email with the specified subject is found
+        print("No emails found with the specified subject")
+        return None
+    except imaplib.IMAP4.error as e:
+        print(f"IMAP error: {e}")
+        return None
+# def search_and_fetch_email(server, port, email_address, password, subject):
+#     try:
+#         # Connect to the email server
+#         mail = imaplib.IMAP4_SSL(server, port)
+#         print(f"Connecting to {server}:{port}")
+#
+#         mail.login(email_address, password)
+#         print(f"Logged in as {email_address}")
+#
+#         mail.select('inbox')
+#         print("Selected inbox")
+#
+#         # Search for emails with the specified subject
+#         result, data = mail.search(None, f'(SUBJECT "{subject}")')
+#         if result != "OK":
+#             print(f"Search failed: {result}")
+#             return None
+#         email_ids = data[0].split()
+#         print(f"Email IDs found: {email_ids}")
+#
+#         # Fetch the latest email and extract the body
+#         if email_ids:
+#             latest_email_id = email_ids[-1]
+#             result, data = mail.fetch(latest_email_id, '(RFC822)')
+#             if result != "OK":
+#                 print(f"Fetch failed: {result}")
+#                 return None
+#             raw_email = data[0][1].decode('utf-8')  # Decode bytes to string
+#             print(f"Raw email: {raw_email[:100]}...")  # Print a snippet of the raw email for debugging
+#
+#             email_message = email.message_from_string(raw_email)  # Use message_from_string to parse email content
+#
+#             # Extract the email body
+#             email_body = ""
+#             if email_message.is_multipart():
+#                 for part in email_message.walk():
+#                     if part.get_content_type() == "text/plain":
+#                         email_body += part.get_payload(decode=True).decode()
+#             else:
+#                 email_body = email_message.get_payload(decode=True).decode()
+#
+#             print(f"Email body: {email_body[:100]}...")  # Print a snippet of the email body for debugging
+#             return email_body
+#
+#         # If no email with the specified subject is found
+#         print("No emails found with the specified subject")
+#         return None
+#     except imaplib.IMAP4.error as e:
+#         print(f"IMAP error: {e}")
+#         return None
