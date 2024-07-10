@@ -128,22 +128,111 @@ Zwing_MOP_23 Payment by using on Account Sale | Account Balance is Greater or Eq
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
+    Collect Payment Via On Account Sale
+    Verify If Payment Is Complete Or Not
+    Verify Successful Payment    ${value}    ${customer_details}
 
 Zwing_MOP_24 Payment by using on Account Sale | Account Balance is less than payable amount
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_24
+    Login With Valid Username And Password | POS   ${mop_data}
+    Open The Session    ${mop_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
+    ${customer_details}    Add Customer Details    ${mop_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Verify Unable To Pay Via On Account Sale With Less Account Balance
+
 
 Zwing_MOP_25 Additional MOP's | Validate additional MOP's available.
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_25
+    Login With Valid Username And Password | POS   ${mop_data}
+    Open The Session    ${mop_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
+    ${customer_details}    Add Customer Details    ${mop_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Payment Via Additional MOP
+    Verify If Payment Is Complete Or Not
+    Verify Successful Payment    ${value}    ${customer_details}
 
 Zwing_MOP_26 Clicking on a MOP should open a popup to enter transaction reference id
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_26
+    Login With Valid Username And Password | POS   ${mop_data}
+    Open The Session    ${mop_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
+    ${customer_details}    Add Customer Details    ${mop_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Payment Via Additional MOP
+    Verify Additional MOP Reference Id Popup
 
 Zwing_MOP_27 Additional MOP's | Enter transaction id
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_27
+    Login With Valid Username And Password | POS   ${mop_data}
+    Open The Session    ${mop_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
+    ${customer_details}    Add Customer Details    ${mop_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Verify Additional MOP Reference Id Popup
+    Verify Entered Transaction ID
+    Verify Successful Payment    ${value}    ${customer_details}
 
 Zwing_MOP_28 Validate the amount auto-populated in customer paid field.
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_28
+    Login With Valid Username And Password | POS   ${mop_data}
+    Open The Session    ${mop_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
+    ${customer_details}    Add Customer Details    ${mop_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Verify Additional MOP Reference Id Popup
+#    Verify Amount AutoPopulated    ${value}
 
 Zwing_MOP_29 Close the transaction reference id popup using X button.
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_29
+    Login With Valid Username And Password | POS   ${mop_data}
+    Open The Session    ${mop_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
+    ${customer_details}    Add Customer Details    ${mop_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Verify Additional MOP Reference Id Popup
+    Close The Transaction Popup
+    Verify Close (X) Button Of Transaction Id
 
 Zwing_MOP_30 Customer paid field should be non - editable
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_30
+    Login With Valid Username And Password | POS   ${mop_data}
+    Open The Session    ${mop_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
+    ${customer_details}    Add Customer Details    ${mop_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Verify Additional MOP Reference Id Popup
+    Verify Customer Paid Field Is Non-editable
 
 Zwing_MOP_31 Complete payment by clicking on continue button, without entering transaction reference id
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_31
+    Login With Valid Username And Password | POS   ${mop_data}
+    Open The Session    ${mop_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
+    ${customer_details}    Add Customer Details    ${mop_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Complete Payment Without Reference ID
+    Verify If Payment Is Complete Or Not
+    Verify Successful Payment    ${value}    ${customer_details}
 
 Zwing_MOP_32 complete payment by clicking on continue button after entering transaction reference id.
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_32
+    Login With Valid Username And Password | POS   ${mop_data}
+    Open The Session    ${mop_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
+    ${customer_details}    Add Customer Details    ${mop_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Payment Via Additional MOP
+    Verify If Payment Is Complete Or Not
+    Verify Successful Payment    ${value}    ${customer_details}
     
