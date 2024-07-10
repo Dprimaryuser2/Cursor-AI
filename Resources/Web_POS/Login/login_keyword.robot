@@ -10,6 +10,7 @@ Resource    ../../../Resources/Web_POS/POS/add_to_cart_keyword.robot
 Open Application | POS
     Open Browser     ${pos_url}    ${browser}
 #    Open Browser     ${pos_url}    ${browser}    options=add_argument("--headless")
+    Open Browser     ${pos_url}    ${browser}
     Maximize Browser Window
 #    Set Window Size    ${window_width}    ${window_height}
 

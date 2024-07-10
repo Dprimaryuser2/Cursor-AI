@@ -270,4 +270,3 @@ Zwing_MOP_32 complete payment by clicking on continue button after entering tran
     Verify Successful Payment    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
-    

@@ -6,3 +6,5 @@ robotframework-pabot==2.16.0
 openpyxl==3.1.2
 allure-robotframework
 
+
+pandas~=2.2.2
