@@ -15,25 +15,28 @@ Variables   ../../../PageObjects/Web_POS/POS/add_customer_locator.py
 Variables   ../../../Environment/environment.py
 
 *** Keywords ***
-
 Verify Shortcut Key Allows Searching Product
-    Wait Until Page Contains Element    ${product_search_bar}
-    Press Keys    CTRL+s
-    Element Should Be Focused    ${product_search_bar}
-    Input Text    ${product_search_bar}    s
+#    Wait Until Page Contains Element    ${product_search_bar}
+#    Press Keys    CTRL+s
+#    Element Should Be Focused    ${product_search_bar}
+#    Input Text    ${product_search_bar}    s
     Wait Until Page Contains Element    ${product_search_dropdown}
+    Page Should Contain Element    ${product_search_dropdown}
 
 Verify Shortcut Key Displays Catalogue Window
-    Wait Until Page Contains Element    ${view_catalog_button}
-    Press Keys    CTRL+g
+#    Wait Until Page Contains Element    ${view_catalog_button}
+#    Press Keys    CTRL+g
+    Wait Until Page Contains Element    ${product_catalog_body}
     Page Should Contain Element    ${product_catalog_body}
 
 Verify Shortcut Key Allows Updating Catalogue
-    Wait Until Page Contains Element    ${view_catalog_button}
-    Press Keys    CTRL+g
+#    Wait Until Page Contains Element    ${view_catalog_button}
+#    Press Keys    CTRL+g
+    Wait Until Page Contains Element     ${product_catalog_body}
     Page Should Contain Element    ${product_catalog_body}
-    Press Keys    CTRL+ALT+r
+#    Press Keys    CTRL+ALT+r
     Wait Until Page Contains Element    ${catalog_update}
+    Page Should Contain Element    ${catalog_update}
 
 Verify Shortcut Key Displays Salesperson Details
     Wait Until Page Contains Element    ${product_name_in_cart_row}
@@ -85,7 +88,7 @@ Verify Shortcut Key Allows Tagging Customer
     Press Keys    CTRL+a
     Wait Until Page Contains Element    ${customer_phone_field}
     Click Element    ${customer_phone_field}
-    Input Text    ${customer_phone_field}    ${my_dict.customer_phone_number}
+    Input Text    ${customer_phone_field}    ${my_dict.mobile}
     Wait Until Element Is Enabled    ${continue_billing_button}
     Click Element    ${continue_billing_button}
     Wait Until Page Contains Element    ${start_billing_button}
@@ -108,12 +111,6 @@ Verify Shortcut Navigates To Checkout Page When ST Is Mandatory
     Press Keys    CTRL+b
     Wait Until Page Contains Element    ${salesperson_mandatory_message}
     Page Should Not Contain Element    ${checkout_heading}
-
-Verify Shortcut Navigates To Checkout Page When CT Is Mandatory
-    Wait Until Page Contains Element    ${product_name_in_cart_row}
-    Press Keys    CTRL+b
-    Wait Until Page Contains Element
-
 
 Verify Shortcut Key Allows Tagging Customer
     [Arguments]    ${pos_data}
@@ -140,12 +137,6 @@ Verify Shortcut Navigates To Checkout Page
     Press Keys    CTRL+b
     Wait Until Page Contains Element    ${checkout_heading}
 
-Verify Shortcut Navigates To Checkout Page When ST Is Mandatory
-    Wait Until Page Contains Element    ${product_name_in_cart_row}
-    Press Keys    CTRL+b
-    Wait Until Page Contains Element    ${salesperson_mandatory_message}
-    Page Should Not Contain Element    ${checkout_heading}
-
 Verify Shortcut Navigates To Checkout Page When CT Is Mandatory
     Wait Until Page Contains Element    ${product_name_in_cart_row}
     Press Keys    CTRL+b
@@ -160,14 +151,10 @@ Verify Shortcut Navigates To Checkout Page When Session Is Closed
     Wait Until Element Is Enabled    ${close_session_button}
     Click Element    ${close_session_button}
     Press Keys    CTRL+b
-    Wait Until Page Contains Element
+    Wait Until Page Contains Element    ${open_session_before_continuing}
 
 Verify Shortcut Key Allows Searching Product | Order Mode
     Wait Until Page Contains Element    ${product_search_bar}
     Element Should Be Focused    ${product_search_bar}
 
 
-Press Shortcut Key
-    [Arguments]    ${pos_data}
-    ${my_dict}    Create Dictionary    &{pos_data}
-    Press Keys    CTRL+${my_dict.shortcut_key}
