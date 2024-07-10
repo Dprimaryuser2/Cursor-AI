@@ -62,6 +62,7 @@ TC_C5 Get the Customer Information of tagged Customer
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      ${customer_info}    Add Customer Details    ${pos_data}
      Verify And Fetch Customer Information    ${customer_info}
+     Wait Until Page Contains Element    ${open_session_link}
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -155,7 +156,7 @@ TC_C13 tag customer with tax invoice UIN number
      Open The Session    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      ${customer_info}    Add Customer Details    ${pos_data}
-     Verify Customer Tagged With Tax Invoice UIN Number
+     Verify Customer Tagged With Tax Invoice UIN Number    ${pos_data}
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -165,7 +166,9 @@ TC_C14 Add existing GST number and customer should be tagged
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     ${customer_info}    Add Customer Details    ${pos_data}
+     Tag Existing Customer    ${pos_data}
+     Discard Items If Present From Previous Session
+     Verify Existing GST Added After Tagging Customer    ${pos_data}
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -175,7 +178,9 @@ TC_C15 Add existing UIN number and customer should be tagged
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     ${customer_info}    Add Customer Details    ${pos_data}
+     Tag Existing Customer    ${pos_data}
+     Discard Items If Present From Previous Session
+     Verify Existing UIN Added After Tagging Customer    ${pos_data}
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -186,18 +191,22 @@ TC_C16 Edit GST number
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     ${customer_info}    Add Customer Details    ${pos_data}
+     Tag Existing Customer    ${pos_data}
+     Discard Items If Present From Previous Session
+     Verify GST Name Edited    ${pos_data}
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 
-TC_C17 Edit GST number
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_17
+TC_C17 Edit UIN number
+     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_17
      Log    ${pos_data}
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     ${customer_info}    Add Customer Details    ${pos_data}
+     Tag Existing Customer    ${pos_data}
+     Discard Items If Present From Previous Session
+     Verify GST Name Edited    ${pos_data}
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -208,7 +217,9 @@ TC_C18 Delete GSTIN for a GST number
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     ${customer_info}    Add Customer Details    ${pos_data}
+     Tag Existing Customer    ${pos_data}
+     Discard Items If Present From Previous Session
+     Delete And Add Same GST Number Again So That Next Time Test Case Doesnt Fail    ${pos_data}
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -219,7 +230,9 @@ TC_C19 Delete GSTIN for a UIN number
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     ${customer_info}    Add Customer Details    ${pos_data}
+     Tag Existing Customer    ${pos_data}
+     Discard Items If Present From Previous Session
+     Delete And Add Same UIN Number Again So That Next Time Test Case Doesnt Fail    ${pos_data}
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -277,7 +290,7 @@ TC_C24 Change Invoice Type from UIN to GST
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     ${customer_info}    Add Customer Details    ${pos_data}
+     Tag Existing Customer    ${pos_data}
      Change Tax Invoice Type  ${pos_data}
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -331,7 +344,7 @@ TC_C28 Add Customer phone number more than 10 digit
 
 
 
-TC_C29 Add Customer phone number more than 10 digit
+TC_C29 Add Customer phone number less than 10 digit
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_29
      Log    ${pos_data}
      Login With Valid Username And Password | POS   ${pos_data}
