@@ -35,6 +35,7 @@ add_carry_bags = '//button[@id="category-add-carrybags"]'
 promo_name = '//span[@class="offer active text-green"]'
 quantity_row = '(//td[@aria-colindex="3"])[1]'
 weighted_quantity = '//button[@id="weight-btn-null"]'
+product_search_dropdown = '//ul[@id="product-list"]'
 # piece
 quantity_in_piece_button = '(//td[@aria-colindex="3"]//button[@id="weight-btn-null"])[1]'    # this is button which selects the piece of item and a modal comes after clicking this
 piece_quantity_value = '(//td[@aria-colindex="3"]//button[@id="weight-btn-null"])[1]/span'

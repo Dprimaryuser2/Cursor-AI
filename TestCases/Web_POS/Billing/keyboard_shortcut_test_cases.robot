@@ -4,7 +4,7 @@ Library    SeleniumLibrary
 Library    ../../../Resources/CustomKeywords/utilities.py
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/keyboard_shortcut_keywords.robot
+Resource  ../../../Resources/Web_POS/POS/keyboard_shortcut_keywords.robot
 
 Test Setup    Open Application | POS
 Test Teardown   Close Browser
