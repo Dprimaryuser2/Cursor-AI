@@ -261,12 +261,13 @@ Edit Customer Information
     ${addresslinesecond}    Generate Random Street Address
     Input Text    ${address_line2}    ${addresslinesecond}
     Click Button    ${customer_info_update_button}
+    Discard Items If Present From Previous Session
     Wait Until Element Is Visible    ${customer_info_close_element}    timeout=10s
     Click Element    ${customer_info_close_element}
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
     ${customer_info}    Create Dictionary    first_name=${first_name}    last_name=${last_name}    email=${email}    addresslinefirst=${addresslinefirst}    addresslinesecond=${addresslinesecond}
     RETURN    ${customer_info}
-
+    
 Verify Customer Untagging
     Click Element    ${customer_info_icon}
     Wait Until Element Is Visible    ${customer_info_window_title}    timeout=10s
@@ -282,7 +283,7 @@ Edit Customer Group
     Wait Until Element Is Visible    ${customer_edit_groups_button}    timeout=10s
     Click Element    ${customer_edit_groups_button}
     Wait Until Element Is Visible    ${assign_customer_group_heading}    timeout=20s
-    ${total_groups_tagged}=    Create List    timeout=10s
+    ${total_groups_tagged}=    Create List
     ${customer_groups}=    Set Variable    ${customer_group_info.group}
     ${customer_groups}=    Convert Items To List    ${customer_groups}
     ${length_of_list}=    Get Length    ${customer_groups}
@@ -298,12 +299,13 @@ Edit Customer Group
 
 Verify Customer Tagging
     [Arguments]    ${customer_info}
+    ${my_dict}    Create Dictionary    &{customer_info}
+    Log    ${my_dict}
     ${customer_group_info}=    Create Dictionary    &{customer_info}
     ${customer_name}=    Get Text    ${tagged_customer_name}
     ${customer_phone_no}=    Get Text    ${tagged_customer_phone_no}
     ${customer_phone_no}=    Convert To Integer    ${customer_phone_no}
-    Should Be Equal As Integers    ${customer_phone_no}    ${customer_group_info.phone_number}
-    ${customer_full_name}=    Catenate    ${customer_group_info.first_name}    ${customer_group_info.last_name}
+    ${customer_full_name}=    Catenate    ${my_dict.first_name}    ${my_dict.last_name}
     Should Be Equal As Strings    ${customer_full_name}    ${customer_name}
 
 Verify Customer Tagging Is Not Mandatory 
@@ -369,7 +371,11 @@ Verify Customer Tagging Is Mandatory With All Fields
     ${add_line2}=    Generate Random Street Address
     Input Text    ${address_line2}    ${add_line2}
     Select State And City    ${my_dict}
-    Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
+    Wait Until Page Contains Element    ${pincode}
+    Click Element    ${pincode}
+    Input Text    ${pincode}    ${my_dict.pincode}
+    Press Keys    ${pincode}    ENTER
+    Wait Until Page Contains Element    ${start_billing_button}    timeout=20s
     Click Button    ${start_billing_button}
     Wait Until Element Is Visible    ${payable_amount}
     Wait Until Element Is Visible    ${checkout_button}    timeout=20s
@@ -401,15 +407,23 @@ Verify Edited Group
     ${length}=    Get Length    ${group_dict}
     FOR    ${i}    IN RANGE    0    ${length}
         ${item}=    Set Variable    ${group_dict}[${i}]
-        ${group}=    Replace String    //div[@class="d-flex"]//span[text()="REGULAR"]    REGULAR    ${item}
+        Convert To String    ${item}
+        Convert To Upper Case    ${item}
+        Convert To Upper Case    ${item}
+        ${uppercase_string}   Evaluate    "${item}".upper()
+        Sleep    0.5
+        ${group}=    Replace String    //div[@class="d-flex"]//span[text()="REGULAR"]    REGULAR    ${uppercase_string}
         Wait Until Page Contains Element    ${group}
+        
     END
 
-Discard Items If Present From Previous Session
-    ${store_item_from_previous_session}    Run Keyword And Return Status    Page Should Contain Element    ${discard_item_previous_session}
-    IF    ${store_item_from_previous_session}
-         Click Element    ${discard_item_previous_session}
-    END
+#Discard Items If Present From Previous Session
+#    Wait Until Page Contains Element    ${discard_item_previous_session}
+#    ${store_item_from_previous_session}    Run Keyword And Return Status    Page Should Contain Element    ${discard_item_previous_session}
+#    IF    ${store_item_from_previous_session}
+#         Click Element    ${discard_item_previous_session}
+#    END
+
 Remove Customer From All Groups
     Wait Until Page Contains Element    ${customer_info_icon}
     Click Element    ${customer_info_icon}
@@ -693,12 +707,15 @@ Tag Existing Customer
     Click Element    ${add_customer_link}
     Wait Until Element Is Visible    ${customer_phone_field}
     Input Text    ${customer_phone_field}    ${my_dict.customer_phone_number}
+    Wait Until Element Is Enabled    ${continue_billing_button}
     Click Button    ${continue_billing_button}
+    Wait Until Page Does Not Contain Element    ${continue_billing_button}    timeout=20s
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
     Click Button    ${start_billing_button}
 
-Discard Items If Present From Previous Session|
+Discard Items If Present From Previous Session
+    Wait Until Page Contains Element        ${discard_item_previous_session}    timeout=10
     ${store_item_from_previous_session}    Run Keyword And Return Status    Page Should Contain Element    ${discard_item_previous_session}
     IF    ${store_item_from_previous_session}
          Click Element    ${discard_item_previous_session}

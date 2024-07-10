@@ -106,8 +106,7 @@ TC_C9 Tag a Existing customer to a bill
      Open The Session    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      Tag Existing Customer   ${pos_data}
-     Sleep    2
-     Discard Items If Present From Previous Session|
+     Discard Items If Present From Previous Session
      Verify Customer Tagging    ${pos_data}
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
