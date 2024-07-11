@@ -104,6 +104,8 @@ active_promotion = '//span[text()="View Available Promotion(s)"]'
 item_remark = '//input[@id="input-remark-productpopup"]'
 salesperson_refresh = "//button[text()='Refresh']"
 salesperson_dropdown = '//span[contains(text(),"Select Salesperson")]'
+salesperson_tagged_message = '//div[@class="alert alert-dismissible alert-success" and text()="Salesperson tagged successfully."]'
+salesperson_below_product = '//span[@class="pt-2 fs-12 text-grey"]'
 salesperson_search_field = '//input[@placeholder="Search..."]'
 salesperson = '//input[@placeholder="Search..."]//ancestor::div[@class="dropdown-body w-100"]//li'
 check_inventory_button = '//button[@id="check-inventory-btn"]'

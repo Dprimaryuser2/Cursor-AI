@@ -6,6 +6,8 @@ Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/salesperson_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/billing_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 
 
@@ -53,6 +55,7 @@ TC_C4 Customer Tagging is mandatory with all fields mandatory in customer inform
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+     Assign A Salesperson All Items     ${pos_data}
      Verify Customer Tagging Is Mandatory With All Fields    ${pos_data}
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -292,7 +295,7 @@ TC_C24 Change Invoice Type from UIN to GST
      Open The Session    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      Tag Existing Customer    ${pos_data}
-     Change Tax Invoice Type  ${pos_data}
+     Change Tax Invoice Type   ${pos_data}
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 

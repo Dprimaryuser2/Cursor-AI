@@ -18,7 +18,7 @@ Add Customer Details
     Set Test Variable    ${mobile}
     Input Text    ${customer_phone_field}    ${mobile}
     Click Button    ${continue_billing_button}
-    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
     ${first_name}=    Generate Random First Name
     Set Test Variable    ${first_name}
     Input Text    ${customer_first_name_field}    ${first_name}
@@ -50,12 +50,13 @@ Add Customer Details
     ${add_line2}=    Generate Random Street Address
     Input Text    ${address_line2}    ${add_line2}
     Select State And City    ${my_dict}
-    Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
+    Sleep    1
+    Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
     Click Button    ${start_billing_button}
     Wait Until Element Is Visible    //div[@class="popup-notification"]    timeout=10s
     Wait Until Element Is Visible    ${payable_amount}
-    Wait Until Element Is Visible    ${checkout_button}    timeout=20s
-    Wait Until Element Is Visible    ${customer_info_icon}    timeout=20s
+    Wait Until Element Is Visible    ${checkout_button}    timeout=10s
+    Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
     Wait Until Element Is Not Visible    //div[@class="popup-notification"]     timeout=10s
 #    Wait Until Element Is Visible    //div[contains(text(),"Customer tagged successfully.")]
      ${customer_information}=    Create Dictionary    first_name=${first_name}    last_name=${last_name}    phone_number= ${mobile}    email=${email}    gender=${gender}    add_line_one= ${add_line1}    add_line_two= ${add_line2}    customer_phone_number=${mobile}
@@ -71,7 +72,7 @@ Tag Customer And Enter Invalid GST Number
     Set Test Variable    ${mobile}
     Input Text    ${customer_phone_field}    ${mobile}
     Click Button    ${continue_billing_button}
-    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
     ${first_name}=    Generate Random First Name
     Set Test Variable    ${first_name}
     Input Text    ${customer_first_name_field}    ${first_name}
@@ -221,6 +222,7 @@ Add DOB
 Select State And City
     [Arguments]    ${state_city_data}
     Click Element    ${state_select}
+    Sleep    0.5
     ${state}=    Replace String    ${state_option}     state    ${state_city_data.state}
     Click Element    ${state}
     Click Element    ${select_city}
@@ -264,7 +266,7 @@ Edit Customer Group
     Wait Until Element Is Visible    ${customer_info_window_title}    timeout=10s
     Wait Until Element Is Visible    ${customer_edit_groups_button}    timeout=10s
     Click Element    ${customer_edit_groups_button}
-    Wait Until Element Is Visible    ${assign_customer_group_heading}    timeout=20s
+    Wait Until Element Is Visible    ${assign_customer_group_heading}    timeout=10s
     ${total_groups_tagged}=    Create List
     ${customer_groups}=    Set Variable    ${customer_group_info.group}
     ${customer_groups}=    Convert Items To List    ${customer_groups}
@@ -312,7 +314,7 @@ Verify Customer Tagging Is Mandatory With Non Mandatory Information
     ${mobile}=     Generate Random Phone Number
     Input Text    ${customer_phone_field}    ${mobile}
     Click Button    ${continue_billing_button}
-    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
     Element Should Be Enabled    ${start_billing_button}
     Click Button    ${start_billing_button}
     Wait Until Element Is Visible    ${tagged_customer_phone_no}    timeout=10s
@@ -334,7 +336,7 @@ Verify Customer Tagging Is Mandatory With All Fields
     ${mobile}=     Generate Random Phone Number
     Input Text    ${customer_phone_field}    ${mobile}
     Click Button    ${continue_billing_button}
-    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
     Element Should Be Disabled    ${start_billing_button}
     ${first_name}=    Generate Random First Name
     Set Test Variable    ${first_name}
@@ -357,14 +359,15 @@ Verify Customer Tagging Is Mandatory With All Fields
     ${add_line2}=    Generate Random Street Address
     Input Text    ${address_line2}    ${add_line2}
     Select State And City    ${my_dict}
+    Sleep    0.5
     Wait Until Page Contains Element    ${pincode}
     Click Element    ${pincode}
     Input Text    ${pincode}    ${my_dict.pincode}
     Press Keys    ${pincode}    ENTER
-    Wait Until Page Contains Element    ${start_billing_button}    timeout=20s
+    Wait Until Page Contains Element    ${start_billing_button}    timeout=10s
     Click Button    ${start_billing_button}
     Wait Until Element Is Visible    ${payable_amount}
-    Wait Until Element Is Visible    ${checkout_button}    timeout=20s
+    Wait Until Element Is Visible    ${checkout_button}    timeout=10s
     Sleep    0.5
     Click Button    ${checkout_button}
     Wait Until Element Is Visible      ${checkout_heading}    timeout=10s
@@ -456,13 +459,13 @@ Change Invoice Type From Sales To GST In Customer Information
     Wait Until Element Is Enabled    ${customer_edit_info_button}    timeout=10s    timeout=10s
     Click Element    ${customer_edit_info_button}
     Add GST Name And Number    ${my_dict}
-    ${add_line1}=    Generate Random Street Address
-    Input Text    ${address_line1}    ${add_line1}
-    ${add_line2}=    Generate Random Street Address
-    Input Text    ${address_line2}    ${add_line2}
+    Wait Until Page Contains Element    ${pincode}
+    Select State And City    ${my_dict}
+    Sleep    1
     Input Text    ${pincode}    ${my_dict.pincode}
-    Wait Until Element Is Enabled    ${update_product_button}    timeout=20s
-    Click Button    ${update_product_button}
+    Press Keys    ${pincode}    ENTER
+    Wait Until Page Contains Element    ${customer_info_update_button}        timeout=10s
+    Click Button    ${customer_info_update_button}
 
 Change Invoice Type From Sales To UIN In Customer Information
     [Arguments]    ${pos_data}
@@ -477,9 +480,15 @@ Change Invoice Type From Sales To UIN In Customer Information
     Input Text    ${address_line1}    ${add_line1}
     ${add_line2}=    Generate Random Street Address
     Input Text    ${address_line2}    ${add_line2}
+    Wait Until Page Contains Element    ${pincode}
+    Select State And City    ${my_dict}
+    Sleep    2
     Input Text    ${pincode}    ${my_dict.pincode}
-    Wait Until Element Is Enabled    ${update_product_button}    timeout=20s
+    Press Keys    ${pincode}    ENTER
+    Input Text    ${pincode}    ${my_dict.pincode}
+    Wait Until Element Is Enabled    ${update_product_button}    timeout=10s
     Click Button    ${update_product_button}
+    Wait Until Page Does Not Contain Element    ${update_product_button}   timeout=10s
 
 Verify Change Invoice Type from sales to GST
     Wait Until Page Contains Element    ${customer_info_icon}    timeout=10s
@@ -493,6 +502,7 @@ Change Invoice Type from Tax Invoice to Sales Invoice
     Click Element    ${customer_info_icon}
     Wait Until Element Is Enabled    ${customer_edit_info_button}    timeout=10s
     Click Element    ${customer_edit_info_button}
+    Sleep    0.5
     Wait Until Page Contains Element    ${sales_invoice}    timeout=10s
     Click Element    ${sales_invoice}
     Wait Until Element Is Enabled    ${customer_info_update_button}   timeout=10s
@@ -520,13 +530,23 @@ Change Tax Invoice Type
         Wait Until Page Contains Element    ${cg_edit_gstin_icon}    timeout=10s
         Click Element    ${cg_edit_gstin_icon}
     END
+    Sleep    1
     Wait Until Page Contains Element    ${cg_manage_gstin_header}    timeout=5s
     Wait Until Page Contains Element    //label[contains(text(),"${gst_details.legal_name}")]//ancestor::label//preceding-sibling::input[@class="custom-control-input"]
     Click Element    //label[contains(text(),"${gst_details.legal_name}")]//ancestor::label//preceding-sibling::input[@class="custom-control-input"]
     Wait Until Element Is Enabled    ${confirm_selected_button}    timeout=5s
     Click Element    ${confirm_selected_button}
-    Wait Until Element Is Enabled    ${update_product_button}    timeout=5s
-    Click Element    ${update_product_button}
+    Wait Until Page Does Not Contain Element    ${confirm_selected_button}    timeout=5s
+    Sleep    0.5
+    Wait Until Page Contains Element    ${pincode}
+    Input Text    ${pincode}    ${gst_details.pincode}
+    Press Keys    ${pincode}    ENTER
+    Select State And City    ${gst_details}
+    Sleep    2
+    Wait Until Element Is Enabled    ${update_product_button}    timeout=10s
+    Click Button    ${update_product_button}
+    Wait Until Page Does Not Contain Element    ${update_product_button}   timeout=10s
+
 
 Changing Phone Number Not Allowed In Customer Information
     Wait Until Page Contains Element    ${customer_info_icon}    timeout=5s
@@ -563,7 +583,7 @@ Add Customer Details Invalid Phone Number
 #    Set Test Variable    ${mobile}
     Input Text    ${customer_phone_field}    ${my_dict.phone_number}
     Click Button    ${continue_billing_button}
-    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
     ${first_name}=    Generate Random First Name
     Set Test Variable    ${first_name}
     Input Text    ${customer_first_name_field}    ${first_name}
@@ -586,12 +606,12 @@ Add Customer Details Invalid Phone Number
     Input Text    ${address_line2}    ${add_line2}
     Add Customer Group    ${my_dict}
     Select State And City    ${my_dict}
-    Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
+    Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
     Click Button    ${start_billing_button}
     Wait Until Element Is Visible    ${customer_tagged_popup}    timeout=10s
     Wait Until Element Is Visible    ${payable_amount}    timeout=10s
-    Wait Until Element Is Visible    ${checkout_button}    timeout=20s
-    Wait Until Element Is Visible    ${customer_info_icon}    timeout=20s
+    Wait Until Element Is Visible    ${checkout_button}    timeout=10s
+    Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
     Wait Until Element Is Not Visible    ${customer_tagged_popup}     timeout=10s
     ${customer_information}=    Create Dictionary    first_name=${first_name}    last_name=${last_name}    phone_number= ${my_dict.phone_number}    email=${email}    gender=${gender}    add_line_one= ${add_line1}    add_line_two= ${add_line2}
     [Return]    ${customer_information}
@@ -659,12 +679,12 @@ Tag Existing Customer
     Input Text    ${customer_phone_field}    ${my_dict.customer_phone_number}
     Wait Until Element Is Enabled    ${continue_billing_button}
     Click Button    ${continue_billing_button}
-    Wait Until Page Does Not Contain Element    ${continue_billing_button}    timeout=20s
-    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
-    Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
+    Wait Until Page Does Not Contain Element    ${continue_billing_button}    timeout=10s
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
+    Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
     Click Button    ${start_billing_button}
-    Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=20s
-    Wait Until Page Does Not Contain Element     ${customer_tagged_popup}    timeout=20s
+    Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=10s
+    Wait Until Page Does Not Contain Element     ${customer_tagged_popup}    timeout=10s
 
 Discard Items If Present From Previous Session
     ${store_item_from_previous_session}    Run Keyword And Return Status    Page Should Contain Element    ${discard_item_previous_session}
@@ -780,7 +800,7 @@ Delete And Add Same GST Number Again So That Next Time Test Case Doesnt Fail
         Wait Until Page Contains Element    ${cg_edit_gstin_icon}    timeout=10s
         Click Element    ${cg_edit_gstin_icon}
     END
-    Sleep    0.5
+    Sleep    2
     Wait Until Page Contains Element    //label[contains(text(),"${gst_details.legal_name}")]//ancestor::div[@class="row py-2 mb-2"]//div[@class="col-md-4"]//div//div[@class="text-right col"]//*[name()='img']        timeout=10s
     Click Element    //label[contains(text(),"${gst_details.legal_name}")]//ancestor::div[@class="row py-2 mb-2"]//div[@class="col-md-4"]//div//div[@class="text-right col"]//*[name()='img']
     Wait Until Page Does Not Contain Element    //label[contains(text(),"${gst_details.legal_name}")]//ancestor::div[@class="row py-2 mb-2"]//div[@class="col-md-4"]//div//div[@class="text-right col"]//*[name()='img']        timeout=10s
@@ -802,11 +822,16 @@ Delete And Add Same GST Number Again So That Next Time Test Case Doesnt Fail
     Wait Until Element Is Enabled    ${save_gstin_button}
     Click Element    ${save_gstin_button}
     Wait Until Page Does Not Contain Element    ${save_gstin_button}        timeout=10s
-    Wait Until Page Contains Element    ${confirm_selected_button}        timeout=10s
+    Sleep    0.5
+    Wait Until Page Contains Element    ${confirm_selected_button}    timeout=10s
     Click Element    ${confirm_selected_button}
     Wait Until Page Does Not Contain Element    ${confirm_selected_button}        timeout=10s
-    Wait Until Page Contains Element    ${start_billing_button}        timeout=10s
-    Click Element    ${start_billing_button}
+    Wait Until Page Contains Element    ${pincode}
+    Select State And City    ${gst_details}
+    Input Text    ${pincode}    ${gst_details.pincode}
+    Press Keys    ${pincode}    ENTER
+    Wait Until Page Contains Element    ${customer_info_update_button}        timeout=10s
+    Click Element    ${customer_info_update_button}
 
 Delete And Add Same UIN Number Again So That Next Time Test Case Doesnt Fail
     [Arguments]    ${pos_data}
@@ -851,8 +876,9 @@ Delete And Add Same UIN Number Again So That Next Time Test Case Doesnt Fail
     Sleep    0.5
     Wait Until Page Contains Element    ${confirm_selected_button}        timeout=10s
     Click Element    ${confirm_selected_button}
-    Wait Until Page Contains Element    ${confirm_selected_button}        timeout=10s
-    Wait Until Page Does Not Contain Element    ${pincode}
+    Wait Until Page Does Not Contain Element    ${confirm_selected_button}        timeout=10s
+    Wait Until Page Contains Element    ${pincode}
+    Select State And City    ${uin_details}
     Input Text    ${pincode}    ${uin_details.pincode}
     Press Keys    ${pincode}    ENTER
     Wait Until Page Contains Element    ${customer_info_update_button}        timeout=10s
