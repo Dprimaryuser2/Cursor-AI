@@ -245,11 +245,12 @@ Edit Customer Information
     ${addresslinesecond}    Generate Random Street Address
     Input Text    ${address_line2}    ${addresslinesecond}
     Click Button    ${customer_info_update_button}
+    Sleep    2
     Discard Items If Present From Previous Session
     Wait Until Element Is Visible    ${customer_info_close_element}    timeout=10s
     Click Element    ${customer_info_close_element}
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
-    ${customer_info}    Create Dictionary    first_name=${first_name}    last_name=${last_name}    email=${email}    addresslinefirst=${addresslinefirst}    addresslinesecond=${addresslinesecond}
+    ${customer_info}    Create Dictionary    first_name=${first_name}    last_name=${last_name}    email=${email}    addresslinefirst=${addresslinefirst}    addresslinesecond=${addresslinesecond}    customer_phone_number=${mobile}
     RETURN    ${customer_info}
     
 Verify Customer Untagging
@@ -285,16 +286,17 @@ Verify Customer Tagging
         [Arguments]    ${pos_data}
         Log    ${pos_data}
         ${my_dict}    Create Dictionary    &{pos_data}
-        Wait Until Page Contains Element    ${customer_info_icon}
+        Wait Until Page Contains Element    ${customer_info_icon}    timeout=10s
         Click Element    ${customer_info_icon}
-        Wait Until Page Contains Element    ${personal_info_phone_no}
+        Wait Until Page Contains Element    ${personal_info_phone_no}    timeout=10s
+        Sleep    1
         ${phone}    Get Text    ${personal_info_phone_no}
-        Convert To Integer    ${phone}
+        ${int_phone}     Convert To Integer    ${phone}
         Sleep    0.5
-        Should Be Equal As Integers    ${phone}     ${my_dict.customer_phone_number}
-        Wait Until Page Contains Element    ${close_customer_window}
+        Should Be Equal As Integers    ${int_phone}     ${my_dict.customer_phone_number}
+        Wait Until Page Contains Element    ${close_customer_window}    timeout=10s
         Click Element    ${close_customer_window}
-        Wait Until Page Does Not Contain Element    ${close_customer_window}
+        Wait Until Page Does Not Contain Element    ${close_customer_window}    timeout=10s
 
 Verify Customer Tagging Is Not Mandatory 
     Click Button    ${checkout_button}
@@ -425,6 +427,7 @@ Verify Customer Tagged With Tax Invoice GST Number
     Click Element    ${cg_edit_gstin_icon}
     Wait Until Page Contains Element    ${gstin_number_in_row}    timeout=10s
     Page Should Contain Element    ${gstin_number_in_row}
+    Sleep    0.5
     ${gstin_number}    Get Text    ${gstin_number_in_row}
     Should Be Equal    ${gstin_number}    ${my_dict.gst_number}
     
@@ -460,7 +463,12 @@ Change Invoice Type From Sales To GST In Customer Information
     Click Element    ${customer_edit_info_button}
     Add GST Name And Number    ${my_dict}
     Wait Until Page Contains Element    ${pincode}
-    Select State And City    ${my_dict}
+    Click Element    ${state_select}
+    Sleep    0.5
+    ${state}=    Replace String    ${state_option}     state    ${my_dict.state}
+    Click Element    ${state}
+    Click Element    ${select_city}
+    ${city}=    Replace String    ${city_option}    city    ${my_dict.new_city}
     Sleep    1
     Input Text    ${pincode}    ${my_dict.pincode}
     Press Keys    ${pincode}    ENTER
@@ -691,7 +699,7 @@ Discard Items If Present From Previous Session
     IF    ${store_item_from_previous_session}
         Wait Until Element Is Enabled    ${discard_item_previous_session}    timeout=10
          Click Element    ${discard_item_previous_session}
-         Wait Until Page Does Not Contain Element    ${discard_item_previous_session}
+         Wait Until Page Does Not Contain Element    ${discard_item_previous_session}    timeout=10
     END
 
 
