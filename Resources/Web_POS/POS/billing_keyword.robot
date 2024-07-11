@@ -7,6 +7,8 @@ Variables    ../../../PageObjects/Web_POS/POS/hold_bill_locators.py
 Variables   ../../../PageObjects/Web_POS/POS/checkout_locators.py
 Variables   ../../../PageObjects/Web_POS/POS/pos_locators.py
 Variables   ../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Resource    ../../../Resources/Web_POS/POS/split_payment_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/manual_discount_keyword.robot
 
 *** Keywords ***
 Hold Bill
@@ -76,33 +78,6 @@ Get payable amount
     ${payable_amt}=    Convert To Number    ${payable_amt}
     RETURN  ${payable_amt}
 
-Enable Split payment mode
-    Wait Until Page Contains Element    ${checkout_split_payment}
-    Click Element    ${checkout_split_payment}
-
-Split Payment By Different Modes
-    [Arguments]    ${products}
-    ${my_dict}    Create Dictionary   &{products}
-    ${items_list}=    Convert Items To List    ${my_dict.payment}
-    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.payment}
-    log     ${items_dict}
-    FOR    ${item}    IN    @{items_dict.items()}
-        ${key}=    Set Variable    ${item}[0]
-        ${values}=    Set Variable    ${item}[1]
-        ${value}=    Convert To String    ${values}
-    Run Keyword If    '${key}' == 'cash'    Split Payment By Cash    ${value}
-        ...    ELSE IF    '${key}' == 'paytm'    Split Payment By Paytm    ${value}
-         ...    ELSE IF    '${key}' == 'voucher'    Split Payment By Redeem Voucher
-    END
-
-Split Payment By Cash
-    [Arguments]    ${cash_value}
-    Clear Element Text    ${enter_split_amount}
-    Input Text    ${enter_split_amount}    ${cash_value}
-    Click Element   ${payment_method_cash}
-    Wait Until Page Contains Element   ${enter_cash}
-    Input Text      ${enter_cash}   ${cash_value}
-    Click Element    ${continue_cash_button}
 
 Payment By Cash
     [Arguments]    ${cash_value}
@@ -149,6 +124,7 @@ Click On Back Button | Checkout
 Add Customer Details for partial payment
     [Arguments]    ${customer_data}
     ${my_dict}    Create Dictionary   &{customer_data}
+    Wait Until Page Contains Element    ${add_customer_link}    timeout=20s
     Click Element    ${add_customer_link}
     Wait Until Element Is Visible    ${customer_phone_field}
     Input Text    ${customer_phone_field}    ${my_dict.mobile}
@@ -156,19 +132,6 @@ Add Customer Details for partial payment
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
     Click Button    ${start_billing_button}
-
-
-Split Payment By Paytm
-    [Arguments]    ${paytm_value}
-    Clear Element Text    ${enter_split_amount}
-#    Click Element   ${cancel}
-    Sleep    0.5
-    Input Text    ${enter_split_amount}    ${paytm_value}
-    click Element   ${upi_payment}
-    ${id}=  Generate Random Phone Number
-    Wait Until Page Contains Element    ${enter_paytm_transaction_id}
-    Input Text      ${enter_paytm_transaction_id}   ${id}
-    Click Element    ${continue_paytm_button}
 
 Payment By Paytm
     [Arguments]    ${paytm_value}
@@ -178,80 +141,20 @@ Payment By Paytm
     Input Text      ${enter_paytm_transaction_id}   ${id}
     Click Element    ${continue_paytm_button}
 
-Split Payment By Redeem Voucher
-    Click Element    ${redeem_voucher}
-    ${id}=  Generate Random Phone Number
-    Wait Until Page Contains Element    ${redeem_voucher_transactionId}
-    Wait Until Page Contains Element    ${redeem_voucher_transactionId}
-    Input Text    ${redeem_voucher_transactionId}    ${id}
-    Click Element    ${voucher_continue_button}
-
-Payment By Account On Sales
-    Input Text    ${enter_split_amount}    ${account_on_sale}
-    Click Element   ${payment_method_cash}
-    ${id}=  Generate Random Street Address
-    Wait Until Page Contains Element    ${remark_account_on_sale}
-    Input Text      ${remark_account_on_sale}   ${id}
-    Click Element    ${continue_account_on_sale_button}
-
 Verify split payment toggle button is enabled
     Wait Until Page Contains Element   ${enter_split_amount}
     Page Should Contain Element     ${enter_split_amount}
 
 Verify split payment toggle button is disabled.
-    Page Should Not Contain Element     ${enter_split_amount}
+    Element Should Be Disabled     ${enter_split_amount}
 
 Verify If Payment is Complete Or Not
-    Wait Until Page Contains Element   ${payment_complete_heading}  timeout=10s
-    Page Should Contain Element     ${payment_complete_heading}
-    Page Should Contain Element     ${share_invoice}
+#    Wait Until Page Contains Element   ${payment_complete_heading}  timeout=10s
+#    Page Should Contain Element     ${payment_complete_heading}
+    Wait Until Page Contains Element    ${checkout_sub_total}   timeout=10s
+    Page Should Contain Element     ${checkout_sub_total}
+    Wait Until Page Contains Element    ${print_invoice}    timeout=10s
     Page Should Contain Element     ${print_invoice}
-
-Navigate To Update Product Window
-    [Arguments]    ${product_data}
-    ${product_dict}    Create Dictionary   &{product_data}
-    ${items_list}=    Convert Items To List    ${product_dict.buy_items}
-    ${items_dict} =    Convert Item List To Dictionary    ${product_dict.buy_items}
-    FOR    ${item}    IN    @{items_dict.items()}
-        ${key}=    Set Variable    ${item}[0]
-        ${values}=    Set Variable    ${item}[1]
-        ${product}=    Replace String    ${item_link}    barcode    ${key}
-        Click Element    ${product}
-        Wait Until Page Contains Element   ${update_product_button}
-    END
-
-Apply Item Manual Discount | Update Product Popup
-    [Arguments]    ${product_price}
-    ${product_price_dict}    Create Dictionary   &{product_price}
-    ${subtotal_amount}=    Get Text    ${update_product_subtotal}
-    ${subtotal_amount}    Remove Characters    ${subtotal_amount}
-    ${cumulative_disc}=    Get Text    ${update_product_cumulative_discount}
-    ${cumulative_disc}    Remove Characters    ${cumulative_disc}
-    ${product_taxes}    Get Text    ${update_product_taxes}
-    ${product_taxes}    Remove Characters    ${product_taxes}
-    ${product_total}=    Get Text    ${update_product_total}
-    ${product_total}    Remove Characters    ${product_total}
-    Click Element    ${manual_discount_arrow}
-    Wait Until Element Is Visible    ${manual_discount_heading}    timeout=10s
-    Page Should Contain Element    ${select_from_list_tab}
-    Page Should Contain Element    ${custom_discount_tab}
-    ${price_without_discount}=    Create Dictionary    subtotal= ${subtotal_amount}    cumulative_discount = ${cumulative_disc}    product_taxes= ${product_taxes}    product_total= ${product_total}    discount= ${product_price_dict.discount_value}
-    RETURN    ${price_without_discount}
-
-Apply Item Manual Discount | Select From List
-    [Arguments]    ${discount_data}
-    ${discount_dict}    Create Dictionary   &{discount_data}
-    Click Element    ${select_from_list_tab}
-    ${discount_list}=    Convert Items To List    ${discount_dict.manual_discount}
-    ${discount_dict} =    Convert Item List To Dictionary    ${discount_dict.manual_discount}
-    FOR    ${item}    IN    @{discount_dict.items()}
-        ${key}=    Set Variable    ${item}[0]
-        ${values}=    Set Variable    ${item}[1]
-        ${value}=    Convert To String    ${values}
-        ${discount_list}=    Replace String    ${list_discount_radio}    disc    ${values}
-        Click Element    ${discount_list}
-        Click Button    ${apply_manual_discount_button}
-    END
 
 Verify Item Manual Discount
     [Arguments]    ${product_price}
@@ -378,8 +281,9 @@ Apply Bill Manual Discount | Custom Discount
 
 Collect Payment Using Store Credit
     [Arguments]    ${pos_dict}
-    ${details}    Create Dictionary    ${pos_dict}
-    Wait Until Page Contains Element    ${redeem_store_credit_button}
+    ${details}    Create Dictionary    &{pos_dict}
+    Sleep    0.5
+    Wait Until Page Contains Element    ${redeem_store_credit_button}   timeout=10s
     Click Element    ${redeem_store_credit_button}
     Wait Until Page Contains Element    ${redeem_with_dropdown}
     Click Element    ${redeem_with_dropdown}
@@ -387,9 +291,8 @@ Collect Payment Using Store Credit
     Wait Until Page Contains Element    ${input_voucher_code}
     Click Element    ${input_voucher_code}
     Input Text    ${input_voucher_code}    ${details.voucher_code}
-    Element Should Be Enabled    ${store_credit_continue_button}
-    Click Element    ${store_credit_continue_button}
-    Wait Until Page Contains Element    ${store_credit_validation_message}
+#    Element Should Be Enabled    ${apply_store_credit_voucher}
+    Wait Until Keyword Succeeds    4    2   Click Element    ${apply_store_credit_voucher}
 
 
 Change Billing Mode

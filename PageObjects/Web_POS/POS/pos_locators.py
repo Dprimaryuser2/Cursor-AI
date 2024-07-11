@@ -53,7 +53,7 @@ price = '(//td[@aria-colindex="4"])[1]'
 discount_field = '(//td[@aria-colindex="5"])[1]'
 net_price = '//td[@aria-colindex="6"]'
 cancel_item = '(//td[@aria-colindex="6"])[1]'
-item_cart_table = '//table[@class="table b-table table cart-table mt-0 table-dark table-dark-bg b-table-row-selected td:first-child border-bottom-0 b-table-selectable b-table-select-single"]'
+item_cart_table = '//table[contains(@class,"table b-table table cart-table mt-0 table-dark table-dark-bg b-table-row-selected td:first-child border-bottom-0 b-table-selectable b-table-select-single")]'
 table = '//td[@aria-colindex="2"]//ancestor::tbody[@role="rowgroup"]'
 first_item_product_name = '(//a[contains(@class,"product-name")])[1]'
 sub_total = '//p[contains(text(),"Sub Total")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
@@ -235,3 +235,8 @@ product_with_some_inventory = '//div[@class="product-info pull-left"]//h6[text()
 
 ssp_price = ' //td[@aria-colindex="4"]/p'
 mrp_table = '//table[@class="table b-table table-cutom widthfixed b-table-selectable b-table-select-single"]'
+
+keyboard_shortcuts_link = '//a[@class="key-link"]'
+# insufficient inventory
+insufficient_inventory_continue_btn = '//button[@class="btn ml-1 btn-primary btn-block"]'
+insufficient_inventory_title = '//h5[@class="modal-title"]'

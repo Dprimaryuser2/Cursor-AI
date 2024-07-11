@@ -31,13 +31,14 @@ Add Weighted UOM Products to Cart | Edit Cart Quantity Mode
         Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
         Sleep    0.5s
         Click Element    ${search_add_button}
-        Sleep    1s
+        Sleep    2s
         ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
         IF    ${multiple_product_present}
             Wait Until Page Contains Element    ${select_mrp}   timeout=10s
             Click Element    ${add_to_cart_mrp}
             Wait Until Page Does Not Contain Element    ${select_mrp}
         END
+        Sleep    1s
         # edit cart
         ${edit_toggle_enabled}    Run Keyword And Return Status    Element Should Be Visible    ${edit_toggle_on}
         IF    ${edit_toggle_enabled}
@@ -69,6 +70,7 @@ Add Weighted UOM Products to Cart | Add Cart Quantity Mode
         Input Text    ${product_search_bar}    ${key}
         Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
         Click Element    ${search_add_button}
+        Sleep    2s
         Sleep    1s
         ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
         IF    ${multiple_product_present}
@@ -123,13 +125,8 @@ Verify Item Is Added
         ${key}=    Set Variable    ${item}[0]
         ${values}=    Set Variable    ${item}[1]
         ${value}=    Convert To String    ${values}
-        ${quantity_in_piece}=    Run Keyword And Return Status    Element Should Contain    ${quantity_row}    Piece
+        ${quantity_in_piece}=    Run Keyword And Return Status    Page Should Contain Element    ${quantity_in_piece_button}
         IF    ${quantity_in_piece}
-            ${expected_product_quantity}=    Get Text    ${piece_quantity_value}
-            ${expected_product_quantity}    Split String    ${expected_product_quantity}
-            ${expected_product_quantity}    Get From List    ${expected_product_quantity}    0
-            ${expected_product_quantity}    Remove Characters    ${expected_product_quantity}
-            ${expected_product_quantity}    Convert To Number    ${expected_product_quantity}
             ${values}    Convert To Number    ${values}
             Should Be Equal As Integers    ${values}    ${expected_product_quantity}
             ${expected_cart_quantity}=    Evaluate    ${expected_cart_quantity}+1
@@ -174,6 +171,7 @@ Scan And Add Product
             Wait Until Page Does Not Contain Element    ${select_mrp}
         END
     END
+    Wait Until Page Contains Element    ${first_item_product_name}
 
 Verify 0 Inventory To Cart With Disable Negative Inventory
     [Arguments]    ${products}

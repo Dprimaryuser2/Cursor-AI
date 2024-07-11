@@ -50,7 +50,7 @@ close_button = '//button[@class="close"]'
 payment_complete_heading = '//span[contains(text(),"Payment complete!")]'
 invoice_customer_name = '//label[contains(text(),"Customer Name")]//following-sibling::p'
 invoice_customer_phone = '//label[contains(text(),"Customer Phone Number")]//following-sibling::p'
-
+split_payment_popup="//div[@class='alert alert-dismissible alert-success' and contains(text(),'Payment saved successfully')]"
 # dynamic
 checkout_qty_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="3"]'
 checkout_unit_price_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="4"]'
@@ -75,6 +75,8 @@ voucher_continue_button="//button[@id='process-payment-btn' and @class='btn floa
 redeem_voucher='//button[@id="pay-method-undefined" and contains(text(),"Redeem Voucher")]'
 
 account_on_sale="//button[@class='btn text-center p-0 h-25 mb-2 btn-outline-secondary btn-block' and contains(text(),'On-Account Sale')]"
+balance_after_sale="(//div[@class='mt-3 col-md-6']//p)[2]"
+on_account_sale_heading = '//header[@id="on_account_sale___BV_modal_header_"]'
 remark_account_on_sale="//textarea[@id='input-account-remark']"
 continue_account_on_sale_button="//button[@id='confirm-account-sale' and @class='btn w-20 btn-primary']"
 #payment complete
@@ -138,9 +140,35 @@ input_store_credit_opt = '//input[@class="active text-center form-control"]'
 store_credit_verify_button = '//button[@id="verify-otp-btn"]'
 store_credit_resend_otp_button = '//button[@id="store-credit-Resend OTP"]'
 store_credit_validation_message = '//div[@class="alert alert-dismissible alert-danger"]'
-
+apply_store_credit_voucher='//button[@id="apply-voucher-storecredit"]'
+apply_store_credit_voucher="//button[@class='btn float-right btn-primary']//span"
 active_promo_dropdown_row = '//ul[@class="m-0 filter-dropdown list-unstyled"]//li//span'
 promo_name_in_product_row = '//span[@class="offer active text-green"]'
+disabled_cash_continue_button = '//span[text()="Continue"]//ancestor::button[@disabled="disabled"]'
+payment_mode_label = '(//div[@class="col light"])[1]//span'
+paid_amount_by_mop = '(//div[@class="col text-right"])[1]//p'
+amount_paid_by_customer = '(//div[@class="col text-right p-0"])[1]//h6'
+amount_paid_at_checkout = '(//div[@class="col text-right p-0"])[2]//h6'
+
+# Store Credit
+partial_redemption_lapse_alert = '//span[contains(text(),"Partial redemption not allowed")]'
+full_redemption_popup = '//div[@id="redeemconfrim___BV_modal_content_"]'
+cancel_redeem_lapse_button = '//button[@id="cacnel-redeem-btn"]'
+continue_redeem_lapse_button = '//button[@id="confirm-redeem-btn"]'
+additional_mop_popup = '//div[@class="modal-content"]'
+customer_paid_field = '//input[@id="input-for-customer-paid"]'
+customer_paid_label = '//label[@id="label-for-customer-paid__BV_label_"]'
+less_account_balance_alert = '//p[contains(normalize-space(),"A mimimum payment of AMOUNT is required to complete this on-account sale.")]'    # Change AMOUNT
+minimum_payment_required = '//h6[text()="Minimum Payment Required"]//following-sibling::p'
+phone_number_redeem_store_credit="//input[@class='mb-2 mr-sm-2 mb-sm-0 form-control']"
+
+greater_amount_popup = "//div[@class='alert alert-dismissible alert-danger' and contains(text(),'Entered amount is greater than bill amount.')]"
+
+cash_order_summary="//div[@class='col light']//child::span[text()='Cash']"
+paytm_order_summary="//div[@class='col light']//child::span[text()='Debit Note']"
+
 
 bill_container = '//div[@class="container p-0"]'
 name_invoice = '//div[@class="modal-content"]//td[contains(text(),"Name")]/span'
+
+fulfilment_option = '//h6[@class="mb-4"]'

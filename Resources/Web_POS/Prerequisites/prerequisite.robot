@@ -67,7 +67,7 @@ Revoke The Licence Key From Console
     Wait Until Element Is Not Visible    ${remove_modal_body}    timeout=10s
     Close Browser
     END
-    Sleep    1
+
 
 Go To Pos Terminal
     Wait Until Keyword Succeeds    5    2     Click Element    ${pos_terminal_logo}
