@@ -284,7 +284,6 @@ def count_table_body_rows(locator):
     return len(rows)
 
 @keyword
-
 def search_and_fetch_email(server, port, email_address, password, subject):
     try:
         # Connect to the email server
@@ -350,12 +349,6 @@ def search_and_fetch_email(server, port, email_address, password, subject):
 
 @keyword
 def get_key_combination(keys):
-    """
-    Returns the key combination in a format that SeleniumLibrary expects.
-
-    Example:
-    | ${result}= | Get Key Combination | ctrl+alt+b |
-    """
     key_mapping = {
         "ctrl": "CONTROL",
         "alt": "ALT",

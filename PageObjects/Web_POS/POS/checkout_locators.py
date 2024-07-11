@@ -170,3 +170,5 @@ paytm_order_summary="//div[@class='col light']//child::span[text()='Debit Note']
 
 bill_container = '//div[@class="container p-0"]'
 name_invoice = '//div[@class="modal-content"]//td[contains(text(),"Name")]/span'
+
+fulfilment_option = '//h6[@class="mb-4"]'
