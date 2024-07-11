@@ -8,6 +8,7 @@ import random
 import pandas as pd
 import string
 from robot.libraries.BuiltIn import BuiltIn
+from robot.api.deco import keyword
 
 @keyword
 def fetch_testdata_by_id(file_path, target_id):
@@ -346,53 +347,22 @@ def search_and_fetch_email(server, port, email_address, password, subject):
     except imaplib.IMAP4.error as e:
         print(f"IMAP error: {e}")
         return None
-# def search_and_fetch_email(server, port, email_address, password, subject):
-#     try:
-#         # Connect to the email server
-#         mail = imaplib.IMAP4_SSL(server, port)
-#         print(f"Connecting to {server}:{port}")
-#
-#         mail.login(email_address, password)
-#         print(f"Logged in as {email_address}")
-#
-#         mail.select('inbox')
-#         print("Selected inbox")
-#
-#         # Search for emails with the specified subject
-#         result, data = mail.search(None, f'(SUBJECT "{subject}")')
-#         if result != "OK":
-#             print(f"Search failed: {result}")
-#             return None
-#         email_ids = data[0].split()
-#         print(f"Email IDs found: {email_ids}")
-#
-#         # Fetch the latest email and extract the body
-#         if email_ids:
-#             latest_email_id = email_ids[-1]
-#             result, data = mail.fetch(latest_email_id, '(RFC822)')
-#             if result != "OK":
-#                 print(f"Fetch failed: {result}")
-#                 return None
-#             raw_email = data[0][1].decode('utf-8')  # Decode bytes to string
-#             print(f"Raw email: {raw_email[:100]}...")  # Print a snippet of the raw email for debugging
-#
-#             email_message = email.message_from_string(raw_email)  # Use message_from_string to parse email content
-#
-#             # Extract the email body
-#             email_body = ""
-#             if email_message.is_multipart():
-#                 for part in email_message.walk():
-#                     if part.get_content_type() == "text/plain":
-#                         email_body += part.get_payload(decode=True).decode()
-#             else:
-#                 email_body = email_message.get_payload(decode=True).decode()
-#
-#             print(f"Email body: {email_body[:100]}...")  # Print a snippet of the email body for debugging
-#             return email_body
-#
-#         # If no email with the specified subject is found
-#         print("No emails found with the specified subject")
-#         return None
-#     except imaplib.IMAP4.error as e:
-#         print(f"IMAP error: {e}")
-#         return None
+
+@keyword
+def get_key_combination(keys):
+    """
+    Returns the key combination in a format that SeleniumLibrary expects.
+
+    Example:
+    | ${result}= | Get Key Combination | ctrl+alt+b |
+    """
+    key_mapping = {
+        "ctrl": "CONTROL",
+        "alt": "ALT",
+        "shift": "SHIFT",
+        "cmd": "COMMAND",
+        "win": "META"
+    }
+
+    keys_list = keys.lower().split('+')
+    return '+'.join([key_mapping.get(key, key) for key in keys_list])

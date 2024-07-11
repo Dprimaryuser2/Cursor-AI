@@ -4,9 +4,9 @@ Library    String
 Library    Collections
 Library    ../../../Resources/CustomKeywords/utilities.py
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
-Resource    ../../AdminConsole/Login/login_keyword.robot
-Resource    ../../AdminConsole/POSTerminal/pos_terminal_keyword.robot
+#Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
+#Resource    ../../AdminConsole/Login/login_keyword.robot
+#Resource    ../../AdminConsole/POSTerminal/pos_terminal_keyword.robot
 Variables    ../../../PageObjects/Web_POS/POS/hold_bill_locators.py
 Variables    ../../../PageObjects/AdminConsole/POSTerminal/pos_terminal.py
 Variables   ../../../PageObjects/Web_POS/POS/checkout_locators.py
@@ -17,11 +17,17 @@ Variables   ../../../Environment/environment.py
 *** Keywords ***
 
 Verify Shortcut Key Allows Searching Product
-    Wait Until Page Contains Element    ${product_search_bar}
-    Press Keys    CTRL+s
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
     Element Should Be Focused    ${product_search_bar}
-    Input Text    ${product_search_bar}    s
-    Wait Until Page Contains Element    ${product_search_dropdown}
+    ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Page Contains Element    ${product_search_dropdown}
+        Page Should Contain    ${key}
+    END
 
 Verify Shortcut Key Displays Catalogue Window
     Wait Until Page Contains Element    ${view_catalog_button}
@@ -170,4 +176,6 @@ Verify Shortcut Key Allows Searching Product | Order Mode
 Press Shortcut Key
     [Arguments]    ${pos_data}
     ${my_dict}    Create Dictionary    &{pos_data}
-    Press Keys    CTRL+${my_dict.shortcut_key}
+    ${shortcut_keys}=    Set Variable    ${my_dict.shortcut_key}
+    ${keys}=    Get Key Combination    ${shortcut_keys}
+    Press Keys    None    ${keys}

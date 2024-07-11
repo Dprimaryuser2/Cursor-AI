@@ -4,13 +4,13 @@ Library    SeleniumLibrary
 Library    ../../../Resources/CustomKeywords/utilities.py
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/keyboard_shortcut_keywords.robot
+Resource  ../../../Resources/Web_POS/POS/keyboard_shortcut_keywords.robot
 
 Test Setup    Open Application | POS
 Test Teardown   Close Browser
 
 *** Variables ***
-${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}keyboard_shortcut_test_data.xlsx
+${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}keyboard_shortcuts_test_data.xlsx
 
 *** Test Cases ***
 
@@ -18,18 +18,21 @@ TC_01 Search product using keyboard shortcut
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_01
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
-    Verify Shortcut Key Allows Searching Product
+    Press Shortcut Key    ${pos_data}
+    Verify Shortcut Key Allows Searching Product    ${pos_data}
 
 TC_02 view/Hide product using keyboard shortcut
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_02
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
+    Press Shortcut Key    ${pos_data}
     Verify Shortcut Key Displays Catalogue Window
 
 TC_03 Refresh catalog using keyboard shortcut
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_03
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
+    Press Shortcut Key    ${pos_data}
     Verify Shortcut Key Allows Updating Catalogue
 
 TC_04 view Salesperson using keyboard shortcut
