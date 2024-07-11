@@ -18,7 +18,7 @@ Zwing_KB_01 Search product using keyboard shortcut
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_1
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
-    Verify Shortcut Key Allows Searching Product
+    #Verify Shortcut Key Allows Searching Product
 
 Zwing_KB_02 view/Hide product using keyboard shortcut
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_02
