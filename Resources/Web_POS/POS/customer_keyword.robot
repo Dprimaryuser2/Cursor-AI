@@ -58,7 +58,7 @@ Add Customer Details
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=20s
     Wait Until Element Is Not Visible    //div[@class="popup-notification"]     timeout=10s
 #    Wait Until Element Is Visible    //div[contains(text(),"Customer tagged successfully.")]
-     ${customer_information}=    Create Dictionary    first_name=${first_name}    last_name=${last_name}    phone_number= ${mobile}    email=${email}    gender=${gender}    add_line_one= ${add_line1}    add_line_two= ${add_line2}
+     ${customer_information}=    Create Dictionary    first_name=${first_name}    last_name=${last_name}    phone_number= ${mobile}    email=${email}    gender=${gender}    add_line_one= ${add_line1}    add_line_two= ${add_line2}    customer_phone_number=${mobile}
     [Return]    ${customer_information}
 
 Tag Customer And Enter Invalid GST Number
@@ -280,14 +280,19 @@ Edit Customer Group
     [Return]    ${total_groups_tagged}
 
 Verify Customer Tagging
-    [Arguments]    ${pos_data}
-    ${my_dict}    Create Dictionary    &{pos_data}
-    Wait Until Page Contains Element    ${customer_info_icon}
-    Click Element    ${customer_info_icon}
-    Wait Until Page Contains Element    ${personal_info_phone_no}
-    ${phone}    Get Text    ${personal_info_phone_no}
-    Convert To Integer    ${phone}
-    Should Be Equal As Integers    ${phone}     ${my_dict.customer_phone_number}
+        [Arguments]    ${pos_data}
+        Log    ${pos_data}
+        ${my_dict}    Create Dictionary    &{pos_data}
+        Wait Until Page Contains Element    ${customer_info_icon}
+        Click Element    ${customer_info_icon}
+        Wait Until Page Contains Element    ${personal_info_phone_no}
+        ${phone}    Get Text    ${personal_info_phone_no}
+        Convert To Integer    ${phone}
+        Sleep    0.5
+        Should Be Equal As Integers    ${phone}     ${my_dict.customer_phone_number}
+        Wait Until Page Contains Element    ${close_customer_window}
+        Click Element    ${close_customer_window}
+        Wait Until Page Does Not Contain Element    ${close_customer_window}
 
 Verify Customer Tagging Is Not Mandatory 
     Click Button    ${checkout_button}
@@ -360,6 +365,7 @@ Verify Customer Tagging Is Mandatory With All Fields
     Click Button    ${start_billing_button}
     Wait Until Element Is Visible    ${payable_amount}
     Wait Until Element Is Visible    ${checkout_button}    timeout=20s
+    Sleep    0.5
     Click Button    ${checkout_button}
     Wait Until Element Is Visible      ${checkout_heading}    timeout=10s
     Page Should Contain Element    ${checkout_heading}
@@ -842,8 +848,12 @@ Delete And Add Same UIN Number Again So That Next Time Test Case Doesnt Fail
     Wait Until Element Is Enabled    ${save_gstin_button}
     Click Element    ${save_gstin_button}
     Wait Until Page Does Not Contain Element    ${save_gstin_button}        timeout=10s
+    Sleep    0.5
     Wait Until Page Contains Element    ${confirm_selected_button}        timeout=10s
     Click Element    ${confirm_selected_button}
-    Wait Until Page Does Not Contain Element    ${confirm_selected_button}        timeout=10s
-    Wait Until Page Contains Element    ${start_billing_button}        timeout=10s
-    Click Element    ${start_billing_button}
+    Wait Until Page Contains Element    ${confirm_selected_button}        timeout=10s
+    Wait Until Page Does Not Contain Element    ${pincode}
+    Input Text    ${pincode}    ${uin_details.pincode}
+    Press Keys    ${pincode}    ENTER
+    Wait Until Page Contains Element    ${customer_info_update_button}        timeout=10s
+    Click Element    ${customer_info_update_button}

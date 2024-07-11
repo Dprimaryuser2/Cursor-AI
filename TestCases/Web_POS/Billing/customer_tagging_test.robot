@@ -62,7 +62,6 @@ TC_C5 Get the Customer Information of tagged Customer
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      ${customer_info}    Add Customer Details    ${pos_data}
      Verify And Fetch Customer Information    ${customer_info}
-     Wait Until Page Contains Element    ${open_session_link}
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
