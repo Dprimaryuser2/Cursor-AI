@@ -123,6 +123,7 @@ salesperson_mandatory_message = '//div[@class="alert alert-dismissible alert-dan
 salesperson_below_product = '//span[@class="pt-2 fs-12 text-grey"]'
 close_icon_salesperson_dropdown = '//div[@class="w-100"]//div//*[name()="svg"]'
 salesperson_untagged_message = '//div[@class="alert alert-dismissible alert-success" and text()="Salesperson untagged."]'
+open_session_before_continuing ='//h6[@class="mb-2 fs-14" and text()="Open Session before continuing"]'
 check_inventory_button = '//button[@id="check-inventory-btn"]'
 inventory_modal_heading = '//h5[contains(text(),"Inventory")]'
 inventory_close_button = '//h5[contains(text(),"Inventory")]//following-sibling::button'
