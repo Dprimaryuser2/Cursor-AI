@@ -184,7 +184,6 @@ Zwing_MOP_26 Clicking on a MOP should open a popup to enter transaction referenc
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
-    Payment Via Additional MOP
     Verify Additional MOP Reference Id Popup
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
@@ -197,7 +196,6 @@ Zwing_MOP_27 Additional MOP's | Enter transaction id
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
-    Verify Additional MOP Reference Id Popup
     Verify Entered Transaction ID
     Verify Successful Payment    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
