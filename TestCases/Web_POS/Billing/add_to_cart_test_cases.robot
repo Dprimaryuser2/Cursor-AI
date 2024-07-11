@@ -132,6 +132,7 @@ Zwing_O_31 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with d
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_32 Add Normal sku with weighted UOM to cart >> Add Qty mode with enable Negative stock Billing with decimal weight
+    [Tags]    Demo
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_32
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}

@@ -521,7 +521,7 @@ Verify Promo Discount In Side Cart | POS
     Should Be Equal As Integers   ${expected_payable_amount}    ${payable_amt}
 
 Verify Billing Checkout
-    Sleep    2
+    Sleep    0.5
     Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
     Click Button    ${checkout_button}
     ${popup_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${updating_catalog_heading}
