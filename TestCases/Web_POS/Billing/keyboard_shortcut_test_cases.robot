@@ -1,6 +1,5 @@
 *** Settings ***
 Library    SeleniumLibrary
-
 Library    ../../../Resources/CustomKeywords/utilities.py
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
@@ -11,7 +10,7 @@ Test Setup    Open Application | POS
 Test Teardown   Close Browser
 
 *** Variables ***
-${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}keyboard_shortcuts_test_data.xlsx
+${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}keyboard_shortcut_test_data.xlsx
 
 *** Test Cases ***
 Zwing_KB_01 Search product using keyboard shortcut
@@ -22,21 +21,21 @@ Zwing_KB_01 Search product using keyboard shortcut
     Verify Shortcut Key Allows Searching Product    ${pos_data}
 
 Zwing_KB_02 view/Hide product using keyboard shortcut
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_02
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_2
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Press Shortcut Key    ${pos_data}
     Verify Shortcut Key Displays Catalogue Window
 
 Zwing_KB_03 Refresh catalog using keyboard shortcut
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_03
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_3
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Press Shortcut Key    ${pos_data}
     Verify Shortcut Key Allows Updating Catalogue
 
 Zwing_KB_04 view Salesperson using keyboard shortcut
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_04
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_4
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}

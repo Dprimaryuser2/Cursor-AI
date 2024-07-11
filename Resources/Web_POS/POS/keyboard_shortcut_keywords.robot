@@ -16,31 +16,24 @@ Variables   ../../../Environment/environment.py
 
 *** Keywords ***
 Verify Shortcut Key Allows Searching Product
-#    [Arguments]    ${products}
-#    ${my_dict}    Create Dictionary   &{products}
-#    Element Should Be Focused    ${product_search_bar}
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Element Should Be Focused    ${product_search_bar}
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
     FOR    ${item}    IN    @{items_dict.items()}
         ${key}=    Set Variable    ${item}[0]
-    #    Input Text    ${product_search_bar}    ${key}
+        Input Text    ${product_search_bar}    ${key}
         Wait Until Page Contains Element    ${product_search_dropdown}
         Page Should Contain    ${key}
     END
     Page Should Contain Element    ${product_search_dropdown}
 
 Verify Shortcut Key Displays Catalogue Window
-#    Wait Until Page Contains Element    ${view_catalog_button}
-#    Press Keys    CTRL+g
     Wait Until Page Contains Element    ${product_catalog_body}
     Page Should Contain Element    ${product_catalog_body}
 
 Verify Shortcut Key Allows Updating Catalogue
-#    Wait Until Page Contains Element    ${view_catalog_button}
-#    Press Keys    CTRL+g
-    Wait Until Page Contains Element     ${product_catalog_body}
-    Page Should Contain Element    ${product_catalog_body}
-#    Press Keys    CTRL+ALT+r
     Wait Until Page Contains Element    ${catalog_update}
     Page Should Contain Element    ${catalog_update}
 
@@ -162,7 +155,6 @@ Verify Shortcut Navigates To Checkout Page When Session Is Closed
 Verify Shortcut Key Allows Searching Product | Order Mode
     Wait Until Page Contains Element    ${product_search_bar}
     Element Should Be Focused    ${product_search_bar}
-
 
 Press Shortcut Key
     [Arguments]    ${pos_data}
