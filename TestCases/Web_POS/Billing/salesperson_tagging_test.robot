@@ -1,6 +1,5 @@
 *** Settings ***
 Library    SeleniumLibrary
-
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/billing_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
@@ -25,8 +24,8 @@ Zwing_ST_1 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory i
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-
 Zwing_ST_2 Salesperson Tagging is Enabled and Salesperson Tagging is Optional in Policies
+    [Tags]    Demo
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_2
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -34,7 +33,6 @@ Zwing_ST_2 Salesperson Tagging is Enabled and Salesperson Tagging is Optional in
    Verify Salesperson Tagging is Enabled and Salesperson Tagging is Optional in Policies
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
 
 Zwing_ST_3 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory after adding the product in Policies
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_3
@@ -71,7 +69,8 @@ Zwing_ST_6 Tag Single Salesperson To multiple Items
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Assign Same Salesperson To All Products Except Last Product And Verify   ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_7 Tag Different salesperson for each item
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_7
@@ -80,7 +79,8 @@ Zwing_ST_7 Tag Different salesperson for each item
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Assign A different Salesperson To Each Item  ${pos_data}
     Verify If Different Salesperson Was Assigned To Each Person
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_8 Change Salesperson tagging for item
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_8
@@ -89,7 +89,9 @@ Zwing_ST_8 Change Salesperson tagging for item
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Change Salesperson tagging for item    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
 
 Zwing_ST_9 Change Salesperson tagging for bill
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_9
@@ -98,7 +100,8 @@ Zwing_ST_9 Change Salesperson tagging for bill
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Change Salesperson tagging for bill   ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_10 Tagged Sales person view below the tagged Item
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_10
@@ -106,9 +109,9 @@ Zwing_ST_10 Tagged Sales person view below the tagged Item
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
-    Set Selenium Speed    1
     Verify Salesperson Tagged At Bill Level    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_11
     Pass Execution    pass
@@ -119,4 +122,5 @@ Zwing_ST_12 Salesperson Tagging is Disabled in policies
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Verify Salesperson Tagging is Disabled
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}

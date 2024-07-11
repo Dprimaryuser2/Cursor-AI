@@ -4,6 +4,7 @@ Library    SeleniumLibrary
 Library    ../../../Resources/CustomKeywords/utilities.py
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
+Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 
@@ -16,6 +17,7 @@ ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}c
 
 *** Test Cases ***
 TC_C1 Customer Tagging is not mandatory with Bill on POS
+     [Tags]    Demo
      ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_01
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}

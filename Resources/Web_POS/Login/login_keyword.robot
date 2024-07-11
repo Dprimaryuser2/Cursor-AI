@@ -1,10 +1,10 @@
 *** Settings ***
 Library    SeleniumLibrary
-Library    ../../../Resources/CustomKeywords/utilities.py
 Variables    ../../../Environment/environment.py
 Variables    ../../../PageObjects/Web_POS/Login/login_locators.py
-Resource     ../../../Resources/Web_POS/POS/promo_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/add_to_cart_keyword.robot
+
 
 *** Keywords ***
 Open Application | POS

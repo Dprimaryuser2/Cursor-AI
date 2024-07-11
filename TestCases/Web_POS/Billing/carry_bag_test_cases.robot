@@ -54,6 +54,7 @@ Zwing_CB_3 Enter Decimal Number As Qty In Select Carry Bags Form
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_4 Enter Negative Integer As Qty In Select Carry Bags Form
+    [Tags]    Demo
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_4
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
