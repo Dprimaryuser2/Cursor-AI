@@ -87,3 +87,17 @@ customer_info_close_element = '//button[@class="close"]'
 
 store_credit_issue = '(//p[@class="float-right mb-1"])[13]'
 customer_info_loyalty_points = '(//p[@class="float-right mb-1"])[12]'
+
+
+group_assigned_name = '//span[@class="badge font-normal mr-2 px-2 py-2 badge-secondary"]'
+discard_item_previous_session = '//button[@id="discard-items"]//span'
+customer_group_checkbox_row = '//label[@class="ml-2"]'
+invalid_number_message = '//div[@class="invalid-feedback"]'
+disabled_number_continue_button = '//button[@class="btn mt-3 btn-primary disabled"]'
+disabled_phone_no_field = '//input[@name="Cust-Phone" and @disabled="disabled"]'
+gstin_number_in_row = '//div[@class="col-md-4"]//div[@class="row"]//div[@class="col"]'
+cg_edit_gstin_icon = '//div[@class="d-flex justify-content-center align-items-center input-group-append"]'
+invalid_gst_warning_label = '//p[contains(text(),"Invalid GST, must be in the format of ")]'
+assign_customer_group_heading = '//h5[@id="customer-group___BV_modal_title_"]'
+cg_gstin_field = '//input[@id="custGST"]'
+
