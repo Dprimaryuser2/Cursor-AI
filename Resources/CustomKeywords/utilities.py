@@ -284,6 +284,19 @@ def count_table_body_rows(locator):
     return len(rows)
 
 @keyword
+def get_key_combination(keys):
+    key_mapping = {
+        "ctrl": "CONTROL",
+        "alt": "ALT",
+        "shift": "SHIFT",
+        "cmd": "COMMAND",
+        "win": "META"
+    }
+
+    keys_list = keys.lower().split('+')
+    return '+'.join([key_mapping.get(key, key) for key in keys_list])
+
+@keyword
 def search_and_fetch_email(server, port, email_address, password, subject):
     try:
         # Connect to the email server
@@ -300,62 +313,94 @@ def search_and_fetch_email(server, port, email_address, password, subject):
         result, data = mail.search(None, f'(SUBJECT "{subject}")')
         if result != "OK":
             print(f"Search failed: {result}")
-            return None
+            return None, None
         email_ids = data[0].split()
         print(f"Email IDs found: {email_ids}")
 
-        # Fetch the latest email and extract the body
+        # Fetch the latest email and extract the body and attachments
         if email_ids:
             latest_email_id = email_ids[-1]
             result, data = mail.fetch(latest_email_id, '(RFC822)')
             if result != "OK":
                 print(f"Fetch failed: {result}")
-                return None
+                return None, None
             raw_email = data[0][1]  # Get the raw email content
 
             # Parse the raw email into a message object
             email_message = email.message_from_bytes(raw_email)
 
-            # Initialize email body variable
-            email_body = ""
+            # Check if the subject contains the specified part
+            if subject not in email_message['subject']:
+                print(f"Subject mismatch: {email_message['subject']}")
+                return None, None
 
-            # Function to recursively extract text from email parts
-            def extract_text_from_email_part(email_part):
+            # Initialize email body variable and attachments list
+            email_body = ""
+            attachments = []
+
+            # Function to recursively extract text from email parts and find attachments
+            def extract_text_and_attachments(email_part):
+                nonlocal email_body, attachments
                 content_type = email_part.get_content_type()
+
                 if content_type == "text/plain":
-                    return email_part.get_payload(decode=True).decode()
+                    # Extract plain text body
+                    email_body += email_part.get_payload(decode=True).decode()
                 elif content_type == "text/html":
-                    # You can add handling for HTML content here if needed
-                    return ""  # Returning empty for now
-                elif email_part.is_multipart():
+                    # Handle HTML content if needed
+                    pass
+                elif "image" in content_type:
+                    # Skip image parts
+                    pass
+                elif content_type == "multipart/mixed":
+                    # Handle mixed content (attachments)
                     for part in email_part.get_payload():
-                        text = extract_text_from_email_part(part)
-                        if text:
-                            return text
-                return ""
+                        if part.get_content_maintype() == 'multipart':
+                            # Recursively handle nested multipart
+                            extract_text_and_attachments(part)
+                        elif part.get_content_maintype() == 'application' and part.get('Content-Disposition'):
+                            # This part is an attachment
+                            attachments.append({
+                                'filename': part.get_filename(),
+                                'content_type': part.get_content_type(),
+                                'content': part.get_payload(decode=True)
+                            })
+                        else:
+                            # Handle other content types
+                            extract_text_and_attachments(part)
+                elif email_part.is_multipart():
+                    # Recursively handle other multipart types
+                    for part in email_part.get_payload():
+                        extract_text_and_attachments(part)
 
             # Call the function with the root email message
-            email_body = extract_text_from_email_part(email_message)
+            extract_text_and_attachments(email_message)
 
+            # Print debug info
             print(f"Email body: {email_body[:100]}...")  # Print a snippet of the email body for debugging
-            return email_body.strip()  # Strip any extra whitespace
+            print(f"Attachments: {attachments}")  # Print attachments for debugging
+
+            return email_body.strip(), attachments  # Return email body and attachments
 
         # If no email with the specified subject is found
         print("No emails found with the specified subject")
-        return None
+        return None, None
     except imaplib.IMAP4.error as e:
         print(f"IMAP error: {e}")
-        return None
+        return None, None
 
-@keyword
-def get_key_combination(keys):
-    key_mapping = {
-        "ctrl": "CONTROL",
-        "alt": "ALT",
-        "shift": "SHIFT",
-        "cmd": "COMMAND",
-        "win": "META"
-    }
+# Usage example
+email_body, attachments = search_and_fetch_email(
+    'imap.gmail.com', 993, 'dprimaryuser@gmail.com', 'aqwb qaoi bkwd jqbb', 'Your ${store_name} Invoice Receipt | ${cust_info_checkout.invoice_id}'
+)
 
-    keys_list = keys.lower().split('+')
-    return '+'.join([key_mapping.get(key, key) for key in keys_list])
+if email_body:
+    print("\nEmail Body:")
+    print(email_body)
+
+if attachments:
+    print("\nAttachments:")
+    for attachment in attachments:
+        print(f"Filename: {attachment['filename']}, Content type: {attachment['content_type']}")
+else:
+    print("\nNo attachments found.")
