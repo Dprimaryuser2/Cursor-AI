@@ -94,7 +94,7 @@ add_bill_remark_textarea = '//textarea[@placeholder="Add remark... "]'
 add_bill_remark_save_button = '//button[@class="btn ml-1 btn-primary"]//span[text()="Save"]'
 add_bill_remark_clear_button = '//button[@class="btn mr-1 btn-outline-primary"]//span[text()="Clear"]'
 checkout_billing_edit_remark = '(//a[@class="dropdown-item text-dark" and contains(text(),"Edit Remark")])[2]'
-
+add_bill_remark_close_icon = '//button[@class="close"]'
 checkout_order_summary = '//h6[@class="mb-0 fw-normal" and contains(text(),"Order Summary")]'
 checkout_salesperson_name = '(//span[@class="pt-2 fs-12 text-grey"])'
 # payment method
@@ -116,6 +116,18 @@ share_invoice_button = '//button[@id="share-invoice-btn" and contains(text(),"Sh
 invoice_modal_heading = '//h3[@class="modal-title" and contains(text(),"Invoice")]'
 print_invoice_modal_button = '//button[@class="btn float-right btn-primary" and contains(text(),"Print")]'
 close_invoice_modal_button = '//button[@class="btn float-right btn-secondary" and contains(text(),"Close")]'
+new_bill_button = '//button[@class="btn mr-2 btn-primary btn-block"]'
+share_invoice_title = '//h5[@class="modal-title" and contains(text(),"Share Invoice")]'
+cust_number_share_invoice = '//input[@placeholder="Enter your phone number"]'
+sms_tab_share_invoice = '//p[text()="SMS"]'
+email_tab_share_invoice = '//div[@class="row pl-2 pr-2"]//div[@class="col-md-6 border-inactive"]//p[text()="E-Mail"]'
+cust_email_share_invoice = '//input[@placeholder="Enter your E-mail address"]'
+send_button_share_invoice = '//button[@class="btn btn-primary btn-block"]'
+close_icon_share_invoice = '//button[@class="close"]'
+share_invoice_alert_number = '//span[text()="Phone number must be 10 characters long."]'
+share_invoice_alert_email = '//div[@class="invalid-feedback" and contains(text(),"Invalid Email")]'
+email_send_registered_mail_msg = '//p[contains(text(),"An E-mail with the invoice has been sent to ")]'
+dismiss_button_share_invoice = '//button[@id="dismiss-invoice-sms"]'
 
 #redeem store credit
 redeem_store_credit_button = '//button[@class="btn text-center p-0 h-25 mb-2 btn-outline-secondary btn-block" and text()="Redeem Store Credit"]'
@@ -154,3 +166,9 @@ greater_amount_popup = "//div[@class='alert alert-dismissible alert-danger' and 
 
 cash_order_summary="//div[@class='col light']//child::span[text()='Cash']"
 paytm_order_summary="//div[@class='col light']//child::span[text()='Debit Note']"
+
+
+bill_container = '//div[@class="container p-0"]'
+name_invoice = '//div[@class="modal-content"]//td[contains(text(),"Name")]/span'
+
+fulfilment_option = '//h6[@class="mb-4"]'

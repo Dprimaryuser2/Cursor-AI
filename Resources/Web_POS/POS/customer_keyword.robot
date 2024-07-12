@@ -11,7 +11,7 @@ Variables    ../../../PageObjects/Web_POS/POS/checkout_locators.py
 Add Customer Details
     [Arguments]    ${customer_data}
     ${my_dict}    Create Dictionary   &{customer_data}
-    Log    ${my_dict}
+    Wait Until Element Is Enabled    ${add_customer_link}   timeout=40s
     Click Element    ${add_customer_link}
     Wait Until Element Is Visible    ${customer_phone_field}
     ${mobile}=     Generate Random Phone Number
@@ -25,8 +25,9 @@ Add Customer Details
     ${last_name}=    Generate Random Last Name
     Set Test Variable    ${last_name}
     Input Text    ${customer_last_name_field}    ${last_name}
-    ${email}=    Generate Random Email
-    Input Text    ${customer_email_field}    ${email}
+    ${email_tag}=    Generate Random Email
+    Input Text    ${customer_email_field}    ${email_tag}
+    Set Test Variable  ${email_tag}
     Click Element    ${gender_select_field}
     ${gender}=    Generate Random Gender
     IF    '${gender}' == 'male'

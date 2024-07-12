@@ -23,7 +23,7 @@ Login With Valid Username And Password
     Page Should Contain Element    ${promotion_icon}
 
 Login Into Admin | Zwing
-    Input Text    ${email}    zwshashank.agrawal@teampureplay.com
+    Input Text    ${email}      zwshashank.agrawal@teampureplay.com
     Wait Until Element Is Visible    ${password}    timeout=20s
     Input Text    ${password}    123456
     Click Button    ${continue_button}
