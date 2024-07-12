@@ -12,13 +12,10 @@ Variables   ../../../PageObjects/AdminConsole/ProductCategories/product_categori
 Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
 
 *** Variables ***
-${IMAP_SERVER}   imap.gmail.com
-${IMAP_PORT}   993
-${PASSWORD}    aqwb qaoi bkwd jqbb
-${MAILBOX}    INBOX
-${SUBJECT}   test
-${HOST}    mail.google.com
-${USER}     dprimaryuser@gmail.com
+${IMAP_SERVER}        imap.gmail.com
+${IMAP_PORT}          993
+${USER}               dprimaryuser@gmail.com
+${PASSWORD}           aqwb qaoi bkwd jqbb
 
 *** Keywords ***
 Verify Bill Remark Added Is Visible In Bill Remark Textarea
@@ -98,9 +95,6 @@ Verify The Print Button | Print Invoice
    ${cust_name}  Get Text   ${name_invoice}
    Log    ${cust_name}
    Click Element    ${print_invoice_modal_button}
-   Wait Until Page Contains Element    ${bill_container}
-   Click Element At Coordinates    ${bill_container}    ${150}    ${120}
-   Wait Until Page Contains Element    ${close_invoice_modal_button}
 
 Verify The Share Invoice Button
    Click Element    ${close_invoice_modal_button}
@@ -249,9 +243,34 @@ Send Invoice To Email | Share Invoice
    Element Should Be Enabled    ${dismiss_button_share_invoice}
 
 Verify Invoice Generated Received On Email
-#    ${body}=  Search And Fetch Email  ${IMAP_SERVER}  ${IMAP_PORT}  ${USER}  ${PASSWORD}  ${SUBJECT}
-    ${body}=  Search And Fetch Email    imap.gmail.com    993     dprimaryuser@gmail.com    aqwb qaoi bkwd jqbb    Your i9_store_p1 Invoice Receipt | ITsp102240193 | 10-07-2024
-    Log  ${body}
-#    Should Not Be Empty  ${body}  msg=Invoice Generated email not received.
-    [Return]  ${body}
+    [Arguments]    ${store_name}    ${cust_info_checkout}
+    ${subject} =  Set Variable  Your ${store_name} Invoice Receipt | ${cust_info_checkout.invoice_id}
+    ${email_body}=  Search And Fetch Email    ${IMAP_SERVER}    ${IMAP_PORT}    ${USER}    ${PASSWORD}    ${subject}
+    Run Keyword If  ${email_body} is not None  Log  Email with subject contains "${subject}" is received
+    ...  ELSE  Log  Email with subject contains "${subject}" is not found
+    [Return]  ${email_body}
 
+Get Customer Details | Checkout
+   Wait Until Page Contains Element    ${payment_complete_heading}
+   ${in_id}  Get Text    ${invoice_number_checkout}
+   ${in_name}  Get Text    ${invoice_customer_name}
+   ${in_number}  Get Text    ${invoice_customer_phone}
+   ${in_amount}  Get Text    ${total_amount_checkout}
+   ${cust_info_checkout}=  Create Dictionary    invoice_id=${in_id}  invoice_name=${in_name}  phone_number=${in_number}  total_amount=${in_amount}
+   [RETURN]   ${cust_info_checkout}
+
+Get Customer Details | Print Invoice
+   Wait Until Page Contains Element    ${bill_container}
+   ${inp_id}  Get Text    ${invoice_no}
+   ${inp_name}  Get Text    ${name_invoice}
+   ${inp_number}  Get Text    ${number_invoice}
+   ${inp_amount}  Get Text    ${invoice_amount}
+   ${cust_info_invoice}=  Create Dictionary    pinvoice_id=${inp_id}  pinvoice_name=${inp_name}  pphone_number=${inp_number}  ptotal_amount=${inp_amount}
+   [RETURN]   ${cust_info_invoice}
+
+Verify Customer Details | Print Invoice
+   [Arguments]    ${cust_info_checkout}    ${cust_info_invoice}
+   Should Be Equal   ${cust_info_checkout.invoice_id}   ${cust_info_invoice.pinvoice_id}
+   Should Be Equal    ${cust_info_checkout.invoice_name}   ${cust_info_invoice.pinvoice_name}
+   Should Be Equal    ${cust_info_checkout.phone_number}   ${cust_info_invoice.pphone_number}
+   Should Be Equal   ${cust_info_checkout.total_amount}   ${cust_info_invoice.ptotal_amount}

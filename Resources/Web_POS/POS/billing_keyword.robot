@@ -9,6 +9,7 @@ Variables   ../../../PageObjects/Web_POS/POS/pos_locators.py
 Variables   ../../../PageObjects/Web_POS/POS/add_customer_locator.py
 Resource    ../../../Resources/Web_POS/POS/split_payment_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/manual_discount_keyword.robot
+Resource  ../../../Resources/Web_POS/POS/share_invoice_keywords.robot
 
 *** Keywords ***
 Hold Bill
@@ -371,8 +372,10 @@ Add Bill Remarks
 
 Automatic Invoice Generation
    Wait Until Page Contains Element    ${payment_complete_heading}
+   ${cust_info_checkout}   Get Customer Details | Checkout
    Click Element    ${print_invoice_button}
    Wait Until Page Contains Element    ${invoice_modal_heading}
+   [Return]  ${cust_info_checkout}
 
 Verify The Product Are Added In Cart
     Wait Until Page Contains Element    ${in_store}
@@ -764,6 +767,7 @@ Verify If Different Salesperson Was Assigned To Each Person
 
 Verify Salesperson Tagging is Disabled
     Element Should Be Disabled    ${salesperson_button}
+
 Get Store Name | Web POS
    Click Element    ${pos_option_sidebar}
    Wait Until Page Contains Element    ${store_name_pos}  timeout=40s

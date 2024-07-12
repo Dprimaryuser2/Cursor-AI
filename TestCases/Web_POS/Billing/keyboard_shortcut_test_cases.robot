@@ -7,6 +7,7 @@ Resource  ../../../Resources/Web_POS/POS/keyboard_shortcut_keywords.robot
 Resource  ../../../Resources/Web_POS/POS/billing_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
+Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 
 Test Setup    Open Application | POS
 Test Teardown   Close Browser
@@ -30,6 +31,7 @@ Zwing_KB_01 Search product using keyboard shortcut
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_1
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
+    #Verify Shortcut Key Allows Searching Product
     Press Shortcut Key    ${pos_data}
     Verify Shortcut Key Allows Searching Product    ${pos_data}
     Revoke Serial Key    ${pos_data}
@@ -163,6 +165,16 @@ Zwing_KB_14 Checkout bill using keyboard shortcut without tagging customer
     Scan And Add Product    ${pos_data}
     Press Shortcut Key    ${pos_data}
     Verify Shortcut Navigates To Checkout Page When CT Is Mandatory
+     Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_KB_15 Checkout using shortcut before opening session
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_15
+    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Scan And Add Product    ${pos_data}
+    Press Shortcut Key    ${pos_data}
+    Verify Shortcut Navigates To Checkout Page When Session Is Closed   ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -326,6 +338,6 @@ Zwing_KB_30 View/Hide product using keyboard shortcut On Return Screen
     Change Billing Mode    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Press Shortcut Key    ${pos_data}
-    Verify Shortcut Key Displays And Hide Catalogue Window    ${pos_data}
+    Verify Shortcut Key Displays And Hide Catalogue Window  ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}

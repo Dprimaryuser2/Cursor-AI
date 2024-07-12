@@ -121,9 +121,10 @@ Zwing_SI_8 Click on Print button in Invoice preview popup to redirect to final p
    ${value}    Get payable amount
    Verify Billing Checkout
    Payment By Cash   ${value}
-   Automatic Invoice Generation
+   ${cust_info_checkout}  Automatic Invoice Generation
    Verify The Print Invoice Button
-#   Verify The Print Button | Print Invoice
+   ${cust_info_invoice}   Get Customer Details | Print Invoice
+   Verify Customer Details | Print Invoice  ${cust_info_checkout}    ${cust_info_invoice}
    Revoke Serial Key    ${share_data}
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
@@ -278,20 +279,18 @@ Zwing_SI_19 Send Invoice using email Id.
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
    Verify Item Added In Cart
+   ${store_name}  Get Store Name | Web POS
    Add Customer Details | Share Invoice    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
    Payment By Cash   ${value}
-   Automatic Invoice Generation
+   ${cust_info_checkout}  Automatic Invoice Generation
    Verify The Share Invoice Button
    Verify Customer Email Is Auto-Populated | Share Invoice   ${share_data}
    Send Invoice To Email | Share Invoice
-   Verify Invoice Generated Received On Email
+   Verify Invoice Generated Received On Email  ${store_name}    ${cust_info_checkout}
    Revoke Serial Key    ${share_data}
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
-
-test
-    Verify Invoice Generated Received On Email
 
 Zwing_SI_20 Navigate to billing page using new bill button on checkout page
    ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_20
@@ -312,14 +311,16 @@ Zwing_SI_21 Update the Email address while sharing the Invoice and send invoice
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
    Verify Item Added In Cart
+   ${store_name}  Get Store Name | Web POS
    Add Customer Details | Share Invoice    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
    Payment By Cash   ${value}
-   Automatic Invoice Generation
+   ${cust_info_checkout}  Automatic Invoice Generation
    Verify The Share Invoice Button
    Update The Email While Sharing The Invoice  ${share_data}
    Send Invoice To Email | Share Invoice
+   Verify Invoice Generated Received On Email  ${store_name}    ${cust_info_checkout}
    Revoke Serial Key    ${share_data}
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
