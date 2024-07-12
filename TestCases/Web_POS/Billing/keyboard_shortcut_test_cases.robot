@@ -5,6 +5,7 @@ Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
 Resource  ../../../Resources/Web_POS/POS/keyboard_shortcut_keywords.robot
 Resource  ../../../Resources/Web_POS/POS/billing_keyword.robot
+Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
 
 Test Setup    Open Application | POS
@@ -209,12 +210,11 @@ Zwing_KB_24 Cancel current bill using keyboard shortcut on Order Screen | Order 
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Product By Scan Only    ${pos_data}
+    Scan And Add Product    ${pos_data}
     Press Shortcut Key    ${pos_data}
     Verify Shortcut Key Clears The Cart
     Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
+    [Teardown]   Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_25 Checkout bill using keyboard shortcut-After adding product when policies for salesperson and customer tagging is optional, press Ctrl + B on Order Screen
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_25
@@ -224,7 +224,7 @@ Zwing_KB_25 Checkout bill using keyboard shortcut-After adding product when poli
     Add Product By Scan Only    ${pos_data}
     Press Shortcut Key    ${pos_data}
     Insufficient Inventory Window | Order   ${pos_data}
-    Verify Fulfiment Option is Visible
+    Verify Fulfilment Option is Visible
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -236,10 +236,9 @@ Zwing_KB_26 Checkout bill using keyboard shortcut-Without tagging salesperson wh
     Add Product By Scan Only    ${pos_data}
     Press Shortcut Key    ${pos_data}
     Insufficient Inventory Window | Order   ${pos_data}
-    Verify Fulfiment Option is Visible
+    Verify Fulfilment Option is Visible
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
 
 Zwing_KB_27 Checkout bill using keyboard shortcut-Without tagging customer when policy for customer is mandatory, press Ctrl + B on Order Screen
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_27
@@ -280,6 +279,6 @@ Zwing_KB_30 View/Hide product using keyboard shortcut On Return Screen
     Change Billing Mode    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Press Shortcut Key    ${pos_data}
-    Verify Shortcut Key Displays Catalogue Window
+    Verify Shortcut Key Displays And Hide Catalogue Window    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
