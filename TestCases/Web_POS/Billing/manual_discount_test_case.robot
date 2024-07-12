@@ -147,8 +147,8 @@ Zwing_MD_11 Manual Discount button | Stores
      ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
      Verify Bill Level Manual Discount    ${bill_data}
      Revoke Serial Key    ${discount_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
-     
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+
 Zwing_MD_12 Select the effective and valid up to date
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_12
      Login With Valid Username And Password | POS   ${discount_data}
@@ -159,8 +159,8 @@ Zwing_MD_12 Select the effective and valid up to date
      ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
      Verify Bill Level Manual Discount    ${bill_data}
      Revoke Serial Key    ${discount_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
-     
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+
 Zwing_MD_13 Item level custom Discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_13
      Login With Valid Username And Password | POS   ${discount_data}
@@ -304,8 +304,6 @@ Zwing_MD_25 Apply Manual Discount Button |Policy : Allows cashier to apply manua
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
      Verify Bill Level Discount Button Is Disabled
-     Revoke Serial Key    ${discount_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manual discount on bill level | Enable bill level discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_26
@@ -316,7 +314,7 @@ Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manua
      Verify Billing Checkout
      Verify Bill Level Discount Button Is Enabled
      Revoke Serial Key    ${discount_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_27 Apply Manual Discount Button Policy : Allow cashier to select bill level discount from given list | Disable bill level discount list
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_27
@@ -383,8 +381,6 @@ Zwing_MD_32 Apply Manual Discount Button Policy : Discount capping (amount) Bill
      Verify Billing Checkout
      ${bill_data}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
      Verify Bill Level Custom Discount More Than Capping Amount Limit    ${bill_data}
-     Revoke Serial Key    ${discount_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_33
@@ -394,8 +390,8 @@ Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
      Navigate To Update Product Window    ${discount_data}
      Verify Disabled Item Level Discount
      Revoke Serial Key    ${discount_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
-     
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+
 Zwing_MD_34 Apply Manual Discount Button | Enable Item level discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_34
      Login With Valid Username And Password | POS   ${discount_data}

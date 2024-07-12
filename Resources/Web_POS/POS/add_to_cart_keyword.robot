@@ -171,6 +171,7 @@ Scan And Add Product
             Wait Until Page Does Not Contain Element    ${select_mrp}
         END
     END
+    Wait Until Page Contains Element    ${first_item_product_name}
 
 Verify 0 Inventory To Cart With Disable Negative Inventory
     [Arguments]    ${products}
