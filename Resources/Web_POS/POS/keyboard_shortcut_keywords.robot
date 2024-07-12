@@ -97,6 +97,12 @@ Verify Shortcut Key Allows Tagging Customer
     Click Element    ${start_billing_button}
     Wait Until Page Contains Element    ${customer_tagged_popup}
 
+Verify Customer Information Is Displayed For Tag A Customer After Tagging Customer
+    Wait Until Page Contains Element    ${customer_untag_button}     timeout=10s
+    Page Should Contain Element    ${customer_untag_button}
+    Page Should Contain Element    ${customer_edit_groups_button}
+    Page Should Contain Element    ${customer_edit_info_button}
+
 Verify Shortcut Key Clears The Cart
     Wait Until Page Does Not Contain Element    ${product_name_in_cart_row}
     Page Should Not Contain Element    ${table}
@@ -141,7 +147,22 @@ Verify Shortcut Navigates To Checkout Page When Session Is Closed
          Click Element    ${insufficient_inventory_continue_btn}
          Press Shortcut Key    ${pos_data}
     END
-    Wait Until Page Contains Element    ${open_session_before_continuing}
+
+Verify Shortcut Does Not Navigates To Checkout Page When Session Is Closed
+    Wait Until Page Contains Element    ${open_session_before_continuing}    timeout=10s
+    Page Should Contain Element    ${open_session_before_continuing} 
+
+Open Session Before Revoking Serial Key
+    [Arguments]    ${pos_data}
+    ${my_dict}    Create Dictionary    &{pos_data}
+    Press Keys    None     CTRL+2
+    Sleep    1s
+    ${opening_session_present}=    Run Keyword And Return Status    Element Should Be Visible    ${opening_balance}    timeout=10s
+    IF    ${opening_session_present}
+        Input Text    ${opening_balance}    ${my_dict.closing_balance}
+        Click Element    ${open_session_submit_button}
+        Wait Until Element Is Not Visible    ${opening_balance}    timeout=10s
+    END
 
 Verify Shortcut Key Allows Searching Product | Order Mode
     Wait Until Page Contains Element    ${product_search_bar}

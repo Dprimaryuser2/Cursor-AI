@@ -38,11 +38,10 @@ Zwing_ST_3 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory a
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_3
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
-    Sleep    2
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Policies after adding the product    ${pos_data}
     Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_4 Salesperson Tagging Item Level
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_4
@@ -52,7 +51,7 @@ Zwing_ST_4 Salesperson Tagging Item Level
     Assign A Salesperson To An Item  ${pos_data}
     Verify If Salesperson Is Assigned To An Item    ${pos_data}
     Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_5 Salesperson Tagging Bill Level
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_5
@@ -62,7 +61,7 @@ Zwing_ST_5 Salesperson Tagging Bill Level
     Assign A Salesperson All Items   ${pos_data}
     Verify Salesperson Tagged At Bill Level    ${pos_data}
     Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_6 Tag Single Salesperson To multiple Items
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_6
@@ -119,7 +118,7 @@ Zwing_ST_11
     #on hold from client side
 
 Zwing_ST_12 Salesperson Tagging is Disabled in policies
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_10
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_12
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Verify Salesperson Tagging is Disabled

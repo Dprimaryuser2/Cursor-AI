@@ -22,7 +22,7 @@ Zwing_CP_1 View Catalog using Catalog button in WebPOS
    Open The Session    ${pc_data}
    Verify View Catalog Using Catalog Button In WebPOS
    Revoke Serial Key    ${pc_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_2 Hide Catalog using Hide button in WebPOS
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_2

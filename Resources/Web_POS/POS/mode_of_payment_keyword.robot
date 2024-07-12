@@ -132,7 +132,10 @@ Verify Amount AutoPopulated
     Element Should Contain    ${customer_paid_field}    ${amount}
         
 Verify Entered Transaction ID
-    ${reference_id}    Generate Random String    
+    ${reference_id}    Generate Random String
+    Click Element   ${upi_payment}
+    Wait Until Page Contains Element    ${additional_mop_popup}    timeout=20s
+    Wait Until Page Contains Element    ${enter_paytm_transaction_id}
     Input Text    ${transaction_reference_id}    ${reference_id}
     Page Should Contain    ${reference_id}
     Element Should Be Enabled    ${continue_payment_button}

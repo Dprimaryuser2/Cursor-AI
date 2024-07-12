@@ -25,6 +25,7 @@ Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Po
     Click Element    ${salesperson_dropdown}
     Wait Until Element Is Enabled    ${update_product_button}
     Click Element    ${update_product_button}
+    Wait Until Page Does Not Contain Element    ${update_product_button}
     Wait Until Element Is Enabled    ${checkout_button}
     Click Element    ${checkout_button}
     Wait Until Page Contains Element    ${salesperson_mandatory_message}
@@ -44,17 +45,18 @@ Verify Salesperson Tagging is Enabled and Salesperson Tagging is Optional in Pol
     Wait Until Page Does Not Contain Element    ${update_product_button}
     Wait Until Element Is Enabled    ${checkout_button}
     Click Element    ${checkout_button}
-    Wait Until Page Contains Element    ${checkout_heading}
+    Wait Until Page Contains Element    ${checkout_heading}    timeout=20
 
 Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Policies after adding the product
     [Arguments]    ${pos_data}
     ${my_dict}    Create Dictionary    &{pos_data}
     Wait Until Page Contains Element    ${product_name_in_cart_row}    timeout=20
-    Open Browser    ${admin_console_url}    ${browser}    alias=FIRST
+    Open Browser    ${admin_console_url}    ${browser}
+    ${admin_id}    Get Browser Ids
     Maximize Browser Window
     Login With Valid Username And Password    ${my_dict}
     Change Salesperson Tagging To Mandatory In POS
-    Switch Browser    SECOND
+    Switch Browser    1
     Wait Until Page Contains Element    ${pos_settings}    timeout=20
     Click Element    ${pos_settings}
     Click Element    ${pos_settings_profile_info}
@@ -68,7 +70,7 @@ Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Po
     Wait Until Page Contains Element    ${checkout_button}    timeout=20
     Click Element    ${checkout_button}
     Page Should Not Contain Element    ${checkout_heading}    timeout=20
-    Switch Browser    FIRST
+    Switch Browser    2
     Sleep    2
     Change Salesperson Tagging To Optional In POS
     
@@ -197,7 +199,8 @@ Verify Change Salesperson tagging for bill
     ${salesperson_list}    Get Webelements    ${checkout_salesperson_name}
     ${product_salesperson_count}    Get Length    ${salesperson_list}
     FOR    ${index}    IN RANGE      1    ${product_salesperson_count}+1
+        ${no}    Evaluate    ${index}-1
         Wait Until Page Contains Element        (${checkout_salesperson_name})[${index}]    timeout=10
-        ${temp}    Get Text     ${salesperson_list}[${index}]
+        ${temp}    Get Text     ${salesperson_list}[${no}]
         Should Contain    ${temp}    ${my_dict.new_salesperson_name}
     END
