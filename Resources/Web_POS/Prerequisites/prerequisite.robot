@@ -33,8 +33,7 @@ Revoke Serial Key
     Input Text    ${license_key_input}    ${serial_key_number}
     Wait Until Keyword Succeeds    5    2     Click Button    ${revoke_license_confirm_button}
     Wait Until Element Is Visible    ${activate_device_heading}    timeout=20s
-    Sleep    1
-    Close Browser
+    Close All Browsers
 
 Tear It Down If Test Case Failed
     [Arguments]    ${discount_data}
