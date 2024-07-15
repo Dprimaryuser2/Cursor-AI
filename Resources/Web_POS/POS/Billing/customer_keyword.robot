@@ -41,9 +41,9 @@ Add Customer Details
     ELSE IF    '${my_dict.tax_invoice}' == 'New UIN'
        Add UIN Name And Number    ${my_dict}
     ELSE IF    '${my_dict.tax_invoice}' == 'Delete GST'
-       Delete GST
+       Delete GST   ${customer_data}
     ELSE IF    '${my_dict.tax_invoice}' == 'Delete UIN'
-       Delete UIN
+       Delete UIN   ${customer_data}
     END
     Sleep    1
     ${add_line1}=    Generate Random Street Address
@@ -60,7 +60,7 @@ Add Customer Details
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
     Wait Until Element Is Not Visible    //div[@class="popup-notification"]     timeout=10s
 #    Wait Until Element Is Visible    //div[contains(text(),"Customer tagged successfully.")]
-     ${customer_information}=    Create Dictionary    first_name=${first_name}    last_name=${last_name}    phone_number= ${mobile}    email=${email}    gender=${gender}    add_line_one= ${add_line1}    add_line_two= ${add_line2}    customer_phone_number=${mobile}
+     ${customer_information}=    Create Dictionary    first_name=${first_name}    last_name=${last_name}    phone_number= ${mobile}    email=${email_tag}    gender=${gender}    add_line_one= ${add_line1}    add_line_two= ${add_line2}    customer_phone_number=${mobile}
     [Return]    ${customer_information}
 
 Tag Customer And Enter Invalid GST Number
@@ -904,3 +904,22 @@ Delete GST
     Wait Until Element Is Enabled    ${confirm_selected_button}    timeout=10s
     Click Element    ${confirm_selected_button}
 
+Add Customer Group
+    [Arguments]    ${customer_info}
+    ${customer_group_info}=    Create Dictionary    &{customer_info}
+    Click Element    ${edit_groups_button}
+    Wait Until Element Is Visible    //div[@id="customer-group___BV_modal_content_"]    timeout=20s
+    ${total_groups_tagged}=    Create List
+    ${customer_groups}=    Set Variable    ${customer_group_info.group}
+    ${customer_groups}=    Convert Items To List    ${customer_groups}
+    ${length_of_list}=    Get Length    ${customer_groups}
+    FOR    ${i}    IN RANGE    0    ${length_of_list}
+        ${group_name}=    Replace String    ${customer_group_checkbox}    Dummy    ${customer_groups}[${i}]
+        Wait Until Element Is Visible    ${group_name}    timeout=10s
+        Click Element    ${group_name}
+        Append To List      ${total_groups_tagged}       ${customer_groups}[${i}]
+    END
+    Wait Until Element Is Visible    ${save_button_customer_group}    timeout=10s
+    Wait Until Keyword Succeeds    2     1    Click Element    ${save_button_customer_group}
+    Sleep    3s
+    [Return]    ${total_groups_tagged}
