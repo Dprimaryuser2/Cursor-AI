@@ -141,7 +141,6 @@ store_credit_verify_button = '//button[@id="verify-otp-btn"]'
 store_credit_resend_otp_button = '//button[@id="store-credit-Resend OTP"]'
 store_credit_validation_message = '//div[@class="alert alert-dismissible alert-danger"]'
 apply_store_credit_voucher='//button[@id="apply-voucher-storecredit"]'
-apply_store_credit_voucher="//button[@class='btn float-right btn-primary']//span"
 active_promo_dropdown_row = '//ul[@class="m-0 filter-dropdown list-unstyled"]//li//span'
 promo_name_in_product_row = '//span[@class="offer active text-green"]'
 disabled_cash_continue_button = '//span[text()="Continue"]//ancestor::button[@disabled="disabled"]'
@@ -175,5 +174,4 @@ number_invoice = '//div[@class="modal-content"]//td[contains(text(),"Number")]/s
 invoice_no = '//div[@class="modal-content"]//td[contains(text(),"Invoice No: ")]/span'
 invoice_barcode = '//div[@class="modal-content"]//td[contains(text(),"8906118410774")]'
 invoice_amount = '(//div[@id="cool"]//tbody[@style="vertical-align: text-bottom;"]/tr/td)[last()]'
-
 fulfilment_option = '//h6[@class="mb-4"]'

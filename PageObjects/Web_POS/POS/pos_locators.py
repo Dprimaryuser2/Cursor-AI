@@ -124,22 +124,6 @@ apply_amount_discount_button = '//button[@id="apply-discount"]'
 active_promotion = '//span[text()="View Available Promotion(s)"]'
 
 item_remark = '//input[@id="input-remark-productpopup"]'
-salesperson_refresh = "//button[text()='Refresh']"
-salesperson_dropdown = '//span[contains(text(),"Select Salesperson")]'
-salesperson_tagged_message = '//div[@class="alert alert-dismissible alert-success" and text()="Salesperson tagged successfully."]'
-salesperson_below_product = '//span[@class="pt-2 fs-12 text-grey"]'
-salesperson_search_field = '//input[@placeholder="Search..."]'
-salesperson = '//input[@placeholder="Search..."]//ancestor::div[@class="dropdown-body w-100"]//li'
-assign_salesperson_window_heading = '//p[@class="mb-0"]//b[text()="Assign Salesperson"]'
-assign_salesperson_search = '//input[@class="search pl-0 form-control"]'
-name_in_assign_salesperson_row = '//tr[@tabindex="0"]//td[@class="text-left align-middle"]'
-assign_to_all_button = '//button[@class="btn btn-primary"]//span[text()="Assign to All"]'
-close_assign_salesperson_window = '//div[@class="col-md-6"]//*[name()="svg"]'
-salesperson_tagged_message = '//div[@class="alert alert-dismissible alert-success" and contains(text(),"Salesperson tagged successfully")]'
-salesperson_mandatory_message = '//div[@class="alert alert-dismissible alert-danger" and text()="Sales Person is Mandatory"]'
-salesperson_below_product = '//span[@class="pt-2 fs-12 text-grey"]'
-close_icon_salesperson_dropdown = '//div[@class="w-100"]//div//*[name()="svg"]'
-salesperson_untagged_message = '//div[@class="alert alert-dismissible alert-success" and text()="Salesperson untagged."]'
 open_session_before_continuing ='//h6[@class="mb-2 fs-14" and text()="Open Session before continuing"]'
 check_inventory_button = '//button[@id="check-inventory-btn"]'
 inventory_modal_heading = '//h5[contains(text(),"Inventory")]'
@@ -154,7 +138,6 @@ carry_bag_amount_field = '//h6[@id="label-undefined" and text()="Carry bag"]//an
 add_carry_bag_unit_button = '//button[@id="add-carry-bags"]'
 close_button = '//button[@class="close"]'
 open_session_link = '//div[@class="fadein col-md-6 col-lg-6" and not(@style="display: none;")]//div[@id="session-info"]//a'
-open_session_before_continuing ='//h6[@class="mb-2 fs-14" and text()="Open Session before continuing"]'
 select_mrp="//h5[@class='modal-title' and contains(text(),'Select MRP')]"
 select_mrp_refresh="//button[@class='btn add-to-cart serve-refresh btn-light btn-sm' and contains(text(),'Refresh')]"
 add_to_cart_mrp="//button[@id='multiple-mrp-add-to-cart' and @class='btn m-0 custom-btn btn-secondary']"

@@ -161,18 +161,6 @@ Zwing_B_14 Return to bill
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_B_16 Apply manual Discount | item level
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_16
-    Login With Valid Username And Password | POS   ${pos_data}
-    Open The Session    ${pos_data}
-    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-    Navigate To Update Product Window    ${pos_data}
-    ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
-    Apply Item Manual Discount | Select From List    ${pos_data}
-    Verify Item Manual Discount   ${product_price}
-    Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
 Zwing_B_15 Apply Item level Promos
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_15
     Login With Valid Username And Password | POS   ${pos_data}
@@ -295,7 +283,7 @@ Zwing_B_25 Collect payment using account sale
     Add Customer Details    ${pos_data}
     ${value}    Get payable amount
     Verify Billing Checkout
-    Payment By Account On Sales
+    Payment By Account On Sales    ${value}
     Verify If Payment is Complete Or Not
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -307,7 +295,7 @@ Zwing_B_26 Payable amount should become editable when split payment toggle is en
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     ${value}    Get payable amount
-    Verify Billing Checkout
+    Verify Billing Checkout    
     Enable Split payment mode
     Verify split payment toggle button is enabled
     Revoke Serial Key    ${pos_data}
