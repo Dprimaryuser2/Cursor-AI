@@ -878,32 +878,6 @@ Delete And Add Same UIN Number Again So That Next Time Test Case Doesnt Fail
     Wait Until Page Contains Element    ${customer_info_update_button}        timeout=10s
     Click Element    ${customer_info_update_button}
 
-Delete UIN
-    [Arguments]  ${details}
-    ${uin_details}  Create Dictionary   &{details}
-    Wait Until Page Contains Element    ${tax_invoice}    timeout=10s
-    Click Element    ${tax_invoice}
-    Wait Until Page Contains Element    ${cg_add_gst_button}    timeout=10s
-    Click Element    ${cg_add_gst_button}
-    Wait Until Page Contains Element    ${cg_manage_gstin_header}    timeout=10s
-    Wait Until Page Contains Element    //label[contains(text(),"${uin_details.legal_name}")]//ancestor::label//preceding-sibling::input[@class="custom-control-input"]
-    Click Element    //label[contains(text(),"${uin_details.legal_name}")]//ancestor::label//preceding-sibling::input[@class="custom-control-input"]
-    Wait Until Element Is Enabled    ${confirm_selected_button}    timeout=10s
-    Click Element    ${confirm_selected_button}
-
-Delete GST
-    [Arguments]  ${details}
-    ${gst_details}  Create Dictionary   &{details}
-    Wait Until Page Contains Element    ${tax_invoice}    timeout=10s
-    Click Element    ${tax_invoice}
-    Wait Until Page Contains Element    ${cg_add_gst_button}    timeout=10s
-    Click Element    ${cg_add_gst_button}
-    Wait Until Page Contains Element    ${cg_manage_gstin_header}    timeout=10s
-    Wait Until Page Contains Element    //label[contains(text(),"${gst_details.legal_name}")]//ancestor::div[@class="row py-2 mb-2"]//child::div[@class="text-right col"]//*[name()='img']
-    Click Element    //label[contains(text(),"${gst_details.legal_name}")]//ancestor::div[@class="row py-2 mb-2"]//child::div[@class="text-right col"]//*[name()='img']
-    Wait Until Element Is Enabled    ${confirm_selected_button}    timeout=10s
-    Click Element    ${confirm_selected_button}
-
 Add Customer Group
     [Arguments]    ${customer_info}
     ${customer_group_info}=    Create Dictionary    &{customer_info}
