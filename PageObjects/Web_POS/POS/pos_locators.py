@@ -250,6 +250,7 @@ select_search_invoice_option_btn = '//div[@class="dropdown b-dropdown switch-bil
 invoice_number_search_option = '//a[contains(text(),"Invoice Number")]'
 customer_name_search_option = '//a[contains(text(),"Customer Name")]'
 customer_phone_search_option = '//a[contains(text(),"Customer Phone")]'
+div_svg_cross_icon = '//div[@class="row exchange-modal-main"]'
 selected_parameter_invoice_option = '//div[@class="dropdown b-dropdown switch-billing fs-12 mr-3 btn-group"]//button[@class="btn dropdown-toggle btn-light" and contains(text(),"Customer Name")]'
 searched_invoice_heading_row = '//div[@class="row header-bar align-content-center"]'
 first_row_invoice = '(//div[@class="grey-100 col-2"])[1]'

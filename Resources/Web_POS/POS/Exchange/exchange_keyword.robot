@@ -69,4 +69,27 @@ Verify The Invoice Parameters Are Clickable
     Page Should Contain Element    ${invoice_number_search_option}
     Page Should Contain Element    ${customer_name_search_option}
     Page Should Contain Element    ${customer_phone_search_option}
-    Click Element    ${customer_phone_search_option}
+    Click Element    ${customer_name_search_option}
+    Wait Until Page Contains Element    ${selected_parameter_invoice_option}  timeout=10s
+    Page Should Contain Element    ${selected_parameter_invoice_option}
+
+Verify The Close Tab Cross(X) | Exchange
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    Click Element At Coordinates    ${div_svg_cross_icon}    ${352}    ${512}
+    Wait Until Page Contains Element    ${add_exchange_item_link}  timeout=10s
+    Element Should Be Visible    ${add_exchange_item_link}
+    Page Should Contain Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Mode}"]
+    Page Should Contain Element    ${delivery}
+    Page Should Contain Element    ${in_store}
+
+Select The Invoice Option Type
+   [Arguments]    ${mode}
+   ${my_dict}    Create Dictionary   &{mode}
+   Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=10s
+   Click Element    ${select_search_invoice_option_btn}
+   Wait Until Page Contains Element    ${invoice_number_search_option}
+   Click Element    //ul[@class="dropdown-menu dropdown-menu-right show"]//li//a[contains(text(),"${my_dict.select_invoice_option}")]
+   Wait Until Page Contains Element   //div[@class="dropdown b-dropdown switch-billing fs-12 mr-3 btn-group"]//button[@class="btn dropdown-toggle btn-light" and contains(text(),"${my_dict.select_invoice_option}")]  timeout=10s
+   Page Should Contain Element    //div[@class="dropdown b-dropdown switch-billing fs-12 mr-3 btn-group"]//button[@class="btn dropdown-toggle btn-light" and contains(text(),"${my_dict.select_invoice_option}")]
+
