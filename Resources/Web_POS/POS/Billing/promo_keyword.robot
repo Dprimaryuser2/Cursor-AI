@@ -2,12 +2,12 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
-Library    ../../../Resources/CustomKeywords/utilities.py
-Variables    ../../../Environment/environment.py
-Variables    ../../../PageObjects/Web_POS/Login/login_locators.py
-Variables    ../../../PageObjects/Web_POS/POS/pos_locators.py
-Variables    ../../../PageObjects/Web_POS/POS/add_customer_locator.py
-Variables    ../../../PageObjects/Web_POS/POS/checkout_locators.py
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Variables    ../../../../Environment/environment.py
+Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
+Variables    ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables    ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Variables    ../../../../PageObjects/Web_POS/POS/checkout_locators.py
 
 *** Keywords ***
 # Generic Keywords for All

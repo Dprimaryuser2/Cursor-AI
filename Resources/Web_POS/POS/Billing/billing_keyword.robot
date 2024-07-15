@@ -2,14 +2,14 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
-Library    ../../../Resources/CustomKeywords/utilities.py
-Variables    ../../../PageObjects/Web_POS/POS/hold_bill_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/checkout_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/pos_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/add_customer_locator.py
-Resource    ../../../Resources/Web_POS/POS/split_payment_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/manual_discount_keyword.robot
-Resource  ../../../Resources/Web_POS/POS/share_invoice_keywords.robot
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Variables    ../../../../PageObjects/Web_POS/POS/hold_bill_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/checkout_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Resource    ../../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
+Resource    ../../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
+Resource  ../../../../Resources/Web_POS/POS/Billing/share_invoice_keywords.robot
 
 *** Keywords ***
 Hold Bill

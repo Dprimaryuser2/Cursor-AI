@@ -2,20 +2,20 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
-Library    ../../../Resources/CustomKeywords/utilities.py
-Variables    ../../../PageObjects/Web_POS/POS/hold_bill_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/checkout_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/pos_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/add_customer_locator.py
-Resource    ../../AdminConsole/Login/login_keyword.robot
-Variables   ../../../PageObjects/AdminConsole/ProductCategories/product_categories.py
-Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Variables    ../../../../PageObjects/Web_POS/POS/hold_bill_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/checkout_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Resource    ../../../AdminConsole/Login/login_keyword.robot
+Variables   ../../../../PageObjects/AdminConsole/ProductCategories/product_categories.py
+Resource    ../../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
 
 *** Variables ***
 ${IMAP_SERVER}        imap.gmail.com
 ${IMAP_PORT}          993
 ${USER}               dprimaryuser@gmail.com
-${PASSWORD}           aqwb qaoi bkwd jqbb
+${PASSWORD_EMAIL}           aqwb qaoi bkwd jqbb
 
 *** Keywords ***
 Verify Bill Remark Added Is Visible In Bill Remark Textarea
@@ -245,7 +245,7 @@ Send Invoice To Email | Share Invoice
 Verify Invoice Generated Received On Email
     [Arguments]    ${store_name}    ${cust_info_checkout}
     ${subject} =  Set Variable  Your ${store_name} Invoice Receipt | ${cust_info_checkout.invoice_id}
-    ${email_body}=  Search And Fetch Email    ${IMAP_SERVER}    ${IMAP_PORT}    ${USER}    ${PASSWORD}    ${subject}
+    ${email_body}=  Search And Fetch Email    ${IMAP_SERVER}    ${IMAP_PORT}    ${USER}    ${PASSWORD_EMAIL}    ${subject}
     Run Keyword If  ${email_body} is not None  Log  Email with subject contains "${subject}" is received
     ...  ELSE  Log  Email with subject contains "${subject}" is not found
     [Return]  ${email_body}

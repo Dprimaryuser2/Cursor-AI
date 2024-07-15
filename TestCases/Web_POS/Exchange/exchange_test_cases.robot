@@ -1,13 +1,13 @@
 *** Settings ***
 Library    SeleniumLibrary
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/billing_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/billing_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
+Resource   ../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Library    ../../../Resources/CustomKeywords/utilities.py
-Resource    ../../../Resources/Web_POS/POS/split_payment_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/manual_discount_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
+Resource   ../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/Exchange/exchange_keyword.robot
 
 Test Setup  Open Application | POS
@@ -17,6 +17,11 @@ Test Teardown   Close Browser
 ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Exchange${/}exchange_test_data.xlsx
 
 *** Test Cases ***
+Zwing_E_01 Check whether Exchange text is clickable or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_1
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
 
 #Zwing_B_46
 #Zwing_B_47
