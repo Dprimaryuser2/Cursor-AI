@@ -26,13 +26,18 @@ Zwing_E_49 select a alternate product ,apply item level manual discount then che
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_49
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
-    Change Billing Mode    ${pos_data}
+#    Change Billing Mode    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Navigate To Update Product Window    ${pos_data}
     ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
     Apply Item Manual Discount | Select From List    ${pos_data}
     Verify Item Manual Discount   ${product_price}
     Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 
+Zwing_E_50 select a exchange product ,apply item level manual discount then check the response.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_49
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+#    Change Billing Mode    ${pos_data}
