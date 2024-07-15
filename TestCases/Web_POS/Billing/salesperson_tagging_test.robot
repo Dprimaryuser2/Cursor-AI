@@ -113,8 +113,8 @@ Zwing_ST_10 Tagged Sales person view below the tagged Item
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_ST_11
-    Pass Execution    pass
+#Zwing_ST_11
+#     Pass Execution    pass
     #on hold from client side
 
 Zwing_ST_12 Salesperson Tagging is Disabled in policies
