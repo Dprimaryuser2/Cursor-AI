@@ -2,12 +2,12 @@
 Library    SeleniumLibrary
 Library    ../../../Resources/CustomKeywords/utilities.py
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/billing_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/mode_of_payment_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/billing_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/mode_of_payment_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
-#Resource    ../../../Resources/Web_POS/POS/split_payment_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 
 Test Setup    Open Application | POS
 Test Teardown   Close Browser

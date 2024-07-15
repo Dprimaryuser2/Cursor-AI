@@ -2,10 +2,10 @@
 Library    SeleniumLibrary
 Library    ../../../Resources/CustomKeywords/utilities.py
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/add_to_cart_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/add_to_cart_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
-Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
 
 Test Setup    Open Application | POS
 Test Teardown   Close All Browsers

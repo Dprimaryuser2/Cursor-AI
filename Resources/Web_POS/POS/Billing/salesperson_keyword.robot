@@ -2,17 +2,17 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
-Library    ../../../Resources/CustomKeywords/utilities.py
-Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
-Resource    ../../AdminConsole/Login/login_keyword.robot
-Resource    ../../AdminConsole/POSTerminal/pos_terminal_keyword.robot
-Variables    ../../../PageObjects/Web_POS/POS/hold_bill_locators.py
-Variables    ../../../PageObjects/AdminConsole/POSTerminal/pos_terminal.py
-Variables   ../../../PageObjects/Web_POS/POS/checkout_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/pos_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/add_customer_locator.py
-Variables   ../../../Environment/environment.py
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Resource   ../../../../Resources/Web_POS/Login/login_keyword.robot
+Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
+Resource    ../../../AdminConsole/Login/login_keyword.robot
+Resource    ../../../AdminConsole/POSTerminal/pos_terminal_keyword.robot
+Variables    ../../../../PageObjects/Web_POS/POS/hold_bill_locators.py
+Variables    ../../../../PageObjects/AdminConsole/POSTerminal/pos_terminal.py
+Variables   ../../../../PageObjects/Web_POS/POS/checkout_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Variables   ../../../../Environment/environment.py
 
 *** Keywords ***
 Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Policies

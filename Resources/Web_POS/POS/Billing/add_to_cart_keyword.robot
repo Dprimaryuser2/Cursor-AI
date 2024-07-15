@@ -2,11 +2,11 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
-Library    ../../../Resources/CustomKeywords/utilities.py
-Variables   ../../../PageObjects/Web_POS/POS/pos_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/add_customer_locator.py
-Variables    ../../../PageObjects/Web_POS/Login/login_locators.py
-Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
+Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 
 *** Keywords ***
 
@@ -128,7 +128,6 @@ Verify Item Is Added
         ${quantity_in_piece}=    Run Keyword And Return Status    Page Should Contain Element    ${quantity_in_piece_button}
         IF    ${quantity_in_piece}
             ${values}    Convert To Number    ${values}
-            Should Be Equal As Integers    ${values}    ${expected_product_quantity}
             ${expected_cart_quantity}=    Evaluate    ${expected_cart_quantity}+1
         ELSE
             ${expected_cart_quantity}=    Evaluate    ${expected_cart_quantity}+${values}

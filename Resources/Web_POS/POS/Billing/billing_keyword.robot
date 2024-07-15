@@ -2,14 +2,14 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
-Library    ../../../Resources/CustomKeywords/utilities.py
-Variables    ../../../PageObjects/Web_POS/POS/hold_bill_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/checkout_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/pos_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/add_customer_locator.py
-Resource    ../../../Resources/Web_POS/POS/split_payment_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/manual_discount_keyword.robot
-Resource  ../../../Resources/Web_POS/POS/share_invoice_keywords.robot
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Variables    ../../../../PageObjects/Web_POS/POS/hold_bill_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/checkout_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Resource    ../../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
+Resource    ../../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
+Resource  ../../../../Resources/Web_POS/POS/Billing/share_invoice_keywords.robot
 
 *** Keywords ***
 Hold Bill
@@ -188,38 +188,6 @@ No Payment Required | Checkout Page
     Wait Until Page Contains Element    ${no_payment_required_confirm_button}
     Page Should Contain Element     ${no_payment_required_confirm_button}
     Click Element   ${no_payment_required_confirm_button}
-
-Apply Bill Manual Discount | Custom Discount
-    [Arguments]    ${discount_data}
-    ${discount_dict_data}    Create Dictionary   &{discount_data}
-    ${grand_total_amt}=    Get Text    ${grand_total}
-    ${grand_total_amt}    Remove Characters    ${grand_total_amt}
-    ${grand_total_amt}    Convert To Number    ${grand_total_amt}
-    Click Button    ${bill_discount}
-    Wait Until Element Is Visible    ${custom_discount_tab}    timeout=10s
-    Click Element    ${custom_discount_tab}
-    Wait Until Element Is Visible    ${discount_type_amount}    timeout=10s
-    Wait Until Element Is Visible    ${discount_type_percentage}
-    ${discount_list}=    Convert Items To List    ${discount_dict_data.manual_discount}
-    ${discount_dict} =    Convert Item List To Dictionary    ${discount_dict_data.manual_discount}
-    FOR    ${item}    IN    @{discount_dict.items()}
-        ${key}=    Set Variable    ${item}[0]
-        ${values}=    Set Variable    ${item}[1]
-        ${value}=    Convert To String    ${values}
-        IF    '${key}' == 'Custom_Discount_Amount'
-            Click Element    ${discount_type_amount}
-            Input Text    ${discount_value}    ${value}
-            Click Button    ${apply_amount_discount_button}
-        ELSE IF    '${key}' == 'Custom_Discount_Percentage'
-            Click Element    ${discount_type_percentage}
-            Input Text    ${discount_value}    ${value}
-            Click Button    ${apply_percent_discount_button}
-        END
-    END
-    ${bill_discount_data}    Create Dictionary     grand_total=${grand_total_amt}    discount_value=${discount_dict_data.discount_value}    discount=${value}
-    RETURN    ${bill_discount_data}
-
-
 
 Change Billing Mode
     [Arguments]    ${mode}

@@ -2,11 +2,12 @@
 Library    SeleniumLibrary
 Library    ../../../Resources/CustomKeywords/utilities.py
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
-Resource  ../../../Resources/Web_POS/POS/keyboard_shortcut_keywords.robot
-Resource  ../../../Resources/Web_POS/POS/billing_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
+Resource  ../../../Resources/Web_POS/POS/Billing/keyboard_shortcut_keywords.robot
+Resource  ../../../Resources/Web_POS/POS/Billing/billing_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
-Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
+Resource   ../../../Resources/Web_POS/POS/Billing/add_to_cart_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 
 Test Setup    Open Application | POS
@@ -235,7 +236,7 @@ Zwing_KB_21 Add Carry bags using keyboard shortcut | Order Mode
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Scan And Add Product        ${pos_data}
+    Scan And Add Product    ${pos_data}
     Press Shortcut Key    ${pos_data}
     Verify Shortcut Key Allows Adding Carry Bags    ${pos_data}
     Revoke Serial Key    ${pos_data}

@@ -1,13 +1,13 @@
 *** Settings ***
 Library    SeleniumLibrary
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/billing_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/billing_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Library    ../../../Resources/CustomKeywords/utilities.py
-Resource    ../../../Resources/Web_POS/POS/split_payment_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/manual_discount_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
 
 Test Setup  Open Application | POS
 Test Teardown   Close Browser
@@ -424,7 +424,7 @@ Zwing_B_34 Apply Bill level discount
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    ${bill_level}   Apply Bill Manual Discount | Custom Discount    ${pos_data}
+    ${bill_level}    Apply Bill Manual Discount | Custom Discount   ${pos_data}
     Verify Bill Level Manual Discount    ${bill_level}
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
