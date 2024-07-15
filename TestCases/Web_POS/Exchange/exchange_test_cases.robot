@@ -71,6 +71,101 @@ Zwing_E_06 Verify invoice parameters are clickable or not
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 
+Zwing_E_21 Verify invoice parameters are clickable or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_21
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+
+Zwing_E_22 check whether double digit number are selecting in quantity dropdown in select exchange popup window bar or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_22
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+
+#Zwing_E_23 Repeated
+
+Zwing_E_24 check all the information about product in cart is correct or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_24
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+
+Zwing_E_25 select invoice which have multiply quantity of a single product for exchange, click on confirm button and check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_25
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+
+Zwing_E_26 select invoice which have multiple products for exchange with quantity >1 , click on confirm button and check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_26
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+
+Zwing_E_27 select + add product for exchange button and add alternate item from catalog
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_27
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+
+Zwing_E_28 select a alternate product that UOM does not match with the exchange product UOM then check the response.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_28
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+
+Zwing_E_29 select a alternate product that UOM matches with the exchange product UOM then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_29
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+
+Zwing_E_30 search a valid alternate product by barcode in search bar during exchange process
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_30
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+
+Zwing_E_31 search a valid alternate product by name in search bar during exchange process
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_31
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+
+Zwing_E_32 select invoice from search bar, click on confirm button, refresh the page then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_32
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+
+Zwing_E_33 Add a exchange product, add a alternate product, remove exchange product ,again add same product, add alternate product then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_33
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+
+Zwing_E_34 Add a serial/batch product as alternate product against a normal product then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_34
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+
+Zwing_E_35 add a invoice which have multiple product,add opposite product of exchange product then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_35
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+
+
+
+
+
+
+
+
+
+
 
 #Zwing_B_46
 #Zwing_B_47
