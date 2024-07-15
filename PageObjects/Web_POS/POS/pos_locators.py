@@ -241,3 +241,7 @@ keyboard_shortcuts_link = '//a[@class="key-link"]'
 # insufficient inventory
 insufficient_inventory_continue_btn = '//button[@class="btn ml-1 btn-primary btn-block"]'
 insufficient_inventory_title = '//h5[@class="modal-title"]'
+
+auto_switch_billing_on = '//h5[contains(text(),"Auto-switch to Billing Mode")]//following-sibling::label[@class="my-auto vue-js-switch toggled"]'
+auto_switch_billing_off = '//h5[contains(text(),"Auto-switch to Billing Mode")]//following-sibling::label[@class="my-auto vue-js-switch"]'
+auto_switch_billing_toggle = '(//h5[contains(text(),"Auto-switch to Billing Mode")]//following::div[@class="v-switch-core"]//div)[1]'
