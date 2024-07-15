@@ -2,14 +2,14 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
-Library    ../../../Resources/CustomKeywords/utilities.py
-Variables    ../../../PageObjects/Web_POS/POS/hold_bill_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/checkout_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/pos_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/add_customer_locator.py
-Resource    ../../AdminConsole/Login/login_keyword.robot
-Variables   ../../../PageObjects/AdminConsole/ProductCategories/product_categories.py
-Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Variables    ../../../../PageObjects/Web_POS/POS/hold_bill_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/checkout_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Resource    ../../../AdminConsole/Login/login_keyword.robot
+Variables   ../../../../PageObjects/AdminConsole/ProductCategories/product_categories.py
+Resource    ../../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
 
 *** Variables ***
 ${IMAP_SERVER}        imap.gmail.com

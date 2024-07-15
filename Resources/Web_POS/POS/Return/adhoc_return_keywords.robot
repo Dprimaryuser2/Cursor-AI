@@ -61,3 +61,62 @@ Turn Auto Switch To Billing On
     Wait Until Page Contains Element    ${pos_option_sidebar}    timeout=5
     Click Element    ${pos_option_sidebar}
     Wait Until Page Contains Element    ${switch_billing_dropdown}    timeout=5
+
+Delete Item In The Cart
+    Wait Until Page Contains Element    ${product_name_in_cart_row}    timeout=5
+    Click Element    ${delete_product_icon}
+    Wait Until Page Does Not Contain Element    ${delete_product_icon}    timeout=5
+
+Navigate To Checkout Page
+    Wait Until Element Is Enabled    ${checkout_button}    timeout=5
+    Click Element    ${checkout_button}
+    Wait Until Page Contains Element    ${checkout_heading}    timeout=5
+    Page Should Contain Element    ${checkout_heading}    timeout=5
+
+Cancel Auto Switch To Billing
+    Click Element    ${order_management_option_sidebar}
+    Wait Until Page Contains Element    ${order_management_option_sidebar}    timeout=5
+    Click Element    ${pos_option_sidebar}
+    Wait Until Page Contains Element    ${switch_modal_text}    timeout=5
+    Wait Until Page Contains Element    ${switch_modal_cancel_button}    timeout=5
+    Click Element    ${switch_modal_cancel_button}
+
+Switch From Return Mode To Order
+    Wait Until Page Contains Element    ${return_option_switch}    timeout=5
+    Click Element    ${return_option_switch}
+    Wait Until Page Contains Element    ${order_option}    timeout=5
+    Click Element    ${order_option}
+    Wait Until Page Contains Element    ${switch_confirm_button}    timeout=5
+    Click Element    ${switch_confirm_button}
+    Wait Until Page Contains Element    ${order_option_switch}    timeout=5
+    Page Should Contain Element    ${order_option_switch}
+
+Cancel Switch From Return Mode To Order
+    Wait Until Page Contains Element    ${return_option_switch}    timeout=5
+    Click Element    ${return_option_switch}
+    Wait Until Page Contains Element    ${order_option}    timeout=5
+    Click Element    ${order_option}
+    Wait Until Page Contains Element    ${switch_cancel_button}    timeout=5
+    Click Element    ${switch_cancel_button}
+    Page Should Contain Element    ${return_option_switch}
+    Page Should Not Contain Element    ${order_option_switch}
+
+Switch From Return Mode To Exchange
+    Wait Until Page Contains Element    ${return_option_switch}    timeout=5
+    Click Element    ${return_option_switch}
+    Wait Until Page Contains Element    ${exchange_option}    timeout=5
+    Click Element    ${exchange_option}
+    Wait Until Page Contains Element    ${switch_confirm_button}    timeout=5
+    Click Element    ${switch_confirm_button}
+    Wait Until Page Contains Element   ${exchange_option_switch}    timeout=5
+    Page Should Contain Element    ${exchange_option_switch}
+
+Cancel Switch From Return Mode To Exchange
+    Wait Until Page Contains Element    ${return_option_switch}    timeout=5
+    Click Element    ${return_option_switch}
+    Wait Until Page Contains Element    ${exchange_option}    timeout=5
+    Click Element    ${exchange_option}
+    Wait Until Page Contains Element    ${switch_cancel_button}    timeout=5
+    Click Element    ${switch_cancel_button}
+    Page Should Contain Element    ${return_option_switch}
+    Page Should Not Contain Element    ${exchange_option_switch}

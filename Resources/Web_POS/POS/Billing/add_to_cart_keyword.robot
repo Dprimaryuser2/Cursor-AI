@@ -2,11 +2,11 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
-Library    ../../../Resources/CustomKeywords/utilities.py
-Variables   ../../../PageObjects/Web_POS/POS/pos_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/add_customer_locator.py
-Variables    ../../../PageObjects/Web_POS/Login/login_locators.py
-Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
+Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 
 *** Keywords ***
 
