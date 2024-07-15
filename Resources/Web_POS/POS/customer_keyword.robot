@@ -44,6 +44,8 @@ Add Customer Details
        Delete GST
     ELSE IF    '${my_dict.tax_invoice}' == 'Delete UIN'
        Delete UIN
+    ELSE
+       Log    Does Not Require Tax
     END
     Sleep    1
     ${add_line1}=    Generate Random Street Address

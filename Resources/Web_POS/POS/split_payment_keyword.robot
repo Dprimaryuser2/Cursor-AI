@@ -124,7 +124,6 @@ Split Payment By Redeem Voucher
     Click Element    ${voucher_continue_button}
 
 Payment By Account On Sales
-    Sleep    1
     [Arguments]     ${value}
     Wait Until Element Is Visible    ${enter_split_amount}
     Clear Element Text    ${enter_split_amount}
