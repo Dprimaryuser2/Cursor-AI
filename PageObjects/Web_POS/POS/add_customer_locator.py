@@ -18,7 +18,7 @@ day_field = '(//div[@class="vdp-datepicker__calendar"])[1]/div/span[text()="day"
 sales_invoice = '//span[text()="Sales invoice"]//ancestor::div[@class="custom-control custom-control-inline custom-radio"]/input'
 address_line1 = '//input[@id="custAddress-1"]'
 address_line2 = '//input[@id="custAddress2"]'
-landamrk = '//input[@id="input-landmark"]'
+landmark = '//input[@id="input-landmark"]'
 pincode = '//input[@id="custPin"]'
 start_billing_button = '//button[@id="start-billing"]'
 state_select = '//select[@id="select-state"]'

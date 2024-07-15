@@ -190,7 +190,7 @@ Zwing_B_16 Apply manual Discount | item level
     Navigate To Update Product Window    ${pos_data}
     ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
     Apply Item Manual Discount | Select From List    ${pos_data}
-    Verify Item Manual Discount   ${product_price}
+    Verify Item Manual Discount     ${product_price}
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -294,7 +294,7 @@ Zwing_B_25 Collect payment using account sale
     Add Customer Details    ${pos_data}
     ${value}    Get payable amount
     Verify Billing Checkout
-    Payment By Account On Sales
+    Payment By Account On Sales   ${value}
     Verify If Payment is Complete Or Not
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -424,7 +424,7 @@ Zwing_B_34 Apply Bill level discount
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    ${bill_level}    Apply Bill Manual Discount | Custom Discount    ${pos_data}
+    ${bill_level}   Apply Bill Manual Discount | Custom Discount    ${pos_data}
     Verify Bill Level Manual Discount    ${bill_level}
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
