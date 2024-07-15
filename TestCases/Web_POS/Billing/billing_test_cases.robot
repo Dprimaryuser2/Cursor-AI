@@ -17,7 +17,7 @@ ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}b
 
 *** Test Cases ***
 Zwing_B_1 Auto Switch To Billing
-    [Tags]    Demo
+   [Tags]    Demo
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_1
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -26,7 +26,6 @@ Zwing_B_1 Auto Switch To Billing
    Verify Auto Switched To Billing
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
 
 Zwing_B_2 Add Product to cart by scanning barcode
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_2
@@ -282,7 +281,7 @@ Zwing_B_24 Collect payment using Credit Score
     Add Customer Details    ${pos_data}
     ${value}    Get payable amount
     Verify Billing Checkout
-    Collect Payment Using Store Credit  ${pos_data}
+    Collect Payment Using Store Credit   ${pos_data}
     Verify If Payment is Complete Or Not
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}

@@ -280,20 +280,6 @@ Apply Bill Manual Discount | Custom Discount
     ${bill_discount_data}    Create Dictionary     grand_total=${grand_total_amt}    discount_value=${discount_dict_data.discount_value}    discount=${value}
     RETURN    ${bill_discount_data}
 
-Collect Payment Using Store Credit
-    [Arguments]    ${pos_dict}
-    ${details}    Create Dictionary    &{pos_dict}
-    Sleep    0.5
-    Wait Until Page Contains Element    ${redeem_store_credit_button}   timeout=10s
-    Click Element    ${redeem_store_credit_button}
-    Wait Until Page Contains Element    ${redeem_with_dropdown}
-    Click Element    ${redeem_with_dropdown}
-    Click Element    ${redeem_with_credit_option}
-    Wait Until Page Contains Element    ${input_voucher_code}
-    Click Element    ${input_voucher_code}
-    Input Text    ${input_voucher_code}    ${details.voucher_code}
-#    Element Should Be Enabled    ${apply_store_credit_voucher}
-    Wait Until Keyword Succeeds    4    2   Click Element    ${apply_store_credit_voucher}
 
 
 Change Billing Mode
