@@ -241,6 +241,7 @@ keyboard_shortcuts_link = '//a[@class="key-link"]'
 # insufficient inventory
 insufficient_inventory_continue_btn = '//button[@class="btn ml-1 btn-primary btn-block"]'
 insufficient_inventory_title = '//h5[@class="modal-title"]'
+disabled_product = '//a[@class="d-flex isDisabled"]'
 
 # Exchange Module
 add_exchange_item_link = '//a[@class="fs-13"]'
