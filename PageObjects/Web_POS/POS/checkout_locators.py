@@ -85,6 +85,7 @@ share_invoice="//button[@id='share-invoice-btn' and @class='btn mt-4 mt-md-2 btn
 
 no_payment_required="//header[@id='__BVID__1628___BV_modal_header_']//child::h5[contains(text(),'No Payment Required')]"
 no_payment_required_confirm_button="//button[@class='btn ml-1 btn-primary btn-block']//child::span[contains(text(),'Confirm')]"
+no_payment_required_cancel_button="//button[@class='btn mr-1 btn-outline-primary btn-block' and contains(text(),'Cancel')]"
 checkout_split_payment='//div[@class="v-switch-button"]'
 checkout_billing_options='//button[@class="btn dropdown-toggle btn-light btn-sm" and contains(text(),"Billing Options")]'
 loyalty_modal_heading= '//h5[@class="modal-title" and contains(text(),"Redeem Loyalty")]'
