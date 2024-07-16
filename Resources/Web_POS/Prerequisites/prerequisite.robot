@@ -32,6 +32,10 @@ Revoke Serial Key
     END
     Wait Until Keyword Succeeds    5    2     Click Element    ${profile_info_heading}
     Wait Until Keyword Succeeds    5    2     Click Element    ${serial_information_tab}
+    ${serial_info_visible}    Run Keyword And Return Status    Element Should Be Visible    ${serial_info_heading}
+    IF    '${serial_info_visible}' == 'False'
+         Wait Until Keyword Succeeds    5    2     Click Element    ${serial_information_tab}
+    END
     Wait Until Element Is Visible    ${serial_info_heading}    timeout=20s
     Wait Until Element Is Visible    ${revoke_license_button}    timeout=20s
     Scroll Element Into View    ${revoke_license_button}

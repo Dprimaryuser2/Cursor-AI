@@ -74,7 +74,6 @@ Zwing_B_6 Tag a New customer to a bill
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_7 Tag a Existing customer to a bill
-    [Tags]    Demo
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_07
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
