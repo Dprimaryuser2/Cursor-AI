@@ -2,10 +2,10 @@
 Library    SeleniumLibrary
 Library    ../../../Resources/CustomKeywords/utilities.py
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/add_to_cart_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/add_to_cart_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
-Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
 
 Test Setup    Open Application | POS
 Test Teardown   Close All Browsers
@@ -54,7 +54,7 @@ Zwing_O_5 Add Normal sku with Fixed UOM and 0 Inventory to cart with disable neg
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_05
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
-    Scan And Add Product    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Verify 0 Inventory To Cart With Disable Negative Inventory    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}

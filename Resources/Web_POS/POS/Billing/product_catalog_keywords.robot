@@ -2,13 +2,13 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
-Library    ../../../Resources/CustomKeywords/utilities.py
-Variables    ../../../PageObjects/Web_POS/POS/hold_bill_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/checkout_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/pos_locators.py
-Variables   ../../../PageObjects/Web_POS/POS/add_customer_locator.py
-Resource    ../../AdminConsole/Login/login_keyword.robot
-Variables   ../../../PageObjects/AdminConsole/ProductCategories/product_categories.py
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Variables    ../../../../PageObjects/Web_POS/POS/hold_bill_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/checkout_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Resource    ../../../AdminConsole/Login/login_keyword.robot
+Variables   ../../../../PageObjects/AdminConsole/ProductCategories/product_categories.py
 
 *** Keywords ***
 Verify View Catalog Using Catalog Button In WebPOS
@@ -208,12 +208,7 @@ Verify Items Allocated With 0 Inventory To Store Are Blur
      ${custom_category}=    Replace String    ${category_sidebar_option}    Body Scrub     ${product_dict.new_category_admin}
      Click Element    ${custom_category}
      Element Should Contain    ${product_catalog_body}     ${product_dict.product_name}
-     #Locator need to update as locator is not present in dom thus testcase will fail
-<<<<<<< HEAD
      Page Should Contain Element    ${disabled_product}
-=======
-     Page Should Contain Element    //locator_of_0_inventory_product_with_blur
->>>>>>> 0bdf806e07539712d559c3bab4be41762fd59b6e
 
 Verify Items Allocated With Some Inventory To Store Are Normal
      [Arguments]    ${product_data}

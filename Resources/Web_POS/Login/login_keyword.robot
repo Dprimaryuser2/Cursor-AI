@@ -2,16 +2,16 @@
 Library    SeleniumLibrary
 Variables    ../../../Environment/environment.py
 Variables    ../../../PageObjects/Web_POS/Login/login_locators.py
-Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/add_to_cart_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/add_to_cart_keyword.robot
 
 
 *** Keywords ***
 Open Application | POS
     Open Browser     ${pos_url}    ${browser}
 #    Open Browser     ${pos_url}    ${browser}    options=add_argument("--headless")
-    Maximize Browser Window
-#    Set Window Size    ${window_width}    ${window_height}
+#    Maximize Browser Window
+    Set Window Size    ${window_width}    ${window_height}
 
 Login With Valid Username And Password | POS
     [Arguments]     ${search_data}

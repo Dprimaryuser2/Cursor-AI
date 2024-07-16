@@ -2,12 +2,12 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
-Library    ../../../Resources/CustomKeywords/utilities.py
-Variables    ../../../Environment/environment.py
-Variables    ../../../PageObjects/Web_POS/Login/login_locators.py
-Variables    ../../../PageObjects/Web_POS/POS/pos_locators.py
-Variables    ../../../PageObjects/Web_POS/POS/add_customer_locator.py
-Variables    ../../../PageObjects/Web_POS/POS/checkout_locators.py
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Variables    ../../../../Environment/environment.py
+Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
+Variables    ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables    ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Variables    ../../../../PageObjects/Web_POS/POS/checkout_locators.py
 
 *** Keywords ***
 Navigate To Update Product Window
@@ -525,6 +525,7 @@ Verify Bill Manual Discount Less Than Item Amount
     ${expected_discount}=    Convert To Number    ${expected_discount}
     ${expected_product_total}=    Evaluate    ${product_price_dict.grand_total}- ${expected_discount}
     Wait Until Element Is Visible    ${checkout_page_manual_discount}    timeout=10s
+    Sleep    1s
     ${grand_total_amt}=    Get Text    ${grand_total}
     ${grand_total_amt}    Remove Characters    ${grand_total_amt}
     ${grand_total_amt}    Convert To Number    ${grand_total_amt}

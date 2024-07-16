@@ -7,6 +7,7 @@ Variables    ../../../Environment/environment.py
 Variables    ../../../PageObjects/Web_POS/Settings/serial_information_locators.py
 Variables    ../../../PageObjects/AdminConsole/POSTerminal/pos_terminal.py
 Resource    ../../../Resources/AdminConsole/Login/login_keyword.robot
+Variables    ../../../PageObjects/Web_POS/POS/pos_locators.py
 
 *** Keywords ***
 Revoke Serial Key
@@ -17,14 +18,24 @@ Revoke Serial Key
     Wait Until Element Is Visible    ${settings_tab}    timeout=40s
     Set Focus To Element    ${settings_tab}
     Wait Until Keyword Succeeds    5    2     Click Element    ${settings_tab}
-    Set Focus To Element    ${settings_tab}
-    ${serial_info_visible}    Run Keyword And Return Status    Element Should Not Be Visible    ${serial_information_tab}
-    IF    ${serial_info_visible}
-        Click Element    ${settings_tab}
-    END
     Wait Until Element Is Visible    ${serial_information_tab}    timeout=20s
+    ${closing_balance_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance}
+    IF    ${closing_balance_visible}
+        Input Text    ${closing_balance}    ${serial_key_info.closing_balance}
+        Click Element    ${open_session_submit_button}
+    END
+    ${opening_session_present}=    Run Keyword And Return Status    Element Should Be Visible    ${opening_balance}    timeout=10s
+    IF    ${opening_session_present}
+        Clear Element Text    ${opening_balance}
+        Input Text    ${opening_balance}    ${serial_key_info.opening_balance}
+        Click Element    ${open_session_submit_button}
+    END
     Wait Until Keyword Succeeds    5    2     Click Element    ${profile_info_heading}
     Wait Until Keyword Succeeds    5    2     Click Element    ${serial_information_tab}
+    ${serial_info_visible}    Run Keyword And Return Status    Element Should Be Visible    ${serial_info_heading}
+    IF    '${serial_info_visible}' == 'False'
+         Wait Until Keyword Succeeds    5    2     Click Element    ${serial_information_tab}
+    END
     Wait Until Element Is Visible    ${serial_info_heading}    timeout=20s
     Wait Until Element Is Visible    ${revoke_license_button}    timeout=20s
     Scroll Element Into View    ${revoke_license_button}
@@ -66,7 +77,6 @@ Revoke The Licence Key From Console
     Wait Until Element Is Not Visible    ${remove_modal_body}    timeout=10s
     Close Browser
     END
-
 
 Go To Pos Terminal
     Wait Until Keyword Succeeds    5    2     Click Element    ${pos_terminal_logo}

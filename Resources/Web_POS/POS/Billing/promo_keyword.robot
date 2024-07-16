@@ -2,12 +2,12 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
-Library    ../../../Resources/CustomKeywords/utilities.py
-Variables    ../../../Environment/environment.py
-Variables    ../../../PageObjects/Web_POS/Login/login_locators.py
-Variables    ../../../PageObjects/Web_POS/POS/pos_locators.py
-Variables    ../../../PageObjects/Web_POS/POS/add_customer_locator.py
-Variables    ../../../PageObjects/Web_POS/POS/checkout_locators.py
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Variables    ../../../../Environment/environment.py
+Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
+Variables    ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables    ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Variables    ../../../../PageObjects/Web_POS/POS/checkout_locators.py
 
 *** Keywords ***
 # Generic Keywords for All
@@ -166,6 +166,11 @@ Scan Barcode To Add Item And Quantity To Cart | Multiple MRP
 Add Items In Cart | Catalog
     [Arguments]    ${quantity_data}
     ${my_dict}    Create Dictionary   &{quantity_data}
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
     Wait Until Element Is Visible    ${view_catalog_button}    timeout=20s
     Click Button    ${view_catalog_button}
     Wait Until Element Is Visible    ${category}    timeout=20s

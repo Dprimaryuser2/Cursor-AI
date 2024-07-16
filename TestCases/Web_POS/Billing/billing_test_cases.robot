@@ -1,13 +1,13 @@
 *** Settings ***
 Library    SeleniumLibrary
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/billing_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/billing_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Library    ../../../Resources/CustomKeywords/utilities.py
-Resource    ../../../Resources/Web_POS/POS/split_payment_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/manual_discount_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
 
 Test Setup  Open Application | POS
 Test Teardown   Close Browser
@@ -17,7 +17,7 @@ ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}b
 
 *** Test Cases ***
 Zwing_B_1 Auto Switch To Billing
-    [Tags]    Demo
+   [Tags]    Demo
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_1
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -26,7 +26,6 @@ Zwing_B_1 Auto Switch To Billing
    Verify Auto Switched To Billing
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
 
 Zwing_B_2 Add Product to cart by scanning barcode
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_2
@@ -38,7 +37,7 @@ Zwing_B_2 Add Product to cart by scanning barcode
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_03 Add Product to cart by searching Product Name / barcode
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_08
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_03
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -47,7 +46,7 @@ Zwing_B_03 Add Product to cart by searching Product Name / barcode
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_04 Add product from catalog
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_08
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_04
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Add Items In Cart | Catalog   ${pos_data}
@@ -75,7 +74,6 @@ Zwing_B_6 Tag a New customer to a bill
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_7 Tag a Existing customer to a bill
-    [Tags]    Demo
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_07
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -90,7 +88,6 @@ Zwing_B_08 Tag Single Sales Person To A Bill With Respect To Items
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-    Add Items In Cart | Catalog   ${pos_data}
     Assign A Salesperson To An Item  ${pos_data}
     Verify If Salesperson Is Assigned To An Item    ${pos_data}
     Revoke Serial Key    ${pos_data}
@@ -101,7 +98,6 @@ Zwing_B_09 Tag Multiple Sales Person To A Bill With Respect To Items
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-    Add Items In Cart | Catalog   ${pos_data}
     Assign A different Salesperson To Each Item  ${pos_data}
     Verify If Different Salesperson Was Assigned To Each Person
     Revoke Serial Key    ${pos_data}
@@ -158,18 +154,6 @@ Zwing_B_14 Return to bill
     Hold Bill
     Return To Bill
     Verify Return To Bill
-    Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
-Zwing_B_16 Apply manual Discount | item level
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_16
-    Login With Valid Username And Password | POS   ${pos_data}
-    Open The Session    ${pos_data}
-    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-    Navigate To Update Product Window    ${pos_data}
-    ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
-    Apply Item Manual Discount | Select From List    ${pos_data}
-    Verify Item Manual Discount   ${product_price}
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -274,7 +258,7 @@ Zwing_B_23 Collect payment by redeem voucher
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_B_24 Collect payment using Credit Score
+Zwing_B_24 Collect payment using Credit Store
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_24
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -282,7 +266,7 @@ Zwing_B_24 Collect payment using Credit Score
     Add Customer Details    ${pos_data}
     ${value}    Get payable amount
     Verify Billing Checkout
-    Collect Payment Using Store Credit  ${pos_data}
+    Collect Payment Using Store Credit   ${pos_data}
     Verify If Payment is Complete Or Not
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -295,6 +279,7 @@ Zwing_B_25 Collect payment using account sale
     Add Customer Details    ${pos_data}
     ${value}    Get payable amount
     Verify Billing Checkout
+    Enable Split payment mode
     Payment By Account On Sales   ${value}
     Verify If Payment is Complete Or Not
     Revoke Serial Key    ${pos_data}
@@ -307,7 +292,7 @@ Zwing_B_26 Payable amount should become editable when split payment toggle is en
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     ${value}    Get payable amount
-    Verify Billing Checkout
+    Verify Billing Checkout    
     Enable Split payment mode
     Verify split payment toggle button is enabled
     Revoke Serial Key    ${pos_data}
@@ -321,7 +306,6 @@ Zwing_B_27 Payable amount should be disabled when split payment toggle is disabl
     Add Customer Details    ${pos_data}
     ${value}    Get payable amount
     Verify Billing Checkout
-    Enable Split payment mode
     Verify split payment toggle button is disabled.
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -417,7 +401,6 @@ Zwing_B_33 Apply Bill level Promos
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-
 Zwing_B_34 Apply Bill level discount
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_34
     Login With Valid Username And Password | POS   ${pos_data}
@@ -425,11 +408,10 @@ Zwing_B_34 Apply Bill level discount
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    ${bill_level}   Apply Bill Manual Discount | Custom Discount    ${pos_data}
+    ${bill_level}    Apply Bill Manual Discount | Custom Discount   ${pos_data}
     Verify Bill Level Manual Discount    ${bill_level}
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
 
 Zwing_B_35 Add Bill Remark
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_35
@@ -482,6 +464,7 @@ Zwing_B_39 Validate Store Credit
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_39
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
+   Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    ${customer_info}    Add Customer Details    ${pos_data}
    Validate Store Credit Are Equal On Tagged Customer Details and Checkout Page
    Revoke Serial Key    ${pos_data}
