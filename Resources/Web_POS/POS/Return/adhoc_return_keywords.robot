@@ -120,3 +120,20 @@ Cancel Switch From Return Mode To Exchange
     Click Element    ${switch_cancel_button}
     Page Should Contain Element    ${return_option_switch}
     Page Should Not Contain Element    ${exchange_option_switch}
+
+Pay Through Store Credit Method
+    Wait Until Page Contains Element    ${refund_method_store_credit_btn}
+    Wait Until Page Contains Element    ${payment_method_cash}
+    Click Element    ${refund_method_store_credit_btn}
+    Wait Until Page Contains Element    ${voucher_continue_button}
+    Click Element    ${voucher_continue_button}
+    Wait Until Page Contains Element    ${print_invoice_button}
+    Page Should Contain Element    ${share_invoice_button}
+
+Pay By Cash | Return Mode
+    Wait Until Page Contains Element    ${payment_method_cash}
+    Click Element    ${payment_method_cash}
+    Wait Until Page Contains Element    ${continue_cash_button}
+    Click Element    ${continue_cash_button}
+    Wait Until Page Contains Element    ${print_invoice_button}
+    Page Should Contain Element    ${share_invoice_button}

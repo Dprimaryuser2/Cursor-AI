@@ -149,7 +149,7 @@ Zwing_R_14 Assign Salesperson to product While returning the product
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
-   Add Items In Cart | Catalog    ${pos_data}
+   Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Assign Same Salesperson To All Products Except Last Product And Verify
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -238,7 +238,7 @@ Zwing_R_22 Check out from POS screen to Payment Collection
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Navigate To Checkout Page
+   Verify Billing Checkout
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -249,7 +249,8 @@ Zwing_R_23 Allow Refund Against Returned Item | Refund Through Cash only
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Payment By Cash    ${pos_data}
+   Verify Billing Checkout
+   Pay By Cash | Return Mode
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -260,7 +261,8 @@ Zwing_R_24 Allow Refund Against Returned Item | Refund Through Credit Note
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Collect Payment Using Store Credit     ${pos_data}
+   Navigate To Checkout Page
+   Pay Through Store Credit Method
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -271,7 +273,8 @@ Zwing_R_25 Allow Refund Against Returned Item | Refund Through both credit note 
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Collect Payment Using Store Credit     ${pos_data}
+   Navigate To Checkout Page
+   Pay Through Store Credit Method
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 

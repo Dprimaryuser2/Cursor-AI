@@ -199,7 +199,7 @@ delete_product_icon = '//a[@title="Delete Product"]//*[name()="svg"]//*[name()="
 # customer_info_icon = "//body/div[@id='app']/div[@id='theme']/div[@class='dashboard']/section/div[@class='container-fluid']/div[@class='row']/div[@class='fadein col-md-6 col-lg-6']/div[@class='row mt-2']/div[@class='col-md-6 col-lg-6']/div[@id='customer-info']//a"
 customer_info_icon = "//div[normalize-space(text())='Customer Information']/a[@id='get-customer-info']"
 switch_modal_proceed_button = "//button[@class='btn ml-1 btn-primary btn-block']//span"
-switch_modal_cancel_button = '//button[@class="btn mr-1 btn-outline-primary btn-block" and contains(text(),"Cancel")]'
+switch_modal_cancel_button = '//button[@class="btn mr-1 btn-outline-primary btn-block"]'
 update_product_md = "//button[@id='update-product-btn' and @class='btn ml-2 btn-primary']//span"
 
 #product preview locators
