@@ -20,7 +20,7 @@ Revoke Serial Key
     Wait Until Keyword Succeeds    5    2     Click Element    ${settings_tab}
     ${serial_info_visible}    Run Keyword And Return Status    Element Should Be Visible    ${serial_info_heading}
     IF    '${serial_info_visible}' == 'False'
-         Wait Until Keyword Succeeds    5    2     Click Element    ${serial_information_tab}
+         Wait Until Keyword Succeeds    5    2     Click Element    ${settings_tab}
     END
     ${closing_balance_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance}
     IF    ${closing_balance_visible}
