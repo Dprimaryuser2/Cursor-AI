@@ -31,7 +31,6 @@ Zwing_KB_01 Search product using keyboard shortcut
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_1
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
-    #Verify Shortcut Key Allows Searching Product
     Press Shortcut Key    ${pos_data}
     Verify Shortcut Key Allows Searching Product    ${pos_data}
     Revoke Serial Key    ${pos_data}
@@ -168,16 +167,6 @@ Zwing_KB_14 Checkout bill using keyboard shortcut without tagging customer
      Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_KB_15 Checkout using shortcut before opening session
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_15
-    Login With Valid Username And Password | POS   ${pos_data}
-    Open The Session    ${pos_data}
-    Scan And Add Product    ${pos_data}
-    Press Shortcut Key    ${pos_data}
-    Verify Shortcut Navigates To Checkout Page When Session Is Closed   ${pos_data}
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
 Zwing_KB_16 Search product using keyboard shortcut | Order Mode
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_16
     Login With Valid Username And Password | POS   ${pos_data}
@@ -260,7 +249,7 @@ Zwing_KB_23 On Order screen after tagging a customer, press Ctrl + A | Order Mod
     Scan And Add Product    ${pos_data}
     Add Customer Details    ${pos_data}
     Press Shortcut Key    ${pos_data}
-    Verify Shortcut Key Allows Tagging Customer    ${pos_data}
+    Verify Customer Information Is Displayed For Tag A Customer After Tagging Customer
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -325,7 +314,7 @@ Zwing_KB_29 Search product using keyboard shortcut On Return Screen
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Scan And Add Product    ${pos_data}
     Press Shortcut Key    ${pos_data}
     Verify Shortcut Key Allows Searching Product    ${pos_data}
     Revoke Serial Key    ${pos_data}

@@ -150,8 +150,6 @@ Verify split payment toggle button is disabled.
     Element Should Be Disabled     ${enter_split_amount}
 
 Verify If Payment is Complete Or Not
-#    Wait Until Page Contains Element   ${payment_complete_heading}  timeout=10s
-#    Page Should Contain Element     ${payment_complete_heading}
     Wait Until Page Contains Element    ${checkout_sub_total}   timeout=10s
     Page Should Contain Element     ${checkout_sub_total}
     Wait Until Page Contains Element    ${print_invoice}    timeout=10s

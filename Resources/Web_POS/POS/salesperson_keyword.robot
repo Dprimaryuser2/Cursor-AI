@@ -73,6 +73,8 @@ Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Po
     Switch Browser    2
     Sleep    2
     Change Salesperson Tagging To Optional In POS
+    Switch Browser    1
+    Wait Until Page Contains Element    ${pos_settings}
     
 
 Assign A Salesperson All Items

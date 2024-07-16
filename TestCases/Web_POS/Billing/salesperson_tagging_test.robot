@@ -20,6 +20,7 @@ Zwing_ST_1 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory i
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Add Customer Details    ${pos_data}
    Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Policies
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -30,6 +31,7 @@ Zwing_ST_2 Salesperson Tagging is Enabled and Salesperson Tagging is Optional in
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Add Customer Details    ${pos_data}
    Verify Salesperson Tagging is Enabled and Salesperson Tagging is Optional in Policies
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -48,6 +50,7 @@ Zwing_ST_4 Salesperson Tagging Item Level
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Add Customer Details    ${pos_data}
     Assign A Salesperson To An Item  ${pos_data}
     Verify If Salesperson Is Assigned To An Item    ${pos_data}
     Revoke Serial Key    ${pos_data}
@@ -58,6 +61,7 @@ Zwing_ST_5 Salesperson Tagging Bill Level
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Salesperson Tagged At Bill Level    ${pos_data}
     Revoke Serial Key    ${pos_data}
@@ -68,6 +72,7 @@ Zwing_ST_6 Tag Single Salesperson To multiple Items
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Add Customer Details    ${pos_data}
     Assign Same Salesperson To All Products Except Last Product And Verify   ${pos_data}
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -77,6 +82,7 @@ Zwing_ST_7 Tag Different salesperson for each item
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Add Customer Details    ${pos_data}
     Assign A different Salesperson To Each Item  ${pos_data}
     Verify If Different Salesperson Was Assigned To Each Person
     Revoke Serial Key    ${pos_data}
@@ -87,6 +93,7 @@ Zwing_ST_8 Change Salesperson tagging for item
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Change Salesperson tagging for item    ${pos_data}
     Revoke Serial Key    ${pos_data}
@@ -98,6 +105,7 @@ Zwing_ST_9 Change Salesperson tagging for bill
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Change Salesperson tagging for bill   ${pos_data}
     Revoke Serial Key    ${pos_data}
@@ -108,14 +116,13 @@ Zwing_ST_10 Tagged Sales person view below the tagged Item
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Salesperson Tagged At Bill Level    ${pos_data}
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_ST_11
-    Pass Execution    pass
-    #on hold from client side
+#Zwing_ST_11
 
 Zwing_ST_12 Salesperson Tagging is Disabled in policies
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_12

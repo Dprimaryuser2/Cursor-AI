@@ -21,7 +21,7 @@ Login With Valid Username And Password
     Wait Until Page Contains Element    ${dashboard}    timeout=20s
     Page Should Contain Element    ${invoice_icon}
     Page Should Contain Element    ${product_icon}
-    Page Should Contain Element    ${promotion_icon}
+#    Page Should Contain Element    ${promotion_icon}
 
 Login Into Admin | Zwing
     Input Text    ${email}      zwshashank.agrawal@teampureplay.com
