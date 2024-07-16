@@ -184,7 +184,7 @@ Verify 0 Inventory To Cart With Disable Negative Inventory
         ${key}=    Set Variable    ${item}[0]
         ${values}=    Set Variable    ${item}[1]
         ${value}=    Convert To String    ${values}
-        Page Should Not Contain Element    ${table}
+        Page Should Not Contain Element    ${item_cart_table}
     END
 
 Verify 0 Inventory To Cart With Enable Negative Inventory

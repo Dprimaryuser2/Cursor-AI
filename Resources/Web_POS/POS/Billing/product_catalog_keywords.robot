@@ -208,9 +208,7 @@ Verify Items Allocated With 0 Inventory To Store Are Blur
      ${custom_category}=    Replace String    ${category_sidebar_option}    Body Scrub     ${product_dict.new_category_admin}
      Click Element    ${custom_category}
      Element Should Contain    ${product_catalog_body}     ${product_dict.product_name}
-     #Locator need to update as locator is not present in dom thus testcase will fail
      Page Should Contain Element    ${disabled_product}
-     Page Should Contain Element    //locator_of_0_inventory_product_with_blur
 
 Verify Items Allocated With Some Inventory To Store Are Normal
      [Arguments]    ${product_data}

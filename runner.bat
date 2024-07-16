@@ -1,1 +1,1 @@
-robot --listener RetryFailed:1  -i Demo .\TestCases\Web_POS\Billing\
+robot --listener .\TestCases\Web_POS\Billing\

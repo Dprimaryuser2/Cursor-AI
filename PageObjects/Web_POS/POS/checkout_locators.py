@@ -174,5 +174,4 @@ number_invoice = '//div[@class="modal-content"]//td[contains(text(),"Number")]/s
 invoice_no = '//div[@class="modal-content"]//td[contains(text(),"Invoice No: ")]/span'
 invoice_barcode = '//div[@class="modal-content"]//td[contains(text(),"8906118410774")]'
 invoice_amount = '(//div[@id="cool"]//tbody[@style="vertical-align: text-bottom;"]/tr/td)[last()]'
-
 fulfilment_option = '//h6[@class="mb-4"]'

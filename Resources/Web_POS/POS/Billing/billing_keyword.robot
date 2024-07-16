@@ -150,35 +150,10 @@ Verify split payment toggle button is disabled.
     Element Should Be Disabled     ${enter_split_amount}
 
 Verify If Payment is Complete Or Not
-#    Wait Until Page Contains Element   ${payment_complete_heading}  timeout=10s
-#    Page Should Contain Element     ${payment_complete_heading}
     Wait Until Page Contains Element    ${checkout_sub_total}   timeout=10s
     Page Should Contain Element     ${checkout_sub_total}
     Wait Until Page Contains Element    ${print_invoice}    timeout=10s
     Page Should Contain Element     ${print_invoice}
-
-Apply Item Manual Discount | Custom Discount
-    [Arguments]    ${discount_data}
-    ${discount_dict}    Create Dictionary   &{discount_data}
-    Click Element    ${custom_discount_tab}
-#    Wait Until Element Is Visible    ${discount_type_amount}    timeout=10s
-#    Wait Until Element Is Visible    ${discount_type_percentage}
-    ${discount_list}=    Convert Items To List    ${discount_dict.manual_discount}
-    ${discount_dict} =    Convert Item List To Dictionary    ${discount_dict.manual_discount}
-    ${key}=    Set Variable    ${discount_dict[0]}
-    Log    ${key}
-    ${value}=    Set Variable    ${discount_dict[1]}
-    Log    ${value}
-    IF    '${key}' == 'Custom_Discount_Amount'
-        Click Element    ${discount_type_amount}
-        Input Text    ${discount_value}    ${value}
-        Click Button    ${apply_amount_discount_button}
-    ELSE IF    '${key}' == 'Custom_Discount_Percentage'
-        Click Element    ${discount_type_percentage}
-        Input Text    ${discount_value}    ${value}
-        Click Button    ${apply_percent_discount_button}
-    END
-    Wait Until Element Is Visible    ${update_product_subtotal}
 
 Click On Update Product | Manual Discount
     Wait Until Page Contains Element    ${update_product_md}     timeout=10s
