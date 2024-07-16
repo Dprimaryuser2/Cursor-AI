@@ -92,12 +92,13 @@ Zwing_E_08 Select customer name,enter valid name then check the Response
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-
-Zwing_E_21 Verify invoice parameters are clickable or not
+Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice then check the response.
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_21
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
 
 Zwing_E_22 check whether double digit number are selecting in quantity dropdown in select exchange popup window bar or not
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_22
