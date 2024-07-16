@@ -86,3 +86,11 @@ Select The Invoice Option Type
    Wait Until Page Contains Element   //div[@class="dropdown b-dropdown switch-billing fs-12 mr-3 btn-group"]//button[@class="btn dropdown-toggle btn-light" and contains(text(),"${my_dict.select_invoice_option}")]  timeout=10s
    Page Should Contain Element    //div[@class="dropdown b-dropdown switch-billing fs-12 mr-3 btn-group"]//button[@class="btn dropdown-toggle btn-light" and contains(text(),"${my_dict.select_invoice_option}")]
 
+Search Invoice | Exchange
+   [Arguments]    ${mode}
+   ${my_dict}    Create Dictionary   &{mode}
+   Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
+   Input Text    ${search_invoice_field}    ${my_dict.search_invoice}
+   Press Keys   ${search_invoice_field}   ENTER
+   Wait Until Page Contains Element    ${searched_invoice_heading_row}  timeout=10s
+   Page Should Contain Element    ${searched_invoice_heading_row}

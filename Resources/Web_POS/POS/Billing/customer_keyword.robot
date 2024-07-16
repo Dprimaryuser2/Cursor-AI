@@ -492,7 +492,7 @@ Change Invoice Type From Sales To UIN In Customer Information
     Wait Until Page Does Not Contain Element    ${update_product_button}   timeout=10s
 
 Verify Change Invoice Type from sales to GST
-    Wait Until Page Contains Element    ${customer_info_icon}    timeout=10s
+    Wait Until Page Contains Element    ${customer_info_icon}    timeout=15s
     Click Element    ${customer_info_icon}
     Wait Until Element Is Enabled    ${customer_edit_info_button}    timeout=10s
     Click Element    ${customer_edit_info_button}

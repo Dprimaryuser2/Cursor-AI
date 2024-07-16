@@ -89,6 +89,7 @@ Zwing_E_08 Select customer name,enter valid name then check the Response
     Verify The +Add Exchange Items from Invoice Link
     Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
