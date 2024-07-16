@@ -98,6 +98,7 @@ Partial Payment
     Input Text      ${enter_cash}   ${half_amount}
     Wait Until Element Is Enabled    ${continue_cash_button} 
     Click Element    ${continue_cash_button}
+    Wait Until Page Contains Element    ${payment_saved_successful}    timeout=20s
 
 Discard Bill | Checkout
     Wait Until Page Contains Element    ${discard_payment_bill}
@@ -108,7 +109,7 @@ Discard Bill | Checkout
 Verify Discard Bill After Partial Payment
     Wait Until Page Contains Element    ${cart_0}
     Page Should Contain Element    ${cart_0}
-    Element Should Be Disabled   ${clear_all_items}
+    Page Should Not Contain Element  ${clear_all_items}
 
 Verify Multiple Price Product Is Added
     sleep   0.5
@@ -133,6 +134,13 @@ Add Customer Details for partial payment
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
     Click Button    ${start_billing_button}
+    Sleep  1s
+    ${status}=  Run Keyword And Return Status    Element Should Be Visible    ${add_items_to_cart}
+    IF     ${status}
+         Click Button    ${discard_button}
+    END
+    ${customer_data}    Create Dictionary    customer_phone_number=${my_dict.mobile}
+    RETURN    ${customer_data}
 
 Payment By Paytm
     [Arguments]    ${paytm_value}
@@ -461,6 +469,7 @@ Reset Bill | Billing Module
 Validate Account Balance Are Equal On Tagged Customer Details and Checkout Page
     Wait Until Page Contains Element    ${customer_info_icon}
     Click Element    ${customer_info_icon}
+    Wait Until Element Is Enabled    ${customer_edit_info_button}   timeout=20s
     Element Should Be Enabled    ${customer_edit_info_button}
     Element Should Be Enabled    ${customer_edit_groups_button}
     Element Should Be Enabled    ${customer_untag_button}
@@ -483,6 +492,7 @@ Validate Account Balance Are Equal On Tagged Customer Details and Checkout Page
 Validate Store Credit Are Equal On Tagged Customer Details and Checkout Page
     Wait Until Page Contains Element    ${customer_info_icon}
     Click Element    ${customer_info_icon}
+    Wait Until Element Is Enabled    ${customer_edit_info_button}   timeout=20s
     Element Should Be Enabled    ${customer_edit_info_button}
     Element Should Be Enabled    ${customer_edit_groups_button}
     Element Should Be Enabled    ${customer_untag_button}
@@ -504,6 +514,7 @@ Validate Store Credit Are Equal On Tagged Customer Details and Checkout Page
 Validate Loyalty Points Are Equal On Tagged Customer Details and Checkout Page
     Wait Until Page Contains Element    ${customer_info_icon}
     Click Element    ${customer_info_icon}
+    Wait Until Element Is Enabled    ${customer_edit_info_button}   timeout=20s
     Element Should Be Enabled    ${customer_edit_info_button}
     Element Should Be Enabled    ${customer_edit_groups_button}
     Element Should Be Enabled    ${customer_untag_button}
@@ -536,16 +547,8 @@ Verify If Bill Was Calculated | Net Price Same As Payable Amount
 
 
 Apply Item Level Promos
-    Wait Until Element Is Enabled    ${product_name_in_cart_row}
-    Click Element    ${product_name_in_cart_row}
-    Sleep    1
-    Wait Until Page Contains Element    ${active_promotion}
-    Click Element    ${active_promotion}
-    Wait Until Page Contains Element    ${active_promo_dropdown_row}
-    Click Element    ${active_promo_dropdown_row}
-    Wait Until Element Is Enabled    ${update_product_button}
-    Click Element    ${update_product_button}
-
+    Wait Until Page Contains Element    ${apply_promo}
+    Click Element    ${apply_promo}
 
 Apply Bill Level Promos
     Wait Until Page Contains Element    ${checkout_bill_promos}
@@ -555,18 +558,21 @@ Apply Bill Level Promos
 
 
 Verify Bill Level Promos Applied
+    Wait Until Page Contains Element    ${bill_promo_discount}
     Page Should Contain Element    ${bill_promo_discount}
     ${bpromo_discount}  Get Text    ${bill_promo_discount}
     ${stotal}    Get Text    ${sub_total}
     ${taxes_value}    Get Text    ${taxes}
-    Remove Characters   ${stotal}
-    Remove Characters    ${bpromo_discount}
-    Remove Characters    ${taxes_value}
-    ${result}   Evaluate    ${stotal}  -  ${bpromo_discount}
-    ${final_result}    Evaluate    ${result}    +   ${taxes_value}
+    ${s}    Remove Characters   ${stotal}
+    ${b}    Remove Characters    ${bpromo_discount}
+    ${t}    Remove Characters    ${taxes_value}
+    ${result}   Evaluate    ${s}-${b}
+    Convert To Number    ${result}
+    ${final_result}    Evaluate    ${result}+${t}
     ${grand__total}    Get Text    ${grand_total}
-    Remove Characters    ${grand__total}
-    Should Be Equal    ${grand__total}    ${result}
+    ${gt}  Remove Characters    ${grand__total}
+    ${gt}  Convert To Number    ${gt}
+    Should Be Equal    ${gt}    ${final_result}
 
 
 Verify If Item Level Promos Applied
