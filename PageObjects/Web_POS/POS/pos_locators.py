@@ -273,5 +273,5 @@ reasons_col_title = '//div[@class="col-3" and contains(text(),"Reason* ")]'
 qty_col_title = '//div[@class="col-1" and contains(text(),"Qty")]'
 unit_price_col_title = '//div[@class="col-1" and contains(text(),"Unit Price")]'
 exchange_qty_col_title = '//div[@class="pr-0 col-2" and contains(text(),"Total Exchange Qty")]'
-
+first_row_qty_exchange = '(//div[@class="row fs-13 py-3 rows px-4 fs-12 grey-100 align-items-center"]//div[@class="col-1"])[1]'
 exchange_popup="//div[@class='popup-notification']"

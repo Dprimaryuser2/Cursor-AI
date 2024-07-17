@@ -18,8 +18,8 @@ Cancel No Payment Required | Checkout Page
     Page Should Contain Element     ${no_payment_required_confirm_button}
     Click Element   ${no_payment_required_cancel_button}
 
-Verify Exchange Text Is Clickable
-   [Arguments]    ${mode}
+Click On Exchange Text In Dropdown
+    [Arguments]    ${mode}
     ${my_dict}    Create Dictionary   &{mode}
     ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
     IF    ${clear_item_enabled}
@@ -29,42 +29,52 @@ Verify Exchange Text Is Clickable
     Wait Until Page Contains Element    ${switch_billing_dropdown}
     Click Element    ${switch_billing_dropdown}
     Click Element    //a[contains(text(),"${my_dict.Mode}")]
+
+Verify Exchange Text Is Clickable
     Wait Until Page Contains Element    ${switch_modal_text}
     Page Should Contain Element    ${switch_modal_text}
     Element Should Be Enabled    ${switch_confirm_button}
     Element Should Be Enabled    ${switch_cancel_button}
 
-Verify The Confirm Button | Exchange
+Click On Confirm Button | Exchange
     [Arguments]    ${mode}
     ${my_dict}    Create Dictionary   &{mode}
     Wait Until Page Contains Element    ${switch_confirm_button}    timeout=20s
     Element Should Be Enabled    ${switch_confirm_button}
     Click Element    ${switch_confirm_button}
+
+Verify The Confirm Button | Exchange
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
     Wait Until Page Contains Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Mode}"]
     Page Should Contain Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Mode}"]
 
-Verify The Cancel Button | Exchange
-    [Arguments]    ${mode}
-    ${my_dict}    Create Dictionary   &{mode}
+Click On Cancel Button | Exchange
     Wait Until Page Contains Element    ${switch_cancel_button}    timeout=20s
     Element Should Be Enabled    ${switch_cancel_button}
     Click Element    ${switch_cancel_button}
+
+Verify The Cancel Button | Exchange
     Wait Until Page Contains Element    ${billing_option_switch_default}
     Page Should Contain Element    ${billing_option_switch_default}
 
-Verify The +Add Exchange Items from Invoice Link
+Click On +Add Exchange Items from Invoice Link
     Wait Until Page Contains Element    ${add_exchange_item_link}  timeout=30s
     Page Should Contain Element    ${add_exchange_item_link}
     Click Element    ${add_exchange_item_link}
+
+Verify The +Add Exchange Items from Invoice Link
     Wait Until Page Contains Element    ${search_invoice_field}  timeout=30s
     Page Should Contain Element    ${search_invoice_field}
     Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=30s
     Page Should Contain Element    ${select_search_invoice_option_btn}
 
-Verify The Invoice Parameters Are Clickable
+Click On Invoice Parameters
     Wait Until Page Contains Element    ${select_search_invoice_option_btn}  timeout=20s
     Page Should Contain Element    ${select_search_invoice_option_btn}
     Click Element    ${select_search_invoice_option_btn}
+
+Verify The Invoice Parameters Are Clickable
     Wait Until Page Contains Element    ${invoice_number_search_option}   timeout=10s
     Page Should Contain Element    ${invoice_number_search_option}
     Page Should Contain Element    ${customer_name_search_option}
@@ -73,10 +83,13 @@ Verify The Invoice Parameters Are Clickable
     Wait Until Page Contains Element    ${selected_parameter_invoice_option}  timeout=10s
     Page Should Contain Element    ${selected_parameter_invoice_option}
 
+Click On The Close Tab Cross(X) | Exchange
+    Wait Until Page Contains Element    ${div_svg_cross_icon}  timeout=5s
+    Click Element At Coordinates    ${div_svg_cross_icon}    ${352}    ${512}
+
 Verify The Close Tab Cross(X) | Exchange
     [Arguments]    ${mode}
     ${my_dict}    Create Dictionary   &{mode}
-    Click Element At Coordinates    ${div_svg_cross_icon}    ${352}    ${512}
     Wait Until Page Contains Element    ${add_exchange_item_link}  timeout=10s
     Element Should Be Visible    ${add_exchange_item_link}
     Page Should Contain Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Mode}"]
@@ -99,15 +112,12 @@ Search Invoice | Exchange
    Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
    Input Text    ${search_invoice_field}    ${my_dict.search_invoice}
    Press Keys   ${search_invoice_field}   ENTER
+
+Verify The Search Invoice Response | Exchange
    Wait Until Page Contains Element    ${searched_invoice_heading_row}  timeout=20s
    Page Should Contain Element    ${searched_invoice_heading_row}
 
-Verify Invoice Search By Invalid Customer Number
-   [Arguments]    ${mode}
-   ${my_dict}    Create Dictionary   &{mode}
-   Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
-   Input Text    ${search_invoice_field}    ${my_dict.search_invoice}
-   Press Keys   ${search_invoice_field}   ENTER
+Verify Invoice Search By Invalid Customer Data
    Wait Until Page Contains Element    ${invoice_not_found}
    Page Should Contain Element    ${invoice_not_found}
    
@@ -116,6 +126,7 @@ Verify All Columns Are Present In Item Exchange Window
    ${my_dict}    Create Dictionary   &{mode}
    Wait Until Page Contains Element    ${first_row_invoice}
    Click Element    ${first_row_invoice}
+   Sleep  2s
    Wait Until Page Contains Element    ${select_item_for_exchange_title}  timeout=10s
    Page Should Contain Element    ${sku_barcode_col_title}
    Page Should Contain Element    ${product_name_col_title}
@@ -123,7 +134,6 @@ Verify All Columns Are Present In Item Exchange Window
    Page Should Contain Element    ${unit_price_col_title}
    Page Should Contain Element    ${exchange_qty_col_title}
    Page Should Contain Element    ${reasons_col_title}
-
 
 Select Invoice From Search Options
     Wait Until Page Contains Element    ${first_row_invoice}    timeout=30s
@@ -175,11 +185,6 @@ Scan Barcode To Add Item And Quantity To Cart | Exchange
     ${my_dict}    Create Dictionary   &{products}
     Log    ${my_dict.buy_items}
     Wait Until Element Is Visible    ${scan_only}    timeout=20s
-    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
-#    IF    ${clear_item_enabled}
-#      Click Element    ${clear_all_items}
-#      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
-#    END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
     FOR    ${item}    IN    @{items_dict.items()}
@@ -197,7 +202,6 @@ Scan Barcode To Add Item And Quantity To Cart | Exchange
         IF    ${multiple_product_present}
             Add Multiple MRP Products
         END
-
         Wait Until Element Contains     ${table}    ${key}    timeout=20s
         Element Should Contain    ${item_cart_table}    ${key}
         ${unit_price_amount}=    Get Text    ${price}
@@ -224,8 +228,6 @@ Scan Barcode To Add Item And Quantity To Cart | Exchange
     END
     ${items_list}=    Convert Items To List    ${my_dict.get_items}
     IF    ${items_list} != ['NULL']
-#        ${items_list}=    Convert Items To List    ${my_dict.get_items}
-#        Log    ${items_list}
         ${items_dict} =    Convert Item List To Dictionary    ${my_dict.get_items}
         Log    ${items_dict}
         FOR    ${item}    IN    @{items_dict.items()}
@@ -266,7 +268,6 @@ Click on New Bill Button
     Click Element    ${new_bill_button}
     Wait Until Page Contains Element    ${cart_0}   timeout=10s
 
-
 Verify Item Added In Cart | Exchange
     Wait Until Page Contains Element    ${in_store}   timeout=10s
     Page Should Contain Element    ${in_store}
@@ -280,12 +281,10 @@ Verify Item Added In Cart | Exchange
     Element Should Be Enabled    ${checkout_button}
     Element Should Be Enabled    ${clear_all_items}
     
-    
 Verify Exchange Page After Reload
     Wait Until Page Contains Element    ${in_store}     timeout=10s
     Page Should Contain Element    ${in_store}
 #    Page Should Contain Element    ${add_exchange_item_link}
-
 
 Remove Exchange Product From Cart
     Wait Until Page Contains Element    ${delete_item}  timeout=10s
@@ -306,3 +305,85 @@ Verify Exchange Item Is Added In The Cart
 Verify Count of Items For Exchange After Payment
     [Arguments]     ${total_quantity}   ${total_quantity1}
     Should Not Be Equal As Numbers    ${total_quantity}    ${total_quantity1}
+
+Verify Exchange Quantity Dopdown In Popup Is Working
+   Wait Until Page Contains Element    ${select_item_for_exchange_title}  timeout=15s
+   Click Element    ${exchange_qty}
+   Wait Until Page Contains Element    ${exchange_qty_option}   timeout=10s
+   Page Should Contain Element    ${exchange_qty_option}
+
+Verify Continue Button | Exchange Item Window
+   [Arguments]    ${mode}
+   ${my_dict}    Create Dictionary   &{mode}
+   Wait Until Page Contains Element    ${add_product_for_exchange_btn}  timeout=10s
+   Page Should Contain Element    ${add_product_for_exchange_btn}
+   Page Should Contain Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Mode}"]
+   Page Should Contain Element    ${in_store}
+   Page Should Contain Element    ${delivery}
+   Element Should Be Enabled    ${clear_all_items}
+
+Verify Cancel Button | Exchange Item Window
+   [Arguments]    ${mode}
+   ${my_dict}    Create Dictionary   &{mode}
+   Wait Until Page Contains Element    ${cancel_btn_exchange_window}   timeout=10s
+   Click Element    ${cancel_btn_exchange_window}
+   Wait Until Page Contains Element    ${add_exchange_item_link}
+   Page Should Contain Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Mode}"]
+   Page Should Contain Element    ${in_store}
+   Page Should Contain Element    ${delivery}
+
+Verify Checklist Is Clickable | Exchange Item Window
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Sleep    1s
+    Click Element    ${search_reason_dropdown}
+    Wait Until Page Contains Element    ${exchange_reason_option}   timeout=10s
+    Click Element    ${exchange_reason_option}
+    Click Element    ${first_product_row_checkbox}
+    ${total_quantity}=  Get Text    ${first_row_qty_exchange}
+    ${total_quantity}  Convert To String     ${total_quantity}
+    ${product_selected_title}=  Get Text    ${product_selected_for_exchange_text}
+    ${total_qty_message}    Replace String    //p[@class="text-primary mb-0 text-left" and contains(text(),"TOTAL products selected for exchange.")]    TOTAL    ${total_quantity}
+    Wait Until Page Contains Element   ${total_qty_message}
+    [Return]    ${total_quantity}
+
+Tag Customer Without Name
+    [Arguments]    ${customer_data}
+    ${my_dict}    Create Dictionary   &{customer_data}
+    Wait Until Element Is Enabled    ${add_customer_link}   timeout=40s
+    Click Element    ${add_customer_link}
+    Wait Until Element Is Visible    ${customer_phone_field}
+    ${mobile}=     Generate Random Phone Number
+    Set Test Variable    ${mobile}
+    Input Text    ${customer_phone_field}    ${mobile}
+    Click Button    ${continue_billing_button}
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
+    Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
+    Click Button    ${start_billing_button}
+    Wait Until Element Is Visible    //div[@class="popup-notification"]    timeout=10s
+    Wait Until Element Is Visible    ${payable_amount}
+    Wait Until Element Is Visible    ${checkout_button}    timeout=10s
+    Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
+    Wait Until Element Is Not Visible    //div[@class="popup-notification"]     timeout=10s
+    ${customer_information}=    Create Dictionary   phone_number= ${mobile}
+    [Return]    ${customer_information}
+
+Enter Customer Name For Previously Used Number
+    Click Element    ${customer_info_icon}
+    Wait Until Element Is Visible    ${customer_info_window_title}    timeout=10s
+    Wait Until Element Is Visible    ${customer_edit_info_button}    timeout=10s
+    Click Element    ${customer_edit_info_button}
+    Wait Until Element Is Visible    ${customer_phone_field}    timeout=10s
+    ${first_name}=    Generate Random First Name
+    Input Text     ${customer_first_name_field}    ${first_name}
+    ${last_name}=    Generate Random Last Name
+    Input Text    ${customer_last_name_field}    ${last_name}
+    Click Button    ${customer_info_update_button}
+    Sleep    2
+    Discard Items If Present From Previous Session
+    Wait Until Element Is Visible    ${customer_info_close_element}    timeout=10s
+    Click Element    ${customer_info_close_element}
+    Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
+    ${customer_info}    Create Dictionary    first_name=${first_name}    last_name=${last_name}
+    RETURN    ${customer_info}
