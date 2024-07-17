@@ -4,7 +4,7 @@ Library    String
 Library    Collections
 Library    ../../../../Resources/CustomKeywords/utilities.py
 Resource   ../../../../Resources/Web_POS/Login/login_keyword.robot
-Resource    ../../../../Resources/Web_POS/POS/promo_keyword.robot
+Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Resource    ../../../AdminConsole/Login/login_keyword.robot
 Resource    ../../../AdminConsole/POSTerminal/pos_terminal_keyword.robot
 Variables    ../../../../PageObjects/Web_POS/POS/hold_bill_locators.py
@@ -73,6 +73,8 @@ Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Po
     Switch Browser    2
     Sleep    2
     Change Salesperson Tagging To Optional In POS
+    Switch Browser    1
+    Wait Until Page Contains Element    ${pos_settings}
     
 
 Assign A Salesperson All Items

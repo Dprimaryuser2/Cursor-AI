@@ -2,9 +2,9 @@
 Library    SeleniumLibrary
 Library    ../../../Resources/CustomKeywords/utilities.py
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/manual_discount_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 
 Test Setup    Open Application | POS
@@ -431,7 +431,7 @@ Zwing_MD_37 Apply Manual Discount Button | Enable Item level discount | Enable C
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      Verify Enabled Item Level Discount
-     Verify Enable Item Level Discount List
+     Verify Enable Item Level Custom Discount
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
