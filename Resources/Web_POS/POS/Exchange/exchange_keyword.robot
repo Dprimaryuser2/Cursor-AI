@@ -116,12 +116,36 @@ Select Items For Exchange
     Click Element    ${exchange_qty}
     Click Element    //select[@class="fs-12 custom-select"]//option[contains(text(),"${my_dict.replace_qty}")]
     Click Element    ${search_reason_dropdown}
+    Wait Until Page Contains Element    ${exchange_reason_option}   timeout=10s
     Click Element    ${exchange_reason_option}
+    ${total_quantity}=  Get Text    ${exchange_qty}
     Click Element    ${continue_btn_exchange_window}
+    [Return]    ${total_quantity}
 
 Add Product For Exchange
-    Wait Until Page Contains Element    ${add_product_for_exchange_btn}     timeout=10s
+    Wait Until Page Contains Element    ${add_product_for_exchange_btn}     timeout=20s
     Click Element    ${add_product_for_exchange_btn}
+
+Scan Barcode To Add Item And Quantity To Cart By Name | Exchange
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    1s
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    1s
+        Click Element    ${search_add_button}
+        ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
+    END
 
 Scan Barcode To Add Item And Quantity To Cart | Exchange
     [Arguments]    ${products}
@@ -146,9 +170,11 @@ Scan Barcode To Add Item And Quantity To Cart | Exchange
         Sleep    1s
         Click Element    ${search_add_button}
         ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
+
         IF    ${multiple_product_present}
             Add Multiple MRP Products
         END
+
         Wait Until Element Contains     ${table}    ${key}    timeout=20s
         Element Should Contain    ${item_cart_table}    ${key}
         ${unit_price_amount}=    Get Text    ${price}
@@ -211,3 +237,49 @@ Scan Barcode To Add Item And Quantity To Cart | Exchange
             Wait Until Element Is Enabled    ${product_search_bar}    timeout=10s
         END
     END
+
+Click on New Bill Button
+    Wait Until Page Contains Element    ${new_bill_button}
+    Click Element    ${new_bill_button}
+    Wait Until Page Contains Element    ${cart_0}   timeout=10s
+
+
+Verify Item Added In Cart | Exchange
+    Wait Until Page Contains Element    ${in_store}   timeout=10s
+    Page Should Contain Element    ${in_store}
+    Page Should Contain Element    ${delivery}
+    Wait Until Page Contains Element    ${cart_last_element}  timeout=5s
+    Wait Until Page Contains Element    ${payable_amount}   timeout=15s
+    Page Should Contain Element    ${payable_amount}
+    Page Should Contain Element    ${sub_total}
+    Page Should Contain Element    ${net_price}
+    Wait Until Element Is Enabled    ${checkout_button}     timeout=20s
+    Element Should Be Enabled    ${checkout_button}
+    Element Should Be Enabled    ${clear_all_items}
+    
+    
+Verify Exchange Page After Reload
+    Wait Until Page Contains Element    ${in_store}     timeout=10s
+    Page Should Contain Element    ${in_store}
+#    Page Should Contain Element    ${add_exchange_item_link}
+
+
+Remove Exchange Product From Cart
+    Wait Until Page Contains Element    ${delete_item}  timeout=10s
+    Click Element    ${delete_item}
+    Sleep    0.3s
+
+Verify Validation Message Popup | Exchange
+    Wait Until Page Contains Element    ${exchange_popup}   timeout=20s
+    Page Should Contain Element    ${exchange_popup}
+
+Verify Exchange Item Is Added In The Cart
+    Wait Until Page Contains Element    ${cart_last_element}    timeout=10s
+    Wait Until Page Contains Element    ${add_product_for_exchange_btn}   timeout=10s
+    Page Should Contain Element    ${add_product_for_exchange_btn}
+    Page Should Contain Element    ${payable_amount}
+    Page Should Contain Element    ${sub_total}
+
+Verify Count of Items For Exchange After Payment
+    [Arguments]     ${total_quantity}   ${total_quantity1}
+    Should Not Be Equal As Numbers    ${total_quantity}    ${total_quantity1}

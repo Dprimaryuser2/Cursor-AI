@@ -102,13 +102,21 @@ Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice t
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
     Select Invoice From Search Options
-    Select Items For Exchange   ${pos_data}
+    ${total_quantity}   Select Items For Exchange   ${pos_data}
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart | Exchange    ${pos_data}
     Verify Billing Checkout
-    Payme
+    Split Payment By Redeem Voucher
+    Click on New Bill Button
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    ${total_quantity1}   Select Items For Exchange   ${pos_data}
+    Verify Count of Items For Exchange After Payment    ${total_quantity}   ${total_quantity1}
 
-
+    
 Zwing_E_22 check whether double digit number are selecting in quantity dropdown in select exchange popup window bar or not
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_22
     Login With Valid Username And Password | POS    ${pos_data}
@@ -117,6 +125,10 @@ Zwing_E_22 check whether double digit number are selecting in quantity dropdown 
     Verify The +Add Exchange Items from Invoice Link
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Verify Exchange Item Is Added In The Cart
+
 
 #Zwing_E_23 Repeated
 
@@ -128,6 +140,9 @@ Zwing_E_24 check all the information about product in cart is correct or not
     Verify The +Add Exchange Items from Invoice Link
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Verify Exchange Item Is Added In The Cart
 
 Zwing_E_25 select invoice which have multiply quantity of a single product for exchange, click on confirm button and check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_25
@@ -137,6 +152,9 @@ Zwing_E_25 select invoice which have multiply quantity of a single product for e
     Verify The +Add Exchange Items from Invoice Link
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Verify Exchange Item Is Added In The Cart
 
 Zwing_E_26 select invoice which have multiple products for exchange with quantity >1 , click on confirm button and check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_26
@@ -146,6 +164,9 @@ Zwing_E_26 select invoice which have multiple products for exchange with quantit
     Verify The +Add Exchange Items from Invoice Link
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Verify Exchange Item Is Added In The Cart
 
 Zwing_E_27 select + add product for exchange button and add alternate item from catalog
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_27
@@ -155,6 +176,11 @@ Zwing_E_27 select + add product for exchange button and add alternate item from 
     Verify The +Add Exchange Items from Invoice Link
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Add Items In Cart | Catalog   ${pos_data}
+    Verify Item Added In Cart | Exchange
 
 Zwing_E_28 select a alternate product that UOM does not match with the exchange product UOM then check the response.
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_28
@@ -164,6 +190,12 @@ Zwing_E_28 select a alternate product that UOM does not match with the exchange 
     Verify The +Add Exchange Items from Invoice Link
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart By Name | Exchange  ${pos_data}
+    Verify Validation Message Popup | Exchange
+
 
 Zwing_E_29 select a alternate product that UOM matches with the exchange product UOM then check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_29
@@ -173,47 +205,131 @@ Zwing_E_29 select a alternate product that UOM matches with the exchange product
     Verify The +Add Exchange Items from Invoice Link
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Item Added In Cart | Exchange
 
 Zwing_E_30 search a valid alternate product by barcode in search bar during exchange process
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_30
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Item Added In Cart | Exchange
 
 Zwing_E_31 search a valid alternate product by name in search bar during exchange process
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_31
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart By Name | Exchange   ${pos_data}
+    Verify Item Added In Cart | Exchange
 
 Zwing_E_32 select invoice from search bar, click on confirm button, refresh the page then check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_32
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Reload Page
+    Verify Exchange Page After Reload
 
 Zwing_E_33 Add a exchange product, add a alternate product, remove exchange product ,again add same product, add alternate product then check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_33
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Remove Exchange Product From Cart
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Item Added In Cart | Exchange
 
-Zwing_E_34 Add a serial/batch product as alternate product against a normal product then check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_34
-    Login With Valid Username And Password | POS    ${pos_data}
-    Open The Session    ${pos_data}
-    Change Billing Mode    ${pos_data}
+
+#Zwing_E_34 Add a serial/batch product as alternate product against a normal product then check the response
+#    Serial and Batch Product.
 
 Zwing_E_35 add a invoice which have multiple product,add opposite product of exchange product then check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_35
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Item Added In Cart | Exchange
+
+E_36 elect a exchanged product which have no discount and quantity is 1,select a alternate product with same quantity and Net price
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_36
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart By Name | Exchange  ${pos_data}
+    Verify Item Added In Cart | Exchange
 
 
+E_37 select a alternate product with same quantity and Net price >then the exchange product net price
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_37
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Item Added In Cart | Exchange
 
-
-
+E_38 select a alternate product with same quantity and Net price less than the exchange product net price
+    #need prodocut less then exchange item
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_38
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Sleep    10s
 
 
 
@@ -289,3 +405,8 @@ Zwing_E_62 check whether salesperson tagging option is popup or not for alternat
     Verify If Salesperson Is Assigned To An Item    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+
+ #testcase 29 same product under UOM | update test data
+ # 38 jvlearphone less then price under same UOM   | update test data
+ # inclusive and exclusive tax
