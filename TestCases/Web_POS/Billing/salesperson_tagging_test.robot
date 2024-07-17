@@ -68,7 +68,7 @@ Zwing_ST_6 Tag Single Salesperson To multiple Items
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-    Assign Same Salesperson To All Products Except Last Product And Verify   ${pos_data}
+    Verify Assign Same Salesperson To All Products Except Last Product   ${pos_data}
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 

@@ -115,7 +115,7 @@ Verify Salesperson Tagged At Bill Level
         Should Contain    ${temp}    ${my_dict.salesperson_name}
     END
 
-Assign Same Salesperson To All Products Except Last Product And Verify
+Verify Assign Same Salesperson To All Products Except Last Product
     [Arguments]    ${pos_data}
     ${my_dict}    Create Dictionary    &{pos_data}
     ${products_list}    Get Webelements    ${product_name_in_cart_row}

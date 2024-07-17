@@ -24,6 +24,7 @@ Zwing_R_1 Return should be mark enable in policies
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
+   Verify Return mark enable in policies
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -54,6 +55,7 @@ Zwing_R_4 When Auto Switch to billing is Off
    Turn Auto Switch To Billing Off
    Change Billing Mode    ${pos_data}
    Turn Auto Switch To Billing On
+   Verify Auto Switch to billing is Off
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -63,6 +65,7 @@ Zwing_R_5 Adding product by scanning the Barcode
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Verify Add product
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -72,8 +75,9 @@ Zwing_R_6 Add items to Return by searching the barcode or name of Item
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Verify Add product
    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_7 Add items to Return by catalog
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_7
@@ -81,6 +85,7 @@ Zwing_R_7 Add items to Return by catalog
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Add Items In Cart | Catalog    ${pos_data}
+   Verify Add product
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -91,6 +96,7 @@ Zwing_R_8 Add Salesperson with return item
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Assign A Salesperson To An Item    ${pos_data}
+   Verify If Salesperson Is Assigned To An Item    ${pos_data}
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -120,6 +126,7 @@ Zwing_R_11 Add items to Return by catalog
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Add Items In Cart | Catalog    ${pos_data}
+   Verify Add Product
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -129,6 +136,7 @@ Zwing_R_12 Add Qty to the added item
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Verify Add Product
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -140,6 +148,7 @@ Zwing_R_13 Remove item to the cart
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Delete Item In The Cart
+   Verify Remove item to the cart
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -150,7 +159,7 @@ Zwing_R_14 Assign Salesperson to product While returning the product
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Assign Same Salesperson To All Products Except Last Product And Verify
+   Verify Assign Same Salesperson To All Products Except Last Product    ${pos_data}
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -162,6 +171,7 @@ Zwing_R_15 Assign customer to the return when customer Tagging is mandatory
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Add Customer Details    ${pos_data}
+   Verify Customer Tagging    ${pos_data}
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -173,6 +183,7 @@ Zwing_R_16 Assign customer to the return when customer Tagging is optional in po
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Add Customer Details    ${pos_data}
+   Verify Customer Tagging    ${pos_data}
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -183,9 +194,10 @@ Zwing_R_17 Apply Customised Manual Discount item level
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Apply Item Manual Discount | Custom Discount
+   Apply Item Manual Discount | Custom Discount    ${pos_data}
+   Verify Item Manual Discount    ${pos_data}
    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 
 Zwing_R_18 Apply Customised Manual Discount item level
@@ -194,9 +206,10 @@ Zwing_R_18 Apply Customised Manual Discount item level
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Apply Item Manual Discount | Custom Discount
+   Apply Item Manual Discount | Custom Discount    ${pos_data}
+   Verify Item Manual Discount    ${pos_data}
    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 
 Zwing_R_19 Apply Customised Manual Discount item level by Fixed amount in item level
@@ -205,7 +218,8 @@ Zwing_R_19 Apply Customised Manual Discount item level by Fixed amount in item l
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Apply Bill Manual Discount | Select From List     ${pos_data}
+   ${bill_data}    Apply Bill Manual Discount | Select From List    ${pos_data}
+   Verify Bill Level Manual Discount    ${bill_data}
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -216,7 +230,8 @@ Zwing_R_20 Apply Customised Manual Discount item level by percentage item level
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Apply Bill Manual Discount | Select From List    ${pos_data}
+   ${bill_data}    Apply Bill Manual Discount | Select From List    ${pos_data}
+   Verify Bill Level Manual Discount    ${bill_data}
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -228,12 +243,13 @@ Zwing_R_21 Apply Item level Promo
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Apply Item Level Promos
+   Verify If Item Level Promos Applied
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 
 Zwing_R_22 Check out from POS screen to Payment Collection
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_21
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_22
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -251,6 +267,7 @@ Zwing_R_23 Allow Refund Against Returned Item | Refund Through Cash only
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Verify Billing Checkout
    Pay By Cash | Return Mode
+   Verify If Payment Is Complete Or Not
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -263,6 +280,7 @@ Zwing_R_24 Allow Refund Against Returned Item | Refund Through Credit Note
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Navigate To Checkout Page
    Pay Through Store Credit Method
+   Verify If Payment Is Complete Or Not
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -275,6 +293,7 @@ Zwing_R_25 Allow Refund Against Returned Item | Refund Through both credit note 
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Navigate To Checkout Page
    Pay Through Store Credit Method
+   Verify If Payment Is Complete Or Not
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -285,6 +304,7 @@ Zwing_R_26 Click on Confirm button on switch to Billing popup box
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Auto Switch To Billing
+   Verify Auto Switch To Billing
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -295,16 +315,18 @@ Zwing_R_27 Click on Cancel button on switch to Billing popup box
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Cancel Auto Switch To Billing
+   Verify Billing Mode Present
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 
 Zwing_R_28 Switching Between Return to Billing Will Give Confirmation Popup
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_26
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_28
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Auto Switch To Billing
+   Verify Auto Switch To Billing
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -315,6 +337,7 @@ Zwing_R_29 Click on Confirm button on switch to Order popup box
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Switch From Return Mode To Order
+   Verify Switch To Order Mode
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -325,6 +348,7 @@ Zwing_R_30 Click on Cancel button on switch to Order popup box
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Cancel Switch From Return Mode To Order
+   Verify Return Mode Present
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -335,6 +359,7 @@ Zwing_R_31 Switching Between Return to Order Will Give Confirmation Popup
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Switch From Return Mode To Order
+   Verify Switch To Order Mode
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -344,8 +369,9 @@ Zwing_R_32 Click on Confirm button on switch to Exchange popup box
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Switch From Return Mode To Exchange
+   Verify Exchange Mode Present
    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_33 Click on Cancel button on switch to Exchange popup box
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_33
@@ -353,6 +379,7 @@ Zwing_R_33 Click on Cancel button on switch to Exchange popup box
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Cancel Switch From Return Mode To Exchange
+   Verify Return Mode Present
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -362,5 +389,6 @@ Zwing_R_34 Switching Between Return to Exchange Will Give Confirmation Popup
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Switch From Return Mode To Exchange
+   Verify Exchange Mode Present
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}

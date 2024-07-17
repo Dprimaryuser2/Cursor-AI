@@ -7,7 +7,7 @@ Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
 Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
 Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
 Variables    ../../../../PageObjects/Web_POS/POS/checkout_locators.py
-Resource    ../../../../Resources/Web_POS/POS/promo_keyword.robot
+Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 
 *** Keywords ***
 
@@ -81,6 +81,10 @@ Cancel Auto Switch To Billing
     Wait Until Page Contains Element    ${switch_modal_cancel_button}    timeout=5
     Click Element    ${switch_modal_cancel_button}
 
+Verify Billing Mode Present
+    Wait Until Page Contains Element    ${billing_option_switch_default}    timeout=5
+    Page Should Contain Element    ${billing_option_switch_default}
+
 Switch From Return Mode To Order
     Wait Until Page Contains Element    ${return_option_switch}    timeout=5
     Click Element    ${return_option_switch}
@@ -88,6 +92,10 @@ Switch From Return Mode To Order
     Click Element    ${order_option}
     Wait Until Page Contains Element    ${switch_confirm_button}    timeout=5
     Click Element    ${switch_confirm_button}
+    Wait Until Page Contains Element    ${order_option_switch}    timeout=5
+    Page Should Contain Element    ${order_option_switch}
+
+Verify Switch To Order Mode
     Wait Until Page Contains Element    ${order_option_switch}    timeout=5
     Page Should Contain Element    ${order_option_switch}
 
@@ -101,6 +109,10 @@ Cancel Switch From Return Mode To Order
     Page Should Contain Element    ${return_option_switch}
     Page Should Not Contain Element    ${order_option_switch}
 
+Verify Return Mode Present
+    Wait Until Page Contains Element    ${return_option_switch}   timeout=5
+    Page Should Contain Element    ${return_option_switch}
+
 Switch From Return Mode To Exchange
     Wait Until Page Contains Element    ${return_option_switch}    timeout=5
     Click Element    ${return_option_switch}
@@ -109,6 +121,10 @@ Switch From Return Mode To Exchange
     Wait Until Page Contains Element    ${switch_confirm_button}    timeout=5
     Click Element    ${switch_confirm_button}
     Wait Until Page Contains Element   ${exchange_option_switch}    timeout=5
+    Page Should Contain Element    ${exchange_option_switch}
+
+Verify Exchange Mode Present
+    Wait Until Page Contains Element    ${exchange_option_switch}    timeout=5
     Page Should Contain Element    ${exchange_option_switch}
 
 Cancel Switch From Return Mode To Exchange
@@ -137,3 +153,23 @@ Pay By Cash | Return Mode
     Click Element    ${continue_cash_button}
     Wait Until Page Contains Element    ${print_invoice_button}
     Page Should Contain Element    ${share_invoice_button}
+    
+Verify Return mark enable in policies
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    Wait Until Page Contains Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Mode}"]
+
+Verify Auto Switch to billing is Off
+    Wait Until Page Contains Element    ${switch_billing_dropdown}    timeout=5
+
+Verify Add product
+    Wait Until Page Contains Element    ${product_name_in_cart_row}
+    Page Should Contain Element    ${product_name_in_cart_row}
+
+Verify Remove item to the cart
+    Wait Until Page Does Not Contain Element    ${product_name_in_cart_row}
+    Page Should Contain Element    ${product_name_in_cart_row}
+
+Verify Auto Switch To Billing
+    Wait Until Page Contains Element    ${billing_option_switch_default}
+    Page Should Contain Element    ${billing_option_switch_default}

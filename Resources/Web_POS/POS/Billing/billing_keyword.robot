@@ -553,17 +553,18 @@ Apply Bill Level Promos
     Wait Until Page Contains Element    ${checkout_bill_promos}
     Click Element    ${checkout_bill_promos}
     Wait Until Page Contains Element    ${promos_applied_message}
-    Page Should Contain Element    ${promos_applied_message}
+    Wait Until Page Does Not Contain Element     ${promos_applied_message}
 
 
 Verify Bill Level Promos Applied
+    Wait Until Page Contains Element
     Page Should Contain Element    ${bill_promo_discount}
     ${bpromo_discount}  Get Text    ${bill_promo_discount}
     ${stotal}    Get Text    ${sub_total}
     ${taxes_value}    Get Text    ${taxes}
-    Remove Characters   ${stotal}
-    Remove Characters    ${bpromo_discount}
-    Remove Characters    ${taxes_value}
+    ${s}    Remove Characters   ${stotal}
+    ${b}    Remove Characters    ${bpromo_discount}
+    ${t}    Remove Characters    ${taxes_value}
     ${result}   Evaluate    ${stotal}  -  ${bpromo_discount}
     ${final_result}    Evaluate    ${result}    +   ${taxes_value}
     ${grand__total}    Get Text    ${grand_total}
