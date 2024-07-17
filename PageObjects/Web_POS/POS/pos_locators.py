@@ -90,6 +90,7 @@ category = '(//ul[@id="infinite-categories"]/li)[1]'
 # assortment 2
 second_category = '(//ul[@id="infinite-categories"]/li)[2]'
 
+delete_item="//p[contains(text(),'To be exchanged with')]//ancestor::td//following-sibling::td//a"
 # dynamic
 quantity_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="3"]'    # change barcode
 price_column = '=//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="4"]'    # change barcode
@@ -272,3 +273,5 @@ reasons_col_title = '//div[@class="col-3" and contains(text(),"Reason* ")]'
 qty_col_title = '//div[@class="col-1" and contains(text(),"Qty")]'
 unit_price_col_title = '//div[@class="col-1" and contains(text(),"Unit Price")]'
 exchange_qty_col_title = '//div[@class="pr-0 col-2" and contains(text(),"Total Exchange Qty")]'
+
+exchange_popup="//div[@class='popup-notification']"
