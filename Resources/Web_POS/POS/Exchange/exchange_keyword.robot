@@ -123,6 +123,8 @@ Verify All Columns Are Present In Item Exchange Window
    Page Should Contain Element    ${unit_price_col_title}
    Page Should Contain Element    ${exchange_qty_col_title}
    Page Should Contain Element    ${reasons_col_title}
+
+
 Select Invoice From Search Options
     Wait Until Page Contains Element    ${first_row_invoice}    timeout=30s
     Click Element    ${first_row_invoice}

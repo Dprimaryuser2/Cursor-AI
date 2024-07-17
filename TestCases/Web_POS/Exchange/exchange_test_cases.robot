@@ -102,6 +102,60 @@ Zwing_E_09 Select customer phone,enter valid Mobile no then check the Response
     Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_10 Select customer phone, Enter invalid data -alphabet ,special character and more than 10 digit number then check the response.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_10
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Verify Invoice Search By Invalid Customer Number  ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_11 Select Invoice number,enter valid Invoice no then check the Response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_11
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_12 Check all columns are present in item exchange window or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_12
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange    ${pos_data}
+    Verify All Columns Are Present In Item Exchange Window   ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_13 Check quantity dropdown in popup is working or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_13
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange    ${pos_data}
+    Verify All Columns Are Present In Item Exchange Window   ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+
 Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice then check the response.
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_21
     Login With Valid Username And Password | POS    ${pos_data}
@@ -341,74 +395,6 @@ E_38 select a alternate product with same quantity and Net price less than the e
     Sleep    10s
 
 
-
-
-
-
-#Zwing_B_46
-#Zwing_B_47
-#Zwing_B_48
-
-Zwing_E_49 select a alternate product ,apply item level manual discount then check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_49
-    Login With Valid Username And Password | POS    ${pos_data}
-    Open The Session    ${pos_data}
-#    Change Billing Mode    ${pos_data}
-    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-    Navigate To Update Product Window    ${pos_data}
-    Verify Disabled Item Level Discount
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
-Zwing_E_10 Select customer phone, Enter invalid data -alphabet ,special character and more than 10 digit number then check the response.
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_10
-    Login With Valid Username And Password | POS    ${pos_data}
-    Open The Session    ${pos_data}
-    Change Billing Mode    ${pos_data}
-    Verify The +Add Exchange Items from Invoice Link
-    Verify The Invoice Parameters Are Clickable
-    Select The Invoice Option Type  ${pos_data}
-    Verify Invoice Search By Invalid Customer Number  ${pos_data}
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
-Zwing_E_11 Select Invoice number,enter valid Invoice no then check the Response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_11
-    Login With Valid Username And Password | POS    ${pos_data}
-    Open The Session    ${pos_data}
-    Change Billing Mode    ${pos_data}
-    Verify The +Add Exchange Items from Invoice Link
-    Verify The Invoice Parameters Are Clickable
-    Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange    ${pos_data}
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
-Zwing_E_12 Check all columns are present in item exchange window or not
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_12
-    Login With Valid Username And Password | POS    ${pos_data}
-    Open The Session    ${pos_data}
-    Change Billing Mode    ${pos_data}
-    Verify The +Add Exchange Items from Invoice Link
-    Verify The Invoice Parameters Are Clickable
-    Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange    ${pos_data}
-    Verify All Columns Are Present In Item Exchange Window   ${pos_data}
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
-Zwing_E_13 Check quantity dropdown in popup is working or not
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_13
-    Login With Valid Username And Password | POS    ${pos_data}
-    Open The Session    ${pos_data}
-    Change Billing Mode    ${pos_data}
-    Verify The +Add Exchange Items from Invoice Link
-    Verify The Invoice Parameters Are Clickable
-    Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange    ${pos_data}
-    Verify All Columns Are Present In Item Exchange Window   ${pos_data}
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_60 check the behaviour of the system when payment amount is 0
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    E_60
