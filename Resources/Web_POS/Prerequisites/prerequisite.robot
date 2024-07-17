@@ -18,7 +18,10 @@ Revoke Serial Key
     Wait Until Element Is Visible    ${settings_tab}    timeout=40s
     Set Focus To Element    ${settings_tab}
     Wait Until Keyword Succeeds    5    2     Click Element    ${settings_tab}
-    Wait Until Element Is Visible    ${serial_information_tab}    timeout=20s
+    ${serial_info_visible}    Run Keyword And Return Status    Element Should Be Visible    ${serial_info_heading}
+    IF    '${serial_info_visible}' == 'False'
+         Wait Until Keyword Succeeds    5    2     Click Element    ${settings_tab}
+    END
     ${closing_balance_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance}
     IF    ${closing_balance_visible}
         Input Text    ${closing_balance}    ${serial_key_info.closing_balance}
@@ -32,10 +35,6 @@ Revoke Serial Key
     END
     Wait Until Keyword Succeeds    5    2     Click Element    ${profile_info_heading}
     Wait Until Keyword Succeeds    5    2     Click Element    ${serial_information_tab}
-    ${serial_info_visible}    Run Keyword And Return Status    Element Should Be Visible    ${serial_info_heading}
-    IF    '${serial_info_visible}' == 'False'
-         Wait Until Keyword Succeeds    5    2     Click Element    ${serial_information_tab}
-    END
     Wait Until Element Is Visible    ${serial_info_heading}    timeout=20s
     Wait Until Element Is Visible    ${revoke_license_button}    timeout=20s
     Scroll Element Into View    ${revoke_license_button}
