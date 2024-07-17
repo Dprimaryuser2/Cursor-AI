@@ -95,3 +95,24 @@ Search Invoice | Exchange
    Wait Until Page Contains Element    ${searched_invoice_heading_row}  timeout=20s
    Page Should Contain Element    ${searched_invoice_heading_row}
 
+Verify Invoice Search By Invalid Customer Number
+   [Arguments]    ${mode}
+   ${my_dict}    Create Dictionary   &{mode}
+   Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
+   Input Text    ${search_invoice_field}    ${my_dict.search_invoice}
+   Press Keys   ${search_invoice_field}   ENTER
+   Wait Until Page Contains Element    ${invoice_not_found}
+   Page Should Contain Element    ${invoice_not_found}
+   
+Verify All Columns Are Present In Item Exchange Window
+   [Arguments]    ${mode}
+   ${my_dict}    Create Dictionary   &{mode}
+   Wait Until Page Contains Element    ${first_row_invoice}
+   Click Element    ${first_row_invoice}
+   Wait Until Page Contains Element    ${select_item_for_exchange_title}  timeout=10s
+   Page Should Contain Element    ${sku_barcode_col_title}
+   Page Should Contain Element    ${product_name_col_title}
+   Page Should Contain Element    ${qty_col_title}
+   Page Should Contain Element    ${unit_price_col_title}
+   Page Should Contain Element    ${exchange_qty_col_title}
+   Page Should Contain Element    ${reasons_col_title}

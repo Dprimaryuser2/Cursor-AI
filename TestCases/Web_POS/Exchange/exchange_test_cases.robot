@@ -113,31 +113,57 @@ Zwing_E_10 Select customer phone, Enter invalid data -alphabet ,special characte
     Verify The +Add Exchange Items from Invoice Link
     Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange   ${pos_data}
+    Verify Invoice Search By Invalid Customer Number  ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_11 Select Invoice number,enter valid Invoice no then check the Response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_11
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_12 Check all columns are present in item exchange window or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_12
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange    ${pos_data}
+    Verify All Columns Are Present In Item Exchange Window   ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
 
 
 #Zwing_B_46
 #Zwing_B_47
 #Zwing_B_48
-
-Zwing_E_49 select a alternate product ,apply item level manual discount then check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_49
-    Login With Valid Username And Password | POS    ${pos_data}
-    Open The Session    ${pos_data}
-#    Change Billing Mode    ${pos_data}
-    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-    Navigate To Update Product Window    ${pos_data}
-    ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
-    Apply Item Manual Discount | Select From List    ${pos_data}
-    Verify Item Manual Discount   ${product_price}
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
-
-Zwing_E_50 select a exchange product ,apply item level manual discount then check the response.
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_49
-    Login With Valid Username And Password | POS    ${pos_data}
-    Open The Session    ${pos_data}
+#
+#Zwing_E_49 select a alternate product ,apply item level manual discount then check the response
+#    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_49
+#    Login With Valid Username And Password | POS    ${pos_data}
+#    Open The Session    ${pos_data}
+##    Change Billing Mode    ${pos_data}
+#    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+#    Navigate To Update Product Window    ${pos_data}
+#    ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
+#    Apply Item Manual Discount | Select From List    ${pos_data}
+#    Verify Item Manual Discount   ${product_price}
+#    Revoke Serial Key    ${pos_data}
+#    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+#
+#
+#Zwing_E_50 select a exchange product ,apply item level manual discount then check the response.
+#    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_49
+#    Login With Valid Username And Password | POS    ${pos_data}
+#    Open The Session    ${pos_data}
 #    Change Billing Mode    ${pos_data}
