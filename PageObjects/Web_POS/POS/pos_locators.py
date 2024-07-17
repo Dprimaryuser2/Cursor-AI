@@ -90,6 +90,7 @@ category = '(//ul[@id="infinite-categories"]/li)[1]'
 # assortment 2
 second_category = '(//ul[@id="infinite-categories"]/li)[2]'
 
+delete_item="//p[contains(text(),'To be exchanged with')]//ancestor::td//following-sibling::td//a"
 # dynamic
 quantity_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="3"]'    # change barcode
 price_column = '=//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="4"]'    # change barcode
@@ -273,3 +274,11 @@ searched_invoice_amount_heading = '//div[contains(text(),"Amount")]'
 searched_invoice_customer_name_heading = '//div[contains(text(),"Customer Name")]'
 searched_invoice_phone_number = '//div[contains(text(),"Phone Number")]'
 searched_invoice_table = '//div[contains(@class,"ex-invoice-table") and not(contains(@style,"display: none;"))]'
+sku_barcode_col_title = '//div[@class="pl-3 d-flex align-items-center col-2"]'
+product_name_col_title = '//div[@class="col-3" and contains(text(),"Product Name")]'
+reasons_col_title = '//div[@class="col-3" and contains(text(),"Reason* ")]'
+qty_col_title = '//div[@class="col-1" and contains(text(),"Qty")]'
+unit_price_col_title = '//div[@class="col-1" and contains(text(),"Unit Price")]'
+exchange_qty_col_title = '//div[@class="pr-0 col-2" and contains(text(),"Total Exchange Qty")]'
+first_row_qty_exchange = '(//div[@class="row fs-13 py-3 rows px-4 fs-12 grey-100 align-items-center"]//div[@class="col-1"])[1]'
+exchange_popup="//div[@class='popup-notification']"
