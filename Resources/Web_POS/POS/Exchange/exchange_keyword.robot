@@ -95,3 +95,51 @@ Search Invoice | Exchange
    Wait Until Page Contains Element    ${searched_invoice_heading_row}  timeout=20s
    Page Should Contain Element    ${searched_invoice_heading_row}
 
+Switch To Exchange Mode
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    Wait Until Page Contains Element    ${switch_billing_dropdown}
+    Click Element    ${switch_billing_dropdown}
+    Click Element    //a[contains(text(),"${my_dict.Mode}")]
+    Wait Until Page Contains Element    ${switch_modal_text}
+
+Verify Exchange Option Popup
+    Wait Until Page Contains Element    ${switch_confirm_button}    timeout=10s
+    Page Should Contain Element    ${switch_modal_text}
+    Element Should Be Enabled    ${switch_confirm_button}
+    Element Should Be Enabled    ${switch_cancel_button}
+
+Verify Switching To Exchange Mode
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    Page Should Contain Element    ${add_exchange_item_link}
+    Page Should Contain     ${my_dict.Mode}
+
+Verify Cancel Button On Switch To Exchange Popup
+    Click Button    ${switch_cancel_button}
+    Page Should Not Contain Element    ${add_exchange_item_link}
+
+Verify Exchange Mode Is Disabled
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    Wait Until Page Contains Element    ${switch_billing_dropdown}
+    Click Element    ${switch_billing_dropdown}
+    Page Should Not Contain Element      //a[contains(text(),"${my_dict.Mode}")]
+
+Verify Item To Be Exchanged Are Visible
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    Wait Until Page Contains Element    ${searched_invoice_number_heading}
+    Page Should Contain Element    ${searched_invoice_number_heading}
+    Page Should Contain Element    ${searched_invoice_date_heading}
+    Page Should Contain Element    ${searched_invoice_item_heading}
+    Page Should Contain Element    ${searched_invoice_amount_heading}
+    Page Should Contain Element    ${searched_invoice_customer_name_heading}
+    Page Should Contain Element    ${searched_invoice_phone_number}
+    Element Should Contain    ${searched_invoice_table}    ${my_dict.search_invoice}
