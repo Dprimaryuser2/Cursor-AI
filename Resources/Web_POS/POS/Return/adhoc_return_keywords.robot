@@ -163,13 +163,19 @@ Verify Auto Switch to billing is Off
     Wait Until Page Contains Element    ${switch_billing_dropdown}    timeout=5
 
 Verify Add product
-    Wait Until Page Contains Element    ${product_name_in_cart_row}
+    Wait Until Page Contains Element    ${product_name_in_cart_row}    timeout=5
     Page Should Contain Element    ${product_name_in_cart_row}
 
 Verify Remove item to the cart
-    Wait Until Page Does Not Contain Element    ${product_name_in_cart_row}
+    Wait Until Page Does Not Contain Element    ${product_name_in_cart_row}    timeout=5
     Page Should Contain Element    ${product_name_in_cart_row}
 
 Verify Auto Switch To Billing
-    Wait Until Page Contains Element    ${billing_option_switch_default}
+    Wait Until Page Contains Element    ${billing_option_switch_default}    timeout=5
     Page Should Contain Element    ${billing_option_switch_default}
+
+Verify A Customer Is Tagged
+    Wait Until Page Contains Element    ${customer_info_icon}    timeout=5
+    Click Element    ${customer_info_icon}
+    Wait Until Page Contains Element    ${customer_information_phone_field}    timeout=5
+    Page Should Contain Element    ${customer_information_phone_field}

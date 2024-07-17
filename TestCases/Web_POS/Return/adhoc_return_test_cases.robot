@@ -170,8 +170,8 @@ Zwing_R_15 Assign customer to the return when customer Tagging is mandatory
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Add Customer Details    ${pos_data}
-   Verify Customer Tagging    ${pos_data}
+   ${customer_details}    Add Customer Details    ${pos_data}
+   Verify Customer Tagging    ${customer_details}
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -182,20 +182,22 @@ Zwing_R_16 Assign customer to the return when customer Tagging is optional in po
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Add Customer Details    ${pos_data}
-   Verify Customer Tagging    ${pos_data}
+   ${customer_details}    Add Customer Details    ${pos_data}
+   Verify Customer Tagging    ${customer_details}
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 
-Zwing_R_17 Apply Customised Manual Discount item level
+Zwing_R_17 Apply Customized Manual Discount item level
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_17
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Navigate To Update Product Window    ${pos_data}
+   ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
    Apply Item Manual Discount | Custom Discount    ${pos_data}
-   Verify Item Manual Discount    ${pos_data}
+   Verify Item Manual Discount   ${product_price}
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -206,8 +208,10 @@ Zwing_R_18 Apply Customised Manual Discount item level
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Navigate To Update Product Window    ${pos_data}
+   ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
    Apply Item Manual Discount | Custom Discount    ${pos_data}
-   Verify Item Manual Discount    ${pos_data}
+   Verify Item Manual Discount   ${product_price}
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -218,8 +222,10 @@ Zwing_R_19 Apply Customised Manual Discount item level by Fixed amount in item l
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   ${bill_data}    Apply Bill Manual Discount | Select From List    ${pos_data}
-   Verify Bill Level Manual Discount    ${bill_data}
+   Navigate To Update Product Window    ${pos_data}
+   ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
+   Apply Item Manual Discount | Custom Discount    ${pos_data}
+   Verify Item Manual Discount   ${product_price}
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -230,8 +236,10 @@ Zwing_R_20 Apply Customised Manual Discount item level by percentage item level
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   ${bill_data}    Apply Bill Manual Discount | Select From List    ${pos_data}
-   Verify Bill Level Manual Discount    ${bill_data}
+   Navigate To Update Product Window    ${pos_data}
+   ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
+   Apply Item Manual Discount | Custom Discount    ${pos_data}
+   Verify Item Manual Discount   ${product_price}
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
