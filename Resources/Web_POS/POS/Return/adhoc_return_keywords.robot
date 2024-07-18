@@ -170,7 +170,7 @@ Verify Add product
 
 Verify Remove item to the cart
     Wait Until Page Does Not Contain Element    ${product_name_in_cart_row}    timeout=5
-    Page Should Contain Element    ${product_name_in_cart_row}
+    Page Should Not Contain Element    ${product_name_in_cart_row}
 
 Verify Auto Switch To Billing
     Wait Until Page Contains Element    ${billing_option_switch_default}    timeout=5
@@ -186,5 +186,6 @@ Verify A Customer Is Tagged
 Verify Quantity Increased
     Wait Until Page Contains Element    ${cart_quantity}
     ${qty}    Get Text    ${cart_quantity}
+    Remove Characters    ${qty}
     ${int_qty}    Convert To Integer    ${qty}
     Should Not Be Equal As Integers    ${int_qty}    1

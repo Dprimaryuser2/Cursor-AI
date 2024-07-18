@@ -106,7 +106,7 @@ Zwing_R_9 Add item qty by scanning
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Verify Item Added In Cart
+   Verify Quantity Increased
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
