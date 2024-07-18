@@ -341,23 +341,25 @@ Zwing_E_20 Search for a already used exchange invoice in search bar then check t
    Verify The +Add Exchange Items from Invoice Link
    Click On Invoice Parameters
    Verify The Invoice Parameters Are Clickable
-   Select The Invoice By Invoice Name | Exchange    ${invoice_id}
+   Select The Invoice By Invoice Name | Exchange    ${invoice_id.invoice_id}
+   Select Invoice From Search Options
    Select Items For Exchange     ${pos_data}
    Add Product For Exchange
    Scan Barcode To Add Item And Quantity To Cart By Name | Exchange     ${pos_data}
    ${value}    Get payable amount
    Verify Billing Checkout
    No Payment Required | Checkout Page
-   ${invoice_id}  Get Customer Details | Checkout
+   Get Customer Details | Checkout
    Click on New Bill Button
    Auto Switch To Billing
-   Click On Confirm Button | Exchange   ${pos_data}
+   Verify Auto Switched To Billing
    Change Billing Mode    ${pos_data}
    Click On +Add Exchange Items from Invoice Link
    Verify The +Add Exchange Items from Invoice Link
    Click On Invoice Parameters
    Verify The Invoice Parameters Are Clickable
-   Select The Invoice By Invoice Name | Exchange    ${invoice_id}
+   Select The Invoice By Invoice Name | Exchange    ${invoice_id.invoice_id}
+   Verify Already Used Exchange Invoice Response    ${invoice_id.invoice_id}
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
      #need to update

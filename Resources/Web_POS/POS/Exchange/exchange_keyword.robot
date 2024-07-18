@@ -170,7 +170,6 @@ Scan Barcode To Add Item And Quantity To Cart By Name | Exchange
     [Arguments]    ${products}
     ${my_dict}    Create Dictionary   &{products}
     Log    ${my_dict.buy_items}
-    Wait Until Element Is Visible    ${scan_only}    timeout=20s
     ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
@@ -529,17 +528,24 @@ Select The Invoice By Invoice Name | Exchange
    Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
    Input Text    ${search_invoice_field}     ${invoice_id}
    Press Keys   ${search_invoice_field}   ENTER
-   Wait Until Page Contains Element    ${first_row_invoice}
+   Wait Until Page Contains Element    ${first_row_invoice}  timeout=15s
 
 Customer Billing For Invoice Generation | Exchange
    [Arguments]    ${customer_billing}
-   Add Product By Scan Only   ${customer_billing}
+   Scan And Add Product   ${customer_billing}
    Verify Item Added In Cart
    Tag Customer Without Name    ${customer_billing}
    ${value}    Get payable amount
    Verify Billing Checkout
+   Wait Until Element Is Visible    ${payment_method_cash}
    Payment By Cash   ${value}
    Wait Until Page Contains Element    ${payment_complete_heading}
    ${cust_invoice_1}  Get Customer Details | Checkout
    Click on New Bill Button
    [Return]   ${cust_invoice_1}
+
+Verify Already Used Exchange Invoice Response
+   [Arguments]    ${invoice_id}
+   Wait Until Page Contains Element    //div[@class="grey-100 col-2" and contains(text(),"${invoice_id}")]//following-sibling::div[@class="col-1"]   timeout=20s
+   ${qty_value}   Get Text     //div[@class="grey-100 col-2" and contains(text(),"${invoice_id}")]//following-sibling::div[@class="col-1"]
+   Should Be Equal    ${qty_value}    0
