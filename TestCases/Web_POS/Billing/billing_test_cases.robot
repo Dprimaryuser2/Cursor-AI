@@ -49,7 +49,7 @@ Zwing_B_04 Add product from catalog
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_04
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
-    Add Ite    ms In Cart | Catalog   ${pos_data}
+    Add Items In Cart | Catalog   ${pos_data}
     Verify Item Added In Cart
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
