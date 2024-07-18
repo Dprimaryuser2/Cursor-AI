@@ -561,6 +561,8 @@ Zwing_E_92 From dropdown on billing screen, select Exchange option
     Open The Session    ${pos_data}
     Switch To Exchange Mode    ${pos_data}
     Verify Exchange Option Popup
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_93 Click on Confirm button on switch to Exchange popup box
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_93
@@ -568,6 +570,8 @@ Zwing_E_93 Click on Confirm button on switch to Exchange popup box
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
     Verify Switching To Exchange Mode    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_94 Click on Cancel button on switch to Exchange popup box
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_94
@@ -575,32 +579,40 @@ Zwing_E_94 Click on Cancel button on switch to Exchange popup box
     Open The Session    ${pos_data}
     Switch To Exchange Mode    ${pos_data}
     Verify Cancel Button On Switch To Exchange Popup
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_95 Disable the allow Exchange Policy, and click on dropdown to change the module
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_95
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Verify Exchange Mode Is Disabled    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_96 Search invoice by customer name to add exchange items
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_96
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Verify The +Add Exchange Items from Invoice Link    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
     Select The Invoice Option Type    ${pos_data}
     Search Invoice | Exchange    ${pos_data}
     Verify Item To Be Exchanged Are Visible    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_97 Search invoice by customer phone No. to add exchange items
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_97
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Verify The +Add Exchange Items from Invoice Link    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
     Select The Invoice Option Type    ${pos_data}
     Search Invoice | Exchange    ${pos_data}
     Verify Item To Be Exchanged Are Visible    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 #Zwing_E_98 Search invoice by customer Invoice Number to add exchange items
 #    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_98
@@ -617,25 +629,81 @@ Zwing_E_99 Search invoice by Entering Invoice No. when Customer Name is selected
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Verify The +Add Exchange Items from Invoice Link    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
     Select The Invoice Option Type    ${pos_data}
     Search Invoice | Exchange    ${pos_data}
+    Verify Invoice Search By Invalid Customer Data
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_100 Search invoice by Entering Invoice No. when Customer Phone No. is selected
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_100
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type    ${pos_data}
+    Search Invoice | Exchange    ${pos_data}
+    Verify Invoice Search By Invalid Customer Data
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_101 Search invoice by Entering Customer Phone No. when Invoice No. is selected
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_101
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type    ${pos_data}
+    Search Invoice | Exchange    ${pos_data}
+    Verify Invoice Search By Invalid Customer Data
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_102 Search invoice by Entering Customer Phone No. when Customer Name. is selected
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_102
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type    ${pos_data}
+    Search Invoice | Exchange    ${pos_data}
+    Verify Invoice Search By Invalid Customer Data
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_103 Search invoice by Entering Customer Name when Invoice No. is selected
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_103
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type    ${pos_data}
+    Search Invoice | Exchange    ${pos_data}
+    Verify Invoice Search By Invalid Customer Data
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_104 Search Invoice by Entering Customer Name when Customer Phone No. is selected
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_104
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type    ${pos_data}
+    Search Invoice | Exchange    ${pos_data}
+    Verify Invoice Search By Invalid Customer Data
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_105 Entering minimum 3 digits while searching should list down all the invoices having those digits in same sequence.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_105
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_106 No invoices should be filtered while searching till only 2 digits are entered in the text search field
 
@@ -688,6 +756,3 @@ Zwing_E_129 Click on Confirm button on switch to Return popup box
 Zwing_E_130 Click on Cancel button on switch to Return popup box
 
 Zwing_E_131 Switching Between Exchange to Return Will Give Confirmation Popup
- #testcase 29 same product under UOM | update test data
- # 38 jvlearphone less then price under same UOM   | update test data
- # inclusive and exclusive tax

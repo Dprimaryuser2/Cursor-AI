@@ -429,6 +429,7 @@ Verify Item To Be Exchanged Are Visible
     [Arguments]    ${mode}
     ${my_dict}    Create Dictionary   &{mode}
     Wait Until Page Contains Element    ${searched_invoice_number_heading}
+    Wait Until Page Contains Element    ${searched_invoice_table}    timeout=20s
     Page Should Contain Element    ${searched_invoice_number_heading}
     Page Should Contain Element    ${searched_invoice_date_heading}
     Page Should Contain Element    ${searched_invoice_item_heading}
@@ -437,3 +438,28 @@ Verify Item To Be Exchanged Are Visible
     Page Should Contain Element    ${searched_invoice_phone_number}
     Element Should Contain    ${searched_invoice_table}    ${my_dict.search_invoice}
 
+Add Exchange Items From Invoice
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    Click Element    ${add_exchange_item_link}
+    Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=10s
+    Click Element    ${select_search_invoice_option_btn} 
+    IF   '${my_dict.select_invoice_option}' == 'Customer Name'
+        Click Element    ${customer_name_search_option}
+    ELSE IF    '${my_dict.select_invoice_option}' == 'Customer Phone'
+        Click Element    ${customer_phone_search_option}
+    ELSE IF     '${my_dict.select_invoice_option}' == 'Invoice Number'
+        Click Element    ${invoice_number_search_option}
+    END
+    Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
+    Input Text    ${search_invoice_field}    ${my_dict.search_invoice}
+    Press Keys   ${search_invoice_field}   ENTER
+    Wait Until Page Contains Element    ${first_row_invoice}    timeout=30s
+    ${invoice_number}=    Get Text    ${searched_invoice_number}
+    ${customer_name}=    Get Text    ${searched_customer_name}
+    ${phone_number}=    Get Text    ${searched_phone_number}
+    ${item_quantity}=    Get Text    ${total_number_of_items}
+    ${item_amount}=    Get Text    ${amount}
+    Click Element    ${first_row_invoice}
+    ${invoice_details}=    Create Dictionary    invoice_number=${invoice_number}        customer_name=${customer_name}     phone_number=${phone_number}     item_quantity=${item_quantity}     item_amount=${item_amount}
+    [Return]    ${invoice_details}
