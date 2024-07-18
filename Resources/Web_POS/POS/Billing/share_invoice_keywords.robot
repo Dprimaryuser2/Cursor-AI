@@ -251,13 +251,16 @@ Verify Invoice Generated Received On Email
     [Return]  ${email_body}
 
 Get Customer Details | Checkout
-   Wait Until Page Contains Element    ${payment_complete_heading}
-   ${in_id}  Get Text    ${invoice_number_checkout}
-   ${in_name}  Get Text    ${invoice_customer_name}
-   ${in_number}  Get Text    ${invoice_customer_phone}
-   ${in_amount}  Get Text    ${total_amount_checkout}
-   ${cust_info_checkout}=  Create Dictionary    invoice_id=${in_id}  invoice_name=${in_name}  phone_number=${in_number}  total_amount=${in_amount}
-   [RETURN]   ${cust_info_checkout}
+    Wait Until Page Contains Element    ${payment_complete_heading}
+    ${in_id}  Get Text    ${invoice_number_checkout}
+    ${in_name}  Get Text    ${invoice_customer_name}
+    ${in_number}  Get Text    ${invoice_customer_phone}
+    ${in_amount}  Get Text    ${total_amount_checkout}
+    ${cust_info_checkout}=  Create Dictionary    invoice_id=${in_id}  invoice_name=${in_name}  phone_number=${in_number}  total_amount=${in_amount}
+    ${invoice_ids}=  Create List
+    Append To List    ${invoice_ids}    ${in_id}
+    Set Test Variable    ${invoice_ids}
+    [RETURN]   ${cust_info_checkout}
 
 Get Customer Details | Print Invoice
    Wait Until Page Contains Element    ${bill_container}

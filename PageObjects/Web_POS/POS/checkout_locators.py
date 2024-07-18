@@ -177,3 +177,4 @@ invoice_barcode = '//div[@class="modal-content"]//td[contains(text(),"8906118410
 invoice_amount = '(//div[@id="cool"]//tbody[@style="vertical-align: text-bottom;"]/tr/td)[last()]'
 
 fulfilment_option = '//h6[@class="mb-4"]'
+payment_saved_successful = '//div[@class="popup-notification"]//div'

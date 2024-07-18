@@ -83,6 +83,7 @@ Split Payment By Different Modes
         ${key}=    Set Variable    ${item}[0]
         ${values}=    Set Variable    ${item}[1]
         ${value}=    Convert To String    ${values}
+        Sleep    0.6s
     Run Keyword If    '${key}' == 'cash'    Split Payment By Cash    ${value}
         ...    ELSE IF    '${key}' == 'paytm'    Split Payment By Paytm    ${value}
          ...    ELSE IF    '${key}' == 'voucher'    Split Payment By Redeem Voucher
@@ -124,7 +125,6 @@ Split Payment By Redeem Voucher
     Click Element    ${voucher_continue_button}
 
 Payment By Account On Sales
-    Sleep    1
     [Arguments]     ${value}
     Wait Until Element Is Visible    ${enter_split_amount}
     Clear Element Text    ${enter_split_amount}

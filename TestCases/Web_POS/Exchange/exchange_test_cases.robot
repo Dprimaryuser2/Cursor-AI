@@ -9,6 +9,7 @@ Library    ../../../Resources/CustomKeywords/utilities.py
 Resource    ../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 Resource   ../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/Exchange/exchange_keyword.robot
+Resource   ../../../Resources/Web_POS/POS/Billing/mode_of_payment_keyword.robot
 
 Test Setup  Open Application | POS
 Test Teardown   Close Browser
@@ -21,7 +22,8 @@ Zwing_E_01 Check whether Exchange text is clickable or not
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_1
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
-    Verify Exchange Text Is Clickable    ${pos_data}
+    Click On Exchange Text In Dropdown   ${pos_data}
+    Verify Exchange Text Is Clickable
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -29,7 +31,8 @@ Zwing_E_02 Click on Exchange Text and check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_2
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
-    Verify Exchange Text Is Clickable    ${pos_data}
+    Click On Exchange Text In Dropdown   ${pos_data}
+    Verify Exchange Text Is Clickable
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -37,8 +40,10 @@ Zwing_E_03 Click on confirm button and check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_3
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
-    Verify Exchange Text Is Clickable    ${pos_data}
-    Verify The Confirm Button | Exchange   ${pos_data}
+    Click On Exchange Text In Dropdown   ${pos_data}
+    Verify Exchange Text Is Clickable
+    Click On Confirm Button | Exchange   ${pos_data}
+    Verify The Confirm Button | Exchange   ${pos_data}  
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -46,8 +51,10 @@ Zwing_E_04 Click on cancel button and check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_4
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
-    Verify Exchange Text Is Clickable    ${pos_data}
-    Verify The Cancel Button | Exchange   ${pos_data}
+    Click On Exchange Text In Dropdown   ${pos_data}
+    Verify Exchange Text Is Clickable
+    Click On Cancel Button | Exchange
+    Verify The Cancel Button | Exchange
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -56,6 +63,7 @@ Zwing_E_05 Click on +Add Exchange Items from Invoice link and check the response
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
     Verify The +Add Exchange Items from Invoice Link
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -65,7 +73,9 @@ Zwing_E_06 Verify invoice parameters are clickable or not
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
     Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
     Verify The Invoice Parameters Are Clickable
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -75,8 +85,11 @@ Zwing_E_07 Click on close tab cross(X) then check the response
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
     Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
     Verify The Invoice Parameters Are Clickable
+    Click On The Close Tab Cross(X) | Exchange
     Verify The Close Tab Cross(X) | Exchange   ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -86,13 +99,242 @@ Zwing_E_08 Select customer name,enter valid name then check the Response
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
     Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
     Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
+    Verify The Search Invoice Response | Exchange
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
+Zwing_E_09 Select customer phone,enter valid Mobile no then check the Response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_9
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Verify The Search Invoice Response | Exchange
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_10 Select customer phone, Enter invalid data -alphabet ,special character and more than 10 digit number then check the response.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_10
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Verify Invoice Search By Invalid Customer Data
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_11 Select Invoice number,enter valid Invoice no then check the Response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_11
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Verify The Search Invoice Response | Exchange
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_12 Check all columns are present in item exchange window or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_12
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Verify The Search Invoice Response | Exchange
+    Verify All Columns Are Present In Item Exchange Window   ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_13 Check quantity dropdown in popup is working or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_13
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Verify The Search Invoice Response | Exchange
+    Verify All Columns Are Present In Item Exchange Window   ${pos_data}
+    Verify Exchange Quantity Dopdown In Popup Is Working
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_14 Check continue button is clickable or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_14
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Verify The Search Invoice Response | Exchange
+    Verify All Columns Are Present In Item Exchange Window   ${pos_data}
+    Select Items For Exchange   ${pos_data}
+    Verify Continue Button | Exchange Item Window   ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_15 Check cancel button is clickable or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_15
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Verify The Search Invoice Response | Exchange
+    Verify All Columns Are Present In Item Exchange Window   ${pos_data}
+    Select Items For Exchange   ${pos_data}
+    Verify Cancel Button | Exchange Item Window   ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_16 Validate check list is clickable or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_16
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Verify The Search Invoice Response | Exchange
+    Verify All Columns Are Present In Item Exchange Window   ${pos_data}
+    Verify Checklist Is Clickable | Exchange Item Window  ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_17 Make a invoice without entering name, make another invoice with same number and enter name, search that name in exchange search bar then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_17
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Scan And Add Product    ${pos_data}
+    Verify Item Added In Cart
+    ${customer_number}  Tag Customer Without Name  ${pos_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Payment By Cash    ${value}
+    Verify If Payment Is Complete Or Not
+    ${cust_invoice_1}  Get Customer Details | Checkout
+    Click on New Bill Button
+    Scan And Add Product    ${pos_data}
+    Verify Item Added In Cart
+    ${customer_name}  Enter Customer Name For Previously Used Number  ${pos_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Payment By Cash    ${value}
+    Verify If Payment Is Complete Or Not
+    ${cust_invoice_2}  Get Customer Details | Checkout
+    Click on New Bill Button
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Verify All The Invoices Under Customer Name Are Visible    ${invoice_ids}
+   #need to update
+
+Zwing_E_18 Make a Invoice with name like (Sunil), make another invoice with same number and update the name like (Sunil-> Vaibhav), search by name in exchange module search bar then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_18
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Add Product By Scan Only    ${pos_data}
+    Verify Item Added In Cart
+    ${customer_data}  Add Customer Details  ${pos_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Payment By Cash    ${value}
+    Verify If Payment Is Complete Or Not
+    Verify Successful Payment    ${value}    ${customer_data}
+    Click on New Bill Button
+    Add Product By Scan Only    ${pos_data}
+    Verify Item Added In Cart
+    ${customer_name}  Enter Customer Name For Previously Used Number  ${pos_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Payment By Cash    ${value}
+    Verify If Payment Is Complete Or Not
+    Verify Successful Payment    ${value}    ${customer_name}
+    Click on New Bill Button
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Verify All The Invoices Under Customer Name Are Visible  ${pos_data}
+    #need to update
+
+Zwing_E_19 Search by previous name (sunil) in exchange module then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_19
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Verify The Search Invoice Response | Exchange
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+     #need to update
+
+Zwing_E_20 Search for a already used exchange invoice in search bar then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_20
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Verify The Search Invoice Response | Exchange
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+     #need to update
 
 Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice then check the response.
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_21
@@ -428,6 +670,4 @@ Zwing_E_62 check whether salesperson tagging option is popup or not for alternat
 
 
 
- #testcase 29 same product under UOM | update test data
- # 38 jvlearphone less then price under same UOM   | update test data
- # inclusive and exclusive tax
+ 

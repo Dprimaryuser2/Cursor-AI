@@ -36,6 +36,7 @@ Add Customer Details
         Click Element    ${female}
     END
     Add DOB    ${my_dict.dob}
+    Add Customer Group    ${my_dict}
     IF    '${my_dict.tax_invoice}' == 'New GST'
        Add GST Name And Number   ${my_dict}
     ELSE IF    '${my_dict.tax_invoice}' == 'New UIN'
@@ -44,6 +45,8 @@ Add Customer Details
        Delete GST   ${customer_data}
     ELSE IF    '${my_dict.tax_invoice}' == 'Delete UIN'
        Delete UIN   ${customer_data}
+    ELSE
+       Log    Does Not Require Tax
     END
     Sleep    1
     ${add_line1}=    Generate Random Street Address
@@ -59,8 +62,7 @@ Add Customer Details
     Wait Until Element Is Visible    ${checkout_button}    timeout=10s
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
     Wait Until Element Is Not Visible    //div[@class="popup-notification"]     timeout=10s
-#    Wait Until Element Is Visible    //div[contains(text(),"Customer tagged successfully.")]
-     ${customer_information}=    Create Dictionary    first_name=${first_name}    last_name=${last_name}    phone_number= ${mobile}    email=${email_tag}    gender=${gender}    add_line_one= ${add_line1}    add_line_two= ${add_line2}    customer_phone_number=${mobile}
+    ${customer_information}=    Create Dictionary    first_name=${first_name}    last_name=${last_name}    phone_number= ${mobile}    email=${email_tag}    gender=${gender}    add_line_one= ${add_line1}    add_line_two= ${add_line2}    customer_phone_number=${mobile}
     [Return]    ${customer_information}
 
 Tag Customer And Enter Invalid GST Number

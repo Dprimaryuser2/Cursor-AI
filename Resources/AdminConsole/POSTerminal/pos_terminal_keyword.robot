@@ -43,6 +43,7 @@ Change Salesperson Tagging To Mandatory In POS
     Wait Until Page Contains Element    ${radio_tag_sp_mandatory}    timeout=20
     Click Element    ${radio_tag_sp_mandatory}
     Wait Until Element Is Enabled    ${save_policies}    timeout=20
+    Scroll Element Into View    ${save_policies}
     Click Element    ${save_policies}
     Wait Until Page Contains Element    ${pencil_icon_in_policy_p8}    timeout=20
 
@@ -55,5 +56,6 @@ Change Salesperson Tagging To Optional In POS
     Wait Until Page Contains Element    ${radio_tag_sp_optional}    timeout=20
     Click Element    ${radio_tag_sp_optional}
     Wait Until Element Is Enabled    ${save_policies}    timeout=20
+    Scroll Element Into View    ${save_policies}
     Click Element    ${save_policies}
     Wait Until Page Contains Element    ${pencil_icon_in_policy_p8}    timeout=20
