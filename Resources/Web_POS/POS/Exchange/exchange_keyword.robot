@@ -439,8 +439,11 @@ Update Customer Name | Exchange
 Verify Manual Discount Not Applicable To Exc product After Added
     Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
     Click Element    ${alternate_product_in_exc_cart}
-    Wait Until Page Does Not Contain Element    ${manual_discount_arrow}
-    Page Should Not Contain Element    ${manual_discount_arrow}
+    Wait Until Page Contains Element    ${manual_discount_arrow}
+    Click Element    ${manual_discount_arrow}
+    Click Element    ${manual_discount_arrow}
+    Page Should Not Contain Element    ${manual_discount_heading}
+
 
 Verify Quantity Cannot Be Increased For The Exchange Product
     Wait Until Page Contains Element    ${disabled_alternate_product_qty_in_exc_cart}
@@ -475,7 +478,8 @@ Verify Alternate Product With Greater Price was Added To Cart
     ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
     Remove Characters   ${alt_product_price}
     Remove Characters    ${initial_product_price}
-    Should Be True    ${{alt_product_price  <  initial_product_price}}
+    ${result}     Run Keyword And Return Status        ${alt_product_price}  <  ${initial_product_price}
+    Should Be True    ${result}
 
 Verify Alternate Product With Lesser Price was Added To Cart
     Wait Until Page Contains Element    ${product_name_in_cart_row}
