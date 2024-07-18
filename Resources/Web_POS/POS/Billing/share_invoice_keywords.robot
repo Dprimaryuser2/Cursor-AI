@@ -251,14 +251,18 @@ Verify Invoice Generated Received On Email
     ...  ELSE  Log  Email with subject contains "${subject}" is not found
     [Return]  ${email_body}
 
+Initialize Invoice List
+    ${invoice_ids}=  Create List
+    Set Global Variable    ${invoice_ids}
+
 Get Customer Details | Checkout
-    [Arguments]  ${invoice_ids}
+    ${invoice_ids}    Create List
     Wait Until Page Contains Element    ${payment_complete_heading}
     ${in_id}  Get Text    ${invoice_number_checkout}
     ${in_name}  Get Text    ${invoice_customer_name}
     ${in_number}  Get Text    ${invoice_customer_phone}
     ${in_amount}  Get Text    ${total_amount_checkout}
-    ${cust_info_checkout}=  Create Dictionary    invoice_id=${in_id}  invoice_name=${in_name}  phone_number=${in_number}  total_amount=${in_amount}
+    ${cust_info_checkout}=  Create Dictionary    invoice_id=${in_id}  invoice_name=${in_name}  phone_number=${in_number}  total_amount=${in_amount}    search_invoice=${in_id}
     Append To List    ${invoice_ids}    ${in_id}
     Set Global Variable    ${invoice_ids}
     [RETURN]   ${cust_info_checkout}
