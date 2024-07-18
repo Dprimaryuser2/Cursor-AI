@@ -415,8 +415,20 @@ Verify All The Invoices Under Customer Name Are Visible
 
 
 Verify Manual Discount Not Applicable To Exc product After Added
-    Wait Until Page Contains Element    ${exc_product_in_exc_cart}
-    Click Element    ${exc_product_in_exc_cart}
-    
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Does Not Contain Element    ${manual_discount_arrow}
+    Page Should Not Contain Element    ${manual_discount_arrow}
+
+Verify Quantity Cannot Be Increased For The Exchange Product
+    Wait Until Page Contains Element    ${alternate_product_qty_in_exc_cart}
+    Page Should Contain Element    ${alternate_product_qty_in_exc_cart}
+
+Verify User Cannot Apply Item/bill Level Promotions On Alternate Product
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Does Not Contain Element    ${active_promotion}
+    Click Element    ${active_promotion}
+    Wait Until Page Does Not Contain Element    ${active_promo_dropdown_row}
 
      

@@ -279,5 +279,6 @@ item_name_exchange='(//div[@class="pl-1 col-3"])[1]'
 item_price_exchange='(//div[@class="pl-1 col-3"]//following-sibling::div)[2]'
 
 all_searched_invoice = '(//div[@class="ex-invoice-table my-3 mx-n2"]//div[@class="vertical-scroll exchange-scroll"])[1]'
-red_product_in_exc_cart = '(//a[@class="product-name text-danger"])'
-exc_product_in_exc_cart = '//a[@class="product-name"]'
+alternate_product_in_exc_cart = '(//a[@class="product-name text-danger"])'
+alternate_product_qty_in_exc_cart= '//a[@class="product-name text-danger"]//ancestor::tr[@class="b-table-row-outofstock border-bottom-0"]//descendant::select[@disabled="disabled"]'
+initial_product_in_exc_cart = '//a[@class="product-name"]'

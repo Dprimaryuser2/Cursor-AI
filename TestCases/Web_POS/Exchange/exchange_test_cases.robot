@@ -472,7 +472,7 @@ E_38 select a alternate product with same quantity and Net price less than the e
     Sleep    10s
 
 Zwing_E_41 check whether manual discount is applied on alternate product after adding or not.
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_38
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_41
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -484,6 +484,47 @@ Zwing_E_41 check whether manual discount is applied on alternate product after a
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
     Verify Manual Discount Not Applicable To Exc product After Added
+
+Zwing_E_42 check whether user can update the quantity of alternate product or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_42
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Quantity Cannot Be Increased For The Exchange Product
+
+Zwing_E_43 check whether user can apply item level/ bill level promotion on alternate product or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_43
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify User Cannot Apply Item/bill Level Promotions On Alternate Product
+
+Zwing_E_44 check whether user can apply price override on alternate product and exchange product or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_43
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
 
 
 
