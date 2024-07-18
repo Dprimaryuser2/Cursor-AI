@@ -614,15 +614,24 @@ Zwing_E_97 Search invoice by customer phone No. to add exchange items
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-#Zwing_E_98 Search invoice by customer Invoice Number to add exchange items
-#    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_98
-#    Login With Valid Username And Password | POS    ${pos_data}
-#    Open The Session    ${pos_data}
-#    Change Billing Mode    ${pos_data}
-#    Verify The +Add Exchange Items from Invoice Link    ${pos_data}
-#    Select The Invoice Option Type    ${pos_data}
-#    Search Invoice | Exchange    ${pos_data}
-#    Verify Item To Be Exchanged Are Visible    ${pos_data}                HOLD
+Zwing_E_98 Search invoice by customer Invoice Number to add exchange items
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_98
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Scan And Add Product    ${pos_data}
+    Verify Item Added In Cart
+    ${customer_number}  Tag Customer Without Name  ${pos_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Payment By Cash    ${value}
+    Verify If Payment Is Complete Or Not
+    ${cust_info_checkout}    Get Customer Details | Checkout
+    Click on New Bill Button
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type    ${pos_data}
+    Search Invoice By Invoice Number    ${cust_info_checkout}
+    Verify Item To Be Exchanged Are Visible    ${cust_info_checkout}
 
 Zwing_E_99 Search invoice by Entering Invoice No. when Customer Name is selected
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_99
@@ -702,6 +711,7 @@ Zwing_E_105 Entering minimum 3 digits while searching should list down all the i
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
     Add Exchange Items From Invoice    ${pos_data}
+    Verify Items Are Searched By 3 Digits Of Name    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -710,11 +720,23 @@ Zwing_E_106 No invoices should be filtered while searching till only 2 digits ar
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Exchange Items From Invoice    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type    ${pos_data}
+    Search Invoice | Exchange    ${pos_data}
+    Verify Items Are Not Searched By 2 Digits Only
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_107 Select the invoice for the product that needs to be exchanged
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_107
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Search Invoice | Exchange    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
 
 Zwing_E_108 User should be able to select/unselect all the items at once
 

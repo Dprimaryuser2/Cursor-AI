@@ -113,6 +113,12 @@ Search Invoice | Exchange
    Input Text    ${search_invoice_field}    ${my_dict.search_invoice}
    Press Keys   ${search_invoice_field}   ENTER
 
+Search Invoice By Invoice Number
+    [Arguments]    ${cust_info_checkout}
+    Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
+   Input Text    ${search_invoice_field}    ${cust_info_checkout.invoice_id}
+   Press Keys   ${search_invoice_field}   ENTER
+
 Verify The Search Invoice Response | Exchange
    Wait Until Page Contains Element    ${searched_invoice_heading_row}  timeout=20s
    Page Should Contain Element    ${searched_invoice_heading_row}
@@ -463,4 +469,18 @@ Add Exchange Items From Invoice
     ${invoice_details}=    Create Dictionary    invoice_number=${invoice_number}        customer_name=${customer_name}     phone_number=${phone_number}     item_quantity=${item_quantity}     item_amount=${item_amount}
     [Return]    ${invoice_details}
 
-Select Items For Exchange | First Row
+Verify Items Are Searched By 3 Digits Of Name
+    [Arguments]    ${searched_product}
+    ${my_dict}    Create Dictionary   &{searched_product}
+    ${count}=    Get Element Count    ${searched_invoice_date}
+    FOR    ${i}    IN RANGE    1     ${count}+1
+        ${index}    Convert To String    ${i}
+        ${name_element}=    Replace String    ${searched_customer_name}    1     ${index}
+        Element Should Contain    ${name_element}    ${my_dict.search_invoice}
+    END
+
+Verify Items Are Not Searched By 2 Digits Only
+    Element Should Not Be Visible    ${searched_invoice_amount_heading}
+    Element Should Not Be Visible   ${searched_invoice_customer_name_heading}
+    Element Should Not Be Visible    ${searched_invoice_date}
+    Element Should Not Be Visible    ${searched_invoice_table}
