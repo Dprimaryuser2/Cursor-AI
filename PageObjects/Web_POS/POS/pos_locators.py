@@ -279,3 +279,5 @@ item_name_exchange='(//div[@class="pl-1 col-3"])[1]'
 item_price_exchange='(//div[@class="pl-1 col-3"]//following-sibling::div)[2]'
 
 all_searched_invoice = '(//div[@class="ex-invoice-table my-3 mx-n2"]//div[@class="vertical-scroll exchange-scroll"])[1]'
+red_product_in_exc_cart = '(//a[@class="product-name text-danger"])'
+exc_product_in_exc_cart = '//a[@class="product-name"]'

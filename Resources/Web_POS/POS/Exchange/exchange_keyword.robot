@@ -8,6 +8,11 @@ Resource    ../../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Resource    ../../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Library    ../../../../Resources/CustomKeywords/utilities.py
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
+Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Exchange/exchange_keyword.robot
@@ -409,3 +414,9 @@ Verify All The Invoices Under Customer Name Are Visible
     END
 
 
+Verify Manual Discount Not Applicable To Exc product After Added
+    Wait Until Page Contains Element    ${exc_product_in_exc_cart}
+    Click Element    ${exc_product_in_exc_cart}
+    
+
+     

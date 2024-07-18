@@ -471,7 +471,19 @@ E_38 select a alternate product with same quantity and Net price less than the e
     Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
     Sleep    10s
 
-
+Zwing_E_41 check whether manual discount is applied on alternate product after adding or not.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_38
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Manual Discount Not Applicable To Exc product After Added
 
 
 
