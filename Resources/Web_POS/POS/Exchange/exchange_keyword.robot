@@ -384,16 +384,33 @@ Enter Customer Name For Previously Used Number
     ${customer_info}    Create Dictionary    first_name=${my_dict.cust_name_tag}
     RETURN    ${customer_info}
 
+Initialize Invoice List
+    ${invoice_ids}=  Create List
+    Set Global Variable    ${invoice_ids}
+
 Verify All The Invoices Under Customer Name Are Visible
-  Verify All The Invoices Under Customer Name Are Visible
     [Arguments]    @{invoice_ids}
-    Wait Until Page Contains Element    ${all_searched_invoice}
-    ${all_invoices_text}  Get Text    ${all_searched_invoice}
-    Log    ${all_invoices_text}    # Log the text to debug the content
-    ${all_invoices_list}=  Create List From Text    ${all_invoices_text}    \n    # Adjust separator if needed
-    Log    ${all_invoices_list}    # Log the list to debug
+    Wait Until Page Contains Element    ${all_searched_invoice}    timeout=30s
+    ${invoice_text}    Get Text    ${all_searched_invoice}
     FOR    ${invoice}    IN    @{invoice_ids}
-        Run Keyword If    '${invoice}' not in ${all_invoices_list}    Fail    Invoice '${invoice}' not found in the list of invoices
+       Page Should Contain Element    ${all_searched_invoice}   ${invoice}
     END
 
+Update Customer Name | Exchange
+    [Arguments]    ${customer_data}
+    ${my_dict}    Create Dictionary   &{customer_data}
+    Wait Until Element Is Enabled    ${add_customer_link}   timeout=40s
+    Click Element    ${add_customer_link}
+    Wait Until Element Is Visible    ${customer_phone_field}
+    Input Text    ${customer_phone_field}    ${my_dict.mobile}
+    Click Button    ${continue_billing_button}
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
+    Clear Element Text    ${customer_first_name_field}
+    Input Text     ${customer_first_name_field}    ${my_dict.cust_name_tag_updated}
+    Click Button    ${start_billing_button}
+    Sleep    2
+    Discard Items If Present From Previous Session
+    Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
+    ${customer_info}    Create Dictionary    first_name=${my_dict.cust_name_tag}
+    RETURN    ${customer_info}
 

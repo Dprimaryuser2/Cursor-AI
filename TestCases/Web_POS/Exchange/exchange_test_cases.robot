@@ -245,64 +245,62 @@ Zwing_E_17 Make a invoice without entering name, make another invoice with same 
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan And Add Product    ${pos_data}
-    Verify Item Added In Cart
     ${customer_number}  Tag Customer Without Name  ${pos_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Payment By Cash    ${value}
     Verify If Payment Is Complete Or Not
-    ${cust_invoice_1}  Get Customer Details | Checkout
+    Initialize Invoice List
+    ${cust_invoice_1}  Get Customer Details | Checkout  ${invoice_ids}
     Click on New Bill Button
     Scan And Add Product    ${pos_data}
-    Verify Item Added In Cart
     ${customer_name}  Enter Customer Name For Previously Used Number  ${pos_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Payment By Cash    ${value}
     Verify If Payment Is Complete Or Not
-    ${cust_invoice_2}  Get Customer Details | Checkout
+    ${cust_invoice_2}  Get Customer Details | Checkout  ${invoice_ids}
     Click on New Bill Button
     Change Billing Mode    ${pos_data}
     Click On +Add Exchange Items from Invoice Link
-    Verify The +Add Exchange Items from Invoice Link
     Click On Invoice Parameters
     Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
     Verify All The Invoices Under Customer Name Are Visible    ${invoice_ids}
-   #need to update
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_18 Make a Invoice with name like (Sunil), make another invoice with same number and update the name like (Sunil-> Vaibhav), search by name in exchange module search bar then check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_18
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
-    Add Product By Scan Only    ${pos_data}
-    Verify Item Added In Cart
-    ${customer_data}  Add Customer Details  ${pos_data}
-    ${value}    Get Payable Amount
-    Verify Billing Checkout
-    Payment By Cash    ${value}
-    Verify If Payment Is Complete Or Not
-    Verify Successful Payment    ${value}    ${customer_data}
-    Click on New Bill Button
-    Add Product By Scan Only    ${pos_data}
-    Verify Item Added In Cart
+    Scan And Add Product    ${pos_data}
     ${customer_name}  Enter Customer Name For Previously Used Number  ${pos_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Payment By Cash    ${value}
     Verify If Payment Is Complete Or Not
-    Verify Successful Payment    ${value}    ${customer_name}
+    Initialize Invoice List
+    ${cust_invoice_1}  Get Customer Details | Checkout  ${invoice_ids}
+    Click on New Bill Button
+    Scan And Add Product    ${pos_data}
+    ${customer_name}  Update Customer Name | Exchange  ${pos_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Payment By Cash    ${value}
+    Verify If Payment Is Complete Or Not
+    ${cust_invoice_2}  Get Customer Details | Checkout  ${invoice_ids}
     Click on New Bill Button
     Change Billing Mode    ${pos_data}
     Click On +Add Exchange Items from Invoice Link
-    Verify The +Add Exchange Items from Invoice Link
     Click On Invoice Parameters
     Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
-    Verify All The Invoices Under Customer Name Are Visible  ${pos_data}
-    #need to update
+    Verify All The Invoices Under Customer Name Are Visible    ${invoice_ids}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_19 Search by previous name (sunil) in exchange module then check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_19
