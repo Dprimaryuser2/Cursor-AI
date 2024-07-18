@@ -114,6 +114,12 @@ Search Invoice | Exchange
    Input Text    ${search_invoice_field}    ${my_dict.search_invoice}
    Press Keys   ${search_invoice_field}   ENTER
 
+Search Invoice By Invoice Number
+    [Arguments]    ${cust_info_checkout}
+    Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
+   Input Text    ${search_invoice_field}    ${cust_info_checkout.invoice_id}
+   Press Keys   ${search_invoice_field}   ENTER
+
 Verify The Search Invoice Response | Exchange
    Wait Until Page Contains Element    ${searched_invoice_heading_row}  timeout=20s
    Page Should Contain Element    ${searched_invoice_heading_row}
@@ -424,3 +430,96 @@ Search Invoice By Name| Exchange
    Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
    Input Text    ${search_invoice_field}     ${first_name}
    Press Keys   ${search_invoice_field}   ENTER
+    ${customer_info}    Create Dictionary    first_name=${first_name}    last_name=${last_name}
+    RETURN    ${customer_info}
+    
+Switch To Exchange Mode
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    Wait Until Page Contains Element    ${switch_billing_dropdown}
+    Click Element    ${switch_billing_dropdown}
+    Click Element    //a[contains(text(),"${my_dict.Mode}")]
+    Wait Until Page Contains Element    ${switch_modal_text}
+
+Verify Exchange Option Popup
+    Wait Until Page Contains Element    ${switch_confirm_button}    timeout=10s
+    Page Should Contain Element    ${switch_modal_text}
+    Element Should Be Enabled    ${switch_confirm_button}
+    Element Should Be Enabled    ${switch_cancel_button}
+
+Verify Switching To Exchange Mode
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    Page Should Contain Element    ${add_exchange_item_link}
+    Page Should Contain     ${my_dict.Mode}
+
+Verify Cancel Button On Switch To Exchange Popup
+    Click Button    ${switch_cancel_button}
+    Page Should Not Contain Element    ${add_exchange_item_link}
+
+Verify Exchange Mode Is Disabled
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    Wait Until Page Contains Element    ${switch_billing_dropdown}
+    Click Element    ${switch_billing_dropdown}
+    Page Should Not Contain Element      //a[contains(text(),"${my_dict.Mode}")]
+
+Verify Item To Be Exchanged Are Visible
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    Wait Until Page Contains Element    ${searched_invoice_number_heading}
+    Wait Until Page Contains Element    ${searched_invoice_table}    timeout=20s
+    Page Should Contain Element    ${searched_invoice_number_heading}
+    Page Should Contain Element    ${searched_invoice_date_heading}
+    Page Should Contain Element    ${searched_invoice_item_heading}
+    Page Should Contain Element    ${searched_invoice_amount_heading}
+    Page Should Contain Element    ${searched_invoice_customer_name_heading}
+    Page Should Contain Element    ${searched_invoice_phone_number}
+    Element Should Contain    ${searched_invoice_table}    ${my_dict.search_invoice}
+
+Add Exchange Items From Invoice
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    Click Element    ${add_exchange_item_link}
+    Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=10s
+    Click Element    ${select_search_invoice_option_btn} 
+    IF   '${my_dict.select_invoice_option}' == 'Customer Name'
+        Click Element    ${customer_name_search_option}
+    ELSE IF    '${my_dict.select_invoice_option}' == 'Customer Phone'
+        Click Element    ${customer_phone_search_option}
+    ELSE IF     '${my_dict.select_invoice_option}' == 'Invoice Number'
+        Click Element    ${invoice_number_search_option}
+    END
+    Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
+    Input Text    ${search_invoice_field}    ${my_dict.search_invoice}
+    Press Keys   ${search_invoice_field}   ENTER
+    Wait Until Page Contains Element    ${first_row_invoice}    timeout=30s
+    ${invoice_number}=    Get Text    ${searched_invoice_number}
+    ${customer_name}=    Get Text    ${searched_customer_name}
+    ${phone_number}=    Get Text    ${searched_phone_number}
+    ${item_quantity}=    Get Text    ${total_number_of_items}
+    ${item_amount}=    Get Text    ${amount}
+    ${invoice_details}=    Create Dictionary    invoice_number=${invoice_number}        customer_name=${customer_name}     phone_number=${phone_number}     item_quantity=${item_quantity}     item_amount=${item_amount}
+    [Return]    ${invoice_details}
+
+Verify Items Are Searched By 3 Digits Of Name
+    [Arguments]    ${searched_product}
+    ${my_dict}    Create Dictionary   &{searched_product}
+    ${count}=    Get Element Count    ${searched_invoice_date}
+    FOR    ${i}    IN RANGE    1     ${count}+1
+        ${index}    Convert To String    ${i}
+        ${name_element}=    Replace String    ${searched_customer_name}    1     ${index}
+        Element Should Contain    ${name_element}    ${my_dict.search_invoice}
+    END
+
+Verify Items Are Not Searched By 2 Digits Only
+    Element Should Not Be Visible    ${searched_invoice_amount_heading}
+    Element Should Not Be Visible   ${searched_invoice_customer_name_heading}
+    Element Should Not Be Visible    ${searched_invoice_date}
+    Element Should Not Be Visible    ${searched_invoice_table}
