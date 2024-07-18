@@ -90,6 +90,7 @@ category = '(//ul[@id="infinite-categories"]/li)[1]'
 # assortment 2
 second_category = '(//ul[@id="infinite-categories"]/li)[2]'
 
+delete_item="//p[contains(text(),'To be exchanged with')]//ancestor::td//following-sibling::td//a"
 # dynamic
 quantity_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="3"]'    # change barcode
 price_column = '=//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="4"]'    # change barcode
@@ -266,3 +267,5 @@ continue_btn_exchange_window = '//div[@class="text-right d-flex pr-2 col-4"]//bu
 add_product_for_exchange_btn = '//button[@class="primary-light fs-12 my-1 add-prod-exchanged"]'
 cancel_adding_product_btn = '//button[@class="primary-light fs-12 my-1 add-prod-exchanged cancel-prod-exchanged"]'
 invoice_not_found = '//div[@class="alert alert-dismissible alert-danger" and contains(text(),"Invoice not found")]'
+
+exchange_popup="//div[@class='popup-notification']"
