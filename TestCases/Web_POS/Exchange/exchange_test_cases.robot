@@ -706,6 +706,13 @@ Zwing_E_105 Entering minimum 3 digits while searching should list down all the i
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_106 No invoices should be filtered while searching till only 2 digits are entered in the text search field
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_106
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_107 Select the invoice for the product that needs to be exchanged
 

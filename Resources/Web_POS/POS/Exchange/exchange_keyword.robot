@@ -460,6 +460,7 @@ Add Exchange Items From Invoice
     ${phone_number}=    Get Text    ${searched_phone_number}
     ${item_quantity}=    Get Text    ${total_number_of_items}
     ${item_amount}=    Get Text    ${amount}
-    Click Element    ${first_row_invoice}
     ${invoice_details}=    Create Dictionary    invoice_number=${invoice_number}        customer_name=${customer_name}     phone_number=${phone_number}     item_quantity=${item_quantity}     item_amount=${item_amount}
     [Return]    ${invoice_details}
+
+Select Items For Exchange | First Row
