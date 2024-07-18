@@ -13,6 +13,7 @@ Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
 Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
 Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
 Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
+Library    utilities
 Resource    ../../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Exchange/exchange_keyword.robot
@@ -393,26 +394,47 @@ Enter Customer Name For Previously Used Number
     Input Text    ${customer_phone_field}    ${my_dict.mobile}
     Click Button    ${continue_billing_button}
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
-    Input Text     ${customer_first_name_field}    ${my_dict.cust_name_tag}
+    ${first_name}=  Generate Random First Name
+    Input Text     ${customer_first_name_field}     ${first_name}
     Click Button    ${start_billing_button}
     Sleep    2
     Discard Items If Present From Previous Session
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
-    ${customer_info}    Create Dictionary    first_name=${my_dict.cust_name_tag}
-    RETURN    ${customer_info}
+#    ${customer_info}    Create Dictionary    first_name=${first_name}
+    RETURN    ${first_name}
+
+Initialize Invoice List
+    ${invoice_ids}=  Create List
+    Set Global Variable    ${invoice_ids}
 
 Verify All The Invoices Under Customer Name Are Visible
-  Verify All The Invoices Under Customer Name Are Visible
     [Arguments]    @{invoice_ids}
-    Wait Until Page Contains Element    ${all_searched_invoice}
-    ${all_invoices_text}  Get Text    ${all_searched_invoice}
-    Log    ${all_invoices_text}    # Log the text to debug the content
-    ${all_invoices_list}=  Create List From Text    ${all_invoices_text}    \n    # Adjust separator if needed
-    Log    ${all_invoices_list}    # Log the list to debug
+    Sleep  5s
+    Wait Until Page Contains Element    ${all_searched_invoice}    timeout=20s
+    ${invoice_texts}    Get Text    ${all_searched_invoice}
+    Capture Page Screenshot
     FOR    ${invoice}    IN    @{invoice_ids}
-        Run Keyword If    '${invoice}' not in ${all_invoices_list}    Fail    Invoice '${invoice}' not found in the list of invoices
+        Should Contain    ${invoice_texts}    ${invoice}
     END
 
+Update Customer Name | Exchange
+    [Arguments]    ${customer_data}
+    ${my_dict}    Create Dictionary   &{customer_data}
+    Wait Until Element Is Enabled    ${add_customer_link}   timeout=40s
+    Click Element    ${add_customer_link}
+    Wait Until Element Is Visible    ${customer_phone_field}
+    Input Text    ${customer_phone_field}    ${my_dict.mobile}
+    Click Button    ${continue_billing_button}
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
+    Clear Element Text    ${customer_first_name_field}
+    ${first_name}=  Generate Random First Name
+    Input Text     ${customer_first_name_field}     ${first_name}
+    Click Button    ${start_billing_button}
+    Sleep    2
+    Discard Items If Present From Previous Session
+    Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
+#    ${customer_info}    Create Dictionary    first_name=${my_dict.cust_name_tag}
+    RETURN    ${first_name}
 
 Verify Manual Discount Not Applicable To Exc product After Added
     Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
@@ -472,3 +494,8 @@ Verify Alternate Product With Equal Price was Added To Cart
     Remove Characters   ${alt_product_price}
     Remove Characters    ${initial_product_price}
     Should Be Equal As Strings    ${alt_product_price}    ${initial_product_price}
+Search Invoice By Name| Exchange
+   [Arguments]    ${first_name}
+   Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
+   Input Text    ${search_invoice_field}     ${first_name}
+   Press Keys   ${search_invoice_field}   ENTER
