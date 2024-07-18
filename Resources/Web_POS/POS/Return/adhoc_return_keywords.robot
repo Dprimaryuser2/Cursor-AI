@@ -183,9 +183,10 @@ Verify A Customer Is Tagged
     Page Should Contain Element    ${customer_information_phone_field}
 
 
+
 Verify Quantity Increased
     Wait Until Page Contains Element    ${cart_quantity}
     ${qty}    Get Text    ${cart_quantity}
-    Remove Characters    ${qty}
-    ${int_qty}    Convert To Integer    ${qty}
-    Should Not Be Equal As Integers    ${int_qty}    1
+    ${clean_qty}    Remove Characters    ${qty}
+    ${int_qty}    Convert To Integer    ${clean_qty}
+    Should Not Be Equal        ${int_qty}    1
