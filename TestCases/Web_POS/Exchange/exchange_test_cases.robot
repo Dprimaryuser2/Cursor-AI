@@ -250,8 +250,7 @@ Zwing_E_17 Make a invoice without entering name, make another invoice with same 
     Verify Billing Checkout
     Payment By Cash    ${value}
     Verify If Payment Is Complete Or Not
-    Initialize Invoice List
-    ${cust_invoice_1}  Get Customer Details | Checkout  ${invoice_ids}
+    ${cust_invoice_1}  Get Customer Details | Checkout
     Click on New Bill Button
     Scan And Add Product    ${pos_data}
     ${customer_name}  Enter Customer Name For Previously Used Number  ${pos_data}
@@ -259,7 +258,7 @@ Zwing_E_17 Make a invoice without entering name, make another invoice with same 
     Verify Billing Checkout
     Payment By Cash    ${value}
     Verify If Payment Is Complete Or Not
-    ${cust_invoice_2}  Get Customer Details | Checkout  ${invoice_ids}
+    ${cust_invoice_2}  Get Customer Details | Checkout
     Click on New Bill Button
     Change Billing Mode    ${pos_data}
     Click On +Add Exchange Items from Invoice Link
@@ -281,8 +280,7 @@ Zwing_E_18 Make a Invoice with name like (Sunil), make another invoice with same
     Verify Billing Checkout
     Payment By Cash    ${value}
     Verify If Payment Is Complete Or Not
-    Initialize Invoice List
-    ${cust_invoice_1}  Get Customer Details | Checkout  ${invoice_ids}
+    ${cust_invoice_1}  Get Customer Details | Checkout
     Click on New Bill Button
     Scan And Add Product    ${pos_data}
     ${customer_name}  Update Customer Name | Exchange  ${pos_data}
@@ -290,7 +288,7 @@ Zwing_E_18 Make a Invoice with name like (Sunil), make another invoice with same
     Verify Billing Checkout
     Payment By Cash    ${value}
     Verify If Payment Is Complete Or Not
-    ${cust_invoice_2}  Get Customer Details | Checkout  ${invoice_ids}
+    ${cust_invoice_2}  Get Customer Details | Checkout
     Click on New Bill Button
     Change Billing Mode    ${pos_data}
     Click On +Add Exchange Items from Invoice Link
@@ -312,8 +310,7 @@ Zwing_E_19 Search by previous name (sunil) in exchange module then check the res
     Verify Billing Checkout
     Payment By Cash    ${value}
     Verify If Payment Is Complete Or Not
-    Initialize Invoice List
-    ${cust_invoice_1}  Get Customer Details | Checkout  ${invoice_ids}
+    ${cust_invoice_1}  Get Customer Details | Checkout
     Click on New Bill Button
     Scan And Add Product    ${pos_data}
     Update Customer Name | Exchange  ${pos_data}
@@ -321,7 +318,7 @@ Zwing_E_19 Search by previous name (sunil) in exchange module then check the res
     Verify Billing Checkout
     Payment By Cash    ${value}
     Verify If Payment Is Complete Or Not
-    ${cust_invoice_2}  Get Customer Details | Checkout  ${invoice_ids}
+    ${cust_invoice_2}  Get Customer Details | Checkout
     Click on New Bill Button
     Change Billing Mode    ${pos_data}
     Click On +Add Exchange Items from Invoice Link
@@ -338,16 +335,29 @@ Zwing_E_20 Search for a already used exchange invoice in search bar then check t
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_20
    Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
+   ${invoice_id}  Customer Billing For Invoice Generation | Exchange  ${pos_data}
    Change Billing Mode    ${pos_data}
    Click On +Add Exchange Items from Invoice Link
-   Select The Invoice Option Type  ${pos_data}
-   Search Invoice | Exchange   ${pos_data}
-   Select Invoice From Search Options
-   Select Items For Exchange   ${pos_data}
+   Verify The +Add Exchange Items from Invoice Link
+   Click On Invoice Parameters
+   Verify The Invoice Parameters Are Clickable
+   Select The Invoice By Invoice Name | Exchange    ${invoice_id}
+   Select Items For Exchange     ${pos_data}
    Add Product For Exchange
    Scan Barcode To Add Item And Quantity To Cart By Name | Exchange     ${pos_data}
    ${value}    Get payable amount
    Verify Billing Checkout
+   No Payment Required | Checkout Page
+   ${invoice_id}  Get Customer Details | Checkout
+   Click on New Bill Button
+   Auto Switch To Billing
+   Click On Confirm Button | Exchange   ${pos_data}
+   Change Billing Mode    ${pos_data}
+   Click On +Add Exchange Items from Invoice Link
+   Verify The +Add Exchange Items from Invoice Link
+   Click On Invoice Parameters
+   Verify The Invoice Parameters Are Clickable
+   Select The Invoice By Invoice Name | Exchange    ${invoice_id}
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
      #need to update
@@ -816,51 +826,51 @@ Zwing_E_107 Select the invoice for the product that needs to be exchanged
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-
-Zwing_E_108 User should be able to select/unselect all the items at once
-
-Zwing_E_109 User should be able to select/unselect individual items
-
-Zwing_E_110 Selecting items should auto populate the invoice qty of that item to total exchange qty
-
-Zwing_E_111 Deselecting the item should reset the qty to 0
-
-Zwing_E_112 Total exchange qty should be dropdown field
-
-Zwing_E_113 Total exchange qty dropdown should not have values more than the invoiced qty
-
-Zwing_E_114 Selecting the total exchange qty to 0 should deselect the item
-
-Zwing_E_115 Reasons field should be a dropdown field
-
-Zwing_E_116 User should be able to select the Reason
-
-Zwing_E_117 Continue button should be disabled if Total exchange qty is not selected.
-
-Zwing_E_118 User should be able to select the Reason
-
-Zwing_E_119 Continue button should be disable if reason not selected
-
-Zwing_E_120 Click on Cancel button on Select Items to exchange popup box
-
-Zwing_E_121 Click Confirm button on Select Items to exhance popup box
-
-Zwing_E_122 Switching Between Billing to Exchange Will Give Confirmation Popup
-
-Zwing_E_123 Click on Confirm button on switch to Billing popup box
-
-Zwing_E_124 Click on Cancel button on switch to Billing popup box
-
-Zwing_E_125 Switching Between Exchange to Billing Will Give Confirmation Popup
-
-Zwing_E_126 Click on Confirm button on switch to Order popup box
-
-Zwing_E_127 Click on Cancel button on switch to Order popup box
-
-Zwing_E_128 Switching Between Exchange to Order Will Give Confirmation Popup
-
-Zwing_E_129 Click on Confirm button on switch to Return popup box
-
-Zwing_E_130 Click on Cancel button on switch to Return popup box
-
-Zwing_E_131 Switching Between Exchange to Return Will Give Confirmation Popup
+#
+#Zwing_E_108 User should be able to select/unselect all the items at once
+#
+#Zwing_E_109 User should be able to select/unselect individual items
+#
+#Zwing_E_110 Selecting items should auto populate the invoice qty of that item to total exchange qty
+#
+#Zwing_E_111 Deselecting the item should reset the qty to 0
+#
+#Zwing_E_112 Total exchange qty should be dropdown field
+#
+#Zwing_E_113 Total exchange qty dropdown should not have values more than the invoiced qty
+#
+#Zwing_E_114 Selecting the total exchange qty to 0 should deselect the item
+#
+#Zwing_E_115 Reasons field should be a dropdown field
+#
+#Zwing_E_116 User should be able to select the Reason
+#
+#Zwing_E_117 Continue button should be disabled if Total exchange qty is not selected.
+#
+#Zwing_E_118 User should be able to select the Reason
+#
+#Zwing_E_119 Continue button should be disable if reason not selected
+#
+#Zwing_E_120 Click on Cancel button on Select Items to exchange popup box
+#
+#Zwing_E_121 Click Confirm button on Select Items to exhance popup box
+#
+#Zwing_E_122 Switching Between Billing to Exchange Will Give Confirmation Popup
+#
+#Zwing_E_123 Click on Confirm button on switch to Billing popup box
+#
+#Zwing_E_124 Click on Cancel button on switch to Billing popup box
+#
+#Zwing_E_125 Switching Between Exchange to Billing Will Give Confirmation Popup
+#
+#Zwing_E_126 Click on Confirm button on switch to Order popup box
+#
+#Zwing_E_127 Click on Cancel button on switch to Order popup box
+#
+#Zwing_E_128 Switching Between Exchange to Order Will Give Confirmation Popup
+#
+#Zwing_E_129 Click on Confirm button on switch to Return popup box
+#
+#Zwing_E_130 Click on Cancel button on switch to Return popup box
+#
+#Zwing_E_131 Switching Between Exchange to Return Will Give Confirmation Popup

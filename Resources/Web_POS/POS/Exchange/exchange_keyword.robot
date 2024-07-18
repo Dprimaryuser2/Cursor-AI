@@ -392,10 +392,6 @@ Enter Customer Name For Previously Used Number
 #    ${customer_info}    Create Dictionary    first_name=${first_name}
     RETURN    ${first_name}
 
-Initialize Invoice List
-    ${invoice_ids}=  Create List
-    Set Global Variable    ${invoice_ids}
-
 Verify All The Invoices Under Customer Name Are Visible
     [Arguments]    @{invoice_ids}
     Sleep  5s
@@ -523,3 +519,27 @@ Verify Items Are Not Searched By 2 Digits Only
     Element Should Not Be Visible   ${searched_invoice_customer_name_heading}
     Element Should Not Be Visible    ${searched_invoice_date}
     Element Should Not Be Visible    ${searched_invoice_table}
+
+Select The Invoice By Invoice Name | Exchange
+   [Arguments]    ${invoice_id}
+   Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=10s
+   Click Element    ${select_search_invoice_option_btn}
+   Wait Until Page Contains Element    ${invoice_number_search_option}
+   Click Element    ${invoice_number_search_option}
+   Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
+   Input Text    ${search_invoice_field}     ${invoice_id}
+   Press Keys   ${search_invoice_field}   ENTER
+   Wait Until Page Contains Element    ${first_row_invoice}
+
+Customer Billing For Invoice Generation | Exchange
+   [Arguments]    ${customer_billing}
+   Add Product By Scan Only   ${customer_billing}
+   Verify Item Added In Cart
+   Tag Customer Without Name    ${customer_billing}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Payment By Cash   ${value}
+   Wait Until Page Contains Element    ${payment_complete_heading}
+   ${cust_invoice_1}  Get Customer Details | Checkout
+   Click on New Bill Button
+   [Return]   ${cust_invoice_1}
