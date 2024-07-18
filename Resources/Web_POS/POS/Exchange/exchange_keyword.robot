@@ -8,6 +8,7 @@ Resource    ../../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Resource    ../../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Library    ../../../../Resources/CustomKeywords/utilities.py
+Library    utilities
 Resource    ../../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Exchange/exchange_keyword.robot
@@ -376,13 +377,14 @@ Enter Customer Name For Previously Used Number
     Input Text    ${customer_phone_field}    ${my_dict.mobile}
     Click Button    ${continue_billing_button}
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
-    Input Text     ${customer_first_name_field}    ${my_dict.cust_name_tag}
+    ${first_name}=  Generate Random First Name
+    Input Text     ${customer_first_name_field}     ${first_name}
     Click Button    ${start_billing_button}
     Sleep    2
     Discard Items If Present From Previous Session
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
-    ${customer_info}    Create Dictionary    first_name=${my_dict.cust_name_tag}
-    RETURN    ${customer_info}
+#    ${customer_info}    Create Dictionary    first_name=${first_name}
+    RETURN    ${first_name}
 
 Initialize Invoice List
     ${invoice_ids}=  Create List
@@ -390,10 +392,12 @@ Initialize Invoice List
 
 Verify All The Invoices Under Customer Name Are Visible
     [Arguments]    @{invoice_ids}
-    Wait Until Page Contains Element    ${all_searched_invoice}    timeout=30s
-    ${invoice_text}    Get Text    ${all_searched_invoice}
+    Sleep  5s
+    Wait Until Page Contains Element    ${all_searched_invoice}    timeout=20s
+    ${invoice_texts}    Get Text    ${all_searched_invoice}
+    Capture Page Screenshot
     FOR    ${invoice}    IN    @{invoice_ids}
-       Page Should Contain Element    ${all_searched_invoice}   ${invoice}
+        Should Contain    ${invoice_texts}    ${invoice}
     END
 
 Update Customer Name | Exchange
@@ -406,11 +410,17 @@ Update Customer Name | Exchange
     Click Button    ${continue_billing_button}
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
     Clear Element Text    ${customer_first_name_field}
-    Input Text     ${customer_first_name_field}    ${my_dict.cust_name_tag_updated}
+    ${first_name}=  Generate Random First Name
+    Input Text     ${customer_first_name_field}     ${first_name}
     Click Button    ${start_billing_button}
     Sleep    2
     Discard Items If Present From Previous Session
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
-    ${customer_info}    Create Dictionary    first_name=${my_dict.cust_name_tag}
-    RETURN    ${customer_info}
+#    ${customer_info}    Create Dictionary    first_name=${my_dict.cust_name_tag}
+    RETURN    ${first_name}
 
+Search Invoice By Name| Exchange
+   [Arguments]    ${first_name}
+   Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
+   Input Text    ${search_invoice_field}     ${first_name}
+   Press Keys   ${search_invoice_field}   ENTER

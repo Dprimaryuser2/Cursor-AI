@@ -266,7 +266,7 @@ Zwing_E_17 Make a invoice without entering name, make another invoice with same 
     Click On Invoice Parameters
     Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange   ${pos_data}
+    Search Invoice By Name | Exchange     ${customer_name}
     Verify All The Invoices Under Customer Name Are Visible    ${invoice_ids}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -276,7 +276,7 @@ Zwing_E_18 Make a Invoice with name like (Sunil), make another invoice with same
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan And Add Product    ${pos_data}
-    ${customer_name}  Enter Customer Name For Previously Used Number  ${pos_data}
+    Enter Customer Name For Previously Used Number  ${pos_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Payment By Cash    ${value}
@@ -297,7 +297,7 @@ Zwing_E_18 Make a Invoice with name like (Sunil), make another invoice with same
     Click On Invoice Parameters
     Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange   ${pos_data}
+    Search Invoice By Name | Exchange     ${customer_name}
     Verify All The Invoices Under Customer Name Are Visible    ${invoice_ids}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -306,32 +306,50 @@ Zwing_E_19 Search by previous name (sunil) in exchange module then check the res
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_19
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
+    Scan And Add Product    ${pos_data}
+    ${customer_name}  Enter Customer Name For Previously Used Number  ${pos_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Payment By Cash    ${value}
+    Verify If Payment Is Complete Or Not
+    Initialize Invoice List
+    ${cust_invoice_1}  Get Customer Details | Checkout  ${invoice_ids}
+    Click on New Bill Button
+    Scan And Add Product    ${pos_data}
+    Update Customer Name | Exchange  ${pos_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Payment By Cash    ${value}
+    Verify If Payment Is Complete Or Not
+    ${cust_invoice_2}  Get Customer Details | Checkout  ${invoice_ids}
+    Click on New Bill Button
     Change Billing Mode    ${pos_data}
     Click On +Add Exchange Items from Invoice Link
     Verify The +Add Exchange Items from Invoice Link
     Click On Invoice Parameters
     Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange   ${pos_data}
-    Verify The Search Invoice Response | Exchange
+    Search Invoice By Name | Exchange     ${customer_name}
+    Verify Invoice Search By Invalid Customer Data
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-     #need to update
 
 Zwing_E_20 Search for a already used exchange invoice in search bar then check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_20
-    Login With Valid Username And Password | POS    ${pos_data}
-    Open The Session    ${pos_data}
-    Change Billing Mode    ${pos_data}
-    Click On +Add Exchange Items from Invoice Link
-    Verify The +Add Exchange Items from Invoice Link
-    Click On Invoice Parameters
-    Verify The Invoice Parameters Are Clickable
-    Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange   ${pos_data}
-    Verify The Search Invoice Response | Exchange
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_20
+   Login With Valid Username And Password | POS   ${pos_data}
+   Open The Session    ${pos_data}
+   Change Billing Mode    ${pos_data}
+   Click On +Add Exchange Items from Invoice Link
+   Select The Invoice Option Type  ${pos_data}
+   Search Invoice | Exchange   ${pos_data}
+   Select Invoice From Search Options
+   Select Items For Exchange   ${pos_data}
+   Add Product For Exchange
+   Scan Barcode To Add Item And Quantity To Cart By Name | Exchange     ${pos_data}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
      #need to update
 
 Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice then check the response.
