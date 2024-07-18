@@ -421,14 +421,54 @@ Verify Manual Discount Not Applicable To Exc product After Added
     Page Should Not Contain Element    ${manual_discount_arrow}
 
 Verify Quantity Cannot Be Increased For The Exchange Product
-    Wait Until Page Contains Element    ${alternate_product_qty_in_exc_cart}
-    Page Should Contain Element    ${alternate_product_qty_in_exc_cart}
+    Wait Until Page Contains Element    ${disabled_alternate_product_qty_in_exc_cart}
+    Page Should Contain Element    ${disabled_alternate_product_qty_in_exc_cart}
 
 Verify User Cannot Apply Item/bill Level Promotions On Alternate Product
     Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
     Click Element    ${alternate_product_in_exc_cart}
-    Wait Until Page Does Not Contain Element    ${active_promotion}
+    Wait Until Page Contains Element    ${active_promotion}
     Click Element    ${active_promotion}
     Wait Until Page Does Not Contain Element    ${active_promo_dropdown_row}
+    Page Should Not Contain Element    ${active_promo_dropdown_row}
 
-     
+Verify Price Override Not Possible For Alternate Product
+    [Arguments]    ${pos_data}
+    ${my_dict}    Create Dictionary    &{pos_data}
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${price_override_link}
+    Click Element    ${price_override_link}
+    Wait Until Page Contains Element    ${price_override_custom_price_field}
+    Input Text    ${price_override_custom_price_field}    ${my_dict.price_override}
+    Click Element    ${apply_override_button}
+    Click Element    ${apply_override_button}
+    Page Should Contain Element    ${disabled_apply_override_button}
+
+
+Verify Alternate Product With Greater Price was Added To Cart
+    Wait Until Page Contains Element    ${product_name_in_cart_row}
+    Wait Until Page Contains Element    ${alternate_product_in_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_in_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
+    Remove Characters   ${alt_product_price}
+    Remove Characters    ${initial_product_price}
+    Should Be True    ${{alt_product_price  <  initial_product_price}}
+
+Verify Alternate Product With Lesser Price was Added To Cart
+    Wait Until Page Contains Element    ${product_name_in_cart_row}
+    Wait Until Page Contains Element    ${alternate_product_in_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_in_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
+    Remove Characters   ${alt_product_price}
+    Remove Characters    ${initial_product_price}
+    Should Be True    ${alt_product_price}  >  ${initial_product_price}
+
+Verify Alternate Product With Equal Price was Added To Cart
+    Wait Until Page Contains Element    ${product_name_in_cart_row}
+    Wait Until Page Contains Element    ${alternate_product_in_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_in_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
+    Remove Characters   ${alt_product_price}
+    Remove Characters    ${initial_product_price}
+    Should Be Equal As Strings    ${alt_product_price}    ${initial_product_price}
