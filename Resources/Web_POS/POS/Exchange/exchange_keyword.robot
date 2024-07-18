@@ -354,9 +354,7 @@ Tag Customer Without Name
     Wait Until Element Is Enabled    ${add_customer_link}   timeout=40s
     Click Element    ${add_customer_link}
     Wait Until Element Is Visible    ${customer_phone_field}
-    ${mobile}=     Generate Random Phone Number
-    Set Test Variable    ${mobile}
-    Input Text    ${customer_phone_field}    ${mobile}
+    Input Text    ${customer_phone_field}    ${my_dict.mobile}
     Click Button    ${continue_billing_button}
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
@@ -366,24 +364,36 @@ Tag Customer Without Name
     Wait Until Element Is Visible    ${checkout_button}    timeout=10s
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
     Wait Until Element Is Not Visible    //div[@class="popup-notification"]     timeout=10s
-    ${customer_information}=    Create Dictionary   phone_number= ${mobile}
+    ${customer_information}=    Create Dictionary   phone_number= ${my_dict.mobile}
     [Return]    ${customer_information}
 
 Enter Customer Name For Previously Used Number
-    Click Element    ${customer_info_icon}
-    Wait Until Element Is Visible    ${customer_info_window_title}    timeout=10s
-    Wait Until Element Is Visible    ${customer_edit_info_button}    timeout=10s
-    Click Element    ${customer_edit_info_button}
-    Wait Until Element Is Visible    ${customer_phone_field}    timeout=10s
-    ${first_name}=    Generate Random First Name
-    Input Text     ${customer_first_name_field}    ${first_name}
-    ${last_name}=    Generate Random Last Name
-    Input Text    ${customer_last_name_field}    ${last_name}
-    Click Button    ${customer_info_update_button}
+    [Arguments]    ${customer_data}
+    ${my_dict}    Create Dictionary   &{customer_data}
+    Wait Until Element Is Enabled    ${add_customer_link}   timeout=40s
+    Click Element    ${add_customer_link}
+    Wait Until Element Is Visible    ${customer_phone_field}
+    Input Text    ${customer_phone_field}    ${my_dict.mobile}
+    Click Button    ${continue_billing_button}
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
+    Input Text     ${customer_first_name_field}    ${my_dict.cust_name_tag}
+    Click Button    ${start_billing_button}
     Sleep    2
     Discard Items If Present From Previous Session
-    Wait Until Element Is Visible    ${customer_info_close_element}    timeout=10s
-    Click Element    ${customer_info_close_element}
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
-    ${customer_info}    Create Dictionary    first_name=${first_name}    last_name=${last_name}
+    ${customer_info}    Create Dictionary    first_name=${my_dict.cust_name_tag}
     RETURN    ${customer_info}
+
+Verify All The Invoices Under Customer Name Are Visible
+  Verify All The Invoices Under Customer Name Are Visible
+    [Arguments]    @{invoice_ids}
+    Wait Until Page Contains Element    ${all_searched_invoice}
+    ${all_invoices_text}  Get Text    ${all_searched_invoice}
+    Log    ${all_invoices_text}    # Log the text to debug the content
+    ${all_invoices_list}=  Create List From Text    ${all_invoices_text}    \n    # Adjust separator if needed
+    Log    ${all_invoices_list}    # Log the list to debug
+    FOR    ${invoice}    IN    @{invoice_ids}
+        Run Keyword If    '${invoice}' not in ${all_invoices_list}    Fail    Invoice '${invoice}' not found in the list of invoices
+    END
+
+
