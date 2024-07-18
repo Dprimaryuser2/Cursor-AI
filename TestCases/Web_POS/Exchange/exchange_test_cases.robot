@@ -93,6 +93,7 @@ Zwing_E_08 Select customer name,enter valid name then check the Response
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
+
 Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice then check the response.
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_21
     Login With Valid Username And Password | POS    ${pos_data}
@@ -116,7 +117,6 @@ Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice t
     ${total_quantity1}   Select Items For Exchange   ${pos_data}
     Verify Count of Items For Exchange After Payment    ${total_quantity}   ${total_quantity1}
 
-    
 Zwing_E_22 check whether double digit number are selecting in quantity dropdown in select exchange popup window bar or not
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_22
     Login With Valid Username And Password | POS    ${pos_data}
@@ -129,7 +129,6 @@ Zwing_E_22 check whether double digit number are selecting in quantity dropdown 
     Select Items For Exchange   ${pos_data}
     Verify Exchange Item Is Added In The Cart
 
-
 #Zwing_E_23 Repeated
 
 Zwing_E_24 check all the information about product in cart is correct or not
@@ -141,8 +140,8 @@ Zwing_E_24 check all the information about product in cart is correct or not
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
     Select Invoice From Search Options
-    Select Items For Exchange   ${pos_data}
-    Verify Exchange Item Is Added In The Cart
+    ${exchange_item_info}     Select Items For Exchange   ${pos_data}
+    Verify Exchange Item Info In Cart Is Correct Or Not     ${exchange_item_info}
 
 Zwing_E_25 select invoice which have multiply quantity of a single product for exchange, click on confirm button and check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_25
@@ -317,7 +316,6 @@ E_37 select a alternate product with same quantity and Net price >then the excha
     Verify Item Added In Cart | Exchange
 
 E_38 select a alternate product with same quantity and Net price less than the exchange product net price
-    #need prodocut less then exchange item
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_38
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -328,17 +326,38 @@ E_38 select a alternate product with same quantity and Net price less than the e
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
     Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart By Name | Exchange    ${pos_data}
+    Verify Validation Message Popup | Exchange
+
+
+Zwing_E_39 select a alternate product which have EXC tax and net price greater exchange product price
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_39
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
-    Sleep    10s
+    Verify Item Added In Cart | Exchange
 
+Zwing_E_40 select a alternate product which have EXC tax and net price greater exchange product price
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_40
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Item Added In Cart | Exchange
 
-
-
-
-
-#Zwing_B_46
-#Zwing_B_47
-#Zwing_B_48
 
 Zwing_E_49 select a alternate product ,apply item level manual discount then check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_49
@@ -405,6 +424,8 @@ Zwing_E_62 check whether salesperson tagging option is popup or not for alternat
     Verify If Salesperson Is Assigned To An Item    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+
 
 
  #testcase 29 same product under UOM | update test data

@@ -119,8 +119,11 @@ Select Items For Exchange
     Wait Until Page Contains Element    ${exchange_reason_option}   timeout=10s
     Click Element    ${exchange_reason_option}
     ${total_quantity}=  Get Text    ${exchange_qty}
+    ${product_name}=  Get Text    ${item_name_exchange}
+    ${product_cost}=  Get Text    ${item_price_exchange}
     Click Element    ${continue_btn_exchange_window}
-    [Return]    ${total_quantity}
+    ${exchange_item_info}=    Create Dictionary    name    ${product_name}    price    ${product_cost}
+    [Return]    ${exchange_item_info}
 
 Add Product For Exchange
     Wait Until Page Contains Element    ${add_product_for_exchange_btn}     timeout=20s
@@ -283,3 +286,13 @@ Verify Exchange Item Is Added In The Cart
 Verify Count of Items For Exchange After Payment
     [Arguments]     ${total_quantity}   ${total_quantity1}
     Should Not Be Equal As Numbers    ${total_quantity}    ${total_quantity1}
+
+
+Verify Exchange Item Info In Cart Is Correct Or Not
+    [Arguments]     ${exchange_item_info}
+    ${my_dict}    Create Dictionary   &{exchange_item_info}
+    Wait Until Page Contains Element    ${payable_amount}   timeout=10s
+    Wait Until Page Contains Element    ${add_product_for_exchange_btn}     timeout=10s
+    Should Match Regexp    ${my_dict.name}    (?i).*${my_dict['name']}.*
+    Should Match Regexp    ${my_dict.price}    (?i).*${my_dict['price']}.*
+    

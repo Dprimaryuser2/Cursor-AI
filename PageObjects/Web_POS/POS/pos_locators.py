@@ -269,3 +269,6 @@ cancel_adding_product_btn = '//button[@class="primary-light fs-12 my-1 add-prod-
 invoice_not_found = '//div[@class="alert alert-dismissible alert-danger" and contains(text(),"Invoice not found")]'
 
 exchange_popup="//div[@class='popup-notification']"
+item_name_exchange='(//div[@class="pl-1 col-3"])[1]'
+item_price_exchange='(//div[@class="pl-1 col-3"]//following-sibling::div)[2]'
+
