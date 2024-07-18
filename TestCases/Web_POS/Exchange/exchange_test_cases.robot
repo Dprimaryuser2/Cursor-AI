@@ -344,10 +344,20 @@ Zwing_E_39 select a alternate product which have EXC tax and net price greater e
     Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
     Verify Item Added In Cart | Exchange
 
+Zwing_E_40 select a alternate product which have EXC tax and net price greater exchange product price
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_40
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Item Added In Cart | Exchange
 
-#Zwing_B_46
-#Zwing_B_47
-#Zwing_B_48
 
 Zwing_E_49 select a alternate product ,apply item level manual discount then check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_49
