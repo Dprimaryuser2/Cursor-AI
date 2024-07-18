@@ -24,7 +24,7 @@ Zwing_R_1 Return should be mark enable in policies
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
-   Verify Return mark enable in policies
+   Verify Return mark enable in policies    ${pos_data}
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -116,7 +116,7 @@ Zwing_R_10 Add Qty to the added item
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Verify Item Added In Cart
+   Verify Quantity Increased
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 

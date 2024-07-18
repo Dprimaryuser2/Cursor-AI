@@ -10,8 +10,8 @@ Resource    ../../../Resources/Web_POS/POS/Billing/add_to_cart_keyword.robot
 Open Application | POS
 #    Open Browser     ${pos_url}    ${browser}
     Open Browser     ${pos_url}    ${browser}    options=add_argument("--headless")
-    Maximize Browser Window
-#    Set Window Size    ${window_width}    ${window_height}
+#    Maximize Browser Window
+    Set Window Size    ${window_width}    ${window_height}
 
 Login With Valid Username And Password | POS
     [Arguments]     ${search_data}

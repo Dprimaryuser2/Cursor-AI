@@ -161,6 +161,8 @@ Verify Return mark enable in policies
 
 Verify Auto Switch to billing is Off
     Wait Until Page Contains Element    ${switch_billing_dropdown}    timeout=5
+    Wait Until Page Does Not Contain Element    ${order_option_switch}    timeout=5
+
 
 Verify Add product
     Wait Until Page Contains Element    ${product_name_in_cart_row}    timeout=5
@@ -179,3 +181,10 @@ Verify A Customer Is Tagged
     Click Element    ${customer_info_icon}
     Wait Until Page Contains Element    ${customer_information_phone_field}    timeout=5
     Page Should Contain Element    ${customer_information_phone_field}
+
+
+Verify Quantity Increased
+    Wait Until Page Contains Element    ${cart_quantity}
+    ${qty}    Get Text    ${cart_quantity}
+    ${int_qty}    Convert To Integer    ${qty}
+    Should Not Be Equal As Integers    ${int_qty}    1
