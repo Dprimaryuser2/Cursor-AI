@@ -814,7 +814,7 @@ Zwing_E_53 Select a exchanged product which have item level manual discount and 
     Select Items For Exchange   ${pos_data}
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
-    Verify Alt Product With Higher Quantity Distributes The Manual Discount
+    Verify Alt Product With Same Quantity And More Price Applies Same Manual Discount
 
 
 Zwing_E_60 check the behaviour of the system when payment amount is 0

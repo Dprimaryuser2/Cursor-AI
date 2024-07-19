@@ -464,9 +464,10 @@ Verify Item Level Manual Discount Gets Carried Forward On Alt Product And User C
     Click Element    ${alternate_product_in_exc_cart}
     Page Should Not Contain Element    ${manual_discount_arrow}
 
-Verify Alt Product With Higher Quantity Distributes The Manual Discount
+Verify Alt Product With Same Quantity And More Price Applies Same Manual Discount
     Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
     Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+
 
 
 Verify Quantity Cannot Be Increased For The Exchange Product
