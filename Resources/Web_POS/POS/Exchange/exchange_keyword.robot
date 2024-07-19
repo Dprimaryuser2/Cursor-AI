@@ -622,3 +622,29 @@ Verify Promo Discount Applied In Exchanged Item Also
     ${abs_price_1}=    Evaluate    abs(float(${clean_price_1}))
     ${abs_price_2}=    Evaluate    abs(float(${clean_price_2}))
     Should Be Equal As Numbers    ${abs_price_1}    ${abs_price_2}
+
+
+Verify Exchanged Product And Alternate Product Prices Is Correct Or Not
+   ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
+   ${alternate_net_price}=  Get Text    ${alternate_product_net_price}
+   Should Not Be Equal    ${exchange_net_price}    ${alternate_net_price}
+   
+Verify Total Amount Of Exchange and Alternate Product
+   ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
+   ${alternate_net_price}=  Get Text    ${alternate_product_net_price}
+   ${total_amount}=  Get Text    ${payable_amount}
+   ${exchange}  Remove Characters    ${exchange_net_price}
+   ${alternate}  Remove Characters     ${alternate_net_price}
+   ${product_price}=  Evaluate    ${alternate}-${exchange}
+   ${total}  Remove Characters    ${total_amount}
+   Should Not Be Equal    ${product_price}    ${total}
+
+Verify Bill Discount Is Disabled Or Not
+   Element Should Be Disabled    ${bill_discount}
+
+Verify No Payment Required | Checkout Page
+    Wait Until Element Is Visible    ${no_payment_required}
+    Wait Until Page Contains Element    ${no_payment_required_confirm_button}
+    Page Should Contain Element    ${no_payment_required}
+    Page Should Contain Element     ${no_payment_required_confirm_button}
+    Page Should Contain Button    ${no_payment_required_cancel_button}

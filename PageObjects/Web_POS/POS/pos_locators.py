@@ -298,3 +298,6 @@ searched_phone_number = '(//div[contains(@class,"exchange-invoices-col rows alig
 total_number_of_items = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="col-1"])[1]'
 amount = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="px-4 col-2"])[1]'
 searched_invoice_date = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="grey-100 col-2" and contains(text(),"PM") or contains(text(),"AM")])'
+
+exchange_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[1]'
+alternate_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[2]'

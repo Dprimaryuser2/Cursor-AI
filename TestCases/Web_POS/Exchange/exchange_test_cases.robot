@@ -821,8 +821,97 @@ Zwing_E_67 check salesperson dropdown search functionality is working or not
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
+Zwing_E_68 Select a valid product with no discount click on checkout button then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_68
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Billing Checkout
+    Verify No Payment Required | Checkout Page
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
+Zwing_E_69 Check whether exchanged product and alternate product prices is correct or not.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_69
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange  ${pos_data}
+    Verify Exchanged Product And Alternate Product Prices Is Correct Or Not
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
+Zwing_E_70 Select a valid product with no discount, take net price greater than exchanged product price, click on checkout button then check the response.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_70
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    ${value}  Get payable amount
+    Verify Billing Checkout
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    
+Zwing_E_71 Select a valid product with no discount, take net price greater than exchanged product price, click on checkout button then check the response(total amount should be like (alternate product net price - exchanged product net price))
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_71
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode     ${pos_data}
+    Add Exchange Items From Invoice   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange  ${pos_data}
+    Verify Total Amount Of Exchange and Alternate Product
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_72 Check whether bill discount option is disabled or not in checkout page.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_72
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode     ${pos_data}
+    Add Exchange Items From Invoice   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange  ${pos_data}
+    Verify Billing Checkout
+    Verify Bill Discount Is Disabled Or Not
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_73 Apply a bill discount on a product exchange it with alternate product then check the response.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_73
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode     ${pos_data}
+    Add Exchange Items From Invoice   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange  ${pos_data}
+    Verify Billing Checkout
+    Verify Bill Discount Is Disabled Or Not
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_92 From dropdown on billing screen, select Exchange option
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_92
