@@ -10,6 +10,7 @@ Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
 Resource    ../../../AdminConsole/Login/login_keyword.robot
 Variables   ../../../../PageObjects/AdminConsole/ProductCategories/product_categories.py
 Resource    ../../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
+Resource   ../../../../Resources/Web_POS/POS/Exchange/exchange_keyword.robot
 
 *** Variables ***
 ${IMAP_SERVER}        imap.gmail.com
@@ -250,16 +251,20 @@ Verify Invoice Generated Received On Email
     ...  ELSE  Log  Email with subject contains "${subject}" is not found
     [Return]  ${email_body}
 
+Initialize Invoice List
+    ${invoice_ids}=  Create List
+    Set Global Variable    ${invoice_ids}
+
 Get Customer Details | Checkout
+    ${invoice_ids}    Create List
     Wait Until Page Contains Element    ${payment_complete_heading}
     ${in_id}  Get Text    ${invoice_number_checkout}
     ${in_name}  Get Text    ${invoice_customer_name}
     ${in_number}  Get Text    ${invoice_customer_phone}
     ${in_amount}  Get Text    ${total_amount_checkout}
-    ${cust_info_checkout}=  Create Dictionary    invoice_id=${in_id}  invoice_name=${in_name}  phone_number=${in_number}  total_amount=${in_amount}
-    ${invoice_ids}=  Create List
+    ${cust_info_checkout}=  Create Dictionary    invoice_id=${in_id}  invoice_name=${in_name}  phone_number=${in_number}  total_amount=${in_amount}    search_invoice=${in_id}
     Append To List    ${invoice_ids}    ${in_id}
-    Set Test Variable    ${invoice_ids}
+    Set Global Variable    ${invoice_ids}
     [RETURN]   ${cust_info_checkout}
 
 Get Customer Details | Print Invoice
