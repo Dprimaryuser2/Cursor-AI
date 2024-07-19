@@ -19,7 +19,7 @@ ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Exchange${/}
 
 *** Test Cases ***
 Zwing_E_01 Check whether Exchange text is clickable or not
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_1
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_01
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Click On Exchange Text In Dropdown   ${pos_data}
@@ -28,7 +28,7 @@ Zwing_E_01 Check whether Exchange text is clickable or not
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_02 Click on Exchange Text and check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_2
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_02
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Click On Exchange Text In Dropdown   ${pos_data}
@@ -37,7 +37,7 @@ Zwing_E_02 Click on Exchange Text and check the response
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_03 Click on confirm button and check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_3
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_03
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Click On Exchange Text In Dropdown   ${pos_data}
@@ -48,7 +48,7 @@ Zwing_E_03 Click on confirm button and check the response
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_04 Click on cancel button and check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_4
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_04
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Click On Exchange Text In Dropdown   ${pos_data}
@@ -59,7 +59,7 @@ Zwing_E_04 Click on cancel button and check the response
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_05 Click on +Add Exchange Items from Invoice link and check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_5
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_05
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -69,7 +69,7 @@ Zwing_E_05 Click on +Add Exchange Items from Invoice link and check the response
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_06 Verify invoice parameters are clickable or not
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_6
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_06
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -81,7 +81,7 @@ Zwing_E_06 Verify invoice parameters are clickable or not
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_07 Click on close tab cross(X) then check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_7
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_07
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -95,7 +95,7 @@ Zwing_E_07 Click on close tab cross(X) then check the response
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_08 Select customer name,enter valid name then check the Response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_8
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_08
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -110,7 +110,7 @@ Zwing_E_08 Select customer name,enter valid name then check the Response
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_09 Select customer phone,enter valid Mobile no then check the Response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_9
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_09
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -362,7 +362,7 @@ Zwing_E_20 Search for a already used exchange invoice in search bar then check t
    Verify Already Used Exchange Invoice Response    ${invoice_id.invoice_id}
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-     #need to update
+
 
 Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice then check the response.
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_21
@@ -663,32 +663,6 @@ Zwing_E_40 select a alternate product which have EXC tax and net price greater e
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 
-Zwing_E_49 select a alternate product ,apply item level manual discount then check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_49
-    Login With Valid Username And Password | POS    ${pos_data}
-    Open The Session    ${pos_data}
-
-    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-    Navigate To Update Product Window    ${pos_data}
-    Verify Disabled Item Level Discount
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
-
-Zwing_E_50 select a exchange product ,apply item level manual discount then check the response.
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_49
-    Login With Valid Username And Password | POS    ${pos_data}
-    Open The Session    ${pos_data}
-#    Change Billing Mode    ${pos_data}
-    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-    Navigate To Update Product Window    ${pos_data}
-    Verify Disabled Item Level Discount
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
-
-
-
 
 
 
@@ -705,7 +679,7 @@ Zwing_E_57 add a product which have promo, add a alternate product then check th
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart By Name | Exchange  ${pos_data}
     Verify Item Added In Cart | Exchange
-    #assertion
+    Verify Promo Discount Applied In Exchanged Item Also
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -777,8 +751,165 @@ Zwing_E_62 check whether salesperson tagging option is popup or not for alternat
     Select Items For Exchange   ${pos_data}
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
-    Assign A Salesperson To An Item  ${pos_data}
-    Verify If Salesperson Is Assigned To An Item    ${pos_data}
+    Assign A Salesperson To An Item | For Exchange  ${pos_data}
+    Verify If Salesperson Is Assigned To An Item | For Exchange    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_63 check whether tag sales person in exchange product is correct or not. tagged salesperson should be same to original product invoice
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}   E_63
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Tag Sales Person In Exchange Product Is Correct Or Not
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_64 check whether user can edit or remove the sales person from exchanged product.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}   E_64
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify whether user can edit or remove the sales person from exchanged product
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+#Zwing_E_65 delete salesperson invalid test case
+
+Zwing_E_66 check the refresh button functionality in sales person tagging is working or not.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}   E_66
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Refresh Button Functionality In Sales Person Tagging Is Working Or Not
+
+Zwing_E_67 check salesperson dropdown search functionality is working or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}   E_67
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Assign A Salesperson To An Item | For Exchange  ${pos_data}
+    Verify If Salesperson Is Assigned To An Item | For Exchange    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_68 Select a valid product with no discount click on checkout button then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_68
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Billing Checkout
+    Verify No Payment Required | Checkout Page
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_69 Check whether exchanged product and alternate product prices is correct or not.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_69
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange  ${pos_data}
+    Verify Exchanged Product And Alternate Product Prices Is Correct Or Not
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_70 Select a valid product with no discount, take net price greater than exchanged product price, click on checkout button then check the response.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_70
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    ${value}  Get payable amount
+    Verify Billing Checkout
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    
+Zwing_E_71 Select a valid product with no discount, take net price greater than exchanged product price, click on checkout button then check the response(total amount should be like (alternate product net price - exchanged product net price))
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_71
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode     ${pos_data}
+    Add Exchange Items From Invoice   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange  ${pos_data}
+    Verify Total Amount Of Exchange and Alternate Product
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_72 Check whether bill discount option is disabled or not in checkout page.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_72
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode     ${pos_data}
+    Add Exchange Items From Invoice   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange  ${pos_data}
+    Verify Billing Checkout
+    Verify Bill Discount Is Disabled Or Not
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_73 Apply a bill discount on a product exchange it with alternate product then check the response.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_73
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode     ${pos_data}
+    Add Exchange Items From Invoice   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange  ${pos_data}
+    Verify Billing Checkout
+    Verify Bill Discount Is Disabled Or Not
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -790,8 +921,6 @@ Zwing_E_92 From dropdown on billing screen, select Exchange option
     Verify Exchange Option Popup
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
-
 
  
 Zwing_E_93 Click on Confirm button on switch to Exchange popup box
@@ -963,55 +1092,206 @@ Zwing_E_107 Select the invoice for the product that needs to be exchanged
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
     Add Exchange Items From Invoice    ${pos_data}
-    Search Invoice | Exchange    ${pos_data}
+    Select Invoice From Search Options
+    Select Individual Item
+    Verify Individual Item Is Selected
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-#
-#Zwing_E_108 User should be able to select/unselect all the items at once
-#
-#Zwing_E_109 User should be able to select/unselect individual items
-#
+Zwing_E_108 User should be able to select/unselect all the items at once
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_108
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select All Items At Once
+    Verify All Items Are Selected
+    Unselect All Items At Once
+    Verify All Items Are Unselected
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_109 User should be able to select/unselect individual items
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_109
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select Individual Item
+    Verify Individual Item Is Selected
+    Unselect Individual Item
+    Verify Individual Item Is Unselected
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
 #Zwing_E_110 Selecting items should auto populate the invoice qty of that item to total exchange qty
+#    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_110
+#    Login With Valid Username And Password | POS    ${pos_data}
+#    Open The Session    ${pos_data}
+#    Change Billing Mode    ${pos_data}
+#    Add Exchange Items From Invoice    ${pos_data}
+#    Select Invoice From Search Options
+#    Select Individual Item
+#    Verify Total QTY Auto Populated
+#    Revoke Serial Key    ${pos_data}
+#    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 #
 #Zwing_E_111 Deselecting the item should reset the qty to 0
-#
-#Zwing_E_112 Total exchange qty should be dropdown field
-#
-#Zwing_E_113 Total exchange qty dropdown should not have values more than the invoiced qty
-#
-#Zwing_E_114 Selecting the total exchange qty to 0 should deselect the item
-#
-#Zwing_E_115 Reasons field should be a dropdown field
-#
-#Zwing_E_116 User should be able to select the Reason
-#
-#Zwing_E_117 Continue button should be disabled if Total exchange qty is not selected.
-#
-#Zwing_E_118 User should be able to select the Reason
-#
-#Zwing_E_119 Continue button should be disable if reason not selected
-#
-#Zwing_E_120 Click on Cancel button on Select Items to exchange popup box
-#
-#Zwing_E_121 Click Confirm button on Select Items to exhance popup box
-#
-#Zwing_E_122 Switching Between Billing to Exchange Will Give Confirmation Popup
-#
-#Zwing_E_123 Click on Confirm button on switch to Billing popup box
-#
-#Zwing_E_124 Click on Cancel button on switch to Billing popup box
-#
-#Zwing_E_125 Switching Between Exchange to Billing Will Give Confirmation Popup
-#
-#Zwing_E_126 Click on Confirm button on switch to Order popup box
-#
-#Zwing_E_127 Click on Cancel button on switch to Order popup box
-#
-#Zwing_E_128 Switching Between Exchange to Order Will Give Confirmation Popup
-#
-#Zwing_E_129 Click on Confirm button on switch to Return popup box
-#
-#Zwing_E_130 Click on Cancel button on switch to Return popup box
-#
-#Zwing_E_131 Switching Between Exchange to Return Will Give Confirmation Popup
+#    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_110
+#    Login With Valid Username And Password | POS    ${pos_data}
+#    Open The Session    ${pos_data}
+#    Change Billing Mode    ${pos_data}
+#    Add Exchange Items From Invoice    ${pos_data}
+#    Select Invoice From Search Options
+#    Select Individual Item
+#    Verify Total QTY Auto Populated
+#    Unselect Individual Item
+#    Verify Total QTY Is 0
+#    Revoke Serial Key    ${pos_data}
+#    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_112 Total exchange qty should be dropdown field
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_112
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select The Item Qty
+    Verify QTY DropDown
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_113 Total exchange qty dropdown should not have values more than the invoiced qty
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_113
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select The Item Qty
+    Verify QTY DropDown Does Not Have More Values
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_114 Selecting the total exchange qty to 0 should deselect the item
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_114
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select Individual Item
+    Select Item QTY From Drop Down   ${pos_data}
+    Verify Individual Item Is Unselected
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_115 Reasons field should be a dropdown field
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_115
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select Individual Item
+    Select Item QTY From Drop Down   ${pos_data}
+    Verify User Should Be Able To See Reason Dropdown
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_116 User should be able to select the Reason
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_116
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select Individual Item
+    Select Item QTY From Drop Down   ${pos_data}
+    Verify User Should Be Able To Select Reason Dropdown
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_117 Continue button should be disabled if Total exchange qty is not selected.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_117
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select Reason For Exchange
+    Verify Continue Button Is Disabled | Exchange
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_118 Continue button should be enabled if reason not selected | Non Mandatory in Policy
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_118
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select Individual Item
+    Verify Continue Button Is Enabled Without Reason | Exchange
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_119 Continue button should be disable if reason not selected
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_119
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select Individual Item
+    Verify Continue Button Is Disabled | Exchange
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_120 Click on Cancel button on Select Items to exchange popup box
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_120
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select Individual Item
+    Cancel The Exchange Of Items
+    Verify Canceling Of Exchange Item
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_121 Click Confirm button on Select Items to exchange popup box
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_121
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange    ${pos_data}
+    Verify The Confirmation Of item To Be Exchanged
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_122 Switching Between Billing to Exchange Will Give Confirmation Popup
+
+Zwing_E_123 Click on Confirm button on switch to Billing popup box
+
+Zwing_E_124 Click on Cancel button on switch to Billing popup box
+
+Zwing_E_125 Switching Between Exchange to Billing Will Give Confirmation Popup
+
+Zwing_E_126 Click on Confirm button on switch to Order popup box
+
+Zwing_E_127 Click on Cancel button on switch to Order popup box
+
+Zwing_E_128 Switching Between Exchange to Order Will Give Confirmation Popup
+
+Zwing_E_129 Click on Confirm button on switch to Return popup box
+
+Zwing_E_130 Click on Cancel button on switch to Return popup box
+
+Zwing_E_131 Switching Between Exchange to Return Will Give Confirmation Popup
