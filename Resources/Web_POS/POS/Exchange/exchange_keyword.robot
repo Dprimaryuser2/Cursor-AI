@@ -438,12 +438,35 @@ Update Customer Name | Exchange
     RETURN    ${first_name}
 
 Verify Manual Discount Not Applicable To Exc product After Added
+    Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+    Click Element    ${initial_product_in_exc_cart}
+    Click Element    ${initial_product_in_exc_cart}
+    Page Should Not Contain Element    ${manual_discount_arrow}
+
+Verify Manual Discount Not Applicable To Alternate product After Added
     Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
     Click Element    ${alternate_product_in_exc_cart}
     Wait Until Page Contains Element    ${manual_discount_arrow}
     Click Element    ${manual_discount_arrow}
     Click Element    ${manual_discount_arrow}
     Page Should Not Contain Element    ${manual_discount_heading}
+
+Verify Item Level Manual Discount Gets Carried Forward On Alt Product And User Cannot Change It
+    Wait Until Page Contains Element    ${alternate_product_in_discount_price}
+    Page Should Contain Element    ${alternate_product_in_discount_price}
+    ${discount}    Get Text    ${alternate_product_in_discount_price}
+    ${clean_discount}    Remove Characters    ${discount}
+    ${float_disc}    Convert To Number    ${clean_discount}
+    ${int_disc}    Convert To Integer    ${float_disc}
+    Should Not Be Equal As Integers    ${int_disc}    0
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Page Should Not Contain Element    ${manual_discount_arrow}
+
+Verify Alt Product With Higher Quantity Distributes The Manual Discount
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${initial_product_in_exc_cart}
 
 
 Verify Quantity Cannot Be Increased For The Exchange Product
