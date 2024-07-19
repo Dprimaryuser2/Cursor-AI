@@ -188,7 +188,6 @@ Scan Barcode To Add Item And Quantity To Cart By Name | Exchange
         Click Element    ${search_add_button}
         ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
     END
-
 Scan Barcode To Add Item And Quantity To Cart | Exchange
     [Arguments]    ${products}
     ${my_dict}    Create Dictionary   &{products}
@@ -569,7 +568,6 @@ Verify No Payment Required | Checkout Page
     Page Should Contain Button    ${no_payment_required_cancel_button}
 
 Verify Exchanged Product And Alternate Product Prices Is Correct Or Not
-   Wait Until Page Contains    ${exchange_product_net_price}
    ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
    ${alternate_net_price}=  Get Text    ${alternate_product_net_price}
    Should Not Be Equal    ${exchange_net_price}    ${alternate_net_price}

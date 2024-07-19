@@ -804,17 +804,14 @@ Zwing_E_69 Check whether exchanged product and alternate product prices is corre
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Click On +Add Exchange Items from Invoice Link
-    Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange   ${pos_data}
+    Add Exchange Items From Invoice   ${pos_data}
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
     Add Product For Exchange
-    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart | Exchange  ${pos_data}
     Verify Exchanged Product And Alternate Product Prices Is Correct Or Not
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-    #need to update
 
 Zwing_E_70 Select a valid product with no discount, take net price greater than exchanged product price, click on checkout button then check the response.
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_70
@@ -833,8 +830,19 @@ Zwing_E_70 Select a valid product with no discount, take net price greater than 
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-
-Zwing_E_71
+Zwing_E_71 Select a valid product with no discount, take net price greater than exchanged product price, click on checkout button then check the response(total amount should be like (alternate product net price - exchanged product net price))
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_71
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode     ${pos_data}
+    Add Exchange Items From Invoice   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange  ${pos_data}
+    Verify Exchanged Product And Alternate Product Prices Is Correct Or Not
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_92 From dropdown on billing screen, select Exchange option
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_92
