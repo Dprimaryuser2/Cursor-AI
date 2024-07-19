@@ -571,3 +571,17 @@ Verify Exchanged Product And Alternate Product Prices Is Correct Or Not
    ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
    ${alternate_net_price}=  Get Text    ${alternate_product_net_price}
    Should Not Be Equal    ${exchange_net_price}    ${alternate_net_price}
+   
+Verify Total Amount Of Exchange and Alternate Product
+   ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
+   ${alternate_net_price}=  Get Text    ${alternate_product_net_price}
+   ${total_amount}=  Get Text    ${payable_amount}
+   ${exchange}  Remove Characters    ${exchange_net_price}
+   ${alternate}  Remove Characters     ${alternate_net_price}
+   ${product_price}=  Evaluate    ${alternate}-${exchange}
+   ${total}  Remove Characters    ${total_amount}
+   Should Not Be Equal    ${product_price}    ${total}
+
+Verify Bill Discount Is Disabled Or Not
+   Element Should Be Disabled    ${bill_discount}
+
