@@ -566,9 +566,9 @@ Verify Individual Item Is Unselected
     Checkbox Should Not Be Selected    ${selected_item}
     Page Should Contain Element    ${no_product_selected_message}
 
-Verify Total QTY Auto Populated
-    
-Verify Total QTY Is 0
+#Verify Total QTY Auto Populated
+#
+#Verify Total QTY Is 0
     
 Select The Invoice By Invoice Name | Exchange
    [Arguments]    ${invoice_id}

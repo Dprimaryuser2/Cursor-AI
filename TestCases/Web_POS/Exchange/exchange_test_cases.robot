@@ -1275,23 +1275,23 @@ Zwing_E_121 Click Confirm button on Select Items to exchange popup box
     Verify The Confirmation Of item To Be Exchanged
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
-Zwing_E_122 Switching Between Billing to Exchange Will Give Confirmation Popup
-
-Zwing_E_123 Click on Confirm button on switch to Billing popup box
-
-Zwing_E_124 Click on Cancel button on switch to Billing popup box
-
-Zwing_E_125 Switching Between Exchange to Billing Will Give Confirmation Popup
-
-Zwing_E_126 Click on Confirm button on switch to Order popup box
-
-Zwing_E_127 Click on Cancel button on switch to Order popup box
-
-Zwing_E_128 Switching Between Exchange to Order Will Give Confirmation Popup
-
-Zwing_E_129 Click on Confirm button on switch to Return popup box
-
-Zwing_E_130 Click on Cancel button on switch to Return popup box
-
-Zwing_E_131 Switching Between Exchange to Return Will Give Confirmation Popup
+#
+#Zwing_E_122 Switching Between Billing to Exchange Will Give Confirmation Popup
+#
+#Zwing_E_123 Click on Confirm button on switch to Billing popup box
+#
+#Zwing_E_124 Click on Cancel button on switch to Billing popup box
+#
+#Zwing_E_125 Switching Between Exchange to Billing Will Give Confirmation Popup
+#
+#Zwing_E_126 Click on Confirm button on switch to Order popup box
+#
+#Zwing_E_127 Click on Cancel button on switch to Order popup box
+#
+#Zwing_E_128 Switching Between Exchange to Order Will Give Confirmation Popup
+#
+#Zwing_E_129 Click on Confirm button on switch to Return popup box
+#
+#Zwing_E_130 Click on Cancel button on switch to Return popup box
+#
+#Zwing_E_131 Switching Between Exchange to Return Will Give Confirmation Popup
