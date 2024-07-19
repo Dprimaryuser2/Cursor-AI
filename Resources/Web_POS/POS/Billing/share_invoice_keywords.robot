@@ -78,8 +78,8 @@ Verify Remark Is Auto-Populated When Click On Close Icon of Add Remark Popup Win
    Page Should Contain Element    ${add_bill_remark_textarea}    ${my_dict.Remark}
 
 Verify The Print Invoice Button
+   Wait Until Page Contains Element    ${print_invoice_button}  timeout=10s
    Element Should Be Enabled    ${print_invoice_button}
-   Wait Until Page Contains Element    ${invoice_modal_heading}
    Element Should Be Enabled    ${print_invoice_modal_button}
    Element Should Be Enabled    ${close_invoice_modal_button}
 

@@ -408,4 +408,3 @@ Verify All The Invoices Under Customer Name Are Visible
         Run Keyword If    '${invoice}' not in ${all_invoices_list}    Fail    Invoice '${invoice}' not found in the list of invoices
     END
 
-
