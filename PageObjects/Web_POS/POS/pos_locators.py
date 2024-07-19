@@ -268,7 +268,7 @@ search_reason_dropdown = '//button[@class="btn dropdown-toggle btn-light" and co
 exchange_reason_option = '(//ul[@class="dropdown-menu show"]//a[@class="dropdown-item"])[1]'
 product_selected_for_exchange_text = '//p[@class="text-primary mb-0 text-left"]'
 cancel_btn_exchange_window = '//button[@class="btn mr-3 btn-outline-primary btn-block"]'
-continue_btn_exchange_window = '//div[@class="text-right d-flex pr-2 col-4"]//button[@class="btn btn-primary btn-block"]'
+continue_btn_exchange_window = '//div[@class="text-right d-flex pr-2 col-4"]//button[contains(@class,"btn btn-primary btn-block")]'
 add_product_for_exchange_btn = '//button[@class="primary-light fs-12 my-1 add-prod-exchanged"]'
 cancel_adding_product_btn = '//button[@class="primary-light fs-12 my-1 add-prod-exchanged cancel-prod-exchanged"]'
 invoice_not_found = '//div[@class="alert alert-dismissible alert-danger" and contains(text(),"Invoice not found")]'
@@ -298,5 +298,14 @@ total_number_of_items = '(//div[contains(@class,"exchange-invoices-col rows alig
 amount = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="px-4 col-2"])[1]'
 searched_invoice_date = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="grey-100 col-2" and contains(text(),"PM") or contains(text(),"AM")])'
 
+select_all_items_checkbox = '//input[@id="select-all"]//following-sibling::label'
+selected_all_item = '//input[@id="select-all"]'
+exchange_item_checkbox = '//input[@id="product-0"]//following-sibling::label'
+selected_item = '//input[@id="product-0"]'
+ensure_product_message = '//p[contains(text(),"Please ensure the customer has them before your proceed.")]'
+product_added_message = '//p[@class="text-primary mb-0 text-left"]'
+no_product_selected_message = '//p[contains(text(),"No product selected for exchange")]'
+
+total_qty_of_item = '(//div[contains(text(),"SKU/Barcode")]//ancestor::div[@class="ex-invoice-table my-3 mx-n2"]//div[contains(@class,"vertical-scroll exchange-scroll")]//div[@class="col-1"])[1]'
 exchange_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[1]'
 alternate_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[2]'
