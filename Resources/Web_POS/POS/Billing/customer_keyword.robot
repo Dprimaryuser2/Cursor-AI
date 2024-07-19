@@ -44,7 +44,7 @@ Add Customer Details
     ELSE IF    '${my_dict.tax_invoice}' == 'Delete GST'
        Delete GST   ${customer_data}
     ELSE IF    '${my_dict.tax_invoice}' == 'Delete UIN'
-       Delete UIN
+       Delete UIN   ${customer_data}
     ELSE
        Log    Does Not Require Tax
     END

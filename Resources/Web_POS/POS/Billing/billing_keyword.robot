@@ -82,6 +82,14 @@ Get payable amount
 
 Payment By Cash
     [Arguments]    ${cash_value}
+    ${discard}=    Run Keyword And Return Status    Element Should Be Enabled    ${discard_item_previous_session}
+    IF    ${discard}
+     Discard Previous Added Item
+    END
+    ${no_payment}=    Run Keyword And Return Status    Element Should Be Enabled    ${no_payment_required_confirm_button}
+    IF    ${no_payment}
+     No Payment Required | Checkout Page
+    END
     Click Element   ${payment_method_cash}
     Wait Until Page Contains Element   ${enter_cash}
     Input Text      ${enter_cash}   ${cash_value}
