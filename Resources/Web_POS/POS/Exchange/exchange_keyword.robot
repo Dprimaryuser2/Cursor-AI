@@ -484,3 +484,45 @@ Verify Items Are Not Searched By 2 Digits Only
     Element Should Not Be Visible   ${searched_invoice_customer_name_heading}
     Element Should Not Be Visible    ${searched_invoice_date}
     Element Should Not Be Visible    ${searched_invoice_table}
+
+Select All Items At Once
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
+    Click Element    ${select_all_items_checkbox}
+
+Verify All Items Are Selected
+    Checkbox Should Be Selected    ${selected_all_item}
+    Page Should Contain Element    ${product_added_message}
+    Page Should Contain Element    ${ensure_product_message}
+
+Unselect All Items At Once
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
+    Click Element    ${select_all_items_checkbox}
+
+Verify All Items Are Unselected
+    Checkbox Should Not Be Selected    ${selected_all_item}
+    Page Should Contain Element    ${no_product_selected_message}
+
+Select Individual Item
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
+    Click Element    ${exchange_item_checkbox}
+
+Verify Individual Item Is Selected
+    Checkbox Should Be Selected    ${selected_item}
+    Page Should Contain Element    ${product_added_message}
+    Page Should Contain Element    ${ensure_product_message}
+
+Unselect Individual Item
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
+    Click Element    ${exchange_item_checkbox}
+
+Verify Individual Item Is Unselected
+    Checkbox Should Not Be Selected    ${selected_item}
+    Page Should Contain Element    ${no_product_selected_message}
+
+Verify Total QTY Auto Populated
+
+Verify Total QTY Is 0

@@ -733,18 +733,65 @@ Zwing_E_107 Select the invoice for the product that needs to be exchanged
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
     Add Exchange Items From Invoice    ${pos_data}
-    Search Invoice | Exchange    ${pos_data}
+    Select Invoice From Search Options
+    Select Individual Item
+    Verify Individual Item Is Selected
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-
 Zwing_E_108 User should be able to select/unselect all the items at once
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_108
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select All Items At Once
+    Verify All Items Are Selected
+    Unselect All Items At Once
+    Verify All Items Are Unselected
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_109 User should be able to select/unselect individual items
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_109
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select Individual Item
+    Verify Individual Item Is Selected
+    Unselect Individual Item
+    Verify Individual Item Is Unselected
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_110 Selecting items should auto populate the invoice qty of that item to total exchange qty
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_110
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select Individual Item
+    Verify Total QTY Auto Populated
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_111 Deselecting the item should reset the qty to 0
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_110
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select Individual Item
+    Verify Total QTY Auto Populated
+    Unselect Individual Item
+    Verify Total QTY Is 0
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_112 Total exchange qty should be dropdown field
 
