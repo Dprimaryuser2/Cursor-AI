@@ -1,1 +1,1 @@
-robot --listener RetryFailed:1  .\TestCases\Web_POS\Billing\
+robot --listener RetryFailed:1 --listener allure_robotframework:allure-results  .\TestCases\Web_POS\Billing\
