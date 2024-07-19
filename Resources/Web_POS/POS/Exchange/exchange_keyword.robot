@@ -152,7 +152,6 @@ Select Invoice From Search Options
     Click Element    ${first_row_invoice}
 
 Select Items For Exchange
-    Sleep    1s
     [Arguments]    ${qty}
     ${my_dict}    Create Dictionary   &{qty}
     Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
@@ -636,6 +635,48 @@ Verify Items Are Not Searched By 2 Digits Only
     Element Should Not Be Visible    ${searched_invoice_date}
     Element Should Not Be Visible    ${searched_invoice_table}
 
+Select All Items At Once
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
+    Click Element    ${select_all_items_checkbox}
+
+Verify All Items Are Selected
+    Checkbox Should Be Selected    ${selected_all_item}
+    Page Should Contain Element    ${product_added_message}
+    Page Should Contain Element    ${ensure_product_message}
+
+Unselect All Items At Once
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
+    Click Element    ${select_all_items_checkbox}
+
+Verify All Items Are Unselected
+    Checkbox Should Not Be Selected    ${selected_all_item}
+    Page Should Contain Element    ${no_product_selected_message}
+
+Select Individual Item
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
+    Click Element    ${exchange_item_checkbox}
+
+Verify Individual Item Is Selected
+    Checkbox Should Be Selected    ${selected_item}
+    Page Should Contain Element    ${product_added_message}
+    Page Should Contain Element    ${ensure_product_message}
+
+Unselect Individual Item
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
+    Click Element    ${exchange_item_checkbox}
+
+Verify Individual Item Is Unselected
+    Checkbox Should Not Be Selected    ${selected_item}
+    Page Should Contain Element    ${no_product_selected_message}
+
+Verify Total QTY Auto Populated
+    
+Verify Total QTY Is 0
+    
 Select The Invoice By Invoice Name | Exchange
    [Arguments]    ${invoice_id}
    Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=10s
@@ -667,6 +708,75 @@ Verify Already Used Exchange Invoice Response
    ${qty_value}   Get Text     //div[@class="grey-100 col-2" and contains(text(),"${invoice_id}")]//following-sibling::div[@class="col-1"]
    Should Be Equal    ${qty_value}    0
 
+Select The Item Qty
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
+    Click Element    ${exchange_qty}
+
+Verify QTY DropDown
+    Page Should Contain Element    ${exchange_qty_option}
+    ${max_qty}=    Get Text    ${total_qty_of_item}
+    Page Should Contain Element    //select[@class="fs-12 custom-select"]//option[contains(text(),"${max_qty}")]
+
+Verify QTY DropDown Does Not Have More Values
+    Page Should Contain Element    ${exchange_qty_option}
+    ${max_qty}=    Get Text    ${total_qty_of_item}
+    Page Should Contain Element    //select[@class="fs-12 custom-select"]//option[contains(text(),"${max_qty}")]
+    ${more_than_max}    Evaluate    int(${max_qty})+1
+    Page Should Not Contain Element    //select[@class="fs-12 custom-select"]//option[contains(text(),"${more_than_max}")]
+
+Select Item QTY From Drop Down
+    [Arguments]    ${qty}
+    ${my_dict}    Create Dictionary   &{qty}
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Sleep    1s
+    Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
+    Click Element    ${exchange_qty}
+    Click Element    //select[@class="fs-12 custom-select"]//option[contains(text(),"${my_dict.replace_qty}")]
+
+Select Reason For Exchange
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Wait Until Page Contains Element    ${search_reason_dropdown}    timeout=20s
+    Click Element    ${search_reason_dropdown}
+    Wait Until Page Contains Element    ${exchange_reason_option}   timeout=10s
+    Click Element    ${exchange_reason_option}
+
+Verify User Should Be Able To See Reason Dropdown
+    Click Element    ${search_reason_dropdown}
+    Wait Until Page Contains Element    ${exchange_reason_option}   timeout=10s
+    Page Should Contain Element        ${exchange_reason_option}
+
+Verify User Should Be Able To Select Reason Dropdown
+    Click Element    ${search_reason_dropdown}
+    Wait Until Page Contains Element    ${exchange_reason_option}   timeout=10s
+    Click Element    ${exchange_reason_option}
+    Element Should Be Enabled    ${continue_btn_exchange_window}
+
+Verify Continue Button Is Disabled | Exchange
+    Wait Until Page Contains Element    ${exchange_qty_col_title}   timeout=10s
+    Element Should Be Disabled    ${continue_btn_exchange_window}
+
+Verify Continue Button Is Enabled Without Reason | Exchange
+    Wait Until Page Contains Element    ${exchange_qty_col_title}   timeout=10s
+    Element Should Be Enabled        ${continue_btn_exchange_window}
+
+Cancel The Exchange Of Items
+    Wait Until Page Contains Element    ${cancel_btn_exchange_window}   timeout=10s
+    Click Element    ${cancel_btn_exchange_window}
+
+Verify Canceling Of Exchange Item
+    Page Should Contain Element    ${add_exchange_item_link}
+    Element Should Not Be Visible   ${exchange_qty_col_title}
+    Element Should Not Be Visible   ${reasons_col_title}
+    Element Should Not Be Visible   ${qty_col_title}
+    Element Should Not Be Visible   ${unit_price_col_title}
+    Element Should Not Be Visible   ${exchange_qty_col_title}
+
+Verify The Confirmation Of item To Be Exchanged
+    Wait Until Page Contains Element    ${add_product_for_exchange_btn}    timeout=20s
+    Page Should Contain Element    ${add_product_for_exchange_btn}
+    Element Should Not Be Visible    ${exchange_qty_col_title}
+    Element Should Not Be Visible    ${exchange_reason_option}
 Assign A Salesperson To An Item | For Exchange
     [Arguments]    ${pos_data}
     ${details_dict}    Create Dictionary    &{pos_data}
@@ -727,3 +837,29 @@ Verify Promo Discount Applied In Exchanged Item Also
     ${abs_price_1}=    Evaluate    abs(float(${clean_price_1}))
     ${abs_price_2}=    Evaluate    abs(float(${clean_price_2}))
     Should Be Equal As Numbers    ${abs_price_1}    ${abs_price_2}
+
+
+Verify Exchanged Product And Alternate Product Prices Is Correct Or Not
+   ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
+   ${alternate_net_price}=  Get Text    ${alternate_product_net_price}
+   Should Not Be Equal    ${exchange_net_price}    ${alternate_net_price}
+   
+Verify Total Amount Of Exchange and Alternate Product
+   ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
+   ${alternate_net_price}=  Get Text    ${alternate_product_net_price}
+   ${total_amount}=  Get Text    ${payable_amount}
+   ${exchange}  Remove Characters    ${exchange_net_price}
+   ${alternate}  Remove Characters     ${alternate_net_price}
+   ${product_price}=  Evaluate    ${alternate}-${exchange}
+   ${total}  Remove Characters    ${total_amount}
+   Should Not Be Equal    ${product_price}    ${total}
+
+Verify Bill Discount Is Disabled Or Not
+   Element Should Be Disabled    ${bill_discount}
+
+Verify No Payment Required | Checkout Page
+    Wait Until Element Is Visible    ${no_payment_required}
+    Wait Until Page Contains Element    ${no_payment_required_confirm_button}
+    Page Should Contain Element    ${no_payment_required}
+    Page Should Contain Element     ${no_payment_required_confirm_button}
+    Page Should Contain Button    ${no_payment_required_cancel_button}
