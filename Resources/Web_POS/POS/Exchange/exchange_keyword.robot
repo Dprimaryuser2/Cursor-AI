@@ -8,6 +8,7 @@ Resource    ../../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Resource    ../../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Library    ../../../../Resources/CustomKeywords/utilities.py
+Library    utilities
 Resource    ../../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Exchange/exchange_keyword.robot
@@ -158,8 +159,11 @@ Select Items For Exchange
     Wait Until Page Contains Element    ${exchange_reason_option}   timeout=10s
     Click Element    ${exchange_reason_option}
     ${total_quantity}=  Get Text    ${exchange_qty}
+    ${product_name}=  Get Text    ${item_name_exchange}
+    ${product_cost}=  Get Text    ${item_price_exchange}
     Click Element    ${continue_btn_exchange_window}
-    [Return]    ${total_quantity}
+    ${exchange_item_info}=    Create Dictionary    name    ${product_name}    price    ${product_cost}
+    [Return]    ${exchange_item_info}
 
 Add Product For Exchange
     Wait Until Page Contains Element    ${add_product_for_exchange_btn}     timeout=20s
@@ -169,7 +173,6 @@ Scan Barcode To Add Item And Quantity To Cart By Name | Exchange
     [Arguments]    ${products}
     ${my_dict}    Create Dictionary   &{products}
     Log    ${my_dict.buy_items}
-    Wait Until Element Is Visible    ${scan_only}    timeout=20s
     ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
@@ -312,6 +315,15 @@ Verify Count of Items For Exchange After Payment
     [Arguments]     ${total_quantity}   ${total_quantity1}
     Should Not Be Equal As Numbers    ${total_quantity}    ${total_quantity1}
 
+
+Verify Exchange Item Info In Cart Is Correct Or Not
+    [Arguments]     ${exchange_item_info}
+    ${my_dict}    Create Dictionary   &{exchange_item_info}
+    Wait Until Page Contains Element    ${payable_amount}   timeout=10s
+    Wait Until Page Contains Element    ${add_product_for_exchange_btn}     timeout=10s
+    Should Match Regexp    ${my_dict.name}    (?i).*${my_dict['name']}.*
+    Should Match Regexp    ${my_dict.price}    (?i).*${my_dict['price']}.*
+    
 Verify Exchange Quantity Dopdown In Popup Is Working
    Wait Until Page Contains Element    ${select_item_for_exchange_title}  timeout=15s
    Click Element    ${exchange_qty}
@@ -360,9 +372,7 @@ Tag Customer Without Name
     Wait Until Element Is Enabled    ${add_customer_link}   timeout=40s
     Click Element    ${add_customer_link}
     Wait Until Element Is Visible    ${customer_phone_field}
-    ${mobile}=     Generate Random Phone Number
-    Set Test Variable    ${mobile}
-    Input Text    ${customer_phone_field}    ${mobile}
+    Input Text    ${customer_phone_field}    ${my_dict.mobile}
     Click Button    ${continue_billing_button}
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
@@ -372,25 +382,61 @@ Tag Customer Without Name
     Wait Until Element Is Visible    ${checkout_button}    timeout=10s
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
     Wait Until Element Is Not Visible    //div[@class="popup-notification"]     timeout=10s
-    ${customer_information}=    Create Dictionary   phone_number= ${mobile}
+    ${customer_information}=    Create Dictionary   phone_number= ${my_dict.mobile}
     [Return]    ${customer_information}
 
 Enter Customer Name For Previously Used Number
-    Click Element    ${customer_info_icon}
-    Wait Until Element Is Visible    ${customer_info_window_title}    timeout=10s
-    Wait Until Element Is Visible    ${customer_edit_info_button}    timeout=10s
-    Click Element    ${customer_edit_info_button}
-    Wait Until Element Is Visible    ${customer_phone_field}    timeout=10s
-    ${first_name}=    Generate Random First Name
-    Input Text     ${customer_first_name_field}    ${first_name}
-    ${last_name}=    Generate Random Last Name
-    Input Text    ${customer_last_name_field}    ${last_name}
-    Click Button    ${customer_info_update_button}
+    [Arguments]    ${customer_data}
+    ${my_dict}    Create Dictionary   &{customer_data}
+    Wait Until Element Is Enabled    ${add_customer_link}   timeout=40s
+    Click Element    ${add_customer_link}
+    Wait Until Element Is Visible    ${customer_phone_field}
+    Input Text    ${customer_phone_field}    ${my_dict.mobile}
+    Click Button    ${continue_billing_button}
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
+    ${first_name}=  Generate Random First Name
+    Input Text     ${customer_first_name_field}     ${first_name}
+    Click Button    ${start_billing_button}
     Sleep    2
     Discard Items If Present From Previous Session
-    Wait Until Element Is Visible    ${customer_info_close_element}    timeout=10s
-    Click Element    ${customer_info_close_element}
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
+#    ${customer_info}    Create Dictionary    first_name=${first_name}
+    RETURN    ${first_name}
+
+Verify All The Invoices Under Customer Name Are Visible
+    [Arguments]    @{invoice_ids}
+    Sleep  5s
+    Wait Until Page Contains Element    ${all_searched_invoice}    timeout=20s
+    ${invoice_texts}    Get Text    ${all_searched_invoice}
+    Capture Page Screenshot
+    FOR    ${invoice}    IN    @{invoice_ids}
+        Should Contain    ${invoice_texts}    ${invoice}
+    END
+
+Update Customer Name | Exchange
+    [Arguments]    ${customer_data}
+    ${my_dict}    Create Dictionary   &{customer_data}
+    Wait Until Element Is Enabled    ${add_customer_link}   timeout=40s
+    Click Element    ${add_customer_link}
+    Wait Until Element Is Visible    ${customer_phone_field}
+    Input Text    ${customer_phone_field}    ${my_dict.mobile}
+    Click Button    ${continue_billing_button}
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
+    Clear Element Text    ${customer_first_name_field}
+    ${first_name}=  Generate Random First Name
+    Input Text     ${customer_first_name_field}     ${first_name}
+    Click Button    ${start_billing_button}
+    Sleep    2
+    Discard Items If Present From Previous Session
+    Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
+#    ${customer_info}    Create Dictionary    first_name=${my_dict.cust_name_tag}
+    RETURN    ${first_name}
+
+Search Invoice By Name| Exchange
+   [Arguments]    ${first_name}
+   Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
+   Input Text    ${search_invoice_field}     ${first_name}
+   Press Keys   ${search_invoice_field}   ENTER
     ${customer_info}    Create Dictionary    first_name=${first_name}    last_name=${last_name}
     RETURN    ${customer_info}
     
@@ -526,3 +572,33 @@ Verify Individual Item Is Unselected
 Verify Total QTY Auto Populated
 
 Verify Total QTY Is 0
+Select The Invoice By Invoice Name | Exchange
+   [Arguments]    ${invoice_id}
+   Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=10s
+   Click Element    ${select_search_invoice_option_btn}
+   Wait Until Page Contains Element    ${invoice_number_search_option}
+   Click Element    ${invoice_number_search_option}
+   Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
+   Input Text    ${search_invoice_field}     ${invoice_id}
+   Press Keys   ${search_invoice_field}   ENTER
+   Wait Until Page Contains Element    ${first_row_invoice}  timeout=15s
+
+Customer Billing For Invoice Generation | Exchange
+   [Arguments]    ${customer_billing}
+   Scan And Add Product   ${customer_billing}
+   Verify Item Added In Cart
+   Tag Customer Without Name    ${customer_billing}
+   ${value}    Get payable amount
+   Verify Billing Checkout
+   Wait Until Element Is Visible    ${payment_method_cash}
+   Payment By Cash   ${value}
+   Wait Until Page Contains Element    ${payment_complete_heading}
+   ${cust_invoice_1}  Get Customer Details | Checkout
+   Click on New Bill Button
+   [Return]   ${cust_invoice_1}
+
+Verify Already Used Exchange Invoice Response
+   [Arguments]    ${invoice_id}
+   Wait Until Page Contains Element    //div[@class="grey-100 col-2" and contains(text(),"${invoice_id}")]//following-sibling::div[@class="col-1"]   timeout=20s
+   ${qty_value}   Get Text     //div[@class="grey-100 col-2" and contains(text(),"${invoice_id}")]//following-sibling::div[@class="col-1"]
+   Should Be Equal    ${qty_value}    0

@@ -8,6 +8,7 @@ Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
 Variables    ../../../../PageObjects/Web_POS/POS/pos_locators.py
 Variables    ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
 Variables    ../../../../PageObjects/Web_POS/POS/checkout_locators.py
+Resource    add_to_cart_keyword.robot
 
 *** Keywords ***
 # Generic Keywords for All
@@ -528,6 +529,10 @@ Verify Promo Discount In Side Cart | POS
 Verify Billing Checkout
     Sleep    0.5
     Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
+    ${discard}=    Run Keyword And Return Status    Element Should Be Enabled    ${discard_item_previous_session}
+    IF    ${discard}
+     Discard Previous Added Item
+    END
     Click Button    ${checkout_button}
     ${popup_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${updating_catalog_heading}
     IF    ${popup_visible}
