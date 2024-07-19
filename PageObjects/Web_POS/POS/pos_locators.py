@@ -286,10 +286,12 @@ item_name_exchange='(//div[@class="pl-1 col-3"])[1]'
 item_price_exchange='(//div[@class="pl-1 col-3"]//following-sibling::div)[2]'
 
 all_searched_invoice = '(//div[@class="ex-invoice-table my-3 mx-n2"]//div[@class="vertical-scroll exchange-scroll"])[1]'
-all_searched_invoice = '(//div[@class="ex-invoice-table my-3 mx-n2"]//div[@class="vertical-scroll exchange-scroll"])[1]'
 searched_invoice_number = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[not(contains(text(),"AM")) and not(contains(text(),"PM")) and @class="grey-100 col-2"])[1]'
 searched_customer_name = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[contains(@class,"grey-") and contains(@class,"col-3")])[1]'
 searched_phone_number = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="col-2"])[1]'
 total_number_of_items = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="col-1"])[1]'
 amount = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="px-4 col-2"])[1]'
 searched_invoice_date = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="grey-100 col-2" and contains(text(),"PM") or contains(text(),"AM")])'
+
+exchange_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[1]'
+alternate_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[2]'

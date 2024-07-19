@@ -437,8 +437,7 @@ Search Invoice By Name| Exchange
    Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
    Input Text    ${search_invoice_field}     ${first_name}
    Press Keys   ${search_invoice_field}   ENTER
-    ${customer_info}    Create Dictionary    first_name=${first_name}    last_name=${last_name}
-    RETURN    ${customer_info}
+   RETURN    ${first_name}
     
 Switch To Exchange Mode
     [Arguments]    ${mode}
@@ -561,3 +560,16 @@ Verify Already Used Exchange Invoice Response
    Wait Until Page Contains Element    //div[@class="grey-100 col-2" and contains(text(),"${invoice_id}")]//following-sibling::div[@class="col-1"]   timeout=20s
    ${qty_value}   Get Text     //div[@class="grey-100 col-2" and contains(text(),"${invoice_id}")]//following-sibling::div[@class="col-1"]
    Should Be Equal    ${qty_value}    0
+
+Verify No Payment Required | Checkout Page
+    Wait Until Element Is Visible    ${no_payment_required}
+    Wait Until Page Contains Element    ${no_payment_required_confirm_button}
+    Page Should Contain Element    ${no_payment_required}
+    Page Should Contain Element     ${no_payment_required_confirm_button}
+    Page Should Contain Button    ${no_payment_required_cancel_button}
+
+Verify Exchanged Product And Alternate Product Prices Is Correct Or Not
+   Wait Until Page Contains    ${exchange_product_net_price}
+   ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
+   ${alternate_net_price}=  Get Text    ${alternate_product_net_price}
+   Should Not Be Equal    ${exchange_net_price}    ${alternate_net_price}
