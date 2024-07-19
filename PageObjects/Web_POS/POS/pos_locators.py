@@ -168,6 +168,8 @@ catalog_update_failed_heading = '//h5[contains(text(),"Catalog Update Failed")]'
 catalog_close_button = '//button[@id="close-progress"]'
 catalog_retry_button = '//button[@id="retry-progress"]'
 manual_close_button = '//h5[text()="Manual Discount(Item)"]//following-sibling::button[@aria-label="Close"]'
+disabled_item_level_discount_field = '//label[contains(text(),"Item Manual Discount")]//following::input[@class="fs-11 form-control" and @disabled="disabled"]'
+cancel_icon_item_level_discount = '(//label[contains(text(),"Item Manual Discount")]//following::*[name()="svg"])[1]'
 
 add_carry_bag_button='//button[@id="category-add-carrybags"]'
 carry_bag_add='//button[@id="add-carry-bags"]'
