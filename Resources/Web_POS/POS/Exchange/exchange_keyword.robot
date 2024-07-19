@@ -560,12 +560,67 @@ Verify Already Used Exchange Invoice Response
    ${qty_value}   Get Text     //div[@class="grey-100 col-2" and contains(text(),"${invoice_id}")]//following-sibling::div[@class="col-1"]
    Should Be Equal    ${qty_value}    0
 
-Verify No Payment Required | Checkout Page
-    Wait Until Element Is Visible    ${no_payment_required}
-    Wait Until Page Contains Element    ${no_payment_required_confirm_button}
-    Page Should Contain Element    ${no_payment_required}
-    Page Should Contain Element     ${no_payment_required_confirm_button}
-    Page Should Contain Button    ${no_payment_required_cancel_button}
+Assign A Salesperson To An Item | For Exchange
+    [Arguments]    ${pos_data}
+    ${details_dict}    Create Dictionary    &{pos_data}
+    Wait Until Page Contains Element   ${second_item_product_name}
+    Click Element    ${second_item_product_name}
+    Wait Until Page Contains Element    ${salesperson_dropdown}
+    Click Element    ${salesperson_dropdown}
+    Wait Until Page Contains Element    ${salesperson_search_field}
+    Click Element    ${salesperson_search_field}
+    Input Text    ${salesperson_search_field}    ${details_dict.salesperson_name}
+    Click Element    ${row_in_salesperson_dropdown}
+    Wait Until Page Contains Element    ${salesperson_tagged_message}
+    Element Should Be Enabled    ${update_product_button}
+    Click Element    ${update_product_button}
+
+Verify If Salesperson Is Assigned To An Item | For Exchange
+    [Arguments]    ${pos_data}
+    ${details_dict}    Create Dictionary    &{pos_data}
+    ${hide_button_present}    Run Keyword And Return Status    Page Should Contain Element    ${hide_catalog_button}
+    IF    ${hide_button_present}
+        Click Element    ${hide_catalog_button}
+    END
+    Page Should Contain Element    ${second_item_product_name}
+    Click Element    ${product_preview_second}
+    Page Should Contain Element    ${preview_salesperson_name}
+    Element Should Contain   ${preview_salesperson_name}    ${details_dict.salesperson_name}
+
+Verify Tag Sales Person In Exchange Product Is Correct Or Not
+    Wait Until Page Contains Element    ${salesperson_exchange_alternate}   timeout=10s
+    ${salesperson_1}=  Get Text    ${salesperson_exchange}
+    ${salesperson_2}=   Get Text    ${salesperson_exchange_alternate}
+    Should Be Equal As Strings    ${salesperson_1}    ${salesperson_2}
+
+
+Verify whether user can edit or remove the sales person from exchanged product
+    Wait Until Page Contains Element   ${second_item_product_name}  timeout=10s
+    Click Element    ${second_item_product_name}
+    Wait Until Page Contains Element    ${salesperson_dropdown}
+    Click Element    ${salesperson_dropdown}
+    Wait Until Page Contains Element    ${salesperson_untagged_message}     timeout=10s
+    Page Should Contain Element    {salesperson_untagged_message}
+
+ Verify Refresh Button Functionality In Sales Person Tagging Is Working Or Not
+    Wait Until Page Contains Element   ${second_item_product_name}  timeout=10s
+    Click Element    ${second_item_product_name}
+    Wait Until Page Contains Element    ${salesperson_refresh}  timeout=10S
+    Click Element    ${salesperson_refresh}
+    Wait Until Page Contains Element    ${salesperson_untagged_message}
+    
+Verify Promo Discount Applied In Exchanged Item Also
+    Wait Until Page Contains Element    ${discount_field}
+    ${price_1}=  Get Text    ${discount_field}
+    ${price_2}=  Get Text    ${discount_field_row_2}
+    ${clean_price_1}=    Replace String    ${price_1}    ₹    ${EMPTY}
+    ${clean_price_2}=    Replace String    ${price_2}    ₹    ${EMPTY}
+    ${clean_price_1}=    Replace String    ${clean_price_1}    ,    ${EMPTY}
+    ${clean_price_2}=    Replace String    ${clean_price_2}    ,    ${EMPTY}
+    ${abs_price_1}=    Evaluate    abs(float(${clean_price_1}))
+    ${abs_price_2}=    Evaluate    abs(float(${clean_price_2}))
+    Should Be Equal As Numbers    ${abs_price_1}    ${abs_price_2}
+
 
 Verify Exchanged Product And Alternate Product Prices Is Correct Or Not
    ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
@@ -585,3 +640,9 @@ Verify Total Amount Of Exchange and Alternate Product
 Verify Bill Discount Is Disabled Or Not
    Element Should Be Disabled    ${bill_discount}
 
+Verify No Payment Required | Checkout Page
+    Wait Until Element Is Visible    ${no_payment_required}
+    Wait Until Page Contains Element    ${no_payment_required_confirm_button}
+    Page Should Contain Element    ${no_payment_required}
+    Page Should Contain Element     ${no_payment_required_confirm_button}
+    Page Should Contain Button    ${no_payment_required_cancel_button}
