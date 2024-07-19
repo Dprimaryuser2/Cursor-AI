@@ -19,7 +19,7 @@ ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Exchange${/}
 
 *** Test Cases ***
 Zwing_E_01 Check whether Exchange text is clickable or not
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_1
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_01
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Click On Exchange Text In Dropdown   ${pos_data}
@@ -28,7 +28,7 @@ Zwing_E_01 Check whether Exchange text is clickable or not
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_02 Click on Exchange Text and check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_2
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_02
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Click On Exchange Text In Dropdown   ${pos_data}
@@ -37,7 +37,7 @@ Zwing_E_02 Click on Exchange Text and check the response
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_03 Click on confirm button and check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_3
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_03
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Click On Exchange Text In Dropdown   ${pos_data}
@@ -48,7 +48,7 @@ Zwing_E_03 Click on confirm button and check the response
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_04 Click on cancel button and check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_4
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_04
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Click On Exchange Text In Dropdown   ${pos_data}
@@ -59,7 +59,7 @@ Zwing_E_04 Click on cancel button and check the response
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_05 Click on +Add Exchange Items from Invoice link and check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_5
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_05
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -69,7 +69,7 @@ Zwing_E_05 Click on +Add Exchange Items from Invoice link and check the response
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_06 Verify invoice parameters are clickable or not
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_6
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_06
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -81,7 +81,7 @@ Zwing_E_06 Verify invoice parameters are clickable or not
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_07 Click on close tab cross(X) then check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_7
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_07
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -95,7 +95,7 @@ Zwing_E_07 Click on close tab cross(X) then check the response
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_08 Select customer name,enter valid name then check the Response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_8
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_08
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -110,7 +110,7 @@ Zwing_E_08 Select customer name,enter valid name then check the Response
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_09 Select customer phone,enter valid Mobile no then check the Response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_9
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_09
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
