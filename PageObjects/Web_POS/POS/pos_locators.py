@@ -37,6 +37,8 @@ close_assign_salesperson_window = '//div[@class="col-md-6"]//*[name()="svg"]'
 salesperson_tagged_message = '//div[@class="alert alert-dismissible alert-success" and contains(text(),"Salesperson tagged successfully")]'
 salesperson_mandatory_message = '//div[@class="alert alert-dismissible alert-danger" and text()="Sales Person is Mandatory"]'
 salesperson_below_product = '//span[@class="pt-2 fs-12 text-grey"]'
+salesperson_exchange = '(//span[@class="pt-2 fs-12 text-grey"])[1]'
+salesperson_exchange_alternate = '(//span[@class="pt-2 fs-12 text-grey"])[2]'
 close_icon_salesperson_dropdown = '//div[@class="w-100"]//div//*[name()="svg"]'
 salesperson_untagged_message = '//div[@class="alert alert-dismissible alert-success" and text()="Salesperson untagged."]'
 
@@ -66,11 +68,13 @@ custom_select_options = '//select[@class="custom-select custom-select-sm"]//opti
 custom_select_quantity = '//span[text()="ITEM"]//ancestor::td//following-sibling::td//option[@value="option_value"]'
 price = '(//td[@aria-colindex="4"])[1]'
 discount_field = '(//td[@aria-colindex="5"])[1]'
+discount_field_row_2 = '(//td[@aria-colindex="5"])[2]'
 net_price = '//td[@aria-colindex="6"]'
 cancel_item = '(//td[@aria-colindex="6"])[1]'
 item_cart_table = '//table[contains(@class,"table b-table table cart-table mt-0 table-dark table-dark-bg b-table-row-selected td:first-child border-bottom-0 b-table-selectable b-table-select-single")]'
 table = '//td[@aria-colindex="2"]//ancestor::tbody[@role="rowgroup"]'
 first_item_product_name = '(//a[contains(@class,"product-name")])[1]'
+second_item_product_name = '(//a[contains(@class,"product-name")])[2]'
 sub_total = '//p[contains(text(),"Sub Total")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 taxes = '//p//span[contains(text(),"Taxes")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 bill_promo_discount = '//span[contains(text(),"Bill Promo Discount")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
@@ -179,6 +183,9 @@ order_management_option_sidebar = "//a[@title='Order Management']//img"
 # cash management locators
 cash_management_heading = "//h5[text()='Cash Management']"
 billing_option_switch_default = '//button[@class="btn dropdown-toggle btn-light" and contains(text(),"Billing")]'
+order_option_switch = '//button[@class="btn dropdown-toggle btn-light" and contains(text(),"Order")]'
+return_option_switch = '//button[@class="btn dropdown-toggle btn-light" and contains(text(),"Return")]'
+exchange_option_switch = '//button[@class="btn dropdown-toggle btn-light" and contains(text(),"Exchange")]'
 amount_limit_message = '//p[text()="Amount is greater than limit"]'
 item_name = "//a[@class='product-name text-danger']"
 cart_last_element = '(//td[@class="text-center align-middle w-5"])[last()]'
@@ -192,15 +199,18 @@ select_list_discount_div='//ul[@class="custom-checklist list-unstyled"]'
 product_modal_close="//button[@class='close' and contains(text(),'×')]"
 carry_bag_all_input_fields = '//div[@class="row mb-2"]//input[@placeholder="0"]'
 carry_bag_option_label ='//h6[@id="label-undefined" and text()="Sync39"]'
+delete_product_icon = '//a[@title="Delete Product"]//*[name()="svg"]//*[name()="path"]'
 
 # customer_info_icon = "//body/div[@id='app']/div[@id='theme']/div[@class='dashboard']/section/div[@class='container-fluid']/div[@class='row']/div[@class='fadein col-md-6 col-lg-6']/div[@class='row mt-2']/div[@class='col-md-6 col-lg-6']/div[@id='customer-info']//a"
 customer_info_icon = "//div[normalize-space(text())='Customer Information']/a[@id='get-customer-info']"
 switch_modal_proceed_button = "//button[@class='btn ml-1 btn-primary btn-block']//span"
+switch_modal_cancel_button = '//button[@class="btn mr-1 btn-outline-primary btn-block"]'
 update_product_md = "//button[@id='update-product-btn' and @class='btn ml-2 btn-primary']//span"
 
 #product preview locators
 preview_salesperson_name = '//small[text()="Salesperson"]//following::*[1]'
 product_preview = '//span[@class="offer text-muted"]'
+product_preview_second = '(//span[@class="offer text-muted"])[2]'
 row_in_salesperson_dropdown = '//li[@data-v-59cb0948]'
 
 product_row_in_cart = '//tr[@class="b-table-row-selected table-active"]'
@@ -242,6 +252,10 @@ keyboard_shortcuts_link = '//a[@class="key-link"]'
 # insufficient inventory
 insufficient_inventory_continue_btn = '//button[@class="btn ml-1 btn-primary btn-block"]'
 insufficient_inventory_title = '//h5[@class="modal-title"]'
+
+auto_switch_billing_on = '//h5[contains(text(),"Auto-switch to Billing Mode")]//following-sibling::label[@class="my-auto vue-js-switch toggled"]'
+auto_switch_billing_off = '//h5[contains(text(),"Auto-switch to Billing Mode")]//following-sibling::label[@class="my-auto vue-js-switch"]'
+auto_switch_billing_toggle = '(//h5[contains(text(),"Auto-switch to Billing Mode")]//following::div[@class="v-switch-core"]//div)[1]'
 disabled_product = '//a[@class="d-flex isDisabled"]'
 
 # Exchange Module
@@ -263,7 +277,7 @@ search_reason_dropdown = '//button[@class="btn dropdown-toggle btn-light" and co
 exchange_reason_option = '(//ul[@class="dropdown-menu show"]//a[@class="dropdown-item"])[1]'
 product_selected_for_exchange_text = '//p[@class="text-primary mb-0 text-left"]'
 cancel_btn_exchange_window = '//button[@class="btn mr-3 btn-outline-primary btn-block"]'
-continue_btn_exchange_window = '//div[@class="text-right d-flex pr-2 col-4"]//button[@class="btn btn-primary btn-block"]'
+continue_btn_exchange_window = '//div[@class="text-right d-flex pr-2 col-4"]//button[contains(@class,"btn btn-primary btn-block")]'
 add_product_for_exchange_btn = '//button[@class="primary-light fs-12 my-1 add-prod-exchanged"]'
 cancel_adding_product_btn = '//button[@class="primary-light fs-12 my-1 add-prod-exchanged cancel-prod-exchanged"]'
 invoice_not_found = '//div[@class="alert alert-dismissible alert-danger" and contains(text(),"Invoice not found")]'
@@ -286,10 +300,21 @@ item_name_exchange='(//div[@class="pl-1 col-3"])[1]'
 item_price_exchange='(//div[@class="pl-1 col-3"]//following-sibling::div)[2]'
 
 all_searched_invoice = '(//div[@class="ex-invoice-table my-3 mx-n2"]//div[@class="vertical-scroll exchange-scroll"])[1]'
-all_searched_invoice = '(//div[@class="ex-invoice-table my-3 mx-n2"]//div[@class="vertical-scroll exchange-scroll"])[1]'
 searched_invoice_number = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[not(contains(text(),"AM")) and not(contains(text(),"PM")) and @class="grey-100 col-2"])[1]'
 searched_customer_name = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[contains(@class,"grey-") and contains(@class,"col-3")])[1]'
 searched_phone_number = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="col-2"])[1]'
 total_number_of_items = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="col-1"])[1]'
 amount = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="px-4 col-2"])[1]'
 searched_invoice_date = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="grey-100 col-2" and contains(text(),"PM") or contains(text(),"AM")])'
+
+select_all_items_checkbox = '//input[@id="select-all"]//following-sibling::label'
+selected_all_item = '//input[@id="select-all"]'
+exchange_item_checkbox = '//input[@id="product-0"]//following-sibling::label'
+selected_item = '//input[@id="product-0"]'
+ensure_product_message = '//p[contains(text(),"Please ensure the customer has them before your proceed.")]'
+product_added_message = '//p[@class="text-primary mb-0 text-left"]'
+no_product_selected_message = '//p[contains(text(),"No product selected for exchange")]'
+
+total_qty_of_item = '(//div[contains(text(),"SKU/Barcode")]//ancestor::div[@class="ex-invoice-table my-3 mx-n2"]//div[contains(@class,"vertical-scroll exchange-scroll")]//div[@class="col-1"])[1]'
+exchange_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[1]'
+alternate_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[2]'
