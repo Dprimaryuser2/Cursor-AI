@@ -42,7 +42,7 @@ Zwing_E_03 Click on confirm button and check the response
     Open The Session    ${pos_data}
     Click On Exchange Text In Dropdown   ${pos_data}
     Verify Exchange Text Is Clickable
-    Click On Confirm Button | Exchange   ${pos_data}
+    Click On Confirm Button | Exchange
     Verify The Confirm Button | Exchange   ${pos_data}  
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -1277,21 +1277,106 @@ Zwing_E_121 Click Confirm button on Select Items to exchange popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_122 Switching Between Billing to Exchange Will Give Confirmation Popup
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_122
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Click On Exchange Text In Dropdown    ${pos_data}
+    Verify Confirmation Popup
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_123 Click on Confirm button on switch to Billing popup box
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_123
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Switch From Exchange Module    ${pos_data}
+    Click On Confirm Button | Exchange
+    Verify Confirm Button On Switching    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_124 Click on Cancel button on switch to Billing popup box
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_124
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Switch From Exchange Module    ${pos_data}
+    Click On Cancel Button | Exchange
+    Verify The Cancel Button On Switch From Exchange
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_125 Switching Between Exchange to Billing Will Give Confirmation Popup
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_125
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Switch From Exchange Module    ${pos_data}
+    Verify Confirmation Popup
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_126 Click on Confirm button on switch to Order popup box
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_126
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Switch From Exchange Module    ${pos_data}
+    Click On Confirm Button | Exchange
+    Verify Confirm Button On Switching    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_127 Click on Cancel button on switch to Order popup box
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_127
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Switch From Exchange Module    ${pos_data}
+    Click On Cancel Button | Exchange
+    Verify The Cancel Button On Switch From Exchange
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_128 Switching Between Exchange to Order Will Give Confirmation Popup
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_128
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Switch From Exchange Module    ${pos_data}
+    Verify Confirmation Popup
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_129 Click on Confirm button on switch to Return popup box
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_129
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Switch From Exchange Module    ${pos_data}
+    Click On Confirm Button | Exchange
+    Verify Confirm Button On Switching    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_130 Click on Cancel button on switch to Return popup box
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_130
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Switch From Exchange Module    ${pos_data}
+    Click On Cancel Button | Exchange
+    Verify The Cancel Button On Switch From Exchange
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_131 Switching Between Exchange to Return Will Give Confirmation Popup
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_131
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Switch From Exchange Module    ${pos_data}
+    Verify Confirmation Popup
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
