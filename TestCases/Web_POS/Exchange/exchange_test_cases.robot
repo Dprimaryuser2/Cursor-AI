@@ -1079,7 +1079,7 @@ Zwing_E_70 Select a valid product with no discount, take net price greater than 
     Verify Billing Checkout
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-    
+
 Zwing_E_71 Select a valid product with no discount, take net price greater than exchanged product price, click on checkout button then check the response(total amount should be like (alternate product net price - exchanged product net price))
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_71
     Login With Valid Username And Password | POS    ${pos_data}
@@ -1123,6 +1123,8 @@ Zwing_E_73 Apply a bill discount on a product exchange it with alternate product
     Verify Bill Discount Is Disabled Or Not
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+
 
 Zwing_E_92 From dropdown on billing screen, select Exchange option
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_92
@@ -1337,31 +1339,31 @@ Zwing_E_109 User should be able to select/unselect individual items
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-#Zwing_E_110 Selecting items should auto populate the invoice qty of that item to total exchange qty
-#    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_110
-#    Login With Valid Username And Password | POS    ${pos_data}
-#    Open The Session    ${pos_data}
-#    Change Billing Mode    ${pos_data}
-#    Add Exchange Items From Invoice    ${pos_data}
-#    Select Invoice From Search Options
-#    Select Individual Item
-#    Verify Total QTY Auto Populated
-#    Revoke Serial Key    ${pos_data}
-#    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-#
-#Zwing_E_111 Deselecting the item should reset the qty to 0
-#    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_110
-#    Login With Valid Username And Password | POS    ${pos_data}
-#    Open The Session    ${pos_data}
-#    Change Billing Mode    ${pos_data}
-#    Add Exchange Items From Invoice    ${pos_data}
-#    Select Invoice From Search Options
-#    Select Individual Item
-#    Verify Total QTY Auto Populated
-#    Unselect Individual Item
-#    Verify Total QTY Is 0
-#    Revoke Serial Key    ${pos_data}
-#    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+Zwing_E_110 Selecting items should auto populate the invoice qty of that item to total exchange qty
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_110
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select Individual Item
+    Verify Total QTY Auto Populated
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_111 Deselecting the item should reset the qty to 0
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_110
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice    ${pos_data}
+    Select Invoice From Search Options
+    Select Individual Item
+    Verify Total QTY Auto Populated
+    Unselect Individual Item
+    Verify Total QTY Is 0
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_112 Total exchange qty should be dropdown field
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_112
@@ -1487,22 +1489,22 @@ Zwing_E_121 Click Confirm button on Select Items to exchange popup box
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_E_122 Switching Between Billing to Exchange Will Give Confirmation Popup
-
-Zwing_E_123 Click on Confirm button on switch to Billing popup box
-
-Zwing_E_124 Click on Cancel button on switch to Billing popup box
-
-Zwing_E_125 Switching Between Exchange to Billing Will Give Confirmation Popup
-
-Zwing_E_126 Click on Confirm button on switch to Order popup box
-
-Zwing_E_127 Click on Cancel button on switch to Order popup box
-
-Zwing_E_128 Switching Between Exchange to Order Will Give Confirmation Popup
-
-Zwing_E_129 Click on Confirm button on switch to Return popup box
-
-Zwing_E_130 Click on Cancel button on switch to Return popup box
-
-Zwing_E_131 Switching Between Exchange to Return Will Give Confirmation Popup
+#Zwing_E_122 Switching Between Billing to Exchange Will Give Confirmation Popup
+#
+#Zwing_E_123 Click on Confirm button on switch to Billing popup box
+#
+#Zwing_E_124 Click on Cancel button on switch to Billing popup box
+#
+#Zwing_E_125 Switching Between Exchange to Billing Will Give Confirmation Popup
+#
+#Zwing_E_126 Click on Confirm button on switch to Order popup box
+#
+#Zwing_E_127 Click on Cancel button on switch to Order popup box
+#
+#Zwing_E_128 Switching Between Exchange to Order Will Give Confirmation Popup
+#
+#Zwing_E_129 Click on Confirm button on switch to Return popup box
+#
+#Zwing_E_130 Click on Cancel button on switch to Return popup box
+#
+#Zwing_E_131 Switching Between Exchange to Return Will Give Confirmation Popup
