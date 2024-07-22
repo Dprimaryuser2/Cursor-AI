@@ -709,19 +709,18 @@ Verify Tag Sales Person In Exchange Product Is Correct Or Not
 Verify whether user can edit or remove the sales person from exchanged product
     Wait Until Page Contains Element   ${second_item_product_name}  timeout=10s
     Click Element    ${second_item_product_name}
-    Wait Until Page Contains Element    ${salesperson_dropdown}
-    Click Element    ${salesperson_dropdown}
+    Click Element    ${onclick_remove_salesperson}
     Wait Until Page Contains Element    ${salesperson_untagged_message}     timeout=10s
-    Page Should Contain Element    {salesperson_untagged_message}
+    Page Should Contain Element    ${salesperson_untagged_message}
 
  Verify Refresh Button Functionality In Sales Person Tagging Is Working Or Not
     Wait Until Page Contains Element   ${second_item_product_name}  timeout=10s
     Click Element    ${second_item_product_name}
     Wait Until Page Contains Element    ${salesperson_refresh}  timeout=10S
     Click Element    ${salesperson_refresh}
-    Wait Until Page Contains Element    ${salesperson_untagged_message}
+    Page Should Contain Element    ${onclick_remove_salesperson}
     
-Verify Promo Discount Applied In Exchanged Item Also
+Verify Promo Discount Apcplied In Exchanged Item Also
     Wait Until Page Contains Element    ${discount_field}
     ${price_1}=  Get Text    ${discount_field}
     ${price_2}=  Get Text    ${discount_field_row_2}

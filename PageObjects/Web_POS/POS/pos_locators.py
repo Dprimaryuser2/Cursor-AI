@@ -82,6 +82,7 @@ promo_discount = '//p[contains(text(),"Item Promo Discount")]//ancestor::div[@cl
 included_tax_text = '//p[contains(text(),"Tax Total (Included)")]'
 excluded_tax_text = '//p[contains(text(),"Tax Total (Excluded)")]'
 round_off_text = '//p[contains(text(),"Round Off")]'
+onclick_remove_salesperson="//div[@class='w-100']//div//span"
 round_off_element = '//p[contains(text(),"Round Off")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 tax_amount = '//p[contains(text(),"Tax Total ")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 tax_amount_excluded = '//p[contains(text(),"Tax Total (Excluded)")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
