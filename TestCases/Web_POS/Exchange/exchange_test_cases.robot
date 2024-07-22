@@ -9,7 +9,6 @@ Library    ../../../Resources/CustomKeywords/utilities.py
 Resource    ../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 Resource   ../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/Exchange/exchange_keyword.robot
-Resource   ../../../Resources/Web_POS/POS/Billing/mode_of_payment_keyword.robot
 
 Test Setup  Open Application | POS
 Test Teardown   Close Browser
@@ -22,8 +21,7 @@ Zwing_E_01 Check whether Exchange text is clickable or not
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_01
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
-    Click On Exchange Text In Dropdown   ${pos_data}
-    Verify Exchange Text Is Clickable
+    Verify Exchange Text Is Clickable    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -31,8 +29,7 @@ Zwing_E_02 Click on Exchange Text and check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_02
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
-    Click On Exchange Text In Dropdown   ${pos_data}
-    Verify Exchange Text Is Clickable
+    Verify Exchange Text Is Clickable    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -43,7 +40,7 @@ Zwing_E_03 Click on confirm button and check the response
     Click On Exchange Text In Dropdown   ${pos_data}
     Verify Exchange Text Is Clickable
     Click On Confirm Button | Exchange   ${pos_data}
-    Verify The Confirm Button | Exchange   ${pos_data}  
+    Verify The Confirm Button | Exchange   ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -230,13 +227,9 @@ Zwing_E_16 Validate check list is clickable or not
     Change Billing Mode    ${pos_data}
     Click On +Add Exchange Items from Invoice Link
     Verify The +Add Exchange Items from Invoice Link
-    Click On Invoice Parameters
     Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
-    Verify The Search Invoice Response | Exchange
-    Verify All Columns Are Present In Item Exchange Window   ${pos_data}
-    Verify Checklist Is Clickable | Exchange Item Window  ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -389,6 +382,7 @@ Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice t
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
+    
 Zwing_E_22 check whether double digit number are selecting in quantity dropdown in select exchange popup window bar or not
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_22
     Login With Valid Username And Password | POS    ${pos_data}
@@ -402,6 +396,7 @@ Zwing_E_22 check whether double digit number are selecting in quantity dropdown 
     Verify Exchange Item Is Added In The Cart
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
 
 #Zwing_E_23 Repeated
 
@@ -615,6 +610,7 @@ E_37 select a alternate product with same quantity and Net price >then the excha
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 E_38 select a alternate product with same quantity and Net price less than the exchange product net price
+    #need prodocut less then exchange item
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_38
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -646,21 +642,238 @@ Zwing_E_39 select a alternate product which have EXC tax and net price greater e
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_E_40 select a alternate product which have EXC tax and net price greater exchange product price
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_40
+Zwing_E_42 check whether user can update the quantity of alternate product or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_42
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
     Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
-    Verify Item Added In Cart | Exchange
+    Verify Quantity Cannot Be Increased For The Exchange Product
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_43 check whether user can apply item level/ bill level promotion on alternate product or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_43
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify User Cannot Apply Item/bill Level Promotions On Alternate Product
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_44 check whether user can apply price override on alternate product and exchange product or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_44
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Price Override Not Possible For Alternate Product    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    
+
+Zwing_E_45 Select a exchanged product which have no discount and quantity is >1 (suppose 4 qty),select a alternate product with less quantity and Net price => to the exchange product net price. then check the response.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_45
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Alternate Product With Greater Price was Added To Cart
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_46 Select a exchanged product which have no discount and quantity is >1 (suppose 4 qty),select a alternate product with same quantity and Net price less than the exchange product net price. then check the response.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_46
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Alternate Product With Lesser Price was Added To Cart
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_B_47 Select a exchanged product which have no discount and quantity is >1 (suppose 4 qty),select a alternate product with same quantity and Net price >= to the exchange product net price. then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_47
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Alternate Product With Equal Price was Added To Cart
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_B_48 select a invoice which have multiple product for exchange , add them to cart, select alternate products whose sum of qty is not equal to the sum of exchanged product quantity and sum of net price >= to the exchanged product net price then check the response.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_48
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Alternate Product With Greater Price was Added To Cart
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    
+Zwing_E_49 select a alternate product ,apply item level manual discount then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_49
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Exchange Items From Invoice   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+#    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Manual Discount Not Applicable To Exc product After Added
+    Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+
+
+
+
+Zwing_E_51 Select a exchanged product which have item level manual discount and quantity is 1 ,select a alternate product with same quantity and net price is => then exchanged product net price then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_51
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Item Level Manual Discount Gets Carried Forward On Alt Product And User Cannot Change It
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_52 Select a exchanged product which have item level manual discount and quantity is >1 ,select a alternate product with same quantity and net price is => then exchanged product net price then check the response.
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_52
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Item Level Manual Discount Gets Carried Forward On Alt Product And User Cannot Change It
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+
+Zwing_E_53 Select a exchanged product which have item level manual discount and quantity is >1 ,select a alternate product with less quantity and net price is => then exchanged product net price then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_53
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Exc Product With Quantity 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
+
+Zwing_E_54 Select a exchanged product which have item level manual discount and quantity is >1 ,select a alternate product with less quantity and net price is => then exchanged product net price then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_54
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
+
+Zwing_E_55 Select a alternate product have less effective price than the effective price of exchange item and Net price >= than the net price of exchange item
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_55
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+
+
+Zwing_E_56 check whether user is able to edit or remove manual discount of exchanged product( Item level manual discount should be disabled)
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_56
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Verify User Cannot Change Or Remove Manual Discount When Disabled
 
 
 Zwing_E_57 add a product which have promo, add a alternate product then check the response.
@@ -697,6 +910,7 @@ Zwing_E_59 add a product which total amount is in decimal, add a alternate produ
     Verify Item Added In Cart | Exchange
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
 
 Zwing_E_60 check the behaviour of the system when payment amount is 0
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_60

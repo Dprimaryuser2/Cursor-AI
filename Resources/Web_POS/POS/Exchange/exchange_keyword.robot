@@ -8,6 +8,11 @@ Resource    ../../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Resource    ../../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Library    ../../../../Resources/CustomKeywords/utilities.py
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
+Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Library    utilities
 Resource    ../../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
@@ -431,6 +436,110 @@ Update Customer Name | Exchange
 #    ${customer_info}    Create Dictionary    first_name=${my_dict.cust_name_tag}
     RETURN    ${first_name}
 
+Verify Manual Discount Not Applicable To Exc product After Added
+    Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+    Click Element    ${initial_product_in_exc_cart}
+    Click Element    ${initial_product_in_exc_cart}
+    Page Should Not Contain Element    ${manual_discount_arrow}
+
+Verify Manual Discount Not Applicable To Alternate product After Added
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${manual_discount_arrow}
+    Click Element    ${manual_discount_arrow}
+    Click Element    ${manual_discount_arrow}
+    Page Should Not Contain Element    ${manual_discount_heading}
+
+Verify Item Level Manual Discount Gets Carried Forward On Alt Product And User Cannot Change It
+    Wait Until Page Contains Element    ${alternate_product_in_discount_price}
+    Page Should Contain Element    ${alternate_product_in_discount_price}
+    ${discount}    Get Text    ${alternate_product_in_discount_price}
+    ${clean_discount}    Remove Characters    ${discount}
+    ${float_disc}    Convert To Number    ${clean_discount}
+    ${int_disc}    Convert To Integer    ${float_disc}
+    Should Not Be Equal As Integers    ${int_disc}    0
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Page Should Not Contain Element    ${manual_discount_arrow}
+
+Verify Exc Product With Quantity 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+    ${quantity}    Get Text
+
+    #inc
+    
+Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+
+    
+    #inc
+
+Verify User Cannot Change Or Remove Manual Discount When Disabled
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${disabled_item_level_discount_field}
+    Click Element    ${cancel_icon_item_level_discount}
+    Click Element    ${cancel_icon_item_level_discount}
+    Page Should Contain Element    ${manual_close_button}
+
+
+Verify Quantity Cannot Be Increased For The Exchange Product
+    Wait Until Page Contains Element    ${disabled_alternate_product_qty_in_exc_cart}
+    Page Should Contain Element    ${disabled_alternate_product_qty_in_exc_cart}
+
+Verify User Cannot Apply Item/bill Level Promotions On Alternate Product
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${active_promotion}
+    Click Element    ${active_promotion}
+    Wait Until Page Does Not Contain Element    ${active_promo_dropdown_row}
+    Page Should Not Contain Element    ${active_promo_dropdown_row}
+
+Verify Price Override Not Possible For Alternate Product
+    [Arguments]    ${pos_data}
+    ${my_dict}    Create Dictionary    &{pos_data}
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${price_override_link}
+    Click Element    ${price_override_link}
+    Wait Until Page Contains Element    ${price_override_custom_price_field}
+    Input Text    ${price_override_custom_price_field}    ${my_dict.price_override}
+    Click Element    ${apply_override_button}
+    Click Element    ${apply_override_button}
+    Page Should Contain Element    ${disabled_apply_override_button}
+
+
+Verify Alternate Product With Greater Price was Added To Cart
+    Wait Until Page Contains Element    ${product_name_in_cart_row}
+    Wait Until Page Contains Element    ${alternate_product_in_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_in_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
+    Remove Characters   ${alt_product_price}
+    Remove Characters    ${initial_product_price}
+    ${result}     Run Keyword And Return Status        ${alt_product_price}  <  ${initial_product_price}
+    Should Be True    ${result}
+
+Verify Alternate Product With Lesser Price was Added To Cart
+    Wait Until Page Contains Element    ${product_name_in_cart_row}
+    Wait Until Page Contains Element    ${alternate_product_in_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_in_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
+    Remove Characters   ${alt_product_price}
+    Remove Characters    ${initial_product_price}
+    Should Be True    ${alt_product_price}  >  ${initial_product_price}
+
+Verify Alternate Product With Equal Price was Added To Cart
+    Wait Until Page Contains Element    ${product_name_in_cart_row}
+    Wait Until Page Contains Element    ${alternate_product_in_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_in_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
+    Remove Characters   ${alt_product_price}
+    Remove Characters    ${initial_product_price}
+    Should Be Equal As Strings    ${alt_product_price}    ${initial_product_price}
 Search Invoice By Name| Exchange
    [Arguments]    ${first_name}
    Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
