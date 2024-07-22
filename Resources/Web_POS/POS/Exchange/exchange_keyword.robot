@@ -466,16 +466,43 @@ Verify Item Level Manual Discount Gets Carried Forward On Alt Product And User C
 Verify Exc Product With Quantity 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
     Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
     Wait Until Page Contains Element    ${initial_product_in_exc_cart}
-    ${quantity}    Get Text
-
-    #inc
+    ${alt_quantity}    Get Text    ${exc_quantity}
+    ${exc_quantity}    Get Text    ${initial_product_qty_in_exc_cart}
+    ${clean_alt}    Remove Characters    ${alt_quantity}
+    ${clean_exc}    Remove Characters    ${exc_quantity}
+    Should Be Equal    ${clean_alt}    1
+    Should Be Equal    ${clean_exc}    1
+    ${alt_product_price}    Get Text    ${alternate_product_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
+    Remove Characters    ${alt_product_price}
+    Remove Characters    ${initial_product_price}
+    ${result}     Run Keyword And Return Status        ${alt_product_price}  >  ${initial_product_price}
+    Should Be True    ${result}
+    ${alt_md}    Get Text    ${alternate_product_discount_price}
+    ${exc_md}    Get Text    ${initial_product_price_in_exc_cart}
+    Remove Characters   ${alt_md}
+    Remove Characters   ${exc_md}
+    Should Be Equal    ${alt_md}    ${exc_md}
     
 Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
     Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
     Wait Until Page Contains Element    ${initial_product_in_exc_cart}
-
-    
-    #inc
+    ${alt_quantity}    Get Text    ${exc_quantity}
+    ${exc_quantity}    Get Text    ${initial_product_qty_in_exc_cart}
+    ${clean_alt}    Remove Characters    ${alt_quantity}
+    ${clean_exc}    Remove Characters    ${exc_quantity}
+    Should Be Equal    ${clean_alt}    ${clean_exc}
+    ${alt_product_price}    Get Text    ${alternate_product_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
+    Remove Characters    ${alt_product_price}
+    Remove Characters    ${initial_product_price}
+    ${result}     Run Keyword And Return Status        ${alt_product_price}  >  ${initial_product_price}
+    Should Be True    ${result}
+    ${alt_md}    Get Text    ${alternate_product_discount_price}
+    ${exc_md}    Get Text    ${initial_product_price_in_exc_cart}
+    Remove Characters   ${alt_md}
+    Remove Characters   ${exc_md}
+    Should Be Equal    ${alt_md}    ${exc_md}
 
 Verify User Cannot Change Or Remove Manual Discount When Disabled
     Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
@@ -515,18 +542,18 @@ Verify Price Override Not Possible For Alternate Product
 
 Verify Alternate Product With Greater Price was Added To Cart
     Wait Until Page Contains Element    ${product_name_in_cart_row}
-    Wait Until Page Contains Element    ${alternate_product_in_net_price}
-    ${alt_product_price}    Get Text    ${alternate_product_in_net_price}
+    Wait Until Page Contains Element    ${alternate_product_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_net_price}
     ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
-    Remove Characters   ${alt_product_price}
+    Remove Characters    ${alt_product_price}
     Remove Characters    ${initial_product_price}
     ${result}     Run Keyword And Return Status        ${alt_product_price}  <  ${initial_product_price}
     Should Be True    ${result}
 
 Verify Alternate Product With Lesser Price was Added To Cart
     Wait Until Page Contains Element    ${product_name_in_cart_row}
-    Wait Until Page Contains Element    ${alternate_product_in_net_price}
-    ${alt_product_price}    Get Text    ${alternate_product_in_net_price}
+    Wait Until Page Contains Element    ${alternate_product_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_net_price}
     ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
     Remove Characters   ${alt_product_price}
     Remove Characters    ${initial_product_price}
@@ -534,8 +561,8 @@ Verify Alternate Product With Lesser Price was Added To Cart
 
 Verify Alternate Product With Equal Price was Added To Cart
     Wait Until Page Contains Element    ${product_name_in_cart_row}
-    Wait Until Page Contains Element    ${alternate_product_in_net_price}
-    ${alt_product_price}    Get Text    ${alternate_product_in_net_price}
+    Wait Until Page Contains Element    ${alternate_product_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_net_price}
     ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
     Remove Characters   ${alt_product_price}
     Remove Characters    ${initial_product_price}
@@ -545,8 +572,8 @@ Search Invoice By Name| Exchange
    Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
    Input Text    ${search_invoice_field}     ${first_name}
    Press Keys   ${search_invoice_field}   ENTER
-    ${customer_info}    Create Dictionary    first_name=${first_name}    last_name=${last_name}
-    RETURN    ${customer_info}
+   ${customer_info}    Create Dictionary    first_name=${first_name}    last_name=${last_name}
+   RETURN    ${customer_info}
     
 Switch To Exchange Mode
     [Arguments]    ${mode}
@@ -822,7 +849,7 @@ Verify whether user can edit or remove the sales person from exchanged product
     Wait Until Page Contains Element    ${salesperson_untagged_message}     timeout=10s
     Page Should Contain Element    ${salesperson_untagged_message}
 
- Verify Refresh Button Functionality In Sales Person Tagging Is Working Or Not
+Verify Refresh Button Functionality In Sales Person Tagging Is Working Or Not
     Wait Until Page Contains Element   ${second_item_product_name}  timeout=10s
     Click Element    ${second_item_product_name}
     Wait Until Page Contains Element    ${salesperson_refresh}  timeout=10S
