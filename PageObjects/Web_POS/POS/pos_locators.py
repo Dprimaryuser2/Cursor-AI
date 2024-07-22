@@ -303,7 +303,6 @@ initial_product_in_exc_cart = '//a[@class="product-name"]'
 initial_product_net_price_in_exc_cart = '//a[@class="product-name"]//ancestor::tr[@role="row"]//descendant::td[@aria-colindex="6"]'
 initial_product_qty_in_exc_cart = '//a[@class="product-name"]//ancestor::tr[@role="row"]//descendant::td[@aria-colindex="5"]'
 initial_product_price_in_exc_cart= '//a[@class="product-name"]//ancestor::tr[@role="row"]//descendant::td[@aria-colindex="4"]'
-all_searched_invoice = '(//div[@class="ex-invoice-table my-3 mx-n2"]//div[@class="vertical-scroll exchange-scroll"])[1]'
 searched_invoice_number = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[not(contains(text(),"AM")) and not(contains(text(),"PM")) and @class="grey-100 col-2"])[1]'
 searched_customer_name = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[contains(@class,"grey-") and contains(@class,"col-3")])[1]'
 searched_phone_number = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="col-2"])[1]'
@@ -321,4 +320,4 @@ no_product_selected_message = '//p[contains(text(),"No product selected for exch
 
 total_qty_of_item = '(//div[contains(text(),"SKU/Barcode")]//ancestor::div[@class="ex-invoice-table my-3 mx-n2"]//div[contains(@class,"vertical-scroll exchange-scroll")]//div[@class="col-1"])[1]'
 exchange_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[1]'
-alternate_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[2]'
+# alternate_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[2]'

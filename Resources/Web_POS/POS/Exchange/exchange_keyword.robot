@@ -466,11 +466,15 @@ Verify Item Level Manual Discount Gets Carried Forward On Alt Product And User C
 Verify Exc Product With Quantity 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
     Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
     Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+    ${quantity}    Get Text
+
     #inc
     
 Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
     Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
     Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+
+    
     #inc
 
 Verify User Cannot Change Or Remove Manual Discount When Disabled
