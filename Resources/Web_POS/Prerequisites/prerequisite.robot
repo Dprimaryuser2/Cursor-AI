@@ -35,14 +35,14 @@ Revoke Serial Key
     END
     Wait Until Keyword Succeeds    5    2     Click Element    ${profile_info_heading}
     Wait Until Keyword Succeeds    5    2     Click Element    ${serial_information_tab}
-    Wait Until Element Is Visible    ${serial_info_heading}    timeout=20s
-    Wait Until Element Is Visible    ${revoke_license_button}    timeout=20s
+    Wait Until Element Is Visible    ${serial_info_heading}    timeout=10s
+    Wait Until Element Is Visible    ${revoke_license_button}    timeout=10s
     Scroll Element Into View    ${revoke_license_button}
     Wait Until Keyword Succeeds    5    2     Click Button    ${revoke_license_button}
-    Wait Until Element Is Visible    ${revoke_modal_title}    timeout=20s
+    Wait Until Element Is Visible    ${revoke_modal_title}    timeout=10s
     Input Text    ${license_key_input}    ${serial_key_number}
     Wait Until Keyword Succeeds    5    2     Click Button    ${revoke_license_confirm_button}
-    Wait Until Element Is Visible    ${activate_device_heading}    timeout=20s
+    Wait Until Element Is Visible    ${activate_device_heading}    timeout=10s
     Close All Browsers
 
 Tear It Down If Test Case Failed

@@ -562,7 +562,7 @@ Apply Bill Level Promos
     Wait Until Page Contains Element    ${checkout_bill_promos}
     Click Element    ${checkout_bill_promos}
     Wait Until Page Contains Element    ${promos_applied_message}
-    Page Should Contain Element    ${promos_applied_message}
+    Wait Until Page Does Not Contain Element     ${promos_applied_message}
 
 
 Verify Bill Level Promos Applied

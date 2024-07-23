@@ -56,7 +56,7 @@ Add Customer Details
     Select State And City    ${my_dict}
     Sleep    1
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
-    Click Button    ${start_billing_button}
+    Click Element    ${start_billing_button}
     Wait Until Element Is Visible    //div[@class="popup-notification"]    timeout=10s
     Wait Until Element Is Visible    ${payable_amount}
     Wait Until Element Is Visible    ${checkout_button}    timeout=10s

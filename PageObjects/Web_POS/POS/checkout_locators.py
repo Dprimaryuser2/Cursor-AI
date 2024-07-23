@@ -131,6 +131,7 @@ email_send_registered_mail_msg = '//p[contains(text(),"An E-mail with the invoic
 dismiss_button_share_invoice = '//button[@id="dismiss-invoice-sms"]'
 
 #redeem store credit
+refund_method_store_credit_btn = '//button[@id="refund-mode-voucher"]'
 redeem_store_credit_button = '//button[@class="btn text-center p-0 h-25 mb-2 btn-outline-secondary btn-block" and text()="Redeem Store Credit"]'
 redeem_with_dropdown = '//select[@id="redeem-types"]'
 redeem_with_credit_option = '//select[@id="redeem-types"]//option[@value="voucher"]'
