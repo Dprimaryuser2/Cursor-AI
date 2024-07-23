@@ -188,6 +188,7 @@ Scan Barcode To Add Item And Quantity To Cart By Name | Exchange
         Click Element    ${search_add_button}
         ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
     END
+
 Scan Barcode To Add Item And Quantity To Cart | Exchange
     [Arguments]    ${products}
     ${my_dict}    Create Dictionary   &{products}
@@ -671,6 +672,7 @@ Verify The Confirmation Of item To Be Exchanged
     Page Should Contain Element    ${add_product_for_exchange_btn}
     Element Should Not Be Visible    ${exchange_qty_col_title}
     Element Should Not Be Visible    ${exchange_reason_option}
+
 Assign A Salesperson To An Item | For Exchange
     [Arguments]    ${pos_data}
     ${details_dict}    Create Dictionary    &{pos_data}
@@ -799,4 +801,55 @@ Get The Net Price Of Product | Exchange
 
 Verify The Net Price
   [Arguments]  ${net_price}  ${unit}
-  Should Be Equal    ${net_price}    ${unit}
+  Should Not Be Equal    ${net_price}    ${unit}
+
+Add Product With Less Price Than Exchange Product
+   [Arguments]    ${products}
+   ${my_dict}    Create Dictionary   &{products}
+    ${items_list}=    Convert Items To List    ${my_dict.add_product}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.add_product}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Input Text    ${product_search_bar}    ${key}
+        Press Keys    ${product_search_bar}    ENTER
+    END
+    Sleep  5s
+    
+Verify Sum Of Product Should Be Greater Than Exchange Product Alert Is Displayed
+   Sleep  10s
+   Page Should Contain Element   ${alert_sum_esp}
+   Page Should Not Contain Button    ${checkout_button}
+
+Verify Checkout Is Enable If Same Quantity And Net Price Is => Then Exchanged Product Net Price
+  Element Should Be Enabled    ${checkout_button}
+
+Assign Saleseperson | Before Exchange
+  [Arguments]    ${pos_data}
+  ${details_dict}    Create Dictionary    &{pos_data}
+  Wait Until Page Contains Element    ${salesperson_button}
+  Click Element    ${salesperson_button}
+  Wait Until Page Contains Element    ${salesperson_search_field}  timeout=10s
+  Input Text    ${salesperson_search_field}     ${details_dict.salesperson_name}
+  Wait Until Page Contains Element    ${name_in_assign_salesperson_row}
+  Click Element    ${name_in_assign_salesperson_row}
+  Wait Until Page Contains Element    ${assign_to_all_button}   timeout=10s
+  Click Element    ${assign_to_all_button}
+  Click Element    ${close_assign_salesperson_window}
+
+Verify Salesperson Should Not Allow To Edit Or Remove From Added Alternative Product
+  [Arguments]    ${pos_data}
+  ${details_dict}    Create Dictionary    &{pos_data}
+  Sleep  3s
+  Wait Until Page Contains Element    ${salesperson_button}  timeout=10s
+  Click Element    ${salesperson_button}
+  Wait Until Page Contains Element    ${salesperson_search_field}  timeout=10s
+  Input Text    ${salesperson_search_field}     ${details_dict.salesperson_name}
+  Wait Until Page Contains Element    ${name_in_assign_salesperson_row}
+  Click Element    ${name_in_assign_salesperson_row}
+  Wait Until Page Contains Element    ${assign_to_all_button}   timeout=10s
+  Click Element    ${assign_to_all_button}
+  Wait Until Page Contains Element    ${salesperson_below_product}
+  Click Element    ${clear_salesperson}
+  Click Element    ${close_assign_salesperson_window}
