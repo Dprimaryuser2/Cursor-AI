@@ -12,6 +12,7 @@ Library    utilities
 Resource    ../../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Exchange/exchange_keyword.robot
+Variables  ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
 
 *** Keywords ***
 Cancel No Payment Required | Checkout Page
@@ -150,7 +151,7 @@ Select Items For Exchange
     [Arguments]    ${qty}
     ${my_dict}    Create Dictionary   &{qty}
     Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
-    Sleep    1s
+    Sleep    2s
     Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
     Click Element    ${exchange_qty}
     Click Element    //select[@class="fs-12 custom-select"]//option[contains(text(),"${my_dict.replace_qty}")]
@@ -755,3 +756,47 @@ Verify No Payment Required | Checkout Page
     Page Should Contain Element    ${no_payment_required}
     Page Should Contain Element     ${no_payment_required_confirm_button}
     Page Should Contain Button    ${no_payment_required_cancel_button}
+
+Verify User Is Able To Edit Or Untag Customer After Adding Exchange Product
+   Wait Until Element Is Visible     ${customer_info_icon}
+   Click Element    ${customer_info_icon}
+   Wait Until Element Is Visible    ${customer_info_window_title}    timeout=10s
+   Element Should Be Disabled    ${customer_untag_button_exchange}
+   Wait Until Element Is Visible    ${customer_edit_info_button}    timeout=10s
+   Click Element    ${customer_edit_info_button}
+   Wait Until Element Is Visible    ${customer_phone_field}    timeout=10s
+   ${first_name}=    Generate Random First Name
+   Clear Element Text    ${customer_first_name_field}
+   Input Text     ${customer_first_name_field}    ${first_name}
+   Element Should Be Disabled    ${customer_info_update_button}
+
+Close The Product Window
+   Sleep  3s
+   Click Element    ${close_product_window_button}
+   Element Should Be Enabled    ${checkout_button}
+
+Get The Net Price Of Product
+   [Arguments]    ${products}
+   ${my_dict}    Create Dictionary   &{products}
+   ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+   ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+   FOR    ${item}    IN    @{items_dict.items()}
+       ${key}=    Set Variable    ${item}[0]
+       ${values}=    Set Variable    ${item}[1]
+       ${value}=    Convert To Integer   ${values}
+   END
+   Sleep  1s
+   ${before}=  Get Text    ${net_price}
+   ${before}=  Remove Characters    ${before}
+   ${net_price}=  Evaluate    ${before}/${value}
+   RETURN   ${net_price}
+
+Get The Net Price Of Product | Exchange
+  Sleep  2s
+  ${unit}=  Get Text    ${unit_price_of_product_ex}
+  ${unit}=  Remove Characters    ${unit}
+  RETURN  ${unit}
+
+Verify The Net Price
+  [Arguments]  ${net_price}  ${unit}
+  Should Be Equal    ${net_price}    ${unit}

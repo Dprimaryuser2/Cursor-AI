@@ -910,6 +910,51 @@ Zwing_E_73 Apply a bill discount on a product exchange it with alternate product
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
+Zwing_E_74 Check whether user is able to edit or untag customer after adding exchange product or not
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_74
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode     ${pos_data}
+    Add Exchange Items From Invoice   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange  ${pos_data}
+    Verify User Is Able To Edit Or Untag Customer After Adding Exchange Product
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_E_75 Create sales invoice of one product (4qty) with manual discount and select invoice for exchange with 2qty then product net price is displaying incorrect
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_75
+    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Navigate To Update Product Window    ${pos_data}
+    ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
+    Apply Item Manual Discount | Select From List    ${pos_data}
+    Close The Product Window
+    ${net_price}  Get The Net Price Of Product  ${pos_data}
+    ${customer_name}  Enter Customer Name For Previously Used Number  ${pos_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Payment By Cash    ${value}
+    Verify If Payment Is Complete Or Not
+    Click on New Bill Button
+    Change Billing Mode     ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice By Name | Exchange     ${customer_name}
+    Select Invoice From Search Options
+    ${unit}  Get The Net Price Of Product | Exchange
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Verify The Net Price  ${net_price}  ${unit}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
 
 
 Zwing_E_92 From dropdown on billing screen, select Exchange option

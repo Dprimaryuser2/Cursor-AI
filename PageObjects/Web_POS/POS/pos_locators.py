@@ -319,3 +319,4 @@ no_product_selected_message = '//p[contains(text(),"No product selected for exch
 total_qty_of_item = '(//div[contains(text(),"SKU/Barcode")]//ancestor::div[@class="ex-invoice-table my-3 mx-n2"]//div[contains(@class,"vertical-scroll exchange-scroll")]//div[@class="col-1"])[1]'
 exchange_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[1]'
 alternate_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[2]'
+unit_price_of_product_ex = '(//div[@class="row fs-13 py-3 rows px-4 fs-12 grey-100 align-items-center"]//div[@class="col-1"])[2]'
