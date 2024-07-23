@@ -82,6 +82,7 @@ promo_discount = '//p[contains(text(),"Item Promo Discount")]//ancestor::div[@cl
 included_tax_text = '//p[contains(text(),"Tax Total (Included)")]'
 excluded_tax_text = '//p[contains(text(),"Tax Total (Excluded)")]'
 round_off_text = '//p[contains(text(),"Round Off")]'
+onclick_remove_salesperson="//div[@class='w-100']//div//span"
 round_off_element = '//p[contains(text(),"Round Off")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 tax_amount = '//p[contains(text(),"Tax Total ")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
 tax_amount_excluded = '//p[contains(text(),"Tax Total (Excluded)")]//ancestor::div[@class="row mb-1"]//following-sibling::div/p'
@@ -183,6 +184,9 @@ order_management_option_sidebar = "//a[@title='Order Management']//img"
 # cash management locators
 cash_management_heading = "//h5[text()='Cash Management']"
 billing_option_switch_default = '//button[@class="btn dropdown-toggle btn-light" and contains(text(),"Billing")]'
+order_option_switch = '//button[@class="btn dropdown-toggle btn-light" and contains(text(),"Order")]'
+return_option_switch = '//button[@class="btn dropdown-toggle btn-light" and contains(text(),"Return")]'
+exchange_option_switch = '//button[@class="btn dropdown-toggle btn-light" and contains(text(),"Exchange")]'
 amount_limit_message = '//p[text()="Amount is greater than limit"]'
 item_name = "//a[@class='product-name text-danger']"
 cart_last_element = '(//td[@class="text-center align-middle w-5"])[last()]'
@@ -196,10 +200,12 @@ select_list_discount_div='//ul[@class="custom-checklist list-unstyled"]'
 product_modal_close="//button[@class='close' and contains(text(),'×')]"
 carry_bag_all_input_fields = '//div[@class="row mb-2"]//input[@placeholder="0"]'
 carry_bag_option_label ='//h6[@id="label-undefined" and text()="Sync39"]'
+delete_product_icon = '//a[@title="Delete Product"]//*[name()="svg"]//*[name()="path"]'
 
 # customer_info_icon = "//body/div[@id='app']/div[@id='theme']/div[@class='dashboard']/section/div[@class='container-fluid']/div[@class='row']/div[@class='fadein col-md-6 col-lg-6']/div[@class='row mt-2']/div[@class='col-md-6 col-lg-6']/div[@id='customer-info']//a"
 customer_info_icon = "//div[normalize-space(text())='Customer Information']/a[@id='get-customer-info']"
 switch_modal_proceed_button = "//button[@class='btn ml-1 btn-primary btn-block']//span"
+switch_modal_cancel_button = '//button[@class="btn mr-1 btn-outline-primary btn-block"]'
 update_product_md = "//button[@id='update-product-btn' and @class='btn ml-2 btn-primary']//span"
 
 #product preview locators
@@ -247,6 +253,10 @@ keyboard_shortcuts_link = '//a[@class="key-link"]'
 # insufficient inventory
 insufficient_inventory_continue_btn = '//button[@class="btn ml-1 btn-primary btn-block"]'
 insufficient_inventory_title = '//h5[@class="modal-title"]'
+
+auto_switch_billing_on = '//h5[contains(text(),"Auto-switch to Billing Mode")]//following-sibling::label[@class="my-auto vue-js-switch toggled"]'
+auto_switch_billing_off = '//h5[contains(text(),"Auto-switch to Billing Mode")]//following-sibling::label[@class="my-auto vue-js-switch"]'
+auto_switch_billing_toggle = '(//h5[contains(text(),"Auto-switch to Billing Mode")]//following::div[@class="v-switch-core"]//div)[1]'
 disabled_product = '//a[@class="d-flex isDisabled"]'
 
 # Exchange Module
