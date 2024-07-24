@@ -169,6 +169,28 @@ Select Items For Exchange
     ${exchange_item_info}=    Create Dictionary    name    ${product_name}    price    ${product_cost}
     [Return]    ${exchange_item_info}
 
+Select All Items With Same Qty For Exchange
+    [Arguments]    ${qty}
+    ${my_dict}    Create Dictionary   &{qty}
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Sleep    1s
+    Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
+    ${count}    Get Webelements    ${exchange_qty}
+    ${len}    Get Length    ${count}
+    FOR    ${qty_count}     IN RANGE   1    ${len}+1
+        Click Element    (${exchange_qty})[${qty_count}]
+        Click Element    (//select[@class="fs-12 custom-select"]//option[contains(text(),"${my_dict.replace_qty}")])[${qty_count}]
+        Click Element    ${search_reason_dropdown}
+        Wait Until Page Contains Element    ${exchange_reason_option}   timeout=10s
+        Click Element    ${exchange_reason_option}
+        ${total_quantity}=  Get Text    ${exchange_qty}
+        ${product_name}=  Get Text    ${item_name_exchange}
+        ${product_cost}=  Get Text    ${item_price_exchange}
+    END
+    Wait Until Element Is Enabled        ${continue_btn_exchange_window}
+    Click Element    ${continue_btn_exchange_window}
+
+
 Add Product For Exchange
     Wait Until Page Contains Element    ${add_product_for_exchange_btn}     timeout=20s
     Click Element    ${add_product_for_exchange_btn}
@@ -204,7 +226,21 @@ Add Alternate Product With Same Quantity As Of Exchange Product
         Add Alternate Items In Exchange Cart   ${my_dict}
     END
 
-
+Add 1 Alternate Product For Each Exchanged Product
+    [Arguments]    ${pos_data}
+    ${my_dict}    Create Dictionary    &{pos_data}
+    Wait Until Page Contains Element    ${initial_product_qty_in_exc_cart}
+    ${qty}    Get Text    ${initial_product_qty_in_exc_cart}
+    ${clean_aty}    Remove Characters    ${qty}
+    FOR    ${index}    IN RANGE    ${clean_aty}
+        ${no_of_buttons}    Get Webelements    ${add_product_for_exchange_btn}
+        ${count}    Get Length    ${no_of_buttons}
+        FOR    ${button_no}    IN RANGE       1    ${count}
+            Wait Until Page Contains Element    (${add_product_for_exchange_btn})[${count}]      timeout=10s
+            Click Element    (${add_product_for_exchange_btn})[${count}]
+            Add Alternate Items In Exchange Cart   ${my_dict}
+        END
+    END
 
 
 
@@ -540,39 +576,28 @@ Verify Manual Discount Not Applicable To Alternate product After Added
     Click Element    ${manual_discount_arrow}
     Page Should Not Contain Element    ${manual_discount_heading}
 
-Verify Item Level Manual Discount Gets Carried Forward On Alt Product And User Cannot Change It
-    Wait Until Page Contains Element    ${alternate_product_in_discount_price}
-    Page Should Contain Element    ${alternate_product_in_discount_price}
-    ${discount}    Get Text    ${alternate_product_in_discount_price}
-    ${clean_discount}    Remove Characters    ${discount}
-    ${float_disc}    Convert To Number    ${clean_discount}
-    ${int_disc}    Convert To Integer    ${float_disc}
-    Should Not Be Equal As Integers    ${int_disc}    0
-    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
-    Click Element    ${alternate_product_in_exc_cart}
-    Click Element    ${alternate_product_in_exc_cart}
-    Page Should Not Contain Element    ${manual_discount_arrow}
 
 Verify Exc Product With Quantity 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
     Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
     Wait Until Page Contains Element    ${initial_product_in_exc_cart}
     ${alt_quantity}    Get Text    ${disabled_alternate_product_qty_in_exc_cart}
     ${exc_quantity}    Get Text    ${initial_product_qty_in_exc_cart}
-    ${clean_alt}    Remove Characters    ${alt_quantity}
-    ${clean_exc}    Remove Characters    ${exc_quantity}
-    Should Be Equal    ${clean_alt}    1
-    Should Be Equal    ${clean_exc}    ${clean_alt}
+    ${clean_alt_qty}    Remove Characters    ${alt_quantity}
+    ${clean_exc_qty}    Remove Characters    ${exc_quantity}
+    Should Be Equal    ${clean_alt_qty}    1
+    Should Be Equal    ${clean_alt_qty}    ${clean_exc_qty}
     ${alt_product_price}    Get Text    ${alternate_product_net_price}
-    ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
-    Remove Characters    ${alt_product_price}
-    Remove Characters    ${initial_product_price}
-    ${result}     Evaluate    ${alt_product_price}  >  ${initial_product_price}
+    ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
+    ${clean_alt_price}    Remove Characters    ${alt_product_price}
+    ${clean_initial_price}    Remove Characters    ${initial_product_price}
+    ${result}=     Evaluate    ${clean_alt_price}>${clean_initial_price}
+    Log    ${result}
     Should Be True    ${result}
     ${alt_md}    Get Text    ${alternate_product_discount_price}
-    ${exc_md}    Get Text    ${initial_product_price_in_exc_cart}
-    Remove Characters   ${alt_md}
-    Remove Characters   ${exc_md}
-    Should Be Equal    ${alt_md}    ${exc_md}
+    ${exc_md}    Get Text    ${initial_product_discount_price}
+    ${clean_alt_price}    Remove Characters   ${alt_md}
+    ${clean_exc_price}    Remove Characters   ${exc_md}
+    Should Be Equal    ${clean_alt_price}    ${clean_exc_price}
     
 Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
     Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
@@ -599,6 +624,17 @@ Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity 
     ${clean_alt_price}    Remove Characters   ${alt_md}
     ${clean_exc_price}    Remove Characters   ${exc_md}
     Should Be Equal    ${clean_alt_price}    ${clean_exc_price}
+
+Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity And Less Price Shows Validation
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+    ${alt_quantity}    Get Text    ${disabled_alternate_product_qty_in_exc_cart}
+    ${exc_quantity}    Get Text    ${initial_product_qty_in_exc_cart}
+    ${clean_alt_qty}    Remove Characters    ${alt_quantity}
+    ${clean_exc_qty}    Remove Characters    ${exc_quantity}
+    Should Not Be Equal    ${clean_alt_qty}    1
+    Wait Until Page Contains Element    ${esp_alert}    timeout=10
+    Page Should Contain Element    ${esp_alert}
 
 Verify Alt Product Has Less Effective Price But More Net Price
     ${alt_eff_price}    Get Text    ${alternate_product_price}

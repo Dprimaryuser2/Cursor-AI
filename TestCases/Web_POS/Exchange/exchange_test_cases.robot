@@ -770,9 +770,8 @@ Zwing_B_48 select a invoice which have multiple product for exchange , add them 
     Select The Invoice Option Type  ${pos_data}
     Search Invoice | Exchange   ${pos_data}
     Select Invoice From Search Options
-    Select Items For Exchange   ${pos_data}
-    Add Product For Exchange
-    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Select All Items With Same Qty For Exchange   ${pos_data}
+    Add 1 Alternate Product For Each Exchanged Product     ${pos_data}
     Verify Alternate Product With Greater Price was Added To Cart
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -820,9 +819,8 @@ Zwing_E_51 Select a exchanged product which have item level manual discount and 
     Search Invoice | Exchange   ${pos_data}
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
-    Add Product For Exchange
-    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
-    Verify Item Level Manual Discount Gets Carried Forward On Alt Product And User Cannot Change It
+    Add Alternate Product With Same Quantity As Of Exchange Product     ${pos_data}
+    Verify Exc Product With Quantity 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -837,9 +835,8 @@ Zwing_E_52 Select a exchanged product which have item level manual discount and 
     Search Invoice | Exchange   ${pos_data}
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
-    Add Product For Exchange
-    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
-    Verify Item Level Manual Discount Gets Carried Forward On Alt Product And User Cannot Change It
+    Add Alternate Product With Same Quantity As Of Exchange Product     ${pos_data}
+    Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -873,7 +870,7 @@ Zwing_E_54 Select a exchanged product which have item level manual discount and 
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
     Add Alternate Product With Same Quantity As Of Exchange Product     ${pos_data}
-    Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
+    Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity And Less Price Shows Validation
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 

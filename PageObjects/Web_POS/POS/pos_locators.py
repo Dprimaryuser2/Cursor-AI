@@ -320,7 +320,7 @@ searched_phone_number = '(//div[contains(@class,"exchange-invoices-col rows alig
 total_number_of_items = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="col-1"])[1]'
 amount = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="px-4 col-2"])[1]'
 searched_invoice_date = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="grey-100 col-2" and contains(text(),"PM") or contains(text(),"AM")])'
-
+esp_alert = '//span[contains(text(),"Sum of ESP of all alternate item should be greater than or equal to that of exchange item, please replace existing product with product of higher value")]'
 select_all_items_checkbox = '//input[@id="select-all"]//following-sibling::label'
 selected_all_item = '//input[@id="select-all"]'
 exchange_item_checkbox = '//input[@id="product-0"]//following-sibling::label'
