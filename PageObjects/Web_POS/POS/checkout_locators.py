@@ -83,7 +83,7 @@ continue_account_on_sale_button="//button[@id='confirm-account-sale' and @class=
 print_invoice="//button[@id='print-invoice-btn' and @class='btn mt-2 btn-primary btn-block']"
 share_invoice="//button[@id='share-invoice-btn' and @class='btn mt-4 mt-md-2 btn-primary btn-block']"
 
-no_payment_required="//header[@id='__BVID__1628___BV_modal_header_']//child::h5[contains(text(),'No Payment Required')]"
+no_payment_required='//header[@class="modal-header"]//child::h5[contains(text(),"No Payment Required")]'
 no_payment_required_confirm_button="//button[@class='btn ml-1 btn-primary btn-block']//child::span[contains(text(),'Confirm')]"
 no_payment_required_cancel_button="//button[@class='btn mr-1 btn-outline-primary btn-block' and contains(text(),'Cancel')]"
 checkout_split_payment='//div[@class="v-switch-button"]'
@@ -179,3 +179,10 @@ invoice_amount = '(//div[@id="cool"]//tbody[@style="vertical-align: text-bottom;
 
 fulfilment_option = '//h6[@class="mb-4"]'
 payment_saved_successful = '//div[@class="popup-notification"]//div'
+fulfilment_options_heading = '//h6[@class="mb-4" and contains(text(),"Fulfilment Options")]'
+fulfilment_due_date_option = '//input[@id="datepicker"]'
+fulfilment_calendar_window = '//div[@class="vdp-datepicker__calendar" and @style=""]'
+last_date_of_this_month = '(//div[@class="vdp-datepicker__calendar" and @style=""]//div//child::span[contains(text(),"30") or contains(text(),"31") or contains(text(),"29")])[last()]'
+continue_fulfilment_button = '//button[@class="btn btn-primary btn-block" and text()="Continue"]'
+place_order_button = '//button[@class="btn btn-primary btn-block" and contains(text(),"Place Order")]'
+min_acceptance_criteria_fulfilled = '//span[@class="ml-2" and contains(text(),"Minimum order acceptance criteria fulfilled")]'
