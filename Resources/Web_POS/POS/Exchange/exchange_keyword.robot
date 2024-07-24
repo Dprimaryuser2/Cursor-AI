@@ -925,22 +925,6 @@ Assign Saleseperson | Before Exchange
   Click Element    ${assign_to_all_button}
   Click Element    ${close_assign_salesperson_window}
 
-Verify Salesperson Should Not Allow To Edit Or Remove From Added Alternative Product
-  [Arguments]    ${pos_data}
-  ${details_dict}    Create Dictionary    &{pos_data}
-  Sleep  3s
-  Wait Until Page Contains Element    ${salesperson_button}  timeout=10s
-  Click Element    ${salesperson_button}
-  Wait Until Page Contains Element    ${salesperson_search_field}  timeout=10s
-  Input Text    ${salesperson_search_field}     ${details_dict.salesperson_name}
-  Wait Until Page Contains Element    ${name_in_assign_salesperson_row}
-  Click Element    ${name_in_assign_salesperson_row}
-  Wait Until Page Contains Element    ${assign_to_all_button}   timeout=10s
-  Click Element    ${assign_to_all_button}
-  Wait Until Page Contains Element    ${salesperson_below_product}
-  Click Element    ${clear_salesperson}
-  Click Element    ${close_assign_salesperson_window}
-
 Add Multiple MRP Product | Exchange
     [Arguments]    ${products}
     ${my_dict}    Create Dictionary   &{products}
@@ -1008,3 +992,14 @@ Select QTY For MRP Exchange
     Element Should Be Enabled    ${continue_btn_exchange_window}
     Click Element    ${continue_btn_exchange_window}
     [Return]    ${total_quantity}
+
+
+Verify Salesperson Should Not Allow To Edit Or Remove From Added Alternative Product
+   Wait Until Page Contains Element    ${product_row_exchange}
+   ${salesperson_ex}=  Get Text    ${assigned_salesperson}
+   ${salesperson_alternate}=  Get Text    ${assigned_Salesperson_alternate}
+   Should Be Equal    ${salesperson_ex}    ${salesperson_alternate}
+   Click Element     ${product_row_exchange}
+   Wait Until Page Contains Element    ${assign_salesperson_field_disable}   timeout=2s
+   Element Should Be Disabled   ${assign_salesperson_field_disable}
+   Close The Product Window

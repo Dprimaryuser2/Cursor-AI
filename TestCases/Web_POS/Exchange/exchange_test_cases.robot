@@ -1038,13 +1038,12 @@ Zwing_E_78 Exchange || If salesperson is tagged in exchanged product then Salesp
     Select Items For Exchange   ${pos_data}
     Add Product For Exchange
     Add Product With Less Price Than Exchange Product  ${pos_data}
-    Verify Salesperson Should Not Allow To Edit Or Remove From Added Alternative Product   ${pos_data}
+    Verify Salesperson Should Not Allow To Edit Or Remove From Added Alternative Product
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-    #need to update
 
 Zwing_E_79 Select salesperson and click on assign to all then salesperson needs to be tagged in alternative product
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_78
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_79
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}

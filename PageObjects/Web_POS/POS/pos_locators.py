@@ -27,7 +27,7 @@ scan_only = '//div[@class="v-switch-button"]'
 salesperson_button = '//button[@id="category-salesperson"]'
 salesperson_refresh = "//button[text()='Refresh']"
 salesperson_dropdown = '//span[contains(text(),"Select Salesperson")]'
-salesperson_search_field = '//input[@placeholder="Search..."]'
+salesperson_search_field = '//input[@placeholder="Search salesperson"]'
 salesperson = '//input[@placeholder="Search..."]//ancestor::div[@class="dropdown-body w-100"]//li'
 assign_salesperson_window_heading = '//p[@class="mb-0"]//b[text()="Assign Salesperson"]'
 assign_salesperson_search = '//input[@class="search pl-0 form-control"]'
@@ -327,3 +327,8 @@ alert_sum_esp = '//div[@class="col-11"]//h6[@class="mb-2 fs-14" and contains(tex
 unit_price_of_product_ex = '(//div[@class="row fs-13 py-3 rows px-4 fs-12 grey-100 align-items-center"]//div[@class="col-1"])[2]'
 mrp_product_2_row = "//input[@id='2']"
 customer_untag_button_exchange = '//button[@id="untag-customer"]'
+
+product_row_exchange = '//a[@class="product-name text-danger"]'
+assigned_salesperson = '(//span[@class="pt-2 fs-12 text-grey"])[1]'
+assigned_Salesperson_alternate = '(//span[@class="pt-2 fs-12 text-grey"])[2]'
+assign_salesperson_field_disable = '//input[@placeholder="No salesperson found in this store."]'
