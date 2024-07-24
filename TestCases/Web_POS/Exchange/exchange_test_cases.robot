@@ -43,7 +43,7 @@ Zwing_E_03 Click on confirm button and check the response
     Open The Session    ${pos_data}
     Click On Exchange Text In Dropdown   ${pos_data}
     Verify Exchange Text Is Clickable
-    Click On Confirm Button | Exchange
+    Click On Confirm Button | Exchange   
     Verify The Confirm Button | Exchange   ${pos_data}  
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
