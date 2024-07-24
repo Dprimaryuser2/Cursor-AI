@@ -147,7 +147,8 @@ open_session_link = '//div[@class="fadein col-md-6 col-lg-6" and not(@style="dis
 select_mrp="//h5[@class='modal-title' and contains(text(),'Select MRP')]"
 select_mrp_refresh="//button[@class='btn add-to-cart serve-refresh btn-light btn-sm' and contains(text(),'Refresh')]"
 add_to_cart_mrp="//button[@id='multiple-mrp-add-to-cart' and @class='btn m-0 custom-btn btn-secondary']"
-
+invoice_not_found='//div[@class="alert alert-dismissible alert-danger"]'
+confirm_exchange="//button[@class='btn ml-1 btn-primary btn-block']"
 # Discard after half payment
 discard_payment_bill = '//p[contains(normalize-space(),"Discard Bill")]'
 discard_confirm = '//span[text()="Yes, Discard"]'

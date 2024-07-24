@@ -38,8 +38,6 @@ Verify Exchange Text Is Clickable
     Element Should Be Enabled    ${switch_cancel_button}
 
 Click On Confirm Button | Exchange
-    [Arguments]    ${mode}
-    ${my_dict}    Create Dictionary   &{mode}
     Wait Until Page Contains Element    ${switch_confirm_button}    timeout=20s
     Element Should Be Enabled    ${switch_confirm_button}
     Click Element    ${switch_confirm_button}
@@ -567,11 +565,12 @@ Unselect Individual Item
 Verify Individual Item Is Unselected
     Checkbox Should Not Be Selected    ${selected_item}
     Page Should Contain Element    ${no_product_selected_message}
+#
+#Verify Total QTY Auto Populated
 
-Verify Total QTY Auto Populated
-    
-Verify Total QTY Is 0
-    
+
+#Verify Total QTY Is 0
+#
 Select The Invoice By Invoice Name | Exchange
    [Arguments]    ${invoice_id}
    Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=10s
@@ -672,6 +671,7 @@ Verify The Confirmation Of item To Be Exchanged
     Page Should Contain Element    ${add_product_for_exchange_btn}
     Element Should Not Be Visible    ${exchange_qty_col_title}
     Element Should Not Be Visible    ${exchange_reason_option}
+
 Assign A Salesperson To An Item | For Exchange
     [Arguments]    ${pos_data}
     ${details_dict}    Create Dictionary    &{pos_data}
@@ -713,7 +713,7 @@ Verify whether user can edit or remove the sales person from exchanged product
     Wait Until Page Contains Element    ${salesperson_untagged_message}     timeout=10s
     Page Should Contain Element    ${salesperson_untagged_message}
 
- Verify Refresh Button Functionality In Sales Person Tagging Is Working Or Not
+Verify Refresh Button Functionality In Sales Person Tagging Is Working Or Not
     Wait Until Page Contains Element   ${second_item_product_name}  timeout=10s
     Click Element    ${second_item_product_name}
     Wait Until Page Contains Element    ${salesperson_refresh}  timeout=10S
@@ -757,3 +757,90 @@ Verify No Payment Required | Checkout Page
     Page Should Contain Element    ${no_payment_required}
     Page Should Contain Element     ${no_payment_required_confirm_button}
     Page Should Contain Button    ${no_payment_required_cancel_button}
+
+Switch From Exchange Module
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    Log    ${my_dict}
+    Wait Until Page Contains Element    ${switch_billing_dropdown}
+    Click Element    ${switch_billing_dropdown}
+    Click Element    //a[contains(text(),"${my_dict.Switch_mode}")]
+
+Scan Barcode To Add Item And Quantity To Cart | Multiple MRP | Exchange
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    0.5s
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    0.5s
+        Click Element    ${search_add_button}
+        Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+        Click Element    ${add_to_cart_mrp}
+#        Wait Until Page Contains Element    @{quantity_input}   timeout=10s
+        Input Text    ${quantity}   1
+        Click Element   ${update_cart_quantity}
+        sleep   1
+    END
+    
+ 
+Verify Invoice After Complete Exchange
+    Wait Until Page Contains Element    ${invoice_not_found}    timeout=10s
+    Page Should Contain Element    ${invoice_not_found}
+ 
+Verify Void Invoice For Exchange
+    Wait Until Page Contains Element    ${invoice_not_found}
+    Page Should Contain Element    ${invoice_not_found}
+    Page Should Not Contain Element    ${first_item_product_name}
+
+
+Change Billing Mode | From Return To Exchange
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    Wait Until Page Contains Element    ${switch_billing_dropdown}
+    Click Element    ${switch_billing_dropdown}
+    Click Element    //a[contains(text(),"Exchange")]
+    Wait Until Page Contains Element    ${switch_modal_text}
+    Wait Until Page Contains Element    ${switch_confirm_button}
+    Page Should Contain Element    ${switch_modal_text}
+    Element Should Be Enabled    ${switch_confirm_button}
+    Element Should Be Enabled    ${switch_cancel_button}
+
+Verify Confirmation Popup
+    Wait Until Page Contains Element    ${switch_modal_text}
+    Wait Until Page Contains Element    ${switch_confirm_button}
+    Page Should Contain Element    ${switch_modal_text}
+    Element Should Be Enabled    ${switch_confirm_button}
+    Element Should Be Enabled    ${switch_cancel_button}
+
+Verify Confirm Button On Switching
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    Wait Until Page Contains Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Switch_mode}"]
+    Page Should Contain Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Switch_mode}"]
+
+Verify The Cancel Button On Switch From Exchange
+    Page Should Contain Element    ${add_exchange_item_link}
+    Page Should Not Contain Element    ${billing_option_switch_default}
+    Click Element    ${switch_confirm_button}
+    Wait Until Page Contains Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="Exchange"]
+    
+
+Verify Confirm Button For Switch To Exchange
+    Click Element    ${confirm_exchange}
