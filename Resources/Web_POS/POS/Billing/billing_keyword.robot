@@ -130,7 +130,7 @@ Verify Multiple Price Product Is Added
     Page Should Contain Element    ${tax_amount} 
 
 Click On Back Button | Checkout
-    Wait Until Page Contains Element   ${back_icon_on_checkout}
+    Wait Until Page Contains Element   ${back_icon_on_checkout}     timeout=20s
     Click Element    ${back_icon_on_checkout}
 
 Add Customer Details for partial payment
