@@ -111,3 +111,13 @@ Zwing_ATC_9 Add Normal sku with weighted UOM to cart >> Add Qty mode with disabl
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
+Zwing_ATC_10 Add Normal sku with weighted UOM to cart >> Add Qty mode with disable Negative Stock Billing
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_10
+    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Add Weighted UOM Products to Cart | Add Cart Quantity Mode    ${pos_data}
+    Verify 0 Inventory To Cart With Disable Negative Inventory    ${pos_data}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+

@@ -282,7 +282,7 @@ cancel_btn_exchange_window = '//button[@class="btn mr-3 btn-outline-primary btn-
 continue_btn_exchange_window = '//div[@class="text-right d-flex pr-2 col-4"]//button[contains(@class,"btn btn-primary btn-block")]'
 add_product_for_exchange_btn = '//button[@class="primary-light fs-12 my-1 add-prod-exchanged"]'
 cancel_adding_product_btn = '//button[@class="primary-light fs-12 my-1 add-prod-exchanged cancel-prod-exchanged"]'
-invoice_not_found = '//div[@class="alert alert-dismissible alert-danger" and contains(text(),"Invoice not found")]'
+# invoice_not_found = '//div[@class="alert alert-dismissible alert-danger" and contains(text(),"Invoice not found")]'
 searched_invoice_number_heading = '//div[contains(text(),"Invoice Number")]'
 searched_invoice_date_heading = '//div[contains(text(),"Date")]'
 searched_invoice_item_heading = '//div[contains(text(),"Items")]'
@@ -320,3 +320,10 @@ no_product_selected_message = '//p[contains(text(),"No product selected for exch
 total_qty_of_item = '(//div[contains(text(),"SKU/Barcode")]//ancestor::div[@class="ex-invoice-table my-3 mx-n2"]//div[contains(@class,"vertical-scroll exchange-scroll")]//div[@class="col-1"])[1]'
 exchange_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[1]'
 alternate_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[2]'
+
+
+clear_salesperson = '//button[@class="btn ml-2 mr-1 btn-secondary btn-danger"]'
+alert_sum_esp = '//div[@class="col-11"]//h6[@class="mb-2 fs-14" and contains(text(),"Alert")]'
+unit_price_of_product_ex = '(//div[@class="row fs-13 py-3 rows px-4 fs-12 grey-100 align-items-center"]//div[@class="col-1"])[2]'
+mrp_product_2_row = "//input[@id='2']"
+customer_untag_button_exchange = '//button[@id="untag-customer"]'
