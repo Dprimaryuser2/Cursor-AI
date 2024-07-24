@@ -179,3 +179,10 @@ invoice_amount = '(//div[@id="cool"]//tbody[@style="vertical-align: text-bottom;
 
 fulfilment_option = '//h6[@class="mb-4"]'
 payment_saved_successful = '//div[@class="popup-notification"]//div'
+fulfilment_options_heading = '//h6[@class="mb-4" and contains(text(),"Fulfilment Options")]'
+fulfilment_due_date_option = '//input[@id="datepicker"]'
+fulfilment_calendar_window = '//div[@class="vdp-datepicker__calendar" and @style=""]'
+last_date_of_this_month = '(//div[@class="vdp-datepicker__calendar" and @style=""]//div//child::span[contains(text(),"30") or contains(text(),"31") or contains(text(),"29")])[last()]'
+continue_fulfilment_button = '//button[@class="btn btn-primary btn-block" and text()="Continue"]'
+place_order_button = '//button[@class="btn btn-primary btn-block" and contains(text(),"Place Order")]'
+min_acceptance_criteria_fulfilled = '//span[@class="ml-2" and contains(text(),"Minimum order acceptance criteria fulfilled")]'
