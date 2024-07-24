@@ -656,6 +656,8 @@ Zwing_E_41 check whether manual discount is applied on alternate product after a
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
     Verify Manual Discount Not Applicable To Exc product After Added
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_42 check whether user can update the quantity of alternate product or not
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_42
@@ -726,7 +728,7 @@ Zwing_E_45 Select a exchanged product which have no discount and quantity is >1 
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_E_46 Select a exchanged product which have no discount and quantity is >1 (suppose 4 qty),select a alternate product with same quantity and Net price less than the exchange product net price. then check the response.
+Zwing_E_46 Select a exchanged product which have no discount and quantity is >1 (suppose 4 qty), select a alternate product with same quantity and Net price less than the exchange product net price. then check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_46
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -737,8 +739,7 @@ Zwing_E_46 Select a exchanged product which have no discount and quantity is >1 
     Search Invoice | Exchange   ${pos_data}
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
-    Add Product For Exchange
-    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Add Alternate Product With Same Quantity As Of Exchange Product    ${pos_data}
     Verify Alternate Product With Lesser Price was Added To Cart
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -754,8 +755,7 @@ Zwing_B_47 Select a exchanged product which have no discount and quantity is >1 
     Search Invoice | Exchange   ${pos_data}
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
-    Add Product For Exchange
-    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Add Alternate Product With Same Quantity As Of Exchange Product    ${pos_data}
     Verify Alternate Product With Equal Price was Added To Cart
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -858,6 +858,8 @@ Zwing_E_53 Select a exchanged product which have item level manual discount and 
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
     Verify Exc Product With Quantity 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_54 Select a exchanged product which have item level manual discount and quantity is >1 ,select a alternate product with less quantity and net price is => then exchanged product net price then check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_54
@@ -870,9 +872,10 @@ Zwing_E_54 Select a exchanged product which have item level manual discount and 
     Search Invoice | Exchange   ${pos_data}
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
-    Add Product For Exchange
-    Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
+    Add Alternate Product With Same Quantity As Of Exchange Product     ${pos_data}
     Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_55 Select a alternate product have less effective price than the effective price of exchange item and Net price >= than the net price of exchange item
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_55
@@ -887,7 +890,9 @@ Zwing_E_55 Select a alternate product have less effective price than the effecti
     Select Items For Exchange   ${pos_data}
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
-
+    Verify Alt Product Has Less Effective Price But More Net Price
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_56 check whether user is able to edit or remove manual discount of exchanged product( Item level manual discount should be disabled)
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_56
@@ -903,6 +908,8 @@ Zwing_E_56 check whether user is able to edit or remove manual discount of excha
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
     Verify User Cannot Change Or Remove Manual Discount When Disabled
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 
 Zwing_E_57 add a product which have promo, add a alternate product then check the response.
