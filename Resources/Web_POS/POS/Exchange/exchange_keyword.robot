@@ -39,8 +39,6 @@ Verify Exchange Text Is Clickable
     Element Should Be Enabled    ${switch_cancel_button}
 
 Click On Confirm Button | Exchange
-    [Arguments]    ${mode}
-    ${my_dict}    Create Dictionary   &{mode}
     Wait Until Page Contains Element    ${switch_confirm_button}    timeout=20s
     Element Should Be Enabled    ${switch_confirm_button}
     Click Element    ${switch_confirm_button}
@@ -128,7 +126,7 @@ Verify The Search Invoice Response | Exchange
 Verify Invoice Search By Invalid Customer Data
    Wait Until Page Contains Element    ${invoice_not_found}
    Page Should Contain Element    ${invoice_not_found}
-   
+
 Verify All Columns Are Present In Item Exchange Window
    [Arguments]    ${mode}
    ${my_dict}    Create Dictionary   &{mode}
@@ -289,7 +287,7 @@ Verify Item Added In Cart | Exchange
     Wait Until Element Is Enabled    ${checkout_button}     timeout=20s
     Element Should Be Enabled    ${checkout_button}
     Element Should Be Enabled    ${clear_all_items}
-    
+
 Verify Exchange Page After Reload
     Wait Until Page Contains Element    ${in_store}     timeout=10s
     Page Should Contain Element    ${in_store}
@@ -323,7 +321,7 @@ Verify Exchange Item Info In Cart Is Correct Or Not
     Wait Until Page Contains Element    ${add_product_for_exchange_btn}     timeout=10s
     Should Match Regexp    ${my_dict.name}    (?i).*${my_dict['name']}.*
     Should Match Regexp    ${my_dict.price}    (?i).*${my_dict['price']}.*
-    
+
 Verify Exchange Quantity Dopdown In Popup Is Working
    Wait Until Page Contains Element    ${select_item_for_exchange_title}  timeout=15s
    Click Element    ${exchange_qty}
@@ -441,7 +439,7 @@ Search Invoice By Name| Exchange
    Input Text    ${search_invoice_field}     ${first_name}
    Press Keys   ${search_invoice_field}   ENTER
    RETURN    ${first_name}
-    
+
 Switch To Exchange Mode
     [Arguments]    ${mode}
     ${my_dict}    Create Dictionary   &{mode}
@@ -497,7 +495,7 @@ Add Exchange Items From Invoice
     ${my_dict}    Create Dictionary   &{mode}
     Click Element    ${add_exchange_item_link}
     Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=10s
-    Click Element    ${select_search_invoice_option_btn} 
+    Click Element    ${select_search_invoice_option_btn}
     IF   '${my_dict.select_invoice_option}' == 'Customer Name'
         Click Element    ${customer_name_search_option}
     ELSE IF    '${my_dict.select_invoice_option}' == 'Customer Phone'
@@ -570,11 +568,10 @@ Unselect Individual Item
 Verify Individual Item Is Unselected
     Checkbox Should Not Be Selected    ${selected_item}
     Page Should Contain Element    ${no_product_selected_message}
-
-#Verify Total QTY Auto Populated
 #
-#Verify Total QTY Is 0
-    
+#Verify Total QTY Auto Populated
+
+
 Select The Invoice By Invoice Name | Exchange
    [Arguments]    ${invoice_id}
    Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=10s
@@ -717,13 +714,13 @@ Verify whether user can edit or remove the sales person from exchanged product
     Wait Until Page Contains Element    ${salesperson_untagged_message}     timeout=10s
     Page Should Contain Element    ${salesperson_untagged_message}
 
- Verify Refresh Button Functionality In Sales Person Tagging Is Working Or Not
+Verify Refresh Button Functionality In Sales Person Tagging Is Working Or Not
     Wait Until Page Contains Element   ${second_item_product_name}  timeout=10s
     Click Element    ${second_item_product_name}
     Wait Until Page Contains Element    ${salesperson_refresh}  timeout=10S
     Click Element    ${salesperson_refresh}
     Page Should Contain Element    ${onclick_remove_salesperson}
-    
+
 Verify Promo Discount Apcplied In Exchanged Item Also
     Wait Until Page Contains Element    ${discount_field}
     ${price_1}=  Get Text    ${discount_field}
@@ -741,7 +738,7 @@ Verify Exchanged Product And Alternate Product Prices Is Correct Or Not
    ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
    ${alternate_net_price}=  Get Text    ${alternate_product_net_price}
    Should Not Be Equal    ${exchange_net_price}    ${alternate_net_price}
-   
+
 Verify Total Amount Of Exchange and Alternate Product
    ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
    ${alternate_net_price}=  Get Text    ${alternate_product_net_price}
@@ -806,6 +803,7 @@ Verify The Net Price
   [Arguments]  ${net_price}  ${unit}
   Should Not Be Equal    ${net_price}    ${unit}
 
+
 Add Product With Less Price Than Exchange Product
    [Arguments]    ${products}
    ${my_dict}    Create Dictionary   &{products}
@@ -819,7 +817,7 @@ Add Product With Less Price Than Exchange Product
         Press Keys    ${product_search_bar}    ENTER
     END
     Sleep  5s
-    
+
 Verify Sum Of Product Should Be Greater Than Exchange Product Alert Is Displayed
    Sleep  10s
    Page Should Contain Element   ${alert_sum_esp}
