@@ -147,6 +147,7 @@ open_session_link = '//div[@class="fadein col-md-6 col-lg-6" and not(@style="dis
 select_mrp="//h5[@class='modal-title' and contains(text(),'Select MRP')]"
 select_mrp_refresh="//button[@class='btn add-to-cart serve-refresh btn-light btn-sm' and contains(text(),'Refresh')]"
 add_to_cart_mrp="//button[@id='multiple-mrp-add-to-cart' and @class='btn m-0 custom-btn btn-secondary']"
+mrp_product_2_row = "//input[@id='2']"
 
 # Discard after half payment
 discard_payment_bill = '//p[contains(normalize-space(),"Discard Bill")]'

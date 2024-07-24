@@ -398,7 +398,10 @@ Enter Customer Name For Previously Used Number
     Input Text     ${customer_first_name_field}     ${first_name}
     Click Button    ${start_billing_button}
     Sleep    2
-    Discard Items If Present From Previous Session
+    ${store_item_from_previous_session}    Run Keyword And Return Status    Page Should Contain Element    ${discard_item_previous_session}
+    IF    ${store_item_from_previous_session}
+       Discard Items If Present From Previous Session
+    END
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
 #    ${customer_info}    Create Dictionary    first_name=${first_name}
     RETURN    ${first_name}
@@ -853,3 +856,71 @@ Verify Salesperson Should Not Allow To Edit Or Remove From Added Alternative Pro
   Wait Until Page Contains Element    ${salesperson_below_product}
   Click Element    ${clear_salesperson}
   Click Element    ${close_assign_salesperson_window}
+
+Add Multiple MRP Product | Exchange
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${items_list}=    Convert Items To List    ${my_dict.add_product}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.add_product}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    0.5s
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    0.5s
+        Click Element    ${search_add_button}
+        Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+        Click Element    ${mrp_product_2_row}
+        Click Element    ${add_to_cart_mrp}
+        Input Text    ${quantity}   ${value}
+        Click Element   ${update_cart_quantity}
+        sleep   1
+    END
+
+Add Multiple MRP Product
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    0.5s
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    0.5s
+        Click Element    ${search_add_button}
+        Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+        Click Element    ${add_to_cart_mrp}
+        Input Text    ${quantity}   ${value}
+        Click Element   ${update_cart_quantity}
+        sleep   1
+    END
+
+Select QTY For MRP Exchange
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Sleep    1s
+    Click Element    ${search_reason_dropdown}
+    Wait Until Page Contains Element    ${exchange_reason_option}   timeout=10s
+    Click Element    ${exchange_reason_option}
+    Click Element    ${first_product_row_checkbox}
+    ${total_quantity}=  Get Text    ${first_row_qty_exchange}
+    ${total_quantity}  Convert To String     ${total_quantity}
+    ${product_selected_title}=  Get Text    ${product_selected_for_exchange_text}
+    Element Should Be Enabled    ${continue_btn_exchange_window}
+    Click Element    ${continue_btn_exchange_window}
+    [Return]    ${total_quantity}
