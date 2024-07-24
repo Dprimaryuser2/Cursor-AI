@@ -43,8 +43,6 @@ Verify Exchange Text Is Clickable
     Element Should Be Enabled    ${switch_cancel_button}
 
 Click On Confirm Button | Exchange
-    [Arguments]    ${mode}
-    ${my_dict}    Create Dictionary   &{mode}
     Wait Until Page Contains Element    ${switch_confirm_button}    timeout=20s
     Element Should Be Enabled    ${switch_confirm_button}
     Click Element    ${switch_confirm_button}
@@ -852,11 +850,12 @@ Unselect Individual Item
 Verify Individual Item Is Unselected
     Checkbox Should Not Be Selected    ${selected_item}
     Page Should Contain Element    ${no_product_selected_message}
+#
+#Verify Total QTY Auto Populated
 
-Verify Total QTY Auto Populated
-    
-Verify Total QTY Is 0
-    
+
+#Verify Total QTY Is 0
+#
 Select The Invoice By Invoice Name | Exchange
    [Arguments]    ${invoice_id}
    Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=10s
@@ -957,6 +956,7 @@ Verify The Confirmation Of item To Be Exchanged
     Page Should Contain Element    ${add_product_for_exchange_btn}
     Element Should Not Be Visible    ${exchange_qty_col_title}
     Element Should Not Be Visible    ${exchange_reason_option}
+
 Assign A Salesperson To An Item | For Exchange
     [Arguments]    ${pos_data}
     ${details_dict}    Create Dictionary    &{pos_data}
@@ -1042,3 +1042,249 @@ Verify No Payment Required | Checkout Page
     Page Should Contain Element    ${no_payment_required}
     Page Should Contain Element     ${no_payment_required_confirm_button}
     Page Should Contain Button    ${no_payment_required_cancel_button}
+
+Switch From Exchange Module
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    Log    ${my_dict}
+    Wait Until Page Contains Element    ${switch_billing_dropdown}
+    Click Element    ${switch_billing_dropdown}
+    Click Element    //a[contains(text(),"${my_dict.Switch_mode}")]
+
+Scan Barcode To Add Item And Quantity To Cart | Multiple MRP | Exchange
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    0.5s
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    0.5s
+        Click Element    ${search_add_button}
+        Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+        Click Element    ${add_to_cart_mrp}
+#        Wait Until Page Contains Element    @{quantity_input}   timeout=10s
+        Input Text    ${quantity}   1
+        Click Element   ${update_cart_quantity}
+        sleep   1
+    END
+    
+ 
+Verify Invoice After Complete Exchange
+    Wait Until Page Contains Element    ${invoice_not_found}    timeout=10s
+    Page Should Contain Element    ${invoice_not_found}
+ 
+Verify Void Invoice For Exchange
+    Wait Until Page Contains Element    ${invoice_not_found}
+    Page Should Contain Element    ${invoice_not_found}
+    Page Should Not Contain Element    ${first_item_product_name}
+
+
+Change Billing Mode | From Return To Exchange
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    Wait Until Page Contains Element    ${switch_billing_dropdown}
+    Click Element    ${switch_billing_dropdown}
+    Click Element    //a[contains(text(),"Exchange")]
+    Wait Until Page Contains Element    ${switch_modal_text}
+    Wait Until Page Contains Element    ${switch_confirm_button}
+    Page Should Contain Element    ${switch_modal_text}
+    Element Should Be Enabled    ${switch_confirm_button}
+    Element Should Be Enabled    ${switch_cancel_button}
+
+Verify Confirmation Popup
+    Wait Until Page Contains Element    ${switch_modal_text}
+    Wait Until Page Contains Element    ${switch_confirm_button}
+    Page Should Contain Element    ${switch_modal_text}
+    Element Should Be Enabled    ${switch_confirm_button}
+    Element Should Be Enabled    ${switch_cancel_button}
+
+Verify Confirm Button On Switching
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    Wait Until Page Contains Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Switch_mode}"]
+    Page Should Contain Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Switch_mode}"]
+
+Verify The Cancel Button On Switch From Exchange
+    Page Should Contain Element    ${add_exchange_item_link}
+    Page Should Not Contain Element    ${billing_option_switch_default}
+    Click Element    ${switch_confirm_button}
+    Wait Until Page Contains Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="Exchange"]
+    
+
+Verify Confirm Button For Switch To Exchange
+    Click Element    ${confirm_exchange}
+
+
+Verify User Is Able To Edit Or Untag Customer After Adding Exchange Product
+   Wait Until Element Is Visible     ${customer_info_icon}
+   Click Element    ${customer_info_icon}
+   Wait Until Element Is Visible    ${customer_info_window_title}    timeout=10s
+   Element Should Be Disabled    ${customer_untag_button_exchange}
+   Wait Until Element Is Visible    ${customer_edit_info_button}    timeout=10s
+   Click Element    ${customer_edit_info_button}
+   Wait Until Element Is Visible    ${customer_phone_field}    timeout=10s
+   ${first_name}=    Generate Random First Name
+   Clear Element Text    ${customer_first_name_field}
+   Input Text     ${customer_first_name_field}    ${first_name}
+   Element Should Be Disabled    ${customer_info_update_button}
+
+Close The Product Window
+   Sleep  3s
+   Click Element    ${close_product_window_button}
+   Element Should Be Enabled    ${checkout_button}
+
+Get The Net Price Of Product
+   [Arguments]    ${products}
+   ${my_dict}    Create Dictionary   &{products}
+   ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+   ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+   FOR    ${item}    IN    @{items_dict.items()}
+       ${key}=    Set Variable    ${item}[0]
+       ${values}=    Set Variable    ${item}[1]
+       ${value}=    Convert To Integer   ${values}
+   END
+   Sleep  1s
+   ${before}=  Get Text    ${net_price}
+   ${before}=  Remove Characters    ${before}
+   ${net_price}=  Evaluate    ${before}/${value}
+   RETURN   ${net_price}
+
+Get The Net Price Of Product | Exchange
+  Sleep  2s
+  ${unit}=  Get Text    ${unit_price_of_product_ex}
+  ${unit}=  Remove Characters    ${unit}
+  RETURN  ${unit}
+
+Verify The Net Price
+  [Arguments]  ${net_price}  ${unit}
+  Should Not Be Equal    ${net_price}    ${unit}
+
+Add Product With Less Price Than Exchange Product
+   [Arguments]    ${products}
+   ${my_dict}    Create Dictionary   &{products}
+    ${items_list}=    Convert Items To List    ${my_dict.add_product}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.add_product}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Input Text    ${product_search_bar}    ${key}
+        Press Keys    ${product_search_bar}    ENTER
+    END
+    Sleep  5s
+
+Verify Sum Of Product Should Be Greater Than Exchange Product Alert Is Displayed
+   Sleep  10s
+   Page Should Contain Element   ${alert_sum_esp}
+   Page Should Not Contain Button    ${checkout_button}
+
+Verify Checkout Is Enable If Same Quantity And Net Price Is => Then Exchanged Product Net Price
+  Element Should Be Enabled    ${checkout_button}
+
+Assign Saleseperson | Before Exchange
+  [Arguments]    ${pos_data}
+  ${details_dict}    Create Dictionary    &{pos_data}
+  Wait Until Page Contains Element    ${salesperson_button}
+  Click Element    ${salesperson_button}
+  Wait Until Page Contains Element    ${salesperson_search_field}  timeout=10s
+  Input Text    ${salesperson_search_field}     ${details_dict.salesperson_name}
+  Wait Until Page Contains Element    ${name_in_assign_salesperson_row}
+  Click Element    ${name_in_assign_salesperson_row}
+  Wait Until Page Contains Element    ${assign_to_all_button}   timeout=10s
+  Click Element    ${assign_to_all_button}
+  Click Element    ${close_assign_salesperson_window}
+
+Add Multiple MRP Product | Exchange
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${items_list}=    Convert Items To List    ${my_dict.add_product}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.add_product}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    0.5s
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    0.5s
+        Click Element    ${search_add_button}
+        Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+        Click Element    ${mrp_product_2_row}
+        Click Element    ${add_to_cart_mrp}
+        Input Text    ${quantity}   ${value}
+        Click Element   ${update_cart_quantity}
+        sleep   1
+    END
+
+Add Multiple MRP Product
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    0.5s
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    0.5s
+        Click Element    ${search_add_button}
+        Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+        Click Element    ${add_to_cart_mrp}
+        Input Text    ${quantity}   ${value}
+        Click Element   ${update_cart_quantity}
+        sleep   1
+    END
+
+Select QTY For MRP Exchange
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Sleep    1s
+    Click Element    ${search_reason_dropdown}
+    Wait Until Page Contains Element    ${exchange_reason_option}   timeout=10s
+    Click Element    ${exchange_reason_option}
+    Click Element    ${first_product_row_checkbox}
+    ${total_quantity}=  Get Text    ${first_row_qty_exchange}
+    ${total_quantity}  Convert To String     ${total_quantity}
+    ${product_selected_title}=  Get Text    ${product_selected_for_exchange_text}
+    Element Should Be Enabled    ${continue_btn_exchange_window}
+    Click Element    ${continue_btn_exchange_window}
+    [Return]    ${total_quantity}
+
+
+Verify Salesperson Should Not Allow To Edit Or Remove From Added Alternative Product
+   Wait Until Page Contains Element    ${product_row_exchange}
+   ${salesperson_ex}=  Get Text    ${assigned_salesperson}
+   ${salesperson_alternate}=  Get Text    ${assigned_Salesperson_alternate}
+   Should Be Equal    ${salesperson_ex}    ${salesperson_alternate}
+   Click Element     ${product_row_exchange}
+   Wait Until Page Contains Element    ${assign_salesperson_field_disable}   timeout=2s
+   Element Should Be Disabled   ${assign_salesperson_field_disable}
+   Close The Product Window
