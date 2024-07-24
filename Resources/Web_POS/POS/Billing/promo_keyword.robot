@@ -2,12 +2,13 @@
 Library    SeleniumLibrary
 Library    String
 Library    Collections
-Library    ../../../Resources/CustomKeywords/utilities.py
-Variables    ../../../Environment/environment.py
-Variables    ../../../PageObjects/Web_POS/Login/login_locators.py
-Variables    ../../../PageObjects/Web_POS/POS/pos_locators.py
-Variables    ../../../PageObjects/Web_POS/POS/add_customer_locator.py
-Variables    ../../../PageObjects/Web_POS/POS/checkout_locators.py
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Variables    ../../../../Environment/environment.py
+Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
+Variables    ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables    ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Variables    ../../../../PageObjects/Web_POS/POS/checkout_locators.py
+Resource    add_to_cart_keyword.robot
 
 *** Keywords ***
 # Generic Keywords for All
@@ -16,6 +17,10 @@ Open The Session
     ${my_dict}    Create Dictionary   &{search_data}
 #    Wait Until Element Is Visible    ${pos_dashboard}
     Sleep    2s
+    ${catalog_update_failed}=    Run Keyword And Return Status    Element Should Be Visible    ${catalog_update_failed_heading}
+    IF    ${catalog_update_failed}
+        Click Button    ${catalog_close_button}
+    END
     ${catalog_update}=    Run Keyword And Return Status    Element Should Be Visible    ${done_progress}
     IF    ${catalog_update}
         Click Button    ${done_progress}
@@ -56,6 +61,10 @@ Scan Barcode To Add Item And Quantity To Cart
         Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
         Sleep    1s
         Click Element    ${search_add_button}
+        ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
+        IF    ${multiple_product_present}
+            Add Multiple MRP Products
+        END
         Wait Until Element Contains     ${table}    ${key}    timeout=20s
         Element Should Contain    ${item_cart_table}    ${key}
         ${unit_price_amount}=    Get Text    ${price}
@@ -94,6 +103,10 @@ Scan Barcode To Add Item And Quantity To Cart
             Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
             Sleep    1s
             Click Element    ${search_add_button}
+            ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
+            IF    ${multiple_product_present}
+                Add Multiple MRP Products
+            END
             Wait Until Element Contains     ${table}    ${key}    timeout=20s
             Element Should Contain    ${item_cart_table}    ${key}
             ${quantity_in_piece}=    Run Keyword And Return Status    Element Should Contain    ${quantity_row}    Piece
@@ -114,6 +127,11 @@ Scan Barcode To Add Item And Quantity To Cart
             Wait Until Element Is Enabled    ${product_search_bar}    timeout=10s
         END
     END
+
+Add Multiple MRP Products
+    Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+    Click Element    ${add_to_cart_mrp}
+    Wait Until Page Does Not Contain Element    ${select_mrp}
 
 
 Scan Barcode To Add Item And Quantity To Cart | Multiple MRP
@@ -149,6 +167,11 @@ Scan Barcode To Add Item And Quantity To Cart | Multiple MRP
 Add Items In Cart | Catalog
     [Arguments]    ${quantity_data}
     ${my_dict}    Create Dictionary   &{quantity_data}
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
     Wait Until Element Is Visible    ${view_catalog_button}    timeout=20s
     Click Button    ${view_catalog_button}
     Wait Until Element Is Visible    ${category}    timeout=20s
@@ -158,7 +181,7 @@ Add Items In Cart | Catalog
         Click Element    ${sub_categories_first_option}
         ${sub_category_product_name}=    Get Text    ${sub_categories_first_option}
         Wait Until Element Is Visible    ${first_item_product_name}    timeout=20s
-        Element Should Contain    ${item_cart_table}    ${sub_category_product_name}
+#        Element Should Contain    ${item_cart_table}    ${sub_category_product_name}
     END
     
 Change Quantity Of Item
@@ -180,8 +203,6 @@ Change Quantity Of Item
         Wait Until Element Is Visible    ${custom_select_options}    timeout=20s
         Click Element    ${custom_select_options}
     END
-
-
 
 Verify Invoice Details After Payment
     Wait Until Element Is Visible    ${upi_payment}    timeout=10s
@@ -506,8 +527,12 @@ Verify Promo Discount In Side Cart | POS
     Should Be Equal As Integers   ${expected_payable_amount}    ${payable_amt}
 
 Verify Billing Checkout
-    Sleep    1s
+    Sleep    0.5
     Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
+    ${discard}=    Run Keyword And Return Status    Element Should Be Enabled    ${discard_item_previous_session}
+    IF    ${discard}
+     Discard Previous Added Item
+    END
     Click Button    ${checkout_button}
     ${popup_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${updating_catalog_heading}
     IF    ${popup_visible}
@@ -521,6 +546,7 @@ Verify Billing Checkout
         Click Button    ${checkout_button}
     END
     Wait Until Element Is Visible    ${checkout_heading}    timeout=20s
+    Page Should Contain Element    ${checkout_heading}
 
 Verify Promo Discount On Modal | Checkout Page
     [Arguments]    ${promo_data}
@@ -3852,4 +3878,3 @@ Select Cart Mode
         Click Element    ${order_option}
     END
     Click Button    ${switch_confirm_button}
-

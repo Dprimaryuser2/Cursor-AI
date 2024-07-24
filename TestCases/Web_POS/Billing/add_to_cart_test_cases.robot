@@ -14,7 +14,6 @@ Test Teardown   Close All Browsers
 ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}add_to_cart_test_data.xlsx
 
 *** Test Cases ***
-
 Zwing_O_1 Add Normal sku with Fixed UOM to cart
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_01
     Login With Valid Username And Password | POS   ${pos_data}

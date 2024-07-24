@@ -18,7 +18,7 @@ day_field = '(//div[@class="vdp-datepicker__calendar"])[1]/div/span[text()="day"
 sales_invoice = '//span[text()="Sales invoice"]//ancestor::div[@class="custom-control custom-control-inline custom-radio"]/input'
 address_line1 = '//input[@id="custAddress-1"]'
 address_line2 = '//input[@id="custAddress2"]'
-landamrk = '//input[@id="input-landmark"]'
+landmark = '//input[@id="input-landmark"]'
 pincode = '//input[@id="custPin"]'
 start_billing_button = '//button[@id="start-billing"]'
 state_select = '//select[@id="select-state"]'
@@ -76,9 +76,28 @@ account_active_store_credit="(//div[@class='cust-summary-dark col-md-6 col-lg-6'
 customer_info_update_button = '//button[@id="update-details"]'
 customer_tagged_popup = '//div[@class="alert alert-dismissible alert-success" and text()="Customer tagged successfully."]'
 customer_untagged = '//div[@class="alert alert-dismissible alert-success fade show" and text()="Customer untagged."]'
-
+available_on_account_limit = '(//p[@class="float-right mb-1"])[1]'
+close_customer_window = '//button[@class="close"]'
 # tagged customer info at cart page
 tagged_customer_phone_no = '(//div[@class="c-number"]//p)[1]'
 tagged_customer_name = '(//div[@class="c-number"]//following-sibling::div//p)[1]'
 customer_tagging_mandatory_alert = '//div[@role="alert"]//h6[text()="Customer tagging is mandatory"]'
 customer_info_close_element = '//button[@class="close"]'
+
+
+store_credit_issue = '(//p[@class="float-right mb-1"])[13]'
+customer_info_loyalty_points = '(//p[@class="float-right mb-1"])[12]'
+
+
+group_assigned_name = '//span[@class="badge font-normal mr-2 px-2 py-2 badge-secondary"]'
+discard_item_previous_session = '//button[@id="discard-items"]//span'
+customer_group_checkbox_row = '//label[@class="ml-2"]'
+invalid_number_message = '//div[@class="invalid-feedback"]'
+disabled_number_continue_button = '//button[@class="btn mt-3 btn-primary disabled"]'
+disabled_phone_no_field = '//input[@name="Cust-Phone" and @disabled="disabled"]'
+gstin_number_in_row = '//div[@class="col-md-4"]//div[@class="row"]//div[@class="col"]'
+cg_edit_gstin_icon = '//div[@class="d-flex justify-content-center align-items-center input-group-append"]'
+invalid_gst_warning_label = '//p[contains(text(),"Invalid GST, must be in the format of ")]'
+assign_customer_group_heading = '//h5[@id="customer-group___BV_modal_title_"]'
+cg_gstin_field = '//input[@id="custGST"]'
+
