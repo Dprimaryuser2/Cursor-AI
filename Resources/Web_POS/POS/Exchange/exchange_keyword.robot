@@ -8,10 +8,16 @@ Resource    ../../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Resource    ../../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Library    ../../../../Resources/CustomKeywords/utilities.py
+Library    ../../../../Resources/CustomKeywords/utilities.py
+Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
+Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
+Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Library    utilities
 Resource    ../../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Exchange/exchange_keyword.robot
+Variables  ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
 
 *** Keywords ***
 Cancel No Payment Required | Checkout Page
@@ -125,7 +131,7 @@ Verify The Search Invoice Response | Exchange
 Verify Invoice Search By Invalid Customer Data
    Wait Until Page Contains Element    ${invoice_not_found}
    Page Should Contain Element    ${invoice_not_found}
-   
+
 Verify All Columns Are Present In Item Exchange Window
    [Arguments]    ${mode}
    ${my_dict}    Create Dictionary   &{mode}
@@ -148,7 +154,7 @@ Select Items For Exchange
     [Arguments]    ${qty}
     ${my_dict}    Create Dictionary   &{qty}
     Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
-    Sleep    1s
+    Sleep    2s
     Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
     Click Element    ${exchange_qty}
     Click Element    //select[@class="fs-12 custom-select"]//option[contains(text(),"${my_dict.replace_qty}")]
@@ -161,6 +167,28 @@ Select Items For Exchange
     Click Element    ${continue_btn_exchange_window}
     ${exchange_item_info}=    Create Dictionary    name    ${product_name}    price    ${product_cost}
     [Return]    ${exchange_item_info}
+
+Select All Items With Same Qty For Exchange
+    [Arguments]    ${qty}
+    ${my_dict}    Create Dictionary   &{qty}
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Sleep    1s
+    Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
+    ${count}    Get Webelements    ${exchange_qty}
+    ${len}    Get Length    ${count}
+    FOR    ${qty_count}     IN RANGE   1    ${len}+1
+        Click Element    (${exchange_qty})[${qty_count}]
+        Click Element    (//select[@class="fs-12 custom-select"]//option[contains(text(),"${my_dict.replace_qty}")])[${qty_count}]
+        Click Element    ${search_reason_dropdown}
+        Wait Until Page Contains Element    ${exchange_reason_option}   timeout=10s
+        Click Element    ${exchange_reason_option}
+        ${total_quantity}=  Get Text    ${exchange_qty}
+        ${product_name}=  Get Text    ${item_name_exchange}
+        ${product_cost}=  Get Text    ${item_price_exchange}
+    END
+    Wait Until Element Is Enabled        ${continue_btn_exchange_window}
+    Click Element    ${continue_btn_exchange_window}
+
 
 Add Product For Exchange
     Wait Until Page Contains Element    ${add_product_for_exchange_btn}     timeout=20s
@@ -185,6 +213,35 @@ Scan Barcode To Add Item And Quantity To Cart By Name | Exchange
         Click Element    ${search_add_button}
         ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
     END
+    
+Add Alternate Product With Same Quantity As Of Exchange Product
+    [Arguments]    ${pos_data}
+    ${my_dict}    Create Dictionary    &{pos_data}
+    Wait Until Page Contains Element    ${initial_product_qty_in_exc_cart}
+    ${qty}    Get Text    ${initial_product_qty_in_exc_cart}
+    ${clean_aty}    Remove Characters    ${qty}
+    FOR    ${index}    IN RANGE    ${clean_aty}
+        Add Product For Exchange
+        Add Alternate Items In Exchange Cart   ${my_dict}
+    END
+
+Add 1 Alternate Product For Each Exchanged Product
+    [Arguments]    ${pos_data}
+    ${my_dict}    Create Dictionary    &{pos_data}
+    Wait Until Page Contains Element    ${initial_product_qty_in_exc_cart}
+    ${qty}    Get Text    ${initial_product_qty_in_exc_cart}
+    ${clean_aty}    Remove Characters    ${qty}
+    FOR    ${index}    IN RANGE    ${clean_aty}
+        ${no_of_buttons}    Get Webelements    ${add_product_for_exchange_btn}
+        ${count}    Get Length    ${no_of_buttons}
+        FOR    ${button_no}    IN RANGE       1    ${count}
+            Wait Until Page Contains Element    (${add_product_for_exchange_btn})[${count}]      timeout=10s
+            Click Element    (${add_product_for_exchange_btn})[${count}]
+            Add Alternate Items In Exchange Cart   ${my_dict}
+        END
+    END
+
+
 
 Scan Barcode To Add Item And Quantity To Cart | Exchange
     [Arguments]    ${products}
@@ -204,7 +261,6 @@ Scan Barcode To Add Item And Quantity To Cart | Exchange
         Sleep    1s
         Click Element    ${search_add_button}
         ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
-
         IF    ${multiple_product_present}
             Add Multiple MRP Products
         END
@@ -269,6 +325,82 @@ Scan Barcode To Add Item And Quantity To Cart | Exchange
         END
     END
 
+Add Alternate Items In Exchange Cart
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    1s
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    1s
+        Click Element    ${search_add_button}
+        ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
+        IF    ${multiple_product_present}
+            Add Multiple MRP Products
+        END
+        Wait Until Element Contains     ${table}    ${key}    timeout=20s
+        Element Should Contain    ${item_cart_table}    ${key}
+        ${unit_price_amount}=    Get Text    ${price}
+        ${unit_price_amount}=    Remove Characters    ${unit_price_amount}
+        ${unit_price_amount}=    Convert To Number    ${unit_price_amount}
+        Set Test Variable    ${unit_price_amount}
+        ${quantity_in_piece}=    Run Keyword And Return Status    Element Should Contain    ${quantity_row}    Piece
+        IF    ${quantity_in_piece}
+            Wait Until Element Is Enabled    ${quantity_in_piece_button}    timeout=20s
+            Click Button    ${quantity_in_piece_button}
+            Wait Until Element Is Visible    ${piece_modal}    timeout=10s
+            Clear Element Text    ${quantity_input}
+            Input Text    ${quantity_input}    ${value}
+            Wait Until Element Is Visible    ${update_cart_quantity}    timeout=20s
+            Click Button    ${update_cart_quantity}
+        END
+        Wait Until Element Is Enabled    ${product_search_bar}    timeout=10s
+    END
+    ${items_list}=    Convert Items To List    ${my_dict.get_items}
+    IF    ${items_list} != ['NULL']
+        ${items_dict} =    Convert Item List To Dictionary    ${my_dict.get_items}
+        Log    ${items_dict}
+        FOR    ${item}    IN    @{items_dict.items()}
+            ${key}=    Set Variable    ${item}[0]
+            ${values}=    Set Variable    ${item}[1]
+            ${value}=    Convert To String    ${values}
+            Input Text    ${product_search_bar}    ${key}
+            Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+            Sleep    1s
+            Click Element    ${search_add_button}
+            ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
+            IF    ${multiple_product_present}
+                Add Multiple MRP Products
+            END
+            Wait Until Element Contains     ${table}    ${key}    timeout=20s
+            Element Should Contain    ${item_cart_table}    ${key}
+            ${quantity_in_piece}=    Run Keyword And Return Status    Element Should Contain    ${quantity_row}    Piece
+            IF    ${quantity_in_piece}
+                Wait Until Element Is Enabled    ${quantity_in_piece_button}    timeout=20s
+                Click Button    ${quantity_in_piece_button}
+                Wait Until Element Is Visible    ${piece_modal}    timeout=10s
+                Clear Element Text    ${quantity_input}
+                Input Text    ${quantity_input}    ${value}
+                Wait Until Element Is Visible    ${update_cart_quantity}    timeout=20s
+                Click Button    ${update_cart_quantity}
+            ELSE
+                Click Element    ${custom_select_quantity_button}
+                ${custom_select_option}=    Replace String    ${custom_select_options}    option_value    ${value}
+                Wait Until Element Is Visible    ${custom_select_option}    timeout=20s
+                Click Element    ${custom_select_option}
+            END
+            Wait Until Element Is Enabled    ${product_search_bar}    timeout=10s
+        END
+    END
+
 Click on New Bill Button
     Wait Until Page Contains Element    ${new_bill_button}
     Click Element    ${new_bill_button}
@@ -286,7 +418,7 @@ Verify Item Added In Cart | Exchange
     Wait Until Element Is Enabled    ${checkout_button}     timeout=20s
     Element Should Be Enabled    ${checkout_button}
     Element Should Be Enabled    ${clear_all_items}
-    
+
 Verify Exchange Page After Reload
     Wait Until Page Contains Element    ${in_store}     timeout=10s
     Page Should Contain Element    ${in_store}
@@ -320,7 +452,7 @@ Verify Exchange Item Info In Cart Is Correct Or Not
     Wait Until Page Contains Element    ${add_product_for_exchange_btn}     timeout=10s
     Should Match Regexp    ${my_dict.name}    (?i).*${my_dict['name']}.*
     Should Match Regexp    ${my_dict.price}    (?i).*${my_dict['price']}.*
-    
+
 Verify Exchange Quantity Dopdown In Popup Is Working
    Wait Until Page Contains Element    ${select_item_for_exchange_title}  timeout=15s
    Click Element    ${exchange_qty}
@@ -395,7 +527,10 @@ Enter Customer Name For Previously Used Number
     Input Text     ${customer_first_name_field}     ${first_name}
     Click Button    ${start_billing_button}
     Sleep    2
-    Discard Items If Present From Previous Session
+    ${store_item_from_previous_session}    Run Keyword And Return Status    Page Should Contain Element    ${discard_item_previous_session}
+    IF    ${store_item_from_previous_session}
+       Discard Items If Present From Previous Session
+    END
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
 #    ${customer_info}    Create Dictionary    first_name=${first_name}
     RETURN    ${first_name}
@@ -429,14 +564,167 @@ Update Customer Name | Exchange
 #    ${customer_info}    Create Dictionary    first_name=${my_dict.cust_name_tag}
     RETURN    ${first_name}
 
+Verify Manual Discount Not Applicable To Exc product After Added
+    Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+    Click Element    ${initial_product_in_exc_cart}
+    Click Element    ${initial_product_in_exc_cart}
+    Page Should Not Contain Element    ${manual_discount_arrow}
+
+Verify Manual Discount Not Applicable To Alternate product After Added
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${manual_discount_arrow}
+    Click Element    ${manual_discount_arrow}
+    Click Element    ${manual_discount_arrow}
+    Page Should Not Contain Element    ${manual_discount_heading}
+
+
+Verify Exc Product With Quantity 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+    ${alt_quantity}    Get Text    ${disabled_alternate_product_qty_in_exc_cart}
+    ${exc_quantity}    Get Text    ${initial_product_qty_in_exc_cart}
+    ${clean_alt_qty}    Remove Characters    ${alt_quantity}
+    ${clean_exc_qty}    Remove Characters    ${exc_quantity}
+    Should Be Equal    ${clean_alt_qty}    1
+    Should Be Equal    ${clean_alt_qty}    ${clean_exc_qty}
+    ${alt_product_price}    Get Text    ${alternate_product_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
+    ${clean_alt_price}    Remove Characters    ${alt_product_price}
+    ${clean_initial_price}    Remove Characters    ${initial_product_price}
+    ${result}=     Evaluate    ${clean_alt_price}>${clean_initial_price}
+    Log    ${result}
+    Should Be True    ${result}
+    ${alt_md}    Get Text    ${alternate_product_discount_price}
+    ${exc_md}    Get Text    ${initial_product_discount_price}
+    ${clean_alt_price}    Remove Characters   ${alt_md}
+    ${clean_exc_price}    Remove Characters   ${exc_md}
+    Should Be Equal    ${clean_alt_price}    ${clean_exc_price}
+    
+Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity And More Price Applies Same Manual Discount
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+    ${alt_quantity}    Get Text    ${disabled_alternate_product_qty_in_exc_cart}
+    ${exc_quantity}    Get Text    ${initial_product_qty_in_exc_cart}
+    ${clean_alt_qty}    Remove Characters    ${alt_quantity}
+    ${clean_exc_qty}    Remove Characters    ${exc_quantity}
+    Should Not Be Equal    ${clean_alt_qty}    1
+    Should Be Equal    ${clean_alt_qty}    ${clean_exc_qty}
+    ${alt_product_price}    Get Text    ${alternate_product_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
+    ${clean_alt_price}    Remove Characters    ${alt_product_price}
+    ${clean_initial_price}    Remove Characters    ${initial_product_price}
+#    ${num_alt}    Convert To Number    ${clean_alt_price}
+#    ${num_initial}    Convert To Number    ${clean_initial_price}
+#    ${int_alt}    Convert To Integer    ${num_alt}
+#    ${int_initial}    Convert To Integer    ${num_initial}
+    ${result}=     Evaluate    ${clean_alt_price}>${clean_initial_price}
+    Log    ${result}
+    Should Be True    ${result}
+    ${alt_md}    Get Text    ${alternate_product_discount_price}
+    ${exc_md}    Get Text    ${initial_product_discount_price}
+    ${clean_alt_price}    Remove Characters   ${alt_md}
+    ${clean_exc_price}    Remove Characters   ${exc_md}
+    Should Be Equal    ${clean_alt_price}    ${clean_exc_price}
+
+Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity And Less Price Shows Validation
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+    ${alt_quantity}    Get Text    ${disabled_alternate_product_qty_in_exc_cart}
+    ${exc_quantity}    Get Text    ${initial_product_qty_in_exc_cart}
+    ${clean_alt_qty}    Remove Characters    ${alt_quantity}
+    ${clean_exc_qty}    Remove Characters    ${exc_quantity}
+    Should Not Be Equal    ${clean_alt_qty}    1
+    Wait Until Page Contains Element    ${esp_alert}    timeout=10
+    Page Should Contain Element    ${esp_alert}
+
+Verify Alt Product Has Less Effective Price But More Net Price
+    ${alt_eff_price}    Get Text    ${alternate_product_price}
+    ${alt_clean_eff}    Remove Characters    ${alt_eff_price}
+    ${exc_eff_price}    Get Text    ${initial_product_price_in_exc_cart}
+    ${exc_clean_eff}    Remove Characters    ${exc_eff_price}
+    ${eff_result}    Run Keyword And Return Status    ${alt_clean_eff}    <     ${exc_clean_eff}
+    Should Be True    ${eff_result}
+    ${alt_net_price}    Get Text    ${alternate_product_net_price}
+    ${alt_clean_net}    Remove Characters    ${alt_net_price}
+    ${exc_net_price}    Get Text    ${initial_product_net_price_in_exc_cart}
+    ${exc_clean_net}    Remove Characters    ${exc_net_price}
+    ${net_result}    Run Keyword And Return Status    ${alt_clean_net}    >     ${exc_clean_net}
+    Should Be True    ${net_result}
+
+
+Verify User Cannot Change Or Remove Manual Discount When Disabled
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${disabled_item_level_discount_field}
+    Click Element    ${cancel_icon_item_level_discount}
+    Click Element    ${cancel_icon_item_level_discount}
+    Page Should Contain Element    ${cancel_icon_item_level_discount}
+
+
+Verify Quantity Cannot Be Increased For The Exchange Product
+    Wait Until Page Contains Element    ${disabled_alternate_product_qty_in_exc_cart}
+    Page Should Contain Element    ${disabled_alternate_product_qty_in_exc_cart}
+
+Verify User Cannot Apply Item/bill Level Promotions On Alternate Product
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${active_promotion}
+    Click Element    ${active_promotion}
+    Wait Until Page Does Not Contain Element    ${active_promo_dropdown_row}
+    Page Should Not Contain Element    ${active_promo_dropdown_row}
+
+Verify Price Override Not Possible For Alternate Product
+    [Arguments]    ${pos_data}
+    ${my_dict}    Create Dictionary    &{pos_data}
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}
+    Click Element    ${alternate_product_in_exc_cart}
+    Wait Until Page Contains Element    ${price_override_link}
+    Click Element    ${price_override_link}
+    Wait Until Page Contains Element    ${price_override_custom_price_field}
+    Input Text    ${price_override_custom_price_field}    ${my_dict.price_override}
+    Click Element    ${apply_override_button}
+    Click Element    ${apply_override_button}
+    Page Should Contain Element    ${disabled_apply_override_button}
+
+
+Verify Alternate Product With Greater Price was Added To Cart
+    Wait Until Page Contains Element    ${product_name_in_cart_row}
+    Wait Until Page Contains Element    ${alternate_product_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
+    ${clean_alt}    Remove Characters    ${alt_product_price}
+    ${clean_init}    Remove Characters    ${initial_product_price}
+    ${result}     Is Greater    ${clean_init}    ${clean_alt}
+    Should Be True    ${result}
+
+Verify Alternate Product With Lesser Price was Added To Cart
+    Wait Until Page Contains Element    ${product_name_in_cart_row}
+    Wait Until Page Contains Element    ${alternate_product_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
+    ${clean_alt}    Remove Characters   ${alt_product_price}
+    ${clean_init}   Remove Characters    ${initial_product_price}
+    ${result}     Is Greater    ${clean_alt}    ${clean_init}
+    Should Be True    ${result}
+
+Verify Alternate Product With Equal Price was Added To Cart
+    Wait Until Page Contains Element    ${product_name_in_cart_row}
+    Wait Until Page Contains Element    ${alternate_product_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
+    Remove Characters   ${alt_product_price}
+    Remove Characters    ${initial_product_price}
+    Should Be Equal As Strings    ${alt_product_price}    ${initial_product_price}
+
 Search Invoice By Name| Exchange
    [Arguments]    ${first_name}
    Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
    Input Text    ${search_invoice_field}     ${first_name}
    Press Keys   ${search_invoice_field}   ENTER
-    ${customer_info}    Create Dictionary    first_name=${first_name}    last_name=${last_name}
-    RETURN    ${customer_info}
-    
+   RETURN    ${first_name}
+
 Switch To Exchange Mode
     [Arguments]    ${mode}
     ${my_dict}    Create Dictionary   &{mode}
@@ -492,7 +780,7 @@ Add Exchange Items From Invoice
     ${my_dict}    Create Dictionary   &{mode}
     Click Element    ${add_exchange_item_link}
     Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=10s
-    Click Element    ${select_search_invoice_option_btn} 
+    Click Element    ${select_search_invoice_option_btn}
     IF   '${my_dict.select_invoice_option}' == 'Customer Name'
         Click Element    ${customer_name_search_option}
     ELSE IF    '${my_dict.select_invoice_option}' == 'Customer Phone'
@@ -569,8 +857,6 @@ Verify Individual Item Is Unselected
 #Verify Total QTY Auto Populated
 
 
-#Verify Total QTY Is 0
-#
 Select The Invoice By Invoice Name | Exchange
    [Arguments]    ${invoice_id}
    Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=10s
@@ -719,7 +1005,7 @@ Verify Refresh Button Functionality In Sales Person Tagging Is Working Or Not
     Wait Until Page Contains Element    ${salesperson_refresh}  timeout=10S
     Click Element    ${salesperson_refresh}
     Page Should Contain Element    ${onclick_remove_salesperson}
-    
+
 Verify Promo Discount Apcplied In Exchanged Item Also
     Wait Until Page Contains Element    ${discount_field}
     ${price_1}=  Get Text    ${discount_field}
@@ -737,7 +1023,7 @@ Verify Exchanged Product And Alternate Product Prices Is Correct Or Not
    ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
    ${alternate_net_price}=  Get Text    ${alternate_product_net_price}
    Should Not Be Equal    ${exchange_net_price}    ${alternate_net_price}
-   
+
 Verify Total Amount Of Exchange and Alternate Product
    ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
    ${alternate_net_price}=  Get Text    ${alternate_product_net_price}
@@ -844,3 +1130,162 @@ Verify The Cancel Button On Switch From Exchange
 
 Verify Confirm Button For Switch To Exchange
     Click Element    ${confirm_exchange}
+
+
+Verify User Is Able To Edit Or Untag Customer After Adding Exchange Product
+   Wait Until Element Is Visible     ${customer_info_icon}
+   Click Element    ${customer_info_icon}
+   Wait Until Element Is Visible    ${customer_info_window_title}    timeout=10s
+   Element Should Be Disabled    ${customer_untag_button_exchange}
+   Wait Until Element Is Visible    ${customer_edit_info_button}    timeout=10s
+   Click Element    ${customer_edit_info_button}
+   Wait Until Element Is Visible    ${customer_phone_field}    timeout=10s
+   ${first_name}=    Generate Random First Name
+   Clear Element Text    ${customer_first_name_field}
+   Input Text     ${customer_first_name_field}    ${first_name}
+   Element Should Be Disabled    ${customer_info_update_button}
+
+Close The Product Window
+   Sleep  3s
+   Click Element    ${close_product_window_button}
+   Element Should Be Enabled    ${checkout_button}
+
+Get The Net Price Of Product
+   [Arguments]    ${products}
+   ${my_dict}    Create Dictionary   &{products}
+   ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+   ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+   FOR    ${item}    IN    @{items_dict.items()}
+       ${key}=    Set Variable    ${item}[0]
+       ${values}=    Set Variable    ${item}[1]
+       ${value}=    Convert To Integer   ${values}
+   END
+   Sleep  1s
+   ${before}=  Get Text    ${net_price}
+   ${before}=  Remove Characters    ${before}
+   ${net_price}=  Evaluate    ${before}/${value}
+   RETURN   ${net_price}
+
+Get The Net Price Of Product | Exchange
+  Sleep  2s
+  ${unit}=  Get Text    ${unit_price_of_product_ex}
+  ${unit}=  Remove Characters    ${unit}
+  RETURN  ${unit}
+
+Verify The Net Price
+  [Arguments]  ${net_price}  ${unit}
+  Should Not Be Equal    ${net_price}    ${unit}
+
+Add Product With Less Price Than Exchange Product
+   [Arguments]    ${products}
+   ${my_dict}    Create Dictionary   &{products}
+    ${items_list}=    Convert Items To List    ${my_dict.add_product}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.add_product}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Input Text    ${product_search_bar}    ${key}
+        Press Keys    ${product_search_bar}    ENTER
+    END
+    Sleep  5s
+
+Verify Sum Of Product Should Be Greater Than Exchange Product Alert Is Displayed
+   Sleep  10s
+   Page Should Contain Element   ${alert_sum_esp}
+   Page Should Not Contain Button    ${checkout_button}
+
+Verify Checkout Is Enable If Same Quantity And Net Price Is => Then Exchanged Product Net Price
+  Element Should Be Enabled    ${checkout_button}
+
+Assign Saleseperson | Before Exchange
+  [Arguments]    ${pos_data}
+  ${details_dict}    Create Dictionary    &{pos_data}
+  Wait Until Page Contains Element    ${salesperson_button}
+  Click Element    ${salesperson_button}
+  Wait Until Page Contains Element    ${salesperson_search_field}  timeout=10s
+  Input Text    ${salesperson_search_field}     ${details_dict.salesperson_name}
+  Wait Until Page Contains Element    ${name_in_assign_salesperson_row}
+  Click Element    ${name_in_assign_salesperson_row}
+  Wait Until Page Contains Element    ${assign_to_all_button}   timeout=10s
+  Click Element    ${assign_to_all_button}
+  Click Element    ${close_assign_salesperson_window}
+
+Add Multiple MRP Product | Exchange
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${items_list}=    Convert Items To List    ${my_dict.add_product}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.add_product}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    0.5s
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    0.5s
+        Click Element    ${search_add_button}
+        Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+        Click Element    ${mrp_product_2_row}
+        Click Element    ${add_to_cart_mrp}
+        Input Text    ${quantity}   ${value}
+        Click Element   ${update_cart_quantity}
+        sleep   1
+    END
+
+Add Multiple MRP Product
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    0.5s
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    0.5s
+        Click Element    ${search_add_button}
+        Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+        Click Element    ${add_to_cart_mrp}
+        Input Text    ${quantity}   ${value}
+        Click Element   ${update_cart_quantity}
+        sleep   1
+    END
+
+Select QTY For MRP Exchange
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Sleep    1s
+    Click Element    ${search_reason_dropdown}
+    Wait Until Page Contains Element    ${exchange_reason_option}   timeout=10s
+    Click Element    ${exchange_reason_option}
+    Click Element    ${first_product_row_checkbox}
+    ${total_quantity}=  Get Text    ${first_row_qty_exchange}
+    ${total_quantity}  Convert To String     ${total_quantity}
+    ${product_selected_title}=  Get Text    ${product_selected_for_exchange_text}
+    Element Should Be Enabled    ${continue_btn_exchange_window}
+    Click Element    ${continue_btn_exchange_window}
+    [Return]    ${total_quantity}
+
+
+Verify Salesperson Should Not Allow To Edit Or Remove From Added Alternative Product
+   Wait Until Page Contains Element    ${product_row_exchange}
+   ${salesperson_ex}=  Get Text    ${assigned_salesperson}
+   ${salesperson_alternate}=  Get Text    ${assigned_Salesperson_alternate}
+   Should Be Equal    ${salesperson_ex}    ${salesperson_alternate}
+   Click Element     ${product_row_exchange}
+   Wait Until Page Contains Element    ${assign_salesperson_field_disable}   timeout=2s
+   Element Should Be Disabled   ${assign_salesperson_field_disable}
+   Close The Product Window
