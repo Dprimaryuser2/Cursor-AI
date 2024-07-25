@@ -170,7 +170,7 @@ Select Items For Exchange
 Select All Items With Same Qty For Exchange
     [Arguments]    ${qty}
     ${my_dict}    Create Dictionary   &{qty}
-    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=10s
     Sleep    1s
     Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
     ${count}    Get Webelements    ${exchange_qty}
@@ -224,7 +224,7 @@ Add Alternate Product With Same Quantity As Of Exchange Product
         Add Alternate Items In Exchange Cart   ${my_dict}
     END
 
-Add 1 Alternate Product For Each Exchanged Product
+Add 1 Alternate Product For First Exchanged Product
     [Arguments]    ${pos_data}
     ${my_dict}    Create Dictionary    &{pos_data}
     Wait Until Page Contains Element    ${initial_product_qty_in_exc_cart}
@@ -233,7 +233,7 @@ Add 1 Alternate Product For Each Exchanged Product
     FOR    ${index}    IN RANGE    ${clean_aty}
         ${no_of_buttons}    Get Webelements    ${add_product_for_exchange_btn}
         ${count}    Get Length    ${no_of_buttons}
-        FOR    ${button_no}    IN RANGE       1    ${count}
+        FOR    ${button_no}    IN RANGE       1    ${count}-1
             Wait Until Page Contains Element    (${add_product_for_exchange_btn})[${count}]      timeout=10s
             Click Element    (${add_product_for_exchange_btn})[${count}]
             Add Alternate Items In Exchange Cart   ${my_dict}
@@ -685,8 +685,17 @@ Verify Price Override Not Possible For Alternate Product
     Page Should Contain Element    ${disabled_apply_override_button}
 
 
-Verify Alternate Product With Greater Price was Added To Cart
-    Wait Until Page Contains Element    ${product_name_in_cart_row}
+#Verify Alternate Product With Greater Price was Added To Cart
+#    Wait Until Page Contains Element    ${product_name_in_cart_row}
+#    Wait Until Page Contains Element    ${alternate_product_net_price}
+#    ${alt_product_price}    Get Text    ${alternate_product_net_price}
+#    ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
+#    ${clean_alt}    Remove Characters    ${alt_product_price}
+#    ${clean_init}    Remove Characters    ${initial_product_price}
+#    ${result}     Is Greater    ${clean_init}    ${clean_alt}
+#    Should Be True    ${result}
+
+Verify Alternate Products With Sum Of Net Price Greater Than Exc Products Was Added To Cart
     Wait Until Page Contains Element    ${alternate_product_net_price}
     ${alt_product_price}    Get Text    ${alternate_product_net_price}
     ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
@@ -694,25 +703,33 @@ Verify Alternate Product With Greater Price was Added To Cart
     ${clean_init}    Remove Characters    ${initial_product_price}
     ${result}     Is Greater    ${clean_init}    ${clean_alt}
     Should Be True    ${result}
+    Element Should Be Disabled    ${disabled_checkout_button}
 
 Verify Alternate Product With Lesser Price was Added To Cart
+    Wait Until Page Contains Element    ${esp_alert}    timeout=10
+    Page Should Contain Element    ${esp_alert}
+    Wait Until Page Contains Element    ${alternate_product_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
+    ${clean_alt_price}    Remove Characters   ${alt_product_price}
+    ${clean_init_price}    Remove Characters    ${initial_product_price}
+    ${num_alt}    Convert To Number    ${clean_alt_price}
+    ${num_init}    Convert To Number    ${clean_init_price}
+    ${result}    Is Greater    ${num_init}    ${num_alt}
+    Should Be True    ${result}
+    
+
+Verify Alternate Product With Greater Price was Added To Cart
     Wait Until Page Contains Element    ${product_name_in_cart_row}
     Wait Until Page Contains Element    ${alternate_product_net_price}
     ${alt_product_price}    Get Text    ${alternate_product_net_price}
     ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
-    ${clean_alt}    Remove Characters   ${alt_product_price}
-    ${clean_init}   Remove Characters    ${initial_product_price}
-    ${result}     Is Greater    ${clean_alt}    ${clean_init}
+    ${clean_alt_price}    Remove Characters   ${alt_product_price}
+    ${clean_init_price}    Remove Characters    ${initial_product_price}
+    ${num_alt}    Convert To Number    ${clean_alt_price}
+    ${num_init}    Convert To Number    ${clean_init_price}
+    ${result}    Is Greater    ${num_alt}    ${num_init}
     Should Be True    ${result}
-
-Verify Alternate Product With Equal Price was Added To Cart
-    Wait Until Page Contains Element    ${product_name_in_cart_row}
-    Wait Until Page Contains Element    ${alternate_product_net_price}
-    ${alt_product_price}    Get Text    ${alternate_product_net_price}
-    ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
-    Remove Characters   ${alt_product_price}
-    Remove Characters    ${initial_product_price}
-    Should Be Equal As Strings    ${alt_product_price}    ${initial_product_price}
 
 Search Invoice By Name| Exchange
    [Arguments]    ${first_name}

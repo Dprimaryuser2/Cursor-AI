@@ -1,4 +1,5 @@
 checkout_button = "(//button[@class='btn mr-1 btn-success btn-block'])[2]"
+disabled_checkout_button = '(//div[@class="action-btns d-flex"]//button[@id="checkout-btn" and @class="btn mr-1 btn-success btn-block disabled" and text()="Checkout"])[2]'
 checkout_heading = '//div[@class="col-md-4 col-lg-6 col-4"]/h5'
 checkout_payable_amount = '//label[@id="label-amt-pay"]//following-sibling::input'
 checkout_loyalty='//button[@class="btn add-to-cart w-auto m-1 btn-light" and contains(text(),"Loyalty")]'
