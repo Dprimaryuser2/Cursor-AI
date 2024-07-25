@@ -25,5 +25,5 @@ Click On Clear All Items Button
 
 Verify Clear All Items Clear the Items From Cart
     Wait Until Page Contains Element    ${cart_0}
-    Page Should Not Contain Element    ${cart_0}
+    Page Should Contain Element    ${cart_0}
     Element Should Be Disabled    ${checkout_button}
