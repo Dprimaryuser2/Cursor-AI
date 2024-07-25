@@ -688,7 +688,7 @@ Tag Existing Customer
 Discard Items If Present From Previous Session
     ${store_item_from_previous_session}    Run Keyword And Return Status    Page Should Contain Element    ${discard_item_previous_session}
     IF    ${store_item_from_previous_session}
-        Wait Until Element Is Enabled    ${discard_item_previous_session}    timeout=10
+         Wait Until Element Is Enabled    ${discard_item_previous_session}    timeout=10
          Click Element    ${discard_item_previous_session}
          Wait Until Page Does Not Contain Element    ${discard_item_previous_session}    timeout=10
     END

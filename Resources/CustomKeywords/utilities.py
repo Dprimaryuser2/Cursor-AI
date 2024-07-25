@@ -404,3 +404,7 @@ if attachments:
         print(f"Filename: {attachment['filename']}, Content type: {attachment['content_type']}")
 else:
     print("\nNo attachments found.")
+
+@keyword
+def is_greater(first_number, second_number):
+    return first_number > second_number

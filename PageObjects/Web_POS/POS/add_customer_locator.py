@@ -101,3 +101,4 @@ invalid_gst_warning_label = '//p[contains(text(),"Invalid GST, must be in the fo
 assign_customer_group_heading = '//h5[@id="customer-group___BV_modal_title_"]'
 cg_gstin_field = '//input[@id="custGST"]'
 
+customer_untag_button_exchange = '//button[@id="untag-customer"]'
