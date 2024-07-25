@@ -17,6 +17,7 @@ Library    utilities
 Resource    ../../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
 Resource    ../../../../Resources/Web_POS/POS/Exchange/exchange_keyword.robot
+Variables  ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
 
 *** Keywords ***
 Cancel No Payment Required | Checkout Page
@@ -130,7 +131,7 @@ Verify The Search Invoice Response | Exchange
 Verify Invoice Search By Invalid Customer Data
    Wait Until Page Contains Element    ${invoice_not_found}
    Page Should Contain Element    ${invoice_not_found}
-   
+
 Verify All Columns Are Present In Item Exchange Window
    [Arguments]    ${mode}
    ${my_dict}    Create Dictionary   &{mode}
@@ -153,7 +154,7 @@ Select Items For Exchange
     [Arguments]    ${qty}
     ${my_dict}    Create Dictionary   &{qty}
     Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
-    Sleep    1s
+    Sleep    2s
     Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
     Click Element    ${exchange_qty}
     Click Element    //select[@class="fs-12 custom-select"]//option[contains(text(),"${my_dict.replace_qty}")]
@@ -417,7 +418,7 @@ Verify Item Added In Cart | Exchange
     Wait Until Element Is Enabled    ${checkout_button}     timeout=20s
     Element Should Be Enabled    ${checkout_button}
     Element Should Be Enabled    ${clear_all_items}
-    
+
 Verify Exchange Page After Reload
     Wait Until Page Contains Element    ${in_store}     timeout=10s
     Page Should Contain Element    ${in_store}
@@ -451,7 +452,7 @@ Verify Exchange Item Info In Cart Is Correct Or Not
     Wait Until Page Contains Element    ${add_product_for_exchange_btn}     timeout=10s
     Should Match Regexp    ${my_dict.name}    (?i).*${my_dict['name']}.*
     Should Match Regexp    ${my_dict.price}    (?i).*${my_dict['price']}.*
-    
+
 Verify Exchange Quantity Dopdown In Popup Is Working
    Wait Until Page Contains Element    ${select_item_for_exchange_title}  timeout=15s
    Click Element    ${exchange_qty}
@@ -526,7 +527,10 @@ Enter Customer Name For Previously Used Number
     Input Text     ${customer_first_name_field}     ${first_name}
     Click Button    ${start_billing_button}
     Sleep    2
-    Discard Items If Present From Previous Session
+    ${store_item_from_previous_session}    Run Keyword And Return Status    Page Should Contain Element    ${discard_item_previous_session}
+    IF    ${store_item_from_previous_session}
+       Discard Items If Present From Previous Session
+    END
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
 #    ${customer_info}    Create Dictionary    first_name=${first_name}
     RETURN    ${first_name}
@@ -736,9 +740,8 @@ Search Invoice By Name| Exchange
    Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
    Input Text    ${search_invoice_field}     ${first_name}
    Press Keys   ${search_invoice_field}   ENTER
-   ${customer_info}    Create Dictionary    first_name=${first_name}    last_name=${last_name}
-   RETURN    ${customer_info}
-    
+   RETURN    ${first_name}
+
 Switch To Exchange Mode
     [Arguments]    ${mode}
     ${my_dict}    Create Dictionary   &{mode}
@@ -794,7 +797,7 @@ Add Exchange Items From Invoice
     ${my_dict}    Create Dictionary   &{mode}
     Click Element    ${add_exchange_item_link}
     Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=10s
-    Click Element    ${select_search_invoice_option_btn} 
+    Click Element    ${select_search_invoice_option_btn}
     IF   '${my_dict.select_invoice_option}' == 'Customer Name'
         Click Element    ${customer_name_search_option}
     ELSE IF    '${my_dict.select_invoice_option}' == 'Customer Phone'
@@ -871,8 +874,6 @@ Verify Individual Item Is Unselected
 #Verify Total QTY Auto Populated
 
 
-#Verify Total QTY Is 0
-#
 Select The Invoice By Invoice Name | Exchange
    [Arguments]    ${invoice_id}
    Wait Until Page Contains Element    ${select_search_invoice_option_btn}   timeout=10s
@@ -1021,7 +1022,7 @@ Verify Refresh Button Functionality In Sales Person Tagging Is Working Or Not
     Wait Until Page Contains Element    ${salesperson_refresh}  timeout=10S
     Click Element    ${salesperson_refresh}
     Page Should Contain Element    ${onclick_remove_salesperson}
-    
+
 Verify Promo Discount Apcplied In Exchanged Item Also
     Wait Until Page Contains Element    ${discount_field}
     ${price_1}=  Get Text    ${discount_field}
@@ -1039,7 +1040,7 @@ Verify Exchanged Product And Alternate Product Prices Is Correct Or Not
    ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
    ${alternate_net_price}=  Get Text    ${alternate_product_net_price}
    Should Not Be Equal    ${exchange_net_price}    ${alternate_net_price}
-   
+
 Verify Total Amount Of Exchange and Alternate Product
    ${exchange_net_price}=  Get Text     ${exchange_product_net_price}
    ${alternate_net_price}=  Get Text    ${alternate_product_net_price}

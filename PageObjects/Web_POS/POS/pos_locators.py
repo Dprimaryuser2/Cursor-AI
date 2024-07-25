@@ -41,7 +41,7 @@ salesperson_exchange = '(//span[@class="pt-2 fs-12 text-grey"])[1]'
 salesperson_exchange_alternate = '(//span[@class="pt-2 fs-12 text-grey"])[2]'
 close_icon_salesperson_dropdown = '//div[@class="w-100"]//div//*[name()="svg"]'
 salesperson_untagged_message = '//div[@class="alert alert-dismissible alert-success" and text()="Salesperson untagged."]'
-
+clear_salesperson = '//button[@class="btn ml-2 mr-1 btn-secondary btn-danger"]'
 view_held_bills = '//button[@id="category-held-bills"]'
 hold_bill = '//button[@id="category-hold-bill"]'
 hold_bill_confirmation = '//button[@id="put-hold-bill"]'
@@ -148,6 +148,8 @@ open_session_link = '//div[@class="fadein col-md-6 col-lg-6" and not(@style="dis
 select_mrp="//h5[@class='modal-title' and contains(text(),'Select MRP')]"
 select_mrp_refresh="//button[@class='btn add-to-cart serve-refresh btn-light btn-sm' and contains(text(),'Refresh')]"
 add_to_cart_mrp="//button[@id='multiple-mrp-add-to-cart' and @class='btn m-0 custom-btn btn-secondary']"
+mrp_product_2_row = "//input[@id='2']"
+
 invoice_not_found='//div[@class="alert alert-dismissible alert-danger"]'
 confirm_exchange="//button[@class='btn ml-1 btn-primary btn-block']"
 # Discard after half payment
@@ -333,6 +335,8 @@ no_product_selected_message = '//p[contains(text(),"No product selected for exch
 total_qty_of_item = '(//div[contains(text(),"SKU/Barcode")]//ancestor::div[@class="ex-invoice-table my-3 mx-n2"]//div[contains(@class,"vertical-scroll exchange-scroll")]//div[@class="col-1"])[1]'
 exchange_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[1]'
 alternate_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[2]'
+unit_price_of_product_ex = '(//div[@class="row fs-13 py-3 rows px-4 fs-12 grey-100 align-items-center"]//div[@class="col-1"])[2]'
+alert_sum_esp = '//div[@class="col-11"]//h6[@class="mb-2 fs-14" and contains(text(),"Alert")]'
 
 
 clear_salesperson = '//button[@class="btn ml-2 mr-1 btn-secondary btn-danger"]'
