@@ -8,6 +8,7 @@ Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
 Variables    ../../../../PageObjects/Web_POS/POS/pos_locators.py
 Variables    ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
 Variables    ../../../../PageObjects/Web_POS/POS/checkout_locators.py
+Resource   ../../../../Resources/Web_POS/POS/Order/manual_discount_order_keyword.robot
 Resource    add_to_cart_keyword.robot
 
 *** Keywords ***
@@ -545,8 +546,13 @@ Verify Billing Checkout
         Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
         Click Button    ${checkout_button}
     END
+    ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
+    IF    ${insufficient}
+     Set Fulfillment Date And Continue
+    END
     Wait Until Element Is Visible    ${checkout_heading}    timeout=20s
     Page Should Contain Element    ${checkout_heading}
+    Sleep    1s
 
 Verify Promo Discount On Modal | Checkout Page
     [Arguments]    ${promo_data}

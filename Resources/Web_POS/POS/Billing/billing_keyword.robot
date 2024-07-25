@@ -3,6 +3,7 @@ Library    SeleniumLibrary
 Library    String
 Library    Collections
 Library    ../../../../Resources/CustomKeywords/utilities.py
+Library    OperatingSystem
 Variables    ../../../../PageObjects/Web_POS/POS/hold_bill_locators.py
 Variables   ../../../../PageObjects/Web_POS/POS/checkout_locators.py
 Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
@@ -89,11 +90,12 @@ Payment By Cash
     ${no_payment}=    Run Keyword And Return Status    Element Should Be Enabled    ${no_payment_required_confirm_button}
     IF    ${no_payment}
      No Payment Required | Checkout Page
+    ELSE
+      Click Element   ${payment_method_cash}
+      Wait Until Page Contains Element   ${enter_cash}
+      Input Text      ${enter_cash}   ${cash_value}
+      Click Element    ${continue_cash_button}
     END
-    Click Element   ${payment_method_cash}
-    Wait Until Page Contains Element   ${enter_cash}
-    Input Text      ${enter_cash}   ${cash_value}
-    Click Element    ${continue_cash_button}
 
 Partial Payment
     [Arguments]    ${cash_value}
@@ -128,7 +130,7 @@ Verify Multiple Price Product Is Added
     Page Should Contain Element    ${tax_amount} 
 
 Click On Back Button | Checkout
-    Wait Until Page Contains Element   ${back_icon_on_checkout}
+    Wait Until Page Contains Element   ${back_icon_on_checkout}     timeout=20s
     Click Element    ${back_icon_on_checkout}
 
 Add Customer Details for partial payment

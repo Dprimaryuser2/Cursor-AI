@@ -6,8 +6,8 @@ Variables   ../../../PageObjects/AdminConsole/Login/login.py
 
 *** Keywords ***
 Open Application | Admin
-#    Open Browser     ${admin_console_url}    ${browser}
-    Open Browser     ${admin_console_url}    ${browser}    options=add_argument("--headless")
+    Open Browser     ${admin_console_url}    ${browser}
+#    Open Browser     ${admin_console_url}    ${browser}    options=add_argument("--headless")
 #    Maximize Browser Window
     Set Window Size    ${window_width}    ${window_height}
 
