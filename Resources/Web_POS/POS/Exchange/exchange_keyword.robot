@@ -171,7 +171,7 @@ Select Items For Exchange
 Select All Items With Same Qty For Exchange
     [Arguments]    ${qty}
     ${my_dict}    Create Dictionary   &{qty}
-    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=20s
+    Wait Until Page Contains Element    ${select_item_for_exchange_title}   timeout=10s
     Sleep    1s
     Wait Until Page Contains Element    ${exchange_qty}     timeout=10s
     ${count}    Get Webelements    ${exchange_qty}
@@ -225,7 +225,7 @@ Add Alternate Product With Same Quantity As Of Exchange Product
         Add Alternate Items In Exchange Cart   ${my_dict}
     END
 
-Add 1 Alternate Product For Each Exchanged Product
+Add 1 Alternate Product For First Exchanged Product
     [Arguments]    ${pos_data}
     ${my_dict}    Create Dictionary    &{pos_data}
     Wait Until Page Contains Element    ${initial_product_qty_in_exc_cart}
@@ -234,7 +234,7 @@ Add 1 Alternate Product For Each Exchanged Product
     FOR    ${index}    IN RANGE    ${clean_aty}
         ${no_of_buttons}    Get Webelements    ${add_product_for_exchange_btn}
         ${count}    Get Length    ${no_of_buttons}
-        FOR    ${button_no}    IN RANGE       1    ${count}
+        FOR    ${button_no}    IN RANGE       1    ${count}-1
             Wait Until Page Contains Element    (${add_product_for_exchange_btn})[${count}]      timeout=10s
             Click Element    (${add_product_for_exchange_btn})[${count}]
             Add Alternate Items In Exchange Cart   ${my_dict}
@@ -270,59 +270,6 @@ Scan Barcode To Add Item And Quantity To Cart | Exchange
         ${unit_price_amount}=    Remove Characters    ${unit_price_amount}
         ${unit_price_amount}=    Convert To Number    ${unit_price_amount}
         Set Test Variable    ${unit_price_amount}
-        ${quantity_in_piece}=    Run Keyword And Return Status    Element Should Contain    ${quantity_row}    Piece
-        IF    ${quantity_in_piece}
-            Wait Until Element Is Enabled    ${quantity_in_piece_button}    timeout=20s
-            Click Button    ${quantity_in_piece_button}
-            Wait Until Element Is Visible    ${piece_modal}    timeout=10s
-            Clear Element Text    ${quantity_input}
-            Input Text    ${quantity_input}    ${value}
-            Wait Until Element Is Visible    ${update_cart_quantity}    timeout=20s
-            Click Button    ${update_cart_quantity}
-        ELSE
-            Click Element    ${custom_select_quantity_button}
-            ${custom_select_option}=    Replace String    ${custom_select_quantity}    option_value    ${value}
-            ${custom_select_option}=    Replace String    ${custom_select_option}    ITEM    ${key}
-            Wait Until Element Is Visible    ${custom_select_option}    timeout=20s
-            Click Element    ${custom_select_option}
-        END
-        Wait Until Element Is Enabled    ${product_search_bar}    timeout=10s
-    END
-    ${items_list}=    Convert Items To List    ${my_dict.get_items}
-    IF    ${items_list} != ['NULL']
-        ${items_dict} =    Convert Item List To Dictionary    ${my_dict.get_items}
-        Log    ${items_dict}
-        FOR    ${item}    IN    @{items_dict.items()}
-            ${key}=    Set Variable    ${item}[0]
-            ${values}=    Set Variable    ${item}[1]
-            ${value}=    Convert To String    ${values}
-            Input Text    ${product_search_bar}    ${key}
-            Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
-            Sleep    1s
-            Click Element    ${search_add_button}
-            ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
-            IF    ${multiple_product_present}
-                Add Multiple MRP Products
-            END
-            Wait Until Element Contains     ${table}    ${key}    timeout=20s
-            Element Should Contain    ${item_cart_table}    ${key}
-            ${quantity_in_piece}=    Run Keyword And Return Status    Element Should Contain    ${quantity_row}    Piece
-            IF    ${quantity_in_piece}
-                Wait Until Element Is Enabled    ${quantity_in_piece_button}    timeout=20s
-                Click Button    ${quantity_in_piece_button}
-                Wait Until Element Is Visible    ${piece_modal}    timeout=10s
-                Clear Element Text    ${quantity_input}
-                Input Text    ${quantity_input}    ${value}
-                Wait Until Element Is Visible    ${update_cart_quantity}    timeout=20s
-                Click Button    ${update_cart_quantity}
-            ELSE
-                Click Element    ${custom_select_quantity_button}
-                ${custom_select_option}=    Replace String    ${custom_select_options}    option_value    ${value}
-                Wait Until Element Is Visible    ${custom_select_option}    timeout=20s
-                Click Element    ${custom_select_option}
-            END
-            Wait Until Element Is Enabled    ${product_search_bar}    timeout=10s
-        END
     END
 
 Add Alternate Items In Exchange Cart
@@ -689,8 +636,17 @@ Verify Price Override Not Possible For Alternate Product
     Page Should Contain Element    ${disabled_apply_override_button}
 
 
-Verify Alternate Product With Greater Price was Added To Cart
-    Wait Until Page Contains Element    ${product_name_in_cart_row}
+#Verify Alternate Product With Greater Price was Added To Cart
+#    Wait Until Page Contains Element    ${product_name_in_cart_row}
+#    Wait Until Page Contains Element    ${alternate_product_net_price}
+#    ${alt_product_price}    Get Text    ${alternate_product_net_price}
+#    ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
+#    ${clean_alt}    Remove Characters    ${alt_product_price}
+#    ${clean_init}    Remove Characters    ${initial_product_price}
+#    ${result}     Is Greater    ${clean_init}    ${clean_alt}
+#    Should Be True    ${result}
+
+Verify Alternate Products With Sum Of Net Price Greater Than Exc Products Was Added To Cart
     Wait Until Page Contains Element    ${alternate_product_net_price}
     ${alt_product_price}    Get Text    ${alternate_product_net_price}
     ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
@@ -698,25 +654,33 @@ Verify Alternate Product With Greater Price was Added To Cart
     ${clean_init}    Remove Characters    ${initial_product_price}
     ${result}     Is Greater    ${clean_init}    ${clean_alt}
     Should Be True    ${result}
+    Element Should Be Disabled    ${disabled_checkout_button}
 
 Verify Alternate Product With Lesser Price was Added To Cart
+    Wait Until Page Contains Element    ${esp_alert}    timeout=10
+    Page Should Contain Element    ${esp_alert}
+    Wait Until Page Contains Element    ${alternate_product_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
+    ${clean_alt_price}    Remove Characters   ${alt_product_price}
+    ${clean_init_price}    Remove Characters    ${initial_product_price}
+    ${num_alt}    Convert To Number    ${clean_alt_price}
+    ${num_init}    Convert To Number    ${clean_init_price}
+    ${result}    Is Greater    ${num_init}    ${num_alt}
+    Should Be True    ${result}
+    
+
+Verify Alternate Product With Greater Price was Added To Cart
     Wait Until Page Contains Element    ${product_name_in_cart_row}
     Wait Until Page Contains Element    ${alternate_product_net_price}
     ${alt_product_price}    Get Text    ${alternate_product_net_price}
     ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
-    ${clean_alt}    Remove Characters   ${alt_product_price}
-    ${clean_init}   Remove Characters    ${initial_product_price}
-    ${result}     Is Greater    ${clean_alt}    ${clean_init}
+    ${clean_alt_price}    Remove Characters   ${alt_product_price}
+    ${clean_init_price}    Remove Characters    ${initial_product_price}
+    ${num_alt}    Convert To Number    ${clean_alt_price}
+    ${num_init}    Convert To Number    ${clean_init_price}
+    ${result}    Is Greater    ${num_alt}    ${num_init}
     Should Be True    ${result}
-
-Verify Alternate Product With Equal Price was Added To Cart
-    Wait Until Page Contains Element    ${product_name_in_cart_row}
-    Wait Until Page Contains Element    ${alternate_product_net_price}
-    ${alt_product_price}    Get Text    ${alternate_product_net_price}
-    ${initial_product_price}    Get Text    ${initial_product_qty_in_exc_cart}
-    Remove Characters   ${alt_product_price}
-    Remove Characters    ${initial_product_price}
-    Should Be Equal As Strings    ${alt_product_price}    ${initial_product_price}
 
 Search Invoice By Name| Exchange
    [Arguments]    ${first_name}
@@ -855,6 +819,10 @@ Verify Individual Item Is Unselected
     Page Should Contain Element    ${no_product_selected_message}
 #
 #Verify Total QTY Auto Populated
+
+
+#Verify Total QTY Is 0
+#
 
 
 Select The Invoice By Invoice Name | Exchange
@@ -1124,6 +1092,66 @@ Verify Confirm Button On Switching
 Verify The Cancel Button On Switch From Exchange
     Page Should Contain Element    ${add_exchange_item_link}
     Page Should Not Contain Element    ${billing_option_switch_default}
+
+Get Invoice Number
+    [Arguments]    ${mode}
+    ${my_dict}    Create Dictionary   &{mode}
+    ${invoice_ids}    Create List
+    Wait Until Page Contains Element    ${payment_complete_heading}
+    ${in_id}  Get Text    ${invoice_number_checkout}
+    ${in_name}  Get Text    ${invoice_customer_name}
+    ${in_number}  Get Text    ${invoice_customer_phone}
+    ${in_amount}  Get Text    ${total_amount_checkout}
+    ${cust_info_checkout}=  Create Dictionary    invoice_id=${in_id}  invoice_name=${in_name}  phone_number=${in_number}  total_amount=${in_amount}    search_invoice=${in_id}     select_invoice_option=${my_dict.select_invoice_option}
+    [RETURN]   ${cust_info_checkout}
+    
+Get Discount Value
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    ${price_amount_with_rs}=    Get Text    ${price}
+    ${price_amount}=    Remove Characters    ${price_amount_with_rs}
+    ${price_amount}=    Convert To Number    ${price_amount}  
+    ${discount_amount_with_rs}=    Get Text    ${discount_field}
+    ${discount_amount}=    Remove Characters    ${discount_amount_with_rs}
+    ${discount_amount}=    Convert To Number    ${discount_amount}
+    ${net_amount_with_rs}=    Get Text    ${net_price}
+    ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+    ${total_value}=    Set Variable    0
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${total_value}    Evaluate    ${total_value}+${values}
+    END
+    ${price_per_item}=    Evaluate    ${discount_amount}/${total_value}
+    ${discount_dict}    Create Dictionary    price_per_item=${price_per_item}    replace_qty=${my_dict.replace_qty}
+    RETURN    ${discount_dict}
+
+Verify Product Discount
+    [Arguments]    ${price_per_item}
+    ${my_dict}    Create Dictionary   &{price_per_item}
+    ${discount_exchange_item}    Get Text    ${discount_field}
+    ${discount_exchange_item}=    Remove Characters    ${discount_exchange_item}
+    ${discount_exchange_item}=    Convert To Number    ${discount_exchange_item}
+    ${expected_exchange_discount}=    Evaluate    ${my_dict.price_per_item}*${my_dict.replace_qty}
+    Should Be Equal As Integers    ${discount_exchange_item}    ${expected_exchange_discount}
+    Sleep    2s
+    ${total_alternate_discount}    Set Variable    0
+    FOR    ${i}    IN RANGE    0    ${my_dict.replace_qty}
+        ${alternate_discount}    Get Text   ${alternate_exchange_discount_field}
+        ${alternate_discount}    Remove Characters    ${alternate_discount}
+        ${alternate_discount}    Convert To Number    ${alternate_discount}
+        ${total_alternate_discount}    Evaluate    ${total_alternate_discount}+${alternate_discount}
+    END
+    Should Be Equal As Integers    ${alternate_discount}    ${discount_exchange_item}
+
+Scan Alternate Product
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${items_list}=    Convert Items To List    ${my_dict.alternate_product}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.alternate_product}
     Click Element    ${switch_confirm_button}
     Wait Until Page Contains Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="Exchange"]
     
@@ -1185,6 +1213,27 @@ Add Product With Less Price Than Exchange Product
         ${key}=    Set Variable    ${item}[0]
         ${values}=    Set Variable    ${item}[1]
         ${value}=    Convert To String    ${values}
+        Sleep    1s
+        FOR    ${i}    IN RANGE    0     ${my_dict.replace_qty}
+            Add Product For Exchange
+            Click Element    ${product_search_bar}
+            Input Text    ${product_search_bar}    ${key}
+            Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+            Sleep    1s
+            Click Element    ${search_add_button}
+            ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
+
+            IF    ${multiple_product_present}
+                Add Multiple MRP Products
+            END
+            Wait Until Element Contains     ${table}    ${key}    timeout=20s
+            Element Should Contain    ${item_cart_table}    ${key}
+            ${unit_price_amount}=    Get Text    ${price}
+            ${unit_price_amount}=    Remove Characters    ${unit_price_amount}
+            ${unit_price_amount}=    Convert To Number    ${unit_price_amount}
+            Set Test Variable    ${unit_price_amount}
+        END
+    END
         Input Text    ${product_search_bar}    ${key}
         Press Keys    ${product_search_bar}    ENTER
     END

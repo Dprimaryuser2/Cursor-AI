@@ -68,6 +68,7 @@ custom_select_options = '//select[@class="custom-select custom-select-sm"]//opti
 custom_select_quantity = '//span[text()="ITEM"]//ancestor::td//following-sibling::td//option[@value="option_value"]'
 price = '(//td[@aria-colindex="4"])[1]'
 discount_field = '(//td[@aria-colindex="5"])[1]'
+alternate_exchange_discount_field = '(//td[@aria-colindex="5"])[2]'
 discount_field_row_2 = '(//td[@aria-colindex="5"])[2]'
 net_price = '//td[@aria-colindex="6"]'
 cancel_item = '(//td[@aria-colindex="6"])[1]'
@@ -335,6 +336,7 @@ no_product_selected_message = '//p[contains(text(),"No product selected for exch
 total_qty_of_item = '(//div[contains(text(),"SKU/Barcode")]//ancestor::div[@class="ex-invoice-table my-3 mx-n2"]//div[contains(@class,"vertical-scroll exchange-scroll")]//div[@class="col-1"])[1]'
 exchange_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[1]'
 alternate_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[2]'
+alert_sum_esp = '//div[@class="col-11"]//h6[@class="mb-2 fs-14" and contains(text(),"Alert")]'
 unit_price_of_product_ex = '(//div[@class="row fs-13 py-3 rows px-4 fs-12 grey-100 align-items-center"]//div[@class="col-1"])[2]'
 alert_sum_esp = '//div[@class="col-11"]//h6[@class="mb-2 fs-14" and contains(text(),"Alert")]'
 
