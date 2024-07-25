@@ -12,9 +12,10 @@ Resource    ../../../Resources/AdminConsole/POSTerminal/pos_terminal_keyword.rob
 
 *** Keywords ***
 Go To Allocation Page
-    Click Element    ${promotions_icon}
-    Wait Until Element Is Visible    ${allocation}
-    Click Element    ${allocation}
+    Click Element    //i[@class="fa fa-fw fa-gift "]//ancestor::a
+    Click Element    ${promotion_allocation_icon}
+#    Wait Until Element Is Visible    ${allocation}
+#    Click Element    ${allocation}
     Wait Until Element Is Visible    ${new_allocation}    timeout=20s
     Page Should Contain Element    ${new_allocation}
     Page Should Contain Element    ${promotion_heading}

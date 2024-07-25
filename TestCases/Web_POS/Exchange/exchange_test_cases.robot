@@ -1361,86 +1361,141 @@ Zwing_E_81 Select exchange product which has netprice =< replacement multiple pr
 
 Zwing_E_82 Apply a item level Promo Buy 1 Get 20% off discount of item create a sale invoice then exchange it with similar item
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_82
-    Login With Valid Username And Password | POS    ${pos_data}
-    Open The Session    ${pos_data}v
-    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-    Apply Item Promo | Manual
-    Add Customer Details for partial payment    ${pos_data}
-    ${value}    Get payable amount
-    Verify Billing Checkout
-    Payment By Paytm    ${value}
-    Click On Back Button | Checkout
-    Change Billing Mode    ${pos_data}
-    Click On +Add Exchange Items from Invoice Link
-    Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange   ${pos_data}
-    Select Invoice From Search Options
-    Select Items For Exchange   ${pos_data}
-    Add Product For Exchange
-    Scan Barcode To Add Item And Quantity To Cart | Exchange    ${pos_data}
-    Verify Billing Checkout
-
-
-Zwing_E_84 Apply a item level Promo Buy 4 Get 20% off discount of item , create a sale invoice with item then exchange it then check the response
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_84
-#    Close Browser
-#    Open Application | Admin
-#    Login With Valid Username And Password    ${pos_data}
-#    Go To Allocation Page
-#    Set Promotion Priority As Highest    ${pos_data}
-#    Close Browser
+    Open Application | Admin
+    Login Into Admin | Zwing
+    Go To Allocation Page
+    Set Promotion Priority As Highest    ${pos_data}
+    Close Browser
+    Open Application | POS
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
+    ${price_per_item}    Get Discount Value    ${pos_data}
     Add Customer Details for partial payment    ${pos_data}
     ${value}    Get payable amount
     Verify Billing Checkout
     Payment By Paytm    ${value}
+    ${get_cust_info}    Get Invoice Number    ${pos_data}
     Click On Back Button | Checkout
     Change Billing Mode    ${pos_data}
     Click On +Add Exchange Items from Invoice Link
     Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange   ${pos_data}
+    Search Invoice | Exchange   ${get_cust_info}
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart | Exchange    ${pos_data}
+    Verify Product Discount     ${price_per_item}
+    Verify Billing Checkout
+
+Zwing_E_83 Apply a slab based promo on item level , add multiple item in cart with total bill value as per promo , create a sales invoice then exchange only 1 item in the invoice
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_83
+    Open Application | Admin
+    Login Into Admin | Zwing
+    Go To Allocation Page
+    Set Promotion Priority As Highest    ${pos_data}
+    Close Browser
+    Open Application | POS
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Apply Item Promo | Manual
+    ${price_per_item}    Get Discount Value    ${pos_data}
+    Add Customer Details for partial payment    ${pos_data}
+    ${value}    Get payable amount
+    Verify Billing Checkout
+    Payment By Paytm    ${value}
+    ${get_cust_info}    Get Invoice Number    ${pos_data}
+    Click On Back Button | Checkout
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${get_cust_info}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange    ${pos_data}
+    Verify Product Discount     ${price_per_item}
+    Verify Billing Checkout
+
+Zwing_E_84 Apply a item level Promo Buy 4 Get 20% off discount of item , create a sale invoice with item then exchange it then check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_84
+    Open Application | Admin
+    Login Into Admin | Zwing
+    Go To Allocation Page
+    Set Promotion Priority As Highest    ${pos_data}
+    Close Browser
+    Open Application | POS
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Apply Item Promo | Manual
+    ${price_per_item}    Get Discount Value    ${pos_data}
+    Add Customer Details for partial payment    ${pos_data}
+    ${value}    Get payable amount
+    Verify Billing Checkout
+    Payment By Paytm    ${value}
+    ${get_cust_info}    Get Invoice Number    ${pos_data}
+    Click On Back Button | Checkout
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${get_cust_info}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Add Product For Exchange
+    Scan Barcode To Add Item And Quantity To Cart | Exchange    ${pos_data}
+    Verify Product Discount     ${price_per_item}
     Verify Billing Checkout
 
 Zwing_E_85 Apply a slab based promo on item level ,add multiple unique item in cart with total bill value as per promo ,create a sales invoice then exchange all product
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_85
+#    Open Application | Admin
+#    Login Into Admin | Zwing
+#    Go To Allocation Page
+#    Set Promotion Priority As Highest    ${pos_data}
+#    Close Browser
+#    Open Application | POS
+    Set Selenium Speed    1
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
+    ${price_per_item}    Get Discount Value    ${pos_data}
     Add Customer Details for partial payment    ${pos_data}
     ${value}    Get payable amount
     Verify Billing Checkout
     Payment By Paytm    ${value}
+    ${get_cust_info}    Get Invoice Number    ${pos_data}
     Click On Back Button | Checkout
     Change Billing Mode    ${pos_data}
     Click On +Add Exchange Items from Invoice Link
     Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange   ${pos_data}
+    Search Invoice | Exchange   ${get_cust_info}
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
-    Add Product For Exchange
-    Scan Barcode To Add Item And Quantity To Cart | Exchange    ${pos_data}
+    Scan Alternate Product    ${pos_data}
+    Verify Product Discount     ${price_per_item}
     Verify Billing Checkout
 
 Zwing_E_86 Create a sale bill which have any bill level promo select similar promotion item in exchange mode,then check in exchange mode promo is applying or not
 
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_86
+    Open Application | Admin
+    Login Into Admin | Zwing
+    Go To Allocation Page
+    Set Promotion Priority As Highest    ${pos_data}
+    Close Browser
+    Open Application | POS
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-    Apply Item Promo | Manual
     Add Customer Details for partial payment    ${pos_data}
     ${value}    Get payable amount
     Verify Billing Checkout
-     No Payment Required | Checkout Page
-#    Payment By Paytm     ${value}
+    Apply Bill Level Promos
+    Payment By Paytm     ${value}
     Click On Back Button | Checkout
     Change Billing Mode    ${pos_data}
     Click On +Add Exchange Items from Invoice Link
@@ -1448,12 +1503,31 @@ Zwing_E_86 Create a sale bill which have any bill level promo select similar pro
     Search Invoice | Exchange   ${pos_data}
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
-    Add Product For Exchange
-    Scan Barcode To Add Item And Quantity To Cart | Exchange    ${pos_data}
+    Scan Alternate Product    ${pos_data}
     Verify Exchange Item Is Added In The Cart
 
+Zwing_E_87 Create different value based slab on bill level , enable auto - promotion , add promo item as alternate item in exchange , click on checkout page and check the response
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_87
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    ${price_per_item}    Get Discount Value    ${pos_data}
+    Add Customer Details for partial payment    ${pos_data}
+    ${value}    Get payable amount
+    Verify Billing Checkout
+    Payment By Cash    ${value}
+    ${get_cust_info}    Get Invoice Number    ${pos_data}
+    Click On Back Button | Checkout
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${get_cust_info}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Scan Alternate Product    ${pos_data}
+    Verify Product Discount     ${price_per_item}
 
- #88 repeated
+#88 repeated
 
 Zwing_E_89 Return sales invoice then select Return invoice for exchange then check the response.
     [Tags]  Valid Failure
