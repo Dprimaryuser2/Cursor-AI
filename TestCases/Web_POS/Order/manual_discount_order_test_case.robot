@@ -17,7 +17,6 @@ ${DISCOUNT_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${
 
 *** Test Cases ***
 Zwing_MD_1 Apply Item Level Manual Discount Assortment Wise
-    [Tags]    Demo
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_01
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -25,8 +24,8 @@ Zwing_MD_1 Apply Item Level Manual Discount Assortment Wise
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
-     Apply Item Manual Discount | Select From List    ${discount_data}
-     Verify Item Manual Discount   ${product_price}
+     Apply Item Manual Discount | Select From List | Order    ${discount_data}
+     Verify Item Manual Discount | Order   ${product_price}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -38,8 +37,8 @@ Zwing_MD_2 Apply Item Level Manual Discount | Discount type as Fixed Amount
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
-     Apply Item Manual Discount | Select From List    ${discount_data}
-     Verify Item Manual Discount   ${product_price}
+     Apply Item Manual Discount | Select From List | Order    ${discount_data}
+     Verify Item Manual Discount | Order   ${product_price}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -51,8 +50,8 @@ Zwing_MD_3 Apply Item Level Manual Discount | Discount type as percentage
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
-     Apply Item Manual Discount | Select From List    ${discount_data}
-     Verify Item Manual Discount   ${product_price}
+     Apply Item Manual Discount | Select From List | Order    ${discount_data}
+     Verify Item Manual Discount | Order   ${product_price}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -65,8 +64,8 @@ Zwing_MD_4 Apply Item Level Manual Discount | Discount to Customer Group
      Add Customer Details    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
-     Apply Item Manual Discount | Select From List    ${discount_data}
-     Verify Item Manual Discount   ${product_price}
+     Apply Item Manual Discount | Select From List | Order    ${discount_data}
+     Verify Item Manual Discount | Order   ${product_price}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -78,8 +77,8 @@ Zwing_MD_5 Apply Item Level Manual Discount | Discount to Store
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
-     Apply Item Manual Discount | Select From List    ${discount_data}
-     Verify Item Manual Discount   ${product_price}
+     Apply Item Manual Discount | Select From List | Order    ${discount_data}
+     Verify Item Manual Discount | Order   ${product_price}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -91,9 +90,9 @@ Zwing_MD_6 Apply Item Level Manual Discount | Effective date and valid up to dat
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
-     Apply Item Manual Discount | Select From List    ${discount_data}
-     Verify Item Manual Discount   ${product_price}
-     Verify Item Manual Discount At Cart    ${product_price}
+     Apply Item Manual Discount | Select From List | Order    ${discount_data}
+     Verify Item Manual Discount | Order   ${product_price}
+     Verify Item Manual Discount At Cart | Order    ${product_price}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -105,8 +104,8 @@ Zwing_MD_7 Bill Level manual discount
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
-     ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
-     Verify Bill Level Manual Discount    ${bill_data}
+     ${bill_data}    Apply Bill Manual Discount | Select From List | Order    ${discount_data}
+     Verify Bill Level Manual Discount | Order    ${bill_data}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -118,8 +117,8 @@ Zwing_MD_8 Bill Level manual discount as Fixed Amount
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
-     ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
-     Verify Bill Level Manual Discount    ${bill_data}
+     ${bill_data}    Apply Bill Manual Discount | Select From List | Order    ${discount_data}
+     Verify Bill Level Manual Discount | Order    ${bill_data}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -131,8 +130,8 @@ Zwing_MD_9 Bill level manual discount as Percentage
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
-     ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
-     Verify Bill Level Manual Discount    ${bill_data}
+     ${bill_data}    Apply Bill Manual Discount | Select From List | Order    ${discount_data}
+     Verify Bill Level Manual Discount | Order    ${bill_data}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -144,8 +143,8 @@ Zwing_MD_10 Allocate Discount to Customer Group
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
-     ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
-     Verify Bill Level Manual Discount    ${bill_data}
+     ${bill_data}    Apply Bill Manual Discount | Select From List | Order    ${discount_data}
+     Verify Bill Level Manual Discount | Order    ${bill_data}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -157,8 +156,8 @@ Zwing_MD_11 Manual Discount button | Stores
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
-     ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
-     Verify Bill Level Manual Discount    ${bill_data}
+     ${bill_data}    Apply Bill Manual Discount | Select From List | Order    ${discount_data}
+     Verify Bill Level Manual Discount | Order    ${bill_data}
      Revoke Serial Key    ${discount_data}
      [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -170,8 +169,8 @@ Zwing_MD_12 Select the effective and valid up to date
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
-     ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
-     Verify Bill Level Manual Discount    ${bill_data}
+     ${bill_data}    Apply Bill Manual Discount | Select From List | Order    ${discount_data}
+     Verify Bill Level Manual Discount | Order    ${bill_data}
      Revoke Serial Key    ${discount_data}
      [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -183,9 +182,9 @@ Zwing_MD_13 Item level custom Discount
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
-     Apply Item Manual Discount | Custom Discount    ${discount_data}
-     Verify Item Manual Discount   ${product_price}
-     Verify Item Manual Discount At Cart    ${product_price}
+     Apply Item Manual Discount | Custom Discount | Order    ${discount_data}
+     Verify Item Manual Discount | Order   ${product_price}
+     Verify Item Manual Discount At Cart | Order    ${product_price}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -197,9 +196,9 @@ Zwing_MD_14 Custom Discount with discount type as amount
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
-     Apply Item Manual Discount | Custom Discount    ${discount_data}
-     Verify Item Manual Discount   ${product_price}
-     Verify Item Manual Discount At Cart    ${product_price}
+     Apply Item Manual Discount | Custom Discount | Order    ${discount_data}
+     Verify Item Manual Discount | Order   ${product_price}
+     Verify Item Manual Discount At Cart | Order    ${product_price}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -211,9 +210,9 @@ Zwing_MD_15 Custom Discount with discount type as Percentage
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
-     Apply Item Manual Discount | Custom Discount    ${discount_data}
-     Verify Item Manual Discount   ${product_price}
-     Verify Item Manual Discount At Cart    ${product_price}
+     Apply Item Manual Discount | Custom Discount | Order    ${discount_data}
+     Verify Item Manual Discount | Order   ${product_price}
+     Verify Item Manual Discount At Cart | Order    ${product_price}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -225,8 +224,8 @@ Zwing_MD_16 Bill level custom discount
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
-     ${bill_level}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
-     Verify Bill Level Manual Discount    ${bill_level}
+     ${bill_level}    Apply Bill Manual Discount | Custom Discount | Order    ${discount_data}
+     Verify Bill Level Manual Discount | Order    ${bill_level}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -238,8 +237,8 @@ Zwing_MD_17 Bill Level Custom Discount with discount type as amount
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
-     ${bill_level}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
-     Verify Bill Level Manual Discount    ${bill_level}
+     ${bill_level}    Apply Bill Manual Discount | Custom Discount | Order    ${discount_data}
+     Verify Bill Level Manual Discount | Order    ${bill_level}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -251,8 +250,8 @@ Zwing_MD_18 Bill Level Custom Discount with discount type as Percentage
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
-     ${bill_level}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
-     Verify Bill Level Manual Discount    ${bill_level}
+     ${bill_level}    Apply Bill Manual Discount | Custom Discount | Order    ${discount_data}
+     Verify Bill Level Manual Discount | Order    ${bill_level}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -263,7 +262,7 @@ Zwing_MD_19 Apply Manual Discount Button | Assortment Wise | Button
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Apply Item Manual Discount | Button
-     Verify Item Manual Discount | Button    ${discount_data}
+     Verify Item Manual Discount | Button | Order    ${discount_data}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -274,7 +273,7 @@ Zwing_MD_20 Apply Manual Discount Button, Use Discount type as Fixed Amount
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Apply Item Manual Discount | Button
-     Verify Item Manual Discount | Button    ${discount_data}
+     Verify Item Manual Discount | Button | Order    ${discount_data}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -285,7 +284,7 @@ Zwing_MD_21 Apply Manual Discount Button | discount type as percentage
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Apply Item Manual Discount | Button
-     Verify Item Manual Discount | Button    ${discount_data}
+     Verify Item Manual Discount | Button | Order    ${discount_data}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -296,7 +295,7 @@ Zwing_MD_22 Apply Manual Discount Button | Discount to Customer Group
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Apply Item Manual Discount | Button
-     Verify Item Manual Discount | Button    ${discount_data}
+     Verify Item Manual Discount | Button | Order    ${discount_data}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -307,7 +306,7 @@ Zwing_MD_23 Apply Manual Discount Button | Allocate Discount to Stores
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Apply Item Manual Discount | Button
-     Verify Item Manual Discount | Button    ${discount_data}
+     Verify Item Manual Discount | Button | Order    ${discount_data}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -318,7 +317,7 @@ Zwing_MD_24 Apply Manual Discount Button | Select the effective date and valid u
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Apply Item Manual Discount | Button
-     Verify Item Manual Discount | Button    ${discount_data}
+     Verify Item Manual Discount | Button | Order    ${discount_data}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -400,7 +399,7 @@ Zwing_MD_31 Apply Manual Discount Button Policy : Discount capping (amount) Bill
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
-     ${bill_data}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
+     ${bill_data}    Apply Bill Manual Discount | Custom Discount | Order    ${discount_data}
      Verify Bill Level Custom Discount More Than Percentage Limit    ${bill_data}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
@@ -413,7 +412,7 @@ Zwing_MD_32 Apply Manual Discount Button Policy : Discount capping (amount) Bill
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
-     ${bill_data}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
+     ${bill_data}    Apply Bill Manual Discount | Custom Discount | Order    ${discount_data}
      Verify Bill Level Custom Discount More Than Capping Amount Limit    ${bill_data}
 
 Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
@@ -494,7 +493,7 @@ Zwing_MD_39 Apply Manual Discount Button | Apply Item level discount percentage 
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
-     Apply Item Manual Discount | Custom Discount    ${discount_data}
+     Apply Item Manual Discount | Custom Discount | Order    ${discount_data}
      Verify Item Level Custom Discount More Than Percentage Limit    ${product_price}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
@@ -507,9 +506,9 @@ Zwing_MD_40 Apply Manual Discount Button | Apply Item level discount percentage 
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
-     Apply Item Manual Discount | Custom Discount    ${discount_data}
-     Verify Item Manual Discount   ${product_price}
-     Verify Item Manual Discount At Cart    ${product_price}
+     Apply Item Manual Discount | Custom Discount | Order    ${discount_data}
+     Verify Item Manual Discount | Order   ${product_price}
+     Verify Item Manual Discount At Cart | Order    ${product_price}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
@@ -521,7 +520,7 @@ Zwing_MD_41 Apply Manual Discount Button | Apply Item level discount amount more
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
-     Apply Item Manual Discount | Custom Discount    ${discount_data}
+     Apply Item Manual Discount | Custom Discount | Order    ${discount_data}
      Verify Item Level Custom Discount More Than Capping Amount Limit    ${product_price}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
@@ -534,9 +533,9 @@ Zwing_MD_42 Apply Manual Discount Button | Apply Item level discount amount less
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      ${product_price}    Apply Item Manual Discount | Update Product Popup    ${discount_data}
-     Apply Item Manual Discount | Custom Discount    ${discount_data}
-     Verify Item Manual Discount   ${product_price}
-     Verify Item Manual Discount At Cart    ${product_price}
+     Apply Item Manual Discount | Custom Discount | Order    ${discount_data}
+     Verify Item Manual Discount | Order   ${product_price}
+     Verify Item Manual Discount At Cart | Order    ${product_price}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 

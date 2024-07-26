@@ -292,3 +292,7 @@ Clear All Products
       Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
     END
+
+Verify Remove item to the cart | Order
+    Wait Until Page Does Not Contain Element    ${product_name_in_cart_row}    timeout=5
+    Page Should Not Contain Element    ${product_name_in_cart_row}
