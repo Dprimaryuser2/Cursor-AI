@@ -28,6 +28,7 @@ Recall Bill
     Click Element    ${recall_bill_confirmation}
 
 Discard Bill
+    Wait Until Page Does Not Contain Element    ${hold_bill_confirmation}    timeout=10s
     Wait Until Page Contains Element    ${view_held_bills}
     Click Element    ${view_held_bills}
     Wait Until Page Contains Element    ${discard_bill}
@@ -611,7 +612,6 @@ Assign A different Salesperson To Each Item
     ${product_count}    Get Text    ${cart_last_element}
     ${item}=  Set Variable    1
     FOR  ${item}  IN RANGE    1    ${product_count}+1
-           Set Selenium Speed    0.3
            Wait Until Page Contains Element    (${product_name_in_cart_row})[${item}]
            Click Element    (${product_name_in_cart_row})[${item}]
            Wait Until Page Contains Element    ${salesperson_dropdown}
@@ -619,9 +619,10 @@ Assign A different Salesperson To Each Item
            Wait Until Page Contains Element    (${row_in_salesperson_dropdown})[${item}]
            Click Element    (${row_in_salesperson_dropdown})[${item}]
            Wait Until Page Contains Element    ${salesperson_tagged_message}
+           Wait Until Element Is Enabled    ${update_product_button}    timeout=20s
            Element Should Be Enabled    ${update_product_button}
            Click Element    ${update_product_button}
-           Wait Until Page Contains Element    ${salesperson_tagged_message}
+           Wait Until Page Does Not Contain Element    ${update_product_button}
     END
 
 Verify If Salesperson Is Assigned To An Item
