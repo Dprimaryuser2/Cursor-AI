@@ -20,6 +20,7 @@ Hold Bill
     Click Element    ${hold_bill_confirmation}
 
 Recall Bill
+    Wait Until Page Does Not Contain Element    ${hold_bill_confirmation}    timeout=10s
     Wait Until Page Contains Element    ${view_held_bills}
     Click Element    ${view_held_bills}
     Wait Until Page Contains Element    ${recall_bill}
@@ -43,6 +44,7 @@ Return To Bill
     Click Element    ${return_to_bill}
 
 View Held Bill
+    Wait Until Page Does Not Contain Element    ${hold_bill_confirmation}    timeout=10s
     Wait Until Page Contains Element    ${view_held_bills}
     Click Element    ${view_held_bills}
     Wait Until Page Contains Element    ${recall_bill}
@@ -145,10 +147,11 @@ Add Customer Details for partial payment
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
     Click Button    ${start_billing_button}
+    Wait Until Page Does Not Contain Element     ${start_billing_button}    timeout=20s
     Sleep  1s
     ${status}=  Run Keyword And Return Status    Element Should Be Visible    ${add_items_to_cart}
     IF     ${status}
-         Click Button    ${discard_button}
+         Wait Until Keyword Succeeds    5     1     Click Button    ${discard_button}
     END
     ${customer_data}    Create Dictionary    customer_phone_number=${my_dict.mobile}
     RETURN    ${customer_data}
@@ -600,8 +603,10 @@ Assign A Salesperson To An Item
     Wait Until Page Contains Element    ${salesperson_search_field}
     Click Element    ${salesperson_search_field}
     Input Text    ${salesperson_search_field}    ${details_dict.salesperson_name}
+    Wait Until Page Contains Element    ${row_in_salesperson_dropdown}    timeout=10s
     Click Element    ${row_in_salesperson_dropdown}
     Wait Until Page Contains Element    ${salesperson_tagged_message}
+    Wait Until Element Is Enabled    ${update_product_button}    timeout=20s
     Element Should Be Enabled    ${update_product_button}
     Click Element    ${update_product_button}
     Element Should Contain    ${salesperson_below_product}    ${details_dict.salesperson_name}
