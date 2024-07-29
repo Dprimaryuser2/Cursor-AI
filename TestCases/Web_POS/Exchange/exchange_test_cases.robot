@@ -2074,6 +2074,6 @@ Zwing_E_131 Switching Between Exchange to Return Will Give Confirmation Popup
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
     Switch From Exchange Module    ${pos_data}
-    Verify Confirmation Popup 
+    Verify Confirmation Popup
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}

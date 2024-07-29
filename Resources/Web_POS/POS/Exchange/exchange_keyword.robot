@@ -149,8 +149,8 @@ Verify All Columns Are Present In Item Exchange Window
    Page Should Contain Element    ${reasons_col_title}
 
 Select Invoice From Search Options
-    Wait Until Page Contains Element    ${first_row_invoice}    timeout=30s
-    Click Element    ${first_row_invoice}
+    Wait Until Page Contains Element    ${first_row_invoice}    timeout=30
+    Wait Until Keyword Succeeds    1     1    Click Element    ${first_row_invoice}
 
 Select Items For Exchange
     [Arguments]    ${qty}
