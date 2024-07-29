@@ -23,7 +23,8 @@ Zwing_E_01 Check whether Exchange text is clickable or not
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_01
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
-    Verify Exchange Text Is Clickable    ${pos_data}
+    Click On Exchange Text In Dropdown   ${pos_data}
+    Verify Exchange Text Is Clickable
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -31,7 +32,8 @@ Zwing_E_02 Click on Exchange Text and check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_02
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
-    Verify Exchange Text Is Clickable    ${pos_data}
+    Click On Exchange Text In Dropdown   ${pos_data}
+    Verify Exchange Text Is Clickable
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 

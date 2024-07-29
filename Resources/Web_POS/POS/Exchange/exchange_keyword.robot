@@ -84,6 +84,8 @@ Verify The Invoice Parameters Are Clickable
     Page Should Contain Element    ${invoice_number_search_option}
     Page Should Contain Element    ${customer_name_search_option}
     Page Should Contain Element    ${customer_phone_search_option}
+    Click Element    ${selected_parameter_invoice_option}
+    Wait Until Page Contains Element    ${customer_name_search_option}
     Click Element    ${customer_name_search_option}
     Wait Until Page Contains Element    ${selected_parameter_invoice_option}  timeout=10s
     Page Should Contain Element    ${selected_parameter_invoice_option}
