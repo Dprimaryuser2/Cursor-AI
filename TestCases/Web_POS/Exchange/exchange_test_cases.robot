@@ -33,7 +33,7 @@ Zwing_E_02 Click on Exchange Text and check the response
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Click On Exchange Text In Dropdown    ${pos_data}
-    Verify Exchange Text Is Clickable  
+    Verify Exchange Text Is Clickable
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
