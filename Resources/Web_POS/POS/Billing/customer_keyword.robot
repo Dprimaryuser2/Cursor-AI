@@ -6,6 +6,7 @@ Library    ../../../../Resources/CustomKeywords/utilities.py
 Variables    ../../../../PageObjects/Web_POS/POS/pos_locators.py
 Variables    ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
 Variables    ../../../../PageObjects/Web_POS/POS/checkout_locators.py
+Resource   ../../../../Resources/Web_POS/POS/Order/manual_discount_order_keyword.robot
 
 *** Keywords ***
 Add Customer Details
@@ -295,8 +296,12 @@ Verify Customer Tagging
         Click Element    ${close_customer_window}
         Wait Until Page Does Not Contain Element    ${close_customer_window}    timeout=10s
 
-Verify Customer Tagging Is Not Mandatory 
+Verify Customer Tagging Is Not Mandatory
     Click Button    ${checkout_button}
+    ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
+    IF    ${insufficient}
+     Set Fulfillment Date And Continue
+    END
     Page Should Not Contain Element    ${customer_tagging_mandatory_alert}
     Wait Until Element Is Visible      ${checkout_heading}    timeout=10s
     Page Should Contain Element    ${checkout_heading}
@@ -328,6 +333,10 @@ Verify Customer Tagging Is Mandatory With All Fields
     [Arguments]    ${customer_data}
     ${my_dict}    Create Dictionary   &{customer_data}
     Click Button    ${checkout_button}
+    ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
+    IF    ${insufficient}
+     Set Fulfillment Date And Continue
+    END
     Wait Until Element Is Visible    ${customer_tagging_mandatory_alert}    timeout=15s
     Page Should Contain Element    ${customer_tagging_mandatory_alert}
     Click Element    ${add_customer_link}
