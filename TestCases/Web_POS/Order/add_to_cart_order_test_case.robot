@@ -231,6 +231,7 @@ Zwing_ATC_20 Add item from previous session>> Discard Button
     ${customer_info}    Add Customer Details    ${pos_data}
     Verify Billing Checkout
     Go Back
+    Auto Switch To Billing
     Close The Session    ${pos_data}
     Logout From The POS
     Login Again With Same User Id And Password   ${pos_data}
