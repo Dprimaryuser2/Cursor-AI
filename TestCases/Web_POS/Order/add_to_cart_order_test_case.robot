@@ -27,7 +27,7 @@ Zwing_ATC_1 Add Normal sku with Fixed UOM to cart
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-    Verify Item Is Added    ${pos_data}
+    Verify Item Is Added | Order    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -36,8 +36,8 @@ Zwing_ATC_2 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode    ${pos_data}
-    Verify Item Is Added    ${pos_data}
+    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order    ${pos_data}
+    Verify Item Is Added | Order    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -46,8 +46,8 @@ Zwing_ATC_3 Add Normal sku with weighted UOM to cart >> Add Qty mode
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Add Cart Quantity Mode    ${pos_data}
-    Verify Item Is Added    ${pos_data}
+    Add Weighted UOM Products to Cart | Add Cart Quantity Mode | Order    ${pos_data}
+    Verify Item Is Added | Order    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -57,7 +57,7 @@ Zwing_ATC_4 Add Normal sku with Fixed UOM and 0 Inventory to cart with enabled n
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-    Verify 0 Inventory To Cart With Enable Negative Inventory    ${pos_data}
+    Verify 0 Inventory To Cart With Enable Negative Inventory | Order    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -76,8 +76,8 @@ Zwing_ATC_6 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with 
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode    ${pos_data}
-    Verify 0 Inventory To Cart With Enable Negative Inventory    ${pos_data}
+    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order    ${pos_data}
+    Verify 0 Inventory To Cart With Enable Negative Inventory | Order    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -86,7 +86,7 @@ Zwing_ATC_7 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with 
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode    ${pos_data}
+    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order    ${pos_data}
     Verify 0 Inventory To Cart With Disable Negative Inventory    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -96,8 +96,8 @@ Zwing_ATC_8 Add Normal sku with weighted UOM to cart >> Add Qty mode with enable
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Add Cart Quantity Mode    ${pos_data}
-    Verify 0 Inventory To Cart With Enable Negative Inventory    ${pos_data}
+    Add Weighted UOM Products to Cart | Add Cart Quantity Mode | Order    ${pos_data}
+    Verify 0 Inventory To Cart With Enable Negative Inventory | Order    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -106,7 +106,7 @@ Zwing_ATC_9 Add Normal sku with weighted UOM to cart >> Add Qty mode with disabl
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Add Cart Quantity Mode    ${pos_data}
+    Add Weighted UOM Products to Cart | Add Cart Quantity Mode | Order    ${pos_data}
     Verify 0 Inventory To Cart With Disable Negative Inventory    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -116,8 +116,8 @@ Zwing_ATC_10 Validate the count of total no. of items added to the cart.
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}s
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Add Cart Quantity Mode    ${pos_data}
-    Verify Item Is Added    ${pos_data}
+    Add Weighted UOM Products to Cart | Add Cart Quantity Mode | Order    ${pos_data}
+    Verify Item Is Added | Order    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -126,9 +126,9 @@ Zwing_ATC_11 Remove items from cart by clicking on cross button
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Add Cart Quantity Mode    ${pos_data}
+    Add Weighted UOM Products to Cart | Add Cart Quantity Mode | Order    ${pos_data}
     Delete Item In The Cart
-    Verify Remove item to the cart
+    Verify Remove item to the cart | Order
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -148,8 +148,8 @@ Zwing_ATC_13 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode    ${pos_data}
-    Verify Item Is Added    ${pos_data}
+    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order    ${pos_data}
+    Verify Item Is Added | Order    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -158,8 +158,8 @@ Zwing_ATC_14 Add Normal sku with weighted UOM to cart >> Add Qty mode with decim
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Add Cart Quantity Mode    ${pos_data}
-    Verify Item Is Added    ${pos_data}
+    Add Weighted UOM Products to Cart | Add Cart Quantity Mode | Order    ${pos_data}
+    Verify Item Is Added | Order    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -168,8 +168,8 @@ Zwing_ATC_15 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode    ${pos_data}
-    Verify 0 Inventory To Cart With Enable Negative Inventory    ${pos_data}
+    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order    ${pos_data}
+    Verify 0 Inventory To Cart With Enable Negative Inventory | Order    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -178,7 +178,7 @@ Zwing_ATC_16 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode    ${pos_data}
+    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order    ${pos_data}
     Verify 0 Inventory To Cart With Disable Negative Inventory    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -189,8 +189,8 @@ Zwing_ATC_17 Add Normal sku with weighted UOM to cart >> Add Qty mode with enabl
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode    ${pos_data}
-    Verify 0 Inventory To Cart With Enable Negative Inventory    ${pos_data}
+    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order    ${pos_data}
+    Verify 0 Inventory To Cart With Enable Negative Inventory | Order    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -199,7 +199,7 @@ Zwing_ATC_18 Add Normal sku with weighted UOM to cart >> Add Qty mode with disab
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode    ${pos_data}
+    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order    ${pos_data}
     Verify 0 Inventory To Cart With Disable Negative Inventory    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -218,7 +218,7 @@ Zwing_ATC_19 Add item from previous session
     Login Again With Same User Id And Password   ${pos_data}
     Add Previous Customer    ${customer_info}
     ${items}    Add Items From Previous Session
-    Verify Items Are Added From Previous Session    ${items}
+    Verify Items Are Added From Previous Session | Order    ${items}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -235,8 +235,8 @@ Zwing_ATC_20 Add item from previous session>> Discard Button
     Logout From The POS
     Login Again With Same User Id And Password   ${pos_data}
     Add Previous Customer    ${customer_info}
-    ${items}    Discard Previous Added Item
-    Verify Items Are Added From Previous Session    ${items}
+    ${items}    Discard Previous Added Item | Order
+    Verify Items Are Added From Previous Session | Order    ${items}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -253,7 +253,7 @@ Zwing_ATC_21 Add item from previous session>> Add item to cart
     Logout From The POS
     Login Again With Same User Id And Password   ${pos_data}
     Add Previous Customer    ${customer_info}
-    ${items}    Add Items From Previous Session
-    Verify Items Are Added From Previous Session    ${items}
+    ${items}    Add Items From Previous Session | Order
+    Verify Items Are Added From Previous Session | Order    ${items}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}

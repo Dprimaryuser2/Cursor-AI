@@ -1388,6 +1388,8 @@ Zwing_E_82 Apply a item level Promo Buy 1 Get 20% off discount of item create a 
     Scan Barcode To Add Item And Quantity To Cart | Exchange    ${pos_data}
     Verify Product Discount     ${price_per_item}
     Verify Billing Checkout
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_83 Apply a slab based promo on item level , add multiple item in cart with total bill value as per promo , create a sales invoice then exchange only 1 item in the invoice
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_83
@@ -1418,6 +1420,8 @@ Zwing_E_83 Apply a slab based promo on item level , add multiple item in cart wi
     Scan Barcode To Add Item And Quantity To Cart | Exchange    ${pos_data}
     Verify Product Discount     ${price_per_item}
     Verify Billing Checkout
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_84 Apply a item level Promo Buy 4 Get 20% off discount of item , create a sale invoice with item then exchange it then check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_84
@@ -1451,13 +1455,12 @@ Zwing_E_84 Apply a item level Promo Buy 4 Get 20% off discount of item , create 
 
 Zwing_E_85 Apply a slab based promo on item level ,add multiple unique item in cart with total bill value as per promo ,create a sales invoice then exchange all product
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_85
-#    Open Application | Admin
-#    Login Into Admin | Zwing
-#    Go To Allocation Page
-#    Set Promotion Priority As Highest    ${pos_data}
-#    Close Browser
-#    Open Application | POS
-    Set Selenium Speed    1
+    Open Application | Admin
+    Login Into Admin | Zwing
+    Go To Allocation Page
+    Set Promotion Priority As Highest    ${pos_data}
+    Close Browser
+    Open Application | POS
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -1478,6 +1481,8 @@ Zwing_E_85 Apply a slab based promo on item level ,add multiple unique item in c
     Scan Alternate Product    ${pos_data}
     Verify Product Discount     ${price_per_item}
     Verify Billing Checkout
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_86 Create a sale bill which have any bill level promo select similar promotion item in exchange mode,then check in exchange mode promo is applying or not
 
@@ -1505,6 +1510,8 @@ Zwing_E_86 Create a sale bill which have any bill level promo select similar pro
     Select Items For Exchange   ${pos_data}
     Scan Alternate Product    ${pos_data}
     Verify Exchange Item Is Added In The Cart
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_87 Create different value based slab on bill level , enable auto - promotion , add promo item as alternate item in exchange , click on checkout page and check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_87
@@ -1526,6 +1533,8 @@ Zwing_E_87 Create different value based slab on bill level , enable auto - promo
     Select Items For Exchange   ${pos_data}
     Scan Alternate Product    ${pos_data}
     Verify Product Discount     ${price_per_item}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 #88 repeated
 
