@@ -84,6 +84,8 @@ Verify The Invoice Parameters Are Clickable
     Page Should Contain Element    ${invoice_number_search_option}
     Page Should Contain Element    ${customer_name_search_option}
     Page Should Contain Element    ${customer_phone_search_option}
+    Click Element    ${selected_parameter_invoice_option}
+    Wait Until Page Contains Element    ${customer_name_search_option}
     Click Element    ${customer_name_search_option}
     Wait Until Page Contains Element    ${selected_parameter_invoice_option}  timeout=10s
     Page Should Contain Element    ${selected_parameter_invoice_option}
@@ -590,13 +592,13 @@ Verify Alt Product Has Less Effective Price But More Net Price
     ${alt_clean_eff}    Remove Characters    ${alt_eff_price}
     ${exc_eff_price}    Get Text    ${initial_product_price_in_exc_cart}
     ${exc_clean_eff}    Remove Characters    ${exc_eff_price}
-    ${eff_result}    Run Keyword And Return Status    ${alt_clean_eff}    <     ${exc_clean_eff}
+    ${eff_result}    Is Greater    ${exc_clean_eff}    ${alt_clean_eff}
     Should Be True    ${eff_result}
     ${alt_net_price}    Get Text    ${alternate_product_net_price}
     ${alt_clean_net}    Remove Characters    ${alt_net_price}
     ${exc_net_price}    Get Text    ${initial_product_net_price_in_exc_cart}
     ${exc_clean_net}    Remove Characters    ${exc_net_price}
-    ${net_result}    Run Keyword And Return Status    ${alt_clean_net}    >     ${exc_clean_net}
+    ${net_result}    Is Greater    ${alt_clean_net}    ${exc_clean_net}
     Should Be True    ${net_result}
 
 
