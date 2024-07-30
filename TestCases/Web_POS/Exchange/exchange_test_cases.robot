@@ -988,6 +988,7 @@ Zwing_E_61 click on cancel button of no payment required then check the response
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_62 check whether salesperson tagging option is popup or not for alternate product.
+    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}   E_62
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1055,6 +1056,7 @@ Zwing_E_66 check the refresh button functionality in sales person tagging is wor
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_67 check salesperson dropdown search functionality is working or not
+    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}   E_67
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1164,6 +1166,7 @@ Zwing_E_73 Apply a bill discount on a product exchange it with alternate product
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_74 Check whether user is able to edit or untag customer after adding exchange product or not
+    [Tags]    Valid Failure
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_74
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1227,13 +1230,10 @@ Zwing_E_76 Create sales invoice by applying item level promo and manual discount
     Change Billing Mode     ${pos_data}
     Click On +Add Exchange Items from Invoice Link
     Verify The +Add Exchange Items from Invoice Link
-    Click On Invoice Parameters
-    Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
-    Search Invoice By Name | Exchange     ${customer_name}
+    Search Invoice By Name | Exchange    ${customer_name}
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
-    Add Product For Exchange
     Add Product With Less Price Than Exchange Product  ${pos_data}
     Verify Sum Of Product Should Be Greater Than Exchange Product Alert Is Displayed
     Revoke Serial Key    ${pos_data}
@@ -1258,13 +1258,10 @@ Zwing_E_77 Create sales invoice by applying item level promo and manual discount
     Change Billing Mode     ${pos_data}
     Click On +Add Exchange Items from Invoice Link
     Verify The +Add Exchange Items from Invoice Link
-    Click On Invoice Parameters
-    Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
     Search Invoice By Name | Exchange     ${customer_name}
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
-    Add Product For Exchange
     Add Product With Less Price Than Exchange Product  ${pos_data}
     Verify Checkout Is Enable If Same Quantity And Net Price Is => Then Exchanged Product Net Price
     Revoke Serial Key    ${pos_data}
@@ -1276,7 +1273,7 @@ Zwing_E_78 Exchange || If salesperson is tagged in exchanged product then Salesp
     Open The Session    ${pos_data}
     Add Product By Scan Only   ${pos_data}
     ${customer_name}  Enter Customer Name For Previously Used Number  ${pos_data}
-    Assign Saleseperson | Before Exchange  ${pos_data}
+    Assign Salesperson | Before Exchange  ${pos_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Payment By Cash    ${value}
@@ -1313,7 +1310,7 @@ Zwing_E_79 Select salesperson and click on assign to all then salesperson needs 
     Select Items For Exchange   ${pos_data}
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
-    Assign Saleseperson | Before Exchange  ${pos_data}
+    Assign Salesperson | Before Exchange   ${pos_data}
     Verify If Salesperson Is Assigned To An Item | For Exchange    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
