@@ -304,6 +304,8 @@ Zwing_SI_20 Navigate to billing page using new bill button on checkout page
    Payment By Cash   ${value}
    Automatic Invoice Generation
    Verify New Bill Button
+   Revoke Serial Key    ${share_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_21 Update the Email address while sharing the Invoice and send invoice
    ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_21

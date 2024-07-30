@@ -1051,6 +1051,8 @@ Zwing_E_66 check the refresh button functionality in sales person tagging is wor
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
     Verify Refresh Button Functionality In Sales Person Tagging Is Working Or Not
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_67 check salesperson dropdown search functionality is working or not
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}   E_67
@@ -1454,6 +1456,8 @@ Zwing_E_84 Apply a item level Promo Buy 4 Get 20% off discount of item , create 
     Scan Barcode To Add Item And Quantity To Cart | Exchange    ${pos_data}
     Verify Product Discount     ${price_per_item}
     Verify Billing Checkout
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_85 Apply a slab based promo on item level ,add multiple unique item in cart with total bill value as per promo ,create a sales invoice then exchange all product
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_85
@@ -1688,6 +1692,8 @@ Zwing_E_98 Search invoice by customer Invoice Number to add exchange items
     Select The Invoice Option Type    ${pos_data}
     Search Invoice By Invoice Number    ${cust_info_checkout}
     Verify Item To Be Exchanged Are Visible    ${cust_info_checkout}
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_99 Search invoice by Entering Invoice No. when Customer Name is selected
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_99
