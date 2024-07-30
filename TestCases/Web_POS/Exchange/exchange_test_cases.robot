@@ -1983,6 +1983,7 @@ Zwing_E_122 Switching Between Billing to Exchange Will Give Confirmation Popup
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_123 Click on Confirm button on switch to Billing popup box
+    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_123
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1994,6 +1995,7 @@ Zwing_E_123 Click on Confirm button on switch to Billing popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_124 Click on Cancel button on switch to Billing popup box
+    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_124
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2005,6 +2007,7 @@ Zwing_E_124 Click on Cancel button on switch to Billing popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_125 Switching Between Exchange to Billing Will Give Confirmation Popup
+    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_125
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2015,6 +2018,7 @@ Zwing_E_125 Switching Between Exchange to Billing Will Give Confirmation Popup
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_126 Click on Confirm button on switch to Order popup box
+    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_126
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2026,6 +2030,7 @@ Zwing_E_126 Click on Confirm button on switch to Order popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_127 Click on Cancel button on switch to Order popup box
+    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_127
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2037,6 +2042,7 @@ Zwing_E_127 Click on Cancel button on switch to Order popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_128 Switching Between Exchange to Order Will Give Confirmation Popup
+    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_128
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2047,6 +2053,7 @@ Zwing_E_128 Switching Between Exchange to Order Will Give Confirmation Popup
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_129 Click on Confirm button on switch to Return popup box
+    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_129
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2058,6 +2065,7 @@ Zwing_E_129 Click on Confirm button on switch to Return popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_130 Click on Cancel button on switch to Return popup box
+    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_130
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2069,6 +2077,7 @@ Zwing_E_130 Click on Cancel button on switch to Return popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_131 Switching Between Exchange to Return Will Give Confirmation Popup
+    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_131
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
