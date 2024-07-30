@@ -40,6 +40,7 @@ Open The Session
         Wait Until Element Is Not Visible    ${opening_balance}    timeout=10s
     END
 
+
 Scan Barcode To Add Item And Quantity To Cart
     [Arguments]    ${products}
     ${my_dict}    Create Dictionary   &{products}

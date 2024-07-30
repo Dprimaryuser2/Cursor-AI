@@ -304,6 +304,8 @@ Zwing_MD_25 Apply Manual Discount Button |Policy : Allows cashier to apply manua
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
      Verify Bill Level Discount Button Is Disabled
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manual discount on bill level | Enable bill level discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_26
@@ -381,6 +383,8 @@ Zwing_MD_32 Apply Manual Discount Button Policy : Discount capping (amount) Bill
      Verify Billing Checkout
      ${bill_data}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
      Verify Bill Level Custom Discount More Than Capping Amount Limit    ${bill_data}
+     Revoke Serial Key    ${discount_data}
+     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_33

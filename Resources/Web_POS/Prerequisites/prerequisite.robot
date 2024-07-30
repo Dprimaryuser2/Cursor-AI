@@ -53,8 +53,9 @@ Tear It Down If Test Case Failed
 
 Revoke The Licence Key From Console
     [Arguments]    ${serial_key}
-    ${serial_key_info}    Create Dictionary   &{serial_key}
+    ${serial_key_info}    Create Dictionary   &{serial_key}    
     ${serial_key_number}=    Set Variable    ${serial_key_info.serial_key}
+    ${clean_serial_key}    Remove Characters    ${serial_key_number}
     Open Application | Admin
     Login Into Admin | Zwing
     Wait Until Keyword Succeeds    8    2    Go To Pos Terminal
