@@ -309,6 +309,10 @@ Verify Customer Tagging Is Not Mandatory
 
 Verify Customer Tagging Is Mandatory
     Click Button    ${checkout_button}
+    ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
+    IF    ${insufficient}
+     Set Fulfillment Date And Continue
+    END
     Wait Until Element Is Visible    ${customer_tagging_mandatory_alert}    timeout=15s
     Page Should Contain Element    ${customer_tagging_mandatory_alert}
 
@@ -326,6 +330,10 @@ Verify Customer Tagging Is Mandatory With Non Mandatory Information
     ${customer_phone_no}=    Convert To Integer    ${customer_phone_no}
     Should Be Equal As Integers    ${customer_phone_no}    ${mobile}
     Click Button    ${checkout_button}
+    ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
+    IF    ${insufficient}
+     Set Fulfillment Date And Continue
+    END
     Wait Until Element Is Visible      ${checkout_heading}    timeout=10s
     Page Should Contain Element    ${checkout_heading}
 
@@ -378,6 +386,10 @@ Verify Customer Tagging Is Mandatory With All Fields
     Wait Until Element Is Visible    ${checkout_button}    timeout=10s
     Sleep    0.5
     Click Button    ${checkout_button}
+    ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
+    IF    ${insufficient}
+     Set Fulfillment Date And Continue
+    END
     Wait Until Element Is Visible      ${checkout_heading}    timeout=10s
     Page Should Contain Element    ${checkout_heading}
 
