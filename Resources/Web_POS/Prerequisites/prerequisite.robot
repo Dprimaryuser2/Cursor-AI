@@ -81,3 +81,8 @@ Go To Pos Terminal
     Wait Until Keyword Succeeds    5    2     Click Element    ${pos_terminal_logo}
     Wait Until Element Is Visible    ${pos_terminal_link}
     Wait Until Keyword Succeeds    5    2     Click Element    ${pos_terminal_link}
+
+
+
+
+
