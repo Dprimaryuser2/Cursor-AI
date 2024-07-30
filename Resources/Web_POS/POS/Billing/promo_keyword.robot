@@ -41,17 +41,6 @@ Open The Session
     END
 
 
-Close The Session
-    [Arguments]    ${search_data}
-    ${my_dict}    Create Dictionary   &{search_data}
-    Wait Until Page Contains Element    ${close_session_icon}
-    Click Element    ${close_session_icon}
-    Wait Until Page Contains Element    ${close_session_header}     timeout=10s
-    Input Text    ${closing_balance_field}    ${my_dict.closing_balance}
-    Click Element    ${close_session_button}
-    Wait Until Page Contains Element    ${session_close_button}  timeout=10s
-    Click Element    ${session_close_button}
-
 Scan Barcode To Add Item And Quantity To Cart
     [Arguments]    ${products}
     ${my_dict}    Create Dictionary   &{products}
