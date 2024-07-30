@@ -2,10 +2,10 @@
 Library    SeleniumLibrary
 Library    ../../../Resources/CustomKeywords/utilities.py
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/promo_keyword.robot
+Resource    ../../../Resources/AdminConsole/Promo/promo_keyword.robot
 Resource    ../../../Resources/AdminConsole/Login/login_keyword.robot
 Resource    ../../../Resources/AdminConsole/Allocation/allocation_keywords.robot
-Resource    ../../../Resources/Web_POS/POS/customer_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
 
 #Suite Setup    Allocate All Promos To Store    ${POS_TD}
 #Test Setup    Open Application | Admin
