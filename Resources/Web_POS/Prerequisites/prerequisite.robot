@@ -52,16 +52,17 @@ Tear It Down If Test Case Failed
 
 Revoke The Licence Key From Console
     [Arguments]    ${serial_key}
-    ${serial_key_info}    Create Dictionary   &{serial_key}
+    ${serial_key_info}    Create Dictionary   &{serial_key}    
     ${serial_key_number}=    Set Variable    ${serial_key_info.serial_key}
+    ${clean_serial_key}    Remove Characters    ${serial_key_number}
     Open Application | Admin
     Login Into Admin | Zwing
     Wait Until Keyword Succeeds    8    2    Go To Pos Terminal
     Wait Until Element Is Visible    ${pos_heading}    timeout=20s
     Wait Until Element Is Visible    ${pos_search_bar}    timeout=20s
-    Input Text    ${pos_search_bar}    ${serial_key_number}
+    Input Text    ${pos_search_bar}    ${clean_serial_key}
     Sleep    0.5s
-    ${tagged_device}=    Replace String    ${tagged_device_edit_link}    Serial_Key    ${serial_key_number}
+    ${tagged_device}=    Replace String    ${tagged_device_edit_link}    Serial_Key    ${clean_serial_key}
     Click Element    ${tagged_device}
     ${status}   Run Keyword And Return Status    Wait until Page contains element   ${remove_device_icon}
     IF    ${status}== False
