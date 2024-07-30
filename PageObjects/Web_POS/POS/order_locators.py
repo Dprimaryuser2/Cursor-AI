@@ -1,0 +1,17 @@
+order_summary_page_heading = '//span[@data-v-682f3abc and contains(text(),"Order Summary")]'
+order_summary_status_pending = '//span[@data-v-682f3abc and contains(text(),"Order Summary")]//span[contains(text(),"Pending")]'
+confirm_order_button = '//button[@class="btn btn-primary btn-block" and contains(text(),"Confirm Order")]'
+print_order_receipt = '//button[@id="print-order-receipt"]'
+insufficient_inventory_cancel_btn = '//button[@class="btn mr-1 btn-outline-primary btn-block"]'
+fulfilment_options_heading = '//h6[@class="mb-4" and contains(text(),"Fulfilment Options")]'
+fulfilment_due_date_option = '//input[@id="datepicker"]'
+fulfilment_calendar_window = '//div[@class="vdp-datepicker__calendar" and @style=""]'
+last_date_of_this_month = '(//div[@class="vdp-datepicker__calendar" and @style=""]//div//child::span[contains(text(),"30") or contains(text(),"31") or contains(text(),"29")])[last()]'
+continue_fulfilment_button = '//button[@class="btn btn-primary btn-block" and text()="Continue"]'
+place_order_button = '//button[@class="btn btn-primary btn-block" and contains(text(),"Place Order")]'
+min_acceptance_criteria_fulfilled = '//span[@class="ml-2" and contains(text(),"Minimum order acceptance criteria fulfilled")]'
+
+bill_container = '//div[@class="container p-0"]'
+name_invoice = '//div[@class="modal-content"]//td[contains(text(),"Name")]/span'
+
+fulfilment_option = '//h6[@class="mb-4"]'

@@ -136,6 +136,7 @@ Verify Item Manual Discount
     [Arguments]    ${product_price}
     Sleep    2s
     ${product_price_dict}    Create Dictionary   &{product_price}
+    Log    ${product_price_dict}
     ${discount_list}=    Convert Items To List    ${product_price_dict.discount}
     ${discount_dict} =    Convert Item List To Dictionary    ${product_price_dict.discount}
     FOR    ${item}    IN    @{discount_dict.items()}

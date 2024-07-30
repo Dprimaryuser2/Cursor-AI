@@ -184,6 +184,7 @@ inventory_option_sidebar = "//a[@title='Inventory']"
 cash_management_option_sidebar = "//li[@title='Cash Management']//a//img"
 pos_option_sidebar = "//a[@id='nav-pos']//img"
 order_management_option_sidebar = "//a[@title='Order Management']//img"
+customers_option_sidebar = "//a[@title='Customers']//img"
 # cash management locators
 cash_management_heading = "//h5[text()='Cash Management']"
 billing_option_switch_default = '//button[@class="btn dropdown-toggle btn-light" and contains(text(),"Billing")]'

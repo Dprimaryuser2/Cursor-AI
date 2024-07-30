@@ -403,7 +403,6 @@ Verify Edited Group
         Sleep    0.5
         ${group}=    Replace String    //div[@class="d-flex"]//span[text()="REGULAR"]    REGULAR    ${uppercase_string}
         Wait Until Page Contains Element    ${group}
-        
     END
 
 Verify Customer Tagged With Tax Invoice GST Number

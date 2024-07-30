@@ -540,6 +540,7 @@ Verify Alternate Product With Equal Price was Added To Cart
     Remove Characters   ${alt_product_price}
     Remove Characters    ${initial_product_price}
     Should Be Equal As Strings    ${alt_product_price}    ${initial_product_price}
+
 Search Invoice By Name| Exchange
    [Arguments]    ${first_name}
    Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
