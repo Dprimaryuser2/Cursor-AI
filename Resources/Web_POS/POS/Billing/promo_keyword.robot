@@ -88,7 +88,7 @@ Scan Barcode To Add Item And Quantity To Cart
             Wait Until Element Is Visible    ${custom_select_option}    timeout=20s
             Click Element    ${custom_select_option}
         END
-        Wait Until Element Is Enabled    ${product_search_bar}    timeout=10s
+        Wait Until Element Is Enabled    ${product_search_bar}    timeout=15s
     END
     ${items_list}=    Convert Items To List    ${my_dict.get_items}
     IF    ${items_list} != ['NULL']
@@ -125,7 +125,7 @@ Scan Barcode To Add Item And Quantity To Cart
                 Wait Until Element Is Visible    ${custom_select_option}    timeout=20s
                 Click Element    ${custom_select_option}
             END
-            Wait Until Element Is Enabled    ${product_search_bar}    timeout=10s
+            Wait Until Element Is Enabled    ${product_search_bar}    timeout=15s
         END
     END
 

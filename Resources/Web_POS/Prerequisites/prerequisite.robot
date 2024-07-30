@@ -8,6 +8,7 @@ Variables    ../../../PageObjects/Web_POS/Settings/serial_information_locators.p
 Variables    ../../../PageObjects/AdminConsole/POSTerminal/pos_terminal.py
 Resource    ../../../Resources/AdminConsole/Login/login_keyword.robot
 Variables    ../../../PageObjects/Web_POS/POS/pos_locators.py
+Resource   ../../../Resources/Web_POS/POS/Billing/add_to_cart_keyword.robot
 
 *** Keywords ***
 Revoke Serial Key
@@ -60,24 +61,49 @@ Revoke The Licence Key From Console
     Wait Until Element Is Visible    ${pos_heading}    timeout=20s
     Wait Until Element Is Visible    ${pos_search_bar}    timeout=20s
     Input Text    ${pos_search_bar}    ${serial_key_number}
-    Sleep    0.5s
+    Sleep    1s
     ${tagged_device}=    Replace String    ${tagged_device_edit_link}    Serial_Key    ${serial_key_number}
     Click Element    ${tagged_device}
     ${status}   Run Keyword And Return Status    Wait until Page contains element   ${remove_device_icon}
     IF    ${status}== False
     Wait Until Keyword Succeeds    5    2    Click Element  ${update_button}
     Sleep    1
-    Close Browser
+#    Close Browser
+    Close Window
+    Switch Browser    1
     ELSE
     Wait Until Element Is Visible    ${remove_device_icon}    timeout=10s
     Wait Until Keyword Succeeds    5    2     Click Element    ${remove_device_icon}
     Wait Until Element Is Visible    ${remove_modal_body}    timeout=10s
     Wait Until Keyword Succeeds    5    2     Click Button    ${remove_button}
     Wait Until Element Is Not Visible    ${remove_modal_body}    timeout=10s
-    Close Browser
+#    Close Browser
+    Close Window
+    Switch Browser    1
     END
 
 Go To Pos Terminal
     Wait Until Keyword Succeeds    5    2     Click Element    ${pos_terminal_logo}
     Wait Until Element Is Visible    ${pos_terminal_link}
     Wait Until Keyword Succeeds    5    2     Click Element    ${pos_terminal_link}
+
+Close Session With Clear Cache
+   [Arguments]    ${pos_data}
+   ${pos_data}    Create Dictionary   &{pos_data}
+   ${status}=  Run Keyword And Return Status    Wait Until Element Is Enabled    ${done_progress}
+   IF    ${status}
+        Open The Session    ${pos_data}
+        Sleep  2s
+   END
+   ${status_done}=  Run Keyword And Return Status    Element Should Be Visible    ${opening_balance}
+    IF    ${status_done}
+        Open The Session    ${pos_data}
+        Sleep  2s
+   END
+   Close The Session    ${pos_data}
+   Logout From The POS
+   Delete All Cookies
+   Execute JavaScript    window.localStorage.clear();
+   Execute JavaScript    window.sessionStorage.clear();
+   Reload Page
+   Revoke The Licence Key From Console    ${pos_data}

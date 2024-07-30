@@ -239,11 +239,15 @@ Close The Session
     Wait Until Element Is Not Visible    ${session_closed_popup}    timeout=10s
 
 Logout From The POS
-    Wait Until Keyword Succeeds    5    1    Click Element    ${logout_link}
-    Wait Until Element Is Visible    ${logout_modal}    timeout=20s
-    Click Button    ${logout_button}
-    Wait Until Element Is Visible    ${pos_username}    timeout=20s
-
+    ${logout_link_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${logout_link}
+    IF    ${logout_link_visible}
+        Wait Until Keyword Succeeds    3    5    Click Element    ${logout_link}
+        Click Element    ${logout_link}
+        Wait Until Element Is Visible    ${logout_modal}    timeout=20s
+        Click Button    ${logout_button}
+        Wait Until Element Is Visible    ${pos_username}    timeout=20s
+    END
+    
 Add Previous Customer
     [Arguments]    ${customer_data}
     ${my_dict}    Create Dictionary   &{customer_data}

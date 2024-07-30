@@ -919,4 +919,5 @@ Add Customer Group
     Wait Until Element Is Visible    ${save_button_customer_group}    timeout=10s
     Wait Until Keyword Succeeds    2     1    Click Element    ${save_button_customer_group}
     Sleep    3s
+    Wait Until Page Contains Element    ${start_billing_button}
     [Return]    ${total_groups_tagged}

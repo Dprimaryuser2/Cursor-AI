@@ -234,10 +234,10 @@ close_session_button = '//button[@id="session-cont"]'
 session_closed_popup = '//div[@id="session-box___BV_modal_body_"]//p[contains(text(),"Session Closed")]'
 session_close_button = '//button[@id="session-close"]'
 session_print_slip_button = '//button[@id="print-session-slip"]'
-logout_link = '//a[@id="logout_btn_nav"]/img'
+logout_link = '//li//a[@id="logout_btn_nav"]/img'
 logout_modal = '//div[@id="log_out___BV_modal_body_"]'
 logout_cancel_button = '//div[@id="log_out___BV_modal_body_"]//button[contains(text(),"Cancel")]'
-logout_button = '//span[contains(text(),"Logout")]//ancestor::button'
+logout_button = '//button[@class="btn ml-1 btn-danger"]'
 
 # previous session
 add_items_from_previous_session = '//div[@class="modal-body"]//h6[contains(text(),"Add items from previous session?")]'
