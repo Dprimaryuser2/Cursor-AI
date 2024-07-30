@@ -27,7 +27,7 @@ scan_only = '//div[@class="v-switch-button"]'
 salesperson_button = '//button[@id="category-salesperson"]'
 salesperson_refresh = "//button[text()='Refresh']"
 salesperson_dropdown = '//span[contains(text(),"Select Salesperson")]'
-salesperson_search_field = '//input[@placeholder="Search..."]'
+salesperson_search_field = '//input[@placeholder="Search salesperson"]'
 salesperson = '//input[@placeholder="Search..."]//ancestor::div[@class="dropdown-body w-100"]//li'
 assign_salesperson_window_heading = '//p[@class="mb-0"]//b[text()="Assign Salesperson"]'
 assign_salesperson_search = '//input[@class="search pl-0 form-control"]'
@@ -41,7 +41,7 @@ salesperson_exchange = '(//span[@class="pt-2 fs-12 text-grey"])[1]'
 salesperson_exchange_alternate = '(//span[@class="pt-2 fs-12 text-grey"])[2]'
 close_icon_salesperson_dropdown = '//div[@class="w-100"]//div//*[name()="svg"]'
 salesperson_untagged_message = '//div[@class="alert alert-dismissible alert-success" and text()="Salesperson untagged."]'
-
+clear_salesperson = '//button[@class="btn ml-2 mr-1 btn-secondary btn-danger"]'
 view_held_bills = '//button[@id="category-held-bills"]'
 hold_bill = '//button[@id="category-hold-bill"]'
 hold_bill_confirmation = '//button[@id="put-hold-bill"]'
@@ -68,6 +68,7 @@ custom_select_options = '//select[@class="custom-select custom-select-sm"]//opti
 custom_select_quantity = '//span[text()="ITEM"]//ancestor::td//following-sibling::td//option[@value="option_value"]'
 price = '(//td[@aria-colindex="4"])[1]'
 discount_field = '(//td[@aria-colindex="5"])[1]'
+alternate_exchange_discount_field = '(//td[@aria-colindex="5"])[2]'
 discount_field_row_2 = '(//td[@aria-colindex="5"])[2]'
 net_price = '//td[@aria-colindex="6"]'
 cancel_item = '(//td[@aria-colindex="6"])[1]'
@@ -148,7 +149,10 @@ open_session_link = '//div[@class="fadein col-md-6 col-lg-6" and not(@style="dis
 select_mrp="//h5[@class='modal-title' and contains(text(),'Select MRP')]"
 select_mrp_refresh="//button[@class='btn add-to-cart serve-refresh btn-light btn-sm' and contains(text(),'Refresh')]"
 add_to_cart_mrp="//button[@id='multiple-mrp-add-to-cart' and @class='btn m-0 custom-btn btn-secondary']"
+mrp_product_2_row = "//input[@id='2']"
 
+invoice_not_found='//div[@class="alert alert-dismissible alert-danger"]'
+confirm_exchange="//button[@class='btn ml-1 btn-primary btn-block']"
 # Discard after half payment
 discard_payment_bill = '//p[contains(normalize-space(),"Discard Bill")]'
 discard_confirm = '//span[text()="Yes, Discard"]'
@@ -285,7 +289,7 @@ cancel_btn_exchange_window = '//button[@class="btn mr-3 btn-outline-primary btn-
 continue_btn_exchange_window = '//div[@class="text-right d-flex pr-2 col-4"]//button[contains(@class,"btn btn-primary btn-block")]'
 add_product_for_exchange_btn = '//button[@class="primary-light fs-12 my-1 add-prod-exchanged"]'
 cancel_adding_product_btn = '//button[@class="primary-light fs-12 my-1 add-prod-exchanged cancel-prod-exchanged"]'
-invoice_not_found = '//div[@class="alert alert-dismissible alert-danger" and contains(text(),"Invoice not found")]'
+# invoice_not_found = '//div[@class="alert alert-dismissible alert-danger" and contains(text(),"Invoice not found")]'
 searched_invoice_number_heading = '//div[contains(text(),"Invoice Number")]'
 searched_invoice_date_heading = '//div[contains(text(),"Date")]'
 searched_invoice_item_heading = '//div[contains(text(),"Items")]'
@@ -306,13 +310,14 @@ item_price_exchange='(//div[@class="pl-1 col-3"]//following-sibling::div)[2]'
 
 all_searched_invoice = '(//div[@class="ex-invoice-table my-3 mx-n2"]//div[@class="vertical-scroll exchange-scroll"])[1]'
 alternate_product_in_exc_cart = '(//a[@class="product-name text-danger"])'
-disabled_alternate_product_qty_in_exc_cart= '//a[@class="product-name text-danger"]//ancestor::tr[@class="b-table-row-outofstock border-bottom-0"]//descendant::select[@disabled="disabled"]'
+disabled_alternate_product_qty_in_exc_cart= '//a[@class="product-name text-danger"]//ancestor::tr[@class="b-table-row-outofstock border-bottom-0"]//descendant::select[@disabled="disabled"]//option[1]'
 alternate_product_net_price = '//a[@class="product-name text-danger"]//ancestor::tr[@class="b-table-row-outofstock border-bottom-0"]//descendant::td[@aria-colindex="6"]'
 alternate_product_discount_price = '//a[@class="product-name text-danger"]//ancestor::tr[@class="b-table-row-outofstock border-bottom-0"]//descendant::td[@aria-colindex="5"]'
 alternate_product_price = '//a[@class="product-name text-danger"]//ancestor::tr[@class="b-table-row-outofstock border-bottom-0"]//descendant::td[@aria-colindex="4"]'
 initial_product_in_exc_cart = '//a[@class="product-name"]'
 initial_product_net_price_in_exc_cart = '//a[@class="product-name"]//ancestor::tr[@role="row"]//descendant::td[@aria-colindex="6"]'
-initial_product_qty_in_exc_cart = '//a[@class="product-name"]//ancestor::tr[@role="row"]//descendant::td[@aria-colindex="5"]'
+initial_product_discount_price = '//a[@class="product-name"]//ancestor::tr[@role="row"]//descendant::td[@aria-colindex="5"]'
+initial_product_qty_in_exc_cart = '//a[@class="product-name"]//ancestor::tr[@role="row"]//descendant::td[@aria-colindex="3"]//select//option[1]'
 initial_product_price_in_exc_cart= '//a[@class="product-name"]//ancestor::tr[@role="row"]//descendant::td[@aria-colindex="4"]'
 searched_invoice_number = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[not(contains(text(),"AM")) and not(contains(text(),"PM")) and @class="grey-100 col-2"])[1]'
 searched_customer_name = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[contains(@class,"grey-") and contains(@class,"col-3")])[1]'
@@ -320,7 +325,7 @@ searched_phone_number = '(//div[contains(@class,"exchange-invoices-col rows alig
 total_number_of_items = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="col-1"])[1]'
 amount = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="px-4 col-2"])[1]'
 searched_invoice_date = '(//div[contains(@class,"exchange-invoices-col rows align-content-center")]/div[@class="grey-100 col-2" and contains(text(),"PM") or contains(text(),"AM")])'
-
+esp_alert = '//span[contains(text(),"Sum of ESP of all alternate item should be greater than or equal to that of exchange item, please replace existing product with product of higher value")]'
 select_all_items_checkbox = '//input[@id="select-all"]//following-sibling::label'
 selected_all_item = '//input[@id="select-all"]'
 exchange_item_checkbox = '//input[@id="product-0"]//following-sibling::label'
@@ -331,4 +336,19 @@ no_product_selected_message = '//p[contains(text(),"No product selected for exch
 
 total_qty_of_item = '(//div[contains(text(),"SKU/Barcode")]//ancestor::div[@class="ex-invoice-table my-3 mx-n2"]//div[contains(@class,"vertical-scroll exchange-scroll")]//div[@class="col-1"])[1]'
 exchange_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[1]'
-# alternate_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[2]'
+alternate_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[2]'
+alert_sum_esp = '//div[@class="col-11"]//h6[@class="mb-2 fs-14" and contains(text(),"Alert")]'
+unit_price_of_product_ex = '(//div[@class="row fs-13 py-3 rows px-4 fs-12 grey-100 align-items-center"]//div[@class="col-1"])[2]'
+alert_sum_esp = '//div[@class="col-11"]//h6[@class="mb-2 fs-14" and contains(text(),"Alert")]'
+
+
+clear_salesperson = '//button[@class="btn ml-2 mr-1 btn-secondary btn-danger"]'
+alert_sum_esp = '//div[@class="col-11"]//h6[@class="mb-2 fs-14" and contains(text(),"Alert")]'
+unit_price_of_product_ex = '(//div[@class="row fs-13 py-3 rows px-4 fs-12 grey-100 align-items-center"]//div[@class="col-1"])[2]'
+mrp_product_2_row = "//input[@id='2']"
+customer_untag_button_exchange = '//button[@id="untag-customer"]'
+
+product_row_exchange = '//a[@class="product-name text-danger"]'
+assigned_salesperson = '(//span[@class="pt-2 fs-12 text-grey"])[1]'
+assigned_Salesperson_alternate = '(//span[@class="pt-2 fs-12 text-grey"])[2]'
+assign_salesperson_field_disable = '//input[@placeholder="No salesperson found in this store."]'

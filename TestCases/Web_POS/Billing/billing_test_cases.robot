@@ -292,7 +292,7 @@ Zwing_B_26 Payable amount should become editable when split payment toggle is en
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     ${value}    Get payable amount
-    Verify Billing Checkout    
+    Verify Billing Checkout
     Enable Split payment mode
     Verify split payment toggle button is enabled
     Revoke Serial Key    ${pos_data}

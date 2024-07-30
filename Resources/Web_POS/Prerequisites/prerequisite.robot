@@ -52,7 +52,7 @@ Tear It Down If Test Case Failed
 
 Revoke The Licence Key From Console
     [Arguments]    ${serial_key}
-    ${serial_key_info}    Create Dictionary   &{serial_key}
+    ${serial_key_info}    Create Dictionary   &{serial_key}    
     ${serial_key_number}=    Set Variable    ${serial_key_info.serial_key}
     ${clean_serial_key}    Remove Characters    ${serial_key_number}
     Open Application | Admin
@@ -82,3 +82,8 @@ Go To Pos Terminal
     Wait Until Keyword Succeeds    5    2     Click Element    ${pos_terminal_logo}
     Wait Until Element Is Visible    ${pos_terminal_link}
     Wait Until Keyword Succeeds    5    2     Click Element    ${pos_terminal_link}
+
+
+
+
+
