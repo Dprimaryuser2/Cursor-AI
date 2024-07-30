@@ -10,7 +10,7 @@ Library    ../../../Resources/CustomKeywords/utilities.py
 
 Suite Setup  Open Application | POS
 #Test Setup  Open Application | POS
-Test Teardown  Close Session With Clear Cache
+#Test Teardown  Close Session With Clear Cache
 
 *** Variables ***
 ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}salesperson_test_data.xlsx
@@ -26,7 +26,7 @@ ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}s
 #   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_2
 #   Login With Valid Username And Password | POS    ${pos_data}
 #   Close Session With Clear Cache  ${pos_data}
-#   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+#   [Teardown]     Close Session With Clear Cache    ${pos_data}
 
 
 Zwing_ST_1 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Policies
@@ -37,7 +37,7 @@ Zwing_ST_1 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory i
    Add Customer Details    ${pos_data}
    Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Policies
    Close Session With Clear Cache    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   [Teardown]     Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_2 Salesperson Tagging is Enabled and Salesperson Tagging is Optional in Policies
     [Tags]    Demo
@@ -47,8 +47,8 @@ Zwing_ST_2 Salesperson Tagging is Enabled and Salesperson Tagging is Optional in
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Add Customer Details    ${pos_data}
    Verify Salesperson Tagging is Enabled and Salesperson Tagging is Optional in Policies
-    Close Session With Clear Cache    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   Close Session With Clear Cache    ${pos_data}
+   [Teardown]     Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_3 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory after adding the product in Policies
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_3
@@ -56,8 +56,8 @@ Zwing_ST_3 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory a
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Policies after adding the product    ${pos_data}
-     Close Session With Clear Cache    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Close Session With Clear Cache    ${pos_data}
+    [Teardown]     Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_4 Salesperson Tagging Item Level
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_4
@@ -67,8 +67,8 @@ Zwing_ST_4 Salesperson Tagging Item Level
     Add Customer Details    ${pos_data}
     Assign A Salesperson To An Item  ${pos_data}
     Verify If Salesperson Is Assigned To An Item    ${pos_data}
-     Close Session With Clear Cache    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Close Session With Clear Cache    ${pos_data}
+    [Teardown]     Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_5 Salesperson Tagging Bill Level
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_5
@@ -78,8 +78,8 @@ Zwing_ST_5 Salesperson Tagging Bill Level
     Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Salesperson Tagged At Bill Level    ${pos_data}
-     Close Session With Clear Cache    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Close Session With Clear Cache    ${pos_data}
+    [Teardown]     Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_6 Tag Single Salesperson To multiple Items
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_6
@@ -88,8 +88,8 @@ Zwing_ST_6 Tag Single Salesperson To multiple Items
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     Verify Assign Same Salesperson To All Products Except Last Product   ${pos_data}
-     Close Session With Clear Cache    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Close Session With Clear Cache    ${pos_data}
+    [Teardown]     Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_7 Tag Different salesperson for each item
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_7
@@ -99,8 +99,8 @@ Zwing_ST_7 Tag Different salesperson for each item
     Add Customer Details    ${pos_data}
     Assign A different Salesperson To Each Item  ${pos_data}
     Verify If Different Salesperson Was Assigned To Each Person
-     Close Session With Clear Cache    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Close Session With Clear Cache    ${pos_data}
+      [Teardown]     Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_8 Change Salesperson tagging for item
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_8
@@ -110,8 +110,8 @@ Zwing_ST_8 Change Salesperson tagging for item
     Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Change Salesperson tagging for item    ${pos_data}
-     Close Session With Clear Cache    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Close Session With Clear Cache    ${pos_data}
+      [Teardown]     Tear It Down If Test Case Failed    ${pos_data}
 
 
 Zwing_ST_9 Change Salesperson tagging for bill
@@ -122,8 +122,8 @@ Zwing_ST_9 Change Salesperson tagging for bill
     Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Change Salesperson tagging for bill   ${pos_data}
-     Close Session With Clear Cache    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Close Session With Clear Cache    ${pos_data}
+      [Teardown]     Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_10 Tagged Sales person view below the tagged Item
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_10
@@ -133,8 +133,8 @@ Zwing_ST_10 Tagged Sales person view below the tagged Item
     Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Salesperson Tagged At Bill Level    ${pos_data}
-     Close Session With Clear Cache    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Close Session With Clear Cache    ${pos_data}
+      [Teardown]     Tear It Down If Test Case Failed    ${pos_data}
 
 #Zwing_ST_11
 
@@ -143,5 +143,5 @@ Zwing_ST_12 Salesperson Tagging is Disabled in policies
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Verify Salesperson Tagging is Disabled
-     Close Session With Clear Cache    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Close Session With Clear Cache    ${pos_data}
+      [Teardown]     Tear It Down If Test Case Failed    ${pos_data}

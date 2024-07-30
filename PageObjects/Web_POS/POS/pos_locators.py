@@ -27,7 +27,7 @@ scan_only = '//div[@class="v-switch-button"]'
 salesperson_button = '//button[@id="category-salesperson"]'
 salesperson_refresh = "//button[text()='Refresh']"
 salesperson_dropdown = '//span[contains(text(),"Select Salesperson")]'
-salesperson_search_field = '//input[@placeholder="Search salesperson"]'
+salesperson_search_field = '//input[@placeholder="Search..."]'
 salesperson = '//input[@placeholder="Search..."]//ancestor::div[@class="dropdown-body w-100"]//li'
 assign_salesperson_window_heading = '//p[@class="mb-0"]//b[text()="Assign Salesperson"]'
 assign_salesperson_search = '//input[@class="search pl-0 form-control"]'

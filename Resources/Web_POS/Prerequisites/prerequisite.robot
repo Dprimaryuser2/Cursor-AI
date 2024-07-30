@@ -50,6 +50,11 @@ Tear It Down If Test Case Failed
     [Arguments]    ${discount_data}
     Run Keyword If Test Failed    Revoke The Licence Key From Console     ${discount_data}
     Sleep    1
+    ${status}=  Run Keyword And Return Status    Page Should Contain Element    ${pos_option_sidebar}
+    IF    ${status}
+        Close All Browsers
+        Open Application | POS
+    END
 
 Revoke The Licence Key From Console
     [Arguments]    ${serial_key}
@@ -101,6 +106,10 @@ Close Session With Clear Cache
         Open The Session    ${pos_data}
         Sleep  2s
    END
+   ${status3}=  Run Keyword And Return Status   Page Should Contain Element    ${checkout_heading}
+    IF    ${status3}
+        Click Element    ${back_icon_on_checkout}
+   END
    Close The Session    ${pos_data}
    Logout From The POS
    Delete All Cookies
@@ -108,3 +117,4 @@ Close Session With Clear Cache
    Execute JavaScript    window.sessionStorage.clear();
    Reload Page
    Revoke The Licence Key From Console    ${pos_data}
+   Sleep  2s
