@@ -63,7 +63,7 @@ Revoke The Licence Key From Console
     Input Text    ${pos_search_bar}    ${clean_serial_key}
     Sleep    0.5s
     ${tagged_device}=    Replace String    ${tagged_device_edit_link}    Serial_Key    ${clean_serial_key}
-    Click Element    ${tagged_device}
+    Wait Until Keyword Succeeds    5    2    Click Element    ${tagged_device}
     ${status}   Run Keyword And Return Status    Wait until Page contains element   ${remove_device_icon}
     IF    ${status}== False
     Wait Until Keyword Succeeds    5    2    Click Element  ${update_button}

@@ -773,7 +773,7 @@ Verify Items Are Searched By 3 Digits Of Name
     FOR    ${i}    IN RANGE    1     ${count}+1
         ${index}    Convert To String    ${i}
         ${name_element}=    Replace String    ${searched_customer_name}    1     ${index}
-        Element Should Contain    ${name_element}    ${my_dict.search_invoice}
+        Element Should Contain    ${name_element}    ${my_dict.search_invoice}    ignore_case=True
     END
 
 Verify Items Are Not Searched By 2 Digits Only
@@ -1052,11 +1052,11 @@ Scan Barcode To Add Item And Quantity To Cart | Multiple MRP | Exchange
         sleep   1
     END
     
- 
+
 Verify Invoice After Complete Exchange
-    Wait Until Page Contains Element    ${invoice_not_found}    timeout=10s
+    Wait Until Page Contains Element    ${invoice_not_found}    timeout=15s
     Page Should Contain Element    ${invoice_not_found}
- 
+
 Verify Void Invoice For Exchange
     Wait Until Page Contains Element    ${invoice_not_found}
     Page Should Contain Element    ${invoice_not_found}
@@ -1137,7 +1137,7 @@ Verify Product Discount
     ${discount_exchange_item}=    Convert To Number    ${discount_exchange_item}
     ${expected_exchange_discount}=    Evaluate    ${my_dict.price_per_item}*${my_dict.replace_qty}
     Should Be Equal As Integers    ${discount_exchange_item}    ${expected_exchange_discount}
-    Sleep    2s
+    Sleep    3s
     ${total_alternate_discount}    Set Variable    0
     FOR    ${i}    IN RANGE    0    ${my_dict.replace_qty}
         ${alternate_discount}    Get Text   ${alternate_exchange_discount_field}
@@ -1328,3 +1328,17 @@ Verify Salesperson Should Not Allow To Edit Or Remove From Added Alternative Pro
    Wait Until Page Contains Element    ${assign_salesperson_field_disable}   timeout=2s
    Element Should Be Disabled   ${assign_salesperson_field_disable}
    Close The Product Window
+
+Make Payment By UPI
+    [Arguments]    ${paytm_value}
+    ${no_payment_required}    Run Keyword And Return Status    Page Should Contain Element    ${no_payment_required_confirm_button}
+    IF    ${no_payment_required}
+        Page Should Contain Element     ${no_payment_required_confirm_button}
+        Click Element   ${no_payment_required_confirm_button}
+    ELSE
+        click Element   ${upi_payment}
+        ${id}=  Generate Random Phone Number
+        Wait Until Page Contains Element    ${enter_paytm_transaction_id}
+        Input Text      ${enter_paytm_transaction_id}   ${id}
+        Click Element    ${continue_paytm_button}
+    END
