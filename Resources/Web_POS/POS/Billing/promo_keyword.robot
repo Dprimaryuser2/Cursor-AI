@@ -130,6 +130,7 @@ Scan Barcode To Add Item And Quantity To Cart
         END
     END
 
+
 Add Multiple MRP Products
     Wait Until Page Contains Element    ${select_mrp}   timeout=10s
     Click Element    ${add_to_cart_mrp}

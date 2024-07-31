@@ -49,7 +49,7 @@ Revoke Serial Key
 Tear It Down If Test Case Failed
     [Arguments]    ${discount_data}
     Run Keyword If Test Failed    Revoke The Licence Key From Console     ${discount_data}
-    Sleep    1
+    Sleep    0.2
     ${status}=  Run Keyword And Return Status    Page Should Contain Element    ${pos_option_sidebar}
     IF    ${status}
         Close All Browsers
@@ -99,12 +99,12 @@ Close Session With Clear Cache
    ${status}=  Run Keyword And Return Status    Wait Until Element Is Enabled    ${done_progress}
    IF    ${status}
         Open The Session    ${pos_data}
-        Sleep  2s
+        Sleep  0.5s
    END
    ${status_done}=  Run Keyword And Return Status    Element Should Be Visible    ${opening_balance}
     IF    ${status_done}
         Open The Session    ${pos_data}
-        Sleep  2s
+        Sleep  0.5s
    END
    ${status3}=  Run Keyword And Return Status   Page Should Contain Element    ${checkout_heading}
     IF    ${status3}
@@ -117,4 +117,4 @@ Close Session With Clear Cache
    Execute JavaScript    window.sessionStorage.clear();
    Reload Page
    Revoke The Licence Key From Console    ${pos_data}
-   Sleep  2s
+   Sleep  0.5s
