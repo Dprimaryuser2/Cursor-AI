@@ -145,7 +145,7 @@ carry_bag_input_field = '//h6[@id="label-undefined" and text()="Carry bag"]//anc
 carry_bag_amount_field = '//h6[@id="label-undefined" and text()="Carry bag"]//ancestor::div[@class="row mb-2"]//span'
 add_carry_bag_unit_button = '//button[@id="add-carry-bags"]'
 close_button = '//button[@class="close"]'
-open_session_link = '//div[@class="fadein col-md-6 col-lg-6" and not(@style="display: none;")]//div[@id="session-info"]//a'
+open_session_link = '//a[@id="nav-open-session"]'
 select_mrp="//h5[@class='modal-title' and contains(text(),'Select MRP')]"
 select_mrp_refresh="//button[@class='btn add-to-cart serve-refresh btn-light btn-sm' and contains(text(),'Refresh')]"
 add_to_cart_mrp="//button[@id='multiple-mrp-add-to-cart' and @class='btn m-0 custom-btn btn-secondary']"
@@ -234,10 +234,10 @@ close_session_button = '//button[@id="session-cont"]'
 session_closed_popup = '//div[@id="session-box___BV_modal_body_"]//p[contains(text(),"Session Closed")]'
 session_close_button = '//button[@id="session-close"]'
 session_print_slip_button = '//button[@id="print-session-slip"]'
-logout_link = '//a[@id="logout_btn_nav"]/img'
+logout_link = '//li//a[@id="logout_btn_nav"]/img'
 logout_modal = '//div[@id="log_out___BV_modal_body_"]'
 logout_cancel_button = '//div[@id="log_out___BV_modal_body_"]//button[contains(text(),"Cancel")]'
-logout_button = '//span[contains(text(),"Logout")]//ancestor::button'
+logout_button = '//button[@class="btn ml-1 btn-danger"]'
 
 # previous session
 add_items_from_previous_session = '//div[@class="modal-body"]//h6[contains(text(),"Add items from previous session?")]'
@@ -335,10 +335,8 @@ no_product_selected_message = '//p[contains(text(),"No product selected for exch
 
 total_qty_of_item = '(//div[contains(text(),"SKU/Barcode")]//ancestor::div[@class="ex-invoice-table my-3 mx-n2"]//div[contains(@class,"vertical-scroll exchange-scroll")]//div[@class="col-1"])[1]'
 exchange_product_net_price = '(//td[@aria-colindex="6" and @class="text-right  align-middle"])[1]'
-
 alert_sum_esp = '//div[@class="col-11"]//h6[@class="mb-2 fs-14" and contains(text(),"Alert")]'
 unit_price_of_product_ex = '(//div[@class="row fs-13 py-3 rows px-4 fs-12 grey-100 align-items-center"]//div[@class="col-1"])[2]'
-
 
 customer_untag_button_exchange = '//button[@id="untag-customer"]'
 
