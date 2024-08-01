@@ -158,9 +158,9 @@ Zwing_O_34 Add item from previous session
     Scan And Add Product     ${pos_data}
     ${customer_info}    Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    Go Back
-    Close The Session    ${pos_data}
-    Logout From The POS
+    Go Back To POS Dashboard
+    Close The Session For Adding The Item From Previous Session   ${pos_data}
+    Logout From The POS For Adding The Item From Previous Session
     Login Again With Same User Id And Password   ${pos_data}
     Add Previous Customer    ${customer_info}
     ${items}    Add Items From Previous Session
@@ -175,9 +175,9 @@ Zwing_O_35 Add item from previous session>> Discard Button
     Scan And Add Product     ${pos_data}
     ${customer_info}    Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    Go Back
-    Close The Session    ${pos_data}
-    Logout From The POS
+    Go Back To POS Dashboard
+    Close The Session For Adding The Item From Previous Session   ${pos_data}
+    Logout From The POS For Adding The Item From Previous Session
     Login Again With Same User Id And Password   ${pos_data}
     Add Previous Customer    ${customer_info}
     ${items}    Discard Previous Added Item
@@ -192,9 +192,9 @@ Zwing_O_36 Add item from previous session>> Add item to cart
     Scan And Add Product     ${pos_data}
     ${customer_info}    Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    Go Back
-    Close The Session    ${pos_data}
-    Logout From The POS
+    Go Back To POS Dashboard
+    Close The Session For Adding The Item From Previous Session   ${pos_data}
+    Logout From The POS For Adding The Item From Previous Session
     Login Again With Same User Id And Password   ${pos_data}
     Add Previous Customer    ${customer_info}
     ${items}    Add Items From Previous Session

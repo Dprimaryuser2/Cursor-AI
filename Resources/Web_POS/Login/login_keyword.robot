@@ -32,6 +32,8 @@ Login With Valid Username And Password | POS
 Login Again With Same User Id And Password
     [Arguments]     ${search_data}
     ${my_dict}    Create Dictionary   &{search_data}
+    Input Text    ${serial_key}    ${my_dict.serial_key}
+    Click Button    ${register_button}
     Wait Until Element Is Visible    ${pos_username}    timeout=20s
     Input Text    ${pos_username}     ${my_dict.username_pos}
     Click Button    ${pos_continue_button}

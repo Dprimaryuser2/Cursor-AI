@@ -19,7 +19,7 @@ Add Customer Details
     Set Test Variable    ${mobile}
     Input Text    ${customer_phone_field}    ${mobile}
     Click Button    ${continue_billing_button}
-    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
     ${first_name}=    Generate Random First Name
     Set Test Variable    ${first_name}
     Input Text    ${customer_first_name_field}    ${first_name}
