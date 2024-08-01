@@ -303,7 +303,7 @@ Zwing_MD_24 Apply Manual Discount Button | Select the effective date and valid u
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_25 Apply Manual Discount Button |Policy : Allows cashier to apply manual discount on bill level | Disable bill level discount
-    [Tags]    try
+    [Tags]    debugged
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_25
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -315,7 +315,7 @@ Zwing_MD_25 Apply Manual Discount Button |Policy : Allows cashier to apply manua
      [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manual discount on bill level | Enable bill level discount
-    [Tags]    try
+    [Tags]    debugged
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_26
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -327,7 +327,7 @@ Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manua
      [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_27 Apply Manual Discount Button Policy : Allow cashier to select bill level discount from given list | Disable bill level discount list
-    [Tags]    try
+    [Tags]    debugged
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_27
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -339,7 +339,7 @@ Zwing_MD_27 Apply Manual Discount Button Policy : Allow cashier to select bill l
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_28 Apply Manual Discount Button Policy : Allow cashier to select bill level discount from given list | Enable bill level discount list
-    [Tags]    try
+    [Tags]    debugged
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_28
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}

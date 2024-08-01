@@ -144,7 +144,7 @@ TC_C11 Add Customer to all available groups
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 
-TC_C12 tag customer with tax invoice GST number
+TC_C12 Tag customer with tax invoice GST number
      ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_12
      Log    ${pos_data}
      Login With Valid Username And Password | POS   ${pos_data}
@@ -155,7 +155,7 @@ TC_C12 tag customer with tax invoice GST number
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-TC_C13 tag customer with tax invoice UIN number
+TC_C13 Tag customer with tax invoice UIN number
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_13
      Log    ${pos_data}
      Login With Valid Username And Password | POS   ${pos_data}
