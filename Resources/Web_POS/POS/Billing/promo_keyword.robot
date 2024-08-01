@@ -28,18 +28,61 @@ Open The Session
     END
     ${closing_balance_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance}
     IF    ${closing_balance_visible}
-        Input Text    ${closing_balance}    ${my_dict.closing_balance}
+        ${items_list}=    Convert Items To List    ${my_dict.closing_balance}
+        ${items_dict} =    Convert Item List To Dictionary    ${my_dict.closing_balance}
+        FOR    ${item}    IN    @{items_dict.items()}
+            ${key}=    Set Variable    ${item}[0]
+            ${key}    Convert To String    ${key}
+            ${values}=    Set Variable    ${item}[1]
+            Input Text    ${closing_balance}    ${key}
+        END
         Click Element    ${force_close_button}
-        Wait Until Element Is Visible    ${opening_balance}    timeout=20s
+        Wait Until Element Is Not Visible    ${force_close_button}    timeout=20s
+    END
+    ${closing_balance_specify_denomination_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance_note_tab}
+    IF    ${closing_balance_specify_denomination_visible}
+        ${items_list}=    Convert Items To List    ${my_dict.closing_balance}
+        ${items_dict} =    Convert Item List To Dictionary    ${my_dict.closing_balance}
+        FOR    ${item}    IN    @{items_dict.items()}
+            ${key}=    Set Variable    ${item}[0]
+            ${key}    Convert To String    ${key}
+            ${values}=    Set Variable    ${item}[1]
+            ${value}=    Convert To String    ${values}
+            ${balance_field}    Replace String    ${money_input_field}    AMOUNT      ${key}
+            Input Text    ${balance_field}    ${value}
+        END
+        Click Element    ${open_session_submit_button}
+        Wait Until Element Is Not Visible    ${closing_balance_note_tab}    timeout=10s
     END
     ${opening_session_present}=    Run Keyword And Return Status    Element Should Be Visible    ${opening_balance}    timeout=10s
     IF    ${opening_session_present}
         Clear Element Text    ${opening_balance}
-        Input Text    ${opening_balance}    ${my_dict.opening_balance}
+        ${items_list}=    Convert Items To List    ${my_dict.opening_balance}
+        ${items_dict} =    Convert Item List To Dictionary    ${my_dict.opening_balance}
+        FOR    ${item}    IN    @{items_dict.items()}
+            ${key}=    Set Variable    ${item}[0]
+            ${key}=    Convert To String    ${key}
+            ${values}=    Set Variable    ${item}[1]
+            Input Text    ${opening_balance}    ${key}
+        END
         Click Element    ${open_session_submit_button}
         Wait Until Element Is Not Visible    ${opening_balance}    timeout=10s
     END
-
+    ${opening_session_specify_denomination_present}=    Run Keyword And Return Status    Element Should Be Visible    ${open_session_notes_tab}    timeout=10s
+    IF    ${opening_session_specify_denomination_present}
+        ${items_list}=    Convert Items To List    ${my_dict.opening_balance}
+        ${items_dict} =    Convert Item List To Dictionary    ${my_dict.opening_balance}
+        FOR    ${item}    IN    @{items_dict.items()}
+            ${key_int}=    Set Variable    ${item}[0]
+            ${key}    Convert To String    ${key_int}
+            ${values}=    Set Variable    ${item}[1]
+            ${value}=    Convert To String    ${values}
+            ${balance_field}    Replace String    ${money_input_field}    AMOUNT      ${key}
+            Input Text    ${balance_field}    ${value}
+        END
+        Click Element    ${open_session_submit_button}
+        Wait Until Element Is Not Visible    ${opening_balance}    timeout=10s
+    END
 
 Scan Barcode To Add Item And Quantity To Cart
     [Arguments]    ${products}

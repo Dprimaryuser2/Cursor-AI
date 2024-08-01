@@ -7,8 +7,8 @@ Resource    ../../../Resources/AdminConsole/Login/login_keyword.robot
 Resource    ../../../Resources/AdminConsole/Allocation/allocation_keywords.robot
 Resource    ../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
 
-#Suite Setup    Allocate All Promos To Store    ${POS_TD}
-#Test Setup    Open Application | Admin
+Suite Setup    Allocate All Promos To Store    ${POS_TD}
+Test Setup    Open Application | Admin
 Test Teardown   Close Browser
 
 *** Variables ***

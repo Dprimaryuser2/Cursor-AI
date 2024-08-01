@@ -351,3 +351,9 @@ product_row_exchange = '//a[@class="product-name text-danger"]'
 assigned_salesperson = '(//span[@class="pt-2 fs-12 text-grey"])[1]'
 assigned_Salesperson_alternate = '(//span[@class="pt-2 fs-12 text-grey"])[2]'
 assign_salesperson_field_disable = '//input[@placeholder="No salesperson found in this store."]'
+
+# Open and Close Session With Specify denomination
+closing_balance_note_tab = '//h5[text()="Close Session"]//ancestor::div//a[(contains(text(),"Notes")) and @role="tab"]'
+open_session_notes_tab = '//h5[text()="Open Session"]//ancestor::div//a[(contains(text(),"Notes")) and @role="tab"]'
+coins_tab = '//a[(contains(text(),"Coins")) and @role="tab"]'
+money_input_field = '//p[contains(text(),"₹ AMOUNT")]//ancestor::div[@class="col-3"]//following-sibling::div//input'

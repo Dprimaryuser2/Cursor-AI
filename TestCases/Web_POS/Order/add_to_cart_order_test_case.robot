@@ -66,7 +66,7 @@ Zwing_ATC_5 Add Normal sku with Fixed UOM and 0 Inventory to cart with disable n
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    Scan And Add Product        ${pos_data}
     Verify 0 Inventory To Cart With Disable Negative Inventory    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -114,7 +114,7 @@ Zwing_ATC_9 Add Normal sku with weighted UOM to cart >> Add Qty mode with disabl
 Zwing_ATC_10 Validate the count of total no. of items added to the cart.
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_10
     Login With Valid Username And Password | POS   ${pos_data}
-    Open The Session    ${pos_data}s
+    Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
     Add Weighted UOM Products to Cart | Add Cart Quantity Mode | Order    ${pos_data}
     Verify Item Is Added | Order    ${pos_data}
