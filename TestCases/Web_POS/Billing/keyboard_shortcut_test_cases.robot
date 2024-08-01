@@ -17,16 +17,6 @@ Test Teardown   Close Browser
 ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}keyboard_shortcut_test_data.xlsx
 
 *** Test Cases ***
-Zwing_KB_15 Checkout using shortcut before opening session
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_15
-    Login With Valid Username And Password | POS   ${pos_data}
-    Open The Session    ${pos_data}
-    Scan And Add Product    ${pos_data}
-    Press Shortcut Key    ${pos_data}
-    Verify Shortcut Does Not Navigates To Checkout Page When Session Is Closed
-    Open Session Before Revoking Serial Key    ${pos_data}
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_01 Search product using keyboard shortcut
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_1
@@ -87,6 +77,7 @@ Zwing_KB_06 Hold the current bill using keyboard shortcut
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_07 Add manual discount using keyboard shortcut
+    [Tags]    Valid Failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_7
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -128,6 +119,7 @@ Zwing_KB_10 Tag a customer using keyboard shortcut after tagging a customer
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_11 Cancel current bill using keyboard shortcut
+    [Tags]    Valid Failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_11
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -148,6 +140,7 @@ Zwing_KB_12 Checkout bill using keyboard shortcut when ST is optional
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_13 Checkout bill using keyboard shortcut when ST is mandatory
+    [Tags]    Valid Failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_13
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -166,6 +159,17 @@ Zwing_KB_14 Checkout bill using keyboard shortcut without tagging customer
     Press Shortcut Key    ${pos_data}
     Verify Shortcut Navigates To Checkout Page When CT Is Mandatory
      Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_KB_15 Checkout using shortcut before opening session
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_15
+    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Scan And Add Product    ${pos_data}
+    Press Shortcut Key    ${pos_data}
+    Verify Shortcut Does Not Navigates To Checkout Page When Session Is Closed
+    Open Session Before Revoking Serial Key    ${pos_data}
+    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_16 Search product using keyboard shortcut | Order Mode
@@ -210,6 +214,7 @@ Zwing_KB_19 view Salesperson using keyboard shortcut | Order Mode
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_20 Add manual discount using keyboard shortcut | Order Mode
+    [Tags]    Valid Failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_20
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -243,6 +248,7 @@ Zwing_KB_22 On Order screen before tagging a customer, press Ctrl + A | Order Mo
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_23 On Order screen after tagging a customer, press Ctrl + A | Order Mode
+    [Tags]    Valid Failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_23
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -255,6 +261,7 @@ Zwing_KB_23 On Order screen after tagging a customer, press Ctrl + A | Order Mod
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_24 Cancel current bill using keyboard shortcut on Order Screen | Order Mode
+    [Tags]    Valid Failure
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_24
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -290,6 +297,7 @@ Zwing_KB_26 Checkout bill using keyboard shortcut-Without tagging salesperson wh
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_27 Checkout bill using keyboard shortcut-Without tagging customer when policy for customer is mandatory, press Ctrl + B on Order Screen
+    [Tags]    Valid Failure
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_27
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}

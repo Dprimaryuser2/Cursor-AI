@@ -91,7 +91,7 @@ Scan Barcode To Add Item And Quantity To Cart
     Wait Until Element Is Visible    ${scan_only}    timeout=20s
     ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
     IF    ${clear_item_enabled}
-      Click Element    ${clear_all_items}
+      Wait Until Keyword Succeeds    3    3    Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
     END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}

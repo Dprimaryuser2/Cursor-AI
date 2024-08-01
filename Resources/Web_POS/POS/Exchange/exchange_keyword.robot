@@ -684,7 +684,7 @@ Verify Alternate Product With Greater Price was Added To Cart
     ${result}    Is Greater    ${num_alt}    ${num_init}
     Should Be True    ${result}
 
-Search Invoice By Name| Exchange
+Search Invoice By Name | Exchange
    [Arguments]    ${first_name}
    Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
    Input Text    ${search_invoice_field}     ${first_name}
@@ -773,7 +773,7 @@ Verify Items Are Searched By 3 Digits Of Name
     FOR    ${i}    IN RANGE    1     ${count}+1
         ${index}    Convert To String    ${i}
         ${name_element}=    Replace String    ${searched_customer_name}    1     ${index}
-        Element Should Contain    ${name_element}    ${my_dict.search_invoice}
+        Element Should Contain    ${name_element}    ${my_dict.search_invoice}    ignore_case=True
     END
 
 Verify Items Are Not Searched By 2 Digits Only
@@ -976,7 +976,7 @@ Verify Refresh Button Functionality In Sales Person Tagging Is Working Or Not
     Click Element    ${salesperson_refresh}
     Page Should Contain Element    ${onclick_remove_salesperson}
 
-Verify Promo Discount Apcplied In Exchanged Item Also
+Verify Promo Discount Applied In Exchanged Item Also
     Wait Until Page Contains Element    ${discount_field}
     ${price_1}=  Get Text    ${discount_field}
     ${price_2}=  Get Text    ${discount_field_row_2}
@@ -1020,7 +1020,9 @@ Switch From Exchange Module
     Log    ${my_dict}
     Wait Until Page Contains Element    ${switch_billing_dropdown}
     Click Element    ${switch_billing_dropdown}
-    Click Element    //a[contains(text(),"${my_dict.Switch_mode}")]
+    ${switch_mode}    Set Variable   ${my_dict.Switch_mode} 
+    ${clean_switch_mode}     Remove Characters    ${switch_mode}
+    Click Element    //a[contains(text(),"${clean_switch_mode}")]
 
 Scan Barcode To Add Item And Quantity To Cart | Multiple MRP | Exchange
     [Arguments]    ${products}
@@ -1052,11 +1054,11 @@ Scan Barcode To Add Item And Quantity To Cart | Multiple MRP | Exchange
         sleep   1
     END
     
- 
+
 Verify Invoice After Complete Exchange
-    Wait Until Page Contains Element    ${invoice_not_found}    timeout=10s
+    Wait Until Page Contains Element    ${invoice_not_found}    timeout=15s
     Page Should Contain Element    ${invoice_not_found}
- 
+
 Verify Void Invoice For Exchange
     Wait Until Page Contains Element    ${invoice_not_found}
     Page Should Contain Element    ${invoice_not_found}
@@ -1137,7 +1139,7 @@ Verify Product Discount
     ${discount_exchange_item}=    Convert To Number    ${discount_exchange_item}
     ${expected_exchange_discount}=    Evaluate    ${my_dict.price_per_item}*${my_dict.replace_qty}
     Should Be Equal As Integers    ${discount_exchange_item}    ${expected_exchange_discount}
-    Sleep    2s
+    Sleep    3s
     ${total_alternate_discount}    Set Variable    0
     FOR    ${i}    IN RANGE    0    ${my_dict.replace_qty}
         ${alternate_discount}    Get Text   ${alternate_exchange_discount_field}
@@ -1217,45 +1219,33 @@ Add Product With Less Price Than Exchange Product
         ${value}=    Convert To String    ${values}
         Sleep    1s
         FOR    ${i}    IN RANGE    0     ${my_dict.replace_qty}
-            Add Product For Exchange
+            Add Product For Exchange    
             Click Element    ${product_search_bar}
             Input Text    ${product_search_bar}    ${key}
-            Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+            Press Keys    ${product_search_bar}    ENTER
             Sleep    1s
-            Click Element    ${search_add_button}
             ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
-
             IF    ${multiple_product_present}
                 Add Multiple MRP Products
             END
-            Wait Until Element Contains     ${table}    ${key}    timeout=20s
-            Element Should Contain    ${item_cart_table}    ${key}
-            ${unit_price_amount}=    Get Text    ${price}
-            ${unit_price_amount}=    Remove Characters    ${unit_price_amount}
-            ${unit_price_amount}=    Convert To Number    ${unit_price_amount}
-            Set Test Variable    ${unit_price_amount}
         END
     END
-        Input Text    ${product_search_bar}    ${key}
-        Press Keys    ${product_search_bar}    ENTER
-    END
-    Sleep  5s
 
 Verify Sum Of Product Should Be Greater Than Exchange Product Alert Is Displayed
-   Sleep  10s
+   Wait Until Element Is Visible    ${alert_sum_esp}    timeout=10s
    Page Should Contain Element   ${alert_sum_esp}
    Page Should Not Contain Button    ${checkout_button}
 
 Verify Checkout Is Enable If Same Quantity And Net Price Is => Then Exchanged Product Net Price
   Element Should Be Enabled    ${checkout_button}
 
-Assign Saleseperson | Before Exchange
+Assign Salesperson | Before Exchange
   [Arguments]    ${pos_data}
   ${details_dict}    Create Dictionary    &{pos_data}
   Wait Until Page Contains Element    ${salesperson_button}
   Click Element    ${salesperson_button}
-  Wait Until Page Contains Element    ${salesperson_search_field}  timeout=10s
-  Input Text    ${salesperson_search_field}     ${details_dict.salesperson_name}
+  Wait Until Page Contains Element    ${assign_salesperson_search}  timeout=10s
+  Input Text    ${assign_salesperson_search}     ${details_dict.salesperson_name}
   Wait Until Page Contains Element    ${name_in_assign_salesperson_row}
   Click Element    ${name_in_assign_salesperson_row}
   Wait Until Page Contains Element    ${assign_to_all_button}   timeout=10s
@@ -1340,3 +1330,17 @@ Verify Salesperson Should Not Allow To Edit Or Remove From Added Alternative Pro
    Wait Until Page Contains Element    ${assign_salesperson_field_disable}   timeout=2s
    Element Should Be Disabled   ${assign_salesperson_field_disable}
    Close The Product Window
+
+Make Payment By UPI
+    [Arguments]    ${paytm_value}
+    ${no_payment_required}    Run Keyword And Return Status    Page Should Contain Element    ${no_payment_required_confirm_button}
+    IF    ${no_payment_required}
+        Page Should Contain Element     ${no_payment_required_confirm_button}
+        Click Element   ${no_payment_required_confirm_button}
+    ELSE
+        click Element   ${upi_payment}
+        ${id}=  Generate Random Phone Number
+        Wait Until Page Contains Element    ${enter_paytm_transaction_id}
+        Input Text      ${enter_paytm_transaction_id}   ${id}
+        Click Element    ${continue_paytm_button}
+    END

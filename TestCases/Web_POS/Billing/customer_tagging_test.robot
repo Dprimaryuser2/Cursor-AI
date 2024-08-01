@@ -51,6 +51,7 @@ TC_C3 Customer Tagging is mandatory with non mandatory customer information
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 TC_C4 Customer Tagging is mandatory with all fields mandatory in customer information
+    [Tags]    try
      ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_04
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -83,6 +84,7 @@ TC_C6 Edit Customer Information
 
 
 TC_C7 Edit Customer Group
+    [Tags]    try
      ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_07
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}

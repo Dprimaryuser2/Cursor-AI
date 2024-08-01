@@ -132,6 +132,7 @@ Verify 0 Inventory To Cart With Disable Negative Inventory | Carry Bag
         ${values}=    Set Variable    ${item}[1]
         ${value}=    Convert To String    ${values}
     END
+    Wait Until Page Contains Element    ${negative_inventory_alert}    timeout=10
     Page Should Contain Element    ${negative_inventory_alert}
     Page Should Contain Element    ${cart_0}
 
