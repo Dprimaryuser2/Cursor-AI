@@ -137,7 +137,7 @@ Verify Entered Transaction ID
     Wait Until Page Contains Element    ${additional_mop_popup}    timeout=20s
     Wait Until Page Contains Element    ${enter_paytm_transaction_id}
     Input Text    ${transaction_reference_id}    ${reference_id}
-    Page Should Contain    ${reference_id}
+    Element Should Contain    ${transaction_reference_id}    ${reference_id}
     Element Should Be Enabled    ${continue_payment_button}
     Click Button    ${continue_payment_button}
     Wait Until Page Contains Element   ${payment_complete_heading}  timeout=10s

@@ -363,9 +363,11 @@ Verify Customer Tagging Is Mandatory With All Fields
     Click Element    ${pincode}
     Input Text    ${pincode}    ${my_dict.pincode}
     Press Keys    ${pincode}    ENTER
-    Wait Until Page Contains Element    ${start_billing_button}    timeout=10s
+    Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
     Click Button    ${start_billing_button}
-    Wait Until Element Is Visible    ${payable_amount}
+    Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=10s
+    Wait Until Page Does Not Contain Element    ${customer_tagged_popup}    timeout=10s
+    Wait Until Element Is Visible    ${payable_amount}    timeout=10s
     Wait Until Element Is Visible    ${checkout_button}    timeout=10s
     Sleep    0.5
     Click Button    ${checkout_button}
@@ -402,7 +404,7 @@ Verify Edited Group
         ${uppercase_string}   Evaluate    "${item}".upper()
         Sleep    0.5
         ${group}=    Replace String    //div[@class="d-flex"]//span[text()="REGULAR"]    REGULAR    ${uppercase_string}
-        Wait Until Page Contains Element    ${group}
+        Wait Until Page Contains Element    ${group}    timeout=10s
         
     END
 

@@ -1020,7 +1020,9 @@ Switch From Exchange Module
     Log    ${my_dict}
     Wait Until Page Contains Element    ${switch_billing_dropdown}
     Click Element    ${switch_billing_dropdown}
-    Click Element    //a[contains(text(),"${my_dict.Switch_mode}")]
+    ${switch_mode}    Set Variable   ${my_dict.Switch_mode} 
+    ${clean_switch_mode}     Remove Characters    ${switch_mode}
+    Click Element    //a[contains(text(),"${clean_switch_mode}")]
 
 Scan Barcode To Add Item And Quantity To Cart | Multiple MRP | Exchange
     [Arguments]    ${products}
