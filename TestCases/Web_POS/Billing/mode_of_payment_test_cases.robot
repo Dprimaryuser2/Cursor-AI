@@ -191,6 +191,7 @@ Zwing_MOP_26 Clicking on a MOP should open a popup to enter transaction referenc
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_MOP_27 Additional MOP's | Enter transaction id
+    [Tags]    debugged
     ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_27
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
