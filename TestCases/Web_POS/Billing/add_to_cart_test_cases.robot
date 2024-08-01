@@ -51,6 +51,7 @@ Zwing_O_4 Add Normal sku with Fixed UOM and 0 Inventory to cart with enabled neg
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_5 Add Normal sku with Fixed UOM and 0 Inventory to cart with disable negative Inventory
+    [Tags]    debugged
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_05
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -157,9 +158,9 @@ Zwing_O_34 Add item from previous session
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     ${customer_info}    Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    Go Back
-    Close The Session    ${pos_data}
-    Logout From The POS
+    Go Back To POS Dashboard
+    Close The Session For Adding The Item From Previous Session    ${pos_data}
+    Logout From The POS For Adding The Item From Previous Session
     Login Again With Same User Id And Password   ${pos_data}
     Add Previous Customer    ${customer_info}
     ${items}    Add Items From Previous Session
@@ -174,9 +175,9 @@ Zwing_O_35 Add item from previous session>> Discard Button
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     ${customer_info}    Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    Go Back
-    Close The Session    ${pos_data}
-    Logout From The POS
+    Go Back To POS Dashboard
+    Close The Session For Adding The Item From Previous Session    ${pos_data}
+    Logout From The POS For Adding The Item From Previous Session
     Login Again With Same User Id And Password   ${pos_data}
     Add Previous Customer    ${customer_info}
     ${items}    Discard Previous Added Item
@@ -191,9 +192,9 @@ Zwing_O_36 Add item from previous session>> Add item to cart
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     ${customer_info}    Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    Go Back
-    Close The Session    ${pos_data}
-    Logout From The POS
+    Go Back To POS Dashboard
+    Close The Session For Adding The Item From Previous Session       ${pos_data}
+    Logout From The POS For Adding The Item From Previous Session
     Login Again With Same User Id And Password   ${pos_data}
     Add Previous Customer    ${customer_info}
     ${items}    Add Items From Previous Session

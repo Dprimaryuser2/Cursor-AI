@@ -28,8 +28,7 @@ Zwing_ST_1 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory i
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_2 Salesperson Tagging is Enabled and Salesperson Tagging is Optional in Policies
-    [Tags]    Demo
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_2
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_2
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode  ${pos_data}
