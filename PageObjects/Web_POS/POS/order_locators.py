@@ -1,15 +1,4 @@
 insufficient_inventory_cancel_btn = '//button[@class="btn mr-1 btn-outline-primary btn-block"]'
-fulfilment_options_heading = '//h6[@class="mb-4" and contains(text(),"Fulfilment Options")]'
-fulfilment_due_date_option = '//input[@id="datepicker"]'
-fulfilment_calendar_window = '//div[@class="vdp-datepicker__calendar" and @style=""]'
-last_date_of_this_month = '(//div[@class="vdp-datepicker__calendar" and @style=""]//div//child::span[contains(text(),"30") or contains(text(),"31") or contains(text(),"29")])[last()]'
-continue_fulfilment_button = '//button[@class="btn btn-primary btn-block" and text()="Continue"]'
-place_order_button = '//button[@class="btn btn-primary btn-block" and contains(text(),"Place Order")]'
-min_acceptance_criteria_fulfilled = '//span[@class="ml-2" and contains(text(),"Minimum order acceptance criteria fulfilled")]'
-bill_container = '//div[@class="container p-0"]'
-name_invoice = '//div[@class="modal-content"]//td[contains(text(),"Name")]/span'
-
-fulfilment_option = '//h6[@class="mb-4"]'
 
 stock_point_alert_popup = '//div[@class="popup-notification"]//child::div'
 stock_point_popup_confirm_order = "//div[@class='tooltip-inner']"
@@ -70,3 +59,5 @@ add_remark_textarea = '//textarea[@id="remark-input"]'
 clear_bill_remark = '//button[@id="clear-bill-remark"]'
 save_bill_remark ='//button[@id="save-bill-remark"]'
 close_bill_remark = '//button[@class="close"]'
+
+
