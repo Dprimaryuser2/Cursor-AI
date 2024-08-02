@@ -16,9 +16,9 @@ Test Teardown   Close Browser
 ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}billing_test_data.xlsx
 
 *** Test Cases ***
-Zwing_B_1 Auto Switch To Billing
+Zwing_B_01 Auto Switch To Billing
    [Tags]    Demo
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_1
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_01
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -27,8 +27,9 @@ Zwing_B_1 Auto Switch To Billing
    Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_B_2 Add Product to cart by scanning barcode
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_2
+Zwing_B_02 Add Product to cart by scanning barcode
+    [Tags]    debugged
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_02
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Add Product By Scan Only   ${pos_data}
@@ -37,6 +38,7 @@ Zwing_B_2 Add Product to cart by scanning barcode
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_03 Add Product to cart by searching Product Name / barcode
+    [Tags]    debugged
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_03
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -54,7 +56,7 @@ Zwing_B_04 Add product from catalog
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_B_5 Add Multiple price products to cart
+Zwing_B_05 Add Multiple price products to cart
      ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_05
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -63,7 +65,7 @@ Zwing_B_5 Add Multiple price products to cart
      Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_B_6 Tag a New customer to a bill
+Zwing_B_06 Tag a New customer to a bill
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_06
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -73,7 +75,7 @@ Zwing_B_6 Tag a New customer to a bill
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_B_7 Tag a Existing customer to a bill
+Zwing_B_07 Tag a Existing customer to a bill
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_07
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -259,6 +261,7 @@ Zwing_B_23 Collect payment by redeem voucher
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_24 Collect payment using Credit Store
+    [Tags]    debugged
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_24
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -388,6 +391,7 @@ Zwing_B_32 Generate Invoice with Zero bill amount
 
 
 Zwing_B_33 Apply Bill level Promos
+   [Tags]    debugged
    ${pos_data}=    Fetch Testdata By Id   ${POS_TD}    TC_33
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
