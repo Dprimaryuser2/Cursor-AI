@@ -105,6 +105,7 @@ Apply Bill Manual Discount | Select From List
 Apply Bill Manual Discount | Custom Discount
     [Arguments]    ${discount_data}
     ${discount_dict_data}    Create Dictionary   &{discount_data}
+    Sleep    2
     ${grand_total_amt}=    Get Text    ${grand_total}
     ${grand_total_amt}    Remove Characters    ${grand_total_amt}
     ${grand_total_amt}    Convert To Number    ${grand_total_amt}
@@ -273,6 +274,7 @@ Verify Enable Bill Level Discount List
 Verify Enable Bill Level Custom Discount
     Page Should Contain Element    ${bill_discount}
     Element Should Be Enabled    ${bill_discount}
+    Sleep    1
     Click Button    ${bill_discount}
     Wait Until Element Is Visible    ${custom_discount_tab}
     Page Should Not Contain Element    ${disabled_custom_discount_tab}
@@ -281,6 +283,7 @@ Verify Enable Bill Level Custom Discount
 Verify Disable Bill Level Custom Discount
     Page Should Contain Element    ${bill_discount}
     Element Should Be Enabled    ${bill_discount}
+    Sleep    1
     Click Button    ${bill_discount}
     Wait Until Element Is Visible    ${custom_discount_tab}
     Page Should Contain Element    ${disabled_custom_discount_tab}

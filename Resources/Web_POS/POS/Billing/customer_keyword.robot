@@ -380,8 +380,9 @@ Verify Customer Tagging Is Mandatory With All Fields
     Click Element    ${pincode}
     Input Text    ${pincode}    ${my_dict.pincode}
     Press Keys    ${pincode}    ENTER
-    Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
+    Wait Until Page Contains Element    ${start_billing_button}    timeout=10s
     Click Button    ${start_billing_button}
+    Wait Until Page Does Not Contain Element    ${start_billing_button}    timeout=10s
     Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=10s
     Wait Until Page Does Not Contain Element    ${customer_tagged_popup}    timeout=10s
     Wait Until Element Is Visible    ${payable_amount}    timeout=10s

@@ -145,7 +145,7 @@ Zwing_CB_13 Validate Details Of Carry Bag Details As On Cart Screen To The Produ
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_14 Set variance limit and enter price override less or more than total price but within variance limit
-    [Tags]    try
+    [Tags]    debugged
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_14
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
