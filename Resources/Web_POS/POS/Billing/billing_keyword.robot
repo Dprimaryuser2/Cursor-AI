@@ -205,10 +205,9 @@ Change Billing Mode
     Click Element    ${switch_confirm_button}
     Wait Until Page Contains Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Mode}"]
 
-
 Auto Switch To Billing
-    Click Element    ${order_management_option_sidebar}
-    Wait Until Page Contains Element    ${order_management_option_sidebar}
+    Click Element    ${customers_option_sidebar}
+    Wait Until Page Contains Element    ${customers_option_sidebar}
     Click Element    ${pos_option_sidebar}
     Wait Until Page Contains Element    ${switch_modal_text}
     Wait Until Page Contains Element    ${switch_modal_proceed_button}
