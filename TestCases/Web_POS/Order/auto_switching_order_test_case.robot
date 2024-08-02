@@ -2,13 +2,10 @@
 Library    SeleniumLibrary
 Resource   ../../../Resources/Web_POS/Login/login_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/Billing/billing_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Library    ../../../Resources/CustomKeywords/utilities.py
-Resource    ../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
-Resource    ../../../Resources/Web_POS/POS/Order/order_keywords.robot
+Resource    ../../../Resources/Web_POS/POS/Order/auto_switch_order_keywords.robot
 Resource    ../../../Resources/Web_POS/POS/Return/adhoc_return_keywords.robot
 
 Test Setup  Open Application | POS

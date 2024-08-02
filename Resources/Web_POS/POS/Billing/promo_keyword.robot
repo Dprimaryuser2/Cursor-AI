@@ -529,13 +529,13 @@ Verify Promo Discount In Side Cart | POS
     #verification
     Should Be Equal As Integers   ${expected_payable_amount}    ${payable_amt}
 
+
 Verify Billing Checkout
-    Sleep    0.5
-    Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
-    ${discard}=    Run Keyword And Return Status    Element Should Be Enabled    ${discard_item_previous_session}
+    ${discard}=    Run Keyword And Return Status    Element Should Be Visible       ${discard_button}
     IF    ${discard}
-     Discard Previous Added Item
+         Click Button    ${discard_button}
     END
+    Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
     Click Button    ${checkout_button}
     ${popup_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${updating_catalog_heading}
     IF    ${popup_visible}
@@ -555,6 +555,15 @@ Verify Billing Checkout
     Wait Until Element Is Visible    ${checkout_heading}    timeout=20s
     Page Should Contain Element    ${checkout_heading}
     Sleep    1s
+    ${feedback}    Run Keyword And Return Status    Element Should Be Visible    //label[text()="Customer Feedback "]
+    IF    ${feedback}
+        ${text}    Generate Random Name
+        Input Text    //label[text()="Customer Feedback "]//following-sibling::div/input    ${text}
+        Click Button    //span[text()="Save"]//ancestor::button
+    END
+
+
+
 
 Verify Promo Discount On Modal | Checkout Page
     [Arguments]    ${promo_data}

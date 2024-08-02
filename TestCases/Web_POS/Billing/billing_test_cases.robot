@@ -28,7 +28,6 @@ Zwing_B_01 Auto Switch To Billing
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_02 Add Product to cart by scanning barcode
-    [Tags]    debugged
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_02
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -38,7 +37,6 @@ Zwing_B_02 Add Product to cart by scanning barcode
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_03 Add Product to cart by searching Product Name / barcode
-    [Tags]    debugged
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_03
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -261,7 +259,6 @@ Zwing_B_23 Collect payment by redeem voucher
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_24 Collect payment using Credit Store
-    [Tags]    debugged
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_24
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -391,7 +388,6 @@ Zwing_B_32 Generate Invoice with Zero bill amount
 
 
 Zwing_B_33 Apply Bill level Promos
-   [Tags]    debugged
    ${pos_data}=    Fetch Testdata By Id   ${POS_TD}    TC_33
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}

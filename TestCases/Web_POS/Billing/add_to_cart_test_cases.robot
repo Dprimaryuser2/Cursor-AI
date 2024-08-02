@@ -51,7 +51,6 @@ Zwing_O_4 Add Normal sku with Fixed UOM and 0 Inventory to cart with enabled neg
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_5 Add Normal sku with Fixed UOM and 0 Inventory to cart with disable negative Inventory
-    [Tags]    debugged
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_05
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}

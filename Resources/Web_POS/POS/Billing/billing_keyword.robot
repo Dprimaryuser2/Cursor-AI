@@ -490,6 +490,8 @@ Validate Account Balance Are Equal On Tagged Customer Details and Checkout Page
     Click Element    ${close_customer_window}
     Wait Until Element Is Enabled    ${checkout_button}
     Click Element    ${checkout_button}
+    Wait Until Page Does Not Contain Element    ${checkout_button}   timeout=20s
+    Wait Until Page Contains Element    ${checkout_heading}   timeout=20s
     ${feedback_window}=  Run Keyword And Return Status    Page Should Contain Element    ${checkout_customer_feedback}
     IF    ${feedback_window}
         Input Text    ${checkout_customer_feedback}    Good!
@@ -574,7 +576,7 @@ Verify Bill Level Promos Applied
     Wait Until Page Contains Element    ${bill_promo_discount}
     Page Should Contain Element    ${bill_promo_discount}
     ${bpromo_discount}  Get Text    ${bill_promo_discount}
-    ${stotal}    Get Text    ${sub_total}
+    ${stotal}    Get Text    ${checkout_sub_total}
     ${taxes_value}    Get Text    ${taxes}
     ${s}    Remove Characters   ${stotal}
     ${b}    Remove Characters    ${bpromo_discount}

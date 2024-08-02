@@ -266,12 +266,6 @@ Scan Barcode To Add Item And Quantity To Cart | Exchange
         IF    ${multiple_product_present}
             Add Multiple MRP Products
         END
-        Wait Until Element Contains     ${table}    ${key}    timeout=20s
-        Element Should Contain    ${item_cart_table}    ${key}
-        ${unit_price_amount}=    Get Text    ${price}
-        ${unit_price_amount}=    Remove Characters    ${unit_price_amount}
-        ${unit_price_amount}=    Convert To Number    ${unit_price_amount}
-        Set Test Variable    ${unit_price_amount}
     END
 
 Add Alternate Items In Exchange Cart
@@ -588,6 +582,8 @@ Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity 
     Page Should Contain Element    ${esp_alert}
 
 Verify Alt Product Has Less Effective Price But More Net Price
+    Wait Until Page Contains Element    ${alternate_product_price}    timeout=10
+    Wait Until Page Contains Element    ${initial_product_price_in_exc_cart}    timeout=10
     ${alt_eff_price}    Get Text    ${alternate_product_price}
     ${alt_clean_eff}    Remove Characters    ${alt_eff_price}
     ${exc_eff_price}    Get Text    ${initial_product_price_in_exc_cart}
@@ -647,6 +643,16 @@ Verify Price Override Not Possible For Alternate Product
 #    ${clean_init}    Remove Characters    ${initial_product_price}
 #    ${result}     Is Greater    ${clean_init}    ${clean_alt}
 #    Should Be True    ${result}
+Verify Alternate Product Has Less Quantity And More Net Price
+    Wait Until Page Contains Element    ${alternate_product_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
+    ${clean_alt}    Remove Characters    ${alt_product_price}
+    ${clean_init}    Remove Characters    ${initial_product_price}
+    ${result}     Is Greater    ${clean_alt}    ${clean_init}
+    Should Be True    ${result}
+    Element Should Be Disabled    ${disabled_checkout_button}
+
 
 Verify Alternate Products With Sum Of Net Price Greater Than Exc Products Was Added To Cart
     Wait Until Page Contains Element    ${alternate_product_net_price}
