@@ -8,16 +8,18 @@ Resource    ../../../Resources/Web_POS/POS/Billing/billing_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/Billing/mode_of_payment_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Resource    ../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
-
+Resource    ../../../Resources/Web_POS/POS/Order/mode_of_payment_keywords.robot
+Resource    ../../../Resources/Web_POS/POS/Order/customer_tagging_order_keyword.robot
+Variables   ../../../PageObjects/Web_POS/POS/order_locators.py
 Test Setup    Open Application | POS
 Test Teardown   Close Browser
 
 *** Variables ***
-${MOP_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}mode_of_payment_test_data.xlsx
+${MOP_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}mode_of_payment_order_test_data.xlsx
 
 *** Test Cases ***
 Zwing_O_96 Customer Paid amount equal to payable amount
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_01
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_96
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
      Change Billing Mode    ${mop_data}
@@ -26,13 +28,13 @@ Zwing_O_96 Customer Paid amount equal to payable amount
      ${value}    Get Payable Amount
      Verify Billing Checkout
      Payment By Cash    ${value}
-     Verify If Payment Is Complete Or Not
-     Verify Successful Payment    ${value}    ${customer_details}
+     Verify If Payment Is Complete Or Not | Order
+     Verify Successful Payment | Order    ${value}    ${customer_details}
      Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_97 Customer Paid amount less than to payable amount(continue button remains disabled)
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_02
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_97
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
      Change Billing Mode    ${mop_data}
@@ -46,7 +48,7 @@ Zwing_O_97 Customer Paid amount less than to payable amount(continue button rema
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_98 Customer Paid amount more than to payable amount
-     ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_03
+     ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_98
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
      Change Billing Mode    ${mop_data}
@@ -55,15 +57,15 @@ Zwing_O_98 Customer Paid amount more than to payable amount
      ${value}    Get Payable Amount
      Verify Billing Checkout
      Collecting Payment Through Cash | More Than Payable Amount    ${value}
-     Verify If Payment Is Complete Or Not
-     Verify Successful Payment    ${value}    ${customer_details}
+     Verify If Payment Is Complete Or Not | Order
+     Verify Successful Payment | Order    ${value}    ${customer_details}
      Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 #Zwing_O_99 Redeem Store Credit Against Mobile Number
 
 Zwing_O_100 Redeem Store Credit using Vouhcer Code
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_05
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_100
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
      Change Billing Mode    ${mop_data}
@@ -72,13 +74,14 @@ Zwing_O_100 Redeem Store Credit using Vouhcer Code
      ${value}    Get Payable Amount
      Verify Billing Checkout
      Collect Payment Using Store Credit    ${mop_data}
-     Verify If Payment Is Complete Or Not
-     Verify Successful Payment    ${value}    ${customer_details}
+     Verify If Payment Is Complete Or Not | Order
+     Verify Successful Payment | Order    ${value}    ${customer_details}
      Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
+
 Zwing_O_101 Collecting Payment by Redeem Store Credit using voucher code | Partially Redemption Allowed
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_06
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_101
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -87,14 +90,14 @@ Zwing_O_101 Collecting Payment by Redeem Store Credit using voucher code | Parti
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Collect Payment Using Store Credit | Partial Redemption Allowed    ${mop_data}
-    Verify Partial Redemption Allowed
-    Verify If Payment Is Complete Or Not
-    Verify Successful Payment    ${value}    ${customer_details}
+    Verify Partial Redemption Allowed | Order
+    Verify If Payment Is Complete Or Not | Order
+    Verify Successful Payment | Order    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_102 Collecting Payment by Redeem Store Credit using voucher | Partially Redemption is not Allowed
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_07
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_102
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -112,7 +115,7 @@ Zwing_O_102 Collecting Payment by Redeem Store Credit using voucher | Partially 
 #Zwing_O_105 Redeem Store Credit against Mobile Number | OTP Authentication is allowed
 
 Zwing_O_106 Payment by using on Account Sale
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_11
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_106
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -121,13 +124,13 @@ Zwing_O_106 Payment by using on Account Sale
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Collect Payment Via On Account Sale
-    Verify If Payment Is Complete Or Not
-    Verify Successful Payment    ${value}    ${customer_details}
+    Verify If Payment Is Complete Or Not | Order
+    Verify Successful Payment | Order    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_107 Payment by using on Account Sale | Account Balance is Greater or Equal to payable amount
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_12
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_107
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -136,13 +139,13 @@ Zwing_O_107 Payment by using on Account Sale | Account Balance is Greater or Equ
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Collect Payment Via On Account Sale
-    Verify If Payment Is Complete Or Not
-    Verify Successful Payment    ${value}    ${customer_details}
+    Verify If Payment Is Complete Or Not | Order
+    Verify Successful Payment | Order    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_108 Payment by using on Account Sale | Account Balance is less than payable amount
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_13
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_108
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -156,7 +159,7 @@ Zwing_O_108 Payment by using on Account Sale | Account Balance is less than paya
 
 
 Zwing_O_109 Additional MOP's | Validate additional MOP's available
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_14
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_109
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -165,13 +168,13 @@ Zwing_O_109 Additional MOP's | Validate additional MOP's available
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Payment Via Additional MOP
-    Verify If Payment Is Complete Or Not
-    Verify Successful Payment    ${value}    ${customer_details}
+    Verify If Payment Is Complete Or Not | Order
+    Verify Successful Payment | Order    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_110 Clicking on a MOP should open a popup to enter transaction reference id
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_15
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_110
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -184,7 +187,7 @@ Zwing_O_110 Clicking on a MOP should open a popup to enter transaction reference
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_111 Additional MOP's | Enter transaction id
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_16
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_111
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -192,13 +195,13 @@ Zwing_O_111 Additional MOP's | Enter transaction id
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
-    Verify Entered Transaction ID
-    Verify Successful Payment    ${value}    ${customer_details}
+    Verify Entered Transaction ID | Order
+    Verify Successful Payment | Order    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_112 Validate the amount auto-populated in customer paid field
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_17
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_112
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -212,7 +215,7 @@ Zwing_O_112 Validate the amount auto-populated in customer paid field
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_113 Close the transaction reference id popup using X button
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_18
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_113
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -227,7 +230,7 @@ Zwing_O_113 Close the transaction reference id popup using X button
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_114 Customer paid field should be non - editable
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_19
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_114
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -241,7 +244,7 @@ Zwing_O_114 Customer paid field should be non - editable
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_115 Complete payment by clicking on continue button, without entering transaction reference id.
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_20
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_115
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -250,13 +253,13 @@ Zwing_O_115 Complete payment by clicking on continue button, without entering tr
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Complete Payment Without Reference ID
-    Verify If Payment Is Complete Or Not
-    Verify Successful Payment    ${value}    ${customer_details}
+    Verify If Payment Is Complete Or Not | Order
+    Verify Successful Payment | Order    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_116 complete payment by clicking on continue button after entering transaction reference id.
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_21
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_116
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -265,8 +268,8 @@ Zwing_O_116 complete payment by clicking on continue button after entering trans
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Payment Via Additional MOP
-    Verify If Payment Is Complete Or Not
-    Verify Successful Payment    ${value}    ${customer_details}
+    Verify If Payment Is Complete Or Not | Order
+    Verify Successful Payment | Order    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 

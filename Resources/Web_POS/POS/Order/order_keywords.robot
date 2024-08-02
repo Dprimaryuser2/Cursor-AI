@@ -10,6 +10,7 @@ Resource    ../../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Library    ../../../../Resources/CustomKeywords/utilities.py
 Library    ../../../../Resources/CustomKeywords/utilities.py
 Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
+Variables   ../../../../PageObjects/Web_POS/POS/order_locators.py
 Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
 Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
 Resource    ../../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
@@ -104,4 +105,11 @@ Cancel Switch From Order Mode To Return
     Wait Until Page Contains Element    ${switch_cancel_button}    timeout=5
     Click Element    ${switch_cancel_button}
     Page Should Contain Element    ${order_option_switch}
+
+Verify Auto Switch to billing is Off | Order
+    Click Element    ${customers_option_sidebar}
+    Wait Until Page Contains Element    ${customers_option_sidebar}
+    Click Element    ${pos_option_sidebar}
+    Page Should Not Contain Element    ${switch_modal_text}
+    Element Should Be Visible    ${order_option_switch}
 

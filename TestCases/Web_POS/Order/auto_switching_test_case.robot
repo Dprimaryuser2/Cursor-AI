@@ -67,8 +67,7 @@ Zwing_A_6 Return to POS Screen when Auto Switch the Billing is off
     Open The Session    ${pos_data}
     Turn Auto Switch To Billing Off
     Change Billing Mode    ${pos_data}
-    Auto Switch To Billing
-    Verify Auto Switch to billing is Off
+    Verify Auto Switch to billing is Off | Order
     Revoke Serial Key    ${pos_data}
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 

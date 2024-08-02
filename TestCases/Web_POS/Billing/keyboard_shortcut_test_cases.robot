@@ -65,7 +65,7 @@ Zwing_KB_04 View Salesperson using keyboard shortcut
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_KB_05 view held bills using keyboard shortcut
+Zwing_KB_05 View held bills using keyboard shortcut
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_5
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}

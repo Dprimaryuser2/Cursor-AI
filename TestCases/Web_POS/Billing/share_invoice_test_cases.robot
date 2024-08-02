@@ -255,7 +255,7 @@ Zwing_SI_16 Update the Email address while sharing the Invoice
    Revoke Serial Key    ${share_data}
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
-Zwing_SI_17 While updating the Email address, send button should be disabled and error message should be displayed if emailId is not valid. Valid format.
+Zwing_SI_17 While updating the Email address, send button should be disabled and error message should be displayed if emailId is not valid. Valid format
    ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_17
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -273,7 +273,7 @@ Zwing_SI_17 While updating the Email address, send button should be disabled and
 
 #Zwing_SI_18 Send Invoice using phone No.
 
-Zwing_SI_19 Send Invoice using email Id.
+Zwing_SI_19 Send Invoice using email Id
    ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_19
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
