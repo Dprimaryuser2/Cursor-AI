@@ -135,7 +135,7 @@ Zwing_B_12 Recall bill
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_B_13 Discard to bill
+Zwing_B_13 Discard Bill
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_13
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -146,7 +146,7 @@ Zwing_B_13 Discard to bill
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_B_14 Return to bill
+Zwing_B_14 Return To Bill
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_14
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -271,7 +271,7 @@ Zwing_B_24 Collect payment using Credit Store
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_B_25 Collect payment using account sale
+Zwing_B_25 Collect payment by on account sale
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_25
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}

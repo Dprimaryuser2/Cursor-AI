@@ -38,6 +38,7 @@ Open The Session
         END
         Click Element    ${force_close_button}
         Wait Until Element Is Not Visible    ${force_close_button}    timeout=20s
+        Wait Until Element Is Visible    ${opening_balance}    timeout=20s
     END
     ${closing_balance_specify_denomination_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance_note_tab}
     IF    ${closing_balance_specify_denomination_visible}

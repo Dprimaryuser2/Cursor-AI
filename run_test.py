@@ -22,7 +22,17 @@ def run_test_suite(test_suite, browser):
     os.environ['BROWSER'] = browser  # Set the BROWSER environment variable
     print(f"Running {test_suite} on {browser} with BROWSER={os.getenv('BROWSER')}")
 
-    result = subprocess.run(["robot", "--variable", f"BROWSER:{browser}", test_suite], capture_output=True, text=True)
+    suite_name = os.path.splitext(os.path.basename(test_suite))[0]
+    output_dir = f"results/{suite_name}_{browser}"
+    os.makedirs(output_dir, exist_ok=True)
+
+    result = subprocess.run([
+        "robot",
+        "--variable", f"BROWSER:{browser}",
+        "--outputdir", output_dir,
+        test_suite
+    ], capture_output=True, text=True)
+
     print(f"Output for {test_suite} on {browser}:")
     print(result.stdout)
     print(result.stderr)
@@ -33,7 +43,6 @@ def run_test_suite(test_suite, browser):
         print(f"Failed {test_suite} on {browser}.")
 
     browser_status[browser] = True  # Mark browser as free
-
 
 def run_in_parallel(suites, browsers):
     # Creates a ThreadPoolExecutor instance with a number of worker threads equal to the number of browsers. The ThreadPoolExecutor manages a pool of threads to execute tasks asynchronously.
@@ -73,9 +82,31 @@ def run_in_parallel(suites, browsers):
                         futures.append(future)
             time.sleep(5)  # Wait before checking again
 
+def combine_reports(output_dir="results"):
+    output_files = []
+    for root, dirs, files in os.walk(output_dir):
+        for file in files:
+            if file == "output.xml":
+                output_files.append(os.path.join(root, file))
+
+    if output_files:
+        combined_output = os.path.join(output_dir, "output.xml")
+        combined_log = os.path.join(output_dir, "log.html")
+        combined_report = os.path.join(output_dir, "report.html")
+
+        # Combine all output.xml files into a single report
+        subprocess.run([
+            "rebot",
+            "--output", combined_output,
+            "--log", combined_log,
+            "--report", combined_report
+        ] + output_files)
+
 def main():
     print("Starting parallel test execution...")
     run_in_parallel(test_suites, browsers)
+    print("Combining reports...")
+    combine_reports()
 
 if __name__ == "__main__":
     main()
