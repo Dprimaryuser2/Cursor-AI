@@ -4,7 +4,6 @@ Library    String
 Library    Collections
 Resource   ../../../../Resources/Web_POS/Login/login_keyword.robot
 Library    ../../../../Resources/CustomKeywords/utilities.py
-Library    utilities
 
 *** Keywords ***
 

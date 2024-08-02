@@ -105,9 +105,13 @@ Apply Bill Manual Discount | Select From List
 Apply Bill Manual Discount | Custom Discount
     [Arguments]    ${discount_data}
     ${discount_dict_data}    Create Dictionary   &{discount_data}
+    Sleep    2
     ${grand_total_amt}=    Get Text    ${grand_total}
     ${grand_total_amt}    Remove Characters    ${grand_total_amt}
     ${grand_total_amt}    Convert To Number    ${grand_total_amt}
+    Sleep    1
+    Wait Until Element Is Visible    ${bill_discount}    timeout=10s
+    Wait Until Element Is Enabled    ${bill_discount}    timeout=10s
     Click Button    ${bill_discount}
     Wait Until Element Is Visible    ${custom_discount_tab}    timeout=10s
     Click Element    ${custom_discount_tab}
@@ -252,6 +256,7 @@ Verify Bill Level Discount Button Is Enabled
     Element Should Be Enabled    ${bill_discount}
 
 Verify Disable Bill Level Discount List
+    Wait Until Page Contains Element    ${bill_discount}    timeout=10
     Page Should Contain Element    ${bill_discount}
     Element Should Be Enabled    ${bill_discount}
     Click Button    ${bill_discount}
@@ -269,6 +274,7 @@ Verify Enable Bill Level Discount List
 Verify Enable Bill Level Custom Discount
     Page Should Contain Element    ${bill_discount}
     Element Should Be Enabled    ${bill_discount}
+    Sleep    1
     Click Button    ${bill_discount}
     Wait Until Element Is Visible    ${custom_discount_tab}
     Page Should Not Contain Element    ${disabled_custom_discount_tab}
@@ -277,6 +283,7 @@ Verify Enable Bill Level Custom Discount
 Verify Disable Bill Level Custom Discount
     Page Should Contain Element    ${bill_discount}
     Element Should Be Enabled    ${bill_discount}
+    Sleep    1
     Click Button    ${bill_discount}
     Wait Until Element Is Visible    ${custom_discount_tab}
     Page Should Contain Element    ${disabled_custom_discount_tab}

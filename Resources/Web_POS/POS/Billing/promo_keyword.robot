@@ -48,7 +48,7 @@ Scan Barcode To Add Item And Quantity To Cart
     Wait Until Element Is Visible    ${scan_only}    timeout=20s
     ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
     IF    ${clear_item_enabled}
-      Click Element    ${clear_all_items}
+      Wait Until Keyword Succeeds    3    3    Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
     END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
@@ -89,7 +89,7 @@ Scan Barcode To Add Item And Quantity To Cart
             Wait Until Element Is Visible    ${custom_select_option}    timeout=20s
             Click Element    ${custom_select_option}
         END
-        Wait Until Element Is Enabled    ${product_search_bar}    timeout=10s
+        Wait Until Element Is Enabled    ${product_search_bar}    timeout=15s
     END
     ${items_list}=    Convert Items To List    ${my_dict.get_items}
     IF    ${items_list} != ['NULL']
@@ -126,9 +126,10 @@ Scan Barcode To Add Item And Quantity To Cart
                 Wait Until Element Is Visible    ${custom_select_option}    timeout=20s
                 Click Element    ${custom_select_option}
             END
-            Wait Until Element Is Enabled    ${product_search_bar}    timeout=10s
+            Wait Until Element Is Enabled    ${product_search_bar}    timeout=15s
         END
     END
+
 
 Add Multiple MRP Products
     Wait Until Page Contains Element    ${select_mrp}   timeout=10s
@@ -528,13 +529,13 @@ Verify Promo Discount In Side Cart | POS
     #verification
     Should Be Equal As Integers   ${expected_payable_amount}    ${payable_amt}
 
+
 Verify Billing Checkout
-    Sleep    0.5
-    Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
-    ${discard}=    Run Keyword And Return Status    Element Should Be Enabled    ${discard_item_previous_session}
+    ${discard}=    Run Keyword And Return Status    Element Should Be Visible       ${discard_button}
     IF    ${discard}
-     Discard Previous Added Item
+         Click Button    ${discard_button}
     END
+    Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
     Click Button    ${checkout_button}
     ${popup_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${updating_catalog_heading}
     IF    ${popup_visible}
@@ -554,6 +555,15 @@ Verify Billing Checkout
     Wait Until Element Is Visible    ${checkout_heading}    timeout=20s
     Page Should Contain Element    ${checkout_heading}
     Sleep    1s
+    ${feedback}    Run Keyword And Return Status    Element Should Be Visible    //label[text()="Customer Feedback "]
+    IF    ${feedback}
+        ${text}    Generate Random Name
+        Input Text    //label[text()="Customer Feedback "]//following-sibling::div/input    ${text}
+        Click Button    //span[text()="Save"]//ancestor::button
+    END
+
+
+
 
 Verify Promo Discount On Modal | Checkout Page
     [Arguments]    ${promo_data}

@@ -8,32 +8,36 @@ Resource    ../../../Resources/Web_POS/POS/Billing/billing_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/Billing/mode_of_payment_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Resource    ../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
-
+Resource    ../../../Resources/Web_POS/POS/Order/mode_of_payment_keywords.robot
+Resource    ../../../Resources/Web_POS/POS/Order/customer_tagging_order_keyword.robot
+Variables   ../../../PageObjects/Web_POS/POS/order_locators.py
 Test Setup    Open Application | POS
 Test Teardown   Close Browser
 
 *** Variables ***
-${MOP_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}mode_of_payment_test_data.xlsx
+${MOP_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}mode_of_payment_order_test_data.xlsx
 
 *** Test Cases ***
-Zwing_MOP_1 Customer Paid amount equal to payable amount
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_01
+Zwing_O_96 Customer Paid amount equal to payable amount
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_96
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
+     Change Billing Mode    ${mop_data}
      Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
      ${customer_details}    Add Customer Details    ${mop_data}
      ${value}    Get Payable Amount
      Verify Billing Checkout
      Payment By Cash    ${value}
-     Verify If Payment Is Complete Or Not
-     Verify Successful Payment    ${value}    ${customer_details}
+     Verify If Payment Is Complete Or Not | Order
+     Verify Successful Payment | Order    ${value}    ${customer_details}
      Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-Zwing_MOP_2 Customer Paid amount less than to payable amount(continue button remains disabled)
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_02
+Zwing_O_97 Customer Paid amount less than to payable amount(continue button remains disabled)
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_97
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
+     Change Billing Mode    ${mop_data}
      Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
      ${customer_details}    Add Customer Details    ${mop_data}
      ${value}    Get Payable Amount
@@ -43,71 +47,60 @@ Zwing_MOP_2 Customer Paid amount less than to payable amount(continue button rem
      Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-Zwing_MOP_3 Customer Paid amount more than to payable amount
-     ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_03
+Zwing_O_98 Customer Paid amount more than to payable amount
+     ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_98
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
+     Change Billing Mode    ${mop_data}
      Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
      ${customer_details}    Add Customer Details    ${mop_data}
      ${value}    Get Payable Amount
      Verify Billing Checkout
      Collecting Payment Through Cash | More Than Payable Amount    ${value}
-     Verify If Payment Is Complete Or Not
-     Verify Successful Payment    ${value}    ${customer_details}
+     Verify If Payment Is Complete Or Not | Order
+     Verify Successful Payment | Order    ${value}    ${customer_details}
      Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-#Zwing_MOP_4 Redeem Voucher against mobile Number  #OTP Required
+#Zwing_O_99 Redeem Store Credit Against Mobile Number
 
-#Zwing_MOP_5 Redeem Voucher by scanning or entering the voucher Code
-
-#Zwing_MOP_6 Redeem Voucher by scanning or entering the voucher Wrong Voucher Code
-
-#Zwing_MOP_7 "Redeem Voucher by scanning or entering the voucher Voucher value is more than Payable amount
-
-#Zwing_MOP_8 Redeem Voucher by scanning or entering the voucher 1) Voucher value is more than Payable amount
-
-#Zwing_MOP_9 Redeem Voucher by scanning or entering the voucher Voucher value is less than Payable amount (Gift voucher should sold)
-
-#Zwing_MOP_10 Gift Voucher need to sold against mobile number OTP authentication is required
-
-#Zwing_MOP_15 Store Credit should be against the mobile number
-
-Zwing_MOP_16 Redeem Store Credit using Voucher Code
-    [Tags]    debugged
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_16
+Zwing_O_100 Redeem Store Credit using Vouhcer Code
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_100
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
+     Change Billing Mode    ${mop_data}
      Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
      ${customer_details}    Add Customer Details    ${mop_data}
      ${value}    Get Payable Amount
      Verify Billing Checkout
      Collect Payment Using Store Credit    ${mop_data}
-     Verify If Payment Is Complete Or Not
-     Verify Successful Payment    ${value}    ${customer_details}
+     Verify If Payment Is Complete Or Not | Order
+     Verify Successful Payment | Order    ${value}    ${customer_details}
      Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-Zwing_MOP_17 Collecting Payment by Redeem Store Credit using voucher code | Partially Redemption Allowed
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_17
+
+Zwing_O_101 Collecting Payment by Redeem Store Credit using voucher code | Partially Redemption Allowed
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_101
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
+    Change Billing Mode    ${mop_data}
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Collect Payment Using Store Credit | Partial Redemption Allowed    ${mop_data}
-    Verify Partial Redemption Allowed
-    Verify If Payment Is Complete Or Not
-    Verify Successful Payment    ${value}    ${customer_details}
+    Verify Partial Redemption Allowed | Order
+    Verify If Payment Is Complete Or Not | Order
+    Verify Successful Payment | Order    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-Zwing_MOP_18 Collecting Payment by Redeem Store Credit using voucher | Partially Redemption is not Allowed
-    [Tags]    debugged
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_18
+Zwing_O_102 Collecting Payment by Redeem Store Credit using voucher | Partially Redemption is not Allowed
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_102
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
+    Change Billing Mode    ${mop_data}
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
@@ -117,44 +110,45 @@ Zwing_MOP_18 Collecting Payment by Redeem Store Credit using voucher | Partially
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-#Zwing_MOP_19 Collecting Paymnet by Redeem Store Credit using mobile number | Partially Redeemption Allowed
+#Zwing_O_103 Collecting Paymnet by Redeem Store Credit using mobile number | Partially Redeemption Allowed
+#Zwing_O_104 Collecting Paymnet by Redeem Store Credit using mobile number | Partially Redeemption not Allowed
+#Zwing_O_105 Redeem Store Credit against Mobile Number | OTP Authentication is allowed
 
-#Zwing_MOP_20 Collecting Paymnet by Redeem Store Credit using mobile number | Partially Redeemption not Allowed
-
-#Zwing_MOP_21 Redeem Store Credit against Mobile Number | OTP Authentication is allowed
-
-Zwing_MOP_22 Payment by using on Account Sale
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_22
+Zwing_O_106 Payment by using on Account Sale
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_106
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
+    Change Billing Mode    ${mop_data}
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Collect Payment Via On Account Sale
-    Verify If Payment Is Complete Or Not
-    Verify Successful Payment    ${value}    ${customer_details}
+    Verify If Payment Is Complete Or Not | Order
+    Verify Successful Payment | Order    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-Zwing_MOP_23 Payment by using on Account Sale | Account Balance is Greater or Equal to payable amount
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_23
+Zwing_O_107 Payment by using on Account Sale | Account Balance is Greater or Equal to payable amount
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_107
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
+    Change Billing Mode    ${mop_data}
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Collect Payment Via On Account Sale
-    Verify If Payment Is Complete Or Not
-    Verify Successful Payment    ${value}    ${customer_details}
+    Verify If Payment Is Complete Or Not | Order
+    Verify Successful Payment | Order    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-Zwing_MOP_24 Payment by using on Account Sale | Account Balance is less than payable amount
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_24
+Zwing_O_108 Payment by using on Account Sale | Account Balance is less than payable amount
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_108
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
+    Change Billing Mode    ${mop_data}
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
@@ -164,24 +158,26 @@ Zwing_MOP_24 Payment by using on Account Sale | Account Balance is less than pay
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 
-Zwing_MOP_25 Additional MOP's | Validate additional MOP's available.
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_25
+Zwing_O_109 Additional MOP's | Validate additional MOP's available
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_109
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
+    Change Billing Mode    ${mop_data}
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Payment Via Additional MOP
-    Verify If Payment Is Complete Or Not
-    Verify Successful Payment    ${value}    ${customer_details}
+    Verify If Payment Is Complete Or Not | Order
+    Verify Successful Payment | Order    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-Zwing_MOP_26 Clicking on a MOP should open a popup to enter transaction reference id
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_26
+Zwing_O_110 Clicking on a MOP should open a popup to enter transaction reference id
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_110
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
+    Change Billing Mode    ${mop_data}
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
@@ -190,24 +186,25 @@ Zwing_MOP_26 Clicking on a MOP should open a popup to enter transaction referenc
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-Zwing_MOP_27 Additional MOP's | Enter transaction id
-    [Tags]    debugged
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_27
+Zwing_O_111 Additional MOP's | Enter transaction id
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_111
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
+    Change Billing Mode    ${mop_data}
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
-    Verify Entered Transaction ID
-    Verify Successful Payment    ${value}    ${customer_details}
+    Verify Entered Transaction ID | Order
+    Verify Successful Payment | Order    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-Zwing_MOP_28 Validate the amount auto-populated in customer paid field.
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_28
+Zwing_O_112 Validate the amount auto-populated in customer paid field
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_112
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
+    Change Billing Mode    ${mop_data}
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
@@ -217,10 +214,11 @@ Zwing_MOP_28 Validate the amount auto-populated in customer paid field.
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-Zwing_MOP_29 Close the transaction reference id popup using X button.
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_29
+Zwing_O_113 Close the transaction reference id popup using X button
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_113
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
+    Change Billing Mode    ${mop_data}
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
@@ -231,10 +229,11 @@ Zwing_MOP_29 Close the transaction reference id popup using X button.
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-Zwing_MOP_30 Customer paid field should be non - editable
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_30
+Zwing_O_114 Customer paid field should be non - editable
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_114
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
+    Change Billing Mode    ${mop_data}
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
@@ -244,30 +243,35 @@ Zwing_MOP_30 Customer paid field should be non - editable
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-Zwing_MOP_31 Complete payment by clicking on continue button, without entering transaction reference id
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_31
+Zwing_O_115 Complete payment by clicking on continue button, without entering transaction reference id.
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_115
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
+    Change Billing Mode    ${mop_data}
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Complete Payment Without Reference ID
-    Verify If Payment Is Complete Or Not
-    Verify Successful Payment    ${value}    ${customer_details}
+    Verify If Payment Is Complete Or Not | Order
+    Verify Successful Payment | Order    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
-Zwing_MOP_32 complete payment by clicking on continue button after entering transaction reference id.
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_32
+Zwing_O_116 complete payment by clicking on continue button after entering transaction reference id.
+    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_116
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
+    Change Billing Mode    ${mop_data}
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
     Verify Billing Checkout
     Payment Via Additional MOP
-    Verify If Payment Is Complete Or Not
-    Verify Successful Payment    ${value}    ${customer_details}
+    Verify If Payment Is Complete Or Not | Order
+    Verify Successful Payment | Order    ${value}    ${customer_details}
     Revoke Serial Key    ${mop_data}
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
+
+#Zwing_O_117 Collecting Payment by Redeem Store Credit using phone number by Resend OTP
+#Zwing_O_118 Collecting Payment by Redeem Store Credit using phone number | Remove Voucher
