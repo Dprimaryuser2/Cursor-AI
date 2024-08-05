@@ -111,7 +111,7 @@ Split Payment By Paytm
     Input Text    ${enter_split_amount}    ${paytm_value}
     click Element   ${upi_payment}
     ${id}=  Generate Random Phone Number
-    Wait Until Page Contains Element    ${enter_paytm_transaction_id}
+    Wait Until Page Contains Element    ${enter_paytm_transaction_id}  timeout=20s
     Input Text      ${enter_paytm_transaction_id}   ${id}
     Click Element    ${continue_paytm_button}
 

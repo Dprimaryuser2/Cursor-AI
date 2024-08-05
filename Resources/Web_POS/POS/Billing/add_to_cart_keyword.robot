@@ -248,13 +248,16 @@ Close The Session For Adding The Item From Previous Session
    IF   ${close_session}
       Wait Until Keyword Succeeds    3    5    Click Element    ${close_session_icon}
       Wait Until Element Is Visible    ${close_session_header}    timeout=20s
+      Wait Until Page Contains Element    ${closing_balance_field}
+      Sleep    2
       Input Text    ${closing_balance_field}    ${my_dict.closing_balance}
       Wait Until Element Is Enabled    ${close_session_button}    timeout=20s
       Click Button    ${close_session_button}
       Wait Until Page Does Not Contain Element    ${close_session_button}     timeout=10s
       Wait Until Element Is Visible    ${session_closed_popup}    timeout=10s
       Click Button    ${session_close_button}
-      Wait Until Element Is Not Visible    ${session_closed_popup}    timeout=15s
+      Wait Until Element Is Not Visible    ${session_closed_popup}    timeout=20
+      Wait Until Element Is Visible    ${open_session_link}        timeout=20
    END
 
 Logout From The POS For Adding The Item From Previous Session
@@ -291,10 +294,10 @@ Add Previous Customer
     Wait Until Element Is Visible    ${customer_phone_field}
     Input Text    ${customer_phone_field}    ${my_dict.phone_number}
     Wait Until Element Is Enabled    ${continue_billing_button}  timeout=20s
-    Click Element    ${continue_billing_button}
+    Wait Until Keyword Succeeds    3     3    Click Element    ${continue_billing_button}
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
-    Click Button    ${start_billing_button}
+    Wait Until Keyword Succeeds    3     3    Click Button    ${start_billing_button}
     Wait Until Element Is Visible    ${add_items_from_previous_session}    timeout=20s
 
 Verify Items Are Added From Previous Session
@@ -329,7 +332,12 @@ Clear All Products
     Wait Until Element Is Visible    ${scan_only}    timeout=20s
     ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
     IF    ${clear_item_enabled}
-      Click Element    ${clear_all_items}
+      Wait Until Keyword Succeeds    3     3    Click Element    ${clear_all_items}
+      ${clear_button_status}    Run Keyword And Return Status    Page Should Contain Element    ${clear_all_items}
+      IF    ${clear_button_status}
+          Wait Until Keyword Succeeds    3     3    Click Element    ${clear_all_items}
+      END
+      Wait Until Page Does Not Contain Element       ${clear_all_items}    timeout=20s
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
     END
 

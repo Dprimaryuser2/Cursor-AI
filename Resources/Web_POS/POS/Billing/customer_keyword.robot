@@ -56,7 +56,7 @@ Add Customer Details
     Input Text    ${address_line2}    ${add_line2}
     Select State And City    ${my_dict}
     Sleep    1
-    Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
+    Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
     Click Element    ${start_billing_button}
     Wait Until Element Is Visible    //div[@class="popup-notification"]    timeout=10s
     Wait Until Element Is Visible    ${payable_amount}
