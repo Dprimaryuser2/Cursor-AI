@@ -171,7 +171,7 @@ paytm_order_summary="//div[@class='col light']//child::span[text()='Debit Note']
 
 invoice_number_checkout = '//div[@class="col-md-6"]//label[text()="Invoice Number"]//following-sibling::p'
 total_amount_checkout = '//div[@class="col-md-6"]//label[text()="Total Amount"]//following-sibling::p'
-bill_container = '//div[@class="container p-0"]'
+bill_container = '//div[@class="print-box"]'
 name_invoice = '//div[@class="modal-content"]//td[contains(text(),"Name")]/span'
 number_invoice = '//div[@class="modal-content"]//td[contains(text(),"Number")]/span'
 invoice_no = '//div[@class="modal-content"]//td[contains(text(),"Invoice No: ")]/span'

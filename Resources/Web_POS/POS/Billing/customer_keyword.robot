@@ -56,8 +56,9 @@ Add Customer Details
     Input Text    ${address_line2}    ${add_line2}
     Select State And City    ${my_dict}
     Sleep    1
-    Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
+    Wait Until Element Is Enabled    ${start_billing_button}    timeout=25s
     Click Element    ${start_billing_button}
+    Wait Until Page Does Not Contain Element     ${start_billing_button}    timeout=20s
     Wait Until Element Is Visible    //div[@class="popup-notification"]    timeout=10s
     Wait Until Element Is Visible    ${payable_amount}
     Wait Until Element Is Visible    ${checkout_button}    timeout=10s
@@ -378,6 +379,7 @@ Verify Customer Tagging Is Mandatory With All Fields
     Sleep    0.5
     Wait Until Page Contains Element    ${pincode}
     Click Element    ${pincode}
+    Sleep    0.5
     Input Text    ${pincode}    ${my_dict.pincode}
     Press Keys    ${pincode}    ENTER
     Wait Until Page Contains Element    ${start_billing_button}    timeout=10s

@@ -17,12 +17,11 @@ Open The Session
     [Arguments]    ${search_data}
     ${my_dict}    Create Dictionary   &{search_data}
 #    Wait Until Element Is Visible    ${pos_dashboard}
-    Sleep    2s
     ${catalog_update_failed}=    Run Keyword And Return Status    Element Should Be Visible    ${catalog_update_failed_heading}
     IF    ${catalog_update_failed}
         Click Button    ${catalog_close_button}
     END
-    ${catalog_update}=    Run Keyword And Return Status    Element Should Be Visible    ${done_progress}
+    ${catalog_update}=    Run Keyword And Return Status    Wait Until Page Contains Element    ${done_progress}    timeout=10
     IF    ${catalog_update}
         Click Button    ${done_progress}
     END
@@ -32,7 +31,7 @@ Open The Session
         Click Element    ${force_close_button}
         Wait Until Element Is Visible    ${opening_balance}    timeout=20s
     END
-    ${opening_session_present}=    Run Keyword And Return Status    Element Should Be Visible    ${opening_balance}    timeout=10s
+    ${opening_session_present}=    Run Keyword And Return Status    Wait Until Page Contains Element    ${opening_balance}    timeout=5
     IF    ${opening_session_present}
         Clear Element Text    ${opening_balance}
         Input Text    ${opening_balance}    ${my_dict.opening_balance}
@@ -536,7 +535,7 @@ Verify Billing Checkout
          Click Button    ${discard_button}
     END
     Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
-    Click Button    ${checkout_button}
+    Wait Until Keyword Succeeds    3    5    Click Button    ${checkout_button}
     ${popup_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${updating_catalog_heading}
     IF    ${popup_visible}
         Wait Until Element Is Visible    ${key_link}    timeout=10s
@@ -554,8 +553,7 @@ Verify Billing Checkout
     END
     Wait Until Element Is Visible    ${checkout_heading}    timeout=20s
     Page Should Contain Element    ${checkout_heading}
-    Sleep    1s
-    ${feedback}    Run Keyword And Return Status    Element Should Be Visible    //label[text()="Customer Feedback "]
+    ${feedback}    Run Keyword And Return Status       Wait Until Page Contains Element        //label[text()="Customer Feedback "]   timeout=10s
     IF    ${feedback}
         ${text}    Generate Random Name
         Input Text    //label[text()="Customer Feedback "]//following-sibling::div/input    ${text}

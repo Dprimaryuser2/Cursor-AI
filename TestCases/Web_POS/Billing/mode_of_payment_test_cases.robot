@@ -74,7 +74,6 @@ Zwing_MOP_3 Customer Paid amount more than to payable amount
 #Zwing_MOP_15 Store Credit should be against the mobile number
 
 Zwing_MOP_16 Redeem Store Credit using Voucher Code
-    [Tags]    debugged
     ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_16
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}

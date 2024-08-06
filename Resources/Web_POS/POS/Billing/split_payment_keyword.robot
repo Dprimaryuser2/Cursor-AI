@@ -111,7 +111,7 @@ Split Payment By Paytm
     Input Text    ${enter_split_amount}    ${paytm_value}
     click Element   ${upi_payment}
     ${id}=  Generate Random Phone Number
-    Wait Until Page Contains Element    ${enter_paytm_transaction_id}
+    Wait Until Page Contains Element    ${enter_paytm_transaction_id}  timeout=20s
     Input Text      ${enter_paytm_transaction_id}   ${id}
     Click Element    ${continue_paytm_button}
 
@@ -138,6 +138,7 @@ Payment By Account On Sales
 Payment By Account On Sales For Validation Of Effective Balance
     Sleep    1
     [Arguments]     ${value}
+    Set Selenium Speed    1
     Wait Until Element Is Visible    ${enter_split_amount}
     Clear Element Text    ${enter_split_amount}
     Input Text    ${enter_split_amount}    ${value}

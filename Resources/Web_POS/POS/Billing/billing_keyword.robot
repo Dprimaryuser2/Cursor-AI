@@ -18,6 +18,10 @@ Hold Bill
     Click Element    ${hold_bill}
     Wait Until Page Contains Element    ${hold_bill_confirmation}
     Click Element    ${hold_bill_confirmation}
+    Wait Until Page Does Not Contain Element      ${hold_bill_confirmation}      timeout=10s
+    Wait Until Page Contains Element    ${bill_held_successful_message}      timeout=10s
+    Wait Until Page Does Not Contain Element      ${bill_held_successful_message}      timeout=10s
+
 
 Recall Bill
     Wait Until Page Does Not Contain Element    ${hold_bill_confirmation}    timeout=10s
@@ -40,6 +44,7 @@ Discard Bill
 Return To Bill
     Wait Until Page Contains Element    ${view_held_bills}
     Click Element    ${view_held_bills}
+    Wait Until Page Contains Element    ${recall_bill}    timeout=10s
     Wait Until Page Contains Element    ${return_to_bill}
     Click Element    ${return_to_bill}
 
@@ -364,6 +369,7 @@ Verify Item Added In Cart
                Wait Until Page Contains Element    (${product_name_in_cart_row})[${i}]
                Click Element    (${product_name_in_cart_row})[${i}]
                Wait Until Page Contains Element    ${quantity_product_window}
+               Sleep    2
                ${count}    Get Text    ${quantity_product_window}
                Convert To Integer    ${count}
                ${product_count_for_test}    Evaluate    ${count}+${product_count_for_test}
@@ -371,6 +377,7 @@ Verify Item Added In Cart
                Click Element    ${update_product_button}
            END
     END
+    Wait Until Page Does Not Contain Element    ${update_product_button}      timeout=15s
     ${temp}    Get Text    ${item_quantity_in_cart}
     ${temp}    Remove Characters    ${temp}
     Convert To Integer    ${temp}
@@ -398,7 +405,7 @@ Add Product By Scan Only
     Log    ${my_dict.buy_items}
     Wait Until Element Is Visible    ${scan_only}    timeout=20s
     Click Element    ${scan_only}
-    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    ${clear_item_enabled}=    Run Keyword And Return Status    Page Should Contain Element    ${clear_all_items}
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
@@ -515,6 +522,8 @@ Validate Store Credit Are Equal On Tagged Customer Details and Checkout Page
     Click Element    ${close_customer_window}
     Wait Until Element Is Enabled    ${checkout_button}
     Click Element    ${checkout_button}
+    Wait Until Page Does Not Contain Element    ${checkout_button}   timeout=20s
+    Wait Until Page Contains Element    ${checkout_heading}   timeout=20s
     ${feedback_window}=  Run Keyword And Return Status    Page Should Contain Element    ${checkout_customer_feedback}
     IF    ${feedback_window}
         Input Text    ${checkout_customer_feedback}    Good!
@@ -537,6 +546,8 @@ Validate Loyalty Points Are Equal On Tagged Customer Details and Checkout Page
     Click Element    ${close_customer_window}
     Wait Until Element Is Enabled    ${checkout_button}
     Click Element    ${checkout_button}
+    Wait Until Page Does Not Contain Element    ${checkout_button}   timeout=20s
+    Wait Until Page Contains Element    ${checkout_heading}   timeout=20s    
     ${feedback_window}=  Run Keyword And Return Status    Page Should Contain Element    ${checkout_customer_feedback}
     IF    ${feedback_window}
         Input Text    ${checkout_customer_feedback}    Good!
@@ -607,9 +618,11 @@ Assign A Salesperson To An Item
     Wait Until Page Contains Element    ${row_in_salesperson_dropdown}    timeout=10s
     Click Element    ${row_in_salesperson_dropdown}
     Wait Until Page Contains Element    ${salesperson_tagged_message}
+    Wait Until Page Does Not Contain Element     ${salesperson_tagged_message}    timeout=20s
     Wait Until Element Is Enabled    ${update_product_button}    timeout=20s
     Element Should Be Enabled    ${update_product_button}
     Click Element    ${update_product_button}
+    Wait Until Page Does Not Contain Element        ${update_product_button}    timeout=20s
     Element Should Contain    ${salesperson_below_product}    ${details_dict.salesperson_name}
 
 Assign A different Salesperson To Each Item

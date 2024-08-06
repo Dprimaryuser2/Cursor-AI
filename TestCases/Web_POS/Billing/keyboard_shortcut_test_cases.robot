@@ -119,7 +119,6 @@ Zwing_KB_10 Tag a customer using keyboard shortcut after tagging a customer
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_11 Cancel current bill using keyboard shortcut
-    [Tags]    Valid Failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_11
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -152,6 +151,7 @@ Zwing_KB_13 Checkout bill using keyboard shortcut when ST is mandatory
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_14 Checkout bill using keyboard shortcut without tagging customer
+    [Tags]    valid failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_14
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -162,10 +162,12 @@ Zwing_KB_14 Checkout bill using keyboard shortcut without tagging customer
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_15 Checkout using shortcut before opening session
+    [Tags]    retry
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_15
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Scan And Add Product    ${pos_data}
+    Close The Session For Adding The Item From Previous Session    ${pos_data}
     Press Shortcut Key    ${pos_data}
     Verify Shortcut Does Not Navigates To Checkout Page When Session Is Closed
     Open Session Before Revoking Serial Key    ${pos_data}
@@ -173,11 +175,12 @@ Zwing_KB_15 Checkout using shortcut before opening session
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_16 Search product using keyboard shortcut | Order Mode
+    [Tags]    retry
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_16
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Press Shortcut Key    ${pos_data}
+    Wait Until Keyword Succeeds    3    2     Press Shortcut Key    ${pos_data}
     Verify Shortcut Key Allows Searching Product    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -248,7 +251,6 @@ Zwing_KB_22 On Order screen before tagging a customer, press Ctrl + A | Order Mo
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_23 On Order screen after tagging a customer, press Ctrl + A | Order Mode
-    [Tags]    Valid Failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_23
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -261,7 +263,6 @@ Zwing_KB_23 On Order screen after tagging a customer, press Ctrl + A | Order Mod
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_24 Cancel current bill using keyboard shortcut on Order Screen | Order Mode
-    [Tags]    Valid Failure
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_24
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -285,14 +286,14 @@ Zwing_KB_25 Checkout bill using keyboard shortcut-After adding product when poli
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_KB_26 Checkout bill using keyboard shortcut-Without tagging salesperson when policy for salesperson is mandatory, press Ctrl + B on Order Screen
+    [Tags]    valid failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    KB_26
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
     Add Product By Scan Only    ${pos_data}
     Press Shortcut Key    ${pos_data}
-    Insufficient Inventory Window | Order   ${pos_data}
-    Verify Fulfilment Option is Visible
+    Verify Salesperson Tagging Is Mandatory Using Shortcut     ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 

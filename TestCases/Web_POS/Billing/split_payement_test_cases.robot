@@ -195,7 +195,7 @@ Zwing_SP_17 Redeem Gift voucher with split payment
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_B_18 Redeem Store credit with credit voucher with split payment
+Zwing_SP_18 Redeem Store credit with credit voucher with split payment
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_18
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -209,10 +209,10 @@ Zwing_B_18 Redeem Store credit with credit voucher with split payment
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-#Zwing_B_19 Redeem Store credit with Phone number with split payment
+#Zwing_SP_19 Redeem Store credit with Phone number with split payment
 #Due to Phone number otp
 
-Zwing_B_20 complete payment with combination of store credit, gift voucher and other MOP's
+Zwing_SP_20 complete payment with combination of store credit, gift voucher and other MOP's
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_20
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -225,7 +225,7 @@ Zwing_B_20 complete payment with combination of store credit, gift voucher and o
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_B_21 Validate Total payment and Mop summary MOP's added after completing the payment
+Zwing_SP_21 Validate Total payment and Mop summary MOP's added after completing the payment
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_21
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -239,7 +239,7 @@ Zwing_B_21 Validate Total payment and Mop summary MOP's added after completing t
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_B_22 validate store credit of customer after using with split payment
+Zwing_SP_22 validate store credit of customer after using with split payment
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_22
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -252,7 +252,7 @@ Zwing_B_22 validate store credit of customer after using with split payment
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-#Zwing_B_23 validate loyalty points of customer after using with split payment
+#Zwing_SP_23 validate loyalty points of customer after using with split payment
 #Loyality points on hold
 
 Zwing_SP_24 Validate Account balance of customer after using with split payment
@@ -267,7 +267,7 @@ Zwing_SP_24 Validate Account balance of customer after using with split payment
     ${total_balance}    Get Account Balance
     ${balance_after_sale}   Payment By Account On Sales For Validation Of Effective Balance     ${value}
     Click On Back Button | Checkout
-    Add Customer Details for partial payment    ${pos_data}
+#    Add Customer Details for partial payment    ${pos_data}
     ${value1}  Validate Account Balance Are Equal On Tagged Customer Split Payment
     Verify Account Balance After Using Split Payment    ${value1}    ${balance_after_sale}
     Revoke Serial Key    ${pos_data}
