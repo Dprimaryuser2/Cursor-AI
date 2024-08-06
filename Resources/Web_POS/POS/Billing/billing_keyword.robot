@@ -369,6 +369,7 @@ Verify Item Added In Cart
                Wait Until Page Contains Element    (${product_name_in_cart_row})[${i}]
                Click Element    (${product_name_in_cart_row})[${i}]
                Wait Until Page Contains Element    ${quantity_product_window}
+               Sleep    2
                ${count}    Get Text    ${quantity_product_window}
                Convert To Integer    ${count}
                ${product_count_for_test}    Evaluate    ${count}+${product_count_for_test}
@@ -376,6 +377,7 @@ Verify Item Added In Cart
                Click Element    ${update_product_button}
            END
     END
+    Wait Until Page Does Not Contain Element    ${update_product_button}      timeout=15s
     ${temp}    Get Text    ${item_quantity_in_cart}
     ${temp}    Remove Characters    ${temp}
     Convert To Integer    ${temp}

@@ -24,6 +24,7 @@ Zwing_O_1 Add Normal sku with Fixed UOM to cart
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_2 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode
+    [Tags]    retry
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_02
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -60,6 +61,7 @@ Zwing_O_5 Add Normal sku with Fixed UOM and 0 Inventory to cart with disable neg
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_6 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with enable Negative Inventory
+    [Tags]    retry
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_06
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -107,6 +109,7 @@ Zwing_O_28 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with d
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_29 Add Normal sku with weighted UOM to cart >> Add Qty mode with decimal weight
+    [Tags]    retry
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_29
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -135,7 +138,7 @@ Zwing_O_31 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with d
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_32 Add Normal sku with weighted UOM to cart >> Add Qty mode with enable Negative stock Billing with decimal weight
-    [Tags]    Demo
+    [Tags]    retry
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_32
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}

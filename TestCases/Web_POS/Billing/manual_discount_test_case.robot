@@ -14,6 +14,7 @@ Test Teardown   Close Browser
 ${DISCOUNT_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}manual_discount_test_data.xlsx
 
 *** Test Cases ***
+
 Zwing_MD_1 Apply Item Level Manual Discount Assortment Wise
     [Tags]    Demo
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_01
@@ -379,6 +380,8 @@ Zwing_MD_31 Apply Manual Discount Button Policy : Discount capping (amount) Bill
      Verify Bill Level Custom Discount More Than Percentage Limit    ${bill_data}
      Revoke Serial Key    ${discount_data}
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+
+Zwing_MD_32 Apply Manual Discount Button Policy : Discount capping (amount) Bill level | Apply Bill level discount percentage less than or equal to Limit on discount percentage(Bill level)
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_32
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}

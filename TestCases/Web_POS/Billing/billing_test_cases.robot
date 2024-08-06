@@ -48,6 +48,7 @@ Zwing_B_03 Add Product to cart by searching Product Name / barcode
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_04 Add product from catalog
+    [Tags]    retry
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_04
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}

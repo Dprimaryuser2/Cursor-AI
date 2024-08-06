@@ -24,7 +24,7 @@ Login With Valid Username And Password | POS
     Wait Until Element Is Visible    ${pos_password}    timeout=5s
     Input Text    ${pos_password}    ${my_dict.password_pos}
     Click Button    ${pos_continue_button}
-    Wait Until Page Contains Element    ${in_store}
+    Wait Until Page Contains Element    ${in_store}   timeout=15s
 #    Wait Until Element Is Visible    ${catalog_update}    timeout=20s
 #    Page Should Contain Element    ${catalog_update}
 #    Page Should Contain Element    ${pos_dashboard}

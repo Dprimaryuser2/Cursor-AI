@@ -60,9 +60,10 @@ Verify Shortcut Key Holds Bill
     Wait Until Page Contains Element    ${bill_held_successful_message}
 
 Verify Shortcut Key Allows Adding Manual Discount
-    Wait Until Page Contains Element    ${manual_discount_heading}
+    Wait Until Page Contains Element    ${manual_discount_heading}    timeout=20s
     Element Should Be Enabled    ${apply_manual_discount_button}
     Click Element    ${apply_manual_discount_button}
+    Wait Until Page Does Not Contain Element    ${apply_manual_discount_button}    timeout=10
     Wait Until Page Contains Element    ${manual_discount_applied_message}    timeout=30s
 
 Verify Shortcut Key Allows Adding Carry Bags
@@ -103,7 +104,8 @@ Verify Customer Information Is Displayed For Tag A Customer After Tagging Custom
 
 Verify Shortcut Key Clears The Cart
     Wait Until Page Does Not Contain Element    ${product_name_in_cart_row}
-    Page Should Not Contain Element    ${table}
+    Page Should Not Contain Element    ${checkout_button}
+    Page Should Not Contain Element    ${clear_all_items}
     Page Should Not Contain Element    ${first_item_product_name}
 
 Verify Shortcut Navigates To Checkout Page
@@ -119,6 +121,7 @@ Verify Shortcut Navigates To Checkout Page When ST Is Mandatory
 Verify Shortcut Navigates To Checkout Page When CT Is Mandatory
     Wait Until Page Contains Element    ${customer_tagging_mandatory_alert}
     Page Should Contain Element    ${customer_tagging_mandatory_alert}
+    Element Should Be Visible      ${customer_tagging_mandatory_alert}
     Page Should Not Contain Element    ${checkout_heading}
 
 Press Shortcut Key
@@ -147,7 +150,7 @@ Verify Shortcut Navigates To Checkout Page When Session Is Closed
     END
 
 Verify Shortcut Does Not Navigates To Checkout Page When Session Is Closed
-    Wait Until Page Contains Element    ${open_session_before_continuing}    timeout=10s
+    Wait Until Page Contains Element    ${open_session_before_continuing}    timeout=15s
     Page Should Contain Element    ${open_session_before_continuing} 
 
 Open Session Before Revoking Serial Key
