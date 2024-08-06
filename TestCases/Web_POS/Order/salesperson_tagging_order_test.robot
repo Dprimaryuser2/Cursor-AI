@@ -17,6 +17,7 @@ ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}sal
 
 *** Test Cases ***
 Zwing_ST_1 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Policies
+    [Tags]    Valid Failure
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_1
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}

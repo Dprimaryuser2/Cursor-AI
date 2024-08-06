@@ -292,6 +292,7 @@ Add Previous Customer
     Wait Until Element Is Enabled    ${add_customer_link}
     Wait Until Keyword Succeeds    5     3      Click Element    ${add_customer_link}
     Wait Until Element Is Visible    ${customer_phone_field}
+    Click Element    ${customer_phone_field}
     Input Text    ${customer_phone_field}    ${my_dict.phone_number}
     Wait Until Element Is Enabled    ${continue_billing_button}  timeout=20s
     Wait Until Keyword Succeeds    3     3    Click Element    ${continue_billing_button}

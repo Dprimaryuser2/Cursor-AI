@@ -61,3 +61,4 @@ save_bill_remark ='//button[@id="save-bill-remark"]'
 close_bill_remark = '//button[@class="close"]'
 
 
+negative_inventory_alert_order = '//div[@class="col-11"]//h6[contains(text(),"Insufficient Inventory")]'

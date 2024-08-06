@@ -212,7 +212,7 @@ Change Billing Mode
 
 Auto Switch To Billing
     Click Element    ${customers_option_sidebar}
-    Wait Until Page Contains Element    ${customers_option_sidebar}
+    Wait Until Page Contains Element    ${pos_option_sidebar}
     Click Element    ${pos_option_sidebar}
     Wait Until Page Contains Element    ${switch_modal_text}
     Wait Until Page Contains Element    ${switch_modal_proceed_button}

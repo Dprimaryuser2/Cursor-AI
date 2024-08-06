@@ -12,11 +12,11 @@ Test Setup  Open Application | POS
 Test Teardown   Close Browser
 
 *** Variables ***
-${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}autoswitching_zwing_test_data.xlsx
+${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}auto_switching_order_test_data.xlsx
 
 *** Test Cases ***
 Zwing_A_1 Switching to Order POS while Order Pos is not allowed in Policies | Order from pos not allowed
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_1
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_01
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Verify Order Mode Is Disable In Policies  ${pos_data}
@@ -24,7 +24,7 @@ Zwing_A_1 Switching to Order POS while Order Pos is not allowed in Policies | Or
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_2 Switching to Order POS while Order Pos is allowed in Policies | Order from pos is allowed
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_2
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_02
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Verify Order Option In Dropdown    ${pos_data}
@@ -69,7 +69,7 @@ Zwing_A_6 Return to POS Screen when Auto Switch the Billing is off
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_153 Click on Confirm button on switch to Billing popup box
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_07
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_153
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -78,7 +78,7 @@ Zwing_A_153 Click on Confirm button on switch to Billing popup box
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_154 Click on Cancel button on switch to Billing popup box
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_08
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_154
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -87,7 +87,7 @@ Zwing_A_154 Click on Cancel button on switch to Billing popup box
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_155 Switching Between Order to Billing Will Give Confirmation Popup
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_09
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_155
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -96,7 +96,7 @@ Zwing_A_155 Switching Between Order to Billing Will Give Confirmation Popup
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_156 Click on Confirm button on switch to Exchange popup box
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_10
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_156
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -105,7 +105,7 @@ Zwing_A_156 Click on Confirm button on switch to Exchange popup box
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_157 Click on Cancel button on switch to Exchange popup box
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_11
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_157
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -114,7 +114,7 @@ Zwing_A_157 Click on Cancel button on switch to Exchange popup box
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_158 Switching Between Order to Exchange Will Give Confirmation Popup
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_12
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_158
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -123,7 +123,7 @@ Zwing_A_158 Switching Between Order to Exchange Will Give Confirmation Popup
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_159 Click on Confirm button on switch to Return popup box
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_13
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_159
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -132,7 +132,7 @@ Zwing_A_159 Click on Confirm button on switch to Return popup box
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_160 Click on Cancel button on switch to Return popup box
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_14
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_160
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -141,7 +141,7 @@ Zwing_A_160 Click on Cancel button on switch to Return popup box
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_161 Switching Between Order to Return Will Give Confirmation Popup
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_15
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_161
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
