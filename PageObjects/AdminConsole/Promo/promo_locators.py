@@ -1,5 +1,5 @@
-promotions_icon = '//span[text()="Promotions"]//preceding-sibling::i[normalize-space(@class="fa fa-fw fa-bullhorn")]//ancestor::a'
-promo = '//a[@href="https://staging.console.gozwing.com/admin/promo/promotion/manage"]'
+promotions_icon = '//i[@class="fa fa-fw fa-gift "]//ancestor::a'
+promo = '//span[text()="Promotions"]//ancestor::a'
 promotion_allocation_icon = '//span[text()="Promotions Allocation"]//preceding-sibling::i[normalize-space(@class="fa fa-fw fa-bullhorn")]//ancestor::a'
 new_definition = "//button[text()='New definition']"
 view_icon = '//i[@class="fa fa-eye"]'

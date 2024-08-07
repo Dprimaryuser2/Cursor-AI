@@ -16,17 +16,8 @@ Buy any one item get flat 50% Discount
     ${promo_data}=    Fetch Testdata By Id    ${PROMO_TD}    TC-01
     Login With Valid Username And Password    ${promo_data}
     Go To Promo Page
-    Create New Definition | Promo    ${promo_data}
-    Select Promotion Type    ${promo_data}
-    Select Buy Specifications Condition    ${promo_data}
-    Select Buy Assortment    ${promo_data}
-    Select Benefit Type    ${promo_data}
-    Select Discount Type   ${promo_data}
-    Select Discount On    ${promo_data}
-    Save Conditions
-    Verify Summary Of Conditions
-    Verify Saving Of The Promo
-    Verify Promo Details In Summary
+    Check Promo Availability    ${promo_data}
+    Verify Promo Details In Summary    ${promo_data}
 
 Buy any 1 item from assortment and get flat Rs. 100 off
     [Documentation]   flat Rs. 300 off

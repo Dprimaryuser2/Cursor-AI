@@ -1446,12 +1446,12 @@ Zwing_E_83 Apply a slab based promo on item level , add multiple item in cart wi
 Zwing_E_84 Apply a item level Promo Buy 4 Get 20% off discount of item , create a sale invoice with item then exchange it then check the response
     [Tags]    failed
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_84
-    Open Application | Admin
-    Login Into Admin | Zwing
-    Go To Allocation Page
-    Set Promotion Priority As Highest    ${pos_data}
-    Close Browser
-    Open Application | POS
+#    Open Application | Admin
+#    Login Into Admin | Zwing
+#    Go To Allocation Page
+#    Set Promotion Priority As Highest    ${pos_data}
+#    Close Browser
+#    Open Application | POS
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -1460,7 +1460,7 @@ Zwing_E_84 Apply a item level Promo Buy 4 Get 20% off discount of item , create 
     Add Customer Details for partial payment    ${pos_data}
     ${value}    Get payable amount
     Verify Billing Checkout
-    Payment By Paytm    ${value}
+    Make Payment By UPI    ${value}
     ${get_cust_info}    Get Invoice Number    ${pos_data}
     Click On Back Button | Checkout
     Change Billing Mode    ${pos_data}

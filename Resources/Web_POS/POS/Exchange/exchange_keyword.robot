@@ -166,6 +166,7 @@ Select Items For Exchange
     ${total_quantity}=  Get Text    ${exchange_qty}
     ${product_name}=  Get Text    ${item_name_exchange}
     ${product_cost}=  Get Text    ${item_price_exchange}
+    Sleep    1
     Click Element    ${continue_btn_exchange_window}
     ${exchange_item_info}=    Create Dictionary    name    ${product_name}    price    ${product_cost}
     [Return]    ${exchange_item_info}
@@ -1333,6 +1334,13 @@ Verify Salesperson Should Not Allow To Edit Or Remove From Added Alternative Pro
 
 Make Payment By UPI
     [Arguments]    ${paytm_value}
+    sleep  1
+    ${feedback}    Run Keyword And Return Status    Element Should Be Visible    //label[text()="Customer Feedback "]
+    IF    ${feedback}
+        ${text}    Generate Random Name
+        Input Text    //label[text()="Customer Feedback "]//following-sibling::div/input    ${text}
+        Click Button    //span[text()="Save"]//ancestor::button
+    END
     ${no_payment_required}    Run Keyword And Return Status    Page Should Contain Element    ${no_payment_required_confirm_button}
     IF    ${no_payment_required}
         Page Should Contain Element     ${no_payment_required_confirm_button}

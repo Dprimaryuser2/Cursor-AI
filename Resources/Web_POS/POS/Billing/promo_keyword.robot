@@ -574,12 +574,11 @@ Verify Promo Discount In Side Cart | POS
     Should Be Equal As Integers   ${expected_payable_amount}    ${payable_amt}
 
 Verify Billing Checkout
-    Sleep    0.5
-    Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
-    ${discard}=    Run Keyword And Return Status    Element Should Be Enabled    ${discard_item_previous_session}
+    ${discard}=    Run Keyword And Return Status    Element Should Be Visible       ${discard_button}
     IF    ${discard}
-     Discard Previous Added Item
+         Click Button    ${discard_button}
     END
+    Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
     Click Button    ${checkout_button}
     ${popup_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${updating_catalog_heading}
     IF    ${popup_visible}
@@ -599,6 +598,12 @@ Verify Billing Checkout
     Wait Until Element Is Visible    ${checkout_heading}    timeout=20s
     Page Should Contain Element    ${checkout_heading}
     Sleep    1s
+    ${feedback}    Run Keyword And Return Status    Element Should Be Visible    //label[text()="Customer Feedback "]
+    IF    ${feedback}
+        ${text}    Generate Random Name
+        Input Text    //label[text()="Customer Feedback "]//following-sibling::div/input    ${text}
+        Click Button    //span[text()="Save"]//ancestor::button
+    END
 
 Verify Promo Discount On Modal | Checkout Page
     [Arguments]    ${promo_data}
@@ -613,10 +618,10 @@ Verify Promo Discount On Modal | Checkout Page
     ${modal_discount_without_characters}=    Remove Characters    ${modal_discount}
     ${modal_discount_amount}=    Convert To Number    ${modal_discount_without_characters}
     Wait Until Keyword Succeeds    4    1    Click Element    ${promo_close_button}
-    ${promo_modal_visible}    Run Keyword And Return Status    Page Should Contain Element    ${item_promotions_title}
-    IF    ${promo_modal_visible}
-        Click Element    ${promo_close_button}
-    END
+#    ${promo_modal_visible}    Run Keyword And Return Status    Page Should Contain Element    ${item_promotions_title}
+#    IF    ${promo_modal_visible}
+#        Click Element    ${promo_close_button}
+#    END
     Wait Until Element Is Not Visible    ${item_promotions_title}    timeout=20s
     ${promo_total_discount}=    Get Text    ${checkout_promo_discount}
     ${promo_discount_amount}=    Remove Characters    ${promo_total_discount}
@@ -3331,7 +3336,11 @@ Verify Applicability Of Buy Between Slab And Get Percent Discount On SSP
 
 Verify 100% Free Billing Checkout
      Wait Until Element Is Visible  ${checkout_button}  timeout=5s
-     Element Should Be Disabled    ${checkout_button}
+     ${payable_amount_with_rs}=    Get Text    ${payable_amount}
+     ${payable_amt}=    Remove Characters    ${payable_amount_with_rs}
+     ${payable_amt}=    Convert To Number    ${payable_amt}
+     ${free}    Set Variable    0
+     Should Be Equal As Integers    ${payable_amt}    ${free}
 
 Verify Applicability Of Buy Between Slab And Get Percent Discount On SSP | Checkout Page
     [Arguments]    ${discount_data}
