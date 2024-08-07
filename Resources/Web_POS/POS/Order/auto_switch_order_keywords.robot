@@ -8,7 +8,6 @@ Variables   ../../../../PageObjects/Web_POS/POS/pos_locators.py
 Variables   ../../../../PageObjects/Web_POS/POS/order_locators.py
 Variables   ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
 Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
-Library    utilities
 
 
 *** Keywords ***

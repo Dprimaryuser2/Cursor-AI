@@ -311,12 +311,13 @@ Add Previous Customer
     Wait Until Element Is Enabled    ${add_customer_link}
     Wait Until Keyword Succeeds    5     3      Click Element    ${add_customer_link}
     Wait Until Element Is Visible    ${customer_phone_field}
+    Click Element    ${customer_phone_field}
     Input Text    ${customer_phone_field}    ${my_dict.phone_number}
     Wait Until Element Is Enabled    ${continue_billing_button}  timeout=20s
-    Click Element    ${continue_billing_button}
+    Wait Until Keyword Succeeds    3     3    Click Element    ${continue_billing_button}
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
-    Click Button    ${start_billing_button}
+    Wait Until Keyword Succeeds    3     3    Click Button    ${start_billing_button}
     Wait Until Element Is Visible    ${add_items_from_previous_session}    timeout=20s
 
 Verify Items Are Added From Previous Session
@@ -351,7 +352,12 @@ Clear All Products
     Wait Until Element Is Visible    ${scan_only}    timeout=20s
     ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
     IF    ${clear_item_enabled}
-      Click Element    ${clear_all_items}
+      Wait Until Keyword Succeeds    3     3    Click Element    ${clear_all_items}
+      ${clear_button_status}    Run Keyword And Return Status    Page Should Contain Element    ${clear_all_items}
+      IF    ${clear_button_status}
+          Wait Until Keyword Succeeds    3     3    Click Element    ${clear_all_items}
+      END
+      Wait Until Page Does Not Contain Element       ${clear_all_items}    timeout=20s
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
     END
 

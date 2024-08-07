@@ -17,12 +17,11 @@ Open The Session
     [Arguments]    ${search_data}
     ${my_dict}    Create Dictionary   &{search_data}
 #    Wait Until Element Is Visible    ${pos_dashboard}
-    Sleep    2s
     ${catalog_update_failed}=    Run Keyword And Return Status    Element Should Be Visible    ${catalog_update_failed_heading}
     IF    ${catalog_update_failed}
         Click Button    ${catalog_close_button}
     END
-    ${catalog_update}=    Run Keyword And Return Status    Element Should Be Visible    ${done_progress}
+    ${catalog_update}=    Run Keyword And Return Status    Wait Until Page Contains Element    ${done_progress}    timeout=10
     IF    ${catalog_update}
         Click Button    ${done_progress}
     END
@@ -573,9 +572,12 @@ Verify Promo Discount In Side Cart | POS
     #verification
     Should Be Equal As Integers   ${expected_payable_amount}    ${payable_amt}
 
+
 Verify Billing Checkout
     ${discard}=    Run Keyword And Return Status    Element Should Be Visible       ${discard_button}
+    ${discard}=    Run Keyword And Return Status    Element Should Be Visible       ${discard_button}
     IF    ${discard}
+         Click Button    ${discard_button}
          Click Button    ${discard_button}
     END
     Wait Until Element Is Enabled    ${checkout_button}    timeout=20s

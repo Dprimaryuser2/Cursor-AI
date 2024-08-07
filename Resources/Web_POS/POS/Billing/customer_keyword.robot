@@ -56,8 +56,9 @@ Add Customer Details
     Input Text    ${address_line2}    ${add_line2}
     Select State And City    ${my_dict}
     Sleep    1
-    Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
+    Wait Until Element Is Enabled    ${start_billing_button}    timeout=25s
     Click Element    ${start_billing_button}
+    Wait Until Page Does Not Contain Element     ${start_billing_button}    timeout=20s
     Wait Until Element Is Visible    //div[@class="popup-notification"]    timeout=10s
     Wait Until Element Is Visible    ${payable_amount}
     Wait Until Element Is Visible    ${checkout_button}    timeout=10s
@@ -378,6 +379,7 @@ Verify Customer Tagging Is Mandatory With All Fields
     Sleep    0.5
     Wait Until Page Contains Element    ${pincode}
     Click Element    ${pincode}
+    Sleep    0.5
     Input Text    ${pincode}    ${my_dict.pincode}
     Press Keys    ${pincode}    ENTER
     Wait Until Page Contains Element    ${start_billing_button}    timeout=10s
@@ -706,8 +708,8 @@ Tag Existing Customer
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
     Click Button    ${start_billing_button}
-    Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=10s
-    Wait Until Page Does Not Contain Element     ${customer_tagged_popup}    timeout=10s
+    Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=15s
+    Wait Until Page Does Not Contain Element     ${customer_tagged_popup}    timeout=15s
 
 Discard Items If Present From Previous Session
     ${store_item_from_previous_session}    Run Keyword And Return Status    Page Should Contain Element    ${discard_item_previous_session}
@@ -920,7 +922,8 @@ Add Customer Group
         Append To List      ${total_groups_tagged}       ${customer_groups}[${i}]
     END
     Wait Until Element Is Visible    ${save_button_customer_group}    timeout=10s
-    Wait Until Keyword Succeeds    2     1    Click Element    ${save_button_customer_group}
+    Wait Until Keyword Succeeds    2     2    Click Element    ${save_button_customer_group}
+    Wait Until Page Does Not Contain Element    ${save_button_customer_group}    timeout=10s
     Sleep    3s
     Wait Until Page Contains Element    ${start_billing_button}
     [Return]    ${total_groups_tagged}

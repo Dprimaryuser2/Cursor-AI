@@ -30,6 +30,7 @@ Revoke Serial Key
     END
     ${opening_session_present}=    Run Keyword And Return Status    Element Should Be Visible    ${opening_balance}    timeout=10s
     IF    ${opening_session_present}
+        Wait Until Page Contains Element    ${opening_balance}
         Clear Element Text    ${opening_balance}
         Input Text    ${opening_balance}    ${serial_key_info.opening_balance}
         Click Element    ${open_session_submit_button}
@@ -39,10 +40,13 @@ Revoke Serial Key
     Wait Until Element Is Visible    ${serial_info_heading}    timeout=10s
     Wait Until Element Is Visible    ${revoke_license_button}    timeout=10s
     Scroll Element Into View    ${revoke_license_button}
-    Wait Until Keyword Succeeds    5    2     Click Button    ${revoke_license_button}
+    Wait Until Keyword Succeeds    5    3     Click Button    ${revoke_license_button}
     Wait Until Element Is Visible    ${revoke_modal_title}    timeout=10s
+    Wait Until Page Contains Element    ${license_key_input}     timeout=10s
+    Sleep    0.5
     Input Text    ${license_key_input}    ${serial_key_number}
-    Wait Until Keyword Succeeds    5    2     Click Button    ${revoke_license_confirm_button}
+    Wait Until Keyword Succeeds    5    4     Click Button    ${revoke_license_confirm_button}
+    Wait Until Page Does Not Contain Element    ${revoke_license_confirm_button}  timeout=10s
     Wait Until Element Is Visible    ${activate_device_heading}    timeout=10s
     Close All Browsers
 
@@ -53,7 +57,7 @@ Tear It Down If Test Case Failed
     ${status}=  Run Keyword And Return Status    Page Should Contain Element    ${pos_option_sidebar}
     IF    ${status}
         Close All Browsers
-        Open Application | POS
+#        Open Application | POS
     END
 
 Revoke The Licence Key From Console

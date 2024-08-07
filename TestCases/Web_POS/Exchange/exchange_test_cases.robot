@@ -238,6 +238,7 @@ Zwing_E_16 Validate check list is clickable or not
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_17 Make a invoice without entering name, make another invoice with same number and enter name, search that name in exchange search bar then check the response
+    [Tags]    valid failure
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_17
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -268,6 +269,7 @@ Zwing_E_17 Make a invoice without entering name, make another invoice with same 
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_18 Make a Invoice with name like (Sunil), make another invoice with same number and update the name like (Sunil-> Vaibhav), search by name in exchange module search bar then check the response
+    [Tags]    valid failure
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_18
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -298,6 +300,7 @@ Zwing_E_18 Make a Invoice with name like (Sunil), make another invoice with same
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_19 Search by previous name (sunil) in exchange module then check the response
+    [Tags]    valid failure
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_19
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -365,14 +368,24 @@ Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice t
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_21
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    ${customer_name}  Add Customer Details      ${pos_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Payment By Cash    ${value}
+    Verify If Payment Is Complete Or Not
+    Click on New Bill Button
     Change Billing Mode    ${pos_data}
     Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange   ${pos_data}
+    Search Invoice Billing-Exchange    ${customer_name}
     Select Invoice From Search Options
     ${total_quantity}   Select Items For Exchange   ${pos_data}
     Add Product For Exchange
-    Scan Barcode To Add Item And Quantity To Cart | Exchange    ${pos_data}
+    Scan And Add Product | Alternate     ${pos_data}
     Verify Billing Checkout
     Split Payment By Redeem Voucher
     Click on New Bill Button
@@ -386,7 +399,7 @@ Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice t
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-    
+
 Zwing_E_22 check whether double digit number are selecting in quantity dropdown in select exchange popup window bar or not
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_22
     Login With Valid Username And Password | POS    ${pos_data}
@@ -463,7 +476,6 @@ Zwing_E_27 select + add product for exchange button and add alternate item from 
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_28 select a alternate product that UOM does not match with the exchange product UOM then check the response.
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_28
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -513,7 +525,6 @@ Zwing_E_30 search a valid alternate product by barcode in search bar during exch
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_31 search a valid alternate product by name in search bar during exchange process
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_31
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -573,7 +584,6 @@ Zwing_E_33 Add a exchange product, add a alternate product, remove exchange prod
 #    Serial and Batch Product.
 
 Zwing_E_35 add a invoice which have multiple product,add opposite product of exchange product then check the response
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_35
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -590,7 +600,6 @@ Zwing_E_35 add a invoice which have multiple product,add opposite product of exc
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_36 Select a exchanged product which have no discount and quantity is 1,select a alternate product with same quantity and Net price
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_36
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -707,7 +716,6 @@ Zwing_E_43 check whether user can apply item level/ bill level promotion on alte
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_44 check whether user can apply price override on alternate product and exchange product or not
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_44
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -723,10 +731,9 @@ Zwing_E_44 check whether user can apply price override on alternate product and 
     Verify Price Override Not Possible For Alternate Product    ${pos_data}
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-    
+
 
 Zwing_E_45 Select a exchanged product which have no discount and quantity is >1 (suppose 4 qty),select a alternate product with less quantity and Net price => to the exchange product net price. then check the response.
-    [Tags]    failed
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_45
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -739,7 +746,7 @@ Zwing_E_45 Select a exchanged product which have no discount and quantity is >1 
     Select Items For Exchange   ${pos_data}
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart | Exchange   ${pos_data}
-    Verify Alternate Products With Sum Of Net Price Greater Than Exc Products Was Added To Cart
+    Verify Alternate Product Has Less Quantity And More Net Price
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -790,7 +797,7 @@ Zwing_B_48 select a invoice which have multiple product for exchange , add them 
     Verify Alternate Products With Sum Of Net Price Greater Than Exc Products Was Added To Cart
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-    
+
 Zwing_E_49 select a alternate product ,apply item level manual discount then check the response
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_49
     Login With Valid Username And Password | POS    ${pos_data}
@@ -890,7 +897,6 @@ Zwing_E_54 Select a exchanged product which have item level manual discount and 
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_55 Select a alternate product have less effective price than the effective price of exchange item and Net price >= than the net price of exchange item
-    [Tags]    failed
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_55
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -926,7 +932,6 @@ Zwing_E_56 check whether user is able to edit or remove manual discount of excha
 
 
 Zwing_E_57 add a product which have promo, add a alternate product then check the response.
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_57
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -963,7 +968,6 @@ Zwing_E_59 add a product which total amount is in decimal, add a alternate produ
 
 
 Zwing_E_60 check the behaviour of the system when payment amount is 0
-   [Tags]    debugged
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_60
    Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
@@ -984,7 +988,6 @@ Zwing_E_60 check the behaviour of the system when payment amount is 0
 
 
 Zwing_E_61 click on cancel button of no payment required then check the response.
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_60
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -1003,7 +1006,6 @@ Zwing_E_61 click on cancel button of no payment required then check the response
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_62 check whether salesperson tagging option is popup or not for alternate product.
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}   E_62
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1071,7 +1073,6 @@ Zwing_E_66 check the refresh button functionality in sales person tagging is wor
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_67 check salesperson dropdown search functionality is working or not
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}   E_67
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1227,7 +1228,6 @@ Zwing_E_75 Create sales invoice of one product (4qty) with manual discount and s
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_76 Create sales invoice by applying item level promo and manual discount in one product then exchange with less price product then check the response
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_76
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -1256,7 +1256,6 @@ Zwing_E_76 Create sales invoice by applying item level promo and manual discount
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_77 Create sales invoice by applying item level promo and manual discount in one product, select a alternate product with same quantity and net price is => then exchanged product net price then check the response
-    [Tags]    failed
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_77
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -1285,7 +1284,6 @@ Zwing_E_77 Create sales invoice by applying item level promo and manual discount
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_78 Exchange || If salesperson is tagged in exchanged product then Salesperson should not allow to edit or remove from added alternative product.
-    [Tags]    failed
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_78
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1310,7 +1308,6 @@ Zwing_E_78 Exchange || If salesperson is tagged in exchanged product then Salesp
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_79 Select salesperson and click on assign to all then salesperson needs to be tagged in alternative product
-    [Tags]    failed
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_79
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1444,7 +1441,6 @@ Zwing_E_83 Apply a slab based promo on item level , add multiple item in cart wi
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_84 Apply a item level Promo Buy 4 Get 20% off discount of item , create a sale invoice with item then exchange it then check the response
-    [Tags]    failed
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_84
 #    Open Application | Admin
 #    Login Into Admin | Zwing
@@ -1537,7 +1533,6 @@ Zwing_E_86 Create a sale bill which have any bill level promo select similar pro
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_87 Create different value based slab on bill level , enable auto - promotion , add promo item as alternate item in exchange , click on checkout page and check the response
-    [Tags]    failed
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_87
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1601,7 +1596,6 @@ Zwing_E_90 Void sale invoice then select sales invoice for exchange then check t
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_91 Once invoice is exchange then enter invoice no. of exchange invoice then check the response
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_91
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1694,7 +1688,6 @@ Zwing_E_97 Search invoice by customer phone No. to add exchange items
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_98 Search invoice by customer Invoice Number to add exchange items
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_98
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1788,7 +1781,6 @@ Zwing_E_104 Search Invoice by Entering Customer Name when Customer Phone No. is 
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_105 Entering minimum 3 digits while searching should list down all the invoices having those digits in same sequence.
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_105
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1889,7 +1881,7 @@ Zwing_E_112 Total exchange qty should be dropdown field
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_113 Total exchange qty dropdown should not have values more than the invoiced qty
-    [Tags]    debugged
+
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_113
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1902,7 +1894,7 @@ Zwing_E_113 Total exchange qty dropdown should not have values more than the inv
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_114 Selecting the total exchange qty to 0 should deselect the item
-    [Tags]    debugged
+
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_114
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1929,7 +1921,6 @@ Zwing_E_115 Reasons field should be a dropdown field
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_116 User should be able to select the Reason
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_116
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1943,7 +1934,6 @@ Zwing_E_116 User should be able to select the Reason
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_117 Continue button should be disabled if Total exchange qty is not selected.
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_117
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1968,7 +1958,6 @@ Zwing_E_118 Continue button should be enabled if reason not selected | Non Manda
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_119 Continue button should be disable if reason not selected
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_119
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1981,7 +1970,6 @@ Zwing_E_119 Continue button should be disable if reason not selected
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_120 Click on Cancel button on Select Items to exchange popup box
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_120
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1995,7 +1983,6 @@ Zwing_E_120 Click on Cancel button on Select Items to exchange popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_121 Click Confirm button on Select Items to exchange popup box
-    [Tags]    debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_121
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2017,7 +2004,6 @@ Zwing_E_122 Switching Between Billing to Exchange Will Give Confirmation Popup
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_123 Click on Confirm button on switch to Billing popup box
-    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_123
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2029,7 +2015,6 @@ Zwing_E_123 Click on Confirm button on switch to Billing popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_124 Click on Cancel button on switch to Billing popup box
-    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_124
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2041,7 +2026,6 @@ Zwing_E_124 Click on Cancel button on switch to Billing popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_125 Switching Between Exchange to Billing Will Give Confirmation Popup
-    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_125
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2052,7 +2036,6 @@ Zwing_E_125 Switching Between Exchange to Billing Will Give Confirmation Popup
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_126 Click on Confirm button on switch to Order popup box
-    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_126
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2064,7 +2047,6 @@ Zwing_E_126 Click on Confirm button on switch to Order popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_127 Click on Cancel button on switch to Order popup box
-    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_127
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2076,7 +2058,6 @@ Zwing_E_127 Click on Cancel button on switch to Order popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_128 Switching Between Exchange to Order Will Give Confirmation Popup
-    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_128
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2087,7 +2068,6 @@ Zwing_E_128 Switching Between Exchange to Order Will Give Confirmation Popup
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_129 Click on Confirm button on switch to Return popup box
-    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_129
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2099,7 +2079,6 @@ Zwing_E_129 Click on Confirm button on switch to Return popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_130 Click on Cancel button on switch to Return popup box
-    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_130
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -2111,7 +2090,6 @@ Zwing_E_130 Click on Cancel button on switch to Return popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_131 Switching Between Exchange to Return Will Give Confirmation Popup
-    [Tags]    Debugged
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_131
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}

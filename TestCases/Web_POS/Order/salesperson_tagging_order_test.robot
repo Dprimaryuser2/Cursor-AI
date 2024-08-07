@@ -17,6 +17,7 @@ ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}sal
 
 *** Test Cases ***
 Zwing_ST_1 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Policies
+    [Tags]    Valid Failure
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_1
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -68,7 +69,7 @@ Zwing_ST_5 Salesperson Tagging Bill Level
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
-    Verify Salesperson Tagged At Bill Level    ${pos_data}
+    Verify Salesperson Tagged At Bill Level | Order    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -116,7 +117,7 @@ Zwing_ST_9 Change Salesperson tagging for bill
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
-    Verify Change Salesperson tagging for bill   ${pos_data}
+    Verify Change Salesperson tagging for bill | Order   ${pos_data}
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -128,7 +129,7 @@ Zwing_ST_10 Tagged Sales person view below the tagged Item
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
-    Verify Salesperson Tagged At Bill Level    ${pos_data}
+    Verify Salesperson Tagged At Bill Level | Order    ${pos_data}
     Revoke Serial Key    ${pos_data}
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 

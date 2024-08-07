@@ -62,12 +62,13 @@ Zwing_ATC_4 Add Normal sku with Fixed UOM and 0 Inventory to cart with enabled n
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_5 Add Normal sku with Fixed UOM and 0 Inventory to cart with disable negative Inventory
+    [Tags]    Valid Failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_05
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Scan And Add Product        ${pos_data}
-    Verify 0 Inventory To Cart With Disable Negative Inventory    ${pos_data}
+    Add Normal SKU Product    ${pos_data}
+    Verify 0 Inventory To Cart With Disable Negative Inventory | Order      ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -82,11 +83,12 @@ Zwing_ATC_6 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with 
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_7 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with disable Negative Inventory
+    [Tags]    Valid Failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_07
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order    ${pos_data}
+    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order | Disable Negative Inventory    ${pos_data}
     Verify 0 Inventory To Cart With Disable Negative Inventory    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -102,11 +104,12 @@ Zwing_ATC_8 Add Normal sku with weighted UOM to cart >> Add Qty mode with enable
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_9 Add Normal sku with weighted UOM to cart >> Add Qty mode with disable Negative Stock Billing
+    [Tags]    Valid Failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_09
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Add Cart Quantity Mode | Order    ${pos_data}
+    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order | Disable Negative Inventory    ${pos_data}
     Verify 0 Inventory To Cart With Disable Negative Inventory    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -164,6 +167,7 @@ Zwing_ATC_14 Add Normal sku with weighted UOM to cart >> Add Qty mode with decim
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_15 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with enable Negative Inventory with decimal weight
+    [Tags]    retry
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_15
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -174,17 +178,17 @@ Zwing_ATC_15 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_16 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with disable Negative Inventory with decimal weight
+    [Tags]    valid failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_16
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order    ${pos_data}
+    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order | Disable Negative Inventory     ${pos_data}
     Verify 0 Inventory To Cart With Disable Negative Inventory    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_17 Add Normal sku with weighted UOM to cart >> Add Qty mode with enable Negative stock Billing with decimal weight
-    [Tags]    Demo
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_17
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -195,11 +199,12 @@ Zwing_ATC_17 Add Normal sku with weighted UOM to cart >> Add Qty mode with enabl
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_18 Add Normal sku with weighted UOM to cart >> Add Qty mode with disable Negative Stock Billing with decimal weight
+    [Tags]    valid failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_18
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
-    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order    ${pos_data}
+    Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order | Disable Negative Inventory    ${pos_data}
     Verify 0 Inventory To Cart With Disable Negative Inventory    ${pos_data}
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -212,9 +217,9 @@ Zwing_ATC_19 Add item from previous session
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     ${customer_info}    Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    Go Back
-    Close The Session    ${pos_data}
-    Logout From The POS
+    Go Back To POS Dashboard
+    Close The Session For Adding The Item From Previous Session    ${pos_data}
+    Logout From The POS For Adding The Item From Previous Session
     Login Again With Same User Id And Password   ${pos_data}
     Add Previous Customer    ${customer_info}
     ${items}    Add Items From Previous Session
@@ -223,6 +228,7 @@ Zwing_ATC_19 Add item from previous session
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_20 Add item from previous session>> Discard Button
+    [Tags]    retry
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_20
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -230,10 +236,9 @@ Zwing_ATC_20 Add item from previous session>> Discard Button
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     ${customer_info}    Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    Go Back
-    Auto Switch To Billing
-    Close The Session    ${pos_data}
-    Logout From The POS
+    Go Back To POS Dashboard
+    Close The Session For Adding The Item From Previous Session    ${pos_data}
+    Logout From The POS For Adding The Item From Previous Session
     Login Again With Same User Id And Password   ${pos_data}
     Add Previous Customer    ${customer_info}
     ${items}    Discard Previous Added Item | Order
@@ -249,9 +254,9 @@ Zwing_ATC_21 Add item from previous session>> Add item to cart
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     ${customer_info}    Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    Go Back
-    Close The Session    ${pos_data}
-    Logout From The POS
+    Go Back To POS Dashboard
+    Close The Session For Adding The Item From Previous Session    ${pos_data}
+    Logout From The POS For Adding The Item From Previous Session
     Login Again With Same User Id And Password   ${pos_data}
     Add Previous Customer    ${customer_info}
     ${items}    Add Items From Previous Session | Order

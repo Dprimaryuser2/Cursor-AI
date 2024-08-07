@@ -84,11 +84,13 @@ Verify The Invoice Parameters Are Clickable
     Page Should Contain Element    ${invoice_number_search_option}
     Page Should Contain Element    ${customer_name_search_option}
     Page Should Contain Element    ${customer_phone_search_option}
+    Wait Until Page Contains Element    ${selected_parameter_invoice_option}   timeout=10s
     Click Element    ${selected_parameter_invoice_option}
     Wait Until Page Contains Element    ${customer_name_search_option}
+    Click Element    ${select_search_invoice_option_btn}
     Click Element    ${customer_name_search_option}
-    Wait Until Page Contains Element    ${selected_parameter_invoice_option}  timeout=10s
-    Page Should Contain Element    ${selected_parameter_invoice_option}
+    Wait Until Page Contains Element    ${option_selected_invoice}  timeout=10s
+    Page Should Contain Element    ${option_selected_invoice}
 
 Click On The Close Tab Cross(X) | Exchange
     Wait Until Page Contains Element    ${div_svg_cross_icon}  timeout=5s
@@ -196,6 +198,7 @@ Select All Items With Same Qty For Exchange
 Add Product For Exchange
     Wait Until Page Contains Element    ${add_product_for_exchange_btn}     timeout=20s
     Click Element    ${add_product_for_exchange_btn}
+    Wait Until Page Contains Element    ${cancel_adding_product_btn}     timeout=10s
 
 Scan Barcode To Add Item And Quantity To Cart By Name | Exchange
     [Arguments]    ${products}
@@ -267,12 +270,6 @@ Scan Barcode To Add Item And Quantity To Cart | Exchange
         IF    ${multiple_product_present}
             Add Multiple MRP Products
         END
-        Wait Until Element Contains     ${table}    ${key}    timeout=20s
-        Element Should Contain    ${item_cart_table}    ${key}
-        ${unit_price_amount}=    Get Text    ${price}
-        ${unit_price_amount}=    Remove Characters    ${unit_price_amount}
-        ${unit_price_amount}=    Convert To Number    ${unit_price_amount}
-        Set Test Variable    ${unit_price_amount}
     END
 
 Add Alternate Items In Exchange Cart
@@ -475,8 +472,8 @@ Enter Customer Name For Previously Used Number
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
     ${first_name}=  Generate Random First Name
     Input Text     ${customer_first_name_field}     ${first_name}
-    Click Button    ${start_billing_button}
-    Sleep    2
+    Wait Until Keyword Succeeds    3    2   Click Button    ${start_billing_button}
+    Wait Until Page Does Not Contain Element       ${start_billing_button}   timeout=10s
     ${store_item_from_previous_session}    Run Keyword And Return Status    Page Should Contain Element    ${discard_item_previous_session}
     IF    ${store_item_from_previous_session}
        Discard Items If Present From Previous Session
@@ -589,6 +586,8 @@ Verify Exc Product With Quantity more than 1 and Alt Product With Same Quantity 
     Page Should Contain Element    ${esp_alert}
 
 Verify Alt Product Has Less Effective Price But More Net Price
+    Wait Until Page Contains Element    ${alternate_product_price}    timeout=10
+    Wait Until Page Contains Element    ${initial_product_price_in_exc_cart}    timeout=10
     ${alt_eff_price}    Get Text    ${alternate_product_price}
     ${alt_clean_eff}    Remove Characters    ${alt_eff_price}
     ${exc_eff_price}    Get Text    ${initial_product_price_in_exc_cart}
@@ -648,6 +647,16 @@ Verify Price Override Not Possible For Alternate Product
 #    ${clean_init}    Remove Characters    ${initial_product_price}
 #    ${result}     Is Greater    ${clean_init}    ${clean_alt}
 #    Should Be True    ${result}
+Verify Alternate Product Has Less Quantity And More Net Price
+    Wait Until Page Contains Element    ${alternate_product_net_price}
+    ${alt_product_price}    Get Text    ${alternate_product_net_price}
+    ${initial_product_price}    Get Text    ${initial_product_net_price_in_exc_cart}
+    ${clean_alt}    Remove Characters    ${alt_product_price}
+    ${clean_init}    Remove Characters    ${initial_product_price}
+    ${result}     Is Greater    ${clean_alt}    ${clean_init}
+    Should Be True    ${result}
+    Element Should Be Disabled    ${disabled_checkout_button}
+
 
 Verify Alternate Products With Sum Of Net Price Greater Than Exc Products Was Added To Cart
     Wait Until Page Contains Element    ${alternate_product_net_price}
@@ -691,6 +700,13 @@ Search Invoice By Name | Exchange
    Input Text    ${search_invoice_field}     ${first_name}
    Press Keys   ${search_invoice_field}   ENTER
    RETURN    ${first_name}
+
+Search Invoice Billing-Exchange
+   [Arguments]    ${cust_name}
+   Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
+   Input Text    ${search_invoice_field}     ${cust_name.first_name}
+   Press Keys   ${search_invoice_field}   ENTER
+   RETURN    ${cust_name.first_name}
 
 Switch To Exchange Mode
     [Arguments]    ${mode}
@@ -1352,3 +1368,29 @@ Make Payment By UPI
         Input Text      ${enter_paytm_transaction_id}   ${id}
         Click Element    ${continue_paytm_button}
     END
+
+Scan And Add Product | Alternate
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.alternate_product}
+    ${items_list}=    Convert Items To List    ${my_dict.alternate_product}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.alternate_product}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    1s
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    1s
+        Click Element    ${search_add_button}
+        Sleep    1s
+        ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
+        IF    ${multiple_product_present}
+            Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+            Click Element    ${add_to_cart_mrp}
+            Wait Until Page Does Not Contain Element    ${select_mrp}
+        END
+    END
+    Wait Until Page Contains Element    ${first_item_product_name}

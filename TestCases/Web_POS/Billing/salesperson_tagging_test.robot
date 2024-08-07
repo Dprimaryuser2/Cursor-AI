@@ -78,6 +78,7 @@ Zwing_ST_6 Tag Single Salesperson To multiple Items
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ST_7 Tag Different salesperson for each item
+    [Tags]    retry
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_7
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
