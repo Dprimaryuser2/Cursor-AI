@@ -59,6 +59,7 @@ Zwing_A_5 Return to POS Screen when Auto Switch the Billing is on
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_6 Return to POS Screen when Auto Switch the Billing is off
+    [Tags]    retry
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_06
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}

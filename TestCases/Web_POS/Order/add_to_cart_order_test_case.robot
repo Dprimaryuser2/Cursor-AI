@@ -167,6 +167,7 @@ Zwing_ATC_14 Add Normal sku with weighted UOM to cart >> Add Qty mode with decim
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_15 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with enable Negative Inventory with decimal weight
+    [Tags]    retry
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_15
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -188,7 +189,6 @@ Zwing_ATC_16 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_17 Add Normal sku with weighted UOM to cart >> Add Qty mode with enable Negative stock Billing with decimal weight
-    [Tags]    Demo
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_17
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -228,6 +228,7 @@ Zwing_ATC_19 Add item from previous session
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_20 Add item from previous session>> Discard Button
+    [Tags]    retry
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_20
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}

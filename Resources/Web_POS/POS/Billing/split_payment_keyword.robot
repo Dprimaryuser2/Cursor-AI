@@ -116,7 +116,7 @@ Split Payment By Paytm
     Click Element    ${continue_paytm_button}
 
 Split Payment By Redeem Voucher
-    Sleep    0.3
+    Wait Until Page Contains Element    ${redeem_voucher}    timeout=10
     Click Element    ${redeem_voucher}
     ${id}=  Generate Random Phone Number
     Wait Until Page Contains Element    ${redeem_voucher_transactionId}

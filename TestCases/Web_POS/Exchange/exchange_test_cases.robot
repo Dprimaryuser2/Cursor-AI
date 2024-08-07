@@ -238,6 +238,7 @@ Zwing_E_16 Validate check list is clickable or not
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_17 Make a invoice without entering name, make another invoice with same number and enter name, search that name in exchange search bar then check the response
+    [Tags]    valid failure
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_17
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -268,6 +269,7 @@ Zwing_E_17 Make a invoice without entering name, make another invoice with same 
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_18 Make a Invoice with name like (Sunil), make another invoice with same number and update the name like (Sunil-> Vaibhav), search by name in exchange module search bar then check the response
+    [Tags]    valid failure
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_18
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -298,6 +300,7 @@ Zwing_E_18 Make a Invoice with name like (Sunil), make another invoice with same
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_19 Search by previous name (sunil) in exchange module then check the response
+    [Tags]    valid failure
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_19
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -365,14 +368,24 @@ Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice t
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_21
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    ${customer_name}  Add Customer Details      ${pos_data}
+    ${value}    Get Payable Amount
+    Verify Billing Checkout
+    Payment By Cash    ${value}
+    Verify If Payment Is Complete Or Not
+    Click on New Bill Button
     Change Billing Mode    ${pos_data}
     Click On +Add Exchange Items from Invoice Link
+    Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange   ${pos_data}
+    Search Invoice Billing-Exchange    ${customer_name}
     Select Invoice From Search Options
     ${total_quantity}   Select Items For Exchange   ${pos_data}
     Add Product For Exchange
-    Scan Barcode To Add Item And Quantity To Cart | Exchange    ${pos_data}
+    Scan And Add Product | Alternate     ${pos_data}
     Verify Billing Checkout
     Split Payment By Redeem Voucher
     Click on New Bill Button
@@ -386,7 +399,7 @@ Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice t
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-    
+
 Zwing_E_22 check whether double digit number are selecting in quantity dropdown in select exchange popup window bar or not
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_22
     Login With Valid Username And Password | POS    ${pos_data}
@@ -1868,7 +1881,7 @@ Zwing_E_112 Total exchange qty should be dropdown field
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_113 Total exchange qty dropdown should not have values more than the invoiced qty
-    
+
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_113
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1881,7 +1894,7 @@ Zwing_E_113 Total exchange qty dropdown should not have values more than the inv
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_E_114 Selecting the total exchange qty to 0 should deselect the item
-    
+
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_114
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
