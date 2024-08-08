@@ -365,6 +365,7 @@ Zwing_E_20 Search for a already used exchange invoice in search bar then check t
 
 
 Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice then check the response.
+    [Tags]    retry
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_21
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -390,9 +391,12 @@ Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice t
     Split Payment By Redeem Voucher
     Click on New Bill Button
     Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
     Verify The +Add Exchange Items from Invoice Link
+    Click On Invoice Parameters
+    Verify The Invoice Parameters Are Clickable
     Select The Invoice Option Type  ${pos_data}
-    Search Invoice | Exchange   ${pos_data}
+    Search Invoice Billing-Exchange    ${customer_name}
     Select Invoice From Search Options
     ${total_quantity1}   Select Items For Exchange   ${pos_data}
     Verify Count of Items For Exchange After Payment    ${total_quantity}   ${total_quantity1}
@@ -470,7 +474,7 @@ Zwing_E_27 select + add product for exchange button and add alternate item from 
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
     Add Product For Exchange
-    Add Items In Cart | Catalog   ${pos_data}
+    Add Items In Cart For Exchange | Catalog   ${pos_data}
     Verify Item Added In Cart | Exchange
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -951,6 +955,7 @@ Zwing_E_57 add a product which have promo, add a alternate product then check th
 #Zwing_E_58  Blank test case
 
 Zwing_E_59 add a product which total amount is in decimal, add a alternate product with same total amount in decimal then check the response.
+    [Tags]    valid failure
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_59
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -1301,7 +1306,6 @@ Zwing_E_78 Exchange || If salesperson is tagged in exchanged product then Salesp
     Search Invoice By Name | Exchange     ${customer_name}
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
-    Add Product For Exchange
     Add Product With Less Price Than Exchange Product  ${pos_data}
     Verify Salesperson Should Not Allow To Edit Or Remove From Added Alternative Product
     Revoke Serial Key    ${pos_data}
@@ -1371,7 +1375,7 @@ Zwing_E_81 Select exchange product which has netprice =< replacement multiple pr
     Select Invoice From Search Options
     Select Items For Exchange   ${pos_data}
     Add Product For Exchange
-    Scan Barcode To Add Item And Quantity To Cart | Multiple MRP    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Verify Validation Message Popup | Exchange
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}

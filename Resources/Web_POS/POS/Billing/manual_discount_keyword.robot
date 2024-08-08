@@ -457,7 +457,6 @@ Apply Item Manual Discount More Than Item Amount And Less Than Capping Amount | 
 Verify Item Level Discount Can Not Be Greater Than Item Amount
     [Arguments]    ${product_price}
     ${product_price_dict}    Create Dictionary   &{product_price}
-    Set Selenium Speed    1
     Element Should Be Disabled    ${apply_amount_discount_button}
     Click Button    ${manual_close_button}
     ${cumulative_disc}=    Get Text    ${update_product_cumulative_discount}
