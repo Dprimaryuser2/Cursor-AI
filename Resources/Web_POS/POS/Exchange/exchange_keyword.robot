@@ -84,11 +84,13 @@ Verify The Invoice Parameters Are Clickable
     Page Should Contain Element    ${invoice_number_search_option}
     Page Should Contain Element    ${customer_name_search_option}
     Page Should Contain Element    ${customer_phone_search_option}
+    Wait Until Page Contains Element    ${selected_parameter_invoice_option}   timeout=10s
     Click Element    ${selected_parameter_invoice_option}
     Wait Until Page Contains Element    ${customer_name_search_option}
+    Click Element    ${select_search_invoice_option_btn}
     Click Element    ${customer_name_search_option}
-    Wait Until Page Contains Element    ${selected_parameter_invoice_option}  timeout=10s
-    Page Should Contain Element    ${selected_parameter_invoice_option}
+    Wait Until Page Contains Element    ${option_selected_invoice}  timeout=10s
+    Page Should Contain Element    ${option_selected_invoice}
 
 Click On The Close Tab Cross(X) | Exchange
     Wait Until Page Contains Element    ${div_svg_cross_icon}  timeout=5s
@@ -166,6 +168,7 @@ Select Items For Exchange
     ${total_quantity}=  Get Text    ${exchange_qty}
     ${product_name}=  Get Text    ${item_name_exchange}
     ${product_cost}=  Get Text    ${item_price_exchange}
+    Sleep    1
     Click Element    ${continue_btn_exchange_window}
     ${exchange_item_info}=    Create Dictionary    name    ${product_name}    price    ${product_cost}
     [Return]    ${exchange_item_info}
@@ -195,6 +198,7 @@ Select All Items With Same Qty For Exchange
 Add Product For Exchange
     Wait Until Page Contains Element    ${add_product_for_exchange_btn}     timeout=20s
     Click Element    ${add_product_for_exchange_btn}
+    Wait Until Page Contains Element    ${cancel_adding_product_btn}     timeout=10s
 
 Scan Barcode To Add Item And Quantity To Cart By Name | Exchange
     [Arguments]    ${products}
@@ -468,8 +472,8 @@ Enter Customer Name For Previously Used Number
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
     ${first_name}=  Generate Random First Name
     Input Text     ${customer_first_name_field}     ${first_name}
-    Click Button    ${start_billing_button}
-    Sleep    2
+    Wait Until Keyword Succeeds    3    2   Click Button    ${start_billing_button}
+    Wait Until Page Does Not Contain Element       ${start_billing_button}   timeout=10s
     ${store_item_from_previous_session}    Run Keyword And Return Status    Page Should Contain Element    ${discard_item_previous_session}
     IF    ${store_item_from_previous_session}
        Discard Items If Present From Previous Session
@@ -696,6 +700,13 @@ Search Invoice By Name | Exchange
    Input Text    ${search_invoice_field}     ${first_name}
    Press Keys   ${search_invoice_field}   ENTER
    RETURN    ${first_name}
+
+Search Invoice Billing-Exchange
+   [Arguments]    ${cust_name}
+   Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
+   Input Text    ${search_invoice_field}     ${cust_name.first_name}
+   Press Keys   ${search_invoice_field}   ENTER
+   RETURN    ${cust_name.first_name}
 
 Switch To Exchange Mode
     [Arguments]    ${mode}
@@ -1339,6 +1350,13 @@ Verify Salesperson Should Not Allow To Edit Or Remove From Added Alternative Pro
 
 Make Payment By UPI
     [Arguments]    ${paytm_value}
+    sleep  1
+    ${feedback}    Run Keyword And Return Status    Element Should Be Visible    //label[text()="Customer Feedback "]
+    IF    ${feedback}
+        ${text}    Generate Random Name
+        Input Text    //label[text()="Customer Feedback "]//following-sibling::div/input    ${text}
+        Click Button    //span[text()="Save"]//ancestor::button
+    END
     ${no_payment_required}    Run Keyword And Return Status    Page Should Contain Element    ${no_payment_required_confirm_button}
     IF    ${no_payment_required}
         Page Should Contain Element     ${no_payment_required_confirm_button}
@@ -1350,3 +1368,29 @@ Make Payment By UPI
         Input Text      ${enter_paytm_transaction_id}   ${id}
         Click Element    ${continue_paytm_button}
     END
+
+Scan And Add Product | Alternate
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.alternate_product}
+    ${items_list}=    Convert Items To List    ${my_dict.alternate_product}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.alternate_product}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    1s
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    1s
+        Click Element    ${search_add_button}
+        Sleep    1s
+        ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
+        IF    ${multiple_product_present}
+            Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+            Click Element    ${add_to_cart_mrp}
+            Wait Until Page Does Not Contain Element    ${select_mrp}
+        END
+    END
+    Wait Until Page Contains Element    ${first_item_product_name}

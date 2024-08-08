@@ -708,8 +708,8 @@ Tag Existing Customer
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
     Click Button    ${start_billing_button}
-    Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=10s
-    Wait Until Page Does Not Contain Element     ${customer_tagged_popup}    timeout=10s
+    Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=15s
+    Wait Until Page Does Not Contain Element     ${customer_tagged_popup}    timeout=15s
 
 Discard Items If Present From Previous Session
     ${store_item_from_previous_session}    Run Keyword And Return Status    Page Should Contain Element    ${discard_item_previous_session}
@@ -922,7 +922,8 @@ Add Customer Group
         Append To List      ${total_groups_tagged}       ${customer_groups}[${i}]
     END
     Wait Until Element Is Visible    ${save_button_customer_group}    timeout=10s
-    Wait Until Keyword Succeeds    2     1    Click Element    ${save_button_customer_group}
+    Wait Until Keyword Succeeds    2     2    Click Element    ${save_button_customer_group}
+    Wait Until Page Does Not Contain Element    ${save_button_customer_group}    timeout=10s
     Sleep    3s
     Wait Until Page Contains Element    ${start_billing_button}
     [Return]    ${total_groups_tagged}

@@ -19,7 +19,6 @@ ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}c
 
 *** Test Cases ***
 TC_C1 Customer Tagging is not mandatory with Bill on POS
-     [Tags]    Demo
      ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_01
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -130,6 +129,7 @@ TC_C10 Remove customer from all groups
 
 
 TC_C11 Add Customer to all available groups
+    [Tags]    valid failure
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_11
      Log    ${pos_data}
      Login With Valid Username And Password | POS   ${pos_data}

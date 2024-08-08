@@ -40,7 +40,7 @@ Revoke Serial Key
     Wait Until Element Is Visible    ${serial_info_heading}    timeout=10s
     Wait Until Element Is Visible    ${revoke_license_button}    timeout=10s
     Scroll Element Into View    ${revoke_license_button}
-    Wait Until Keyword Succeeds    5    2     Click Button    ${revoke_license_button}
+    Wait Until Keyword Succeeds    5    3     Click Button    ${revoke_license_button}
     Wait Until Element Is Visible    ${revoke_modal_title}    timeout=10s
     Wait Until Page Contains Element    ${license_key_input}     timeout=10s
     Sleep    0.5

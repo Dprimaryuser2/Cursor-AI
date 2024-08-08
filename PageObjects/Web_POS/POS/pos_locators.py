@@ -99,8 +99,8 @@ second_category = '(//ul[@id="infinite-categories"]/li)[2]'
 delete_item="//p[contains(text(),'To be exchanged with')]//ancestor::td//following-sibling::td//a"
 # dynamic
 quantity_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="3"]'    # change barcode
-price_column = '=//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="4"]'    # change barcode
-discount_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex"5"]'     # change barcode
+price_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="4"]'    # change barcode
+discount_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="5"]'     # change barcode
 net_price_column = '//span[contains(text(),"barcode")]//ancestor::tr//td[@aria-colindex="6"]'    # change barcode
 item_link = '//span[contains(text(),"barcode")]//preceding-sibling::a'   # change barcode
 
@@ -275,7 +275,8 @@ invoice_number_search_option = '//a[contains(text(),"Invoice Number")]'
 customer_name_search_option = '//a[contains(text(),"Customer Name")]'
 customer_phone_search_option = '//a[contains(text(),"Customer Phone")]'
 div_svg_cross_icon = '//div[@class="row exchange-modal-main"]'
-selected_parameter_invoice_option = '//div[@class="dropdown b-dropdown switch-billing fs-12 mr-3 btn-group"]//button[@class="btn dropdown-toggle btn-light" and contains(text(),"Customer Name")]'
+selected_parameter_invoice_option = '//div[@class="dropdown b-dropdown switch-billing fs-12 mr-3 show btn-group"]//button[@class="btn dropdown-toggle btn-light"]'
+option_selected_invoice = '//div[@class="dropdown b-dropdown switch-billing fs-12 mr-3 btn-group"]//button[@class="btn dropdown-toggle btn-light"]'
 searched_invoice_heading_row = '//div[@class="ex-invoice-table my-3 mx-n2"]//div[@class="row header-bar align-content-center"]'
 first_row_invoice = '(//div[@class="grey-100 col-2"])[1]'
 select_item_for_exchange_title = '//p[@class="fs-16 mb-0" and contains(text(),"Select Items for Exchange")]'
@@ -345,3 +346,9 @@ product_row_exchange = '//a[@class="product-name text-danger"]'
 assigned_salesperson = '(//span[@class="pt-2 fs-12 text-grey"])[1]'
 assigned_Salesperson_alternate = '(//span[@class="pt-2 fs-12 text-grey"])[2]'
 assign_salesperson_field_disable = '//input[@placeholder="No salesperson found in this store."]'
+
+# Open and Close Session With Specify denomination
+closing_balance_note_tab = '//h5[text()="Close Session"]//ancestor::div//a[(contains(text(),"Notes")) and @role="tab"]'
+open_session_notes_tab = '//h5[text()="Open Session"]//ancestor::div//a[(contains(text(),"Notes")) and @role="tab"]'
+coins_tab = '//a[(contains(text(),"Coins")) and @role="tab"]'
+money_input_field = '//p[contains(text(),"₹ AMOUNT")]//ancestor::div[@class="col-3"]//following-sibling::div//input'

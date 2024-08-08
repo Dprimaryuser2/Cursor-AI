@@ -18,11 +18,30 @@ Go To Promo Page
     Click Element    ${promo}
     Wait Until Element Is Visible    ${new_definition}    timeout=20s
     Page Should Contain Element    ${new_definition}
-#    Page Should Contain Element    ${view_icon}
-#    Page Should Contain Element    ${filter_icon}
     Page Should Contain Element    ${promo_list_table}
     ${php_debugger}=    Run Keyword And Return Status     Element Should Be Visible    ${php_close_button}
     Run Keyword If    ${php_debugger}     Click Element    ${php_close_button}
+
+Check Promo Availability
+    [Arguments]    ${promo_data}
+    ${promotion_data}    Create Dictionary    &{promo_data}
+    Input Text    ${search_field}    ${promotion_data.promo_name}
+    Sleep    0.2s
+    ${promo_available}    Run Keyword And Return Status    Element Should Contain     ${first_promo_name}    ${promotion_data.promo_name}
+    IF    ${promo_available}
+        log     promo already present
+    ELSE
+        Create New Definition | Promo    ${promo_data}
+        Select Promotion Type    ${promo_data}
+        Select Buy Specifications Condition    ${promo_data}
+        Select Buy Assortment    ${promo_data}
+        Select Benefit Type    ${promo_data}
+        Select Discount Type   ${promo_data}
+        Select Discount On    ${promo_data}
+        Save Conditions
+        Verify Summary Of Conditions
+        Verify Saving Of The Promo
+    END
 
 Create New Definition | Promo
     [Arguments]     ${search_data}
@@ -218,8 +237,10 @@ Verify Saving Of The Promo
     Element Should Contain    ${promo_list}    ${applicability_text}    ignore_case=True
 
 Verify Promo Details In Summary
-#    User should be able to see the deatils in summary.
-    Input Text    ${search_field}    ${name}
+    [Arguments]    ${promo_data}
+    ${promo_data}    Create Dictionary    &{promo_data}
+#    User should be able to see the details in summary.
+    Input Text    ${search_field}    ${promo_data.name}
     Sleep    2s
     Wait Until Element Contains    ${first_promo_name}    ${name}    timeout=20s
     Click Element    ${first_promo_number}

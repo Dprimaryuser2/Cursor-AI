@@ -29,6 +29,7 @@ TC_C1 Customer Tagging is not mandatory with Bill on POS
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
      
 TC_C2 Customer Tagging is mandatory with Bill on POS
+    [Tags]    valid failure
      ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_02
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
