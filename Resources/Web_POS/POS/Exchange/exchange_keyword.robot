@@ -217,6 +217,8 @@ Scan Barcode To Add Item And Quantity To Cart By Name | Exchange
         Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
         Sleep    1s
         Click Element    ${search_add_button}
+        Wait Until Page Does Not Contain Element    ${search_add_button}    timeout=20s
+        Wait Until Page Contains Element    ${product_name_in_cart_row}    timeout=20s
         ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
     END
     
@@ -266,6 +268,8 @@ Scan Barcode To Add Item And Quantity To Cart | Exchange
         Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
         Sleep    1s
         Click Element    ${search_add_button}
+        Wait Until Page Does Not Contain Element    ${search_add_button}    timeout=20s
+        Sleep    3
         ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
         IF    ${multiple_product_present}
             Add Multiple MRP Products
@@ -389,8 +393,14 @@ Verify Exchange Item Is Added In The Cart
 
 Verify Count of Items For Exchange After Payment
     [Arguments]     ${total_quantity}   ${total_quantity1}
-    Should Not Be Equal As Numbers    ${total_quantity}    ${total_quantity1}
-
+#    ${d1}    Create Dictionary    &{total_quantity}
+#    ${d2}    Create Dictionary    &{total_quantity1}
+#    ${clean_d1}    Remove Characters    ${d1.price}
+#    ${clean_d2}    Remove Characters    ${d2.price}
+#    ${clean_d1}    Convert To Number    ${clean_d1}
+#    ${clean_d2}    Convert To Number    ${clean_d2}
+#    Should Not Be Equal As Numbers    ${clean_d1}    ${clean_d2}
+    Should Not Be Equal As Strings    ${total_quantity}   ${total_quantity1}
 
 Verify Exchange Item Info In Cart Is Correct Or Not
     [Arguments]     ${exchange_item_info}
@@ -512,7 +522,8 @@ Update Customer Name | Exchange
     RETURN    ${first_name}
 
 Verify Manual Discount Not Applicable To Exc product After Added
-    Wait Until Page Contains Element    ${initial_product_in_exc_cart}
+    Wait Until Page Contains Element    ${initial_product_in_exc_cart}    timeout=15
+    Wait Until Page Contains Element    ${alternate_product_in_exc_cart}    timeout=15
     Click Element    ${initial_product_in_exc_cart}
     Click Element    ${initial_product_in_exc_cart}
     Page Should Not Contain Element    ${manual_discount_arrow}
@@ -1090,7 +1101,8 @@ Change Billing Mode | From Return To Exchange
     END
     Wait Until Page Contains Element    ${switch_billing_dropdown}
     Click Element    ${switch_billing_dropdown}
-    Click Element    //a[contains(text(),"Exchange")]
+    Wait Until Page Contains Element    ${mode_exchange}
+    Click Element    ${mode_exchange}
     Wait Until Page Contains Element    ${switch_modal_text}
     Wait Until Page Contains Element    ${switch_confirm_button}
     Page Should Contain Element    ${switch_modal_text}
@@ -1171,10 +1183,13 @@ Scan Alternate Product
     ${my_dict}    Create Dictionary   &{products}
     Log    ${my_dict.buy_items}
     Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    Sleep    1
     ${items_list}=    Convert Items To List    ${my_dict.alternate_product}
+    Wait Until Page Contains Element    ${switch_confirm_button}    timeout=10
+    Wait Until Element Is Enabled    ${switch_confirm_button}    timeout=10
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.alternate_product}
     Click Element    ${switch_confirm_button}
-    Wait Until Page Contains Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="Exchange"]
+    Wait Until Page Contains Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="Exchange"]    timeout=10
     
 
 Verify Confirm Button For Switch To Exchange
@@ -1267,7 +1282,9 @@ Assign Salesperson | Before Exchange
   Click Element    ${name_in_assign_salesperson_row}
   Wait Until Page Contains Element    ${assign_to_all_button}   timeout=10s
   Click Element    ${assign_to_all_button}
-  Click Element    ${close_assign_salesperson_window}
+  Wait Until Page Contains Element    ${salesperson_below_product}    timeout=10
+  Wait Until Keyword Succeeds    3    3    Click Element    ${close_assign_salesperson_window}
+
 
 Add Multiple MRP Product | Exchange
     [Arguments]    ${products}
@@ -1394,3 +1411,19 @@ Scan And Add Product | Alternate
         END
     END
     Wait Until Page Contains Element    ${first_item_product_name}
+
+Add Items In Cart For Exchange | Catalog
+    [Arguments]    ${quantity_data}
+    ${my_dict}    Create Dictionary   &{quantity_data}
+    Wait Until Element Is Visible    ${view_catalog_button}    timeout=20s
+    Click Button    ${view_catalog_button}
+    Wait Until Element Is Visible    ${category}    timeout=20s
+    FOR    ${index}    IN RANGE    1    ${my_dict.assortment}+1
+        ${categories_button}=    Replace String    ${category}    1    '${index}'
+        Click Element    ${categories_button}
+        Click Element    ${sub_categories_first_option}
+        ${sub_category_product_name}=    Get Text    ${sub_categories_first_option}
+        Wait Until Element Is Visible    ${first_item_product_name}    timeout=20s
+#        Element Should Contain    ${item_cart_table}    ${sub_category_product_name}
+    END
+

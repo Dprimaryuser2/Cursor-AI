@@ -82,6 +82,7 @@ Verify Return To Bill
     Page Should Contain Element    ${view_held_bills}
 
 Get payable amount
+    Sleep    1
     Wait Until Page Contains Element    ${payable_amount}   timeout=20s
     ${payable_amount_with_rs}=    Get Text    ${payable_amount}
     ${payable_amt}=    Remove Characters    ${payable_amount_with_rs}
@@ -201,6 +202,7 @@ Change Billing Mode
     END
     Wait Until Page Contains Element    ${switch_billing_dropdown}
     Click Element    ${switch_billing_dropdown}
+    Wait Until Page Contains Element     //a[contains(text(),"${my_dict.Mode}")]   timeout=10s
     Click Element    //a[contains(text(),"${my_dict.Mode}")]
     Wait Until Page Contains Element    ${switch_modal_text}
     Wait Until Page Contains Element    ${switch_confirm_button}

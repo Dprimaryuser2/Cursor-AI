@@ -279,6 +279,7 @@ Close The Session For Adding The Item From Previous Session
        END
    END
 
+
 Logout From The POS For Adding The Item From Previous Session
     ${logout_link_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${logout_link}
     IF    ${logout_link_visible}
