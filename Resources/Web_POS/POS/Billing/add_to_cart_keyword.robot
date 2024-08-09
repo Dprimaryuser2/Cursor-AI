@@ -248,17 +248,37 @@ Close The Session For Adding The Item From Previous Session
    IF   ${close_session}
       Wait Until Keyword Succeeds    3    5    Click Element    ${close_session_icon}
       Wait Until Element Is Visible    ${close_session_header}    timeout=20s
-      Wait Until Page Contains Element    ${closing_balance_field}
-      Sleep    2
-      Input Text    ${closing_balance_field}    ${my_dict.closing_balance}
-      Wait Until Element Is Enabled    ${close_session_button}    timeout=20s
-      Click Button    ${close_session_button}
-      Wait Until Page Does Not Contain Element    ${close_session_button}     timeout=10s
-      Wait Until Element Is Visible    ${session_closed_popup}    timeout=10s
-      Click Button    ${session_close_button}
-      Wait Until Element Is Not Visible    ${session_closed_popup}    timeout=20
-      Wait Until Element Is Visible    ${open_session_link}        timeout=20
+      ${closing_balance_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance}
+      IF    ${closing_balance_visible}
+            ${items_list}=    Convert Items To List    ${my_dict.closing_balance}
+            ${items_dict} =    Convert Item List To Dictionary    ${my_dict.closing_balance}
+            FOR    ${item}    IN    @{items_dict.items()}
+                ${key}=    Set Variable    ${item}[0]
+                ${key}    Convert To String    ${key}
+                ${values}=    Set Variable    ${item}[1]
+                Input Text    ${closing_balance}    ${key}
+            END
+            Click Element    ${force_close_button}
+            Wait Until Element Is Not Visible    ${force_close_button}    timeout=20s
+            Wait Until Element Is Visible    ${opening_balance}    timeout=20s
+      END
+      ${closing_balance_specify_denomination_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance_note_tab}
+      IF    ${closing_balance_specify_denomination_visible}
+           ${items_list}=    Convert Items To List    ${my_dict.closing_balance}
+           ${items_dict} =    Convert Item List To Dictionary    ${my_dict.closing_balance}
+           FOR    ${item}    IN    @{items_dict.items()}
+               ${key}=    Set Variable    ${item}[0]
+               ${key}    Convert To String    ${key}
+               ${values}=    Set Variable    ${item}[1]
+               ${value}=    Convert To String    ${values}
+               ${balance_field}    Replace String    ${money_input_field}    AMOUNT      ${key}
+               Input Text    ${balance_field}    ${value}
+           END
+           Click Element    ${open_session_submit_button}
+           Wait Until Element Is Not Visible    ${closing_balance_note_tab}    timeout=10s
+       END
    END
+
 
 Logout From The POS For Adding The Item From Previous Session
     ${logout_link_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${logout_link}
