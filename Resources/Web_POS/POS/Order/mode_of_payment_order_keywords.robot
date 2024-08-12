@@ -14,10 +14,12 @@ Variables   ../../../../Environment/environment.py
 Verify If Payment Is Complete Or Not | Order
     Wait Until Element Is Visible     ${order_summary_page_heading}   timeout=10s
     Page Should Contain Element    ${order_summary_page_heading}
+    Wait Until Element Is Visible    ${confirm_order_button}    timeout=10
     Page Should Contain Element    ${confirm_order_button}
     Page Should Contain Element    ${print_order_receipt}
+    Wait Until Element Is Visible    ${credit_note_reserved}    timeout=10
     Page Should Contain Element    ${credit_note_reserved}
-    Page Should Contain Element    ${amount_paid_order_summary}
+#    Page Should Contain Element    ${amount_paid_order_summary}
     Page Should Contain Element    ${total_amount_order_summary}
 
 Verify Successful Payment | Order

@@ -13,6 +13,7 @@ Resource    ../../../Resources/Web_POS/POS/Return/adhoc_return_keywords.robot
 Resource   ../../../Resources/Web_POS/POS/Billing/mode_of_payment_keyword.robot
 Resource    ../../../Resources/AdminConsole/Allocation/allocation_keywords.robot
 Resource    ../../../Resources/Web_POS/POS/Order/add_to_cart_order_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Order/salesperson_tagging_order_keyword.robot
 
 Test Setup  Open Application | POS
 Test Teardown   Close Browser

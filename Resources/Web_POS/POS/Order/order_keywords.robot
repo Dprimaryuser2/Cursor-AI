@@ -113,3 +113,29 @@ Verify Auto Switch to billing is Off | Order
     Page Should Not Contain Element    ${switch_modal_text}
     Element Should Be Visible    ${order_option_switch}
 
+Cancel Switch From Billing Mode To Return
+    Wait Until Page Contains Element    ${billing_option_switch_default}    timeout=5
+    Click Element    ${billing_option_switch_default}
+    Wait Until Page Contains Element    ${return_option}    timeout=5
+    Click Element    ${return_option}
+    Wait Until Page Contains Element    ${switch_cancel_button}    timeout=5
+    Click Element    ${switch_cancel_button}
+    Page Should Contain Element    ${billing_option_switch_default}
+
+Cancel Switch From Billing Mode To Order
+    Wait Until Page Contains Element    ${billing_option_switch_default}    timeout=5
+    Click Element    ${billing_option_switch_default}
+    Wait Until Page Contains Element    ${order_option}    timeout=5
+    Click Element    ${order_option}
+    Wait Until Page Contains Element    ${switch_cancel_button}    timeout=5
+    Click Element    ${switch_cancel_button}
+    Page Should Contain Element    ${billing_option_switch_default}
+
+Cancel Switch From Billing Mode To Exchange
+    Wait Until Page Contains Element    ${billing_option_switch_default}    timeout=5
+    Click Element    ${billing_option_switch_default}
+    Wait Until Page Contains Element    ${exchange_option}    timeout=5
+    Click Element    ${exchange_option}
+    Wait Until Page Contains Element    ${switch_cancel_button}    timeout=5
+    Click Element    ${switch_cancel_button}
+    Page Should Contain Element    ${billing_option_switch_default}
