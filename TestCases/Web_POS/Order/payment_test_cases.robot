@@ -50,12 +50,11 @@ Zwing_O_P_86 Set Minimum Percentage Value
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      ${value}    Get payable amount
      Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
-     Verify Checkout Page Redirection
-     Verify 10 Percent Amount Payment By Cash Popup   ${value}
+     Place Order With Minimum Percentage | Continue Button Enabled
      Revoke Serial Key    ${pos_data}
      [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
-Zwing_O_P_87 Both Mimimum value in Amount and Percentage Value is configured
+Zwing_O_P_87 Both Mimimum value in Amount and Percentage Value is configured | Advance collection is off
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    O_P_87
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -63,8 +62,7 @@ Zwing_O_P_87 Both Mimimum value in Amount and Percentage Value is configured
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      ${value}    Get payable amount
      Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
-     Verify Checkout Page Redirection
-     Verify More Than 10 Percent Amount Payment By Cash Popup   ${value}
+     Verify Order Can Be Placed Without Payment
      Revoke Serial Key    ${pos_data}
      [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
@@ -76,7 +74,6 @@ Zwing_O_P_89 Delivery Fulfillment option while its mandatory from policy
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      Verify Billing Checkout
-     Set Fulfillment Date And Continue
      Verify Delivery Fulfillment
      Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}

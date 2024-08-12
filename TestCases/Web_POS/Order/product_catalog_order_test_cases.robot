@@ -12,7 +12,7 @@ Test Setup  Open Application | POS
 Test Teardown   Close Browser
 
 *** Variables ***
-${Product_td}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}product_catalog_order_test_data.xlsx
+${Product_td}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}Product_catalog_order_test_data.xlsx
 
 *** Test Cases ***
 Zwing_CP_O_175 View Catalog using Catalog button in WebPOS

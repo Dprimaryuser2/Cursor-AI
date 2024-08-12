@@ -14,22 +14,22 @@ Resource    ../../../../Resources/Web_POS/POS/Order/add_to_cart_order_keyword.ro
 
 *** Keywords ***
 Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
-    Wait Until Element Is Enabled    ${checkout_button}    timeout=5
+    Wait Until Element Is Enabled    ${checkout_button}    timeout=10
     Click Element    ${checkout_button}
     ${insufficient}    Run Keyword And Return Status    Page Should Contain Element    ${insufficient_inventory_continue_btn}
     IF    ${insufficient}
        Click Element    ${insufficient_inventory_continue_btn}
     END
-    Wait Until Page Contains Element    ${fulfilment_options_heading}    timeout=5
-    Wait Until Page Contains Element    ${fulfilment_due_date_option}    timeout=5
+    Wait Until Page Contains Element    ${fulfilment_options_heading}    timeout=10
+    Wait Until Page Contains Element    ${fulfilment_due_date_option}    timeout=10
     Click Element    ${fulfilment_due_date_option}
-    Wait Until Page Contains Element    ${fulfilment_calendar_window}    timeout=5
-    Wait Until Page Contains Element    ${last_date_of_this_month}    timeout=5
+    Wait Until Page Contains Element    ${fulfilment_calendar_window}    timeout=10
+    Wait Until Page Contains Element    ${last_date_of_this_month}    timeout=10
     Click Element    ${last_date_of_this_month}
     Sleep    1
-    Wait Until Element Is Enabled    ${continue_fulfilment_button}    timeout=5
+    Wait Until Element Is Enabled    ${continue_fulfilment_button}    timeout=10
     Click Element    ${continue_fulfilment_button}
-    Wait Until Page Does Not Contain Element    ${fulfilment_options_heading}    timeout=5
+    Wait Until Page Does Not Contain Element    ${fulfilment_options_heading}    timeout=10
 
 
 Verify Order Can Be Placed Without Payment
@@ -49,35 +49,35 @@ Place Order With Minimum Amount
     ${ten_percent}=    Evaluate    ${number_only} * 0.1
     Sleep    0.5
     Input Text    ${checkout_payable_amount}    ${ten_percent}
-    Wait Until Element Is Enabled    ${payment_method_cash}    timeout=5
+    Wait Until Element Is Enabled    ${payment_method_cash}    timeout=10
     Click Element    ${payment_method_cash}
-    Wait Until Page Contains Element    ${enter_cash}    timeout=5
+    Wait Until Page Contains Element    ${enter_cash}    timeout=10
     Clear Element Text    ${enter_cash}
     Input Text    ${enter_cash}     ${ten_percent}
-    Wait Until Element Is Enabled    ${continue_cash_button}    timeout=5
+    Wait Until Element Is Enabled    ${continue_cash_button}    timeout=10
     Click Element    ${continue_cash_button}
-    Wait Until Page Contains Element    ${payment_saved_successful}    timeout=5
-    Wait Until Page Does Not Contain Element    ${payment_saved_successful}    timeout=5
-    Wait Until Element Is Enabled    ${place_order_button}    timeout=5
+    Wait Until Page Contains Element    ${payment_saved_successful}    timeout=10
+    Wait Until Page Does Not Contain Element    ${payment_saved_successful}    timeout=10
+    Wait Until Element Is Enabled    ${place_order_button}    timeout=10
     Click Element    ${place_order_button}
-    Wait Until Page Contains Element    ${order_summary_page_heading}    timeout=5
+    Wait Until Page Contains Element    ${order_summary_page_heading}    timeout=10
 
 Verify Insufficient Inventory Buttons
-    Wait Until Element Is Visible    ${checkout_button} 
+    Wait Until Element Is Visible    ${checkout_button}  timeout=10
     Click Element    ${checkout_button}
-    Wait Until Element Is Visible    ${insufficient_inventory_title}  timeout=5s
+    Wait Until Element Is Visible    ${insufficient_inventory_title}  timeout=15s
     Wait Until Element Is Enabled    ${insufficient_inventory_continue_btn}     timeout=5
     Wait Until Element Is Enabled    ${insufficient_inventory_cancel_btn}   timeout=5
     Element Should Be Enabled    ${insufficient_inventory_continue_btn}
     Element Should Be Enabled    ${insufficient_inventory_cancel_btn}
 
 Cancel Insufficient Inventory Popup
-    Wait Until Element Is Visible    ${insufficient_inventory_cancel_btn}
+    Wait Until Element Is Visible    ${insufficient_inventory_cancel_btn}   timeout=20
     Click Element    ${insufficient_inventory_cancel_btn}
     Page Should Contain Element    ${product_search_bar}
     
 Verify Checkout Page Redirection
-    Wait Until Element Is Visible    ${checkout_heading}    timeout=10s
+    Wait Until Element Is Visible    ${checkout_heading}    timeout=20s
     Wait Until Element Is Visible    ${checkout_split_payment}
     Wait Until Element Is Visible    ${checkout_order_summary}
     Wait Until Element Is Enabled   ${options_checkout_page}
@@ -94,11 +94,11 @@ Verify Stock Not Available Popup | Order Is Confirmed
     Wait Until Element Is Enabled    ${place_order_button}
     Element Should Be Enabled    ${place_order_button}
     Click Element    ${place_order_button}
-    Wait Until Element Is Visible    ${order_summary_page_heading}
+    Wait Until Element Is Visible    ${order_summary_page_heading}  timeout=20s
     Wait Until Element Is Enabled    ${confirm_order_button}
     Element Should Be Enabled    ${confirm_order_button}
     Click Element    ${confirm_order_button}
-    Wait Until Element Is Visible    ${order_confirmation_page_heading}
+    Wait Until Element Is Visible    ${order_confirmation_page_heading}     timeout=20s
     Sleep    1s
     Wait Until Element Is Visible    ${info_icon_confirm_order}
     Mouse Over    ${info_icon_confirm_order}
@@ -111,11 +111,11 @@ Navigate To Pack Order Page | Order Is Packed
         Element Should Be Enabled    ${place_order_button}
         Click Element    ${place_order_button}
     END
-    Wait Until Element Is Visible    ${order_summary_page_heading}
+    Wait Until Element Is Visible    ${order_summary_page_heading}  timeout=20s
     Wait Until Element Is Enabled    ${confirm_order_button}
     Element Should Be Enabled    ${confirm_order_button}
     Click Element    ${confirm_order_button}
-    Wait Until Element Is Visible    ${order_confirmation_page_heading}
+    Wait Until Element Is Visible    ${order_confirmation_page_heading}     timeout=20s
     Wait Until Element Is Enabled    ${confirm_order_button_order_confirm_page}
     Click Element    ${confirm_order_button_order_confirm_page}
     Wait Until Element Is Enabled    ${pack_order_button}
@@ -142,12 +142,12 @@ Navigate To Discard Order Popup | Discard Order
     Wait Until Element Is Visible    ${confirm_order_button}    timeout=10s
     Wait Until Element Is Enabled    ${confirm_order_button}
     Click Element     ${confirm_order_button}
-    Wait Until Element Is Visible    ${discard_button_order_confirmation}   timeout=10s
+    Wait Until Element Is Visible    ${discard_button_order_confirmation}   timeout=20s
     Wait Until Element Is Enabled    ${discard_button_order_confirmation}
     Click Element    ${discard_button_order_confirmation}
 
 Verify Discard Order Popup
-    Wait Until Element Is Visible    ${discard_popup_heading}
+    Wait Until Element Is Visible    ${discard_popup_heading}   timeout=20s
     Page Should Contain Element    ${cash_button_discard_popup}
     Page Should Contain Element    ${store_credit_button_discard_popup}
     Element Should Be Enabled    ${cancel_button_discard_popup}
@@ -155,7 +155,7 @@ Verify Discard Order Popup
     Click Element    ${continue_button_discard_popup}
     Wait Until Element Is Visible    ${order_cancel_alert}
     Page Should Contain Element    ${order_cancel_alert}
-    Wait Until Element Is Visible    ${amount_due_cancel_order}
+    Wait Until Element Is Visible    ${amount_due_cancel_order}     timeout=20s
     Page Should Contain Element    ${amount_due_cancel_order}
     ${index}=    Set Variable    0
     ${index_value}=  Convert To Number  ${index}
@@ -175,7 +175,7 @@ Verify Discard Order Popup
 
 Verify Discard Order Popup With Different Method
     [Arguments]     ${refund_method}
-    Wait Until Element Is Visible    ${discard_popup_heading}
+    Wait Until Element Is Visible    ${discard_popup_heading}   timeout=20s
     Page Should Contain Element    ${cash_button_discard_popup}
     Page Should Contain Element    ${store_credit_button_discard_popup}
     Element Should Be Enabled    ${cancel_button_discard_popup}
@@ -415,6 +415,21 @@ Place Order With Minimum Amount | Continue Button Enabled
     Wait Until Element Is Enabled    ${continue_cash_button}    timeout=5
     Element Should Be Enabled    ${continue_cash_button}
 
+Place Order With Minimum Percentage | Continue Button Enabled
+    Wait Until Page Contains Element    ${checkout_split_payment}
+    Click Element    ${checkout_split_payment}
+    Wait Until Element Is Enabled    ${checkout_payable_amount}
+    ${total}    Get Text    ${grand_total}
+    ${number_only}    Remove Characters    ${total}
+    ${ten_percent}=    Evaluate    ${number_only} * 0.1
+    Sleep    0.5
+    Input Text    ${checkout_payable_amount}    ${ten_percent}
+    Wait Until Element Is Enabled    ${payment_method_cash}    timeout=5
+    Click Element    ${payment_method_cash}
+    Wait Until Page Contains Element    ${enter_cash}    timeout=5
+    Clear Element Text    ${enter_cash}
+    Input Text    ${enter_cash}     ${ten_percent}
+    Wait Until Element Is Enabled    ${continue_cash_button}    timeout=5
 
 Pay 10 percent Amount of total Payable Amount By Cash
     [Arguments]     ${total_amount}

@@ -56,9 +56,11 @@ Navigate To Order Confirmation Page From Order Summary Page
 Enter 10 Percent Amount In Payable Amount
     [Arguments]     ${total_amount}
     ${new_amount} =  Evaluate    ${total_amount} * 0.1
+    ${integer_value}    Convert To Integer    ${new_amount}
+    ${new_amount_value}  Evaluate    ${integer_value}+1
     Sleep    1
-    Input Text    ${enter_split_amount}    ${new_amount}
-    RETURN  ${new_amount}
+    Input Text    ${enter_split_amount}    ${new_amount_value}
+    RETURN  ${new_amount_value}
 
 Verify Order Confirm Alert
     Wait Until Element Is Visible   ${order_confirm_alert}

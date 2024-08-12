@@ -21,7 +21,7 @@ stock_alert_pack_order = '//div[@class="popup-notification"]//div'
 
 # Order Summary
 order_summary_page_heading = '//span[contains(text(),"Order Summary")]'
-order_summary_status_pending = '//span[@data-v-682f3abc and contains(text(),"Order Summary")]//span[contains(text(),"Pending")]'
+order_summary_status_pending = '//span[contains(text(), "Pending")]'
 confirm_order_button = '//button[@class="btn btn-primary btn-block" and contains(text(),"Confirm Order")]'
 credit_note_reserved ="//p[text()='Credit Note Reserved']"
 credit_note_reserved_amount= '//div[@class="d-flex justify-content-between"]//child::p[@class="text-success"]'
