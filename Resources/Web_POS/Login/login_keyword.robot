@@ -6,10 +6,15 @@ Resource    ../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/Billing/add_to_cart_keyword.robot
 
 
+*** Variables ***
+${ENV}    QA
+${QA_URL}=      ${pos_url_qa}
+${PROD_URL}=    ${pos_url_prod}
+
 *** Keywords ***
 Open Application | POS
-    Open Browser     ${pos_url}    ${browser}
-#    Open Browser     ${pos_url}    ${browser}    options=add_argument("--headless")
+    Open Browser     ${${ENV}_URL}   ${browser}
+#    Open Browser     ${${ENV}_URL}    ${browser}    options=add_argument("--headless")
 #    Maximize Browser Window
     Set Window Size    ${window_width}    ${window_height}
 
@@ -42,3 +47,9 @@ Login Again With Same User Id And Password
     Click Button    ${pos_continue_button}
     Open The Session    ${my_dict}
     Clear All Products
+
+Get Test Data File
+    [Arguments]    ${env}   ${QA_TD}    ${PROD_TD}
+    ${test_data_file}=    Run Keyword If    '${env}' == 'PROD'    Set Variable    ${PROD_TD}    ELSE    Set Variable    ${QA_TD}
+    [Return]    ${test_data_file}
+    Log     ${test_data_file}

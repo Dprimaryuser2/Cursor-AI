@@ -10,12 +10,17 @@ Resource    ../../../Resources/AdminConsole/Login/login_keyword.robot
 Variables    ../../../PageObjects/Web_POS/POS/pos_locators.py
 Resource   ../../../Resources/Web_POS/POS/Billing/add_to_cart_keyword.robot
 
+*** Variables ***
+${ENV}    QA
+${QA_URL}=      ${pos_url_qa}
+${PROD_URL}=    ${pos_url_prod}
+
 *** Keywords ***
 Revoke Serial Key
     [Arguments]    ${serial_key}
     ${serial_key_info}    Create Dictionary   &{serial_key}
     ${serial_key_number}=    Set Variable    ${serial_key_info.serial_key}
-    Go To    ${pos_url}
+    Go To    ${${ENV}_URL}
     Wait Until Element Is Visible    ${settings_tab}    timeout=40s
     Set Focus To Element    ${settings_tab}
     Wait Until Keyword Succeeds    5    2     Click Element    ${settings_tab}
@@ -66,7 +71,13 @@ Revoke The Licence Key From Console
     ${serial_key_number}=    Set Variable    ${serial_key_info.serial_key}
     ${clean_serial_key}    Remove Characters    ${serial_key_number}
     Open Application | Admin
-    Login Into Admin | Zwing
+    Input Text    ${email}      ${serial_key_info.username_admin}
+    Wait Until Element Is Visible    ${password}    timeout=20s
+    Input Text    ${password}    ${serial_key_info.password_admin}
+    Click Button    ${continue_button}
+    Wait Until Page Contains Element    ${dashboard}    timeout=20s
+    Page Should Contain Element    ${invoice_icon}
+    Page Should Contain Element    ${product_icon}
     Wait Until Keyword Succeeds    8    2    Go To Pos Terminal
     Wait Until Element Is Visible    ${pos_heading}    timeout=20s
     Wait Until Element Is Visible    ${pos_search_bar}    timeout=20s

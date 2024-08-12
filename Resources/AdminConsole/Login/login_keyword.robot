@@ -3,10 +3,14 @@ Library    SeleniumLibrary
 Variables  ../../../Environment/environment.py
 Variables   ../../../PageObjects/AdminConsole/Login/login.py
 
+*** Variables ***
+${ENV}    QA
+${QA_CONSOLE_URL}=      ${qa_console_url}
+${PROD_CONSOLE_URL}=    ${prod_console_url}
 
 *** Keywords ***
 Open Application | Admin
-    Open Browser     ${admin_console_url}    ${browser}
+    Open Browser     ${${ENV}_CONSOLE_URL}    ${browser}
 #    Open Browser     ${admin_console_url}    ${browser}    options=add_argument("--headless")
 #    Maximize Browser Window
     Set Window Size    ${window_width}    ${window_height}

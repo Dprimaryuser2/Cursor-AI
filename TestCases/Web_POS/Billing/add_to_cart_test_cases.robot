@@ -10,11 +10,16 @@ Resource    ../../../Resources/Web_POS/POS/Billing/customer_keyword.robot
 Test Setup    Open Application | POS
 Test Teardown   Close All Browsers
 
+#*** Variables ***
+#${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}add_to_cart_test_data.xlsx
+
 *** Variables ***
-${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}add_to_cart_test_data.xlsx
+${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Billing${/}add_to_cart_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Billing${/}add_to_cart_test_data.xlsx
 
 *** Test Cases ***
 Zwing_O_1 Add Normal sku with Fixed UOM to cart
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_01
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -25,6 +30,7 @@ Zwing_O_1 Add Normal sku with Fixed UOM to cart
 
 Zwing_O_2 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode
     [Tags]    retry
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_02
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -34,6 +40,7 @@ Zwing_O_2 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_3 Add Normal sku with weighted UOM to cart >> Add Qty mode
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_03
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -43,6 +50,7 @@ Zwing_O_3 Add Normal sku with weighted UOM to cart >> Add Qty mode
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_4 Add Normal sku with Fixed UOM and 0 Inventory to cart with enabled negative Inventory
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_04
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -52,6 +60,7 @@ Zwing_O_4 Add Normal sku with Fixed UOM and 0 Inventory to cart with enabled neg
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_5 Add Normal sku with Fixed UOM and 0 Inventory to cart with disable negative Inventory
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_05
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -62,6 +71,7 @@ Zwing_O_5 Add Normal sku with Fixed UOM and 0 Inventory to cart with disable neg
 
 Zwing_O_6 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with enable Negative Inventory
     [Tags]    retry
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_06
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -72,6 +82,7 @@ Zwing_O_6 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with en
 
 Zwing_O_7 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with disable Negative Inventory
     [Tags]    retry
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_07
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -81,6 +92,7 @@ Zwing_O_7 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with di
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_8 Add Normal sku with weighted UOM to cart >> Add Qty mode with enable Negative stock Billing
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_08
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -91,6 +103,7 @@ Zwing_O_8 Add Normal sku with weighted UOM to cart >> Add Qty mode with enable N
 
 Zwing_O_9 Add Normal sku with weighted UOM to cart >> Add Qty mode with disable Negative Stock Billing
     [Tags]    retry
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_09
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -100,6 +113,7 @@ Zwing_O_9 Add Normal sku with weighted UOM to cart >> Add Qty mode with disable 
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_28 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with decimal weight
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_28
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -110,6 +124,7 @@ Zwing_O_28 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with d
 
 Zwing_O_29 Add Normal sku with weighted UOM to cart >> Add Qty mode with decimal weight
     [Tags]    retry
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_29
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -119,6 +134,7 @@ Zwing_O_29 Add Normal sku with weighted UOM to cart >> Add Qty mode with decimal
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_30 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with enable Negative Inventory with decimal weight
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_30
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -129,6 +145,7 @@ Zwing_O_30 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with e
 
 Zwing_O_31 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with disable Negative Inventory with decimal weight
     [Tags]    retry
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_31
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -139,6 +156,7 @@ Zwing_O_31 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with d
 
 Zwing_O_32 Add Normal sku with weighted UOM to cart >> Add Qty mode with enable Negative stock Billing with decimal weight
     [Tags]    retry
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_32
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -149,6 +167,7 @@ Zwing_O_32 Add Normal sku with weighted UOM to cart >> Add Qty mode with enable 
 
 Zwing_O_33 Add Normal sku with weighted UOM to cart >> Add Qty mode with disable Negative Stock Billing with decimal weight
     [Tags]    retry
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_33
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -159,6 +178,7 @@ Zwing_O_33 Add Normal sku with weighted UOM to cart >> Add Qty mode with disable
 
 Zwing_O_34 Add item from previous session
     [Tags]    retry
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_34
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -177,6 +197,7 @@ Zwing_O_34 Add item from previous session
 
 Zwing_O_35 Add item from previous session>> Discard Button
     [Tags]    retry
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_35
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -195,6 +216,7 @@ Zwing_O_35 Add item from previous session>> Discard Button
 
 Zwing_O_36 Add item from previous session>> Add item to cart
     [Tags]    retry
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_36
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}

@@ -258,9 +258,12 @@ Close The Session For Adding The Item From Previous Session
                 ${values}=    Set Variable    ${item}[1]
                 Input Text    ${closing_balance}    ${key}
             END
-            Click Element    ${force_close_button}
-            Wait Until Element Is Not Visible    ${force_close_button}    timeout=20s
-            Wait Until Element Is Visible    ${opening_balance}    timeout=20s
+            Click Button    ${close_session_button}
+            Wait Until Page Does Not Contain Element    ${close_session_button}     timeout=10s
+            Wait Until Element Is Visible    ${session_closed_popup}    timeout=10s
+            Click Button    ${session_close_button}
+            Wait Until Element Is Not Visible    ${session_closed_popup}    timeout=20s
+            Wait Until Element Is Visible    ${open_session_link}   timeout=20s
       END
       ${closing_balance_specify_denomination_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance_note_tab}
       IF    ${closing_balance_specify_denomination_visible}
