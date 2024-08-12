@@ -40,8 +40,8 @@ Revoke Serial Key
         Input Text    ${opening_balance}    ${serial_key_info.opening_balance}
         Click Element    ${open_session_submit_button}
     END
-    Wait Until Keyword Succeeds    5    2     Click Element    ${profile_info_heading}
-    Wait Until Keyword Succeeds    5    2     Click Element    ${serial_information_tab}
+    Wait Until Keyword Succeeds    5    3     Click Element    ${profile_info_heading}
+    Wait Until Keyword Succeeds    5    3     Click Element    ${serial_information_tab}
     Wait Until Element Is Visible    ${serial_info_heading}    timeout=10s
     Wait Until Element Is Visible    ${revoke_license_button}    timeout=10s
     Scroll Element Into View    ${revoke_license_button}
@@ -50,9 +50,14 @@ Revoke Serial Key
     Wait Until Page Contains Element    ${license_key_input}     timeout=10s
     Sleep    0.5
     Input Text    ${license_key_input}    ${serial_key_number}
+    Wait Until Page Contains Element    ${license_key_input}   timeout=20s
     Wait Until Keyword Succeeds    5    4     Click Button    ${revoke_license_confirm_button}
     Wait Until Page Does Not Contain Element    ${revoke_license_confirm_button}  timeout=10s
     Wait Until Element Is Visible    ${activate_device_heading}    timeout=10s
+    Delete All Cookies
+    Execute JavaScript    window.localStorage.clear();
+    Execute JavaScript    window.sessionStorage.clear();
+    Reload Page
     Close All Browsers
 
 Tear It Down If Test Case Failed

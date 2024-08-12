@@ -19,6 +19,7 @@ Add Weighted UOM Products to Cart | Edit Cart Quantity Mode
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+      Wait Until Page Contains Element    ${cart_0}   timeout=20s
     END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
@@ -59,6 +60,7 @@ Add Weighted UOM Products to Cart | Add Cart Quantity Mode
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+      Wait Until Page Contains Element    ${cart_0}   timeout=20s
     END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
@@ -88,7 +90,6 @@ Add Weighted UOM Products to Cart | Add Cart Quantity Mode
         Click Element    ${update_cart_quantity}
         Sleep    1s
     END
-
 
 Update Product Quantity | Edit Cart Quantity Mode
     [Arguments]    ${products}
@@ -149,6 +150,7 @@ Scan And Add Product
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+      Wait Until Page Contains Element    ${cart_0}   timeout=20s
     END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
@@ -377,6 +379,7 @@ Add Normal SKU Product
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+      Wait Until Page Contains Element    ${cart_0}   timeout=20s
     END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
