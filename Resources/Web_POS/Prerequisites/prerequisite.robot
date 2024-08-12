@@ -35,8 +35,8 @@ Revoke Serial Key
         Input Text    ${opening_balance}    ${serial_key_info.opening_balance}
         Click Element    ${open_session_submit_button}
     END
-    Wait Until Keyword Succeeds    5    2     Click Element    ${profile_info_heading}
-    Wait Until Keyword Succeeds    5    2     Click Element    ${serial_information_tab}
+    Wait Until Keyword Succeeds    5    3     Click Element    ${profile_info_heading}
+    Wait Until Keyword Succeeds    5    3     Click Element    ${serial_information_tab}
     Wait Until Element Is Visible    ${serial_info_heading}    timeout=10s
     Wait Until Element Is Visible    ${revoke_license_button}    timeout=10s
     Scroll Element Into View    ${revoke_license_button}

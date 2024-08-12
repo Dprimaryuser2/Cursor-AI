@@ -19,6 +19,7 @@ Add Weighted UOM Products to Cart | Edit Cart Quantity Mode
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+      Wait Until Page Contains Element    ${cart_0}   timeout=20s
     END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
@@ -59,6 +60,7 @@ Add Weighted UOM Products to Cart | Add Cart Quantity Mode
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+      Wait Until Page Contains Element    ${cart_0}   timeout=20s
     END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
@@ -88,7 +90,6 @@ Add Weighted UOM Products to Cart | Add Cart Quantity Mode
         Click Element    ${update_cart_quantity}
         Sleep    1s
     END
-
 
 Update Product Quantity | Edit Cart Quantity Mode
     [Arguments]    ${products}
@@ -149,6 +150,7 @@ Scan And Add Product
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+      Wait Until Page Contains Element    ${cart_0}   timeout=20s
     END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
@@ -258,9 +260,12 @@ Close The Session For Adding The Item From Previous Session
                 ${values}=    Set Variable    ${item}[1]
                 Input Text    ${closing_balance}    ${key}
             END
-            Click Element    ${force_close_button}
-            Wait Until Element Is Not Visible    ${force_close_button}    timeout=20s
-            Wait Until Element Is Visible    ${opening_balance}    timeout=20s
+            Click Button    ${close_session_button}
+            Wait Until Page Does Not Contain Element    ${close_session_button}     timeout=10s
+            Wait Until Element Is Visible    ${session_closed_popup}    timeout=10s
+            Click Button    ${session_close_button}
+            Wait Until Element Is Not Visible    ${session_closed_popup}    timeout=20s
+            Wait Until Element Is Visible    ${open_session_link}   timeout=20s
       END
       ${closing_balance_specify_denomination_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance_note_tab}
       IF    ${closing_balance_specify_denomination_visible}
@@ -278,7 +283,6 @@ Close The Session For Adding The Item From Previous Session
            Wait Until Element Is Not Visible    ${closing_balance_note_tab}    timeout=10s
        END
    END
-
 
 Logout From The POS For Adding The Item From Previous Session
     ${logout_link_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${logout_link}
@@ -375,6 +379,7 @@ Add Normal SKU Product
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+      Wait Until Page Contains Element    ${cart_0}   timeout=20s
     END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}

@@ -1,10 +1,10 @@
 # catalog updated
 done_progress = '//button[@id="done-progress"]'
-closing_balance = '//input[@placeholder="Enter closing balance"]'
+closing_balance = '//div//header//h5[@class="modal-title"and contains(text(),"Close Session")]//following::div[@class="col-md-12 col-lg-12"]//input[@class="w-100 form-control form-control-lg"]'
 force_close_button = '//button[@class="btn ml-1 btn-danger btn-block"]'
 force_close_element = "//span[text()='Force Close Session']"
 open_session_submit_button = '//button[@id="session-cont"]'
-opening_balance = '//input[@id="session-input"]'
+opening_balance = '//div//header//h5[@class="modal-title"and contains(text(),"Open Session")]//following::div[@class="col-md-12 col-lg-12"]//input[@class="w-100 form-control form-control-lg"]'
 in_store = '//a[text()="In-Store"]'
 delivery = '//a[text()="Delivery"]'
 switch_billing_dropdown = '//div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]'

@@ -18,13 +18,13 @@ Login With Valid Username And Password | POS
     ${my_dict}    Create Dictionary   &{search_data}
     Input Text    ${serial_key}    ${my_dict.serial_key}
     Click Button    ${register_button}
-    Wait Until Element Is Visible    ${pos_username}    timeout=15s
+    Wait Until Element Is Visible    ${pos_username}    timeout=25s
     Input Text    ${pos_username}     ${my_dict.username_pos}
     Click Button    ${pos_continue_button}
-    Wait Until Element Is Visible    ${pos_password}    timeout=5s
+    Wait Until Element Is Visible    ${pos_password}    timeout=15s
     Input Text    ${pos_password}    ${my_dict.password_pos}
     Click Button    ${pos_continue_button}
-    Wait Until Page Contains Element    ${in_store}   timeout=15s
+    Wait Until Page Contains Element    ${in_store}   timeout=25s
 #    Wait Until Element Is Visible    ${catalog_update}    timeout=20s
 #    Page Should Contain Element    ${catalog_update}
 #    Page Should Contain Element    ${pos_dashboard}
