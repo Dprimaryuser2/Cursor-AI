@@ -19,6 +19,7 @@ Add Weighted UOM Products to Cart | Edit Cart Quantity Mode
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+      Wait Until Page Contains Element    ${cart_0}   timeout=20s
     END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
@@ -59,6 +60,7 @@ Add Weighted UOM Products to Cart | Add Cart Quantity Mode
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+      Wait Until Page Contains Element    ${cart_0}   timeout=20s
     END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
@@ -88,7 +90,6 @@ Add Weighted UOM Products to Cart | Add Cart Quantity Mode
         Click Element    ${update_cart_quantity}
         Sleep    1s
     END
-
 
 Update Product Quantity | Edit Cart Quantity Mode
     [Arguments]    ${products}
@@ -149,6 +150,7 @@ Scan And Add Product
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+      Wait Until Page Contains Element    ${cart_0}   timeout=20s
     END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
@@ -233,28 +235,94 @@ Close The Session
     Wait Until Keyword Succeeds    5    1    Click Element    ${close_session_icon}
     Wait Until Element Is Visible    ${close_session_header}    timeout=20s
     Input Text    ${closing_balance_field}    ${my_dict.closing_balance}
+    Wait Until Element Is Enabled    ${close_session_button}    timeout=20s
     Click Button    ${close_session_button}
+    Wait Until Page Does Not Contain Element    ${close_session_button}     timeout=10s
     Wait Until Element Is Visible    ${session_closed_popup}    timeout=10s
     Click Button    ${session_close_button}
-    Wait Until Element Is Not Visible    ${session_closed_popup}    timeout=10s
+    Wait Until Element Is Not Visible    ${session_closed_popup}    timeout=20s
+    Wait Until Element Is Visible    ${open_session_link}   timeout=20s
+
+Close The Session For Adding The Item From Previous Session
+   [Arguments]    ${products}
+   ${my_dict}    Create Dictionary   &{products}
+   ${close_session}=  Run Keyword And Return Status    Element Should Be Visible    ${close_session_icon}
+   IF   ${close_session}
+      Wait Until Keyword Succeeds    3    5    Click Element    ${close_session_icon}
+      Wait Until Element Is Visible    ${close_session_header}    timeout=20s
+      ${closing_balance_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance}
+      IF    ${closing_balance_visible}
+            ${items_list}=    Convert Items To List    ${my_dict.closing_balance}
+            ${items_dict} =    Convert Item List To Dictionary    ${my_dict.closing_balance}
+            FOR    ${item}    IN    @{items_dict.items()}
+                ${key}=    Set Variable    ${item}[0]
+                ${key}    Convert To String    ${key}
+                ${values}=    Set Variable    ${item}[1]
+                Input Text    ${closing_balance}    ${key}
+            END
+            Click Button    ${close_session_button}
+            Wait Until Page Does Not Contain Element    ${close_session_button}     timeout=10s
+            Wait Until Element Is Visible    ${session_closed_popup}    timeout=10s
+            Click Button    ${session_close_button}
+            Wait Until Element Is Not Visible    ${session_closed_popup}    timeout=20s
+            Wait Until Element Is Visible    ${open_session_link}   timeout=20s
+      END
+      ${closing_balance_specify_denomination_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance_note_tab}
+      IF    ${closing_balance_specify_denomination_visible}
+           ${items_list}=    Convert Items To List    ${my_dict.closing_balance}
+           ${items_dict} =    Convert Item List To Dictionary    ${my_dict.closing_balance}
+           FOR    ${item}    IN    @{items_dict.items()}
+               ${key}=    Set Variable    ${item}[0]
+               ${key}    Convert To String    ${key}
+               ${values}=    Set Variable    ${item}[1]
+               ${value}=    Convert To String    ${values}
+               ${balance_field}    Replace String    ${money_input_field}    AMOUNT      ${key}
+               Input Text    ${balance_field}    ${value}
+           END
+           Click Element    ${open_session_submit_button}
+           Wait Until Element Is Not Visible    ${closing_balance_note_tab}    timeout=10s
+       END
+   END
+
+Logout From The POS For Adding The Item From Previous Session
+    ${logout_link_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${logout_link}
+    IF    ${logout_link_visible}
+        Wait Until Keyword Succeeds    4    5    Click Element    ${logout_link}
+        Sleep  0.5
+        Click Element    ${logout_link}
+        Wait Until Element Is Visible    ${logout_modal}    timeout=20s
+        Click Button    ${logout_button}
+        Wait Until Element Is Visible    ${pos_username}    timeout=20s
+    END
+   Delete All Cookies
+   Execute JavaScript    window.localStorage.clear();
+   Execute JavaScript    window.sessionStorage.clear();
+   Reload Page
 
 Logout From The POS
-    Wait Until Keyword Succeeds    5    1    Click Element    ${logout_link}
-    Wait Until Element Is Visible    ${logout_modal}    timeout=20s
-    Click Button    ${logout_button}
-    Wait Until Element Is Visible    ${pos_username}    timeout=20s
-
+    ${logout_link_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${logout_link}
+    IF    ${logout_link_visible}
+        Wait Until Keyword Succeeds    3    5    Click Element    ${logout_link}
+        Sleep  0.5
+        Click Element    ${logout_link}
+        Wait Until Element Is Visible    ${logout_modal}    timeout=20s
+        Click Button    ${logout_button}
+        Wait Until Element Is Visible    ${pos_username}    timeout=20s
+    END
+    
 Add Previous Customer
     [Arguments]    ${customer_data}
     ${my_dict}    Create Dictionary   &{customer_data}
     Wait Until Element Is Enabled    ${add_customer_link}
-    Wait Until Keyword Succeeds    5     1      Click Element    ${add_customer_link}
+    Wait Until Keyword Succeeds    5     3      Click Element    ${add_customer_link}
     Wait Until Element Is Visible    ${customer_phone_field}
-    Input Text    ${customer_phone_field}    ${my_dict.mobile_no}
-    Click Button    ${continue_billing_button}
+    Click Element    ${customer_phone_field}
+    Input Text    ${customer_phone_field}    ${my_dict.phone_number}
+    Wait Until Element Is Enabled    ${continue_billing_button}  timeout=20s
+    Wait Until Keyword Succeeds    3     3    Click Element    ${continue_billing_button}
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=20s
-    Click Button    ${start_billing_button}
+    Wait Until Keyword Succeeds    3     3    Click Button    ${start_billing_button}
     Wait Until Element Is Visible    ${add_items_from_previous_session}    timeout=20s
 
 Verify Items Are Added From Previous Session
@@ -289,10 +357,51 @@ Clear All Products
     Wait Until Element Is Visible    ${scan_only}    timeout=20s
     ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
     IF    ${clear_item_enabled}
-      Click Element    ${clear_all_items}
+      Wait Until Keyword Succeeds    3     3    Click Element    ${clear_all_items}
+      ${clear_button_status}    Run Keyword And Return Status    Page Should Contain Element    ${clear_all_items}
+      IF    ${clear_button_status}
+          Wait Until Keyword Succeeds    3     3    Click Element    ${clear_all_items}
+      END
+      Wait Until Page Does Not Contain Element       ${clear_all_items}    timeout=20s
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
     END
 
 Verify Remove item to the cart | Order
     Wait Until Page Does Not Contain Element    ${product_name_in_cart_row}    timeout=5
     Page Should Not Contain Element    ${product_name_in_cart_row}
+
+Add Normal SKU Product
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+      Wait Until Page Contains Element    ${cart_0}   timeout=20s
+    END
+    ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    1s
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    1s
+        Click Element    ${search_add_button}
+        Sleep    1s
+        ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
+        IF    ${multiple_product_present}
+            Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+            Click Element    ${add_to_cart_mrp}
+            Wait Until Page Does Not Contain Element    ${select_mrp}
+        END
+    END
+
+Go Back To POS Dashboard
+   Wait Until Page Contains Element    ${back_icon_on_checkout}   timeout=10s
+   Click Element    ${back_icon_on_checkout}

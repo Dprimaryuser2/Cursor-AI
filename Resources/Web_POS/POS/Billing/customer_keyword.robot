@@ -6,6 +6,7 @@ Library    ../../../../Resources/CustomKeywords/utilities.py
 Variables    ../../../../PageObjects/Web_POS/POS/pos_locators.py
 Variables    ../../../../PageObjects/Web_POS/POS/add_customer_locator.py
 Variables    ../../../../PageObjects/Web_POS/POS/checkout_locators.py
+Resource   ../../../../Resources/Web_POS/POS/Order/manual_discount_order_keyword.robot
 
 *** Keywords ***
 Add Customer Details
@@ -18,7 +19,7 @@ Add Customer Details
     Set Test Variable    ${mobile}
     Input Text    ${customer_phone_field}    ${mobile}
     Click Button    ${continue_billing_button}
-    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
+    Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s
     ${first_name}=    Generate Random First Name
     Set Test Variable    ${first_name}
     Input Text    ${customer_first_name_field}    ${first_name}
@@ -55,8 +56,9 @@ Add Customer Details
     Input Text    ${address_line2}    ${add_line2}
     Select State And City    ${my_dict}
     Sleep    1
-    Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
+    Wait Until Element Is Enabled    ${start_billing_button}    timeout=25s
     Click Element    ${start_billing_button}
+    Wait Until Page Does Not Contain Element     ${start_billing_button}    timeout=20s
     Wait Until Element Is Visible    //div[@class="popup-notification"]    timeout=10s
     Wait Until Element Is Visible    ${payable_amount}
     Wait Until Element Is Visible    ${checkout_button}    timeout=10s
@@ -295,8 +297,12 @@ Verify Customer Tagging
         Click Element    ${close_customer_window}
         Wait Until Page Does Not Contain Element    ${close_customer_window}    timeout=10s
 
-Verify Customer Tagging Is Not Mandatory 
+Verify Customer Tagging Is Not Mandatory
     Click Button    ${checkout_button}
+    ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
+    IF    ${insufficient}
+     Set Fulfillment Date And Continue
+    END
     Page Should Not Contain Element    ${customer_tagging_mandatory_alert}
     Wait Until Element Is Visible      ${checkout_heading}    timeout=10s
     Page Should Contain Element    ${checkout_heading}
@@ -304,6 +310,10 @@ Verify Customer Tagging Is Not Mandatory
 
 Verify Customer Tagging Is Mandatory
     Click Button    ${checkout_button}
+    ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
+    IF    ${insufficient}
+     Set Fulfillment Date And Continue
+    END
     Wait Until Element Is Visible    ${customer_tagging_mandatory_alert}    timeout=15s
     Page Should Contain Element    ${customer_tagging_mandatory_alert}
 
@@ -321,6 +331,10 @@ Verify Customer Tagging Is Mandatory With Non Mandatory Information
     ${customer_phone_no}=    Convert To Integer    ${customer_phone_no}
     Should Be Equal As Integers    ${customer_phone_no}    ${mobile}
     Click Button    ${checkout_button}
+    ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
+    IF    ${insufficient}
+     Set Fulfillment Date And Continue
+    END
     Wait Until Element Is Visible      ${checkout_heading}    timeout=10s
     Page Should Contain Element    ${checkout_heading}
 
@@ -328,6 +342,10 @@ Verify Customer Tagging Is Mandatory With All Fields
     [Arguments]    ${customer_data}
     ${my_dict}    Create Dictionary   &{customer_data}
     Click Button    ${checkout_button}
+    ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
+    IF    ${insufficient}
+     Set Fulfillment Date And Continue
+    END
     Wait Until Element Is Visible    ${customer_tagging_mandatory_alert}    timeout=15s
     Page Should Contain Element    ${customer_tagging_mandatory_alert}
     Click Element    ${add_customer_link}
@@ -361,14 +379,22 @@ Verify Customer Tagging Is Mandatory With All Fields
     Sleep    0.5
     Wait Until Page Contains Element    ${pincode}
     Click Element    ${pincode}
+    Sleep    0.5
     Input Text    ${pincode}    ${my_dict.pincode}
     Press Keys    ${pincode}    ENTER
     Wait Until Page Contains Element    ${start_billing_button}    timeout=10s
     Click Button    ${start_billing_button}
-    Wait Until Element Is Visible    ${payable_amount}
+    Wait Until Page Does Not Contain Element    ${start_billing_button}    timeout=10s
+    Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=10s
+    Wait Until Page Does Not Contain Element    ${customer_tagged_popup}    timeout=10s
+    Wait Until Element Is Visible    ${payable_amount}    timeout=10s
     Wait Until Element Is Visible    ${checkout_button}    timeout=10s
     Sleep    0.5
     Click Button    ${checkout_button}
+    ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
+    IF    ${insufficient}
+     Set Fulfillment Date And Continue
+    END
     Wait Until Element Is Visible      ${checkout_heading}    timeout=10s
     Page Should Contain Element    ${checkout_heading}
 
@@ -402,7 +428,8 @@ Verify Edited Group
         ${uppercase_string}   Evaluate    "${item}".upper()
         Sleep    0.5
         ${group}=    Replace String    //div[@class="d-flex"]//span[text()="REGULAR"]    REGULAR    ${uppercase_string}
-        Wait Until Page Contains Element    ${group}
+        Wait Until Page Contains Element    ${group}    timeout=10s
+        
     END
 
 Verify Customer Tagged With Tax Invoice GST Number
@@ -681,8 +708,8 @@ Tag Existing Customer
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=10s
     Wait Until Element Is Enabled    ${start_billing_button}    timeout=10s
     Click Button    ${start_billing_button}
-    Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=10s
-    Wait Until Page Does Not Contain Element     ${customer_tagged_popup}    timeout=10s
+    Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=15s
+    Wait Until Page Does Not Contain Element     ${customer_tagged_popup}    timeout=15s
 
 Discard Items If Present From Previous Session
     ${store_item_from_previous_session}    Run Keyword And Return Status    Page Should Contain Element    ${discard_item_previous_session}
@@ -895,6 +922,8 @@ Add Customer Group
         Append To List      ${total_groups_tagged}       ${customer_groups}[${i}]
     END
     Wait Until Element Is Visible    ${save_button_customer_group}    timeout=10s
-    Wait Until Keyword Succeeds    2     1    Click Element    ${save_button_customer_group}
+    Wait Until Keyword Succeeds    2     2    Click Element    ${save_button_customer_group}
+    Wait Until Page Does Not Contain Element    ${save_button_customer_group}    timeout=10s
     Sleep    3s
+    Wait Until Page Contains Element    ${start_billing_button}
     [Return]    ${total_groups_tagged}

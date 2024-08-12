@@ -14,6 +14,7 @@ Test Teardown   Close Browser
 ${DISCOUNT_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}manual_discount_test_data.xlsx
 
 *** Test Cases ***
+
 Zwing_MD_1 Apply Item Level Manual Discount Assortment Wise
     [Tags]    Demo
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_01
@@ -237,6 +238,7 @@ Zwing_MD_18 Bill Level Custom Discount with discount type as Percentage
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_19 Apply Manual Discount Button | Assortment Wise | Button
+     [Tags]    Valid Failure
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_19
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -247,6 +249,7 @@ Zwing_MD_19 Apply Manual Discount Button | Assortment Wise | Button
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_20 Apply Manual Discount Button, Use Discount type as Fixed Amount
+    [Tags]    Valid Failure
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_20
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -257,6 +260,7 @@ Zwing_MD_20 Apply Manual Discount Button, Use Discount type as Fixed Amount
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_21 Apply Manual Discount Button | discount type as percentage
+    [Tags]    Valid Failure
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_21
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -267,6 +271,7 @@ Zwing_MD_21 Apply Manual Discount Button | discount type as percentage
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_22 Apply Manual Discount Button | Discount to Customer Group
+    [Tags]    Valid Failure
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_22
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -277,6 +282,7 @@ Zwing_MD_22 Apply Manual Discount Button | Discount to Customer Group
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_23 Apply Manual Discount Button | Allocate Discount to Stores
+    [Tags]    Valid Failure
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_23
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -287,6 +293,7 @@ Zwing_MD_23 Apply Manual Discount Button | Allocate Discount to Stores
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_24 Apply Manual Discount Button | Select the effective date and valid upto date
+    [Tags]    Valid Failure
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_24
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}

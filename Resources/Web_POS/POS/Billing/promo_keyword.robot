@@ -17,29 +17,72 @@ Open The Session
     [Arguments]    ${search_data}
     ${my_dict}    Create Dictionary   &{search_data}
 #    Wait Until Element Is Visible    ${pos_dashboard}
-    Sleep    2s
     ${catalog_update_failed}=    Run Keyword And Return Status    Element Should Be Visible    ${catalog_update_failed_heading}
     IF    ${catalog_update_failed}
         Click Button    ${catalog_close_button}
     END
-    ${catalog_update}=    Run Keyword And Return Status    Element Should Be Visible    ${done_progress}
+    ${catalog_update}=    Run Keyword And Return Status    Wait Until Page Contains Element    ${done_progress}    timeout=10
     IF    ${catalog_update}
         Click Button    ${done_progress}
     END
     ${closing_balance_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance}
     IF    ${closing_balance_visible}
-        Input Text    ${closing_balance}    ${my_dict.closing_balance}
+        ${items_list}=    Convert Items To List    ${my_dict.closing_balance}
+        ${items_dict} =    Convert Item List To Dictionary    ${my_dict.closing_balance}
+        FOR    ${item}    IN    @{items_dict.items()}
+            ${key}=    Set Variable    ${item}[0]
+            ${key}    Convert To String    ${key}
+            ${values}=    Set Variable    ${item}[1]
+            Input Text    ${closing_balance}    ${key}
+        END
         Click Element    ${force_close_button}
+        Wait Until Element Is Not Visible    ${force_close_button}    timeout=20s
         Wait Until Element Is Visible    ${opening_balance}    timeout=20s
+    END
+    ${closing_balance_specify_denomination_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance_note_tab}
+    IF    ${closing_balance_specify_denomination_visible}
+        ${items_list}=    Convert Items To List    ${my_dict.closing_balance}
+        ${items_dict} =    Convert Item List To Dictionary    ${my_dict.closing_balance}
+        FOR    ${item}    IN    @{items_dict.items()}
+            ${key}=    Set Variable    ${item}[0]
+            ${key}    Convert To String    ${key}
+            ${values}=    Set Variable    ${item}[1]
+            ${value}=    Convert To String    ${values}
+            ${balance_field}    Replace String    ${money_input_field}    AMOUNT      ${key}
+            Input Text    ${balance_field}    ${value}
+        END
+        Click Element    ${open_session_submit_button}
+        Wait Until Element Is Not Visible    ${closing_balance_note_tab}    timeout=10s
     END
     ${opening_session_present}=    Run Keyword And Return Status    Element Should Be Visible    ${opening_balance}    timeout=10s
     IF    ${opening_session_present}
         Clear Element Text    ${opening_balance}
-        Input Text    ${opening_balance}    ${my_dict.opening_balance}
+        ${items_list}=    Convert Items To List    ${my_dict.opening_balance}
+        ${items_dict} =    Convert Item List To Dictionary    ${my_dict.opening_balance}
+        FOR    ${item}    IN    @{items_dict.items()}
+            ${key}=    Set Variable    ${item}[0]
+            ${key}=    Convert To String    ${key}
+            ${values}=    Set Variable    ${item}[1]
+            Input Text    ${opening_balance}    ${key}
+        END
         Click Element    ${open_session_submit_button}
         Wait Until Element Is Not Visible    ${opening_balance}    timeout=10s
     END
-
+    ${opening_session_specify_denomination_present}=    Run Keyword And Return Status    Element Should Be Visible    ${open_session_notes_tab}    timeout=10s
+    IF    ${opening_session_specify_denomination_present}
+        ${items_list}=    Convert Items To List    ${my_dict.opening_balance}
+        ${items_dict} =    Convert Item List To Dictionary    ${my_dict.opening_balance}
+        FOR    ${item}    IN    @{items_dict.items()}
+            ${key_int}=    Set Variable    ${item}[0]
+            ${key}    Convert To String    ${key_int}
+            ${values}=    Set Variable    ${item}[1]
+            ${value}=    Convert To String    ${values}
+            ${balance_field}    Replace String    ${money_input_field}    AMOUNT      ${key}
+            Input Text    ${balance_field}    ${value}
+        END
+        Click Element    ${open_session_submit_button}
+        Wait Until Element Is Not Visible    ${opening_balance}    timeout=10s
+    END
 
 Scan Barcode To Add Item And Quantity To Cart
     [Arguments]    ${products}
@@ -48,7 +91,7 @@ Scan Barcode To Add Item And Quantity To Cart
     Wait Until Element Is Visible    ${scan_only}    timeout=20s
     ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
     IF    ${clear_item_enabled}
-      Click Element    ${clear_all_items}
+      Wait Until Keyword Succeeds    3    3    Click Element    ${clear_all_items}
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
     END
     ${items_list}=    Convert Items To List    ${my_dict.buy_items}
@@ -89,7 +132,7 @@ Scan Barcode To Add Item And Quantity To Cart
             Wait Until Element Is Visible    ${custom_select_option}    timeout=20s
             Click Element    ${custom_select_option}
         END
-        Wait Until Element Is Enabled    ${product_search_bar}    timeout=10s
+        Wait Until Element Is Enabled    ${product_search_bar}    timeout=15s
     END
     ${items_list}=    Convert Items To List    ${my_dict.get_items}
     IF    ${items_list} != ['NULL']
@@ -126,9 +169,10 @@ Scan Barcode To Add Item And Quantity To Cart
                 Wait Until Element Is Visible    ${custom_select_option}    timeout=20s
                 Click Element    ${custom_select_option}
             END
-            Wait Until Element Is Enabled    ${product_search_bar}    timeout=10s
+            Wait Until Element Is Enabled    ${product_search_bar}    timeout=15s
         END
     END
+
 
 Add Multiple MRP Products
     Wait Until Page Contains Element    ${select_mrp}   timeout=10s
@@ -528,13 +572,15 @@ Verify Promo Discount In Side Cart | POS
     #verification
     Should Be Equal As Integers   ${expected_payable_amount}    ${payable_amt}
 
+
 Verify Billing Checkout
-    Sleep    0.5
-    Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
-    ${discard}=    Run Keyword And Return Status    Element Should Be Enabled    ${discard_item_previous_session}
+    ${discard}=    Run Keyword And Return Status    Element Should Be Visible       ${discard_button}
+    ${discard}=    Run Keyword And Return Status    Element Should Be Visible       ${discard_button}
     IF    ${discard}
-     Discard Previous Added Item
+         Click Button    ${discard_button}
+         Click Button    ${discard_button}
     END
+    Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
     Click Button    ${checkout_button}
     ${popup_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${updating_catalog_heading}
     IF    ${popup_visible}
@@ -554,6 +600,12 @@ Verify Billing Checkout
     Wait Until Element Is Visible    ${checkout_heading}    timeout=20s
     Page Should Contain Element    ${checkout_heading}
     Sleep    1s
+    ${feedback}    Run Keyword And Return Status    Element Should Be Visible    //label[text()="Customer Feedback "]
+    IF    ${feedback}
+        ${text}    Generate Random Name
+        Input Text    //label[text()="Customer Feedback "]//following-sibling::div/input    ${text}
+        Click Button    //span[text()="Save"]//ancestor::button
+    END
 
 Verify Promo Discount On Modal | Checkout Page
     [Arguments]    ${promo_data}
@@ -568,10 +620,10 @@ Verify Promo Discount On Modal | Checkout Page
     ${modal_discount_without_characters}=    Remove Characters    ${modal_discount}
     ${modal_discount_amount}=    Convert To Number    ${modal_discount_without_characters}
     Wait Until Keyword Succeeds    4    1    Click Element    ${promo_close_button}
-    ${promo_modal_visible}    Run Keyword And Return Status    Page Should Contain Element    ${item_promotions_title}
-    IF    ${promo_modal_visible}
-        Click Element    ${promo_close_button}
-    END
+#    ${promo_modal_visible}    Run Keyword And Return Status    Page Should Contain Element    ${item_promotions_title}
+#    IF    ${promo_modal_visible}
+#        Click Element    ${promo_close_button}
+#    END
     Wait Until Element Is Not Visible    ${item_promotions_title}    timeout=20s
     ${promo_total_discount}=    Get Text    ${checkout_promo_discount}
     ${promo_discount_amount}=    Remove Characters    ${promo_total_discount}
@@ -3286,7 +3338,11 @@ Verify Applicability Of Buy Between Slab And Get Percent Discount On SSP
 
 Verify 100% Free Billing Checkout
      Wait Until Element Is Visible  ${checkout_button}  timeout=5s
-     Element Should Be Disabled    ${checkout_button}
+     ${payable_amount_with_rs}=    Get Text    ${payable_amount}
+     ${payable_amt}=    Remove Characters    ${payable_amount_with_rs}
+     ${payable_amt}=    Convert To Number    ${payable_amt}
+     ${free}    Set Variable    0
+     Should Be Equal As Integers    ${payable_amt}    ${free}
 
 Verify Applicability Of Buy Between Slab And Get Percent Discount On SSP | Checkout Page
     [Arguments]    ${discount_data}

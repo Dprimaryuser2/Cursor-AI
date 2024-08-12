@@ -11,6 +11,7 @@ Resource    ../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/Order/mode_of_payment_order_keywords.robot
 Resource    ../../../Resources/Web_POS/POS/Order/customer_tagging_order_keyword.robot
 Variables   ../../../PageObjects/Web_POS/POS/order_locators.py
+
 Test Setup    Open Application | POS
 Test Teardown   Close Browser
 
@@ -19,7 +20,8 @@ ${MOP_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}mod
 
 *** Test Cases ***
 Zwing_O_96 Customer Paid amount equal to payable amount
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_96
+    [Tags]    retry
+     ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_96
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
      Change Billing Mode    ${mop_data}
@@ -115,6 +117,7 @@ Zwing_O_102 Collecting Payment by Redeem Store Credit using voucher | Partially 
 #Zwing_O_105 Redeem Store Credit against Mobile Number | OTP Authentication is allowed
 
 Zwing_O_106 Payment by using on Account Sale
+    [Tags]    Valid Failure
     ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_106
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -130,6 +133,7 @@ Zwing_O_106 Payment by using on Account Sale
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_107 Payment by using on Account Sale | Account Balance is Greater or Equal to payable amount
+    [Tags]    Valid Failure
     ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_107
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -145,6 +149,7 @@ Zwing_O_107 Payment by using on Account Sale | Account Balance is Greater or Equ
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_108 Payment by using on Account Sale | Account Balance is less than payable amount
+    [Tags]    Valid Failure
     ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_108
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -159,6 +164,7 @@ Zwing_O_108 Payment by using on Account Sale | Account Balance is less than paya
 
 
 Zwing_O_109 Additional MOP's | Validate additional MOP's available
+    [Tags]    retry
     ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_109
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -187,6 +193,7 @@ Zwing_O_110 Clicking on a MOP should open a popup to enter transaction reference
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_111 Additional MOP's | Enter transaction id
+     [Tags]    retry
     ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_111
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}

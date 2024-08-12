@@ -3,8 +3,8 @@ Library    SeleniumLibrary
 Library    String
 Library    Collections
 Resource   ../../../../Resources/Web_POS/Login/login_keyword.robot
+Variables   ../../../../PageObjects/Web_POS/POS/order_locators.py
 Library    ../../../../Resources/CustomKeywords/utilities.py
-Library    utilities
 
 *** Keywords ***
 
@@ -18,7 +18,7 @@ Click On Clear All Items Button
 Verify Clear All Items Clear the Items From Cart
     Wait Until Page Contains Element    ${cart_0}
     Page Should Contain Element    ${cart_0}
-    Element Should Be Disabled    ${checkout_button}
+    Page Should Not Contain Element    ${checkout_button}
 
 Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order
     [Arguments]    ${products}
@@ -184,4 +184,59 @@ Verify Items Are Added From Previous Session | Order
     ${session_dict}    Create List    @{session_data}
     FOR    ${i}    IN RANGE    0     ${product_count}
         Page Should Contain    ${session_dict}[${i}]
+    END
+
+Verify 0 Inventory To Cart With Disable Negative Inventory | Order
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+    Wait Until Page Contains Element    ${negative_inventory_alert_order}    timeout=10s
+    Page Should Contain Element    ${negative_inventory_alert_order}
+    Page Should Contain Element    ${cart_0}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Page Should Not Contain Element    ${item_cart_table}
+    END
+
+Add Weighted UOM Products to Cart | Edit Cart Quantity Mode | Order | Disable Negative Inventory
+     [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.buy_items}
+    Wait Until Element Is Visible    ${scan_only}    timeout=20s
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF    ${clear_item_enabled}
+      Click Element    ${clear_all_items}
+      Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
+    END
+    ${items_list}=    Convert Items To List    ${my_dict.buy_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.buy_items}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Click Element    ${product_search_bar}
+        Input Text    ${product_search_bar}    ${key}
+        Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
+        Sleep    0.5s
+        Click Element    ${search_add_button}
+        Sleep    2s
+        ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
+        IF    ${multiple_product_present}
+            Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+            Click Element    ${add_to_cart_mrp}
+            Wait Until Page Does Not Contain Element    ${select_mrp}
+        END
+        Sleep    1s
+        # edit cart
+        ${edit_toggle_enabled}    Run Keyword And Return Status    Element Should Be Visible    ${edit_toggle_on}
+        IF    ${edit_toggle_enabled}
+            Input Text    ${quantity_input}    ${value}
+        ELSE
+            Click Element    ${add_toggle_button}
+            Input Text    ${quantity_input}    ${value}
+        END
+        Click Element    ${update_cart_quantity}
     END

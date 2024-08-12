@@ -99,6 +99,7 @@ Zwing_CB_8 Add Multiple Carry Bags At Once To Cart
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_9 Add Carry Bags With 0 Inventory
+    [Tags]    try
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_9
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}

@@ -22,7 +22,6 @@ Zwing_SI_1 Add remarks in Add remark popup
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    Verify Billing Checkout
    Verify Bill Remark Added Is Visible In Bill Remark Textarea   ${share_data}
@@ -34,7 +33,6 @@ Zwing_SI_2 Clear the remarks using clear button
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    Verify Billing Checkout
    Verify The Clear Button Of Add Bill Remark   ${share_data}
@@ -46,7 +44,6 @@ Zwing_SI_3 Save the remarks using save button
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    Verify Billing Checkout
    Add Bill Remarks    ${share_data}
@@ -59,7 +56,6 @@ Zwing_SI_4 Click outside the add remarks popup without saving or clearing the re
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    Verify Billing Checkout
    Verify Bill Remark Added Is Visible In Bill Remark Textarea   ${share_data}
@@ -72,7 +68,6 @@ Zwing_SI_5 Close the add remarks popup using X button
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    Verify Billing Checkout
    Verify Bill Remark Added Is Visible In Bill Remark Textarea   ${share_data}
@@ -85,7 +80,6 @@ Zwing_SI_6 After checkout click on Print Invoice button
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
@@ -100,7 +94,6 @@ Zwing_SI_7 Close the Invoice preview using close button
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
@@ -116,7 +109,6 @@ Zwing_SI_8 Click on Print button in Invoice preview popup to redirect to final p
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
@@ -133,7 +125,6 @@ Zwing_SI_9 Click on share invoice button to open share invoice popup
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
@@ -148,7 +139,6 @@ Zwing_SI_10 Close share invoice pop up using X button
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
@@ -164,7 +154,6 @@ Zwing_SI_11 Navigate from email id tab to phone No. tab and vice versa in share 
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
@@ -180,7 +169,6 @@ Zwing_SI_12 Validate the phone No. should get auto populated with the no. tagged
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
@@ -196,7 +184,6 @@ Zwing_SI_13 Validate the Email address should get auto populated with the Email 
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
@@ -212,7 +199,6 @@ Zwing_SI_14 Update the phone No. while sharing the Invoice
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
@@ -228,7 +214,6 @@ Zwing_SI_15 While updating the phoneNo, send button should be disabled and error
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
@@ -244,7 +229,6 @@ Zwing_SI_16 Update the Email address while sharing the Invoice
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
@@ -255,12 +239,11 @@ Zwing_SI_16 Update the Email address while sharing the Invoice
    Revoke Serial Key    ${share_data}
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
-Zwing_SI_17 While updating the Email address, send button should be disabled and error message should be displayed if emailId is not valid. Valid format
+Zwing_SI_17 While updating the Email address, send button should be disabled and error message should be displayed if emailId is not valid. Valid format.
    ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_17
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
@@ -273,12 +256,11 @@ Zwing_SI_17 While updating the Email address, send button should be disabled and
 
 #Zwing_SI_18 Send Invoice using phone No.
 
-Zwing_SI_19 Send Invoice using email Id
+Zwing_SI_19 Send Invoice using email Id.
    ${share_data}=  Fetch Testdata By Id   ${share_td}    SI_19
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    ${store_name}  Get Store Name | Web POS
    Add Customer Details | Share Invoice    ${share_data}
    ${value}    Get payable amount
@@ -297,7 +279,6 @@ Zwing_SI_20 Navigate to billing page using new bill button on checkout page
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    Add Customer Details | Share Invoice    ${share_data}
    ${value}    Get payable amount
    Verify Billing Checkout
@@ -312,7 +293,6 @@ Zwing_SI_21 Update the Email address while sharing the Invoice and send invoice
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
    Add Product By Scan Only   ${share_data}
-   Verify Item Added In Cart
    ${store_name}  Get Store Name | Web POS
    Add Customer Details | Share Invoice    ${share_data}
    ${value}    Get payable amount

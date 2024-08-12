@@ -108,4 +108,4 @@ edit_remark_button = '//a[normalize-space()="Edit Remark"]'
 search_bar_order_management = '//div[@class="container-fluid"]//following::input[@class="search form-control"]'
 order_status_order_management ='//div[@class="row w-100"]'
 order_management_page_heading = '//h5[@class="mt-2 mr-3" and contains(text(), "Order Management")]'
-
+negative_inventory_alert_order = '//div[@class="col-11"]//h6[contains(text(),"Insufficient Inventory")]'
