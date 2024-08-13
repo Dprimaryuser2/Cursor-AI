@@ -17,12 +17,12 @@ Test Teardown   Close Browser
 #${share_td}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}share_invoice_test_data.xlsx
 
 *** Variables ***
-${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Billing${/}share_invoice_test_data.xlsx
-${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Billing${/}share_invoice_test_data.xlsx
+${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Billing${/}share_invoice_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Billing${/}share_invoice_test_data.xlsx
 
 *** Test Cases ***
 Zwing_SI_1 Add remarks in Add remark popup
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_01
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -34,7 +34,7 @@ Zwing_SI_1 Add remarks in Add remark popup
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_2 Clear the remarks using clear button
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_02
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -46,7 +46,7 @@ Zwing_SI_2 Clear the remarks using clear button
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_3 Save the remarks using save button
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_03
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -59,7 +59,7 @@ Zwing_SI_3 Save the remarks using save button
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_4 Click outside the add remarks popup without saving or clearing the remarks
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_04
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -72,7 +72,7 @@ Zwing_SI_4 Click outside the add remarks popup without saving or clearing the re
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_5 Close the add remarks popup using X button
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_05
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -85,7 +85,7 @@ Zwing_SI_5 Close the add remarks popup using X button
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_6 After checkout click on Print Invoice button
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_06
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -100,7 +100,7 @@ Zwing_SI_6 After checkout click on Print Invoice button
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_7 Close the Invoice preview using close button
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_07
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -116,7 +116,7 @@ Zwing_SI_7 Close the Invoice preview using close button
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_8 Click on Print button in Invoice preview popup to redirect to final print preview page
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_08
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -133,7 +133,7 @@ Zwing_SI_8 Click on Print button in Invoice preview popup to redirect to final p
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_9 Click on share invoice button to open share invoice popup
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_09
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -148,7 +148,7 @@ Zwing_SI_9 Click on share invoice button to open share invoice popup
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_10 Close share invoice pop up using X button
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_10
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -164,7 +164,7 @@ Zwing_SI_10 Close share invoice pop up using X button
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_11 Navigate from email id tab to phone No. tab and vice versa in share invoice popup
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_11
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -180,7 +180,7 @@ Zwing_SI_11 Navigate from email id tab to phone No. tab and vice versa in share 
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_12 Validate the phone No. should get auto populated with the no. tagged while customer tagging
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_12
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -196,7 +196,7 @@ Zwing_SI_12 Validate the phone No. should get auto populated with the no. tagged
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_13 Validate the Email address should get auto populated with the Email id tagged while customer tagging
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_13
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -212,7 +212,7 @@ Zwing_SI_13 Validate the Email address should get auto populated with the Email 
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_14 Update the phone No. while sharing the Invoice
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_14
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -228,7 +228,7 @@ Zwing_SI_14 Update the phone No. while sharing the Invoice
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_15 While updating the phoneNo, send button should be disabled and error message should be displayed if phoneNo is not of 10 characters
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_15
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -244,7 +244,7 @@ Zwing_SI_15 While updating the phoneNo, send button should be disabled and error
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_16 Update the Email address while sharing the Invoice
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_16
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -260,7 +260,7 @@ Zwing_SI_16 Update the Email address while sharing the Invoice
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_17 While updating the Email address, send button should be disabled and error message should be displayed if emailId is not valid. Valid format.
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_17
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -278,7 +278,7 @@ Zwing_SI_17 While updating the Email address, send button should be disabled and
 #Zwing_SI_18 Send Invoice using phone No.
 
 Zwing_SI_19 Send Invoice using email Id.
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_19
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -297,7 +297,7 @@ Zwing_SI_19 Send Invoice using email Id.
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_20 Navigate to billing page using new bill button on checkout page
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_20
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}
@@ -312,7 +312,7 @@ Zwing_SI_20 Navigate to billing page using new bill button on checkout page
    [Teardown]    Tear It Down If Test Case Failed    ${share_data}
 
 Zwing_SI_21 Update the Email address while sharing the Invoice and send invoice
-   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${SHARE_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${share_data}=  Fetch Testdata By Id   ${SHARE_TD}    SI_21
    Login With Valid Username And Password | POS    ${share_data}
    Open The Session    ${share_data}

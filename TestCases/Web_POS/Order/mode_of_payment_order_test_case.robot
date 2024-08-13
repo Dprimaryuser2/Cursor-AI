@@ -18,13 +18,13 @@ Test Teardown   Close Browser
 #${MOP_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}mode_of_payment_order_test_data.xlsx
 
 *** Variables ***
-${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Order${/}mode_of_payment_order_test_data.xlsx
-${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Order${/}mode_of_payment_order_test_data.xlsx
+${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Order${/}mode_of_payment_order_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Order${/}mode_of_payment_order_test_data.xlsx
 
 *** Test Cases ***
 Zwing_O_96 Customer Paid amount equal to payable amount
     [Tags]    retry
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_96
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
@@ -40,7 +40,8 @@ Zwing_O_96 Customer Paid amount equal to payable amount
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_97 Customer Paid amount less than to payable amount(continue button remains disabled)
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_97
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_97
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
      Change Billing Mode    ${mop_data}
@@ -54,7 +55,7 @@ Zwing_O_97 Customer Paid amount less than to payable amount(continue button rema
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_98 Customer Paid amount more than to payable amount
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_98
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
@@ -72,7 +73,8 @@ Zwing_O_98 Customer Paid amount more than to payable amount
 #Zwing_O_99 Redeem Store Credit Against Mobile Number
 
 Zwing_O_100 Redeem Store Credit using Vouhcer Code
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_100
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_100
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
      Change Billing Mode    ${mop_data}
@@ -88,7 +90,8 @@ Zwing_O_100 Redeem Store Credit using Vouhcer Code
 
 
 Zwing_O_101 Collecting Payment by Redeem Store Credit using voucher code | Partially Redemption Allowed
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_101
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_101
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -104,7 +107,8 @@ Zwing_O_101 Collecting Payment by Redeem Store Credit using voucher code | Parti
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_102 Collecting Payment by Redeem Store Credit using voucher | Partially Redemption is not Allowed
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_102
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_102
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -123,7 +127,8 @@ Zwing_O_102 Collecting Payment by Redeem Store Credit using voucher | Partially 
 
 Zwing_O_106 Payment by using on Account Sale
     [Tags]    Valid Failure
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_106
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_106
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -139,7 +144,8 @@ Zwing_O_106 Payment by using on Account Sale
 
 Zwing_O_107 Payment by using on Account Sale | Account Balance is Greater or Equal to payable amount
     [Tags]    Valid Failure
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_107
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_107
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -155,7 +161,8 @@ Zwing_O_107 Payment by using on Account Sale | Account Balance is Greater or Equ
 
 Zwing_O_108 Payment by using on Account Sale | Account Balance is less than payable amount
     [Tags]    Valid Failure
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_108
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_108
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -170,7 +177,8 @@ Zwing_O_108 Payment by using on Account Sale | Account Balance is less than paya
 
 Zwing_O_109 Additional MOP's | Validate additional MOP's available
     [Tags]    retry
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_109
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_109
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -185,7 +193,8 @@ Zwing_O_109 Additional MOP's | Validate additional MOP's available
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_110 Clicking on a MOP should open a popup to enter transaction reference id
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_110
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_110
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -199,7 +208,8 @@ Zwing_O_110 Clicking on a MOP should open a popup to enter transaction reference
 
 Zwing_O_111 Additional MOP's | Enter transaction id
      [Tags]    retry
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_111
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_111
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -213,7 +223,8 @@ Zwing_O_111 Additional MOP's | Enter transaction id
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_112 Validate the amount auto-populated in customer paid field
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_112
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_112
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -227,7 +238,8 @@ Zwing_O_112 Validate the amount auto-populated in customer paid field
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_113 Close the transaction reference id popup using X button
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_113
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_113
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -242,7 +254,8 @@ Zwing_O_113 Close the transaction reference id popup using X button
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_114 Customer paid field should be non - editable
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_114
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_114
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -256,7 +269,8 @@ Zwing_O_114 Customer paid field should be non - editable
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_115 Complete payment by clicking on continue button, without entering transaction reference id.
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_115
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_115
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}
@@ -271,7 +285,8 @@ Zwing_O_115 Complete payment by clicking on continue button, without entering tr
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_116 complete payment by clicking on continue button after entering transaction reference id.
-    ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_116
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_116
     Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
     Change Billing Mode    ${mop_data}

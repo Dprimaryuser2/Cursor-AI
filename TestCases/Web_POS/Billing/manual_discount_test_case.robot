@@ -14,14 +14,14 @@ Test Teardown   Close Browser
 #${DISCOUNT_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}manual_discount_test_data.xlsx
 
 *** Variables ***
-${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Billing${/}manual_discount_test_data.xlsx
-${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Billing${/}manual_discount_test_data.xlsx
+${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Billing${/}manual_discount_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Billing${/}manual_discount_test_data.xlsx
 
 *** Test Cases ***
 
 Zwing_MD_1 Apply Item Level Manual Discount Assortment Wise
     [Tags]    Demo
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_01
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -34,7 +34,7 @@ Zwing_MD_1 Apply Item Level Manual Discount Assortment Wise
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_2 Apply Item Level Manual Discount | Discount type as Fixed Amount
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_02
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -47,7 +47,7 @@ Zwing_MD_2 Apply Item Level Manual Discount | Discount type as Fixed Amount
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_3 Apply Item Level Manual Discount | Discount type as percentage
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_03
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -60,7 +60,7 @@ Zwing_MD_3 Apply Item Level Manual Discount | Discount type as percentage
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_4 Apply Item Level Manual Discount | Discount to Customer Group
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_04
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -74,7 +74,7 @@ Zwing_MD_4 Apply Item Level Manual Discount | Discount to Customer Group
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_5 Apply Item Level Manual Discount | Discount to Store
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_05
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -87,7 +87,7 @@ Zwing_MD_5 Apply Item Level Manual Discount | Discount to Store
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_6 Apply Item Level Manual Discount | Effective date and valid up to date
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_06
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -101,7 +101,7 @@ Zwing_MD_6 Apply Item Level Manual Discount | Effective date and valid up to dat
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_7 Bill Level manual discount
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_07
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -114,7 +114,7 @@ Zwing_MD_7 Bill Level manual discount
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_8 Bill Level manual discount as Fixed Amount
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_08
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -127,7 +127,7 @@ Zwing_MD_8 Bill Level manual discount as Fixed Amount
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_9 Bill level manual discount as Percentage
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_09
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -140,7 +140,7 @@ Zwing_MD_9 Bill level manual discount as Percentage
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_10 Allocate Discount to Customer Group
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_10
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -153,7 +153,7 @@ Zwing_MD_10 Allocate Discount to Customer Group
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_11 Manual Discount button | Stores
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_11
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -166,7 +166,7 @@ Zwing_MD_11 Manual Discount button | Stores
      [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_12 Select the effective and valid up to date
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_12
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -179,7 +179,7 @@ Zwing_MD_12 Select the effective and valid up to date
      [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_13 Item level custom Discount
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_13
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -193,7 +193,7 @@ Zwing_MD_13 Item level custom Discount
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_14 Custom Discount with discount type as amount
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_14
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -207,7 +207,7 @@ Zwing_MD_14 Custom Discount with discount type as amount
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_15 Custom Discount with discount type as Percentage
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_15
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -221,7 +221,7 @@ Zwing_MD_15 Custom Discount with discount type as Percentage
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_16 Bill level custom discount
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_16
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -234,7 +234,7 @@ Zwing_MD_16 Bill level custom discount
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_17 Bill Level Custom Discount with discount type as amount
-     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_17
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -247,7 +247,7 @@ Zwing_MD_17 Bill Level Custom Discount with discount type as amount
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_18 Bill Level Custom Discount with discount type as Percentage
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_18
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -261,7 +261,7 @@ Zwing_MD_18 Bill Level Custom Discount with discount type as Percentage
 
 Zwing_MD_19 Apply Manual Discount Button | Assortment Wise | Button
      [Tags]    Valid Failure
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_19
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -273,7 +273,7 @@ Zwing_MD_19 Apply Manual Discount Button | Assortment Wise | Button
 
 Zwing_MD_20 Apply Manual Discount Button, Use Discount type as Fixed Amount
     [Tags]    Valid Failure
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_20
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -285,7 +285,7 @@ Zwing_MD_20 Apply Manual Discount Button, Use Discount type as Fixed Amount
 
 Zwing_MD_21 Apply Manual Discount Button | discount type as percentage
     [Tags]    Valid Failure
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_21
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -297,7 +297,7 @@ Zwing_MD_21 Apply Manual Discount Button | discount type as percentage
 
 Zwing_MD_22 Apply Manual Discount Button | Discount to Customer Group
     [Tags]    Valid Failure
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_22
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -309,7 +309,7 @@ Zwing_MD_22 Apply Manual Discount Button | Discount to Customer Group
 
 Zwing_MD_23 Apply Manual Discount Button | Allocate Discount to Stores
     [Tags]    Valid Failure
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_23
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -321,7 +321,7 @@ Zwing_MD_23 Apply Manual Discount Button | Allocate Discount to Stores
 
 Zwing_MD_24 Apply Manual Discount Button | Select the effective date and valid upto date
     [Tags]    Valid Failure
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_24
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -332,7 +332,7 @@ Zwing_MD_24 Apply Manual Discount Button | Select the effective date and valid u
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_25 Apply Manual Discount Button |Policy : Allows cashier to apply manual discount on bill level | Disable bill level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_25
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -344,7 +344,7 @@ Zwing_MD_25 Apply Manual Discount Button |Policy : Allows cashier to apply manua
      [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manual discount on bill level | Enable bill level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_26
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -356,7 +356,7 @@ Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manua
      [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_27 Apply Manual Discount Button Policy : Allow cashier to select bill level discount from given list | Disable bill level discount list
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_27
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -368,7 +368,7 @@ Zwing_MD_27 Apply Manual Discount Button Policy : Allow cashier to select bill l
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_28 Apply Manual Discount Button Policy : Allow cashier to select bill level discount from given list | Enable bill level discount list
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_28
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -380,7 +380,7 @@ Zwing_MD_28 Apply Manual Discount Button Policy : Allow cashier to select bill l
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_29 Apply Manual Discount Button Policy : Allow cashier to enter bill level manual discount as percentage or amount | enable custom bill level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_29
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -392,7 +392,7 @@ Zwing_MD_29 Apply Manual Discount Button Policy : Allow cashier to enter bill le
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_30 Apply Manual Discount Button Policy : Allow cashier to enter bill level manual discount as percentage or amount | disable custom bill level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_30
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -404,7 +404,7 @@ Zwing_MD_30 Apply Manual Discount Button Policy : Allow cashier to enter bill le
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_31 Apply Manual Discount Button Policy : Discount capping (amount) Bill level | Apply Bill level discount percentage more than Limit on discount percentage(Bill level)
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_31
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -417,7 +417,7 @@ Zwing_MD_31 Apply Manual Discount Button Policy : Discount capping (amount) Bill
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_32 Apply Manual Discount Button Policy : Discount capping (amount) Bill level | Apply Bill level discount percentage less than or equal to Limit on discount percentage(Bill level)
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_32
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -430,7 +430,7 @@ Zwing_MD_32 Apply Manual Discount Button Policy : Discount capping (amount) Bill
      [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_33
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -441,7 +441,7 @@ Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
      [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_34 Apply Manual Discount Button | Enable Item level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_34
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -452,7 +452,7 @@ Zwing_MD_34 Apply Manual Discount Button | Enable Item level discount
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_35 Apply Manual Discount Button | Enable Item level discount | Disable Item level discount list
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_35
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -464,7 +464,7 @@ Zwing_MD_35 Apply Manual Discount Button | Enable Item level discount | Disable 
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_36 Apply Manual Discount Button | Enable Item level discount | Enable Item level discount list
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_36
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -476,7 +476,7 @@ Zwing_MD_36 Apply Manual Discount Button | Enable Item level discount | Enable I
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_37 Apply Manual Discount Button | Enable Item level discount | Enable Custom Item level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_37
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -488,7 +488,7 @@ Zwing_MD_37 Apply Manual Discount Button | Enable Item level discount | Enable C
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_38 Apply Manual Discount Button | Enable Item level discount | Disable Custom Item level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_38
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -500,7 +500,7 @@ Zwing_MD_38 Apply Manual Discount Button | Enable Item level discount | Disable 
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_39 Apply Manual Discount Button | Apply Item level discount percentage more than Limit on discount percentage(Item level)
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_39
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -513,7 +513,7 @@ Zwing_MD_39 Apply Manual Discount Button | Apply Item level discount percentage 
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_40 Apply Manual Discount Button | Apply Item level discount percentage less than or equal to Limit on discount percentage(Item level)
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_40
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -527,7 +527,7 @@ Zwing_MD_40 Apply Manual Discount Button | Apply Item level discount percentage 
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_41 Apply Manual Discount Button | Apply Item level discount amount more than the Limit on discount amount (Item level)
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_41
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -540,7 +540,7 @@ Zwing_MD_41 Apply Manual Discount Button | Apply Item level discount amount more
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_42 Apply Manual Discount Button | Apply Item level discount amount less than or equal to the Limit on discount amount (Item level)
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_42
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -554,7 +554,7 @@ Zwing_MD_42 Apply Manual Discount Button | Apply Item level discount amount less
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_43 Apply Manual Discount Button | Apply Bill level custom discount more than bill amount when limit is greater than Bill amount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_43
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -567,7 +567,7 @@ Zwing_MD_43 Apply Manual Discount Button | Apply Bill level custom discount more
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_44 Apply Manual Discount Button | Apply Bill level custom discount less than or equal to bill amount when limit is greater than Bill amount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_44
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -580,7 +580,7 @@ Zwing_MD_44 Apply Manual Discount Button | Apply Bill level custom discount less
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_45 Apply Manual Discount Button | Apply item level custom discount more than the line item amount when limit is greater than line item amount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_45
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -592,7 +592,7 @@ Zwing_MD_45 Apply Manual Discount Button | Apply item level custom discount more
     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
 
 Zwing_MD_46 Apply Manual Discount Button | Apply item level custom discount less than or equal to line item amount when limit is greater than line item amount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_46
      Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}

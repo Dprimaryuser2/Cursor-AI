@@ -18,13 +18,13 @@ Test Teardown   Close Browser
 #${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Return${/}adhoc_return_test_data.xlsx
 
 *** Variables ***
-${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Return${/}adhoc_return_test_data.xlsx
-${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Return${/}adhoc_return_test_data.xlsx
+${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Return${/}adhoc_return_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Return${/}adhoc_return_test_data.xlsx
 
 *** Test Cases ***
-
 Zwing_R_1 Return should be mark enable in policies
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_1
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_1
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -34,7 +34,8 @@ Zwing_R_1 Return should be mark enable in policies
 
 
 Zwing_R_2 While Return is off in Policies
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_2
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_2
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Verify Mode Is Disabled    ${pos_data}
@@ -42,7 +43,8 @@ Zwing_R_2 While Return is off in Policies
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_3 When Auto Switch to billing is On
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_3
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_3
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -53,7 +55,8 @@ Zwing_R_3 When Auto Switch to billing is On
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_4 When Auto Switch to billing is Off
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_4
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_4
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Turn Auto Switch To Billing Off
@@ -64,7 +67,8 @@ Zwing_R_4 When Auto Switch to billing is Off
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_5 Adding product by scanning the Barcode
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_5
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_5
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -74,7 +78,8 @@ Zwing_R_5 Adding product by scanning the Barcode
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_6 Add items to Return by searching the barcode or name of Item
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_6
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_6
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -84,7 +89,8 @@ Zwing_R_6 Add items to Return by searching the barcode or name of Item
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_7 Add items to Return by catalog
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_7
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_7
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -94,7 +100,8 @@ Zwing_R_7 Add items to Return by catalog
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_8 Add Salesperson with return item
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_8
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_8
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -105,7 +112,8 @@ Zwing_R_8 Add Salesperson with return item
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_9 Add item qty by scanning
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_9
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_9
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -115,7 +123,8 @@ Zwing_R_9 Add item qty by scanning
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_10 Add Qty to the added item
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_10
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_10
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -125,7 +134,8 @@ Zwing_R_10 Add Qty to the added item
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_11 Add items to Return by catalog
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_11
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_11
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -135,7 +145,8 @@ Zwing_R_11 Add items to Return by catalog
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_12 Add Qty to the added item
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_12
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_12
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -146,7 +157,8 @@ Zwing_R_12 Add Qty to the added item
 
 
 Zwing_R_13 Remove item to the cart
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_13
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_13
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -158,7 +170,8 @@ Zwing_R_13 Remove item to the cart
 
 
 Zwing_R_14 Assign Salesperson to product While returning the product
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_14
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_14
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -169,7 +182,8 @@ Zwing_R_14 Assign Salesperson to product While returning the product
 
 
 Zwing_R_15 Assign customer to the return when customer Tagging is mandatory
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_15
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_15
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -181,7 +195,8 @@ Zwing_R_15 Assign customer to the return when customer Tagging is mandatory
 
 
 Zwing_R_16 Assign customer to the return when customer Tagging is optional in policies
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_16
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_16
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -193,7 +208,8 @@ Zwing_R_16 Assign customer to the return when customer Tagging is optional in po
 
 
 Zwing_R_17 Apply Customized Manual Discount item level
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_17
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_17
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -207,7 +223,8 @@ Zwing_R_17 Apply Customized Manual Discount item level
 
 
 Zwing_R_18 Apply Customised Manual Discount item level
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_18
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_18
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -221,7 +238,8 @@ Zwing_R_18 Apply Customised Manual Discount item level
 
 
 Zwing_R_19 Apply Customised Manual Discount item level by Fixed amount in item level
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_19
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_19
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -235,7 +253,8 @@ Zwing_R_19 Apply Customised Manual Discount item level by Fixed amount in item l
 
 
 Zwing_R_20 Apply Customised Manual Discount item level by percentage item level
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_20
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_20
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -249,7 +268,8 @@ Zwing_R_20 Apply Customised Manual Discount item level by percentage item level
 
 
 Zwing_R_21 Apply Item level Promo
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_21
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_21
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -261,7 +281,8 @@ Zwing_R_21 Apply Item level Promo
 
 
 Zwing_R_22 Check out from POS screen to Payment Collection
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_22
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_22
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -272,7 +293,8 @@ Zwing_R_22 Check out from POS screen to Payment Collection
 
 
 Zwing_R_23 Allow Refund Against Returned Item | Refund Through Cash only
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_23
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_23
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -285,7 +307,8 @@ Zwing_R_23 Allow Refund Against Returned Item | Refund Through Cash only
 
 
 Zwing_R_24 Allow Refund Against Returned Item | Refund Through Credit Note
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_24
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_24
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -298,7 +321,8 @@ Zwing_R_24 Allow Refund Against Returned Item | Refund Through Credit Note
 
 
 Zwing_R_25 Allow Refund Against Returned Item | Refund Through both credit note and cash
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_25
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_25
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -311,7 +335,8 @@ Zwing_R_25 Allow Refund Against Returned Item | Refund Through both credit note 
 
 
 Zwing_R_26 Click on Confirm button on switch to Billing popup box
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_26
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_26
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -322,7 +347,8 @@ Zwing_R_26 Click on Confirm button on switch to Billing popup box
 
 
 Zwing_R_27 Click on Cancel button on switch to Billing popup box
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_27
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_27
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -333,7 +359,8 @@ Zwing_R_27 Click on Cancel button on switch to Billing popup box
 
 
 Zwing_R_28 Switching Between Return to Billing Will Give Confirmation Popup
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_28
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_28
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -344,7 +371,8 @@ Zwing_R_28 Switching Between Return to Billing Will Give Confirmation Popup
 
 
 Zwing_R_29 Click on Confirm button on switch to Order popup box
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_29
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_29
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -355,7 +383,8 @@ Zwing_R_29 Click on Confirm button on switch to Order popup box
 
 
 Zwing_R_30 Click on Cancel button on switch to Order popup box
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_30
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_30
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -366,7 +395,8 @@ Zwing_R_30 Click on Cancel button on switch to Order popup box
 
 
 Zwing_R_31 Switching Between Return to Order Will Give Confirmation Popup
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_31
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_31
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -376,7 +406,8 @@ Zwing_R_31 Switching Between Return to Order Will Give Confirmation Popup
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_32 Click on Confirm button on switch to Exchange popup box
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_32
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_32
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -386,7 +417,8 @@ Zwing_R_32 Click on Confirm button on switch to Exchange popup box
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_33 Click on Cancel button on switch to Exchange popup box
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_33
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_33
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -396,7 +428,8 @@ Zwing_R_33 Click on Cancel button on switch to Exchange popup box
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_R_34 Switching Between Return to Exchange Will Give Confirmation Popup
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_34
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_34
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}

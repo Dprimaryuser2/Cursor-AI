@@ -16,13 +16,13 @@ Test Teardown   Close Browser
 #${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}billing_test_data.xlsx
 
 *** Variables ***
-${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Billing${/}billing_test_data.xlsx
-${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Billing${/}billing_test_data.xlsx
+${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Billing${/}billing_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Billing${/}billing_test_data.xlsx
 
 *** Test Cases ***
 Zwing_B_01 Auto Switch To Billing
    [Tags]    Demo
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_01
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -34,7 +34,7 @@ Zwing_B_01 Auto Switch To Billing
 
 Zwing_B_02 Add Product to cart by scanning barcode
     [Tags]    retry
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_02
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -45,7 +45,7 @@ Zwing_B_02 Add Product to cart by scanning barcode
 
 Zwing_B_03 Add Product to cart by searching Product Name / barcode
     [Tags]    retry
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_03
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -56,7 +56,7 @@ Zwing_B_03 Add Product to cart by searching Product Name / barcode
 
 Zwing_B_04 Add product from catalog
     [Tags]    retry
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_04
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -66,7 +66,7 @@ Zwing_B_04 Add product from catalog
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_05 Add Multiple price products to cart
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_05
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -76,7 +76,7 @@ Zwing_B_05 Add Multiple price products to cart
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_06 Tag a New customer to a bill
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_06
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -87,7 +87,7 @@ Zwing_B_06 Tag a New customer to a bill
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_07 Tag a Existing customer to a bill
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_07
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -98,7 +98,7 @@ Zwing_B_07 Tag a Existing customer to a bill
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_08 Tag Single Sales Person To A Bill With Respect To Items
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_08
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -109,7 +109,7 @@ Zwing_B_08 Tag Single Sales Person To A Bill With Respect To Items
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_09 Tag Multiple Sales Person To A Bill With Respect To Items
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_09
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -120,7 +120,7 @@ Zwing_B_09 Tag Multiple Sales Person To A Bill With Respect To Items
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_10 Hold On-going Bill | Billing
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_10
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -131,7 +131,7 @@ Zwing_B_10 Hold On-going Bill | Billing
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_11 View Held Bill
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_11
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -143,7 +143,7 @@ Zwing_B_11 View Held Bill
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_12 Recall bill
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_12
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -155,7 +155,7 @@ Zwing_B_12 Recall bill
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_13 Discard Bill
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_13
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -167,7 +167,7 @@ Zwing_B_13 Discard Bill
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_14 Return To Bill
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_14
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -179,7 +179,7 @@ Zwing_B_14 Return To Bill
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_15 Apply Item level Promos
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_15
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -190,7 +190,7 @@ Zwing_B_15 Apply Item level Promos
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_16 Apply manual Discount | item level
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_16
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -203,7 +203,7 @@ Zwing_B_16 Apply manual Discount | item level
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_17 Add Carry Bag
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_17
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -213,7 +213,7 @@ Zwing_B_17 Add Carry Bag
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_18 Validate Bill calculation
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_18
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -223,7 +223,7 @@ Zwing_B_18 Validate Bill calculation
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_19 Reset Bill
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_19
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -235,7 +235,7 @@ Zwing_B_19 Reset Bill
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_20 Navigate To CheckOut Page
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_20
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -247,7 +247,7 @@ Zwing_B_20 Navigate To CheckOut Page
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_21 Collect payment by cash
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_21
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -261,7 +261,7 @@ Zwing_B_21 Collect payment by cash
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_22 Collect payment by UPI
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_22
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -275,7 +275,7 @@ Zwing_B_22 Collect payment by UPI
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_23 Collect payment by redeem voucher
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_23
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -289,7 +289,7 @@ Zwing_B_23 Collect payment by redeem voucher
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_24 Collect payment using Credit Store
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_24
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -303,7 +303,7 @@ Zwing_B_24 Collect payment using Credit Store
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_25 Collect payment by on account sale
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_25
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -318,7 +318,7 @@ Zwing_B_25 Collect payment by on account sale
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_26 Payable amount should become editable when split payment toggle is enabled.
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_26
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -332,7 +332,7 @@ Zwing_B_26 Payable amount should become editable when split payment toggle is en
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_27 Payable amount should be disabled when split payment toggle is disabled.
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_27
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -345,7 +345,7 @@ Zwing_B_27 Payable amount should be disabled when split payment toggle is disabl
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_28 Pay Bill Amount With multiple MOP
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_28
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -360,7 +360,7 @@ Zwing_B_28 Pay Bill Amount With multiple MOP
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_29 Pay Bill Amount With single MOP
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_29
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -375,7 +375,7 @@ Zwing_B_29 Pay Bill Amount With single MOP
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_30 Discard Bill after Partial payment
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_30
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -392,7 +392,7 @@ Zwing_B_30 Discard Bill after Partial payment
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_31 Automatic Invoice Generation
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_31
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -408,7 +408,7 @@ Zwing_B_31 Automatic Invoice Generation
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_32 Generate Invoice with Zero bill amount
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_32
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -427,7 +427,7 @@ Zwing_B_32 Generate Invoice with Zero bill amount
 
 
 Zwing_B_33 Apply Bill level Promos
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id   ${POS_TD}    TC_33
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -442,7 +442,7 @@ Zwing_B_33 Apply Bill level Promos
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_34 Apply Bill level discount
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_34
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -455,7 +455,7 @@ Zwing_B_34 Apply Bill level discount
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_35 Add Bill Remark
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_35
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -469,7 +469,7 @@ Zwing_B_35 Add Bill Remark
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_36 Apply Bill Level Coupon
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_36
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -482,7 +482,7 @@ Zwing_B_36 Apply Bill Level Coupon
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_37 Apply Bill Level Loyalty
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_37
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -495,7 +495,7 @@ Zwing_B_37 Apply Bill Level Loyalty
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_38 Validate Account balance
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_38
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -506,7 +506,7 @@ Zwing_B_38 Validate Account balance
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_39 Validate Store Credit
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_39
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -517,7 +517,7 @@ Zwing_B_39 Validate Store Credit
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_40 Validate Loyalty Points
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_40
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -528,7 +528,7 @@ Zwing_B_40 Validate Loyalty Points
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_41 Auto Switch To Billing From Return Mode
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_41
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -540,7 +540,7 @@ Zwing_B_41 Auto Switch To Billing From Return Mode
 
 
 Zwing_B_42 Auto Switch To Billing From Exchange Mode
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_42
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -551,7 +551,7 @@ Zwing_B_42 Auto Switch To Billing From Exchange Mode
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_43 Click on Confirm button on switch to Order popup box
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_43
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -560,7 +560,7 @@ Zwing_B_43 Click on Confirm button on switch to Order popup box
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_44 Click on Cancel button on switch to Order popup box
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_44
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -570,7 +570,7 @@ Zwing_B_44 Click on Cancel button on switch to Order popup box
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_45 Switching Between Billing to Order Will Give Confirmation Popup
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_45
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -579,7 +579,7 @@ Zwing_B_45 Switching Between Billing to Order Will Give Confirmation Popup
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_46 Click on Confirm button on switch to Return popup box
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_46
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -588,7 +588,7 @@ Zwing_B_46 Click on Confirm button on switch to Return popup box
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_47 Click on Cancel button on switch to Return popup box
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_47
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -598,7 +598,7 @@ Zwing_B_47 Click on Cancel button on switch to Return popup box
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_48 Switching Between Billing to Return Will Give Confirmation Popup
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_48
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -607,7 +607,7 @@ Zwing_B_48 Switching Between Billing to Return Will Give Confirmation Popup
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_49 Set variance limit and enter price override less or more than total price but within variance limit
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_49
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -619,7 +619,7 @@ Zwing_B_49 Set variance limit and enter price override less or more than total p
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_50 Set variance limit and enter price override less or more than total price but out of variance limit
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_50
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -631,7 +631,7 @@ Zwing_B_50 Set variance limit and enter price override less or more than total p
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_51 Set variance limit and enter price override less or more than total price but equal to variance limit
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_51
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -643,7 +643,7 @@ Zwing_B_51 Set variance limit and enter price override less or more than total p
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_52 Set variance limit and enter price override less or more than total price but within variance limit. Then try again price override and check the response
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_52
    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -655,7 +655,7 @@ Zwing_B_52 Set variance limit and enter price override less or more than total p
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_B_53 Disable price override and try price overriding then check the response
-   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_53
    Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}

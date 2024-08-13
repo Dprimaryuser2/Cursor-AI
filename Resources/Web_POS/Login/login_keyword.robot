@@ -5,10 +5,9 @@ Variables    ../../../PageObjects/Web_POS/Login/login_locators.py
 Resource    ../../../Resources/Web_POS/POS/Billing/promo_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/Billing/add_to_cart_keyword.robot
 
-
 *** Variables ***
-${ENV}    QA
-${QA_URL}=      ${pos_url_qa}
+${ENV}    STAGING
+${STAGING_URL}=      ${pos_url_staging}
 ${PROD_URL}=    ${pos_url_prod}
 
 *** Keywords ***
@@ -49,7 +48,7 @@ Login Again With Same User Id And Password
     Clear All Products
 
 Get Test Data File
-    [Arguments]    ${env}   ${QA_TD}    ${PROD_TD}
+    [Arguments]    ${env}   ${STAGING_TD}    ${PROD_TD}
     ${test_data_file}=    Run Keyword If    '${env}' == 'PROD'    Set Variable    ${PROD_TD}    ELSE    Set Variable    ${QA_TD}
     [Return]    ${test_data_file}
     Log     ${test_data_file}

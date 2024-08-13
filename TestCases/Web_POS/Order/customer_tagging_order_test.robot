@@ -18,12 +18,12 @@ Test Teardown   Close Browser
 #${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}customer_tagging_order_test_data.xlsx
 
 *** Variables ***
-${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Order${/}customer_tagging_order_test_data.xlsx
-${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Order${/}customer_tagging_order_test_data.xlsx
+${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Order${/}customer_tagging_order_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Order${/}customer_tagging_order_test_data.xlsx
 
 *** Test Cases ***
 TC_C1 Customer Tagging is not mandatory with Bill on POS
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_01
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -35,7 +35,7 @@ TC_C1 Customer Tagging is not mandatory with Bill on POS
      
 TC_C2 Customer Tagging is mandatory with Bill on POS
     [Tags]    valid failure
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_02
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -50,7 +50,7 @@ TC_C2 Customer Tagging is mandatory with Bill on POS
      
 TC_C3 Customer Tagging is mandatory with non mandatory customer information
      [Tags]    Retry
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_03
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -63,7 +63,7 @@ TC_C3 Customer Tagging is mandatory with non mandatory customer information
 
 TC_C4 Customer Tagging is mandatory with all fields mandatory in customer information
     [Tags]    Retry
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_04
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -76,7 +76,7 @@ TC_C4 Customer Tagging is mandatory with all fields mandatory in customer inform
 
 TC_C5 Get the Customer Information of tagged Customer
      [Tags]    Retry
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_05
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -89,7 +89,7 @@ TC_C5 Get the Customer Information of tagged Customer
 
 TC_C6 Edit Customer Information
      [Tags]    Retry
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_06
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -103,7 +103,7 @@ TC_C6 Edit Customer Information
 
 
 TC_C7 Edit Customer Group
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_07
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -128,7 +128,7 @@ TC_08 Untag Customer from Bill
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 TC_C9 Tag a Existing customer to a bill
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_09
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -142,7 +142,7 @@ TC_C9 Tag a Existing customer to a bill
 
 TC_C10 Remove customer from all groups
      [Tags]    Retry
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_10
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -170,7 +170,7 @@ TC_C11 Add Customer to all available groups
 
 TC_C12 tag customer with tax invoice GST number
     [Tags]    Retry
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_12
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -231,7 +231,7 @@ TC_C16 Edit GST number
 
 
 TC_C17 Edit UIN number
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_17
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}

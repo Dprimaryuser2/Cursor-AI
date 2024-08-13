@@ -3,7 +3,7 @@ import os
 # browser = os.getenv('BROWSER', 'chrome')
 prod_console_url = 'https://legacyconsole.gozwing.com/'
 qa_console_url = 'https://staging.legacyconsole.gozwing.com/'
-pos_url_qa = " https://staging.app.gozwing.com/"
+pos_url_staging = " https://staging.app.gozwing.com/"
 pos_url_prod = "https://app.gozwing.com/"
 browser = 'chrome'
 # browser = 'edge'

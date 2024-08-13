@@ -11,8 +11,8 @@ Variables    ../../../PageObjects/Web_POS/POS/pos_locators.py
 Resource   ../../../Resources/Web_POS/POS/Billing/add_to_cart_keyword.robot
 
 *** Variables ***
-${ENV}    QA
-${QA_URL}=      ${pos_url_qa}
+${ENV}    STAGING
+${STAGING_URL}=      ${pos_url_staging}
 ${PROD_URL}=    ${pos_url_prod}
 
 *** Keywords ***

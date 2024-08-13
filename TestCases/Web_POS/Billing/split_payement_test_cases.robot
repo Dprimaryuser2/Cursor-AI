@@ -16,13 +16,13 @@ Test Teardown   Close Browser
 #${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}split_payment_test_data.xlsx
 
 *** Variables ***
-${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Billing${/}split_payment_test_data.xlsx
-${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Billing${/}split_payment_test_data.xlsx
+${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Billing${/}split_payment_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Billing${/}split_payment_test_data.xlsx
 
 *** Test Cases ***
 
 Zwing_SP_1 Split payment option is available if policy is enabled
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_1
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -35,7 +35,7 @@ Zwing_SP_1 Split payment option is available if policy is enabled
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_2 Split Payment Policy Is Unavailable If Policy Is Disabled
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_2
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -48,7 +48,7 @@ Zwing_SP_2 Split Payment Policy Is Unavailable If Policy Is Disabled
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_3 split payment toggle is enabled.
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_3
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -62,7 +62,7 @@ Zwing_SP_3 split payment toggle is enabled.
    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_4 split payment toggle is disabled.
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_4
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -75,7 +75,7 @@ Zwing_SP_4 split payment toggle is disabled.
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_5 complete payment by MOP as cash
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_5
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -90,7 +90,7 @@ Zwing_SP_5 complete payment by MOP as cash
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_6 complete payment by MOP as UPI
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_6
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -105,7 +105,7 @@ Zwing_SP_6 complete payment by MOP as UPI
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_7 complete payment by MOP as On Account sale
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_7
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -123,7 +123,7 @@ Zwing_SP_7 complete payment by MOP as On Account sale
 #Due to Physical Card Payment
 
 Zwing_SP_9 complete payment by combination of Cash, on Account sale
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_9
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -138,7 +138,7 @@ Zwing_SP_9 complete payment by combination of Cash, on Account sale
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_10 complete payment by combination of UPI and on Account sale
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_10
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -159,7 +159,7 @@ Zwing_SP_10 complete payment by combination of UPI and on Account sale
 #Due to Physical Card Payment
 
 Zwing_SP_13 complete payment by combination of cash and upi
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_13
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -180,7 +180,7 @@ Zwing_SP_13 complete payment by combination of cash and upi
 #Due to Physical Card Payment
 
 Zwing_SP_16 Add bill discount with split payment
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_16
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -197,7 +197,7 @@ Zwing_SP_16 Add bill discount with split payment
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_17 Redeem Gift voucher with split payment
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_17
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -212,7 +212,7 @@ Zwing_SP_17 Redeem Gift voucher with split payment
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_18 Redeem Store credit with credit voucher with split payment
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_18
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -230,7 +230,7 @@ Zwing_SP_18 Redeem Store credit with credit voucher with split payment
 #Due to Phone number otp
 
 Zwing_SP_20 complete payment with combination of store credit, gift voucher and other MOP's
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_20
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -244,7 +244,7 @@ Zwing_SP_20 complete payment with combination of store credit, gift voucher and 
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_21 Validate Total payment and Mop summary MOP's added after completing the payment
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_21
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -259,7 +259,7 @@ Zwing_SP_21 Validate Total payment and Mop summary MOP's added after completing 
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_22 validate store credit of customer after using with split payment
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_22
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -276,7 +276,7 @@ Zwing_SP_22 validate store credit of customer after using with split payment
 #Loyality points on hold
 
 Zwing_SP_24 Validate Account balance of customer after using with split payment
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_24
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -295,7 +295,7 @@ Zwing_SP_24 Validate Account balance of customer after using with split payment
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_25 Validate payable amount after every payment done in case of split payment.
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_25
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -311,7 +311,7 @@ Zwing_SP_25 Validate payable amount after every payment done in case of split pa
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_26 After enabling split payment enter payable amount more than bill amount
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_26
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -326,7 +326,7 @@ Zwing_SP_26 After enabling split payment enter payable amount more than bill amo
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_SP_27 Make complete payment by discount and generate bill with 0 invoice.
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_27
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
