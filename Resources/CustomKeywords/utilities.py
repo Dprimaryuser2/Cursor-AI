@@ -408,3 +408,91 @@ else:
 @keyword
 def is_greater(first_number, second_number):
     return first_number > second_number
+
+
+import json
+
+@keyword
+def extract_required_fields(json_data):
+    # Load the JSON data
+    data = json.loads(json_data)
+
+    # Extract the required fields
+    required_fields = {
+        "api_token": data['sessions']['user']['api_token'],
+        "v_id": data['sessions']['user']['v_id'],
+        "store_id": data['sessions']['user']['store_id'],
+        "licence": None,  # Assuming 'licence' is not present in the provided JSON
+        "vu_id": data['sessions']['user']['vu_id'],
+        "terminal_id": None,  # Assuming 'terminal_id' is not present in the provided JSON
+        "url": "/revoke-licence?",
+        "trans_from": "CLOUD_TAB_WEB",  # Based on the bearerToken 'source_platform'
+        "session_id": data['sessions']['session']['id']
+    }
+
+    # Convert the result to JSON
+    result_json = json.dumps(required_fields, indent=4)
+    return result_json
+
+@keyword
+def extract_udidtoken(logs):
+    try:
+        # Check if logs is a list; if so, convert it to JSON string
+        if isinstance(logs, list):
+            logs = json.dumps(logs)
+
+        # Parse the JSON string into a Python list
+        logs_list = json.loads(logs)
+
+        # Iterate through the list of log entries
+        for entry in logs_list:
+            if 'response' in entry:
+                response_data = json.loads(entry['response'])
+                if 'udidtoken' in response_data:
+                    return response_data['udidtoken']
+
+        return None
+    except json.JSONDecodeError as e:
+        print(f"Error decoding JSON: {e}")
+        return None
+
+@keyword
+def merge_and_update_data_with_json_output(extracted_data, udidtoken, serial_key):
+    # Ensure extracted_data is a dictionary, not a string
+    if isinstance(extracted_data, str):
+        extracted_data = json.loads(extracted_data)
+
+    # Replace the udidtoken in extracted_data
+    extracted_data['udidtoken'] = udidtoken
+
+    # Attach the serial_key to the licence field
+    extracted_data['licence'] = serial_key
+
+    # Update the url and trans_from with static values
+    extracted_data['url'] = "/revoke-licence?"
+    extracted_data['trans_from'] = "CLOUD_TAB_WEB"
+
+    # Convert the dictionary to a JSON string with double quotes
+    updated_data_json = json.dumps(extracted_data, ensure_ascii=False)
+
+    return updated_data_json
+
+@keyword
+def modify_json_data(json_data,user_mobile):
+    # Ensure json_data is a dictionary, not a string
+    if isinstance(json_data, str):
+        json_data = json.loads(json_data)
+
+    # Remove specified fields
+    json_data.pop("terminal_id", None)
+    json_data.pop("udidtoken", None)
+    json_data.pop("url", None)
+
+    # Add static data
+    json_data["mobile"] = user_mobile
+    json_data["url"] = "%2Fvendor%2Flogout"
+
+    # Convert the dictionary to a JSON string with double quotes
+    updated_data_json = json.dumps(json_data, ensure_ascii=False)
+
+    return updated_data_json
