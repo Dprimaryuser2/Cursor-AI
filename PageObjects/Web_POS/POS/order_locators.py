@@ -109,3 +109,8 @@ search_bar_order_management = '//div[@class="container-fluid"]//following::input
 order_status_order_management ='//div[@class="row w-100"]'
 order_management_page_heading = '//h5[@class="mt-2 mr-3" and contains(text(), "Order Management")]'
 negative_inventory_alert_order = '//div[@class="col-11"]//h6[contains(text(),"Insufficient Inventory")]'
+
+# confirm order popup
+review_button_confirm_order_popup ='//button[contains(@class, "btn btn-outline-primary btn-block") and contains(text(),"Review")]'
+confirm_button_confirm_order_popup = '//button[contains(@class, "btn btn-primary btn-block")]//span[text()="Confirm"]'
+confirm_order_heading_confirm_order_popup = '//h5[contains(@class,"modal-title") and contains(text(),"Confirm Order")]'

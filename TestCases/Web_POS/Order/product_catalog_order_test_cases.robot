@@ -17,7 +17,7 @@ ${Product_td}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/
 *** Test Cases ***
 Zwing_CP_O_175 View Catalog using Catalog button in WebPOS
     [Tags]    Demo
-   ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_1
+   ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_01
    Login With Valid Username And Password | POS    ${pc_data}
    Open The Session    ${pc_data}
    Change Billing Mode    ${pc_data}
@@ -26,7 +26,7 @@ Zwing_CP_O_175 View Catalog using Catalog button in WebPOS
    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_O_176 Hide Catalog using Hide button in WebPOS
-   ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_2
+   ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_02
    Login With Valid Username And Password | POS    ${pc_data}
    Open The Session    ${pc_data}
    Change Billing Mode    ${pc_data}
@@ -36,7 +36,7 @@ Zwing_CP_O_176 Hide Catalog using Hide button in WebPOS
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_O_177 Refresh Catalog using Refresh button
-   ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_3
+   ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_03
    Login With Valid Username And Password | POS    ${pc_data}
    Open The Session    ${pc_data}
    Change Billing Mode    ${pc_data}
@@ -46,10 +46,9 @@ Zwing_CP_O_177 Refresh Catalog using Refresh button
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_O_178 A new category item is allocated to a store
-     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_4
+     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_04
      Open Application | Admin
      Login With Valid Username And Password  ${pc_data}
-     Change Billing Mode    ${pc_data}
      Navigate To Product & Catalogue | Console
      Add New Category | Console   ${pc_data}
      Close Browser
@@ -62,10 +61,9 @@ Zwing_CP_O_178 A new category item is allocated to a store
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_O_179 A New Item Of Existing Category That Is Already Listed Is Allocated To The Store
-     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_5
+     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_05
      Open Application | Admin
      Login With Valid Username And Password  ${pc_data}
-     Change Billing Mode    ${pc_data}
      Navigate To Products | Console
      Create New Products | Console   ${pc_data}
      Close Browser
@@ -78,7 +76,7 @@ Zwing_CP_O_179 A New Item Of Existing Category That Is Already Listed Is Allocat
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_O_180 Item With Multiple Price(existing prices)
-     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_6
+     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_06
      Login With Valid Username And Password | POS   ${pc_data}
      Open The Session    ${pc_data}
      Change Billing Mode    ${pc_data}
@@ -88,13 +86,13 @@ Zwing_CP_O_180 Item With Multiple Price(existing prices)
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_O_181 Item With Multiple Price Creating New Price books
-    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_7
+    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_07
     Login With Valid Username And Password | POS    ${pc_data}
     Open The Session    ${pc_data}
+    Change Billing Mode    ${pc_data}
     ${storename}  Get Store Name | Web POS
     Close Browser
     Open Application | Admin
-    Change Billing Mode    ${pc_data}
     Login With Valid Username And Password  ${pc_data}
     Navigate To Retail Price Book | Console
     Create New PriceBook | Console  ${pc_data}
@@ -108,7 +106,7 @@ Zwing_CP_O_181 Item With Multiple Price Creating New Price books
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_O_182 All Items in Item With multiple prices added
-    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_8
+    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_08
     Login With Valid Username And Password | POS   ${pc_data}
     Open The Session    ${pc_data}
     Change Billing Mode    ${pc_data}
@@ -117,7 +115,7 @@ Zwing_CP_O_182 All Items in Item With multiple prices added
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_O_183 Items allocated with 0 inventory to store
-    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_9
+    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_09
     Login With Valid Username And Password | POS   ${pc_data}
     Open The Session    ${pc_data}
     Change Billing Mode    ${pc_data}

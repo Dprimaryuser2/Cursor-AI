@@ -60,7 +60,8 @@ Place Order With Minimum Amount
     Wait Until Page Does Not Contain Element    ${payment_saved_successful}    timeout=10
     Wait Until Element Is Enabled    ${place_order_button}    timeout=10
     Click Element    ${place_order_button}
-    Wait Until Page Contains Element    ${order_summary_page_heading}    timeout=10
+    Wait Until Page Does Not Contain    ${place_order_button}
+    Wait Until Page Contains Element    ${order_summary_page_heading}    timeout=20
 
 Verify Insufficient Inventory Buttons
     Wait Until Element Is Visible    ${checkout_button}  timeout=10
@@ -98,6 +99,11 @@ Verify Stock Not Available Popup | Order Is Confirmed
     Wait Until Element Is Enabled    ${confirm_order_button}
     Element Should Be Enabled    ${confirm_order_button}
     Click Element    ${confirm_order_button}
+    ${confirm_order_popup_visible}  Run Keyword And Return Status    Wait Until Page Contains Element    ${confirm_order_heading_confirm_order_popup}  timeout=5
+    IF    ${confirm_order_popup_visible}
+         Verify Confirm Order Popup
+         Click Element    ${review_button_confirm_order_popup}
+    END
     Wait Until Element Is Visible    ${order_confirmation_page_heading}     timeout=20s
     Sleep    1s
     Wait Until Element Is Visible    ${info_icon_confirm_order}
@@ -107,7 +113,7 @@ Verify Stock Not Available Popup | Order Is Confirmed
 Navigate To Pack Order Page | Order Is Packed
     ${place_order_visible}  run keyword and return status   Wait Until Element Is Visible   ${place_order_button}
     IF    ${place_order_visible}
-        Wait Until Element Is Enabled    ${place_order_button}
+        Wait Until Element Is Enabled    ${place_order_button}  timeout=20s
         Element Should Be Enabled    ${place_order_button}
         Click Element    ${place_order_button}
     END
@@ -115,6 +121,11 @@ Navigate To Pack Order Page | Order Is Packed
     Wait Until Element Is Enabled    ${confirm_order_button}
     Element Should Be Enabled    ${confirm_order_button}
     Click Element    ${confirm_order_button}
+        ${confirm_order_popup_visible}  Run Keyword And Return Status    Wait Until Page Contains Element    ${confirm_order_heading_confirm_order_popup}  timeout=5s
+    IF    ${confirm_order_popup_visible}
+         Verify Confirm Order Popup
+         Click Element    ${review_button_confirm_order_popup}
+    END
     Wait Until Element Is Visible    ${order_confirmation_page_heading}     timeout=20s
     Wait Until Element Is Enabled    ${confirm_order_button_order_confirm_page}
     Click Element    ${confirm_order_button_order_confirm_page}
@@ -142,7 +153,13 @@ Navigate To Discard Order Popup | Discard Order
     Wait Until Element Is Visible    ${confirm_order_button}    timeout=10s
     Wait Until Element Is Enabled    ${confirm_order_button}
     Click Element     ${confirm_order_button}
+   ${confirm_order_popup_visible}  Run Keyword And Return Status    Wait Until Page Contains Element    ${confirm_order_heading_confirm_order_popup}  timeout=10
+    IF    ${confirm_order_popup_visible}
+         Verify Confirm Order Popup
+         Click Element    ${review_button_confirm_order_popup}
+    END
     Wait Until Element Is Visible    ${discard_button_order_confirmation}   timeout=20s
+    Sleep    1s
     Wait Until Element Is Enabled    ${discard_button_order_confirmation}
     Click Element    ${discard_button_order_confirmation}
 
@@ -228,7 +245,7 @@ Scan Barcode To Add Item And Quantity To Cart | Pack Order
     END
 
 Verify Discard Product | No Advance Payment
-    Wait Until Element Is Visible    ${cancel_order_popup_heading}      timeout=10
+    Wait Until Element Is Visible    ${discard_popup_heading}      timeout=10
     Element Should Be Enabled    ${discard_button_discard_popup}
     Click Element    ${discard_button_discard_popup}
     Wait Until Element Is Visible    ${order_cancel_alert}
@@ -438,3 +455,8 @@ Pay 10 percent Amount of total Payable Amount By Cash
     Input Text    ${enter_cash}    ${new_amount}
     Wait Until Element Is Enabled  ${continue_cash_button}
     Click Element    ${continue_cash_button}
+
+Verify Confirm Order Popup
+    Wait Until Element Is Visible    ${confirm_order_heading_confirm_order_popup}   timeout=10s
+    Wait Until Element Is Enabled    ${review_button_confirm_order_popup}
+    Wait Until Element Is Enabled    ${confirm_button_confirm_order_popup}

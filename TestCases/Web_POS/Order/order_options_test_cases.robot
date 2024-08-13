@@ -52,20 +52,20 @@ Zwing_O_131 Confirmation message
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
-#Zwing_O_132 Order Review before confirming the order
-#    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_132
-#    Login With Valid Username And Password | POS   ${pos_data}
-#    Open The Session    ${pos_data}
-#    Change Billing Mode    ${pos_data}
-#    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-#    ${value}    Get payable amount
-#    Add Customer Details    ${pos_data}
-#    Assign A Salesperson All Items | Order    ${pos_data}
-#    Apply Item Promo | Manual
-#    Verify Promo Discount In Cart | POS
-#    Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
-#    Revoke Serial Key    ${pos_data}
-#    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+Zwing_O_132 Order Review before confirming the order
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_132
+    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    ${value}    Get payable amount
+    Add Customer Details    ${pos_data}
+    Assign A Salesperson All Items | Order    ${pos_data}
+    Apply Item Promo | Manual
+    Verify Promo Discount In Cart | POS
+    Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+    Revoke Serial Key    ${pos_data}
+    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_133 Confirming the order without reveiwing
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_133
@@ -78,7 +78,6 @@ Zwing_O_133 Confirming the order without reveiwing
     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
     Payment By Cash    ${value}
     Navigate To Order Confirmation Page From Order Summary Page
-#    Verify Redirection To Order Confirmation Page
     Verify Order Confirm Alert
     Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
@@ -127,9 +126,6 @@ Zwing_O_139 Collected amount need to reflect in bill summary
      Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
      Enable Split payment mode
      ${payable_amount}  Enter 10 Percent Amount In Payable Amount  ${value}
-     Payment By Cash   ${payable_amount}
-     Verify Redirection To Checkout Page After Advance Payment
-     ${due_amount}  Get Amount From Payable Amount After Partial Payment
      Payment By Cash   ${payable_amount}
      Verify Redirection To Checkout Page After Advance Payment
      ${due_amount}  Get Amount From Payable Amount After Partial Payment
