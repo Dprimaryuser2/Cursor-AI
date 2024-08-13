@@ -220,7 +220,8 @@ Verify Recipt Content | Order
 
 Get Customer Details | Checkout | Order
     ${invoice_ids}    Create List
-    Wait Until Page Contains Element    ${order_summary_page_heading}
+    Wait Until Page Contains Element    ${order_summary_page_heading}    timeout=10
+    Sleep    2
     ${in_id}  Get Value    ${order_number_order_summary}
     ${in_name}  Get Value    ${customer_name_order_summary}
     ${in_number}  Get Value    ${customer_number_order_summary}
@@ -228,7 +229,7 @@ Get Customer Details | Checkout | Order
     ${cust_info_checkout}=  Create Dictionary    invoice_id=${in_id}  invoice_name=${in_name}  phone_number=${in_number}  total_amount=${in_amount}    search_invoice=${in_id}
     Append To List    ${invoice_ids}    ${in_id}
     Set Global Variable    ${invoice_ids}
-    [RETURN]   ${cust_info_checkout}
+    [Return]    ${cust_info_checkout}
 
 Get Customer Details | Print Invoice | Order
    Wait Until Page Contains Element    ${print_recipt_container}
