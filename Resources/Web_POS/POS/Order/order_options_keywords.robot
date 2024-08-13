@@ -155,7 +155,7 @@ Navigate To Order Management And Redirect To Checkout Page Using Order Number
     Click Element    ${order_status_order_management}
     Wait Until Element Is Visible    ${order_summary_page_heading}    timeout=10s
 
-Navigate To Print Recipt Container
+Navigate To Print Receipt Container
     Wait Until Element Is Visible    ${print_order_receipt}     timeout=10
     Wait Until Element Is Enabled     ${print_order_receipt}
     Click Element      ${print_order_receipt}
@@ -230,7 +230,7 @@ Click On Print Recipt Button
     Click Element    ${print_order_receipt}
     Wait Until Element Is Visible  ${order_number_print_recipt}     timeout=10
 
-Verify Recipt Content | Order
+Verify Receipt Content | Order
    Wait Until Page Contains Element    ${order_summary_page_heading}    timeout=10
    ${cust_info_checkout}   Get Customer Details | Checkout | Order
    Click Element    ${print_order_receipt}

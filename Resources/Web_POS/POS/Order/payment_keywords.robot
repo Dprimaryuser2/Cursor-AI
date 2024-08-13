@@ -13,7 +13,7 @@ Variables   ../../../../Environment/environment.py
 Resource    ../../../../Resources/Web_POS/POS/Order/add_to_cart_order_keyword.robot
 
 *** Keywords ***
-Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
     Wait Until Element Is Enabled    ${checkout_button}    timeout=10
     Click Element    ${checkout_button}
     ${insufficient}    Run Keyword And Return Status    Page Should Contain Element    ${insufficient_inventory_continue_btn}
@@ -385,7 +385,7 @@ Verify More Than 10 Percent Amount Payment By Cash Popup
       Element Should Be Enabled    ${continue_cash_button}
     END
 
-Verify Update Of Fullfilment Options Due Date
+Verify Update Of Fulfillment Options Due Date
     Wait Until Element Is Visible     ${options_checkout_page}   timeout=10
     Wait Until Element Is Enabled    ${options_checkout_page}
     Click Element  ${options_checkout_page}
