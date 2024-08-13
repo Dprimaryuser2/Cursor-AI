@@ -13,18 +13,18 @@ Test Setup  Open Application | POS
 Test Teardown   Close Browser
 
 *** Variables ***
-${carrybag_td}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}carry_bag_order_test_data.xlsx
+${carrybag_td}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}carry_bag_order_test_data.xlsx
 
 *** Test Cases ***
 Zwing_CB_O_159 View All Carry Bags Allocated To Store
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_1
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
+   Change Billing Mode    ${carry_data}
    ${storename}  Get Store Name | Web POS
    Close Browser
    Open Application | Admin
    Login With Valid Username And Password  ${carry_data}
-   Change Billing Mode    ${carry_data}
    Navigate To Carry Bags | Console
    ${carrybag}  Verify Carry Bags Are Allocated To Store  ${storename}
    Close Browser

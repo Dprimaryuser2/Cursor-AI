@@ -10,6 +10,7 @@ Resource    ../../../Resources/Web_POS/POS/Order/mode_of_payment_order_keywords.
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Resource    ../../../Resources/Web_POS/POS/Order/payment_keywords.robot
 Resource    ../../../Resources/Web_POS/POS/Billing/keyboard_shortcut_keywords.robot
+Resource    ../../../Resources/Web_POS/POS/Order/order_options_keywords.robot
 #Resource    ../../../Resources/Web_POS/POS/split_payment_keyword.robot
 
 Test Setup    Open Application | POS
@@ -260,14 +261,16 @@ Zwing_O_128 Add Bill Remark while placing order | Clear bill remark
      [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_O_129 Check Conditions before placing order | Place Order
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    O_P_122
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    O_P_129
      Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      ${value}   Get payable amount
      Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
-     Pay 10 percent Amount of total Payable Amount By Cash   ${value}
+     Enable Split payment mode
+     ${payable_amount}  Enter 10 Percent Amount In Payable Amount  ${value}
+     Payment By Cash   ${payable_amount}
      Navigate To Pack Order Page | Order Is Packed
      Scan Barcode To Add Item And Quantity To Cart | Pack Order   ${pos_data}
      Verify Stock Not Available Popup | Order Is Packed
