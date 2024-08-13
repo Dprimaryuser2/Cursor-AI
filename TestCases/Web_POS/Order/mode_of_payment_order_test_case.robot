@@ -9,6 +9,7 @@ Resource    ../../../Resources/Web_POS/POS/Billing/mode_of_payment_keyword.robot
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Resource    ../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/Order/mode_of_payment_order_keywords.robot
+Resource    ../../../Resources/Web_POS/POS/Order/customer_tagging_order_keyword.robot
 Variables   ../../../PageObjects/Web_POS/POS/order_locators.py
 
 Test Setup    Open Application | POS

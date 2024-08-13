@@ -437,3 +437,62 @@ Zwing_R_34 Switching Between Return to Exchange Will Give Confirmation Popup
    Verify Exchange Mode Present
    Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_R_35 Set variance limit and enter price override less or more than total price but within variance limit
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_35
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Change Billing Mode    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Verify Item Added In Cart
+   Price Override | Billing    ${pos_data}
+   Verify Price Overridden | Billing
+   Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_R_36 Set variance limit and enter price override less or more than total price but out of variance limit
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_36
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Change Billing Mode    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Verify Item Added In Cart
+   Price Override | Billing    ${pos_data}
+   Verify Alert Message for Price Overridden | Billing
+   Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_R_37 Set variance limit and enter price override less or more than total price but equal to variance limit
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_37
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Change Billing Mode    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Verify Item Added In Cart
+   Price Override | Billing    ${pos_data}
+   Verify Price Overridden | Billing
+   Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_R_38 Set variance limit and enter price override less or more than total price but within variance limit. Then try again price override and check the response
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}  TC_38
+   Login With Valid Username And Password | POS    ${pos_data}
+   Open The Session    ${pos_data}
+   Change Billing Mode    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Verify Item Added In Cart
+   Price Override | Billing    ${pos_data}
+   Verify Price Override Link Is Disabled
+   Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_R_39 Disable price override and try price overriding then check the response
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_39
+   Login With Valid Username And Password | POS   ${pos_data}
+   Open The Session    ${pos_data}
+   Change Billing Mode    ${pos_data}
+   Add Product By Scan Only   ${pos_data}
+   Verify Item Added In Cart
+   Verify Price Override Link Is Disabled
+   Revoke Serial Key    ${pos_data}
+   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}

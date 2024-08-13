@@ -168,3 +168,27 @@ Zwing_A_161 Switching Between Order to Return Will Give Confirmation Popup
     Verify Mode Option Popup  ${return_option}
     Revoke Serial Key    ${pos_data}
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_A_189 Cancel Switch From Billing to Order
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_16
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Cancel Switch From Billing Mode To Order
+    Revoke Serial Key    ${pos_data}
+    [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_A_190 Cancel Switch From Billing to Return
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_17
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Cancel Switch From Billing Mode To Return
+    Revoke Serial Key    ${pos_data}
+    [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
+
+Zwing_A_191 Cancel Switch From Billing to Exchange
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_18
+    Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Cancel Switch From Billing Mode To Exchange
+    Revoke Serial Key    ${pos_data}
+    [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
