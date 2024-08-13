@@ -14,8 +14,12 @@ Resource    ../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
 Test Setup  Open Application | POS
 Test Teardown   Close Browser
 
+#*** Variables ***
+#${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Return${/}adhoc_return_test_data.xlsx
+
 *** Variables ***
-${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Return${/}adhoc_return_test_data.xlsx
+${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Return${/}adhoc_return_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Return${/}adhoc_return_test_data.xlsx
 
 *** Test Cases ***
 

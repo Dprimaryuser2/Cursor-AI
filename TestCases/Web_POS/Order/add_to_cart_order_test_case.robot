@@ -17,12 +17,17 @@ Resource    ../../../Resources/Web_POS/POS/Order/add_to_cart_order_keyword.robot
 Test Setup  Open Application | POS
 Test Teardown   Close Browser
 
+#*** Variables ***
+#${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}add_to_cart_order_test_data.xlsx
+
 *** Variables ***
-${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}add_to_cart_order_test_data.xlsx
+${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Order${/}add_to_cart_order_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Order${/}add_to_cart_order_test_data.xlsx
 
 *** Test Cases ***
 Zwing_ATC_1 Add Normal sku with Fixed UOM to cart
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_01
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_01
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -32,7 +37,8 @@ Zwing_ATC_1 Add Normal sku with Fixed UOM to cart
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_2 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_02
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_02
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -42,7 +48,8 @@ Zwing_ATC_2 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_3 Add Normal sku with weighted UOM to cart >> Add Qty mode
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_03
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_03
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -52,7 +59,8 @@ Zwing_ATC_3 Add Normal sku with weighted UOM to cart >> Add Qty mode
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_4 Add Normal sku with Fixed UOM and 0 Inventory to cart with enabled negative Inventory
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_04
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_04
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -63,7 +71,8 @@ Zwing_ATC_4 Add Normal sku with Fixed UOM and 0 Inventory to cart with enabled n
 
 Zwing_ATC_5 Add Normal sku with Fixed UOM and 0 Inventory to cart with disable negative Inventory
     [Tags]    Valid Failure
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_05
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_05
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -73,7 +82,8 @@ Zwing_ATC_5 Add Normal sku with Fixed UOM and 0 Inventory to cart with disable n
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_6 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with enable Negative Inventory
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_06
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_06
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -84,7 +94,8 @@ Zwing_ATC_6 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with 
 
 Zwing_ATC_7 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with disable Negative Inventory
     [Tags]    Valid Failure
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_07
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_07
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -94,7 +105,8 @@ Zwing_ATC_7 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with 
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_8 Add Normal sku with weighted UOM to cart >> Add Qty mode with enable Negative stock Billing
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_08
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_08
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -105,7 +117,8 @@ Zwing_ATC_8 Add Normal sku with weighted UOM to cart >> Add Qty mode with enable
 
 Zwing_ATC_9 Add Normal sku with weighted UOM to cart >> Add Qty mode with disable Negative Stock Billing
     [Tags]    Valid Failure
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_09
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_09
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -115,7 +128,8 @@ Zwing_ATC_9 Add Normal sku with weighted UOM to cart >> Add Qty mode with disabl
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_10 Validate the count of total no. of items added to the cart.
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_10
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_10
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -125,7 +139,8 @@ Zwing_ATC_10 Validate the count of total no. of items added to the cart.
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_11 Remove items from cart by clicking on cross button
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_11
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_11
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -136,7 +151,8 @@ Zwing_ATC_11 Remove items from cart by clicking on cross button
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_12 Remove items from cart by clicking on clear button
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_12
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_12
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -147,7 +163,8 @@ Zwing_ATC_12 Remove items from cart by clicking on clear button
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_13 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with decimal weight
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_13
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_13
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -157,7 +174,8 @@ Zwing_ATC_13 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_14 Add Normal sku with weighted UOM to cart >> Add Qty mode with decimal weight
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_14
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_14
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -168,7 +186,8 @@ Zwing_ATC_14 Add Normal sku with weighted UOM to cart >> Add Qty mode with decim
 
 Zwing_ATC_15 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with enable Negative Inventory with decimal weight
     [Tags]    retry
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_15
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_15
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -179,7 +198,8 @@ Zwing_ATC_15 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with
 
 Zwing_ATC_16 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with disable Negative Inventory with decimal weight
     [Tags]    valid failure
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_16
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_16
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -189,7 +209,8 @@ Zwing_ATC_16 Add Normal sku with weighted UOM to cart >> Edit Cart Qty mode with
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_17 Add Normal sku with weighted UOM to cart >> Add Qty mode with enable Negative stock Billing with decimal weight
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_17
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_17
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -200,7 +221,8 @@ Zwing_ATC_17 Add Normal sku with weighted UOM to cart >> Add Qty mode with enabl
 
 Zwing_ATC_18 Add Normal sku with weighted UOM to cart >> Add Qty mode with disable Negative Stock Billing with decimal weight
     [Tags]    valid failure
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_18
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_18
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -210,7 +232,8 @@ Zwing_ATC_18 Add Normal sku with weighted UOM to cart >> Add Qty mode with disab
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_19 Add item from previous session
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_19
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_19
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -229,7 +252,8 @@ Zwing_ATC_19 Add item from previous session
 
 Zwing_ATC_20 Add item from previous session>> Discard Button
     [Tags]    retry
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_20
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_20
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -247,7 +271,8 @@ Zwing_ATC_20 Add item from previous session>> Discard Button
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_ATC_21 Add item from previous session>> Add item to cart
-    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    ATC_21
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    ATC_21
     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}

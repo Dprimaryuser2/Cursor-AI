@@ -11,11 +11,16 @@ Resource    ../../../Resources/Web_POS/POS/Return/adhoc_return_keywords.robot
 Test Setup  Open Application | POS
 Test Teardown   Close Browser
 
+#*** Variables ***
+#${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}auto_switching_order_test_data.xlsx
+
 *** Variables ***
-${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}auto_switching_order_test_data.xlsx
+${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Order${/}auto_switching_order_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Order${/}auto_switching_order_test_data.xlsx
 
 *** Test Cases ***
 Zwing_A_1 Switching to Order POS while Order Pos is not allowed in Policies | Order from pos not allowed
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_01
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -24,6 +29,7 @@ Zwing_A_1 Switching to Order POS while Order Pos is not allowed in Policies | Or
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_2 Switching to Order POS while Order Pos is allowed in Policies | Order from pos is allowed
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_02
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -32,6 +38,7 @@ Zwing_A_2 Switching to Order POS while Order Pos is allowed in Policies | Order 
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_3 Confirm the Switching to the Order | Order from pos is allowed
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_03
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -40,6 +47,7 @@ Zwing_A_3 Confirm the Switching to the Order | Order from pos is allowed
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_4 Cancel the Switching to the Order | Order from pos is allowed
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_04
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -48,6 +56,7 @@ Zwing_A_4 Cancel the Switching to the Order | Order from pos is allowed
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_5 Return to POS Screen when Auto Switch the Billing is on
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_05
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -60,6 +69,7 @@ Zwing_A_5 Return to POS Screen when Auto Switch the Billing is on
 
 Zwing_A_6 Return to POS Screen when Auto Switch the Billing is off
     [Tags]    retry
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_06
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -70,6 +80,7 @@ Zwing_A_6 Return to POS Screen when Auto Switch the Billing is off
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_153 Click on Confirm button on switch to Billing popup box
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_153
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -79,6 +90,7 @@ Zwing_A_153 Click on Confirm button on switch to Billing popup box
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_154 Click on Cancel button on switch to Billing popup box
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_154
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -88,6 +100,7 @@ Zwing_A_154 Click on Cancel button on switch to Billing popup box
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_155 Switching Between Order to Billing Will Give Confirmation Popup
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_155
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -97,6 +110,7 @@ Zwing_A_155 Switching Between Order to Billing Will Give Confirmation Popup
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_156 Click on Confirm button on switch to Exchange popup box
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_156
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -106,6 +120,7 @@ Zwing_A_156 Click on Confirm button on switch to Exchange popup box
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_157 Click on Cancel button on switch to Exchange popup box
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_157
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -115,6 +130,7 @@ Zwing_A_157 Click on Cancel button on switch to Exchange popup box
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_158 Switching Between Order to Exchange Will Give Confirmation Popup
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_158
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -124,6 +140,7 @@ Zwing_A_158 Switching Between Order to Exchange Will Give Confirmation Popup
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_159 Click on Confirm button on switch to Return popup box
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_159
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -133,6 +150,7 @@ Zwing_A_159 Click on Confirm button on switch to Return popup box
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_160 Click on Cancel button on switch to Return popup box
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_160
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -142,6 +160,7 @@ Zwing_A_160 Click on Cancel button on switch to Return popup box
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_161 Switching Between Order to Return Will Give Confirmation Popup
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_161
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}

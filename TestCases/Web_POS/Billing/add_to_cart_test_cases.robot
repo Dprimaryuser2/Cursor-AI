@@ -11,7 +11,7 @@ Test Setup    Open Application | POS
 Test Teardown   Close All Browsers
 
 #*** Variables ***
-#${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}add_to_cart_test_data.xlsx
+#${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${Staging(TeamPureplay)}${/}Billing${/}add_to_cart_test_data.xlsx
 
 *** Variables ***
 ${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Billing${/}add_to_cart_test_data.xlsx

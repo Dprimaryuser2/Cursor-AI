@@ -12,12 +12,17 @@ Resource   ../../../Resources/Web_POS/POS/Billing/carry_bag_keyword.robot
 Test Setup  Open Application | POS
 Test Teardown   Close Browser
 
+#*** Variables ***
+#${carrybag_td}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}carry_bag_test_data.xlsx
+
 *** Variables ***
-${carrybag_td}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}carry_bag_test_data.xlsx
+${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Billing${/}carry_bag_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Billing${/}carry_bag_test_data.xlsx
 
 *** Test Cases ***
 Zwing_CB_1 View All Carry Bags Allocated To Store
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_1
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}    CB_1
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    ${storename}  Get Store Name | Web POS
@@ -36,7 +41,8 @@ Zwing_CB_1 View All Carry Bags Allocated To Store
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_2 Enter Positive Integer As Qty In Select Carry Bags Form
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_2
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_2
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    Add Carry Bags    ${carry_data}
@@ -45,7 +51,8 @@ Zwing_CB_2 Enter Positive Integer As Qty In Select Carry Bags Form
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_3 Enter Decimal Number As Qty In Select Carry Bags Form
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_3
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_3
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    ${carrybag_value}  Add Carry Bag With Decimal/Negative Integer Value  ${carry_data}
@@ -55,7 +62,8 @@ Zwing_CB_3 Enter Decimal Number As Qty In Select Carry Bags Form
 
 Zwing_CB_4 Enter Negative Integer As Qty In Select Carry Bags Form
     [Tags]    Demo
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_4
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_4
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    ${carrybag_value}  Add Carry Bag With Decimal/Negative Integer Value  ${carry_data}
@@ -64,7 +72,8 @@ Zwing_CB_4 Enter Negative Integer As Qty In Select Carry Bags Form
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_5 Add Carry Bags Button Should Be Disabled If Qty Not Entered In Any Carry Bag
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_5
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_5
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    Verify Add Carry Button Is Disabled If Qty Is Not Entered
@@ -72,7 +81,8 @@ Zwing_CB_5 Add Carry Bags Button Should Be Disabled If Qty Not Entered In Any Ca
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_6 Add Carry Bag Button Should Be Enabled Once Qty Is Entered In Any Carry Bag
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_6
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_6
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    ${carrybag_value}  Add Carry Bag With Decimal/Negative Integer Value  ${carry_data}
@@ -81,7 +91,8 @@ Zwing_CB_6 Add Carry Bag Button Should Be Enabled Once Qty Is Entered In Any Car
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_7 Add Single Carry Bag To Cart
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_7
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_7
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    Add Carry Bags    ${carry_data}
@@ -90,7 +101,8 @@ Zwing_CB_7 Add Single Carry Bag To Cart
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_8 Add Multiple Carry Bags At Once To Cart
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_8
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_8
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    Add Carry Bags    ${carry_data}
@@ -100,7 +112,8 @@ Zwing_CB_8 Add Multiple Carry Bags At Once To Cart
 
 Zwing_CB_9 Add Carry Bags With 0 Inventory
     [Tags]    try
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_9
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_9
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    Add Carry Bag With Negative Inventory By Scanning Barcode  ${carry_data}
@@ -109,7 +122,8 @@ Zwing_CB_9 Add Carry Bags With 0 Inventory
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_10 Add Carry Bags With 0 Inventory
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_10
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_10
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    Add Carry Bag With Negative Inventory By Scanning Barcode  ${carry_data}
@@ -118,7 +132,8 @@ Zwing_CB_10 Add Carry Bags With 0 Inventory
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_11 View Details Of Carry Bags Added To Cart By Clicking On Product In Cart
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_11
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_11
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    Add Carry Bags    ${carry_data}
@@ -127,7 +142,8 @@ Zwing_CB_11 View Details Of Carry Bags Added To Cart By Clicking On Product In C
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_12 Validate Count Of Carry Bags Added To Cart On Add Carry Bags Button On Billing Screen
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_12
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_12
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    Add Carry Bags    ${carry_data}
@@ -136,7 +152,8 @@ Zwing_CB_12 Validate Count Of Carry Bags Added To Cart On Add Carry Bags Button 
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_13 Validate Details Of Carry Bag Details As On Cart Screen To The Product Details Window
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_13
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_13
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    ${carrybag_value}  Add Carry Bag With Decimal/Negative Integer Value    ${carry_data}
@@ -145,7 +162,8 @@ Zwing_CB_13 Validate Details Of Carry Bag Details As On Cart Screen To The Produ
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_14 Set variance limit and enter price override less or more than total price but within variance limit
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_14
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_14
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    Add Product By Scan Only    ${carry_data}
@@ -156,7 +174,8 @@ Zwing_CB_14 Set variance limit and enter price override less or more than total 
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_15 Disable price override and try price overriding then check the response
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_15
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_15
    Login With Valid Username And Password | POS   ${carry_data}
    Open The Session    ${carry_data}
    Add Product By Scan Only   ${carry_data}
@@ -166,7 +185,8 @@ Zwing_CB_15 Disable price override and try price overriding then check the respo
    [Teardown]    Tear It Down If Test Case Failed    ${carry_data}
 
 Zwing_CB_16 Set variance limit and enter price override less or more than total price but out of variance limit
-   ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_16
+   ${CARRYBAG_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${carry_data}=  Fetch Testdata By Id   ${CARRYBAG_TD}   CB_16
    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
    Add Product By Scan Only   ${carry_data}

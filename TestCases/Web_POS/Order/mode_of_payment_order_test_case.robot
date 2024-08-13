@@ -14,13 +14,18 @@ Variables   ../../../PageObjects/Web_POS/POS/order_locators.py
 Test Setup    Open Application | POS
 Test Teardown   Close Browser
 
+#*** Variables ***
+#${MOP_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}mode_of_payment_order_test_data.xlsx
+
 *** Variables ***
-${MOP_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}mode_of_payment_order_test_data.xlsx
+${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Order${/}mode_of_payment_order_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Order${/}mode_of_payment_order_test_data.xlsx
 
 *** Test Cases ***
 Zwing_O_96 Customer Paid amount equal to payable amount
     [Tags]    retry
-     ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_96
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_96
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
      Change Billing Mode    ${mop_data}
@@ -49,7 +54,8 @@ Zwing_O_97 Customer Paid amount less than to payable amount(continue button rema
     [Teardown]    Tear It Down If Test Case Failed    ${mop_data}
 
 Zwing_O_98 Customer Paid amount more than to payable amount
-     ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}    TC_98
+    ${MOP_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_98
      Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
      Change Billing Mode    ${mop_data}

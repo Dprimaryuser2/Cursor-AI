@@ -11,12 +11,17 @@ Resource    ../../../Resources/Web_POS/POS/Billing/product_catalog_keywords.robo
 Test Setup  Open Application | POS
 Test Teardown   Close Browser
 
+#*** Variables ***
+#${Product_td}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}product_catalog_test_data.xlsx
+
 *** Variables ***
-${Product_td}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}product_catalog_test_data.xlsx
+${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Billing${/}product_catalog_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Billing${/}product_catalog_test_data.xlsx
 
 *** Test Cases ***
 Zwing_CP_1 View Catalog using Catalog button in WebPOS
     [Tags]    Demo
+   ${Product_td}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_1
    Login With Valid Username And Password | POS    ${pc_data}
    Open The Session    ${pc_data}
@@ -25,6 +30,7 @@ Zwing_CP_1 View Catalog using Catalog button in WebPOS
    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_2 Hide Catalog using Hide button in WebPOS
+   ${Product_td}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_2
    Login With Valid Username And Password | POS    ${pc_data}
    Open The Session    ${pc_data}
@@ -34,6 +40,7 @@ Zwing_CP_2 Hide Catalog using Hide button in WebPOS
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_3 Refresh Catalog using Refresh button
+   ${Product_td}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_3
    Login With Valid Username And Password | POS    ${pc_data}
    Open The Session    ${pc_data}
@@ -43,7 +50,8 @@ Zwing_CP_3 Refresh Catalog using Refresh button
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_4 A new category item is allocated to a store
-     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_4
+     ${Product_td}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_4
      Open Application | Admin
      Login With Valid Username And Password  ${pc_data}
      Navigate To Product & Catalogue | Console
@@ -57,7 +65,8 @@ Zwing_CP_4 A new category item is allocated to a store
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_5 A New Item Of Existing Category That Is Already Listed Is Allocated To The Store
-     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_5
+     ${Product_td}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_5
      Open Application | Admin
      Login With Valid Username And Password  ${pc_data}
      Navigate To Products | Console
@@ -71,7 +80,8 @@ Zwing_CP_5 A New Item Of Existing Category That Is Already Listed Is Allocated T
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_6 Item With Multiple Price(existing prices)
-     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_6
+     ${Product_td}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_6
      Login With Valid Username And Password | POS   ${pc_data}
      Open The Session    ${pc_data}
      Scan Barcode To Add Item And Quantity To Cart | Multiple MRP    ${pc_data}
@@ -80,7 +90,8 @@ Zwing_CP_6 Item With Multiple Price(existing prices)
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_7 Item With Multiple Price Creating New Price books
-    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_7
+    ${Product_td}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_7
     Login With Valid Username And Password | POS    ${pc_data}
     Open The Session    ${pc_data}
     ${storename}  Get Store Name | Web POS
@@ -98,7 +109,8 @@ Zwing_CP_7 Item With Multiple Price Creating New Price books
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_8 All Items in Item With multiple prices added
-    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_8
+    ${Product_td}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_8
     Login With Valid Username And Password | POS   ${pc_data}
     Open The Session    ${pc_data}
     Add All Variants Of Multiple Price Books    ${pc_data}
@@ -106,7 +118,8 @@ Zwing_CP_8 All Items in Item With multiple prices added
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_9 Items allocated with 0 inventory to store
-    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_9
+    ${Product_td}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_9
     Login With Valid Username And Password | POS   ${pc_data}
     Open The Session    ${pc_data}
     Verify Items Allocated With 0 Inventory To Store Are Blur    ${pc_data}
@@ -114,7 +127,8 @@ Zwing_CP_9 Items allocated with 0 inventory to store
     [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
 
 Zwing_CP_10 Items with some inventory on the store
-    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_10
+    ${Product_td}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_10
     Login With Valid Username And Password | POS   ${pc_data}
     Open The Session    ${pc_data}
     Verify Items Allocated With Some Inventory To Store Are Normal    ${pc_data}
