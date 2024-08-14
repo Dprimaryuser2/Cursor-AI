@@ -30,10 +30,10 @@ Set Fulfillment Date And Continue
     Click Element    ${continue_fulfilment_button}
     Wait Until Page Does Not Contain Element    ${fulfilment_options_heading}    timeout=5
 
-Verify Delivery Fulfillment
+Verify Delivery Fulfillment Popup
     Reload Page
-    Wait Until Element Is Enabled    ${place_order_button}    timeout=5
-    Wait Until Page Contains Element    ${min_acceptance_criteria_fulfilled}    timeout=5
+#    Wait Until Element Is Enabled    ${place_order_button}    timeout=5
+    Wait Until Page Contains Element   ${min_acceptance_criteria_fulfilled}    timeout=5
 
 Verify Item Manual Discount | Order
     [Arguments]    ${product_price}

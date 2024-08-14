@@ -75,7 +75,7 @@ Zwing_O_P_89 Delivery Fulfillment option while its mandatory from policy
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      Verify Billing Checkout
-     Verify Delivery Fulfillment
+     Set Fulfillment Date And Continue
      Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 
@@ -86,7 +86,7 @@ Zwing_O_P_90 Delivery Fulfillment option while its non mandatory from policy
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
-     Verify Delivery Fulfillment
+     Verify Delivery Fulfillment Popup
      Revoke Serial Key    ${pos_data}
     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
 

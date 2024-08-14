@@ -162,6 +162,7 @@ customer_paid_field = '//input[@id="input-for-customer-paid"]'
 customer_paid_label = '//label[@id="label-for-customer-paid__BV_label_"]'
 less_account_balance_alert = '//p[contains(normalize-space(),"A mimimum payment of AMOUNT is required to complete this on-account sale.")]'    # Change AMOUNT
 minimum_payment_required = '//h6[text()="Minimum Payment Required"]//following-sibling::p'
+minimum_order_acceptance_amount = '//span[contains(text(),"Minimum order acceptance amount is")]'
 phone_number_redeem_store_credit="//input[@class='mb-2 mr-sm-2 mb-sm-0 form-control']"
 
 greater_amount_popup = "//div[@class='alert alert-dismissible alert-danger' and contains(text(),'Entered amount is greater than bill amount.')]"

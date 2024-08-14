@@ -103,6 +103,7 @@ Scan Barcode To Add Item And Quantity To Cart
         Sleep    1s
         Click Element    ${product_search_bar}
         Input Text    ${product_search_bar}    ${key}
+        Wait Until Keyword Succeeds    3    3    Press Keys    ${product_search_bar}    ENTER
         Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
         Sleep    1s
         Click Element    ${search_add_button}
@@ -593,7 +594,7 @@ Verify Billing Checkout
         Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
         Click Button    ${checkout_button}
     END
-    ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
+    ${insufficient}=    Run Keyword And Return Status    Wait Until Page Contains Element    ${insufficient_inventory_continue_btn}    timeout=
     IF    ${insufficient}
      Set Fulfillment Date And Continue
     END
