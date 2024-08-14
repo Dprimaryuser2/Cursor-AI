@@ -39,8 +39,8 @@ Open Application | POS
 
 Login With Valid Username And Password | POS
     [Arguments]     ${search_data}
-    Inject JavaScript For Fetch
-    Inject JavaScript For XHR
+#    Inject JavaScript For Fetch
+#    Inject JavaScript For XHR
     ${my_dict}    Create Dictionary   &{search_data}
     Input Text    ${serial_key}    ${my_dict.serial_key}
     Click Button    ${register_button}
@@ -126,6 +126,8 @@ Revoke Licence Key | API
     ${header} =    Create Dictionary    Content-Type=application/json    Connection=keep-alive
     Create Session    revoke    ${base_url}    headers=${header}
     ${api_response} =    POST On Session    revoke    /revoke-licence    data=${body}    headers=${header}
+    ${status_code}    Set Variable    ${api_response.status_code}
+    Run Keyword If    '${status_code}' != '200'    Tear It Down If Test Case Failed    ${my_dict}
     Reload Page
     Logout After Revoke     ${response}     ${my_dict}
     Delete All Cookies

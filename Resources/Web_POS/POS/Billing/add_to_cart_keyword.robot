@@ -260,7 +260,7 @@ Close The Session For Adding The Item From Previous Session
                 ${values}=    Set Variable    ${item}[1]
                 Input Text    ${closing_balance}    ${key}
             END
-            Click Button    ${close_session_button}
+            Wait Until Keyword Succeeds    3    5    Click Button    ${close_session_button}
             Wait Until Page Does Not Contain Element    ${close_session_button}     timeout=10s
             Wait Until Element Is Visible    ${session_closed_popup}    timeout=10s
             Click Button    ${session_close_button}
