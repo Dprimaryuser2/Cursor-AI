@@ -12,7 +12,10 @@ Test Setup  Open Application | POS
 Test Teardown   Close Browser
 
 *** Variables ***
-${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}auto_switching_order_test_data.xlsx
+#${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Order${/}auto_switching_order_test_data.xlsx
+${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Billing${/}add_to_cart_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Billing${/}add_to_cart_test_data.xlsx
+
 
 *** Test Cases ***
 Zwing_A_1 Switching to Order POS while Order Pos is not allowed in Policies | Order from pos not allowed
@@ -24,12 +27,13 @@ Zwing_A_1 Switching to Order POS while Order Pos is not allowed in Policies | Or
     [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
 
 Zwing_A_2 Switching to Order POS while Order Pos is allowed in Policies | Order from pos is allowed
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_02
     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Verify Order Option In Dropdown    ${pos_data}
     Revoke Serial Key    ${pos_data}
-    [Teardown]  Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]  Tear It Down If Test Case Failed
 
 Zwing_A_3 Confirm the Switching to the Order | Order from pos is allowed
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_03
