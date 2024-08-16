@@ -1,5 +1,5 @@
-datasources:632a9bbfbc33c4f215890e3e0c9743b05f6b8ec4
+datasources:58f74df326c66f8d94a03609c171c70b0f2a515e
 commandlineoptions:1655082a448e706e995e1eae09954e9e3c615466
 suitesfrom:no-suites-from-option
-file:20fa77cac15d16dccb129326f5dee21faddf0f1b
---suite Adhoc Return Test Cases
+file:ea00f02398a1e6ac7caea285ff2fceea9a3c3125
+--suite Manual Discount Test Case

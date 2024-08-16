@@ -127,7 +127,7 @@ Revoke Licence Key | API
     Create Session    revoke    ${base_url}    headers=${header}
     ${api_response} =    POST On Session    revoke    /revoke-licence    data=${body}    headers=${header}
     ${status_code}    Set Variable    ${api_response.status_code}
-    Run Keyword If    '${status_code}' != '200'    Tear It Down If Test Case Failed    ${my_dict}
+    Run Keyword If    '${status_code}' != '200'    Tear It Down If Test Case Failed
     Reload Page
     Logout After Revoke     ${response}     ${my_dict}
     Delete All Cookies
