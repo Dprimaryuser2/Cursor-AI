@@ -24,137 +24,125 @@ Zwing_ST_1 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory i
     [Tags]    Valid Failure
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_1
-   Login With Valid Username And Password | POS    ${pos_data}
+   ${response}    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode  ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Add Customer Details    ${pos_data}
    Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Policies
-   Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_ST_2 Salesperson Tagging is Enabled and Salesperson Tagging is Optional in Policies
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_2
-   Login With Valid Username And Password | POS    ${pos_data}
+   ${response}    Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode  ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Add Customer Details    ${pos_data}
    Verify Salesperson Tagging is Enabled and Salesperson Tagging is Optional in Policies | Order
-   Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_ST_3 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory after adding the product in Policies
      ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_3
-    Login With Valid Username And Password | POS    ${pos_data}
+    ${response}    Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode  ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Verify Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Policies after adding the product    ${pos_data}
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_ST_4 Salesperson Tagging Item Level
      ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_4
-    Login With Valid Username And Password | POS    ${pos_data}
+    ${response}    Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode  ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     Assign A Salesperson To An Item  ${pos_data}
     Verify If Salesperson Is Assigned To An Item    ${pos_data}
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_ST_5 Salesperson Tagging Bill Level
      ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_5
-    Login With Valid Username And Password | POS    ${pos_data}
+    ${response}    Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode  ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Salesperson Tagged At Bill Level | Order    ${pos_data}
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_ST_6 Tag Single Salesperson To multiple Items
      ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_6
-    Login With Valid Username And Password | POS    ${pos_data}
+    ${response}    Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode  ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     Verify Assign Same Salesperson To All Products Except Last Product   ${pos_data}
-    Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_ST_7 Tag Different salesperson for each item
      ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_7
-    Login With Valid Username And Password | POS    ${pos_data}
+    ${response}    Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode  ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     Assign A different Salesperson To Each Item  ${pos_data}
     Verify If Different Salesperson Was Assigned To Each Person
-    Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_ST_8 Change Salesperson tagging for item
      ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_8
-    Login With Valid Username And Password | POS    ${pos_data}
+    ${response}    Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode  ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Change Salesperson tagging for item    ${pos_data}
-    Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_ST_9 Change Salesperson tagging for bill
      ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_9
-    Login With Valid Username And Password | POS    ${pos_data}
+    ${response}    Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode  ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Change Salesperson tagging for bill | Order   ${pos_data}
-    Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_ST_10 Tagged Sales person view below the tagged Item
      ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_10
-    Login With Valid Username And Password | POS    ${pos_data}
+    ${response}    Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode  ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Add Customer Details    ${pos_data}
     Assign A Salesperson All Items   ${pos_data}
     Verify Salesperson Tagged At Bill Level | Order    ${pos_data}
-    Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 #Zwing_ST_11
 
 Zwing_ST_12 Salesperson Tagging is Disabled in policies
      ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_12
-    Login With Valid Username And Password | POS    ${pos_data}
+    ${response}    Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode  ${pos_data}
     Verify Salesperson Tagging is Disabled
-    Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}

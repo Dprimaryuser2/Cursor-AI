@@ -23,16 +23,15 @@ Zwing_CP_1 View Catalog using Catalog button in WebPOS
     [Tags]    Demo
    ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_1
-   Login With Valid Username And Password | POS    ${pc_data}
+   ${response}    Login With Valid Username And Password | POS    ${pc_data}
    Open The Session    ${pc_data}
    Verify View Catalog Using Catalog Button In WebPOS
-   Revoke Serial Key    ${pc_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
+   [Teardown]    Revoke Licence Key | API   ${response}      ${pc_data}
 
 Zwing_CP_2 Hide Catalog using Hide button in WebPOS
    ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_2
-   Login With Valid Username And Password | POS    ${pc_data}
+   ${response}    Login With Valid Username And Password | POS    ${pc_data}
    Open The Session    ${pc_data}
    Verify View Catalog Using Catalog Button In WebPOS
    Verify Hide Catalog using Hide button in WebPOS
@@ -42,7 +41,7 @@ Zwing_CP_2 Hide Catalog using Hide button in WebPOS
 Zwing_CP_3 Refresh Catalog using Refresh button
    ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_3
-   Login With Valid Username And Password | POS    ${pc_data}
+   ${response}=  Login With Valid Username And Password | POS   ${pc_data}
    Open The Session    ${pc_data}
    Verify View Catalog Using Catalog Button In WebPOS
    Verify Refresh catalog using refresh button
@@ -52,13 +51,13 @@ Zwing_CP_3 Refresh Catalog using Refresh button
 Zwing_CP_4 A new category item is allocated to a store
      ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_4
-     Open Application | Admin
-     Login With Valid Username And Password  ${pc_data}
+   Open Application | Admin
+   ${response}   Login With Valid Username And Password  ${pc_data}
      Navigate To Product & Catalogue | Console
      Add New Category | Console   ${pc_data}
      Close Browser
      Open Application | POS
-     Login With Valid Username And Password | POS    ${pc_data}
+     ${response}=  Login With Valid Username And Password | POS   ${pc_data}
      Open The Session    ${pc_data}
      Verify New Category Is Visible   ${pc_data}
      Revoke Serial Key    ${pc_data}
@@ -68,12 +67,12 @@ Zwing_CP_5 A New Item Of Existing Category That Is Already Listed Is Allocated T
      ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_5
      Open Application | Admin
-     Login With Valid Username And Password  ${pc_data}
+     ${response}    Login With Valid Username And Password  ${pc_data}
      Navigate To Products | Console
      Create New Products | Console   ${pc_data}
      Close Browser
      Open Application | POS
-     Login With Valid Username And Password | POS    ${pc_data}
+     ${response}=  Login With Valid Username And Password | POS   ${pc_data}
      Open The Session    ${pc_data}
      Verify New Product Is Visible In Category  ${pc_data}
      Revoke Serial Key    ${pc_data}
@@ -82,7 +81,7 @@ Zwing_CP_5 A New Item Of Existing Category That Is Already Listed Is Allocated T
 Zwing_CP_6 Item With Multiple Price(existing prices)
      ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_6
-     Login With Valid Username And Password | POS   ${pc_data}
+     ${response}=  Login With Valid Username And Password | POS   ${pc_data}
      Open The Session    ${pc_data}
      Scan Barcode To Add Item And Quantity To Cart | Multiple MRP    ${pc_data}
      Verify Multiple Price Product Is Added
@@ -92,7 +91,7 @@ Zwing_CP_6 Item With Multiple Price(existing prices)
 Zwing_CP_7 Item With Multiple Price Creating New Price books
     ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_7
-    Login With Valid Username And Password | POS    ${pc_data}
+    ${response}    Login With Valid Username And Password | POS    ${pc_data}
     Open The Session    ${pc_data}
     ${storename}  Get Store Name | Web POS
     Close Browser
@@ -102,7 +101,7 @@ Zwing_CP_7 Item With Multiple Price Creating New Price books
     Create New PriceBook | Console  ${pc_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS    ${pc_data}
+    ${response}=  Login With Valid Username And Password | POS   ${pc_data}
     Open The Session    ${pc_data}
     Verify New PriceBook Product Is Visible  ${pc_data}
     Revoke Serial Key    ${pc_data}
@@ -110,8 +109,8 @@ Zwing_CP_7 Item With Multiple Price Creating New Price books
 
 Zwing_CP_8 All Items in Item With multiple prices added
     ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-   ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_8
-    Login With Valid Username And Password | POS   ${pc_data}
+    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_8
+    ${response}=  Login With Valid Username And Password | POS   ${pc_data}
     Open The Session    ${pc_data}
     Add All Variants Of Multiple Price Books    ${pc_data}
     Revoke Serial Key    ${pc_data}
@@ -120,7 +119,7 @@ Zwing_CP_8 All Items in Item With multiple prices added
 Zwing_CP_9 Items allocated with 0 inventory to store
     ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_9
-    Login With Valid Username And Password | POS   ${pc_data}
+    ${response}=  Login With Valid Username And Password | POS   ${pc_data}
     Open The Session    ${pc_data}
     Verify Items Allocated With 0 Inventory To Store Are Blur    ${pc_data}
     Revoke Serial Key    ${pc_data}
@@ -129,7 +128,7 @@ Zwing_CP_9 Items allocated with 0 inventory to store
 Zwing_CP_10 Items with some inventory on the store
     ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_10
-    Login With Valid Username And Password | POS   ${pc_data}
+    ${response}=  Login With Valid Username And Password | POS   ${pc_data}
     Open The Session    ${pc_data}
     Verify Items Allocated With Some Inventory To Store Are Normal    ${pc_data}
     Revoke Serial Key    ${pc_data}

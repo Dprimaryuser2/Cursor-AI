@@ -23,7 +23,7 @@ ${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}ord
 *** Test Cases ***
 Zwing_O_130 Check condintions before confirming the order
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_130
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}    Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -33,12 +33,11 @@ Zwing_O_130 Check condintions before confirming the order
     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
     Payment By Paytm   ${value}
     Verify Stock Not Available alert | Order Created | Advance Payment On
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_131 Confirmation message
      ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_131
-     Login With Valid Username And Password | POS   ${pos_data}
+     ${response}    Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -49,12 +48,11 @@ Zwing_O_131 Confirmation message
     Verify If Payment Is Complete Or Not | Order
     Navigate To Order Confirmation Page From Checkout Page
     Verify Order Confirm Alert
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 #Zwing_O_132 Order Review before confirming the order
 #    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_132
-#    Login With Valid Username And Password | POS   ${pos_data}
+#    ${response}    Login With Valid Username And Password | POS   ${pos_data}
 #    Open The Session    ${pos_data}
 #    Change Billing Mode    ${pos_data}
 #    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -64,12 +62,11 @@ Zwing_O_131 Confirmation message
 #    Apply Item Promo | Manual
 #    Verify Promo Discount In Cart | POS
 #    Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
-#    Revoke Serial Key    ${pos_data}
-#    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+##    [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_133 Confirming the order without reveiwing
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_133
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}    Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -80,12 +77,11 @@ Zwing_O_133 Confirming the order without reveiwing
     Navigate To Order Confirmation Page From Order Summary Page
 #    Verify Redirection To Order Confirmation Page
     Verify Order Confirm Alert
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_137 Collect pending amount of total payable | Taken advance should be less than payable amount or zero
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_137
-     Login With Valid Username And Password | POS   ${pos_data}
+     ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -95,12 +91,11 @@ Zwing_O_137 Collect pending amount of total payable | Taken advance should be le
      ${payable_amount}  Enter 10 Percent Amount In Payable Amount  ${value}
      Payment By Cash Less Than Payable Amount     ${payable_amount}
      Verify Continue Button Is Disabled
-     Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+     [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_138 Collect pending amount using split payment
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_138
-     Login With Valid Username And Password | POS   ${pos_data}
+     ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -114,12 +109,11 @@ Zwing_O_138 Collect pending amount using split payment
      Payment By Cash   ${due_amount}
      Verify If Payment Is Complete Or Not After Full Payment | Order
      Verify Successful Payment After Full Payment| Order    ${value}
-     Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+     [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_139 Collected amount need to reflect in bill summary
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_139
-     Login With Valid Username And Password | POS   ${pos_data}
+     ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -135,12 +129,11 @@ Zwing_O_139 Collected amount need to reflect in bill summary
      ${due_amount}  Get Amount From Payable Amount After Partial Payment
      Payment By Cash   ${due_amount}
      Verify If Payment Is Complete Or Not After Full Payment | Order
-     Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+     [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_140 Collected amount could be removal and removed amount will refelct on payable amount
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_140
-     Login With Valid Username And Password | POS   ${pos_data}
+     ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -155,12 +148,11 @@ Zwing_O_140 Collected amount could be removal and removed amount will refelct on
      Payment By Cash   ${due_amount}
      Verify If Payment Is Complete Or Not After Full Payment | Order
      Verify Successful Payment After Full Payment| Order    ${value}
-     Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+     [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_141 Re-Print Order Receipt
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_141
-     Login With Valid Username And Password | POS   ${pos_data}
+     ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -175,12 +167,11 @@ Zwing_O_141 Re-Print Order Receipt
      ${cust_info_checkout}  Verify Recipt Content | Order
      ${cust_info_invoice}   Get Customer Details | Print Invoice | Order
      Verify Customer Details | Print Invoice  ${cust_info_checkout}    ${cust_info_invoice}
-     Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+     [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_142 Cancel Order if advance is already paid, need to refund
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_142
-     Login With Valid Username And Password | POS   ${pos_data}
+     ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -196,12 +187,11 @@ Zwing_O_142 Cancel Order if advance is already paid, need to refund
      Navigate To Order Management And Redirect To Checkout Page Using Order Number      ${order_number}
      Cancel Order
      Verify Discard Order Popup With Different Method | Cancel Order Popup    ${cash_cancel_order_popup}
-     Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+     [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_144 Refund by Cash
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_144
-     Login With Valid Username And Password | POS   ${pos_data}
+     ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -217,12 +207,11 @@ Zwing_O_144 Refund by Cash
      Navigate To Order Management And Redirect To Checkout Page Using Order Number      ${order_number}
      Cancel Order
      Verify Discard Order Popup With Different Method | Cancel Order Popup    ${cash_cancel_order_popup}
-     Revoke Serial Key    ${pos_data}
-     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+      [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_145 Refund by Credit note
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_145
-     Login With Valid Username And Password | POS   ${pos_data}
+     ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
@@ -238,5 +227,4 @@ Zwing_O_145 Refund by Credit note
      Navigate To Order Management And Redirect To Checkout Page Using Order Number      ${order_number}
      Cancel Order
      Verify Discard Order Popup With Different Method | Cancel Order Popup    ${store_credit_cancel_order_popup}
-     Revoke Serial Key    ${pos_data}
-     [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+      [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}

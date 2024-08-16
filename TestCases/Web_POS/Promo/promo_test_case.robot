@@ -29,7 +29,7 @@ Buy any one item get flat 50% Discount
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -43,8 +43,7 @@ Buy any one item get flat 50% Discount
     Verify Total Payable Amount At Checkout
     Verify Applicability Percentage Discount On Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any 1 item from assortment and get flat Rs. 300 off
     [Documentation]   flat Rs. 300 off
@@ -56,7 +55,7 @@ Buy any 1 item from assortment and get flat Rs. 300 off
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -70,8 +69,7 @@ Buy any 1 item from assortment and get flat Rs. 300 off
     Verify Total Payable Amount At Checkout
     Verify Applicability Flat Discount In Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any 1 item from assortment and get fixed price Rs 300 for each
     [Documentation]    fixed price Rs 300 each
@@ -83,7 +81,7 @@ Buy any 1 item from assortment and get fixed price Rs 300 for each
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -97,8 +95,7 @@ Buy any 1 item from assortment and get fixed price Rs 300 for each
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Fixed Discount In Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any 2 item from assortment get fixed price Rs. 300 off for all
     [Documentation]    fixed price Rs 300 all
@@ -110,7 +107,7 @@ Buy any 2 item from assortment get fixed price Rs. 300 off for all
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -124,8 +121,7 @@ Buy any 2 item from assortment get fixed price Rs. 300 off for all
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Fixed Discount In Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any 2 from Buy pool and get 1 free
     [Documentation]    Buy 2 get one free
@@ -137,7 +133,7 @@ Buy any 2 from Buy pool and get 1 free
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -151,8 +147,7 @@ Buy any 2 from Buy pool and get 1 free
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Pool In Checkout Page | Get Free From Same Assortment    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any 1 item from BUY pool and get any quantity of item from Get pool
     [Documentation]    Buy 1from buy pool and get any from get pool free
@@ -164,7 +159,7 @@ Buy any 1 item from BUY pool and get any quantity of item from Get pool
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -178,8 +173,7 @@ Buy any 1 item from BUY pool and get any quantity of item from Get pool
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy from BUY pool and get any quantity from Get pool | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any 1 item from BUY pool and get any 1 quantity of item from Get pool
      [Documentation]    Buy 1from buy pool and get any from get pool free
@@ -191,7 +185,7 @@ Buy any 1 item from BUY pool and get any 1 quantity of item from Get pool
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -205,8 +199,7 @@ Buy any 1 item from BUY pool and get any 1 quantity of item from Get pool
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy from BUY pool and get any quantity from Get pool | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy specific quantity in item ratio and Get 50% Discount
     [Documentation]    Buy 1from buy pool and get any from get pool free
@@ -218,7 +211,7 @@ Buy specific quantity in item ratio and Get 50% Discount
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -232,8 +225,7 @@ Buy specific quantity in item ratio and Get 50% Discount
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy item in ratio and Get Percentage off | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy specific quantity in item ratio and Get 300 Rs Discount
     [Documentation]    Buy 1from buy pool and get any from get pool free
@@ -245,7 +237,7 @@ Buy specific quantity in item ratio and Get 300 Rs Discount
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -259,8 +251,7 @@ Buy specific quantity in item ratio and Get 300 Rs Discount
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy specific quantity in ratio and Get Discount In Rupees | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity from different assortment and Get 50% Discount
     [Documentation]    Buy 1from buy pool and get any from get pool free
@@ -272,7 +263,7 @@ Buy any quantity from different assortment and Get 50% Discount
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -286,8 +277,7 @@ Buy any quantity from different assortment and Get 50% Discount
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy item in ratio and Get Percentage off | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy 3 Get 50% off on 1 item
     [Documentation]    QBSB-Any___qty-Buypool-Flat-percentage
@@ -299,7 +289,7 @@ Buy 3 Get 50% off on 1 item
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -313,8 +303,7 @@ Buy 3 Get 50% off on 1 item
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy 3 Get 50 % Off On One Item | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy 3 Get 300 Rs off on 1 item
     [Documentation]    QBSB-Any____qty-Buypool-Flat-Rupees
@@ -326,7 +315,7 @@ Buy 3 Get 300 Rs off on 1 item
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -340,8 +329,7 @@ Buy 3 Get 300 Rs off on 1 item
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy 3 Get 300 Rs Off On 1 Item | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy 5 Get 2 item for Rs 300 in each
     [Documentation]    QBSB-Any____qty-Buy Pool-fixed-each
@@ -353,7 +341,7 @@ Buy 5 Get 2 item for Rs 300 in each
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -367,8 +355,7 @@ Buy 5 Get 2 item for Rs 300 in each
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy 5 Get 2 Item For Rs 300 In Each | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy 5 Get 2 item for Rs 300 on all
     [Documentation]    QBSB-Any Qty-Buy pool-Fixed-all
@@ -380,7 +367,7 @@ Buy 5 Get 2 item for Rs 300 on all
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -395,8 +382,7 @@ Buy 5 Get 2 item for Rs 300 on all
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy 5 Get 2 Item For Rs 300 On All | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any 1 item from BUY pool and get any 1 quantity with Rs 300 off from Get pool
     [Documentation]    QBSB-Any Qty-get pool-spf-Rupees
@@ -408,7 +394,7 @@ Buy any 1 item from BUY pool and get any 1 quantity with Rs 300 off from Get poo
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -422,8 +408,7 @@ Buy any 1 item from BUY pool and get any 1 quantity with Rs 300 off from Get poo
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy 1 Item Get Off On One Item | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any 1 item from BUY pool and get any 2 quantity with Rs 300 each from Get pool
     [Documentation]    QQBSB-Any Qty-get pool-spf-Fixed-each
@@ -435,7 +420,7 @@ Buy any 1 item from BUY pool and get any 2 quantity with Rs 300 each from Get po
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -449,8 +434,7 @@ Buy any 1 item from BUY pool and get any 2 quantity with Rs 300 each from Get po
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Pool 1 And Get Pool 2 At Rs. 300 Each | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any 1 item from BUY pool and get any 2 quantity with Rs 300 all from Get pool
     [Documentation]    QBSB-Any Get pool-spf-Fixed-all-each
@@ -462,7 +446,7 @@ Buy any 1 item from BUY pool and get any 2 quantity with Rs 300 all from Get poo
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -476,8 +460,7 @@ Buy any 1 item from BUY pool and get any 2 quantity with Rs 300 all from Get poo
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Pool 1 And Get Pool 2 At Rs. 300 All | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy item in ratio of 2:3 and get item at 300 all
     [Documentation]    QBSB-Specificity-Flat-fixed-all
@@ -489,7 +472,7 @@ Buy item in ratio of 2:3 and get item at 300 all
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -503,8 +486,7 @@ Buy item in ratio of 2:3 and get item at 300 all
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any Quantity Between Slab And Get Rs. Discount On All | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy item in ratio of 2:3 and get item at 300 each
     [Documentation]    QBSB-Specificity-Flat-fixed-each
@@ -516,7 +498,7 @@ Buy item in ratio of 2:3 and get item at 300 each
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -530,8 +512,7 @@ Buy item in ratio of 2:3 and get item at 300 each
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Item In 2:3 And Get At Rs. 300 Each | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any 1 item from BUY pool and get any quantity with 50% off from Get pool
     [Documentation]    QBSB-Any____Qty-get pool-any-perc
@@ -543,7 +524,7 @@ Buy any 1 item from BUY pool and get any quantity with 50% off from Get pool
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -557,8 +538,7 @@ Buy any 1 item from BUY pool and get any quantity with 50% off from Get pool
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Pool Get Any With % Off | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any 2 item from BUY pool and get any quantity of item at Rs 300 discount on Get pool
     [Documentation]    QBSB-Any____Qty-get pool-any-rupees
@@ -570,7 +550,7 @@ Buy any 2 item from BUY pool and get any quantity of item at Rs 300 discount on 
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -584,8 +564,7 @@ Buy any 2 item from BUY pool and get any quantity of item at Rs 300 discount on 
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any From Buy pool And Get Discount In Rupees | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any 2 item from BUY pool and get any quantity of item at Rs 300 each on Get pool
     [Documentation]    QBSB-Any____Qty-get pool-any-fixed-each
@@ -597,7 +576,7 @@ Buy any 2 item from BUY pool and get any quantity of item at Rs 300 each on Get 
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -611,8 +590,7 @@ Buy any 2 item from BUY pool and get any quantity of item at Rs 300 each on Get 
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any From Buy pool And Get Fixed Price Each | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any 2 item from BUY pool and get any quantity of item at Rs 300 all in Get pool
     [Documentation]    QBSB-Any____Qty-get pool-any-fixed-all
@@ -624,7 +602,7 @@ Buy any 2 item from BUY pool and get any quantity of item at Rs 300 all in Get p
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -637,8 +615,7 @@ Buy any 2 item from BUY pool and get any quantity of item at Rs 300 all in Get p
     Verify Promo Discount On Modal | Checkout Page    ${pos_data}
     Verify Total Payable Amount At Checkout
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any 1 item from BUY pool and get any 1 quantity with 50% off from Get pool
     [Documentation]    QBSB-Any____Qty-get pool-spf-perc
@@ -650,7 +627,7 @@ Buy any 1 item from BUY pool and get any 1 quantity with 50% off from Get pool
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -664,8 +641,7 @@ Buy any 1 item from BUY pool and get any 1 quantity with 50% off from Get pool
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any From Buy pool And Get Percent Off | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity from different assortment and Get Rs300 Discount
     [Documentation]    QBSB-Any qty-flat-rupees
@@ -677,7 +653,7 @@ Buy any quantity from different assortment and Get Rs300 Discount
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -691,8 +667,7 @@ Buy any quantity from different assortment and Get Rs300 Discount
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy from different assortment and Get Rupees Discount | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity from different assortment and Get each item at 300
     [Documentation]    QBSB-Any qty-flat-fixed-each
@@ -704,7 +679,7 @@ Buy any quantity from different assortment and Get each item at 300
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -718,8 +693,7 @@ Buy any quantity from different assortment and Get each item at 300
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Fixed Discount In Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity from different assortment and Get all item at 300
     [Documentation]    QBSB-Any qty-flat-fixed-all
@@ -731,7 +705,7 @@ Buy any quantity from different assortment and Get all item at 300
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -745,8 +719,7 @@ Buy any quantity from different assortment and Get all item at 300
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy From Different Assortment And Get All Item At Some Rupees | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity between slab of 2-5 and get all item free in that slab
     [Documentation]    QBSLB-flat-free
@@ -758,7 +731,7 @@ Buy any quantity between slab of 2-5 and get all item free in that slab
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -768,8 +741,7 @@ Buy any quantity between slab of 2-5 and get all item free in that slab
     Verify Promo Discount In Side Cart | POS
     Add Customer Details    ${pos_data}
     Verify 100% Free Billing Checkout
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity between slab of 2-5 and get item at 50% free in that slab
     [Documentation]    QBSLB-flat-perc
@@ -781,7 +753,7 @@ Buy any quantity between slab of 2-5 and get item at 50% free in that slab
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -795,8 +767,7 @@ Buy any quantity between slab of 2-5 and get item at 50% free in that slab
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Between Slab And Get Percent Discount On SSP | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity between slab of 2-5 and get item at 300 rs free in that slab
     [Documentation]     QBSlB-flat-rupee
@@ -808,7 +779,7 @@ Buy any quantity between slab of 2-5 and get item at 300 rs free in that slab
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -822,8 +793,7 @@ Buy any quantity between slab of 2-5 and get item at 300 rs free in that slab
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any Between Slab And Get Rs. Discount On Each | Checkout Page  ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity between slab of 2-5 and get item at 300 rs on each item
     [Documentation]     QBSlB-flat-fixed-each
@@ -835,7 +805,7 @@ Buy any quantity between slab of 2-5 and get item at 300 rs on each item
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -849,8 +819,7 @@ Buy any quantity between slab of 2-5 and get item at 300 rs on each item
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any Between Slab And Get Rs. Discount On Each | Checkout Page  ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity between slab of 2-5 and get item at 300 rs on all item
     [Documentation]     QBSlB-flat-fixed-all
@@ -862,7 +831,7 @@ Buy any quantity between slab of 2-5 and get item at 300 rs on all item
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -876,8 +845,7 @@ Buy any quantity between slab of 2-5 and get item at 300 rs on all item
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any Quantity Between Slab And Get Rs. Discount On All | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit of item e.g(1) at 100% flat disc from buy pool
     [Documentation]    QBSlB-Buy-100 disc
@@ -889,7 +857,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit of item e.g
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -903,8 +871,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit of item e.g
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Pool Slab Flat Discount In Percentage | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit of item e.g(1) at 50%disc from buy pool
     [Documentation]    QBSlB-Buy-perc
@@ -916,7 +883,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit of item e.g
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -930,8 +897,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit of item e.g
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Pool Slab Flat Discount In Percentage | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity between slab of 2-5 from buy bool and get any unit of item e.g(1) at 300 rupees from buy pool
     [Documentation]     QBSlB-Buy-rupee
@@ -943,7 +909,7 @@ Buy any quantity between slab of 2-5 from buy bool and get any unit of item e.g(
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -957,8 +923,7 @@ Buy any quantity between slab of 2-5 from buy bool and get any unit of item e.g(
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy 3 Get 300 Rs Off On 1 Item | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit of item e.g(1) at 300 rupees for all item from buy pool
     [Documentation]    QBSlB-Buy-fixed-all
@@ -970,7 +935,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit of item e.g
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -984,8 +949,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit of item e.g
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Pool Slab Fixed Discount | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit of item e.g(1) at 300 rupees for each item from buy pool
     [Documentation]     QBSlB-Buy-fixed-each
@@ -997,7 +961,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit of item e.g
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1011,8 +975,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit of item e.g
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Between Slab Get Rs. Discount On Each In Buy Pool | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity betweeb slaab of 2-5 from buy pool and get any quantity from assortment at 100% discount item from get pool
     [Documentation]    QBSlB-Get-any-100 % disc
@@ -1024,7 +987,7 @@ Buy any quantity betweeb slaab of 2-5 from buy pool and get any quantity from as
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1038,8 +1001,7 @@ Buy any quantity betweeb slaab of 2-5 from buy pool and get any quantity from as
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any From Buy pool And Get Percent Off | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity betweeb slaab of 2-5 from buy bool and get any quantity from assortment at 50% discount item from get pool
     [Documentation]    QBSlB-Get-any-perc
@@ -1051,7 +1013,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any quantity from as
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1065,8 +1027,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any quantity from as
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any From Buy pool And Get Percent Off | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity betweeb slaab of 2-5 from buy pool and get any quantity from assortment at 300rs. discount item from get pool
     [Documentation]    QBSlB-Get-any-rupee
@@ -1078,7 +1039,7 @@ Buy any quantity betweeb slaab of 2-5 from buy pool and get any quantity from as
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1092,8 +1053,7 @@ Buy any quantity betweeb slaab of 2-5 from buy pool and get any quantity from as
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Pool Slab and Get Rupees Discount | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity betweeb slaab of 2-5 from buy bool get any quantity from assortment at fixed price 300 rupees discount on each item from get pool
     [Documentation]    QBSlB-Get-any-fixed-each
@@ -1105,7 +1065,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool get any quantity from assort
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1119,8 +1079,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool get any quantity from assort
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy From Different Assortment And Get Fixed Discount At Each | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity betweeb slaab of 2-5 from buy bool and get any quantity from assortment at fixed price 300 rupees discount on all item from get pooll
     [Documentation]    QBSlB-Get-any-fixed-all
@@ -1132,7 +1091,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any quantity from as
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1146,8 +1105,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any quantity from as
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy From Different Assortment And Get Fixed Discount At All | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 1 from assortment at 100% discount from get pool
     [Documentation]    QBSlB-Get-any-unit 100% disc
@@ -1159,7 +1117,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 1 from 
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1173,8 +1131,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 1 from 
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any From Buy pool And Get Percent Off | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 1 from assortment at 50% discount from get pool
     [Documentation]    QBSlB-Get-any-unit perc
@@ -1186,7 +1143,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 1 from 
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1200,8 +1157,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 1 from 
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any From Buy pool And Get Percent Off | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 1 from assortment at 300 rupees discount from get pool
     [Documentation]    QBSlB-Get-any-rupee
@@ -1213,7 +1169,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 1 from 
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1227,8 +1183,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 1 from 
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy from different assortment and Get Rupees Discount | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 1 from assortment at Fixed each 300 rupees discount from get pool
     [Documentation]    QBSlB-Get-any-unit fixed-each
@@ -1240,7 +1195,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 1 from 
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1254,8 +1209,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 1 from 
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy From Different Assortment And Get Fixed Discount At Each | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 2 from assortment at Fixed all 300 rupees discount from get pool
     [Documentation]    QBSlB-Get-any-unit fixed-all
@@ -1267,7 +1221,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 2 from 
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1281,8 +1235,7 @@ Buy any quantity betweeb slaab of 2-5 from buy bool and get any unit e.g 2 from 
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy From Different Assortment And Get Fixed Discount At All | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment, For Slab 1000 : 3999, Get free, For Slab 4000 : , Get free at 100 % disc
     [Documentation]   VBSLB-flat -100% disc
@@ -1294,7 +1247,7 @@ Buy from Assortment, For Slab 1000 : 3999, Get free, For Slab 4000 : , Get free 
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1304,8 +1257,7 @@ Buy from Assortment, For Slab 1000 : 3999, Get free, For Slab 4000 : , Get free 
     Verify Promo Discount In Side Cart | POS
     Add Customer Details    ${pos_data}
     Verify 100% Free Billing Checkout
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment , For Slab 1000.00 : 3999.00, Get free, For Slab 4000.00 : 0, Get 50 % off on SSP
     [Documentation]   VBSLB-flat-percent
@@ -1317,7 +1269,7 @@ Buy from Assortment , For Slab 1000.00 : 3999.00, Get free, For Slab 4000.00 : 0
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1331,8 +1283,7 @@ Buy from Assortment , For Slab 1000.00 : 3999.00, Get free, For Slab 4000.00 : 0
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Between Slab And Get Percent Discount On SSP | Checkout Page   ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment, For Slab 1000.00 : 3999, Get 300Rs off on SSP, For Slab 4000 : 0, Get 300Rs off on SSP
     [Documentation]   VBSLB-flat-rupees
@@ -1344,7 +1295,7 @@ Buy from Assortment, For Slab 1000.00 : 3999, Get 300Rs off on SSP, For Slab 400
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1358,8 +1309,7 @@ Buy from Assortment, For Slab 1000.00 : 3999, Get 300Rs off on SSP, For Slab 400
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any Between Slab And Get Rs. Discount On Each | Checkout Page  ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment For Slab 1000 : 3999, Get 300Rs and Slab 4000 : 0, Get 300Rs fixed off on Each item
     [Documentation]   VBSLB-flat-fixed each
@@ -1371,7 +1321,7 @@ Buy from Assortment For Slab 1000 : 3999, Get 300Rs and Slab 4000 : 0, Get 300Rs
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1385,8 +1335,7 @@ Buy from Assortment For Slab 1000 : 3999, Get 300Rs and Slab 4000 : 0, Get 300Rs
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any Between Slab And Get Rs. Discount On Each | Checkout Page  ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment [WM10], For Slab 1000.00 : 3999.00 and For Slab 4000.00 : 0, Get 300Rs fixed off on all item
     [Documentation]   VBSLB-flat-fixed all
@@ -1398,7 +1347,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00 and For Slab 4000.00 : 0,
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1412,8 +1361,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00 and For Slab 4000.00 : 0,
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any Quantity Between Slab And Get Rs. Discount On All | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment [WM10], For Slab 1000.00 : 3999, Get from WM11, Get free, For Slab 4000.00 : 0, Get from WM11, Get free
     [Documentation]   VBSLB-Get-any-100
@@ -1425,7 +1373,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999, Get from WM11, Get free, Fo
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1439,8 +1387,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999, Get from WM11, Get free, Fo
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any From Buy pool And Get Percent Off | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get from WM11, Get 50 % off on SSP, For Slab 4000.00 : 0, Get from WM11, Get 50 % off on SSP
     [Documentation]   VBSLB-Get-any-perc
@@ -1452,7 +1399,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get from WM11, Get 50 % 
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1466,8 +1413,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get from WM11, Get 50 % 
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any From Buy pool And Get Percent Off | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get from WM11, Get 300.000Rs off on SSP, For Slab 4000.00 : 0, Get from WM11, Get 300.000Rs off on SSP
     [Documentation]   VBSLB-Get-any-rupee
@@ -1479,7 +1425,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get from WM11, Get 300.0
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1493,8 +1439,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get from WM11, Get 300.0
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy from different assortment and Get Rupees Discount | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get from WM11, Get 300.000Rs fixed off on Each, For Slab 4000.00 : 0, Get from WM11, Get 300.000Rs fixed off on Each
     [Documentation]   VBSLB-Get-any-fixed-each
@@ -1506,7 +1451,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get from WM11, Get 300.0
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1520,8 +1465,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get from WM11, Get 300.0
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy From Different Assortment And Get Fixed Discount At Each | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get from WM11, Get 300.000Rs fixed off on Each, For Slab 4000.00 : 0, Get from WM11, Get 300.000Rs fixed off on all
     [Documentation]   VBSLB-Get-any-fixed-all
@@ -1533,7 +1477,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get from WM11, Get 300.0
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1547,8 +1491,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get from WM11, Get 300.0
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy From Different Assortment And Get Fixed Discount At All | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get 1 unit from WM11,Get free, For Slab 4000.00 : 0, Get 1 unit from WM11, Get free
     [Documentation]   VBSLB-Get-any-unit- 100
@@ -1560,7 +1503,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get 1 unit from WM11,Get
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1574,8 +1517,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get 1 unit from WM11,Get
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any From Buy pool And Get Percent Off | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get 1 unit from WM11, Get 50 % off on SSP, For Slab 4000.00 : 0, Get 1 unit from WM11, Get 50 % off on SSP
     [Documentation]   VBSLB-Get-any-unit- perc
@@ -1587,7 +1529,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get 1 unit from WM11, Ge
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1601,8 +1543,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get 1 unit from WM11, Ge
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy Any From Buy pool And Get Percent Off | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get 1 unit from WM11, Get 300Rs off on SSP, For Slab 4000.00 : 0, Get 1 unit from WM11, Get 300Rs off on SSP
     [Documentation]   VBSLB-Get-any-unit- rupee
@@ -1614,7 +1555,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get 1 unit from WM11, Ge
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1628,8 +1569,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00, Get 1 unit from WM11, Ge
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy From Different Assortment And Get Rupees Discount | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment [WM10], For Slab 1000 : 3999,and For Slab 4000 : , Get from WM11, Get 300Rs fixed off on Each Item
     [Documentation]   VBSLB-Get-any-unit- fixed-each
@@ -1641,7 +1581,7 @@ Buy from Assortment [WM10], For Slab 1000 : 3999,and For Slab 4000 : , Get from 
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1654,9 +1594,8 @@ Buy from Assortment [WM10], For Slab 1000 : 3999,and For Slab 4000 : , Get from 
     Verify Promo Discount On Modal | Checkout Page    ${pos_data}
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy From Different Assortment And Get Fixed Discount At Each | Checkout Page    ${pos_data}
-   Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    Verify Invoice Details After Payment
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Buy from Assortment [WM10], For Slab 1000.00 : 3999.00 and For Slab 4000.00 : 0, Get from WM11, Get 300.000Rs fixed off on all item
     [Documentation]   VBSLB-Get-any-unit- fixed-all
@@ -1668,7 +1607,7 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00 and For Slab 4000.00 : 0,
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
     Open Application | POS
-    Login With Valid Username And Password | POS   ${pos_data}
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Apply Item Promo | Manual
@@ -1682,5 +1621,4 @@ Buy from Assortment [WM10], For Slab 1000.00 : 3999.00 and For Slab 4000.00 : 0,
     Verify Total Payable Amount At Checkout
     Verify Applicability Of Buy From Different Assortment And Get Fixed Discount At All | Checkout Page    ${pos_data}
     Verify Invoice Details After Payment
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
