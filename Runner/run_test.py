@@ -86,15 +86,15 @@
 #     output_files = []
 #     for root, dirs, files in os.walk(output_dir):
 #         for file in files:
-#             if file == "output.xml":
+#             if file == "output1.xml":
 #                 output_files.append(os.path.join(root, file))
 #
 #     if output_files:
-#         combined_output = os.path.join(output_dir, "output.xml")
+#         combined_output = os.path.join(output_dir, "output1.xml")
 #         combined_log = os.path.join(output_dir, "log.html")
 #         combined_report = os.path.join(output_dir, "report.html")
 #
-#         # Combine all output.xml files into a single report
+#         # Combine all output1.xml files into a single report
 #         subprocess.run([
 #             "rebot",
 #             "--output", combined_output,
@@ -189,15 +189,15 @@ def run_in_parallel(suites, browsers):
                 time.sleep(5)  # Wait before re-checking
 
 def combine_reports(output_dir="results"):
-    """Combine all output.xml files into a single report."""
+    """Combine all output1.xml files into a single report."""
     output_files = []
     for root, dirs, files in os.walk(output_dir):
         for file in files:
-            if file == "output.xml":
+            if file == "output1.xml":
                 output_files.append(os.path.join(root, file))
 
     if output_files:
-        combined_output = os.path.join(output_dir, "output.xml")
+        combined_output = os.path.join(output_dir, "output1.xml")
         combined_log = os.path.join(output_dir, "log.html")
         combined_report = os.path.join(output_dir, "report.html")
 

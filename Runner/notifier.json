@@ -1,0 +1,13 @@
+{
+  "email": {
+    "sender_email": "salonirajput3105@gmail.com",
+    "receiver_emails": [
+      "saloni.rajput@indexnine.com",
+      "mrunal.jagtap@indexnine.com"
+    ],
+    "smtp_server": "smtp.gmail.com",
+    "smtp_port": 587,
+    "smtp_username": "salonirajput3105@gmail.com",
+    "smtp_password": "etvv uhyl yicq xstg"
+  }
+}

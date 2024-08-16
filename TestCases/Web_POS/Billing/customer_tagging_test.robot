@@ -31,7 +31,7 @@ TC_C1 Customer Tagging is not mandatory with Bill on POS
      Verify Customer Tagging Is Not Mandatory
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-     
+
 TC_C2 Customer Tagging is mandatory with Bill on POS
      ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_02
@@ -44,7 +44,7 @@ TC_C2 Customer Tagging is mandatory with Bill on POS
      Verify Billing Checkout
      Revoke Serial Key    ${pos_data}
      [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
-     
+
 TC_C3 Customer Tagging is mandatory with non mandatory customer information
      ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_03

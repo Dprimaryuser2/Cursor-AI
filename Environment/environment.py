@@ -11,4 +11,4 @@ admin_console_url = "https://staging.legacyconsole.gozwing.com/"
 pos_url = " https://staging.app.gozwing.com/"
 window_height = 1080
 window_width = 1920
-# receiver_email = ["saloni.rajput@indexnine.com", "mrunal.jagtap@indexnine.com", "aditya.wagh@indexnine.com"]
+receiver_email = ["saloni.rajput@indexnine.com", "mrunal.jagtap@indexnine.com", "aditya.wagh@indexnine.com"]
