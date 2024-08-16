@@ -24,3 +24,11 @@ tag_salesperson_toggle_off = '//div[text()="Tagging salesperson at POS"]//ancest
 radio_tag_sp_optional = '//div[text()="Tagging salesperson at POS"]//ancestor::div[@class="row mb-3 align-items-center mx-2"]//label[@class="checkbtn" and contains(text(),"Optional")]'
 radio_tag_sp_mandatory = '//div[text()="Tagging salesperson at POS"]//ancestor::div[@class="row mb-3 align-items-center mx-2"]//label[@class="checkbtn" and contains(text(),"Mandatory")]'
 save_policies = '//button[@class="btn btn btn-primary btn-md pull-right btn-primary" and text()="Save"]'
+
+# Revoke from Console
+tagged_device_column = '(//tr//td[@data-v-02c9d4fc][8])//span[@class=""]'
+last_most_page_icon = '//li//a[@role="button" and @aria-label="Last"]'
+last_page_number = '(//li//a[@role="button" and not(descendant::span)])[last()]'
+tagged_device_icon = '(//tr//td[@data-v-02c9d4fc][8])//span[@class=""]//ancestor::tr//i'
+first_most_page_icon = '//li//a[@role="button" and @aria-label="First"]'
+next_page_icon = '//li//a[@role="button" and @aria-label="Next"]'

@@ -9,7 +9,8 @@ Resource    ../../../Resources/Web_POS/POS/Billing/add_to_cart_keyword.robot
 ${ENV}    STAGING
 ${STAGING_URL}=      ${pos_url_staging}
 ${PROD_URL}=    ${pos_url_prod}
-${base_url}=    https://app.api.gozwing.com/
+#${base_url_PROD}=    https://api.gozwing.com/
+#${base_url_STAGING}=     https://staging.api.gozwing.com
 
 *** Keywords ***
 Open Application | POS
@@ -107,24 +108,35 @@ Inject JavaScript For XHR
     ...       };
     ...   })();
 
+Get API Base URL
+    ${environment}    Get Variable Value    ${ENV}
+    ${base_url} =    Run Keyword If    '${environment}' == 'STAGING'    Set Variable    ${base_url_staging}
+    ...            ELSE IF    '${environment}' == 'PROD'    Set Variable    ${base_url_prod}
+    [Return]    ${base_url}
+
 Revoke Licence Key | API
     [Arguments]    ${response}      ${pos_data}
     ${my_dict}    Create Dictionary   &{pos_data}
+    ${base_url}    Get API Base URL
     ${body} =    Set Variable    ${response}
     ${header} =    Create Dictionary    Content-Type=application/json    Connection=keep-alive
     Create Session    revoke    ${base_url}    headers=${header}
     ${api_response} =    POST On Session    revoke    /revoke-licence    data=${body}    headers=${header}
+    ${status_code}    Set Variable    ${api_response.status_code}
+    Run Keyword If    '${status_code}' != '200'    Tear It Down If Test Case Failed    ${my_dict}
     Reload Page
     Logout After Revoke     ${response}     ${my_dict}
     Delete All Cookies
     Execute JavaScript    window.localStorage.clear();
     Execute JavaScript    window.sessionStorage.clear();
     Reload Page
+    Close Browser
 
 Logout After Revoke
     [Arguments]    ${response}      ${my_dict}
     ${updated_response}=    modify_json_data    ${response}    ${my_dict.user_mobile}
     ${header}=    Create Dictionary    Content-Type=application/json    Connection=keep-alive
-    Create Session    logout    ${BASE_URL}    headers=${header}
+    ${base_url}    Get API Base URL
+    Create Session    logout    ${base_url}    headers=${header}
     ${api_response}=    GET On Session    logout    /vendor/logout    data=${updated_response}    headers=${header}
     Log    API Response: ${api_response}
