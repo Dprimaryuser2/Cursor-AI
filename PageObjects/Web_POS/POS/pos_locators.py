@@ -66,7 +66,7 @@ add_toggle_button = '//div[@class="modal-body"]//label[@class="my-auto vue-js-sw
 # units
 custom_select_quantity_button = '(//select[@class="custom-select custom-select-sm"])[1]'      # change the number
 custom_select_options = '//select[@class="custom-select custom-select-sm"]//option[@value="option_value"]'     # change the option to the number you want to select
-custom_select_quantity = '//span[text()="ITEM"]//ancestor::td//following-sibling::td//option[@value="option_value"]'
+custom_select_quantity = '//span[contains(text(),"ITEM")]//ancestor::td//following-sibling::td//option[@value="option_value"]'
 price = '(//td[@aria-colindex="4"])[1]'
 discount_field = '(//td[@aria-colindex="5"])[1]'
 alternate_exchange_discount_field = '//tbody[@role="rowgroup"]//td[@aria-colindex="2" and not(descendant::p) and not(descendant::button)]//ancestor::tr[@role="row"]//descendant::td[@aria-colindex="5"]'

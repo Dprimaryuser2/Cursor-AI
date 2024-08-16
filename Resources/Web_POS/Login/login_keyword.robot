@@ -39,8 +39,8 @@ Open Application | POS
 
 Login With Valid Username And Password | POS
     [Arguments]     ${search_data}
-#    Inject JavaScript For Fetch
-#    Inject JavaScript For XHR
+    Inject JavaScript For Fetch
+    Inject JavaScript For XHR
     ${my_dict}    Create Dictionary   &{search_data}
     Input Text    ${serial_key}    ${my_dict.serial_key}
     Click Button    ${register_button}
@@ -134,6 +134,7 @@ Revoke Licence Key | API
     Execute JavaScript    window.localStorage.clear();
     Execute JavaScript    window.sessionStorage.clear();
     Reload Page
+    Close Browser
 
 Logout After Revoke
     [Arguments]    ${response}      ${my_dict}

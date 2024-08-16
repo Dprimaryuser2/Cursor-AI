@@ -16,11 +16,10 @@ Test Teardown   Close Browser
 
 *** Variables ***
 #${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Return${/}adhoc_return_test_data.xlsx
-${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Return${/}adhoc_return_test_data_old.xlsx
-${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Return${/}adhoc_return_test_data_old.xlsx
+${QA_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Staging${/}Return${/}adhoc_return_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Production${/}Return${/}adhoc_return_test_data.xlsx
 
 *** Test Cases ***
-
 Zwing_R_1 Return should be mark enable in policies
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_1
@@ -28,8 +27,7 @@ Zwing_R_1 Return should be mark enable in policies
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Verify Return mark enable in policies    ${pos_data}
-   Revoke Licence Key | API   ${response}      ${pos_data}
-
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_2 While Return is off in Policies
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
@@ -37,7 +35,7 @@ Zwing_R_2 While Return is off in Policies
    ${response}=  Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
    Verify Mode Is Disabled    ${pos_data}
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_3 When Auto Switch to billing is On
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
@@ -48,7 +46,7 @@ Zwing_R_3 When Auto Switch to billing is On
    Turn Auto Switch To Billing On
    Auto Switch To Billing
    Verify Auto Switched To Billing
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_4 When Auto Switch to billing is Off
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
@@ -59,7 +57,7 @@ Zwing_R_4 When Auto Switch to billing is Off
    Change Billing Mode    ${pos_data}
    Turn Auto Switch To Billing On
    Verify Auto Switch to billing is Off
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_5 Adding product by scanning the Barcode
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
@@ -69,7 +67,7 @@ Zwing_R_5 Adding product by scanning the Barcode
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Verify Add product
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_6 Add items to Return by searching the barcode or name of Item
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
@@ -79,7 +77,7 @@ Zwing_R_6 Add items to Return by searching the barcode or name of Item
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Verify Add product
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_7 Add items to Return by catalog
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
@@ -89,7 +87,7 @@ Zwing_R_7 Add items to Return by catalog
    Change Billing Mode    ${pos_data}
    Add Items In Cart | Catalog    ${pos_data}
    Verify Add product
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_8 Add Salesperson with return item
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
@@ -100,7 +98,7 @@ Zwing_R_8 Add Salesperson with return item
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Assign A Salesperson To An Item    ${pos_data}
    Verify If Salesperson Is Assigned To An Item    ${pos_data}
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_9 Add item qty by scanning
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
@@ -110,7 +108,7 @@ Zwing_R_9 Add item qty by scanning
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Verify Quantity Increased
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_10 Add Qty to the added item
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
@@ -120,7 +118,7 @@ Zwing_R_10 Add Qty to the added item
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Verify Quantity Increased
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_11 Add items to Return by catalog
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
@@ -130,7 +128,7 @@ Zwing_R_11 Add items to Return by catalog
    Change Billing Mode    ${pos_data}
    Add Items In Cart | Catalog    ${pos_data}
    Verify Add Product
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_12 Add Qty to the added item
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
@@ -140,7 +138,7 @@ Zwing_R_12 Add Qty to the added item
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Verify Add Product
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_13 Remove item to the cart
@@ -152,7 +150,7 @@ Zwing_R_13 Remove item to the cart
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Delete Item In The Cart
    Verify Remove item to the cart
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_14 Assign Salesperson to product While returning the product
@@ -163,7 +161,7 @@ Zwing_R_14 Assign Salesperson to product While returning the product
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Verify Assign Same Salesperson To All Products Except Last Product    ${pos_data}
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_15 Assign customer to the return when customer Tagging is mandatory
@@ -175,7 +173,7 @@ Zwing_R_15 Assign customer to the return when customer Tagging is mandatory
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    ${customer_details}    Add Customer Details    ${pos_data}
    Verify Customer Tagging    ${customer_details}
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_16 Assign customer to the return when customer Tagging is optional in policies
@@ -187,7 +185,7 @@ Zwing_R_16 Assign customer to the return when customer Tagging is optional in po
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    ${customer_details}    Add Customer Details    ${pos_data}
    Verify Customer Tagging    ${customer_details}
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_17 Apply Customized Manual Discount item level
@@ -201,7 +199,7 @@ Zwing_R_17 Apply Customized Manual Discount item level
    ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
    Apply Item Manual Discount | Select From List    ${pos_data}
    Verify Item Manual Discount   ${product_price}
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_18 Apply Customised Manual Discount item level
@@ -215,7 +213,7 @@ Zwing_R_18 Apply Customised Manual Discount item level
    ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
    Apply Item Manual Discount | Select From List    ${pos_data}
    Verify Item Manual Discount   ${product_price}
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_19 Apply Customised Manual Discount item level by Fixed amount in item level
@@ -229,7 +227,7 @@ Zwing_R_19 Apply Customised Manual Discount item level by Fixed amount in item l
    ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
    Apply Item Manual Discount | Custom Discount    ${pos_data}
    Verify Item Manual Discount   ${product_price}
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_20 Apply Customised Manual Discount item level by percentage item level
@@ -243,7 +241,7 @@ Zwing_R_20 Apply Customised Manual Discount item level by percentage item level
    ${product_price}    Apply Item Manual Discount | Update Product Popup    ${pos_data}
    Apply Item Manual Discount | Custom Discount    ${pos_data}
    Verify Item Manual Discount   ${product_price}
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_21 Apply Item level Promo
@@ -255,7 +253,7 @@ Zwing_R_21 Apply Item level Promo
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
    Apply Item Level Promos
    Verify If Item Level Promos Applied
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_22 Check out from POS screen to Payment Collection
@@ -264,9 +262,9 @@ Zwing_R_22 Check out from POS screen to Payment Collection
    ${response}=  Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
-   Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Scan And Add Product    ${pos_data}
    Verify Billing Checkout
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_23 Allow Refund Against Returned Item | Refund Through Cash only
@@ -275,11 +273,11 @@ Zwing_R_23 Allow Refund Against Returned Item | Refund Through Cash only
    ${response}=  Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
-   Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Scan And Add Product    ${pos_data}
    Verify Billing Checkout
    Pay By Cash | Return Mode
    Verify If Payment Is Complete Or Not
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_24 Allow Refund Against Returned Item | Refund Through Credit Note
@@ -288,11 +286,11 @@ Zwing_R_24 Allow Refund Against Returned Item | Refund Through Credit Note
    ${response}=  Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
-   Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Scan And Add Product    ${pos_data}
    Navigate To Checkout Page
    Pay Through Store Credit Method
    Verify If Payment Is Complete Or Not
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_25 Allow Refund Against Returned Item | Refund Through both credit note and cash
@@ -301,11 +299,11 @@ Zwing_R_25 Allow Refund Against Returned Item | Refund Through both credit note 
    ${response}=  Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
-   Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Scan And Add Product    ${pos_data}
    Navigate To Checkout Page
    Pay Through Store Credit Method
    Verify If Payment Is Complete Or Not
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_26 Click on Confirm button on switch to Billing popup box
@@ -316,7 +314,7 @@ Zwing_R_26 Click on Confirm button on switch to Billing popup box
    Change Billing Mode    ${pos_data}
    Auto Switch To Billing
    Verify Auto Switch To Billing
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_27 Click on Cancel button on switch to Billing popup box
@@ -327,7 +325,7 @@ Zwing_R_27 Click on Cancel button on switch to Billing popup box
    Change Billing Mode    ${pos_data}
    Cancel Auto Switch To Billing
    Verify Billing Mode Present
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_28 Switching Between Return to Billing Will Give Confirmation Popup
@@ -338,7 +336,7 @@ Zwing_R_28 Switching Between Return to Billing Will Give Confirmation Popup
    Change Billing Mode    ${pos_data}
    Auto Switch To Billing
    Verify Auto Switch To Billing
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_29 Click on Confirm button on switch to Order popup box
@@ -349,7 +347,7 @@ Zwing_R_29 Click on Confirm button on switch to Order popup box
    Change Billing Mode    ${pos_data}
    Switch From Return Mode To Order
    Verify Switch To Order Mode
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_30 Click on Cancel button on switch to Order popup box
@@ -360,7 +358,7 @@ Zwing_R_30 Click on Cancel button on switch to Order popup box
    Change Billing Mode    ${pos_data}
    Cancel Switch From Return Mode To Order
    Verify Return Mode Present
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 
 Zwing_R_31 Switching Between Return to Order Will Give Confirmation Popup
@@ -371,7 +369,7 @@ Zwing_R_31 Switching Between Return to Order Will Give Confirmation Popup
    Change Billing Mode    ${pos_data}
    Switch From Return Mode To Order
    Verify Switch To Order Mode
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_32 Click on Confirm button on switch to Exchange popup box
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
@@ -381,7 +379,7 @@ Zwing_R_32 Click on Confirm button on switch to Exchange popup box
    Change Billing Mode    ${pos_data}
    Switch From Return Mode To Exchange
    Verify Exchange Mode Present
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_33 Click on Cancel button on switch to Exchange popup box
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
@@ -391,7 +389,7 @@ Zwing_R_33 Click on Cancel button on switch to Exchange popup box
    Change Billing Mode    ${pos_data}
    Cancel Switch From Return Mode To Exchange
    Verify Return Mode Present
-   Revoke Licence Key | API   ${response}      ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_34 Switching Between Return to Exchange Will Give Confirmation Popup
    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
@@ -401,64 +399,58 @@ Zwing_R_34 Switching Between Return to Exchange Will Give Confirmation Popup
    Change Billing Mode    ${pos_data}
    Switch From Return Mode To Exchange
    Verify Exchange Mode Present
-   Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_35 Set variance limit and enter price override less or more than total price but within variance limit
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_35
-   Login With Valid Username And Password | POS    ${pos_data}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_35
+   ${response}=  Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Add Product By Scan Only   ${pos_data}
-   Verify Item Added In Cart
    Price Override | Billing    ${pos_data}
    Verify Price Overridden | Billing
-   Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_36 Set variance limit and enter price override less or more than total price but out of variance limit
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_36
-   Login With Valid Username And Password | POS    ${pos_data}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_36
+   ${response}=  Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Add Product By Scan Only   ${pos_data}
-   Verify Item Added In Cart
    Price Override | Billing    ${pos_data}
    Verify Alert Message for Price Overridden | Billing
-   Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_37 Set variance limit and enter price override less or more than total price but equal to variance limit
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_37
-   Login With Valid Username And Password | POS    ${pos_data}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_37
+   ${response}=  Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Add Product By Scan Only   ${pos_data}
-   Verify Item Added In Cart
    Price Override | Billing    ${pos_data}
    Verify Price Overridden | Billing
-   Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_38 Set variance limit and enter price override less or more than total price but within variance limit. Then try again price override and check the response
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}  TC_38
-   Login With Valid Username And Password | POS    ${pos_data}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}  R_38
+   ${response}=  Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Add Product By Scan Only   ${pos_data}
-   Verify Item Added In Cart
    Price Override | Billing    ${pos_data}
    Verify Price Override Link Is Disabled
-   Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_39 Disable price override and try price overriding then check the response
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_39
-   Login With Valid Username And Password | POS   ${pos_data}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    R_39
+   ${response}=  Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Add Product By Scan Only   ${pos_data}
-   Verify Item Added In Cart
    Verify Price Override Link Is Disabled
-   Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
