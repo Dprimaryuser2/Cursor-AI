@@ -99,8 +99,7 @@ Zwing_B_08 Tag Single Sales Person To A Bill With Respect To Items
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     Assign A Salesperson To An Item  ${pos_data}
     Verify If Salesperson Is Assigned To An Item    ${pos_data}
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]   Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_09 Tag Multiple Sales Person To A Bill With Respect To Items
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}

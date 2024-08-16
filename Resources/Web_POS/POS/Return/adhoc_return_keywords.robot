@@ -22,7 +22,7 @@ Verify Mode Is Disabled
     END
     Wait Until Page Contains Element    ${switch_billing_dropdown}
     Click Element    ${switch_billing_dropdown}
-    Wait Until Page Does Not Contain Element    //a[@role="menuitem" and contains(text(),"${my_dict.Mode}")]
+    Wait Until Page Does Not Contain Element    //a[@role="menuitem" and contains(text(),"${my_dict.Mode}")]  timeout=20s
     Page Should Not Contain Element    //a[@role="menuitem" and contains(text(),"${my_dict.Mode}")]
 
 

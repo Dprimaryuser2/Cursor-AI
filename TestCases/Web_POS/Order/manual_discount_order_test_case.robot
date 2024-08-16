@@ -101,6 +101,7 @@ Zwing_O_MD_6 Apply Item Level Manual Discount | Effective date and valid up to d
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
 
 Zwing_O_MD_7 Bill Level manual discount
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_07
      ${response}    Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -152,6 +153,7 @@ Zwing_O_MD_10 Allocate Discount to Customer Group
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
 
 Zwing_O_MD_11 Manual Discount button | Stores
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_11
      ${response}    Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -232,6 +234,7 @@ Zwing_O_MD_16 Bill level custom discount
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
 
 Zwing_O_MD_17 Bill Level Custom Discount with discount type as amount
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_17
      ${response}    Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}

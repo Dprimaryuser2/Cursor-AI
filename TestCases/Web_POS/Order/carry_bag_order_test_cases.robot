@@ -13,18 +13,20 @@ Test Setup  Open Application | POS
 Test Teardown   Close Browser
 
 *** Variables ***
-${carrybag_td}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}carry_bag_order_test_data.xlsx
+${carrybag_td}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}carry_bag_order_test_data.xlsx
 
 *** Test Cases ***
 Zwing_CB_O_159 View All Carry Bags Allocated To Store
+  ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_1
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
+   Change Billing Mode    ${carry_data}
    ${storename}  Get Store Name | Web POS
    Close Browser
    Open Application | Admin
    Login With Valid Username And Password  ${carry_data}
-   Change Billing Mode    ${carry_data}
    Navigate To Carry Bags | Console
    ${carrybag}  Verify Carry Bags Are Allocated To Store  ${storename}
    Close Browser
@@ -38,6 +40,7 @@ Zwing_CB_O_159 View All Carry Bags Allocated To Store
    [Teardown]    Revoke Licence Key | API   ${response}   ${carry_data}
 
 Zwing_CB_O_160 Enter Positive Integer As Qty In Select Carry Bags Form
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_2
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
@@ -48,6 +51,7 @@ Zwing_CB_O_160 Enter Positive Integer As Qty In Select Carry Bags Form
    [Teardown]    Revoke Licence Key | API   ${response}   ${carry_data}
 
 Zwing_CB_O_161 Enter Decimal Number As Qty In Select Carry Bags Form
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_3
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
@@ -59,6 +63,7 @@ Zwing_CB_O_161 Enter Decimal Number As Qty In Select Carry Bags Form
 
 Zwing_CB_O_162 Enter Negative Integer As Qty In Select Carry Bags Form
     [Tags]    Demo
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}   CB_O_4
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
@@ -69,6 +74,7 @@ Zwing_CB_O_162 Enter Negative Integer As Qty In Select Carry Bags Form
    [Teardown]    Revoke Licence Key | API   ${response}   ${carry_data}
 
 Zwing_CB_O_163 Add Carry Bags Button Should Be Disabled If Qty Not Entered In Any Carry Bag
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_5
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
@@ -78,6 +84,7 @@ Zwing_CB_O_163 Add Carry Bags Button Should Be Disabled If Qty Not Entered In An
    [Teardown]    Revoke Licence Key | API   ${response}   ${carry_data}
 
 Zwing_CB_O_164 Add Carry Bag Button Should Be Enabled Once Qty Is Entered In Any Carry Bag
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_6
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
@@ -88,6 +95,7 @@ Zwing_CB_O_164 Add Carry Bag Button Should Be Enabled Once Qty Is Entered In Any
    [Teardown]    Revoke Licence Key | API   ${response}   ${carry_data}
 
 Zwing_CB_O_165 Add Single Carry Bag To Cart
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_7
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
@@ -98,6 +106,7 @@ Zwing_CB_O_165 Add Single Carry Bag To Cart
    [Teardown]    Revoke Licence Key | API   ${response}   ${carry_data}
 
 Zwing_CB_O_166 Add Multiple Carry Bags At Once To Cart
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_8
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
@@ -108,6 +117,7 @@ Zwing_CB_O_166 Add Multiple Carry Bags At Once To Cart
    [Teardown]    Revoke Licence Key | API   ${response}   ${carry_data}
 
 Zwing_CB_O_167 Add Carry Bags With 0 Inventory
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_9
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
@@ -118,6 +128,7 @@ Zwing_CB_O_167 Add Carry Bags With 0 Inventory
    [Teardown]    Revoke Licence Key | API   ${response}   ${carry_data}
 
 Zwing_CB_O_168 Add Carry Bags With 0 Inventory
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_10
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
@@ -128,6 +139,7 @@ Zwing_CB_O_168 Add Carry Bags With 0 Inventory
    [Teardown]    Revoke Licence Key | API   ${response}   ${carry_data}
 
 Zwing_CB_O_169 View Details Of Carry Bags Added To Cart By Clicking On Product In Cart
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_11
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
@@ -138,6 +150,7 @@ Zwing_CB_O_169 View Details Of Carry Bags Added To Cart By Clicking On Product I
    [Teardown]    Revoke Licence Key | API   ${response}   ${carry_data}
 
 Zwing_CB_O_170 Validate Count Of Carry Bags Added To Cart On Add Carry Bags Button On Billing Screen
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_12
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
@@ -148,6 +161,7 @@ Zwing_CB_O_170 Validate Count Of Carry Bags Added To Cart On Add Carry Bags Butt
    [Teardown]    Revoke Licence Key | API   ${response}   ${carry_data}
 
 Zwing_CB_O_171 Validate Details Of Carry Bag Details As On Cart Screen To The Product Details Window
+  ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_13
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
@@ -158,6 +172,7 @@ Zwing_CB_O_171 Validate Details Of Carry Bag Details As On Cart Screen To The Pr
    [Teardown]    Revoke Licence Key | API   ${response}   ${carry_data}
 
 Zwing_CB_O_172 Set variance limit and enter price override less or more than total price but within variance limit
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_14
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}
@@ -170,6 +185,7 @@ Zwing_CB_O_172 Set variance limit and enter price override less or more than tot
    [Teardown]    Revoke Licence Key | API   ${response}   ${carry_data}
 
 Zwing_CB_O_173 Disable price override and try price overriding then check the response
+  ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_15
    ${response}    Login With Valid Username And Password | POS   ${carry_data}
    Open The Session    ${carry_data}
@@ -181,6 +197,7 @@ Zwing_CB_O_173 Disable price override and try price overriding then check the re
    [Teardown]    Revoke Licence Key | API   ${response}   ${carry_data}
 
 Zwing_CB_O_174 Set variance limit and enter price override less or more than total price but out of variance limit
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
    ${carry_data}=  Fetch Testdata By Id   ${carrybag_td}    CB_O_16
    ${response}    Login With Valid Username And Password | POS    ${carry_data}
    Open The Session    ${carry_data}

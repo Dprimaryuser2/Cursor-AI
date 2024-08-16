@@ -10,6 +10,7 @@ Resource    ../../../Resources/Web_POS/POS/Order/mode_of_payment_order_keywords.
 Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Resource    ../../../Resources/Web_POS/POS/Order/payment_keywords.robot
 Resource    ../../../Resources/Web_POS/POS/Billing/keyboard_shortcut_keywords.robot
+Resource    ../../../Resources/Web_POS/POS/Order/order_options_keywords.robot
 #Resource    ../../../Resources/Web_POS/POS/split_payment_keyword.robot
 
 Test Setup    Open Application | POS
@@ -25,7 +26,7 @@ Zwing_O_P_84 Allow to place Order without payment
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Verify Checkout Page Redirection
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
@@ -36,7 +37,7 @@ Zwing_O_P_85 Set Minimum Value in Amount
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      ${value}    Get payable amount
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Place Order With Minimum Amount | Continue Button Enabled
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
@@ -47,18 +48,18 @@ Zwing_O_P_86 Set Minimum Percentage Value
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      ${value}    Get payable amount
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Place Order With Minimum Percentage | Continue Button Enabled
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
-Zwing_O_P_87 Both Mimimum value in Amount and Percentage Value is configured | Advance collection is off
+Zwing_O_P_87 Both Minimum value in Amount and Percentage Value is configured | Advance collection is off
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    O_P_87
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      ${value}    Get payable amount
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Verify Order Can Be Placed Without Payment
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
@@ -89,7 +90,7 @@ Zwing_O_P_91 Allow to place Order without payment
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Verify Order Can Be Placed Without Payment
       [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
@@ -99,7 +100,7 @@ Zwing_O_P_92 Set Minimum Value in Amount
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Place Order With Minimum Amount
       [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
@@ -109,7 +110,7 @@ Zwing_O_P_93 Set Minimum Percentage Value
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Place Order With Minimum Amount
       [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
@@ -119,7 +120,7 @@ Zwing_O_P_94 Both Minimum value in Amount and Percentage Value is configured
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Place Order With Minimum Amount
       [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
@@ -129,7 +130,7 @@ Zwing_O_P_95 Both Minimum value in Amount and Percentage Value is Zero But Advan
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Verify Order Can Be Placed Without Payment
       [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
@@ -159,7 +160,7 @@ Zwing_O_P_121 Block order if the Ordered Product's Inventory is negative | Alert
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Verify Checkout Page Redirection
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
@@ -170,7 +171,7 @@ Zwing_O_P_122 Block order if the Ordered Product's Inventory is negative | Order
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      Add Customer Details    ${pos_data}
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Verify Stock Not Available Popup | Order Is Created
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
@@ -181,7 +182,7 @@ Zwing_O_P_123 Block order if the Ordered Product's Inventory is negative | Order
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      Add Customer Details    ${pos_data}
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Verify Stock Not Available Popup | Order Is Confirmed
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
@@ -191,7 +192,7 @@ Zwing_O_P_124 Block order if the Ordered Product's Inventory is negative | Order
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Navigate To Pack Order Page | Order Is Packed
      Scan Barcode To Add Item And Quantity To Cart | Pack Order   ${pos_data}
      Verify Stock Not Available Popup | Order Is Packed
@@ -203,7 +204,7 @@ Zwing_O_P_124 Block order if the Ordered Product's Inventory is negative | Order
 #     Open The Session    ${pos_data}
 #     Change Billing Mode    ${pos_data}
 #     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-#     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+#     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
 #     Navigate To Pack Order Page | Order Is Packed
 #     Scan Barcode To Add Item And Quantity To Cart | Pack Order    ${pos_data}  #more quantity of products
 ##    Blocked Due To generte invoice is not redirecting to any page or not opening any popup
@@ -214,7 +215,7 @@ Zwing_O_126 Add Bill Remark while placing order
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-    Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+    Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
     Verify Bill Remark Added Is Visible In Bill Remark Textarea | Order     ${pos_data}
      [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
@@ -224,7 +225,7 @@ Zwing_O_127 Add Bill Remark while placing order | Save Bill Remark
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Add Bill Remarks | Order  ${pos_data}
      Verify Bill Remark Added | Order
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
@@ -235,7 +236,7 @@ Zwing_O_128 Add Bill Remark while placing order | Clear bill remark
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Verify The Clear Button Of Add Bill Remark | Order    ${pos_data}
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
@@ -246,8 +247,10 @@ Zwing_O_129 Check Conditions before placing order | Place Order
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      ${value}   Get payable amount
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
-     Pay 10 percent Amount of total Payable Amount By Cash   ${value}
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
+     Enable Split payment mode
+     ${payable_amount}  Enter 10 Percent Amount In Payable Amount  ${value}
+     Payment By Cash   ${payable_amount}
      Navigate To Pack Order Page | Order Is Packed
      Scan Barcode To Add Item And Quantity To Cart | Pack Order   ${pos_data}
      Verify Stock Not Available Popup | Order Is Packed
@@ -259,7 +262,7 @@ Zwing_O_129 Check Conditions before placing order | Place Order
 #     Open The Session    ${pos_data}
 #     Change Billing Mode    ${pos_data}
 #     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-#     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+#     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
 #     Verify Order Can Be Placed Without Payment
 #
 #Zwing_O_P_147 Replace with product with less value than ordered product
@@ -277,7 +280,7 @@ Zwing_O_P_149 Discard product from order | Refund to pay if advance taken for di
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      ${value}    Get payable amount
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Enable Split payment mode
      Split Payment By Paytm  ${value}
      Verify If Payment Is Complete Or Not | Order
@@ -292,7 +295,7 @@ Zwing_O_P_150 Discard product from order | Refund to pay if advance taken for di
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      ${value}    Get payable amount
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Enable Split payment mode
      Split Payment By Paytm  ${value}
      Verify If Payment Is Complete Or Not | Order
@@ -307,7 +310,7 @@ Zwing_O_P_151 Discard product from order | Refund to pay if advance taken for di
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      ${value}    Get payable amount
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Enable Split payment mode
      Split Payment By Paytm  ${value}
      Verify If Payment Is Complete Or Not | Order
@@ -322,7 +325,7 @@ Zwing_O_P_152 Discard product from order | If advance is not taken for discarded
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
      ${value}    Get payable amount
-     Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
+     Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
      Navigate To Discard Order Popup | Discard Order
      Verify Discard Product | No Advance Payment
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}

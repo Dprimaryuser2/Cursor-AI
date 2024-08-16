@@ -170,6 +170,7 @@ Zwing_A_161 Switching Between Order to Return Will Give Confirmation Popup
     [Teardown]  Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_A_189 Cancel Switch From Billing to Order
+  ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_16
     ${response}    Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -178,6 +179,7 @@ Zwing_A_189 Cancel Switch From Billing to Order
     [Teardown]  Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_A_190 Cancel Switch From Billing to Return
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_17
     ${response}    Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
@@ -186,6 +188,7 @@ Zwing_A_190 Cancel Switch From Billing to Return
     [Teardown]  Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_A_191 Cancel Switch From Billing to Exchange
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_18
     ${response}    Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}

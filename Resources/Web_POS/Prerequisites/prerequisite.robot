@@ -61,14 +61,43 @@ Revoke Serial Key
     Close All Browsers
 
 Tear It Down If Test Case Failed
-    [Arguments]    ${discount_data}
-    Run Keyword If Test Failed    Revoke The Licence Key From Console     ${discount_data}
+    Run Keyword If Test Failed    Revoke The Licence Key From Console
     Sleep    0.2
     ${status}=  Run Keyword And Return Status    Page Should Contain Element    ${pos_option_sidebar}
     IF    ${status}
         Close All Browsers
 #        Open Application | POS
     END
+#
+#Revoke The Licence Key From Console
+#    [Arguments]    ${serial_key}
+#    ${serial_key_info}    Create Dictionary   &{serial_key}
+#    ${serial_key_number}=    Set Variable    ${serial_key_info.serial_key}
+#    ${clean_serial_key}    Remove Characters    ${serial_key_number}
+#    Open Application | Admin
+#    Login Into Admin | Zwing
+#    Wait Until Keyword Succeeds    8    2    Go To Pos Terminal
+#    Wait Until Element Is Visible    ${pos_heading}    timeout=20s
+#    Wait Until Element Is Visible    ${pos_search_bar}    timeout=20s
+#    Input Text    ${pos_search_bar}    ${serial_key_number}
+#    Sleep    1s
+#    ${tagged_device}=    Replace String    ${tagged_device_edit_link}    Serial_Key    ${serial_key_number}
+#    Wait Until Keyword Succeeds    5    2    Click Element    ${tagged_device}
+#    ${status}   Run Keyword And Return Status    Wait until Page contains element   ${remove_device_icon}
+#    IF    ${status}== False
+#    Wait Until Keyword Succeeds    5    2    Click Element  ${update_button}
+#    Sleep    1
+#    Close Window
+#    Switch Browser    1
+#    ELSE
+#    Wait Until Element Is Visible    ${remove_device_icon}    timeout=10s
+#    Wait Until Keyword Succeeds    5    2     Click Element    ${remove_device_icon}
+#    Wait Until Element Is Visible    ${remove_modal_body}    timeout=10s
+#    Wait Until Keyword Succeeds    5    2     Click Button    ${remove_button}
+#    Wait Until Element Is Not Visible    ${remove_modal_body}    timeout=10s
+#    Close Window
+#    Switch Browser    1
+#    END
 
 Revoke The Licence Key From Console
     Open Application | Admin
@@ -163,5 +192,5 @@ Close Session With Clear Cache
    Execute JavaScript    window.localStorage.clear();
    Execute JavaScript    window.sessionStorage.clear();
    Reload Page
-   Revoke The Licence Key From Console    ${pos_data}
+   Revoke The Licence Key From Console
    Sleep  0.5s

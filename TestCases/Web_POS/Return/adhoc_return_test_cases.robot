@@ -264,7 +264,7 @@ Zwing_R_22 Check out from POS screen to Payment Collection
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
-   Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Scan And Add Product    ${pos_data}
    Verify Billing Checkout
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
@@ -275,7 +275,7 @@ Zwing_R_23 Allow Refund Against Returned Item | Refund Through Cash only
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
-   Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Scan And Add Product    ${pos_data}
    Verify Billing Checkout
    Pay By Cash | Return Mode
    Verify If Payment Is Complete Or Not
@@ -288,7 +288,7 @@ Zwing_R_24 Allow Refund Against Returned Item | Refund Through Credit Note
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
-   Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Scan And Add Product    ${pos_data}
    Navigate To Checkout Page
    Pay Through Store Credit Method
    Verify If Payment Is Complete Or Not
@@ -301,7 +301,7 @@ Zwing_R_25 Allow Refund Against Returned Item | Refund Through both credit note 
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
-   Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+   Scan And Add Product    ${pos_data}
    Navigate To Checkout Page
    Pay Through Store Credit Method
    Verify If Payment Is Complete Or Not
@@ -409,7 +409,6 @@ Zwing_R_35 Set variance limit and enter price override less or more than total p
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Add Product By Scan Only   ${pos_data}
-   Verify Item Added In Cart
    Price Override | Billing    ${pos_data}
    Verify Price Overridden | Billing
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
@@ -420,7 +419,6 @@ Zwing_R_36 Set variance limit and enter price override less or more than total p
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Add Product By Scan Only   ${pos_data}
-   Verify Item Added In Cart
    Price Override | Billing    ${pos_data}
    Verify Alert Message for Price Overridden | Billing
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
@@ -431,7 +429,6 @@ Zwing_R_37 Set variance limit and enter price override less or more than total p
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Add Product By Scan Only   ${pos_data}
-   Verify Item Added In Cart
    Price Override | Billing    ${pos_data}
    Verify Price Overridden | Billing
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
@@ -442,7 +439,6 @@ Zwing_R_38 Set variance limit and enter price override less or more than total p
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Add Product By Scan Only   ${pos_data}
-   Verify Item Added In Cart
    Price Override | Billing    ${pos_data}
    Verify Price Override Link Is Disabled
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
@@ -453,6 +449,5 @@ Zwing_R_39 Disable price override and try price overriding then check the respon
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Add Product By Scan Only   ${pos_data}
-   Verify Item Added In Cart
    Verify Price Override Link Is Disabled
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}

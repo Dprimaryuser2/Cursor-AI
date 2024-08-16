@@ -20,7 +20,6 @@ ${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS$
 ${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Billing${/}split_payment_test_data.xlsx
 
 *** Test Cases ***
-
 Zwing_SP_1 Split payment option is available if policy is enabled
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}     TC_1
@@ -56,8 +55,7 @@ Zwing_SP_3 split payment toggle is enabled.
     Verify Billing Checkout
     Enable Split payment mode
     Verify split payment toggle button is enabled
-    Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+     [Teardown]   Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_SP_4 split payment toggle is disabled.
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}

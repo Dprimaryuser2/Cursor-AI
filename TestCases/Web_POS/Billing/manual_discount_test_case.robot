@@ -18,7 +18,6 @@ ${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS$
 ${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Billing${/}manual_discount_test_data.xlsx
 
 *** Test Cases ***
-
 Zwing_MD_1 Apply Item Level Manual Discount Assortment Wise
     [Tags]    Demo
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
@@ -152,8 +151,7 @@ Zwing_MD_11 Manual Discount button | Stores
      Verify Billing Checkout
      ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
      Verify Bill Level Manual Discount    ${bill_data}
-     Revoke Serial Key    ${discount_data}
-     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+    [Teardown]   Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_12 Select the effective and valid up to date
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
@@ -165,8 +163,7 @@ Zwing_MD_12 Select the effective and valid up to date
      Verify Billing Checkout
      ${bill_data}    Apply Bill Manual Discount | Select From List    ${discount_data}
      Verify Bill Level Manual Discount    ${bill_data}
-     Revoke Serial Key    ${discount_data}
-     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+   [Teardown]   Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_13 Item level custom Discount
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
@@ -318,8 +315,7 @@ Zwing_MD_25 Apply Manual Discount Button |Policy : Allows cashier to apply manua
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
      Verify Bill Level Discount Button Is Disabled
-     Revoke Serial Key    ${discount_data}
-     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+   [Teardown]   Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manual discount on bill level | Enable bill level discount
       ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
@@ -330,8 +326,7 @@ Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manua
      Add Customer Details    ${discount_data}
      Verify Billing Checkout
      Verify Bill Level Discount Button Is Enabled
-     Revoke Serial Key    ${discount_data}
-     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+    [Teardown]   Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_27 Apply Manual Discount Button Policy : Allow cashier to select bill level discount from given list | Disable bill level discount list
       ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
@@ -399,8 +394,7 @@ Zwing_MD_32 Apply Manual Discount Button Policy : Discount capping (amount) Bill
      Verify Billing Checkout
      ${bill_data}    Apply Bill Manual Discount | Custom Discount    ${discount_data}
      Verify Bill Level Custom Discount More Than Capping Amount Limit    ${bill_data}
-     Revoke Serial Key    ${discount_data}
-     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+     [Teardown]   Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
       ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
@@ -410,8 +404,7 @@ Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Navigate To Update Product Window    ${discount_data}
      Verify Disabled Item Level Discount
-     Revoke Serial Key    ${discount_data}
-     [Teardown]    Tear It Down If Test Case Failed    ${discount_data}
+   [Teardown]   Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_34 Apply Manual Discount Button | Enable Item level discount
       ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}

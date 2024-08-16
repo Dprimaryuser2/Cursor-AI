@@ -275,8 +275,7 @@ Zwing_KB_24 Cancel current bill using keyboard shortcut on Order Screen | Order 
     Scan And Add Product    ${pos_data}
     Press Shortcut Key    ${pos_data}
     Verify Shortcut Key Clears The Cart
-    Revoke Serial Key    ${pos_data}
-    [Teardown]   Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]   Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_KB_25 Checkout bill using keyboard shortcut-After adding product when policies for salesperson and customer tagging is optional, press Ctrl + B on Order Screen
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}

@@ -35,8 +35,7 @@ Zwing_CP_2 Hide Catalog using Hide button in WebPOS
    Open The Session    ${pc_data}
    Verify View Catalog Using Catalog Button In WebPOS
    Verify Hide Catalog using Hide button in WebPOS
-   Revoke Serial Key    ${pc_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
+  [Teardown]   Revoke Licence Key | API   ${response}      ${pc_data}
 
 Zwing_CP_3 Refresh Catalog using Refresh button
    ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
@@ -45,8 +44,7 @@ Zwing_CP_3 Refresh Catalog using Refresh button
    Open The Session    ${pc_data}
    Verify View Catalog Using Catalog Button In WebPOS
    Verify Refresh catalog using refresh button
-   Revoke Serial Key    ${pc_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
+  [Teardown]   Revoke Licence Key | API   ${response}      ${pc_data}
 
 Zwing_CP_4 A new category item is allocated to a store
      ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
@@ -60,8 +58,7 @@ Zwing_CP_4 A new category item is allocated to a store
      ${response}=  Login With Valid Username And Password | POS   ${pc_data}
      Open The Session    ${pc_data}
      Verify New Category Is Visible   ${pc_data}
-     Revoke Serial Key    ${pc_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
+    [Teardown]   Revoke Licence Key | API   ${response}      ${pc_data}
 
 Zwing_CP_5 A New Item Of Existing Category That Is Already Listed Is Allocated To The Store
      ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
@@ -75,8 +72,7 @@ Zwing_CP_5 A New Item Of Existing Category That Is Already Listed Is Allocated T
      ${response}=  Login With Valid Username And Password | POS   ${pc_data}
      Open The Session    ${pc_data}
      Verify New Product Is Visible In Category  ${pc_data}
-     Revoke Serial Key    ${pc_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
+    [Teardown]   Revoke Licence Key | API   ${response}      ${pc_data}
 
 Zwing_CP_6 Item With Multiple Price(existing prices)
      ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
@@ -85,8 +81,7 @@ Zwing_CP_6 Item With Multiple Price(existing prices)
      Open The Session    ${pc_data}
      Scan Barcode To Add Item And Quantity To Cart | Multiple MRP    ${pc_data}
      Verify Multiple Price Product Is Added
-     Revoke Serial Key    ${pc_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
+    [Teardown]   Revoke Licence Key | API   ${response}      ${pc_data}
 
 Zwing_CP_7 Item With Multiple Price Creating New Price books
     ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
@@ -104,8 +99,7 @@ Zwing_CP_7 Item With Multiple Price Creating New Price books
     ${response}=  Login With Valid Username And Password | POS   ${pc_data}
     Open The Session    ${pc_data}
     Verify New PriceBook Product Is Visible  ${pc_data}
-    Revoke Serial Key    ${pc_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
+   [Teardown]   Revoke Licence Key | API   ${response}      ${pc_data}
 
 Zwing_CP_8 All Items in Item With multiple prices added
     ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
@@ -113,8 +107,7 @@ Zwing_CP_8 All Items in Item With multiple prices added
     ${response}=  Login With Valid Username And Password | POS   ${pc_data}
     Open The Session    ${pc_data}
     Add All Variants Of Multiple Price Books    ${pc_data}
-    Revoke Serial Key    ${pc_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
+   [Teardown]   Revoke Licence Key | API   ${response}      ${pc_data}
 
 Zwing_CP_9 Items allocated with 0 inventory to store
     ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
@@ -122,8 +115,7 @@ Zwing_CP_9 Items allocated with 0 inventory to store
     ${response}=  Login With Valid Username And Password | POS   ${pc_data}
     Open The Session    ${pc_data}
     Verify Items Allocated With 0 Inventory To Store Are Blur    ${pc_data}
-    Revoke Serial Key    ${pc_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pc_data}
+   [Teardown]   Revoke Licence Key | API   ${response}      ${pc_data}
 
 Zwing_CP_10 Items with some inventory on the store
     ${Product_td}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}

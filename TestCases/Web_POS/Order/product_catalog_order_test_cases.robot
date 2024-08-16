@@ -43,10 +43,9 @@ Zwing_CP_O_177 Refresh Catalog using Refresh button
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_CP_O_178 A new category item is allocated to a store
-     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_4
+     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_04
      Open Application | Admin
      Login With Valid Username And Password  ${pc_data}
-     Change Billing Mode    ${pc_data}
      Navigate To Product & Catalogue | Console
      Add New Category | Console   ${pc_data}
      Close Browser
@@ -58,10 +57,9 @@ Zwing_CP_O_178 A new category item is allocated to a store
      [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_CP_O_179 A New Item Of Existing Category That Is Already Listed Is Allocated To The Store
-     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_5
+     ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_05
      Open Application | Admin
      Login With Valid Username And Password  ${pc_data}
-     Change Billing Mode    ${pc_data}
      Navigate To Products | Console
      Create New Products | Console   ${pc_data}
      Close Browser
@@ -82,13 +80,13 @@ Zwing_CP_O_180 Item With Multiple Price(existing prices)
      [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_CP_O_181 Item With Multiple Price Creating New Price books
-    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_7
+    ${pc_data}=  Fetch Testdata By Id   ${Product_td}    PC_07
     Login With Valid Username And Password | POS    ${pc_data}
     Open The Session    ${pc_data}
+    Change Billing Mode    ${pc_data}
     ${storename}  Get Store Name | Web POS
     Close Browser
     Open Application | Admin
-    Change Billing Mode    ${pc_data}
     Login With Valid Username And Password  ${pc_data}
     Navigate To Retail Price Book | Console
     Create New PriceBook | Console  ${pc_data}

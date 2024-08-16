@@ -10,6 +10,7 @@ Variables    ../../../../PageObjects/Web_POS/POS/order_locators.py
 Variables    ../../../../PageObjects/Web_POS/Login/login_locators.py
 Variables   ../../../../Environment/environment.py
 Resource    ../../../../Resources/Web_POS/POS/Order/add_to_cart_order_keyword.robot
+Resource    ../../../../Resources/Web_POS/POS/Order/payment_keywords.robot
 
 *** Keywords ***
 Verify Stock Not Available alert | Order Created | Advance Payment On
@@ -25,11 +26,19 @@ Verify Redirection To Order Confirmation Page
     Element Should Be Enabled    ${discard_button_order_confirmation}
 
 Review Order Before Order Confirmation
-#    Wait Until Element Is Visible    ${order_confirmation_page_heading}   timeout=10
-#    ${barcode}  Get Text    ${barcode_order_confirmation}
-#    ${product_price}  Get Text    ${total_price_order_confirmation}
-#    ${quantity}     Get Text    ${quantity_order_confirmation}
-#    ${discount}     Get Text    ${discount_order_confirmation}
+    Wait Until Element Is Visible    ${confirm_order_button}    timeout=15
+    Wait Until Element Is Enabled    ${confirm_order_button}
+    Click Element    ${confirm_order_button}
+        ${confirm_order_popup_visible}  Run Keyword And Return Status    Element Should Be Visible    ${confirm_order_heading_confirm_order_popup}
+    IF    ${confirm_order_popup_visible}
+         Verify Confirm Order Popup
+         Click Element    ${review_button_confirm_order_popup}
+    END
+    Wait Until Element Is Visible    ${order_confirmation_page_heading}   timeout=10
+    ${barcode}  Get Text    ${barcode_order_confirmation}
+    ${product_price}  Get Text    ${total_price_order_confirmation}
+    ${quantity}     Get Text    ${quantity_order_confirmation}
+    ${discount}     Get Text    ${discount_order_confirmation}
 
 
 Navigate To Order Confirmation Page From Checkout Page
@@ -49,6 +58,11 @@ Navigate To Order Confirmation Page From Order Summary Page
     Wait Until Element Is Visible    ${confirm_order_button}    timeout=10
     Wait Until Element Is Enabled    ${confirm_order_button}
     Click Element    ${confirm_order_button}
+        ${confirm_order_popup_visible}  Run Keyword And Return Status    Element Should Be Visible    ${confirm_order_heading_confirm_order_popup}
+    IF    ${confirm_order_popup_visible}
+         Verify Confirm Order Popup
+         Click Element    ${review_button_confirm_order_popup}
+    END
     Wait Until Element Is Visible    ${confirm_order_button_order_confirm_page}    timeout=10
     Wait Until Element Is Enabled    ${confirm_order_button_order_confirm_page}
     Click Element    ${confirm_order_button_order_confirm_page}
@@ -98,6 +112,11 @@ Verify Redirection To Checkout Page After Advance Payment
     Wait Until Element Is Visible    ${confirm_order_button}    timeout=10
     Wait Until Element Is Enabled    ${confirm_order_button}
     Click Element    ${confirm_order_button}
+        ${confirm_order_popup_visible}  Run Keyword And Return Status    Element Should Be Visible    ${confirm_order_heading_confirm_order_popup}
+    IF    ${confirm_order_popup_visible}
+         Verify Confirm Order Popup
+         Click Element    ${review_button_confirm_order_popup}
+    END
     Wait Until Element Is Visible    ${confirm_order_button_order_confirm_page}    timeout=10
     Wait Until Element Is Enabled    ${confirm_order_button_order_confirm_page}
     Click Element    ${confirm_order_button_order_confirm_page}
@@ -136,7 +155,7 @@ Navigate To Order Management And Redirect To Checkout Page Using Order Number
     Click Element    ${order_status_order_management}
     Wait Until Element Is Visible    ${order_summary_page_heading}    timeout=10s
 
-Navigate To Print Recipt Container
+Navigate To Print Receipt Container
     Wait Until Element Is Visible    ${print_order_receipt}     timeout=10
     Wait Until Element Is Enabled     ${print_order_receipt}
     Click Element      ${print_order_receipt}
@@ -211,7 +230,7 @@ Click On Print Recipt Button
     Click Element    ${print_order_receipt}
     Wait Until Element Is Visible  ${order_number_print_recipt}     timeout=10
 
-Verify Recipt Content | Order
+Verify Receipt Content | Order
    Wait Until Page Contains Element    ${order_summary_page_heading}    timeout=10
    ${cust_info_checkout}   Get Customer Details | Checkout | Order
    Click Element    ${print_order_receipt}
@@ -220,7 +239,8 @@ Verify Recipt Content | Order
 
 Get Customer Details | Checkout | Order
     ${invoice_ids}    Create List
-    Wait Until Page Contains Element    ${order_summary_page_heading}
+    Wait Until Page Contains Element    ${order_summary_page_heading}    timeout=10
+    Sleep    2
     ${in_id}  Get Value    ${order_number_order_summary}
     ${in_name}  Get Value    ${customer_name_order_summary}
     ${in_number}  Get Value    ${customer_number_order_summary}
@@ -228,7 +248,7 @@ Get Customer Details | Checkout | Order
     ${cust_info_checkout}=  Create Dictionary    invoice_id=${in_id}  invoice_name=${in_name}  phone_number=${in_number}  total_amount=${in_amount}    search_invoice=${in_id}
     Append To List    ${invoice_ids}    ${in_id}
     Set Global Variable    ${invoice_ids}
-    [RETURN]   ${cust_info_checkout}
+    [Return]    ${cust_info_checkout}
 
 Get Customer Details | Print Invoice | Order
    Wait Until Page Contains Element    ${print_recipt_container}

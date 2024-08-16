@@ -8,7 +8,12 @@ edit_modal_title = '//h5[@id="show___BV_modal_title_" and text()="Edit POS Termi
 pos_search_bar = '//input[@placeholder="Enter search query.."]'
 remove_modal_body = '//div[contains(@id,"BV_modal_content_")]'
 remove_button = '//button[@class="btn btn-primary" and text()="Remove"]'
-
+tagged_device_column = '(//tr//td[@data-v-02c9d4fc][8])//span[@class=""]'
+last_most_page_icon = '//li//a[@role="button" and @aria-label="Last"]'
+last_page_number = '(//li//a[@role="button" and not(descendant::span)])[last()]'
+tagged_device_icon = '(//tr//td[@data-v-02c9d4fc][8])//span[@class=""]//ancestor::tr//i'
+first_most_page_icon = '//li//a[@role="button" and @aria-label="First"]'
+next_page_icon = '//li//a[@role="button" and @aria-label="Next"]'
 
 #Setup and more
 setup_and_more = '//span[contains(text(),"Setup & More")]//ancestor::li[@class="treeview"]'
