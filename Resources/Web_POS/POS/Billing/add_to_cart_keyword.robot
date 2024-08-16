@@ -294,10 +294,10 @@ Logout From The POS For Adding The Item From Previous Session
         Click Button    ${logout_button}
         Wait Until Element Is Visible    ${pos_username}    timeout=20s
     END
-#   Delete All Cookies
-#   Execute JavaScript    window.localStorage.clear();
-#   Execute JavaScript    window.sessionStorage.clear();
-#   Reload Page
+   Delete All Cookies
+   Execute JavaScript    window.localStorage.clear();
+   Execute JavaScript    window.sessionStorage.clear();
+   Reload Page
 
 Logout From The POS
     ${logout_link_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${logout_link}
@@ -312,12 +312,11 @@ Logout From The POS
     
 Add Previous Customer
     [Arguments]    ${customer_data}
-    ${my_dict}    Create Dictionary   &{customer_data}
     Wait Until Element Is Enabled    ${add_customer_link}
     Wait Until Keyword Succeeds    5     3      Click Element    ${add_customer_link}
     Wait Until Element Is Visible    ${customer_phone_field}
     Click Element    ${customer_phone_field}
-    Input Text    ${customer_phone_field}    ${my_dict.phone_number}
+    Input Text    ${customer_phone_field}    ${customer_data.phone_number}
     Wait Until Element Is Enabled    ${continue_billing_button}  timeout=20s
     Wait Until Keyword Succeeds    3     3    Click Element    ${continue_billing_button}
     Wait Until Element Is Visible    ${customer_first_name_field}    timeout=20s

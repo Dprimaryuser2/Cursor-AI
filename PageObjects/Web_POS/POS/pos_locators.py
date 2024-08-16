@@ -199,7 +199,7 @@ exchange_option_switch = '//button[@class="btn dropdown-toggle btn-light" and co
 amount_limit_message = '//p[text()="Amount is greater than limit"]'
 item_name = "//a[@class='product-name text-danger']"
 cart_last_element = '(//td[@class="text-center align-middle w-5"])[last()]'
-product_name_in_cart_row = '//br[@data-v-24c05cb9]//preceding-sibling::a[@data-v-24c05cb9]'
+product_name_in_cart_row = '//br//preceding-sibling::a'
 close_product_window_button = '//button[@class="close"]'
 item_quantity_in_cart = '//span[@class="quantity h5 mb-0 mr-1"]'
 quantity_product_window = '(//span[@data-v-59cb0948])[1]'

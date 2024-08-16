@@ -15,8 +15,8 @@ ${base_url}=    https://staging.api.gozwing.com
 
 *** Keywords ***
 Open Application | POS
-    Open Browser     ${${ENV}_URL}    ${browser}
-#    Open Browser     ${${ENV}_URL}    ${browser}    options=add_argument("--headless")
+#    Open Browser     ${${ENV}_URL}    ${browser}
+    Open Browser     ${${ENV}_URL}    ${browser}    options=add_argument("--headless")
 #    Maximize Browser Window
     Set Window Size    ${window_width}    ${window_height}
 #
@@ -62,8 +62,8 @@ Login With Valid Username And Password | POS
 Login Again With Same User Id And Password
     [Arguments]     ${search_data}
     ${my_dict}    Create Dictionary   &{search_data}
-#    Input Text    ${serial_key}    ${my_dict.serial_key}
-#    Click Button    ${register_button}
+    Input Text    ${serial_key}    ${my_dict.serial_key}
+    Click Button    ${register_button}
     Wait Until Element Is Visible    ${pos_username}    timeout=20s
     Input Text    ${pos_username}     ${my_dict.username_pos}
     Click Button    ${pos_continue_button}

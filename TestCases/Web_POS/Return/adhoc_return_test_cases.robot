@@ -66,7 +66,7 @@ Zwing_R_5 Adding product by scanning the Barcode
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Verify Add product
+   Verify Item Added In Cart
    [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_6 Add items to Return by searching the barcode or name of Item
@@ -76,7 +76,7 @@ Zwing_R_6 Add items to Return by searching the barcode or name of Item
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-   Verify Add product
+   Verify Item Added In Cart
    [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_7 Add items to Return by catalog
@@ -86,7 +86,7 @@ Zwing_R_7 Add items to Return by catalog
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Add Items In Cart | Catalog    ${pos_data}
-   Verify Add product
+   Verify Item Added In Cart
    [Teardown]  Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_8 Add Salesperson with return item
