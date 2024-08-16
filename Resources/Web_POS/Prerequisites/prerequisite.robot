@@ -71,43 +71,70 @@ Tear It Down If Test Case Failed
     END
 
 Revoke The Licence Key From Console
-    [Arguments]    ${serial_key}
-    ${serial_key_info}    Create Dictionary   &{serial_key}    
-    ${serial_key_number}=    Set Variable    ${serial_key_info.serial_key}
-    ${clean_serial_key}    Remove Characters    ${serial_key_number}
     Open Application | Admin
-    Input Text    ${email}      ${serial_key_info.username_admin}
-    Wait Until Element Is Visible    ${password}    timeout=20s
-    Input Text    ${password}    ${serial_key_info.password_admin}
-    Click Button    ${continue_button}
-    Wait Until Page Contains Element    ${dashboard}    timeout=20s
-    Page Should Contain Element    ${invoice_icon}
-    Page Should Contain Element    ${product_icon}
+    Login Into Admin | Zwing
     Wait Until Keyword Succeeds    8    2    Go To Pos Terminal
     Wait Until Element Is Visible    ${pos_heading}    timeout=20s
     Wait Until Element Is Visible    ${pos_search_bar}    timeout=20s
-    Input Text    ${pos_search_bar}    ${serial_key_number}
-    Sleep    1s
-    ${tagged_device}=    Replace String    ${tagged_device_edit_link}    Serial_Key    ${serial_key_number}
-    Wait Until Keyword Succeeds    5    2    Click Element    ${tagged_device}
-    ${status}   Run Keyword And Return Status    Wait until Page contains element   ${remove_device_icon}
-    IF    ${status}== False
-    Wait Until Keyword Succeeds    5    2    Click Element  ${update_button}
-    Sleep    1
-#    Close Browser
-    Close Window
-    Switch Browser    1
+    Input Text    ${pos_search_bar}   i9_store
+    Sleep    2s
+    ${status}=  Run Keyword And Return Status   Element Should Be Visible    ${last_most_page_icon}
+    IF    ${status}
+         Click Element    ${last_most_page_icon}
+         Wait Until Page Contains Element    ${last_page_number}   timeout=20s
+         ${last_number}=   Get Text    ${last_page_number}
+         ${last_number}=  Convert To Integer    ${last_number}
+         Log    ${last_number}
+         Click Element    ${first_most_page_icon}
+         Sleep   1s
+         FOR    ${counter}    IN RANGE    0    ${last_number}
+            ${tag_device}=    Run Keyword And Return Status     Wait Until Page Contains Element    ${tagged_device_icon}   timeout=3s
+            IF   ${tag_device}
+                Click Element    ${tagged_device_icon}
+                ${status_icon}   Run Keyword And Return Status    Wait until Page contains element   ${remove_device_icon}
+                 IF    ${status_icon}
+                     Wait Until Element Is Visible    ${remove_device_icon}    timeout=10s
+                     Wait Until Keyword Succeeds    5    2     Click Element    ${remove_device_icon}
+                     Wait Until Element Is Visible    ${remove_modal_body}    timeout=10s
+                     Wait Until Keyword Succeeds    5    2     Click Button    ${remove_button}
+                     Wait Until Element Is Not Visible    ${remove_modal_body}    timeout=10s
+                 END
+             Input Text    ${pos_search_bar}   i9_store
+             Sleep    2s
+            END
+          Wait Until Page Contains Element    ${next_page_icon}   timeout=20s
+          Click Element    ${next_page_icon}
+          Sleep    1
+         END
     ELSE
-    Wait Until Element Is Visible    ${remove_device_icon}    timeout=10s
-    Wait Until Keyword Succeeds    5    2     Click Element    ${remove_device_icon}
-    Wait Until Element Is Visible    ${remove_modal_body}    timeout=10s
-    Wait Until Keyword Succeeds    5    2     Click Button    ${remove_button}
-    Wait Until Element Is Not Visible    ${remove_modal_body}    timeout=10s
-#    Close Browser
-    Close Window
-    Switch Browser    1
+         Wait Until Page Contains Element    ${last_page_number}   timeout=20s
+         ${last_number}=   Get Text    ${last_page_number}
+         ${last_number}=  Convert To Integer    ${last_number}
+         Log    ${last_number}
+         Sleep   1s
+         FOR    ${counter}    IN RANGE    0    ${last_number}
+            ${tag_device}=    Run Keyword And Return Status     Wait Until Page Contains Element    ${tagged_device_icon}   timeout=3s
+            IF  ${tag_device}
+                Click Element    ${tagged_device_icon}
+                ${status_icon}   Run Keyword And Return Status    Wait until Page contains element   ${remove_device_icon}
+                 IF    ${status_icon}
+                     Wait Until Element Is Visible    ${remove_device_icon}    timeout=10s
+                     Wait Until Keyword Succeeds    5    2     Click Element    ${remove_device_icon}
+                     Wait Until Element Is Visible    ${remove_modal_body}    timeout=10s
+                     Wait Until Keyword Succeeds    5    2     Click Button    ${remove_button}
+                     Wait Until Element Is Not Visible    ${remove_modal_body}    timeout=10s
+                 END
+            Input Text    ${pos_search_bar}   i9_store
+            Sleep    2s
+            END
+          Wait Until Page Contains Element    ${next_page_icon}   timeout=20s
+          Click Element    ${next_page_icon}
+          Sleep    1
+         END
     END
-
+     Close Window
+     Switch Browser    1
+     
 Go To Pos Terminal
     Wait Until Keyword Succeeds    5    2     Click Element    ${pos_terminal_logo}
     Wait Until Element Is Visible    ${pos_terminal_link}
