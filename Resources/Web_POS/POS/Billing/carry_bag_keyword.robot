@@ -72,7 +72,8 @@ Add Carry Bag With Decimal/Negative Integer Value
     ${amount}  Get Text    ${carry_bag_amount}
     ${amount_c}  Remove Characters    ${amount}
     Set Test Variable   ${amount_c}
-    RETURN  ${values}
+    ${carry_bag_dict}    Create Dictionary    amount=${amount_c}    values=${values}
+    RETURN  ${carry_bag_dict}
 
 Verify Carry Bag Window Ignores Decimal/Negative Sign
     [Arguments]    ${values}
@@ -161,7 +162,7 @@ Verify 0 Inventory To Cart With Enable Negative Inventory | Carry Bag
     Page Should Not Contain Element    ${negative_inventory_alert}
 
 Verify The Details Of Carry Bag Added in Cart
-    [Arguments]    ${values}
+    [Arguments]    ${carry_bag_dict}
     Wait Until Page Contains Element    ${carry_bag_add}
     Click Element    ${carry_bag_add}
     Wait Until Page Contains Element    ${cart_last_element}  timeout=5s
@@ -171,9 +172,10 @@ Verify The Details Of Carry Bag Added in Cart
     ${product_count_for_test}    Set Variable    0
     FOR  ${i}  IN RANGE    1    ${cart_count}+1
            ${is_a_button}    Run Keyword And Return Status    Element Should Be Visible    ${quantity_column_buttons}
+           ${single_carry_bag_amount}=    Set Variable    ${carry_bag_dict.amount}
            IF    ${is_a_button}
                ${product_count_for_test}=    Evaluate    ${product_count_for_test}+1
-               ${carry_bag_amount}=  Evaluate    ${values} * ${amount_c}
+               ${carry_bag_amount}=  Evaluate    ${product_count_for_test} * ${single_carry_bag_amount}
                Log    ${product_count_for_test}
            ELSE
                Wait Until Page Contains Element    (${product_name_in_cart_row})[${i}]
@@ -181,6 +183,7 @@ Verify The Details Of Carry Bag Added in Cart
                Wait Until Page Contains Element    ${quantity_product_window}
                ${count}    Get Text    ${quantity_product_window}
                Convert To Integer    ${count}
+               ${carry_bag_amount}=  Evaluate    ${carry_bag_dict.values} * ${single_carry_bag_amount}
                ${product_count_for_test}    Evaluate    ${count}+${product_count_for_test}
                Wait Until Page Contains Element    ${close_product_window_button}
                Click Element    ${close_product_window_button}
@@ -194,5 +197,3 @@ Verify The Details Of Carry Bag Added in Cart
     ${unit_price_amount}=    Remove Characters    ${unit_price_amount}
     ${unit_price_amount}=    Convert To Number    ${unit_price_amount}
     Should Be Equal    ${carry_bag_amount}    ${unit_price_amount}
-
-

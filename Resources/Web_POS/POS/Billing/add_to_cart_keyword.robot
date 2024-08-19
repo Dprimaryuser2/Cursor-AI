@@ -30,9 +30,9 @@ Add Weighted UOM Products to Cart | Edit Cart Quantity Mode
         Click Element    ${product_search_bar}
         Input Text    ${product_search_bar}    ${key}
         Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
-        Sleep    0.5s
+        Sleep    1s
         Click Element    ${search_add_button}
-        Sleep    2s
+        Wait Until Page Contains Element    ${search_add_button}    timeout=10s
         ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
         IF    ${multiple_product_present}
             Wait Until Page Contains Element    ${select_mrp}   timeout=10s

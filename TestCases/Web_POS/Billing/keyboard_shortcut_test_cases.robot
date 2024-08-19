@@ -344,4 +344,4 @@ Zwing_KB_30 View/Hide product using keyboard shortcut On Return Screen
    Press Shortcut Key    ${pos_data}
    Verify Shortcut Key Displays And Hide Catalogue Window  ${pos_data}
    Revoke Serial Key    ${pos_data}
-   [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+   [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}

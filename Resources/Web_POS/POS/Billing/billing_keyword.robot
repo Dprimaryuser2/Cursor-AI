@@ -67,6 +67,7 @@ Verify View Held Bill
 
 Verify Recall Bill
     Wait Until Page Contains Element    ${hold_bill}
+    Wait Until Page Does Not Contain Element    ${cart_0}    timeout=10s
     Page Should Not Contain Element    ${cart_0}
     Page Should Contain Element    ${checkout_button}
     Page Should Contain Element    ${clear_all_items}

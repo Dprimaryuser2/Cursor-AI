@@ -214,6 +214,10 @@ Verify Items Allocated With Some Inventory To Store Are Normal
      [Arguments]    ${product_data}
      ${product_dict}    Create Dictionary   &{product_data}
      Wait Until Page Contains Element    ${view_catalog_button}
+     Click Element    ${refresh_button}
+     Wait Until Page Contains Element    ${done_progress}    timeout=20s
+     Click Button    ${done_progress}
+     Wait Until Page Does Not Contain Element    ${done_progress}    timeout=10s
      Click Element    ${view_catalog_button}
      Wait Until Page Contains Element    ${hide_catalog_button}
      Page Should Contain Element    ${hide_catalog_button}

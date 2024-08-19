@@ -16,7 +16,6 @@ Resource    add_to_cart_keyword.robot
 Open The Session
     [Arguments]    ${search_data}
     ${my_dict}    Create Dictionary   &{search_data}
-#    Wait Until Element Is Visible    ${pos_dashboard}
     ${catalog_update_failed}=    Run Keyword And Return Status    Element Should Be Visible    ${catalog_update_failed_heading}
     IF    ${catalog_update_failed}
         Click Button    ${catalog_close_button}
@@ -81,7 +80,7 @@ Open The Session
             Input Text    ${balance_field}    ${value}
         END
         Click Element    ${open_session_submit_button}
-        Wait Until Element Is Not Visible    ${opening_balance}    timeout=10s
+        Wait Until Element Is Not Visible    ${open_session_submit_button}    timeout=10s
     END
 
 Scan Barcode To Add Item And Quantity To Cart

@@ -68,8 +68,7 @@ Zwing_B_05 Add Multiple price products to cart
     Open The Session    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart | Multiple MRP    ${pos_data}
     Verify Multiple Price Product Is Added
-    Revoke Serial Key    ${pos_data}
-    [Teardown]    Tear It Down If Test Case Failed    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_06 Tag a New customer to a bill
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}

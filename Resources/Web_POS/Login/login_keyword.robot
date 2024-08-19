@@ -40,9 +40,9 @@ Open Application | POS
 #    Input Text    ${pos_password}    ${my_dict.password_pos}
 #    Click Button    ${pos_continue_button}
 #    Wait Until Page Contains Element    ${in_store}   timeout=25s
-##    Wait Until Element Is Visible    ${catalog_update}    timeout=20s
-##    Page Should Contain Element    ${catalog_update}
-##    Page Should Contain Element    ${pos_dashboard}
+#    Wait Until Element Is Visible    ${catalog_update}    timeout=20s
+#    Page Should Contain Element    ${catalog_update}
+#    Page Should Contain Element    ${pos_dashboard}
 
 
 Login With Valid Username And Password | POS
@@ -52,13 +52,14 @@ Login With Valid Username And Password | POS
     ${my_dict}    Create Dictionary   &{search_data}
     Input Text    ${serial_key}    ${my_dict.serial_key}
     Click Button    ${register_button}
-    Wait Until Element Is Visible    ${pos_username}    timeout=5s
+    Wait Until Element Is Visible    ${pos_username}    timeout=15s
     Input Text    ${pos_username}     ${my_dict.username_pos}
     Click Button    ${pos_continue_button}
-    Wait Until Element Is Visible    ${pos_password}    timeout=5s
+    Wait Until Element Is Visible    ${pos_password}    timeout=15s
     Input Text    ${pos_password}    ${my_dict.password_pos}
     Click Button    ${pos_continue_button}
-    Wait Until Page Contains Element    ${in_store}
+    Wait Until Page Does Not Contain Element    ${pos_continue_button}    timeout=20s
+    Wait Until Page Does Not Contain Element    ${pos_password}    timeout=10s
     ${logs}    Execute JavaScript   return window.apiLogs;
     ${udidtoken}=    extract_udidtoken    ${logs}
     ${token}        Execute JavaScript    return localStorage.getItem('operations');
@@ -141,7 +142,8 @@ Revoke Licence Key | API
     Create Session    revoke    ${base_url}    headers=${header}
     ${api_response} =    POST On Session    revoke    /revoke-licence    data=${body}    headers=${header}
     ${status_code}    Set Variable    ${api_response.status_code}
-    Run Keyword If    '${status_code}' != '200'    Tear It Down If Test Case Failed    ${my_dict}
+    Run Keyword If    '${status_code}' != '200'    Tear It Down If Test Case Failed
+    Run Keyword If    '${status_code}' == 'None'    Tear It Down If Test Case Failed
     Reload Page
     Logout After Revoke     ${response}     ${my_dict}
     Delete All Cookies

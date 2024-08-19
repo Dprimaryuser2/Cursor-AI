@@ -23,6 +23,7 @@ ${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS$
 
 *** Test Cases ***
 Zwing_R_1 Return should be mark enable in policies
+    [Tags]    Retry
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_1
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
@@ -40,6 +41,7 @@ Zwing_R_2 While Return is off in Policies
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_3 When Auto Switch to billing is On
+     [Tags]    Retry
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_3
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
@@ -51,6 +53,7 @@ Zwing_R_3 When Auto Switch to billing is On
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_4 When Auto Switch to billing is Off
+     [Tags]    Retry
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_4
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
@@ -219,6 +222,7 @@ Zwing_R_18 Apply Customised Manual Discount item level
 
 
 Zwing_R_19 Apply Customised Manual Discount item level by Fixed amount in item level
+     [Tags]    Retry
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_19
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
@@ -265,6 +269,7 @@ Zwing_R_22 Check out from POS screen to Payment Collection
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan And Add Product    ${pos_data}
+   Add Customer Details    ${pos_data}
    Verify Billing Checkout
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
@@ -276,6 +281,7 @@ Zwing_R_23 Allow Refund Against Returned Item | Refund Through Cash only
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan And Add Product    ${pos_data}
+   Add Customer Details    ${pos_data}
    Verify Billing Checkout
    Pay By Cash | Return Mode
    Verify If Payment Is Complete Or Not
@@ -289,6 +295,7 @@ Zwing_R_24 Allow Refund Against Returned Item | Refund Through Credit Note
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan And Add Product    ${pos_data}
+   Add Customer Details    ${pos_data}
    Navigate To Checkout Page
    Pay Through Store Credit Method
    Verify If Payment Is Complete Or Not
@@ -302,6 +309,7 @@ Zwing_R_25 Allow Refund Against Returned Item | Refund Through both credit note 
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
    Scan And Add Product    ${pos_data}
+   Add Customer Details    ${pos_data}
    Navigate To Checkout Page
    Pay Through Store Credit Method
    Verify If Payment Is Complete Or Not
@@ -317,7 +325,6 @@ Zwing_R_26 Click on Confirm button on switch to Billing popup box
    Auto Switch To Billing
    Verify Auto Switch To Billing
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
-
 
 Zwing_R_27 Click on Cancel button on switch to Billing popup box
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
@@ -404,7 +411,8 @@ Zwing_R_34 Switching Between Return to Exchange Will Give Confirmation Popup
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_35 Set variance limit and enter price override less or more than total price but within variance limit
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_35
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_35
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -414,7 +422,8 @@ Zwing_R_35 Set variance limit and enter price override less or more than total p
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_36 Set variance limit and enter price override less or more than total price but out of variance limit
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_36
+  ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_36
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -424,7 +433,8 @@ Zwing_R_36 Set variance limit and enter price override less or more than total p
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_37 Set variance limit and enter price override less or more than total price but equal to variance limit
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_37
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}   R_37
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -434,7 +444,8 @@ Zwing_R_37 Set variance limit and enter price override less or more than total p
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_38 Set variance limit and enter price override less or more than total price but within variance limit. Then try again price override and check the response
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}  TC_38
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}  R_38
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -444,7 +455,8 @@ Zwing_R_38 Set variance limit and enter price override less or more than total p
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_R_39 Disable price override and try price overriding then check the response
-   ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_39
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    R_39
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
