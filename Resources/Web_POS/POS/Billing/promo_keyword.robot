@@ -16,6 +16,7 @@ Resource    add_to_cart_keyword.robot
 Open The Session
     [Arguments]    ${search_data}
     ${my_dict}    Create Dictionary   &{search_data}
+#    Wait Until Element Is Visible    ${pos_dashboard}
     ${catalog_update_failed}=    Run Keyword And Return Status    Element Should Be Visible    ${catalog_update_failed_heading}
     IF    ${catalog_update_failed}
         Click Button    ${catalog_close_button}
@@ -24,7 +25,7 @@ Open The Session
     IF    ${catalog_update}
         Click Button    ${done_progress}
     END
-    ${closing_balance_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance}
+    ${closing_balance_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${closing_balance_force_session_close}
     IF    ${closing_balance_visible}
         ${items_list}=    Convert Items To List    ${my_dict.closing_balance}
         ${items_dict} =    Convert Item List To Dictionary    ${my_dict.closing_balance}
@@ -32,7 +33,7 @@ Open The Session
             ${key}=    Set Variable    ${item}[0]
             ${key}    Convert To String    ${key}
             ${values}=    Set Variable    ${item}[1]
-            Input Text    ${closing_balance}    ${key}
+            Input Text    ${closing_balance_force_session_close}    ${key}
         END
         Click Element    ${force_close_button}
         Wait Until Element Is Not Visible    ${force_close_button}    timeout=20s
@@ -80,7 +81,19 @@ Open The Session
             Input Text    ${balance_field}    ${value}
         END
         Click Element    ${open_session_submit_button}
-        Wait Until Element Is Not Visible    ${open_session_submit_button}    timeout=10s
+        Wait Until Element Is Not Visible    ${opening_balance}    timeout=10s
+    END
+    ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+    IF   ${clear_item_enabled}
+       Click Element    ${clear_all_items}
+       ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
+       IF   ${clear_item_enabled}
+           Click Element    ${clear_all_items}
+       END
+       ${first_item}=   Run Keyword And Return Status    Element Should Be Visible    ${first_item_product_name}   timeout=20s
+             IF    ${first_item}
+                    Click Element    //a[@title="Delete Product"]
+             END
     END
 
 Scan Barcode To Add Item And Quantity To Cart
@@ -578,7 +591,8 @@ Verify Billing Checkout
     ${discard}=    Run Keyword And Return Status    Element Should Be Visible       ${discard_button}
     IF    ${discard}
          Click Button    ${discard_button}
-         Click Button    ${discard_button}
+#         Click Button    ${discard_button}
+         sleep  1s
     END
     Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
     Click Button    ${checkout_button}
@@ -591,9 +605,11 @@ Verify Billing Checkout
         Wait Until Element Is Not Visible    ${updating_catalog_heading}    timeout=20s
         Sleep    2
         Wait Until Element Is Enabled    ${checkout_button}    timeout=20s
+        sleep   1
         Click Button    ${checkout_button}
     END
-    ${insufficient}=    Run Keyword And Return Status    Wait Until Page Contains Element    ${insufficient_inventory_continue_btn}    timeout=
+    Sleep    1
+    ${insufficient}=    Run Keyword And Return Status    Element Should Be Visible    ${insufficient_inventory_continue_btn}
     IF    ${insufficient}
      Set Fulfillment Date And Continue
     END

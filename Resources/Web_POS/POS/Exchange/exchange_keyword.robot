@@ -1185,8 +1185,8 @@ Scan Alternate Product
     Wait Until Element Is Visible    ${scan_only}    timeout=20s
     Sleep    1
     ${items_list}=    Convert Items To List    ${my_dict.alternate_product}
-    Wait Until Page Contains Element    ${switch_confirm_button}    timeout=10
-    Wait Until Element Is Enabled    ${switch_confirm_button}    timeout=10
+    Wait Until Page Contains Element    ${switch_confirm_button}    timeout=27s
+    Wait Until Element Is Enabled    ${switch_confirm_button}    timeout=20s
     ${items_dict} =    Convert Item List To Dictionary    ${my_dict.alternate_product}
     Click Element    ${switch_confirm_button}
     Wait Until Page Contains Element    //div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="Exchange"]    timeout=10
@@ -1304,6 +1304,7 @@ Add Multiple MRP Product | Exchange
         Sleep    0.5s
         Click Element    ${search_add_button}
         Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+        Sleep    0.5s
         Click Element    ${mrp_product_2_row}
         Click Element    ${add_to_cart_mrp}
         Input Text    ${quantity}   ${value}

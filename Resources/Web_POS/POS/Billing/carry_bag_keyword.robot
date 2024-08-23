@@ -77,7 +77,8 @@ Add Carry Bag With Decimal/Negative Integer Value
 
 Verify Carry Bag Window Ignores Decimal/Negative Sign
     [Arguments]    ${values}
-    ${int_value}   Evaluate    isinstance(int(${values}), int)
+    ${cleaned_value}   Evaluate    ''.join(filter(str.isdigit, str(${values})))
+    ${int_value}   Evaluate    int(${cleaned_value})
     Should Be True    ${int_value}
     Element Should Be Enabled    ${carry_bag_add}
 
@@ -170,30 +171,34 @@ Verify The Details Of Carry Bag Added in Cart
     Convert To Integer    ${cart_count}
     ${i}=  Set Variable    1
     ${product_count_for_test}    Set Variable    0
+    ${single_carry_bag_amount}=    Set Variable    ${carry_bag_dict['amount']}
+
     FOR  ${i}  IN RANGE    1    ${cart_count}+1
-           ${is_a_button}    Run Keyword And Return Status    Element Should Be Visible    ${quantity_column_buttons}
-           ${single_carry_bag_amount}=    Set Variable    ${carry_bag_dict.amount}
-           IF    ${is_a_button}
-               ${product_count_for_test}=    Evaluate    ${product_count_for_test}+1
-               ${carry_bag_amount}=  Evaluate    ${product_count_for_test} * ${single_carry_bag_amount}
-               Log    ${product_count_for_test}
-           ELSE
-               Wait Until Page Contains Element    (${product_name_in_cart_row})[${i}]
-               Click Element    (${product_name_in_cart_row})[${i}]
-               Wait Until Page Contains Element    ${quantity_product_window}
-               ${count}    Get Text    ${quantity_product_window}
-               Convert To Integer    ${count}
-               ${carry_bag_amount}=  Evaluate    ${carry_bag_dict.values} * ${single_carry_bag_amount}
-               ${product_count_for_test}    Evaluate    ${count}+${product_count_for_test}
-               Wait Until Page Contains Element    ${close_product_window_button}
-               Click Element    ${close_product_window_button}
-           END
+        ${is_a_button}=    Run Keyword And Return Status    Element Should Be Visible    ${quantity_column_buttons}
+        IF    ${is_a_button}
+            ${product_count_for_test}=    Evaluate    ${product_count_for_test} + 1
+            ${carry_bag_amount}=    Evaluate    ${product_count_for_test} * ${single_carry_bag_amount}
+            Log    ${product_count_for_test}
+        ELSE
+            Wait Until Page Contains Element    (${product_name_in_cart_row})[${i}]
+            Click Element    (${product_name_in_cart_row})[${i}]
+            Wait Until Page Contains Element    ${quantity_product_window}
+            ${count}=    Get Text    ${quantity_product_window}
+            Convert To Integer    ${count}
+            ${carry_bag_amount}=    Evaluate    ${count} * ${single_carry_bag_amount}
+            ${product_count_for_test}=    Evaluate    ${count} + ${product_count_for_test}
+            Wait Until Page Contains Element    ${close_product_window_button}
+            Click Element    ${close_product_window_button}
+        END
     END
-    ${temp}    Get Text    ${item_quantity_in_cart}
-    ${temp}    Remove Characters    ${temp}
+
+    ${temp}=    Get Text    ${item_quantity_in_cart}
+    ${temp}=    Remove Characters    ${temp}
     Convert To Integer    ${temp}
-    Should Be Equal As Integers     ${temp}    ${product_count_for_test}
+    Should Be Equal As Integers    ${temp}    ${product_count_for_test}
+
     ${unit_price_amount}=    Get Text    ${price}
     ${unit_price_amount}=    Remove Characters    ${unit_price_amount}
     ${unit_price_amount}=    Convert To Number    ${unit_price_amount}
+
     Should Be Equal    ${carry_bag_amount}    ${unit_price_amount}

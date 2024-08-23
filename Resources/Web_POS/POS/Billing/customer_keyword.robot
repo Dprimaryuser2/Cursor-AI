@@ -14,7 +14,7 @@ Add Customer Details
     ${my_dict}    Create Dictionary   &{customer_data}
     Wait Until Element Is Enabled    ${add_customer_link}   timeout=40s
     Click Element    ${add_customer_link}
-    Wait Until Element Is Visible    ${customer_phone_field}
+    Wait Until Element Is Visible    ${customer_phone_field}  timeout=10s
     ${mobile}=     Generate Random Phone Number
     Set Test Variable    ${mobile}
     Input Text    ${customer_phone_field}    ${mobile}
@@ -64,6 +64,7 @@ Add Customer Details
     Wait Until Element Is Visible    ${checkout_button}    timeout=10s
     Wait Until Element Is Visible    ${customer_info_icon}    timeout=10s
     Wait Until Element Is Not Visible    //div[@class="popup-notification"]     timeout=10s
+    Discard Items If Present From Previous Session
     ${customer_information}=    Create Dictionary    first_name=${first_name}    last_name=${last_name}    phone_number= ${mobile}    email=${email_tag}    gender=${gender}    add_line_one= ${add_line1}    add_line_two= ${add_line2}    customer_phone_number=${mobile}
     [Return]    ${customer_information}
 
@@ -142,21 +143,6 @@ Delete UIN
     Click Element    ${confirm_selected_button}
 
 
-Add Existing GST
-    [Arguments]  ${details}
-    ${gst_details}  Create Dictionary   &{details}
-    Wait Until Page Contains Element    ${tax_invoice}    timeout=10s
-    Click Element    ${tax_invoice}
-    Wait Until Page Contains Element    ${cg_add_gst_button}    timeout=10s
-    Click Element    ${cg_add_gst_button}
-    Wait Until Page Contains Element    ${cg_manage_gstin_header}    timeout=10s
-    Wait Until Page Contains Element    //label[contains(text(),"${gst_details.legal_name}")]//ancestor::label//preceding-sibling::input[@class="custom-control-input"]        timeout=10s
-    Sleep    0.3
-    Click Element    //label[contains(text(),"${gst_details.legal_name}")]//ancestor::label//preceding-sibling::input[@class="custom-control-input"]
-    Wait Until Element Is Enabled    ${confirm_selected_button}    timeout=10s
-    Click Element    ${confirm_selected_button}
-
-
 Add Existing UIN
     [Arguments]  ${details}
     ${uin_details}  Create Dictionary   &{details}
@@ -179,6 +165,7 @@ Add UIN Name And Number
     Wait Until Page Contains Element    ${tax_invoice}    timeout=10s
     Click Element    ${tax_invoice}
     Wait Until Page Contains Element    ${cg_add_gst_button}    timeout=10s
+    Sleep    0.5
     Click Element    ${cg_add_gst_button}
     Sleep    0.5
     Wait Until Page Contains Element    ${cg_manage_gstin_header}    timeout=10s
@@ -268,13 +255,17 @@ Edit Customer Group
     Click Element    ${customer_edit_groups_button}
     Wait Until Element Is Visible    ${assign_customer_group_heading}    timeout=10s
     ${total_groups_tagged}=    Create List
-    ${customer_groups}=    Set Variable    ${customer_group_info.group}
+    ${customer_groups}=    Set Variable    ${customer_group_info.edited_group}
     ${customer_groups}=    Convert Items To List    ${customer_groups}
     ${length_of_list}=    Get Length    ${customer_groups}
     FOR    ${i}    IN RANGE    0    ${length_of_list}
         ${group_name}=    Replace String    ${customer_group_checkbox}    Dummy    ${customer_groups}[${i}]
+        ${group_checkbox}=    Replace String    ${customer_checkbox_edit_group}    Dummy       ${customer_groups}[${i}]
         Wait Until Element Is Visible    ${group_name}    timeout=10s
-        Click Element    ${group_name}
+        ${is_checked}=    Get Element Attribute    ${group_checkbox}    checked
+        Run Keyword If    '${is_checked}' == 'None'    Click Element    ${group_name}
+        Run Keyword If    '${is_checked}' == 'true'    Log    Checkbox is checked
+        Run Keyword If    '${is_checked}' == 'false'    Click Element    ${group_name}
         Append To List      ${total_groups_tagged}       ${customer_groups}[${i}]
     END
     Wait Until Element Is Visible    ${save_button_customer_group}    timeout=10s
@@ -312,7 +303,7 @@ Verify Customer Tagging Is Mandatory
     Click Button    ${checkout_button}
     ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
     IF    ${insufficient}
-     Set Fulfillment Date And Continue
+       Click Element    ${insufficient_inventory_continue_btn}
     END
     Wait Until Element Is Visible    ${customer_tagging_mandatory_alert}    timeout=15s
     Page Should Contain Element    ${customer_tagging_mandatory_alert}
@@ -344,10 +335,12 @@ Verify Customer Tagging Is Mandatory With All Fields
     Click Button    ${checkout_button}
     ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
     IF    ${insufficient}
-     Set Fulfillment Date And Continue
+       Click Element    ${insufficient_inventory_continue_btn}
     END
     Wait Until Element Is Visible    ${customer_tagging_mandatory_alert}    timeout=15s
     Page Should Contain Element    ${customer_tagging_mandatory_alert}
+    Click Element    ${close_alert_button}
+    Wait Until Page Does Not Contain Element    ${close_alert_button}    timeout=20
     Click Element    ${add_customer_link}
     Wait Until Element Is Visible    ${customer_phone_field}
     ${mobile}=     Generate Random Phone Number
@@ -495,6 +488,9 @@ Change Invoice Type From Sales To GST In Customer Information
     Press Keys    ${pincode}    ENTER
     Wait Until Page Contains Element    ${customer_info_update_button}        timeout=10s
     Click Button    ${customer_info_update_button}
+    Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=10s
+    Wait Until Element Is Not Visible    ${customer_tagged_popup}     timeout=10s
+    Discard Items If Present From Previous Session
 
 Change Invoice Type From Sales To UIN In Customer Information
     [Arguments]    ${pos_data}
@@ -515,14 +511,16 @@ Change Invoice Type From Sales To UIN In Customer Information
     Input Text    ${pincode}    ${my_dict.pincode}
     Press Keys    ${pincode}    ENTER
     Input Text    ${pincode}    ${my_dict.pincode}
+    sleep  1s
     Wait Until Element Is Enabled    ${update_product_button}    timeout=10s
     Click Button    ${update_product_button}
     Wait Until Page Does Not Contain Element    ${update_product_button}   timeout=10s
+    Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=10s
+    Wait Until Element Is Not Visible    ${customer_tagged_popup}     timeout=10s
+    Discard Items If Present From Previous Session
 
 Verify Change Invoice Type from sales to GST
-    Wait Until Page Contains Element    ${customer_info_icon}    timeout=15s
-    Click Element    ${customer_info_icon}
-    Wait Until Element Is Enabled    ${customer_edit_info_button}    timeout=10s
+    Page Should Contain Element    ${gst_info_label}    timeout=20s
     Click Element    ${customer_edit_info_button}
     Page Should Contain Element    ${cg_gstin_field}
 
@@ -538,6 +536,8 @@ Change Invoice Type from Tax Invoice to Sales Invoice
     Click Element    ${customer_info_update_button}
     Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=10s
     Page Should Contain Element    ${customer_tagged_popup}
+    Wait Until Element Is Not Visible    ${customer_tagged_popup}     timeout=10s
+    Discard Items If Present From Previous Session
 
 Change Tax Invoice Type
     [Arguments]    ${pos_data}
@@ -562,19 +562,23 @@ Change Tax Invoice Type
     Sleep    1
     Wait Until Page Contains Element    ${cg_manage_gstin_header}    timeout=5s
     Wait Until Page Contains Element    //label[contains(text(),"${gst_details.legal_name}")]//ancestor::label//preceding-sibling::input[@class="custom-control-input"]
+    sleep  1
     Click Element    //label[contains(text(),"${gst_details.legal_name}")]//ancestor::label//preceding-sibling::input[@class="custom-control-input"]
     Wait Until Element Is Enabled    ${confirm_selected_button}    timeout=5s
     Click Element    ${confirm_selected_button}
     Wait Until Page Does Not Contain Element    ${confirm_selected_button}    timeout=5s
-    Sleep    0.5
+    Sleep    1s
     Wait Until Page Contains Element    ${pincode}
     Input Text    ${pincode}    ${gst_details.pincode}
     Press Keys    ${pincode}    ENTER
     Select State And City    ${gst_details}
-    Sleep    2
+    Sleep    2s
     Wait Until Element Is Enabled    ${update_product_button}    timeout=10s
+    sleep  0.5
     Click Button    ${update_product_button}
     Wait Until Page Does Not Contain Element    ${update_product_button}   timeout=10s
+    Wait Until Element Is Not Visible    ${customer_tagged_popup}     timeout=10s
+    Discard Items If Present From Previous Session
 
 Changing Phone Number Not Allowed In Customer Information
     Wait Until Page Contains Element    ${customer_info_icon}    timeout=5s
@@ -657,20 +661,28 @@ Verify Customer Phone Number More Then 10 Digit
     Should Be Equal As Integers    ${digits}    10
 
 Remove Customer From All Groups
+    [Arguments]    ${customer_data}
+    ${my_dict}    Create Dictionary   &{customer_data}
     Wait Until Page Contains Element    ${customer_info_icon}
     Click Element    ${customer_info_icon}
     Wait Until Element Is Enabled    ${customer_edit_groups_button}
     Click Element    ${customer_edit_groups_button}
     Wait Until Page Contains Element    ${customer_group_checkbox}
+    ${customer_groups}=    Set Variable    ${my_dict.group}
+    ${customer_groups}=    Convert Items To List    ${customer_groups}
+    ${length_of_list}=    Get Length    ${customer_groups}
     ${customer_group_list}  Get WebElements    ${customer_group_checkbox_row}
-    FOR    ${group}    IN    @{customer_group_list}
-        Log    ${group}
-        Unselect Checkbox    ${group}
+    FOR    ${i}    IN RANGE    0    ${length_of_list}
+        ${group_name}=    Replace String    ${customer_group_checkbox}    Dummy    ${customer_groups}[${i}]
+        ${group_checkbox}=    Replace String    ${customer_checkbox_edit_group}    Dummy       ${customer_groups}[${i}]
+        Click Element    ${group_name}
     END
     Wait Until Element Is Enabled    ${save_button_customer_group}
     Click Element    ${save_button_customer_group}
 
 Add Customer To All Groups
+    [Arguments]    ${customer_data}
+    ${my_dict}    Create Dictionary   &{customer_data}
     Wait Until Page Contains Element    ${customer_info_icon}
     Click Element    ${customer_info_icon}
     Wait Until Element Is Enabled    ${customer_edit_groups_button}
@@ -680,14 +692,23 @@ Add Customer To All Groups
     ${group_count}    Get Length    ${customer_group_list}
     FOR    ${group}    IN RANGE    1    ${group_count}
         Log    ${group}
-        Sleep    0.5
          Select Checkbox    ${customer_group_list}[${group}]
+    END
+    ${customer_groups}=    Set Variable    ${my_dict.group}
+    ${customer_groups}=    Convert Items To List    ${customer_groups}
+    ${length_of_list}=    Get Length    ${customer_groups}
+    ${customer_group_list}  Get WebElements    ${customer_group_checkbox_row}
+    FOR    ${i}    IN RANGE    0    ${length_of_list}
+        ${group_name}=    Replace String    ${customer_group_checkbox}    Dummy    ${customer_groups}[${i}]
+        ${group_checkbox}=    Replace String    ${customer_checkbox_edit_group}    Dummy       ${customer_groups}[${i}]
+        Click Element    ${group_name}
     END
     Wait Until Element Is Enabled    ${save_button_customer_group}
     Click Element    ${save_button_customer_group}
     [Return]    ${group_count}
 
 Verify Customer Removed From All Groups
+    Wait Until Page Does Not Contain Element    ${save_button_customer_group}    timeout=20s
     Wait Until Page Contains Element    ${group_assigned_name}    timeout=10s
     ${no_of_groups_assigned}    Get WebElements    ${group_assigned_name}
     ${group_count}   Get Length   ${no_of_groups_assigned}
@@ -927,3 +948,17 @@ Add Customer Group
     Sleep    3s
     Wait Until Page Contains Element    ${start_billing_button}
     [Return]    ${total_groups_tagged}
+
+Add Existing GST
+    [Arguments]  ${details}
+    ${gst_details}  Create Dictionary   &{details}
+    Wait Until Page Contains Element    ${tax_invoice}    timeout=10s
+    Wait Until Keyword Succeeds    3    3    Click Element    ${tax_invoice}
+    Wait Until Page Contains Element    ${cg_add_gst_button}    timeout=10s
+    Click Element    ${cg_add_gst_button}
+    Wait Until Page Contains Element    ${cg_manage_gstin_header}    timeout=10s
+    Wait Until Page Contains Element    //label[contains(text(),"${gst_details.legal_name}")]//ancestor::label//preceding-sibling::input[@class="custom-control-input"]        timeout=10s
+    Sleep    0.3
+    Click Element    //label[contains(text(),"${gst_details.legal_name}")]//ancestor::label//preceding-sibling::input[@class="custom-control-input"]
+    Wait Until Element Is Enabled    ${confirm_selected_button}    timeout=10s
+    Click Element    ${confirm_selected_button}

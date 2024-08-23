@@ -37,7 +37,7 @@ Verify Shortcut Key Displays And Hide Catalogue Window
     Page Should Not Contain Element    ${hide_catalog_button}
 
 Verify Shortcut Key Allows Updating Catalogue
-    Wait Until Page Contains Element    ${catalog_update}
+    Wait Until Page Contains Element    ${catalog_update}    timeout=20s
     Page Should Contain Element    ${catalog_update}
     Page Should Contain Element    ${keyboard_shortcuts_link}
     Page Should Contain Element    ${done_progress}

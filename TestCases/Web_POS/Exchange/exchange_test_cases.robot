@@ -21,6 +21,7 @@ Test Teardown   Close Browser
 *** Variables ***
 ${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Exchange${/}exchange_test_data.xlsx
 ${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Exchange${/}exchange_test_data.xlsx
+${response}=    'NULL'
 
 *** Test Cases ***
 Zwing_E_01 Check whether Exchange text is clickable or not
@@ -368,7 +369,7 @@ Zwing_E_20 Search for a already used exchange invoice in search bar then check t
 
 
 Zwing_E_21 exchanged less quantity of a invoice , again search for the invoice then check the response.
-    [Tags]    retry
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_21
     ${response}     Login With Valid Username And Password | POS    ${pos_data}
@@ -976,6 +977,7 @@ Zwing_E_59 add a product which total amount is in decimal, add a alternate produ
 
 
 Zwing_E_60 check the behaviour of the system when payment amount is 0
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_60
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -1263,6 +1265,7 @@ Zwing_E_76 Create sales invoice by applying item level promo and manual discount
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_E_77 Create sales invoice by applying item level promo and manual discount in one product, select a alternate product with same quantity and net price is => then exchanged product net price then check the response
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_77
     ${response}     Login With Valid Username And Password | POS    ${pos_data}
@@ -1338,6 +1341,7 @@ Zwing_E_79 Select salesperson and click on assign to all then salesperson needs 
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_E_80 Select exchange product which has netprice > replacement multiple price products one row only then check the response
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_80
     ${response}     Login With Valid Username And Password | POS    ${pos_data}
@@ -1386,7 +1390,7 @@ Zwing_E_82 Apply a item level Promo Buy 1 Get 20% off discount of item create a 
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_82
     Open Application | Admin
-    Login Into Admin | Zwing
+    Login With Valid Username And Password    ${pos_data}
     Go To Allocation Page
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
@@ -1418,7 +1422,7 @@ Zwing_E_83 Apply a slab based promo on item level , add multiple item in cart wi
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_83
     Open Application | Admin
-    Login Into Admin | Zwing
+    Login With Valid Username And Password    ${pos_data}
     Go To Allocation Page
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
@@ -1450,7 +1454,7 @@ Zwing_E_84 Apply a item level Promo Buy 4 Get 20% off discount of item , create 
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_84
     Open Application | Admin
-    Login Into Admin | Zwing
+    Login With Valid Username And Password    ${pos_data}
     Go To Allocation Page
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
@@ -1482,7 +1486,7 @@ Zwing_E_85 Apply a slab based promo on item level ,add multiple unique item in c
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_85
     Open Application | Admin
-    Login Into Admin | Zwing
+    Login With Valid Username And Password    ${pos_data}
     Go To Allocation Page
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
@@ -1513,7 +1517,7 @@ Zwing_E_86 Create a sale bill which have any bill level promo select similar pro
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_86
     Open Application | Admin
-    Login Into Admin | Zwing
+    Login With Valid Username And Password    ${pos_data}
     Go To Allocation Page
     Set Promotion Priority As Highest    ${pos_data}
     Close Browser
@@ -1548,7 +1552,7 @@ Zwing_E_87 Create different value based slab on bill level , enable auto - promo
     Add Customer Details for partial payment    ${pos_data}
     ${value}    Get payable amount
     Verify Billing Checkout
-    Payment By Cash       ${value}
+    Make Payment By UPI      ${value}
     ${get_cust_info}    Get Invoice Number    ${pos_data}
     Click On Back Button | Checkout
     Change Billing Mode    ${pos_data}
@@ -1602,6 +1606,7 @@ Zwing_E_90 Void sale invoice then select sales invoice for exchange then check t
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_E_91 Once invoice is exchange then enter invoice no. of exchange invoice then check the response
+    [[Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_91
     ${response}     Login With Valid Username And Password | POS    ${pos_data}
@@ -1662,6 +1667,7 @@ Zwing_E_94 Click on Cancel button on switch to Exchange popup box
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_E_95 Disable the allow Exchange Policy, and click on dropdown to change the module
+    [Tags]  valid failure
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_95
     ${response}     Login With Valid Username And Password | POS    ${pos_data}

@@ -18,6 +18,7 @@ Test Teardown   Close Browser
 *** Variables ***
 ${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Order${/}manual_discount_order_test_data.xlsx
 ${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Order${/}manual_discount_order_test_data.xlsx
+${response}=    'NULL'
 
 *** Test Cases ***
 Zwing_O_MD_1 Apply Item Level Manual Discount Assortment Wise
@@ -101,14 +102,14 @@ Zwing_O_MD_6 Apply Item Level Manual Discount | Effective date and valid up to d
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
 
 Zwing_O_MD_7 Bill Level manual discount
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_07
      ${response}    Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      ${bill_data}    Apply Bill Manual Discount | Select From List | Order    ${discount_data}
      Verify Bill Level Manual Discount | Order    ${bill_data}
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
@@ -121,7 +122,7 @@ Zwing_O_MD_8 Bill Level manual discount as Fixed Amount
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      ${bill_data}    Apply Bill Manual Discount | Select From List | Order    ${discount_data}
      Verify Bill Level Manual Discount | Order    ${bill_data}
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
@@ -134,7 +135,7 @@ Zwing_O_MD_9 Bill level manual discount as Percentage
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      ${bill_data}    Apply Bill Manual Discount | Select From List | Order    ${discount_data}
      Verify Bill Level Manual Discount | Order    ${bill_data}
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
@@ -147,20 +148,20 @@ Zwing_O_MD_10 Allocate Discount to Customer Group
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      ${bill_data}    Apply Bill Manual Discount | Select From List | Order    ${discount_data}
      Verify Bill Level Manual Discount | Order    ${bill_data}
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
 
 Zwing_O_MD_11 Manual Discount button | Stores
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_11
      ${response}    Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      ${bill_data}    Apply Bill Manual Discount | Select From List | Order    ${discount_data}
      Verify Bill Level Manual Discount | Order    ${bill_data}
      [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
@@ -173,7 +174,7 @@ Zwing_O_MD_12 Select the effective and valid up to date
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      ${bill_data}    Apply Bill Manual Discount | Select From List | Order    ${discount_data}
      Verify Bill Level Manual Discount | Order    ${bill_data}
      [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
@@ -228,20 +229,20 @@ Zwing_O_MD_16 Bill level custom discount
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      ${bill_level}    Apply Bill Manual Discount | Custom Discount | Order    ${discount_data}
      Verify Bill Level Manual Discount | Order    ${bill_level}
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
 
 Zwing_O_MD_17 Bill Level Custom Discount with discount type as amount
-    ${POS_TD}=    Get Test Data File    ${ENV}   ${QA_TD}  ${PROD_TD}
+    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    TC_17
      ${response}    Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      ${bill_level}    Apply Bill Manual Discount | Custom Discount | Order    ${discount_data}
      Verify Bill Level Manual Discount | Order    ${bill_level}
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
@@ -254,7 +255,7 @@ Zwing_O_MD_18 Bill Level Custom Discount with discount type as Percentage
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      ${bill_level}    Apply Bill Manual Discount | Custom Discount | Order    ${discount_data}
      Verify Bill Level Manual Discount | Order    ${bill_level}
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
@@ -333,7 +334,7 @@ Zwing_O_MD_25 Apply Manual Discount Button |Policy : Allows cashier to apply man
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      Verify Bill Level Discount Button Is Disabled
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
 
@@ -345,7 +346,7 @@ Zwing_O_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply man
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      Verify Bill Level Discount Button Is Enabled
      [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
 
@@ -357,7 +358,7 @@ Zwing_O_MD_27 Apply Manual Discount Button Policy : Allow cashier to select bill
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      Verify Disable Bill Level Discount List
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
 
@@ -369,7 +370,7 @@ Zwing_O_MD_28 Apply Manual Discount Button Policy : Allow cashier to select bill
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      Verify Enable Bill Level Discount List
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
 
@@ -381,7 +382,7 @@ Zwing_O_MD_29 Apply Manual Discount Button Policy : Allow cashier to enter bill 
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      Verify Enable Bill Level Custom Discount
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
 
@@ -393,7 +394,7 @@ Zwing_O_MD_30 Apply Manual Discount Button Policy : Allow cashier to enter bill 
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      Verify Disable Bill Level Custom Discount
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
 
@@ -405,7 +406,7 @@ Zwing_O_MD_31 Apply Manual Discount Button Policy : Discount capping (amount) Bi
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      ${bill_data}    Apply Bill Manual Discount | Custom Discount | Order    ${discount_data}
      Verify Bill Level Custom Discount More Than Percentage Limit    ${bill_data}
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
@@ -418,7 +419,7 @@ Zwing_O_MD_32 Apply Manual Discount Button Policy : Discount capping (amount) Bi
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      ${bill_data}    Apply Bill Manual Discount | Custom Discount | Order    ${discount_data}
      Verify Bill Level Custom Discount More Than Capping Amount Limit    ${bill_data}
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
@@ -555,7 +556,7 @@ Zwing_O_MD_43 Apply Manual Discount Button | Apply Bill level custom discount mo
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      ${bill_data}    Apply Bill Manual Discount More Than Bill Amount And Less Than Capping Amount | Custom Discount    ${discount_data}
      Verify Bill Level Discount Can Not Be Greater Than Payable Amount     ${bill_data}
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}
@@ -568,7 +569,7 @@ Zwing_O_MD_44 Apply Manual Discount Button | Apply Bill level custom discount le
      Change Billing Mode    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
      Add Customer Details    ${discount_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      ${bill_data}     Apply Bill Manual Discount Less Than Bill Amount And Less Than Capping Amount | Custom Discount    ${discount_data}
      Verify Bill Manual Discount Less Than Item Amount    ${bill_data}
     [Teardown]    Revoke Licence Key | API   ${response}    ${discount_data}

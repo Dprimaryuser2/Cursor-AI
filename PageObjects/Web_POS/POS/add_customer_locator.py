@@ -25,14 +25,14 @@ state_select = '//select[@id="select-state"]'
 state_option = '//option[@id="state"]' # change state name
 select_city = '//select[@id="select-city"]'
 city_option = '//option[@id="city"]'
-
+close_alert_button = '(//div[@role="alert"]//*[name() = "svg" and @class="close svg-inline--fa fa-times fa-w-11"])[1]'
 #edit groups locators
 edit_groups_button = '//button[@id="edit-groups"]'
 edit_groups_window_header = "//header[@class='modal-header']//child::h5[@class='modal-title' and contains(text(),'Assign customer group')]"
 customer_group_checkbox = "//div[@class='custom-check hover-color mb-1']//child::div//label[contains(normalize-space(),'Dummy')]"      # replace Dummy with the Group name         # modify
 save_button_customer_group = "//button[@id='save-customer-group']//child::span"
 cg_saved_successfully_popup= " //div[@class='alert alert-dismissible alert-success fade show' and text()='Customer groups updated successfully.']"
-
+customer_checkbox_edit_group = '//label[contains(text(),"Dummy")]//preceding-sibling::input[@type="checkbox"]'
 #add tax invoice
 tax_invoice = '//span[text()="Tax Invoice"]//ancestor::div[@class="custom-control custom-control-inline custom-radio"]/input'
 cg_add_gst_button="//button[@id='add-gst' or @class='btn col-md-12 btn-secondary' and text()='Add GST']"
@@ -50,7 +50,7 @@ uin_radio='//span[contains(text(),"UIN")]//ancestor::label[@class="custom-contro
 enter_legal_name='//input[@id="legal-name-input" and @placeholder="Enter legal name"]'
 enter_15digit_gstin='//input[@id="input-gstin" and @placeholder="Enter 15 digit GSTIN…"]'
 save_gstin_button="//button[@id='save-gstin']//child::span[contains(text(),'Save GSTIN')]"
-
+gst_info_label = '//label[text()="GSTIN Information"]'
 #more info customer icon
 customer_info_icon="//body/div[@id='app']/div[@id='theme']/div[@class='dashboard']/section/div[@class='container-fluid']/div[@class='row']/div[@class='fadein col-md-6 col-lg-6']/div[@class='row mt-2']/div[@class='col-md-6 col-lg-6']/div[@id='customer-info']//a"
 customer_info_window_title='//header[contains(@id,"___BV_modal_header_")]//child::h5[text()="Customer Information"]'

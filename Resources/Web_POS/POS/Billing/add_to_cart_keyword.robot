@@ -40,6 +40,7 @@ Add Weighted UOM Products to Cart | Edit Cart Quantity Mode
             Wait Until Page Does Not Contain Element    ${select_mrp}
         END
         Sleep    1s
+        Wait Until Page Contains Element    ${switch_edit_add_toggle}    timeout=15s
         # edit cart
         ${edit_toggle_enabled}    Run Keyword And Return Status    Element Should Be Visible    ${edit_toggle_on}
         IF    ${edit_toggle_enabled}
@@ -59,6 +60,11 @@ Add Weighted UOM Products to Cart | Add Cart Quantity Mode
     ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
     IF    ${clear_item_enabled}
       Click Element    ${clear_all_items}
+      Sleep  0.5
+      ${first_item}=   Run Keyword And Return Status    Element Should Be Visible    ${first_item_product_name}   timeout=20s
+      IF    ${first_item}
+           Click Element    //a[@title="Delete Product"]
+      END
       Wait Until Element Is Not Visible    ${first_item_product_name}     timeout=20s
       Wait Until Page Contains Element    ${cart_0}   timeout=20s
     END
@@ -72,14 +78,14 @@ Add Weighted UOM Products to Cart | Add Cart Quantity Mode
         Input Text    ${product_search_bar}    ${key}
         Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
         Click Element    ${search_add_button}
-        Sleep    2s
-        Sleep    1s
+        Sleep    3s
         ${multiple_product_present}=    Run Keyword And Return Status    Element Should Be Visible    ${select_mrp}
         IF    ${multiple_product_present}
             Wait Until Page Contains Element    ${select_mrp}   timeout=10s
             Click Element    ${add_to_cart_mrp}
             Wait Until Page Does Not Contain Element    ${select_mrp}
         END
+        Wait Until Page Contains Element    ${switch_edit_add_toggle}    timeout=15s
         ${add_toggle_enabled}    Run Keyword And Return Status    Element Should Be Visible    ${add_toggle_button}
         IF    ${add_toggle_enabled}
             Input Text    ${quantity_input}    ${value}
@@ -88,7 +94,7 @@ Add Weighted UOM Products to Cart | Add Cart Quantity Mode
             Input Text    ${quantity_input}    ${value}
         END
         Click Element    ${update_cart_quantity}
-        Sleep    1s
+        Wait Until Page Does Not Contain Element    ${update_cart_quantity}    timeout=10s
     END
 
 Update Product Quantity | Edit Cart Quantity Mode
@@ -316,6 +322,7 @@ Add Previous Customer
     Wait Until Keyword Succeeds    5     3      Click Element    ${add_customer_link}
     Wait Until Element Is Visible    ${customer_phone_field}
     Click Element    ${customer_phone_field}
+    Sleep  1s
     Input Text    ${customer_phone_field}    ${customer_data.phone_number}
     Wait Until Element Is Enabled    ${continue_billing_button}  timeout=20s
     Wait Until Keyword Succeeds    3     3    Click Element    ${continue_billing_button}

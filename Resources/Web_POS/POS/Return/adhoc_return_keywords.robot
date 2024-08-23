@@ -73,6 +73,12 @@ Navigate To Checkout Page
     Wait Until Page Contains Element    ${checkout_heading}    timeout=5
     Page Should Contain Element    ${checkout_heading}    timeout=5
 
+Navigate To Return Checkout Page
+    Wait Until Element Is Enabled    ${checkout_button}    timeout=5
+    Click Element    ${checkout_button}
+    Wait Until Page Contains Element    ${checkout_heading_return}    timeout=5
+    Page Should Contain Element    ${checkout_heading_return}    timeout=5
+
 Cancel Auto Switch To Billing
     Click Element    ${order_management_option_sidebar}
     Wait Until Page Contains Element    ${order_management_option_sidebar}    timeout=5

@@ -12,15 +12,14 @@ Resource    ../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 Test Setup    Open Application | POS
 Test Teardown   Close Browser
 
-#*** Variables ***
-#${MOP_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}mode_of_payment_test_data.xlsx
-
 *** Variables ***
 ${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Billing${/}mode_of_payment_test_data.xlsx
 ${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Billing${/}mode_of_payment_test_data.xlsx
+${response}=    'NULL'
 
 *** Test Cases ***
 Zwing_MOP_1 Customer Paid amount equal to payable amount
+     [Tags]    test:retry(1)
      ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_01
     ${response}=  Login With Valid Username And Password | POS   ${mop_data}
@@ -35,7 +34,8 @@ Zwing_MOP_1 Customer Paid amount equal to payable amount
      [Teardown]    Revoke Licence Key | API   ${response}      ${mop_data}
 
 Zwing_MOP_2 Customer Paid amount less than to payable amount(continue button remains disabled)
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_02
     ${response}=  Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
@@ -48,6 +48,7 @@ Zwing_MOP_2 Customer Paid amount less than to payable amount(continue button rem
      [Teardown]    Revoke Licence Key | API   ${response}      ${mop_data}
 
 Zwing_MOP_3 Customer Paid amount more than to payable amount
+     [Tags]    test:retry(1)
      ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_03
     ${response}=  Login With Valid Username And Password | POS   ${mop_data}
@@ -78,7 +79,8 @@ Zwing_MOP_3 Customer Paid amount more than to payable amount
 #Zwing_MOP_15 Store Credit should be against the mobile number
 
 Zwing_MOP_16 Redeem Store Credit using Voucher Code
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_16
     ${response}=  Login With Valid Username And Password | POS   ${mop_data}
      Open The Session    ${mop_data}
@@ -92,7 +94,8 @@ Zwing_MOP_16 Redeem Store Credit using Voucher Code
      [Teardown]    Revoke Licence Key | API   ${response}      ${mop_data}
 
 Zwing_MOP_17 Collecting Payment by Redeem Store Credit using voucher code | Partially Redemption Allowed
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_17
    ${response}=  Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -107,8 +110,8 @@ Zwing_MOP_17 Collecting Payment by Redeem Store Credit using voucher code | Part
     [Teardown]    Revoke Licence Key | API   ${response}      ${mop_data}
 
 Zwing_MOP_18 Collecting Payment by Redeem Store Credit using voucher | Partially Redemption is not Allowed
-    [Tags]    debugged
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_18
    ${response}=  Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -127,7 +130,8 @@ Zwing_MOP_18 Collecting Payment by Redeem Store Credit using voucher | Partially
 #Zwing_MOP_21 Redeem Store Credit against Mobile Number | OTP Authentication is allowed
 
 Zwing_MOP_22 Payment by using on Account Sale
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_22
    ${response}=  Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -141,7 +145,8 @@ Zwing_MOP_22 Payment by using on Account Sale
     [Teardown]    Revoke Licence Key | API   ${response}      ${mop_data}
 
 Zwing_MOP_23 Payment by using on Account Sale | Account Balance is Greater or Equal to payable amount
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_23
    ${response}=  Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -155,7 +160,8 @@ Zwing_MOP_23 Payment by using on Account Sale | Account Balance is Greater or Eq
     [Teardown]    Revoke Licence Key | API   ${response}      ${mop_data}
 
 Zwing_MOP_24 Payment by using on Account Sale | Account Balance is less than payable amount
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_24
    ${response}=  Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -168,7 +174,8 @@ Zwing_MOP_24 Payment by using on Account Sale | Account Balance is less than pay
 
 
 Zwing_MOP_25 Additional MOP's | Validate additional MOP's available.
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_25
    ${response}=  Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -182,7 +189,8 @@ Zwing_MOP_25 Additional MOP's | Validate additional MOP's available.
     [Teardown]    Revoke Licence Key | API   ${response}      ${mop_data}
 
 Zwing_MOP_26 Clicking on a MOP should open a popup to enter transaction reference id
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_26
    ${response}=  Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -194,8 +202,8 @@ Zwing_MOP_26 Clicking on a MOP should open a popup to enter transaction referenc
     [Teardown]    Revoke Licence Key | API   ${response}      ${mop_data}
 
 Zwing_MOP_27 Additional MOP's | Enter transaction id
-    [Tags]    debugged
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_27
    ${response}=  Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -208,7 +216,8 @@ Zwing_MOP_27 Additional MOP's | Enter transaction id
     [Teardown]    Revoke Licence Key | API   ${response}      ${mop_data}
 
 Zwing_MOP_28 Validate the amount auto-populated in customer paid field.
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_28
    ${response}=  Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -221,7 +230,8 @@ Zwing_MOP_28 Validate the amount auto-populated in customer paid field.
     [Teardown]    Revoke Licence Key | API   ${response}      ${mop_data}
 
 Zwing_MOP_29 Close the transaction reference id popup using X button.
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_29
    ${response}=  Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -235,7 +245,8 @@ Zwing_MOP_29 Close the transaction reference id popup using X button.
     [Teardown]    Revoke Licence Key | API   ${response}      ${mop_data}
 
 Zwing_MOP_30 Customer paid field should be non - editable
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_30
    ${response}=  Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -248,7 +259,8 @@ Zwing_MOP_30 Customer paid field should be non - editable
     [Teardown]    Revoke Licence Key | API   ${response}      ${mop_data}
 
 Zwing_MOP_31 Complete payment by clicking on continue button, without entering transaction reference id
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_31
    ${response}=  Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}
@@ -262,7 +274,8 @@ Zwing_MOP_31 Complete payment by clicking on continue button, without entering t
     [Teardown]    Revoke Licence Key | API   ${response}      ${mop_data}
 
 Zwing_MOP_32 complete payment by clicking on continue button after entering transaction reference id.
-    ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    [Tags]    test:retry(1)
+     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${mop_data}=    Fetch Testdata By Id    ${MOP_TD}     TC_32
    ${response}=  Login With Valid Username And Password | POS   ${mop_data}
     Open The Session    ${mop_data}

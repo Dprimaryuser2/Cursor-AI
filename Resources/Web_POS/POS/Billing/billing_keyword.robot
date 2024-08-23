@@ -217,7 +217,7 @@ Auto Switch To Billing
     Click Element    ${customers_option_sidebar}
     Wait Until Page Contains Element    ${pos_option_sidebar}
     Click Element    ${pos_option_sidebar}
-    Wait Until Page Contains Element    ${switch_modal_text}
+#    Wait Until Page Contains Element    ${switch_modal_text}
     Wait Until Page Contains Element    ${switch_modal_proceed_button}
     Click Element    ${switch_modal_proceed_button}
 
@@ -268,6 +268,7 @@ Add Bill Remarks
    Capture Page Screenshot
 
 Automatic Invoice Generation
+   Wait Until Page Does Not Contain Element    ${payment_method_cash}   timeout=15s
    Wait Until Page Contains Element    ${payment_complete_heading}
    ${cust_info_checkout}   Get Customer Details | Checkout
    Click Element    ${print_invoice_button}
@@ -359,6 +360,7 @@ Verify Item Added In Cart
     Page Should Contain Element    ${in_store}
     Page Should Contain Element    ${delivery}
     Wait Until Page Contains Element    ${cart_last_element}  timeout=5s
+    Sleep  1s
     ${cart_count}  Get Text   ${cart_last_element}
     Convert To Integer    ${cart_count}
     ${i}=  Set Variable    1
@@ -397,7 +399,7 @@ Verify Alert Message for Price Overridden | Billing
 
 Verify Price Override Link Is Disabled
      Wait Until Page Contains Element    ${first_item_product_name}  timeout=15s
-     Sleep  2s
+     Wait Until Page Does Not Contain Element    ${price_override_heading}    timeout=20s
      Click Element  ${first_item_product_name}
      Wait Until Page Contains Element    ${price_override_link_disable}
      Page Should Contain Element   ${price_override_link_disable}

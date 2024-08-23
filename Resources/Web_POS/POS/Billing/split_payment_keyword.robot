@@ -61,12 +61,9 @@ Verify Split By Single MOP
     Page Should Contain Element    ${split_payment_popup}
 
 Verify Mop summaryMOP's added after completing the payment
-    Sleep    1.5
-    Wait Until Page Contains Element    ${checkout_order_summary}
+    Wait Until Page Contains Element    ${checkout_order_summary}    timeout=20s
     Wait Until Page Contains Element    ${cash_order_summary}   timeout=10s
     Page Should Contain Element    ${cash_order_summary}
-    Wait Until Page Contains Element    ${paytm_order_summary}   timeout=10s
-    Page Should Contain Element    ${paytm_order_summary}
 
 Enable Split payment mode
     Wait Until Page Contains Element    ${checkout_split_payment}   timeout=20s

@@ -18,6 +18,7 @@ Test Teardown   Close Browser
 *** Variables ***
 ${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Order${/}salesperson_order_test_data.xlsx
 ${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Order${/}salesperson_order_test_data.xlsx
+${response}=    'NULL'
 
 *** Test Cases ***
 Zwing_ST_1 Salesperson Tagging is Enabled and Salesperson Tagging is Mandatory in Policies
@@ -139,10 +140,10 @@ Zwing_ST_10 Tagged Sales person view below the tagged Item
 #Zwing_ST_11
 
 Zwing_ST_12 Salesperson Tagging is Disabled in policies
-     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    TC_12
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id       ${POS_TD}    TC_12
     ${response}    Login With Valid Username And Password | POS    ${pos_data}
     Open The Session    ${pos_data}
-    Change Billing Mode  ${pos_data}
+    Change Billing Mode      ${pos_data}
     Verify Salesperson Tagging is Disabled
-    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
+    [Teardown]    Revoke Licence Key | API     ${response}      ${pos_data}

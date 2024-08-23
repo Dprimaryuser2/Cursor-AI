@@ -16,8 +16,9 @@ Resource    ../../../../Resources/Web_POS/POS/Order/add_to_cart_order_keyword.ro
 Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
     Wait Until Element Is Enabled    ${checkout_button}    timeout=10
     Click Element    ${checkout_button}
-    ${insufficient}    Run Keyword And Return Status    Page Should Contain Element    ${insufficient_inventory_continue_btn}
+    ${insufficient}    Run Keyword And Return Status    Wait Until Element Is Visible    ${insufficient_inventory_continue_btn}
     IF    ${insufficient}
+       Wait Until Element Is Enabled    ${insufficient_inventory_continue_btn}
        Click Element    ${insufficient_inventory_continue_btn}
     END
     Wait Until Page Contains Element    ${fulfilment_options_heading}    timeout=10
@@ -140,10 +141,6 @@ Verify Stock Not Available Popup | Order Is Packed
 Verify Stock Not Available Popup | When Invoices Is Generated
     Wait Until Element Is Enabled    ${order_completion_button}
     Click Element    ${order_completion_button}
-
-Verify Replace Product | Order Is Packed  #incomplete
-    Wait Until Element Is Enabled    ${confirm_order_button}
-    Click Element    ${confirm_order_button}
 
 Navigate To Discard Order Popup | Discard Order
     ${place_order_button_checkout}   Run Keyword And Return Status    Element Should Be Enabled    ${place_order_button}
@@ -460,3 +457,55 @@ Verify Confirm Order Popup
     Wait Until Element Is Visible    ${confirm_order_heading_confirm_order_popup}   timeout=10s
     Wait Until Element Is Enabled    ${review_button_confirm_order_popup}
     Wait Until Element Is Enabled    ${confirm_button_confirm_order_popup}
+
+Navigate To Order Confirmation Page From Order Summary Page
+    Wait Until Element Is Visible    ${confirm_order_button}    timeout=10
+    Wait Until Element Is Enabled    ${confirm_order_button}
+    Click Element    ${confirm_order_button}
+        ${confirm_order_popup_visible}  Run Keyword And Return Status    Element Should Be Visible    ${confirm_order_heading_confirm_order_popup}
+    IF    ${confirm_order_popup_visible}
+         Verify Confirm Order Popup
+         Click Element    ${review_button_confirm_order_popup}
+    END
+
+Verify Replace Product | Order Is Packed
+    Wait Until Element Is Visible    ${replace_button_order_confirm}    timeout=10
+    Wait Until Element Is Enabled    ${replace_button_order_confirm}
+    Click Element    ${replace_button_order_confirm}
+    Wait Until Element Is Visible    ${replace_popup_heading}   timeout=10
+
+Scan Barcode To Add Item And Quantity To Cart | Replace Product
+    [Arguments]    ${products}
+    ${my_dict}    Create Dictionary   &{products}
+    Log    ${my_dict.replace_items}
+    Wait Until Element Is Visible    ${search_bar_replace_page}    timeout=20s
+    ${items_list}=    Convert Items To List    ${my_dict.replace_items}
+    ${items_dict} =    Convert Item List To Dictionary    ${my_dict.replace_items}
+    FOR    ${item}    IN    @{items_dict.items()}
+        ${key}=    Set Variable    ${item}[0]
+        ${values}=    Set Variable    ${item}[1]
+        ${value}=    Convert To String    ${values}
+        Sleep    1s
+        Click Element    ${search_bar_replace_page}
+        Input Text    ${search_bar_replace_page}    ${key}
+        Wait Until Element Is Visible    ${search_product_result_replace_page}    timeout=20s
+        Sleep    1s
+        Click Element    ${search_product_result_replace_page}
+    END
+
+Verify Product Replace Button Functionality
+    Wait Until Element Is Visible    ${replace_button_replace_popup}
+    Wait Until Element Is Enabled    ${replace_button_replace_popup}
+    Element Should Be Enabled    ${replace_button_replace_popup}
+
+Verify Invoice Generation When Advance Payment Is Off | When Inovices Is Generated
+    Wait Until Element Is Visible    ${confirm_completion_pack_order}   timeout=10
+    Wait Until Element Is Enabled    ${confirm_completion_pack_order}
+    Click Element    ${confirm_completion_pack_order}
+    Wait Until Element Is Visible    ${order_options_order_summary}  timeout=10
+    Wait Until Element Is Enabled    ${order_options_order_summary}
+    Click Element    ${order_options_order_summary}
+    Wait Until Element Is Visible    ${generate_invoice_order_options}  timeout=10
+    Wait Until Element Is Enabled    ${generate_invoice_order_options}
+    Click Element    ${generate_invoice_order_options}
+    Page Should Contain    invoice_details

@@ -90,7 +90,8 @@ confirm_completion_pack_order = '//button[@class="btn btn-primary btn-block"]'
 cancel_button_pack_order = '//button[@class="btn btn-outline-primary btn-block"]'
 generate_invoice_pack_order = '//div[@class="pr-1 col-lg-6"]'
 print_order_receipt_pack_order = '//div[@class="pl-1 col-lg-6"]'
-
+generate_invoice_order_options = '//a[@class="dropdown-item text-dark" and contains(text(),"Generate Invoice")]'
+replace_button_replace_popup ='//button[contains(@class,"btn btn-primary btn-block")]'
 
 # bill remark
 options_checkout_page = '//button[contains(@class,"btn dropdown-toggle btn-light btn-sm")]'
@@ -114,3 +115,5 @@ negative_inventory_alert_order = '//div[@class="col-11"]//h6[contains(text(),"In
 review_button_confirm_order_popup ='//button[contains(@class, "btn btn-outline-primary btn-block") and contains(text(),"Review")]'
 confirm_button_confirm_order_popup = '//button[contains(@class, "btn btn-primary btn-block")]//span[text()="Confirm"]'
 confirm_order_heading_confirm_order_popup = '//h5[contains(@class,"modal-title") and contains(text(),"Confirm Order")]'
+
+

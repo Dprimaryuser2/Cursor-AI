@@ -21,10 +21,11 @@ Test Teardown   Close Browser
 *** Variables ***
 ${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Order${/}mode_of_payment_order_test_data.xlsx
 ${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Order${/}mode_of_payment_order_test_data.xlsx
+${response}=    'NULL'
 
 *** Test Cases ***
 Zwing_O_96 Customer Paid amount equal to payable amount
-    [Tags]    retry
+    [Tags]    test:retry(1)
     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_96
      ${response}    Login With Valid Username And Password | POS   ${mop_data}
@@ -168,7 +169,7 @@ Zwing_O_108 Payment by using on Account Sale | Account Balance is less than paya
 
 
 Zwing_O_109 Additional MOP's | Validate additional MOP's available
-    [Tags]    retry
+    [Tags]    test:retry(1)
     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_109
     ${response}    Login With Valid Username And Password | POS   ${mop_data}
@@ -197,7 +198,7 @@ Zwing_O_110 Clicking on a MOP should open a popup to enter transaction reference
     [Teardown]    Revoke Licence Key | API   ${response}    ${mop_data}
 
 Zwing_O_111 Additional MOP's | Enter transaction id
-     [Tags]    retry
+     [Tags]    test:retry(1)
     ${MOP_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${mop_data}=  Fetch Testdata By Id   ${MOP_TD}    TC_111
     ${response}    Login With Valid Username And Password | POS   ${mop_data}

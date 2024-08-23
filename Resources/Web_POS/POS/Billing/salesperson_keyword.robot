@@ -95,8 +95,9 @@ Assign A Salesperson All Items
     Click Element    ${name_in_assign_salesperson_row}
     Wait Until Element Is Enabled    ${assign_to_all_button}
     Click Element    ${assign_to_all_button}
-    Wait Until Page Contains Element    ${salesperson_tagged_message}
-    Wait Until Page Contains Element    ${close_assign_salesperson_window}
+    Wait Until Page Contains Element    ${salesperson_tagged_message}    timeout=10
+    Wait Until Page Does Not Contain Element    ${salesperson_tagged_message}    timeout=10
+    Wait Until Page Contains Element    ${close_assign_salesperson_window}    timeout=10
     Click Element    ${close_assign_salesperson_window}
 
 

@@ -18,10 +18,13 @@ Test Setup    Open Application | POS
 Test Teardown   Close Browser
 
 *** Variables ***
-${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Order${/}order_option_test_data.xlsx
+${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Order${/}order_option_test_data.xlsx
+${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Order${/}order_option_test_data.xlsx
+${response}=    'NULL'
 
 *** Test Cases ***
 Zwing_O_130 Check conditions before confirming the order
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_130
     ${response}    Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -36,6 +39,7 @@ Zwing_O_130 Check conditions before confirming the order
     [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_131 Confirmation message
+      ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_131
      ${response}    Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -50,21 +54,23 @@ Zwing_O_131 Confirmation message
     Verify Order Confirm Alert
     [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
-#Zwing_O_132 Order Review before confirming the order
-#    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_132
-#    ${response}    Login With Valid Username And Password | POS   ${pos_data}
-#    Open The Session    ${pos_data}
-#    Change Billing Mode    ${pos_data}
-#    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-#    ${value}    Get payable amount
-#    Add Customer Details    ${pos_data}
-#    Assign A Salesperson All Items | Order    ${pos_data}
-#    Apply Item Promo | Manual
-#    Verify Promo Discount In Cart | POS
-#    Click Continue Button Of Insufficient Inventory And Set Fullfilment Date
-##    [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
+Zwing_O_132 Order Review before confirming the order
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_132
+    ${response}    Login With Valid Username And Password | POS   ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
+    ${value}    Get payable amount
+    Add Customer Details    ${pos_data}
+    Assign A Salesperson All Items | Order    ${pos_data}
+    Apply Item Promo | Manual
+    Verify Promo Discount In Cart | POS
+    Click Continue Button Of Insufficient Inventory And Set Fulfillment Date
+    [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_133 Confirming the order without reviewing
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_133
     ${response}    Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
@@ -79,6 +85,7 @@ Zwing_O_133 Confirming the order without reviewing
     [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_137 Collect pending amount of total payable | Taken advance should be less than payable amount or zero
+   ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_137
      ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -93,6 +100,7 @@ Zwing_O_137 Collect pending amount of total payable | Taken advance should be le
      [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_138 Collect pending amount using split payment
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_138
      ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -111,6 +119,7 @@ Zwing_O_138 Collect pending amount using split payment
      [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_139 Collected amount need to reflect in bill summary
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_139
      ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -128,6 +137,7 @@ Zwing_O_139 Collected amount need to reflect in bill summary
      [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_140 Collected amount could be removal and removed amount will refelct on payable amount
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_140
      ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -147,6 +157,7 @@ Zwing_O_140 Collected amount could be removal and removed amount will refelct on
      [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_141 Re-Print Order Receipt
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_141
      ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -166,6 +177,7 @@ Zwing_O_141 Re-Print Order Receipt
      [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_142 Cancel Order if advance is already paid, need to refund
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_142
      ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -186,6 +198,7 @@ Zwing_O_142 Cancel Order if advance is already paid, need to refund
      [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_144 Refund by Cash
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_144
      ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -206,6 +219,7 @@ Zwing_O_144 Refund by Cash
       [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 Zwing_O_145 Refund by Credit note
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_145
      ${response}    Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}

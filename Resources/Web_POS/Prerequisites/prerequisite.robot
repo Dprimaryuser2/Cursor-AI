@@ -11,7 +11,7 @@ Variables    ../../../PageObjects/Web_POS/POS/pos_locators.py
 Resource   ../../../Resources/Web_POS/POS/Billing/add_to_cart_keyword.robot
 
 *** Variables ***
-${ENV}    STAGING
+${ENV}    PROD
 ${STAGING_URL}=      ${pos_url_staging}
 ${PROD_URL}=    ${pos_url_prod}
 
@@ -61,7 +61,8 @@ Revoke Serial Key
     Close All Browsers
 
 Tear It Down If Test Case Failed
-    Run Keyword If Test Failed    Revoke The Licence Key From Console
+    [Arguments]    ${pos_data}
+    Run Keyword If Test Failed    Revoke The Licence Key From Console      ${pos_data}   
     Sleep    0.2
     ${status}=  Run Keyword And Return Status    Page Should Contain Element    ${pos_option_sidebar}
     IF    ${status}
@@ -99,10 +100,18 @@ Tear It Down If Test Case Failed
 #    Switch Browser    1
 #    END
 
-Revoke The Licence Key From Console
+Revoke The Licence Key From Console 
+    [Arguments]     ${pos_data}
+    ${pos_data_dict}=    Create Dictionary    &{pos_data}
     Open Application | Admin
-    Login Into Admin | Zwing
-    Wait Until Keyword Succeeds    8    2    Go To Pos Terminal
+    Input Text    ${email}      ${pos_data_dict.username_admin}
+    Wait Until Element Is Visible    ${password}    timeout=20s
+    Input Text    ${password}    ${pos_data_dict.password_admin}
+    Click Button    ${continue_button}
+    Wait Until Page Contains Element    ${dashboard}    timeout=20s
+    Page Should Contain Element    ${invoice_icon}
+    Page Should Contain Element    ${product_icon}
+    Wait Until Keyword Succeeds    2    2    Go To Pos Terminal
     Wait Until Element Is Visible    ${pos_heading}    timeout=20s
     Wait Until Element Is Visible    ${pos_search_bar}    timeout=20s
     Input Text    ${pos_search_bar}   i9_store
@@ -166,6 +175,9 @@ Revoke The Licence Key From Console
 
 Go To Pos Terminal
     Wait Until Keyword Succeeds    5    2     Click Element    ${pos_terminal_logo}
+    Run Keyword If    ${ENV} == STAGING    Click POS terminal Link
+        
+Click POS terminal Link
     Wait Until Element Is Visible    ${pos_terminal_link}
     Wait Until Keyword Succeeds    5    2     Click Element    ${pos_terminal_link}
 

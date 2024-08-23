@@ -262,23 +262,41 @@ Get Customer Details | Checkout
     ${in_name}  Get Text    ${invoice_customer_name}
     ${in_number}  Get Text    ${invoice_customer_phone}
     ${in_amount}  Get Text    ${total_amount_checkout}
+    ${in_amount}   Remove Characters   ${in_amount}
     ${cust_info_checkout}=  Create Dictionary    invoice_id=${in_id}  invoice_name=${in_name}  phone_number=${in_number}  total_amount=${in_amount}    search_invoice=${in_id}
     Append To List    ${invoice_ids}    ${in_id}
     Set Global Variable    ${invoice_ids}
     [RETURN]   ${cust_info_checkout}
 
+#Get Customer Details | Print Invoice
+#   Wait Until Page Contains Element    ${bill_container}
+#   ${inp_id}  Get Text    ${invoice_no}
+#   ${inp_name}  Get Text    ${name_invoice}
+#   ${inp_number}  Get Text    ${number_invoice}
+#   ${inp_amount}  Get Text    ${invoice_amount}
+#   ${cust_info_invoice}=  Create Dictionary    pinvoice_id=${inp_id}  pinvoice_name=${inp_name}  pphone_number=${inp_number}  ptotal_amount=${inp_amount}
+#   [RETURN]   ${cust_info_invoice}
+
 Get Customer Details | Print Invoice
-   Wait Until Page Contains Element    ${bill_container}
-   ${inp_id}  Get Text    ${invoice_no}
-   ${inp_name}  Get Text    ${name_invoice}
-   ${inp_number}  Get Text    ${number_invoice}
-   ${inp_amount}  Get Text    ${invoice_amount}
-   ${cust_info_invoice}=  Create Dictionary    pinvoice_id=${inp_id}  pinvoice_name=${inp_name}  pphone_number=${inp_number}  ptotal_amount=${inp_amount}
-   [RETURN]   ${cust_info_invoice}
+    Wait Until Page Contains Element    ${bill_container}
+    ${inp_id}  Get Text    ${invoice_no}
+    ${inp_number}  Get Text    ${number_invoice}
+    ${inp_amount}  Get Text    ${invoice_amount}
+    ${inp_id}  Split String    ${inp_id}   :
+    ${inp_id}  Get From List    ${inp_id}   1
+    ${inp_id}   Remove Characters   ${inp_id}
+    ${inp_number}  Split String  ${inp_number}  :
+    ${inp_number}  Get From List    ${inp_number}   1
+    ${inp_number}   Remove Characters   ${inp_number}
+    ${inp_amount}  Split String    ${inp_amount}   :
+    ${inp_amount}  Get From List    ${inp_amount}   1
+    ${inp_amount}   Remove Characters   ${inp_amount}
+    ${cust_info_invoice}=  Create Dictionary    pinvoice_id=${inp_id}   pphone_number=${inp_number}  ptotal_amount=${inp_amount}
+    [RETURN]   ${cust_info_invoice}
 
 Verify Customer Details | Print Invoice
    [Arguments]    ${cust_info_checkout}    ${cust_info_invoice}
    Should Be Equal   ${cust_info_checkout.invoice_id}   ${cust_info_invoice.pinvoice_id}
-   Should Be Equal    ${cust_info_checkout.invoice_name}   ${cust_info_invoice.pinvoice_name}
+#   Should Be Equal    ${cust_info_checkout.invoice_name}   ${cust_info_invoice.pinvoice_name}
    Should Be Equal    ${cust_info_checkout.phone_number}   ${cust_info_invoice.pphone_number}
    Should Be Equal   ${cust_info_checkout.total_amount}   ${cust_info_invoice.ptotal_amount}

@@ -54,19 +54,6 @@ Navigate To Order Confirmation Page From Checkout Page
     Wait Until Element Is Enabled    ${confirm_order_button_order_confirm_page}
     Click Element    ${confirm_order_button_order_confirm_page}
 
-Navigate To Order Confirmation Page From Order Summary Page
-    Wait Until Element Is Visible    ${confirm_order_button}    timeout=10
-    Wait Until Element Is Enabled    ${confirm_order_button}
-    Click Element    ${confirm_order_button}
-        ${confirm_order_popup_visible}  Run Keyword And Return Status    Element Should Be Visible    ${confirm_order_heading_confirm_order_popup}
-    IF    ${confirm_order_popup_visible}
-         Verify Confirm Order Popup
-         Click Element    ${review_button_confirm_order_popup}
-    END
-    Wait Until Element Is Visible    ${confirm_order_button_order_confirm_page}    timeout=10
-    Wait Until Element Is Enabled    ${confirm_order_button_order_confirm_page}
-    Click Element    ${confirm_order_button_order_confirm_page}
-
 Enter 10 Percent Amount In Payable Amount
     [Arguments]     ${total_amount}
     ${new_amount} =  Evaluate    ${total_amount} * 0.1

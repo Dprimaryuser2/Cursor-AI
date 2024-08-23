@@ -474,7 +474,7 @@ Verify Item Level Discount Can Not Be Greater Than Item Amount
 
 Verify Item Manual Discount Less Than Item Amount
     [Arguments]    ${product_price}
-    Sleep    1s
+    Wait Until Page Does Not Contain Element    ${discount_value}    timeout=20s
     ${product_price_dict}    Create Dictionary   &{product_price}
     ${expected_product_total}=    Evaluate    ${product_price_dict.product_total}- ${product_price_dict.discount}
     ${subtotal_amount}=    Get Text    ${update_product_subtotal}

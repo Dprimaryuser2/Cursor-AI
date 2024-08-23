@@ -9,7 +9,7 @@ from email.mime.base import MIMEBase
 from email import encoders
 
 
-def load_email_config(config_file='Runner/notifier.json'):
+def load_email_config(config_file='notifier.json'):
     """
     Load email configuration from a JSON file.
     """
@@ -171,7 +171,7 @@ if __name__ == "__main__":
     email_config = load_email_config()
 
     # Specify the path to the output.xml
-    xml_path = os.path.join(r"", "output.xml")
+    xml_path = os.path.join(r"", "../output.xml")
 
     # Extract suite-wise summary statistics
     suite_summaries = extract_suite_statistics(xml_path)
@@ -185,8 +185,8 @@ if __name__ == "__main__":
 
     # attachment files
     attachment_files = [
-        'log.html',
-        "report.html",  # Add more file paths as needed
+        '../log.html',
+        "../report.html",  # Add more file paths as needed
     ]
 
     # Send the summary via email

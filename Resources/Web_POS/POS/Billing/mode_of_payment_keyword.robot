@@ -66,6 +66,8 @@ Collect Payment Using Store Credit | Partial Redemption Not Allowed
         Page Should Contain Element    ${partial_redemption_lapse_alert}
         Click Element    ${input_voucher_code}
         Input Text    ${input_voucher_code}    ${details.voucher_code}
+        Wait Until Element Is Visible    ${apply_store_credit_voucher}  timeout=20s
+        Wait Until Element Is Enabled    ${apply_store_credit_voucher}    timeout=20s
         Element Should Be Enabled    ${apply_store_credit_voucher}
         Click Element    ${apply_store_credit_voucher}
 

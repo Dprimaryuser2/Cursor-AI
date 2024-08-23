@@ -7,7 +7,7 @@ Resource    ../../../Resources/Web_POS/POS/Billing/add_to_cart_keyword.robot
 Library    RequestsLibrary
 
 *** Variables ***
-${ENV}    STAGING
+${ENV}    PROD
 ${STAGING_URL}=      ${pos_url_staging}
 ${PROD_URL}=    ${pos_url_prod}
 #${base_url_PROD}=    https://api.gozwing.com/
@@ -15,35 +15,8 @@ ${PROD_URL}=    ${pos_url_prod}
 
 *** Keywords ***
 Open Application | POS
-#    ${options}  Evaluate  sys.modules['selenium.webdriver'].ChromeOptions()  sys
-#    Call Method  ${options}  add_argument  --disable-notifications
-#    Call Method  ${options}  add_argument  --disable-infobars
-#    Call Method  ${options}  add_argument  --disable-extensions
-#    Call Method  ${options}  add_argument  --no-sandbox
-#    Call Method  ${options}  add_argument  --headless
-#    Call Method  ${options}  add_argument  --disable-dev-shm-usage
-#    Open Browser     ${${ENV}_URL}    ${browser}   options=${options}
-    Open Browser     ${${ENV}_URL}   ${browser}
-#    Open Browser     ${${ENV}_URL}    ${browser}    options=add_argument("--headless")
-#    Maximize Browser Window
+    Open Browser     ${${ENV}_URL}    ${browser}    options=add_argument("--headless")
     Set Window Size    ${window_width}    ${window_height}
-#
-#Login With Valid Username And Password | POS
-#    [Arguments]     ${search_data}
-#    ${my_dict}    Create Dictionary   &{search_data}
-#    Input Text    ${serial_key}    ${my_dict.serial_key}
-#    Click Button    ${register_button}
-#    Wait Until Element Is Visible    ${pos_username}    timeout=25s
-#    Input Text    ${pos_username}     ${my_dict.username_pos}
-#    Click Button    ${pos_continue_button}
-#    Wait Until Element Is Visible    ${pos_password}    timeout=15s
-#    Input Text    ${pos_password}    ${my_dict.password_pos}
-#    Click Button    ${pos_continue_button}
-#    Wait Until Page Contains Element    ${in_store}   timeout=25s
-#    Wait Until Element Is Visible    ${catalog_update}    timeout=20s
-#    Page Should Contain Element    ${catalog_update}
-#    Page Should Contain Element    ${pos_dashboard}
-
 
 Login With Valid Username And Password | POS
     [Arguments]     ${search_data}
@@ -134,22 +107,31 @@ Get API Base URL
     [Return]    ${base_url}
 
 Revoke Licence Key | API
-    [Arguments]    ${response}      ${pos_data}
+    [Arguments]      ${response}    ${pos_data}
     ${my_dict}    Create Dictionary   &{pos_data}
     ${base_url}    Get API Base URL
     ${body} =    Set Variable    ${response}
-    ${header} =    Create Dictionary    Content-Type=application/json    Connection=keep-alive
-    Create Session    revoke    ${base_url}    headers=${header}
-    ${api_response} =    POST On Session    revoke    /revoke-licence    data=${body}    headers=${header}
-    ${status_code}    Set Variable    ${api_response.status_code}
-    Run Keyword If    '${status_code}' != '200'    Tear It Down If Test Case Failed
-    Run Keyword If    '${status_code}' == 'None'    Tear It Down If Test Case Failed
-    Reload Page
-    Logout After Revoke     ${response}     ${my_dict}
-    Delete All Cookies
-    Execute JavaScript    window.localStorage.clear();
-    Execute JavaScript    window.sessionStorage.clear();
-    Reload Page
+    ${status}=    Run Keyword And Return Status    ${body} == 'NULL'
+    IF    ${status}
+        Tear It Down If Test Case Failed    ${pos_data}
+    ELSE
+        ${header} =    Create Dictionary    Content-Type=application/json    Connection=keep-alive
+        Create Session    revoke    ${base_url}    headers=${header}
+        ${api_response} =    POST On Session    revoke    /revoke-licence    data=${body}    headers=${header}
+        ${status_code}    Set Variable    ${api_response.status_code}
+        IF    '${status_code}' != '200'
+            Tear It Down If Test Case Failed    ${pos_data}
+        ELSE IF    '${status_code}' == 'None'
+            Tear It Down If Test Case Failed    ${pos_data}
+        ELSE
+            Reload Page
+            Logout After Revoke     ${response}     ${my_dict}
+            Delete All Cookies
+            Execute JavaScript    window.localStorage.clear();
+            Execute JavaScript    window.sessionStorage.clear();
+            Reload Page
+        END
+    END
     Close Browser
 
 Logout After Revoke

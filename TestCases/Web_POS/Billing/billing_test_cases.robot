@@ -12,16 +12,14 @@ Resource    ../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
 Test Setup  Open Application | POS
 Test Teardown   Close Browser
 
-#*** Variables ***
-#${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}billing_test_data.xlsx
-
 *** Variables ***
 ${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Billing${/}billing_test_data.xlsx
 ${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Billing${/}billing_test_data.xlsx
+${response}=    'NULL'
 
 *** Test Cases ***
 Zwing_B_01 Auto Switch To Billing
-   [Tags]    Demo
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_01
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -32,7 +30,7 @@ Zwing_B_01 Auto Switch To Billing
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_02 Add Product to cart by scanning barcode
-    [Tags]    retry
+    [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_02
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -42,7 +40,7 @@ Zwing_B_02 Add Product to cart by scanning barcode
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_03 Add Product to cart by searching Product Name / barcode
-    [Tags]    retry
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_03
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -52,7 +50,7 @@ Zwing_B_03 Add Product to cart by searching Product Name / barcode
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_04 Add product from catalog
-    [Tags]    retry
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_04
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -62,6 +60,7 @@ Zwing_B_04 Add product from catalog
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_05 Add Multiple price products to cart
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_05
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -71,6 +70,7 @@ Zwing_B_05 Add Multiple price products to cart
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_06 Tag a New customer to a bill
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_06
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -81,6 +81,7 @@ Zwing_B_06 Tag a New customer to a bill
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_07 Tag a Existing customer to a bill
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_07
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -91,6 +92,7 @@ Zwing_B_07 Tag a Existing customer to a bill
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_08 Tag Single Sales Person To A Bill With Respect To Items
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_08
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -101,6 +103,7 @@ Zwing_B_08 Tag Single Sales Person To A Bill With Respect To Items
     [Teardown]   Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_09 Tag Multiple Sales Person To A Bill With Respect To Items
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_09
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -111,6 +114,7 @@ Zwing_B_09 Tag Multiple Sales Person To A Bill With Respect To Items
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_10 Hold On-going Bill | Billing
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_10
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -121,6 +125,7 @@ Zwing_B_10 Hold On-going Bill | Billing
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_11 View Held Bill
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_11
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -132,6 +137,7 @@ Zwing_B_11 View Held Bill
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_12 Recall bill
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_12
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -143,6 +149,7 @@ Zwing_B_12 Recall bill
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_13 Discard Bill
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_13
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -154,6 +161,7 @@ Zwing_B_13 Discard Bill
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_14 Return To Bill
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_14
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -165,6 +173,7 @@ Zwing_B_14 Return To Bill
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_15 Apply Item level Promos
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_15
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -175,6 +184,7 @@ Zwing_B_15 Apply Item level Promos
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_16 Apply manual Discount | item level
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_16
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -187,6 +197,7 @@ Zwing_B_16 Apply manual Discount | item level
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_17 Add Carry Bag
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_17
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -196,6 +207,7 @@ Zwing_B_17 Add Carry Bag
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_18 Validate Bill calculation
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_18
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -205,6 +217,7 @@ Zwing_B_18 Validate Bill calculation
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_19 Reset Bill
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_19
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -216,6 +229,7 @@ Zwing_B_19 Reset Bill
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_20 Navigate To CheckOut Page
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_20
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -227,6 +241,7 @@ Zwing_B_20 Navigate To CheckOut Page
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_21 Collect payment by cash
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_21
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -240,6 +255,8 @@ Zwing_B_21 Collect payment by cash
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_22 Collect payment by UPI
+    [Tags]    test:retry(1)[Tags]    test:retry(1)
+
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_22
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -253,6 +270,8 @@ Zwing_B_22 Collect payment by UPI
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_23 Collect payment by redeem voucher
+    [Tags]    test:retry(1)[Tags]    test:retry(1)
+
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_23
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -266,6 +285,8 @@ Zwing_B_23 Collect payment by redeem voucher
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_24 Collect payment using Credit Store
+   [Tags]    test:retry(1)[Tags]    test:retry(1)
+
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_24
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -279,6 +300,8 @@ Zwing_B_24 Collect payment using Credit Store
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_25 Collect payment by on account sale
+    [Tags]    test:retry(1)[Tags]    test:retry(1)
+
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_25
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -293,6 +316,8 @@ Zwing_B_25 Collect payment by on account sale
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_26 Payable amount should become editable when split payment toggle is enabled.
+   [Tags]    test:retry(1)[Tags]    test:retry(1)
+
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_26
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -306,6 +331,8 @@ Zwing_B_26 Payable amount should become editable when split payment toggle is en
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_27 Payable amount should be disabled when split payment toggle is disabled.
+    [Tags]    test:retry(1)[Tags]    test:retry(1)
+
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_27
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -318,6 +345,8 @@ Zwing_B_27 Payable amount should be disabled when split payment toggle is disabl
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_28 Pay Bill Amount With multiple MOP
+    [Tags]    test:retry(1)[Tags]    test:retry(1)
+
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_28
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -332,6 +361,8 @@ Zwing_B_28 Pay Bill Amount With multiple MOP
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_29 Pay Bill Amount With single MOP
+    [Tags]    test:retry(1)[Tags]    test:retry(1)
+
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_29
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -346,6 +377,8 @@ Zwing_B_29 Pay Bill Amount With single MOP
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_30 Discard Bill after Partial payment
+   [Tags]    test:retry(1)[Tags]    test:retry(1)
+
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_30
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -362,6 +395,8 @@ Zwing_B_30 Discard Bill after Partial payment
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_31 Automatic Invoice Generation
+   [Tags]    test:retry(1)[Tags]    test:retry(1)
+
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_31
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -377,6 +412,8 @@ Zwing_B_31 Automatic Invoice Generation
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_32 Generate Invoice with Zero bill amount
+   [Tags]    test:retry(1)[Tags]    test:retry(1)
+
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_32
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -395,6 +432,8 @@ Zwing_B_32 Generate Invoice with Zero bill amount
 
 
 Zwing_B_33 Apply Bill level Promos
+    [Tags]    test:retry(1)[Tags]    test:retry(1)
+
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id   ${POS_TD}    TC_33
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -409,6 +448,8 @@ Zwing_B_33 Apply Bill level Promos
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_34 Apply Bill level discount
+   [Tags]    test:retry(1)[Tags]    test:retry(1)
+
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_34
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -421,6 +462,8 @@ Zwing_B_34 Apply Bill level discount
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_35 Add Bill Remark
+   [Tags]    test:retry(1)[Tags]    test:retry(1)
+
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_35
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -458,6 +501,7 @@ Zwing_B_37 Apply Bill Level Loyalty
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_38 Validate Account balance
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_38
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -468,6 +512,7 @@ Zwing_B_38 Validate Account balance
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_39 Validate Store Credit
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_39
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -478,6 +523,7 @@ Zwing_B_39 Validate Store Credit
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_40 Validate Loyalty Points
+  [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_40
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -488,6 +534,7 @@ Zwing_B_40 Validate Loyalty Points
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_41 Auto Switch To Billing From Return Mode
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_41
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -499,6 +546,7 @@ Zwing_B_41 Auto Switch To Billing From Return Mode
 
 
 Zwing_B_42 Auto Switch To Billing From Exchange Mode
+  [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_42
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -509,6 +557,7 @@ Zwing_B_42 Auto Switch To Billing From Exchange Mode
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_43 Click on Confirm button on switch to Order popup box
+  [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_43
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -517,6 +566,7 @@ Zwing_B_43 Click on Confirm button on switch to Order popup box
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_44 Click on Cancel button on switch to Order popup box
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_44
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -526,6 +576,7 @@ Zwing_B_44 Click on Cancel button on switch to Order popup box
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_45 Switching Between Billing to Order Will Give Confirmation Popup
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_45
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -534,6 +585,7 @@ Zwing_B_45 Switching Between Billing to Order Will Give Confirmation Popup
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_46 Click on Confirm button on switch to Return popup box
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_46
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -542,6 +594,7 @@ Zwing_B_46 Click on Confirm button on switch to Return popup box
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_47 Click on Cancel button on switch to Return popup box
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_47
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -551,6 +604,7 @@ Zwing_B_47 Click on Cancel button on switch to Return popup box
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_48 Switching Between Billing to Return Will Give Confirmation Popup
+  [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_48
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -559,6 +613,7 @@ Zwing_B_48 Switching Between Billing to Return Will Give Confirmation Popup
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_49 Set variance limit and enter price override less or more than total price but within variance limit
+  [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_49
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -570,6 +625,7 @@ Zwing_B_49 Set variance limit and enter price override less or more than total p
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_50 Set variance limit and enter price override less or more than total price but out of variance limit
+  [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_50
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -581,6 +637,7 @@ Zwing_B_50 Set variance limit and enter price override less or more than total p
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_51 Set variance limit and enter price override less or more than total price but equal to variance limit
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_51
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -592,6 +649,7 @@ Zwing_B_51 Set variance limit and enter price override less or more than total p
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_52 Set variance limit and enter price override less or more than total price but within variance limit. Then try again price override and check the response
+  [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_52
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -603,6 +661,7 @@ Zwing_B_52 Set variance limit and enter price override less or more than total p
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_53 Disable price override and try price overriding then check the response
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_53
    ${response}=  Login With Valid Username And Password | POS   ${pos_data}

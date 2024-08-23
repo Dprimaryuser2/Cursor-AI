@@ -372,3 +372,5 @@ Delete
         Click Element    (//i[@class="fa fa-trash-o"])[1]
         Click Element    ${yes_remove_button}
     END
+
+

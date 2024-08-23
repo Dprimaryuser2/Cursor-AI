@@ -10,16 +10,14 @@ Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Test Setup    Open Application | POS
 Test Teardown   Close Browser
 
-#*** Variables ***
-#${DISCOUNT_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Billing${/}manual_discount_test_data.xlsx
-
 *** Variables ***
 ${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Billing${/}manual_discount_test_data.xlsx
 ${PROD_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Production${/}Web_POS${/}Billing${/}manual_discount_test_data.xlsx
+${response}=    'NULL'
 
 *** Test Cases ***
 Zwing_MD_1 Apply Item Level Manual Discount Assortment Wise
-    [Tags]    Demo
+    [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_01
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -32,6 +30,7 @@ Zwing_MD_1 Apply Item Level Manual Discount Assortment Wise
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_2 Apply Item Level Manual Discount | Discount type as Fixed Amount
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_02
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -44,6 +43,7 @@ Zwing_MD_2 Apply Item Level Manual Discount | Discount type as Fixed Amount
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_3 Apply Item Level Manual Discount | Discount type as percentage
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_03
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -56,6 +56,7 @@ Zwing_MD_3 Apply Item Level Manual Discount | Discount type as percentage
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_4 Apply Item Level Manual Discount | Discount to Customer Group
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_04
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -69,6 +70,7 @@ Zwing_MD_4 Apply Item Level Manual Discount | Discount to Customer Group
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_5 Apply Item Level Manual Discount | Discount to Store
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_05
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -81,6 +83,7 @@ Zwing_MD_5 Apply Item Level Manual Discount | Discount to Store
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_6 Apply Item Level Manual Discount | Effective date and valid up to date
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_06
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -94,6 +97,7 @@ Zwing_MD_6 Apply Item Level Manual Discount | Effective date and valid up to dat
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_7 Bill Level manual discount
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_07
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -106,6 +110,7 @@ Zwing_MD_7 Bill Level manual discount
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_8 Bill Level manual discount as Fixed Amount
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_08
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -118,6 +123,7 @@ Zwing_MD_8 Bill Level manual discount as Fixed Amount
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_9 Bill level manual discount as Percentage
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_09
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -130,6 +136,7 @@ Zwing_MD_9 Bill level manual discount as Percentage
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_10 Allocate Discount to Customer Group
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_10
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -142,6 +149,7 @@ Zwing_MD_10 Allocate Discount to Customer Group
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_11 Manual Discount button | Stores
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_11
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -154,6 +162,7 @@ Zwing_MD_11 Manual Discount button | Stores
     [Teardown]   Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_12 Select the effective and valid up to date
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_12
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -166,6 +175,7 @@ Zwing_MD_12 Select the effective and valid up to date
    [Teardown]   Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_13 Item level custom Discount
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_13
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -179,6 +189,7 @@ Zwing_MD_13 Item level custom Discount
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_14 Custom Discount with discount type as amount
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_14
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -192,6 +203,7 @@ Zwing_MD_14 Custom Discount with discount type as amount
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_15 Custom Discount with discount type as Percentage
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_15
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -205,6 +217,7 @@ Zwing_MD_15 Custom Discount with discount type as Percentage
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_16 Bill level custom discount
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_16
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -217,6 +230,7 @@ Zwing_MD_16 Bill level custom discount
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_17 Bill Level Custom Discount with discount type as amount
+     [Tags]    test:retry(1)
      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_17
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
@@ -229,7 +243,8 @@ Zwing_MD_17 Bill Level Custom Discount with discount type as amount
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_18 Bill Level Custom Discount with discount type as Percentage
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_18
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -253,14 +268,14 @@ Zwing_MD_19 Apply Manual Discount Button | Assortment Wise | Button
 
 Zwing_MD_20 Apply Manual Discount Button, Use Discount type as Fixed Amount
     [Tags]    Valid Failure
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_20
+    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_20
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
-     Open The Session    ${discount_data}
-     Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
-     Apply Item Manual Discount | Button
-     Verify Item Manual Discount | Button    ${discount_data}
-     [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
+    Open The Session    ${discount_data}
+    Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
+    Apply Item Manual Discount | Button
+    Verify Item Manual Discount | Button    ${discount_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_21 Apply Manual Discount Button | discount type as percentage
     [Tags]    Valid Failure
@@ -286,8 +301,8 @@ Zwing_MD_22 Apply Manual Discount Button | Discount to Customer Group
 
 Zwing_MD_23 Apply Manual Discount Button | Allocate Discount to Stores
     [Tags]    Valid Failure
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-     ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_23
+    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_23
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
      Scan Barcode To Add Item And Quantity To Cart    ${discount_data}
@@ -318,7 +333,8 @@ Zwing_MD_25 Apply Manual Discount Button |Policy : Allows cashier to apply manua
    [Teardown]   Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manual discount on bill level | Enable bill level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_26
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -329,7 +345,8 @@ Zwing_MD_26 Apply Manual Discount Button |Policy : Allows cashier to apply manua
     [Teardown]   Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_27 Apply Manual Discount Button Policy : Allow cashier to select bill level discount from given list | Disable bill level discount list
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_27
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -340,7 +357,8 @@ Zwing_MD_27 Apply Manual Discount Button Policy : Allow cashier to select bill l
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_28 Apply Manual Discount Button Policy : Allow cashier to select bill level discount from given list | Enable bill level discount list
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_28
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -351,7 +369,8 @@ Zwing_MD_28 Apply Manual Discount Button Policy : Allow cashier to select bill l
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_29 Apply Manual Discount Button Policy : Allow cashier to enter bill level manual discount as percentage or amount | enable custom bill level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_29
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -362,7 +381,8 @@ Zwing_MD_29 Apply Manual Discount Button Policy : Allow cashier to enter bill le
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_30 Apply Manual Discount Button Policy : Allow cashier to enter bill level manual discount as percentage or amount | disable custom bill level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+     [Tags]     test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_30
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -373,7 +393,8 @@ Zwing_MD_30 Apply Manual Discount Button Policy : Allow cashier to enter bill le
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_31 Apply Manual Discount Button Policy : Discount capping (amount) Bill level | Apply Bill level discount percentage more than Limit on discount percentage(Bill level)
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+     [Tags]     test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_31
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -385,7 +406,8 @@ Zwing_MD_31 Apply Manual Discount Button Policy : Discount capping (amount) Bill
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_32 Apply Manual Discount Button Policy : Discount capping (amount) Bill level | Apply Bill level discount percentage less than or equal to Limit on discount percentage(Bill level)
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+     [Tags]     test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_32
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -397,7 +419,8 @@ Zwing_MD_32 Apply Manual Discount Button Policy : Discount capping (amount) Bill
      [Teardown]   Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_33
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -407,7 +430,8 @@ Zwing_MD_33 Apply Manual Discount Button | Disable Item level discount
    [Teardown]   Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_34 Apply Manual Discount Button | Enable Item level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_34
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -417,7 +441,8 @@ Zwing_MD_34 Apply Manual Discount Button | Enable Item level discount
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_35 Apply Manual Discount Button | Enable Item level discount | Disable Item level discount list
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_35
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -428,7 +453,8 @@ Zwing_MD_35 Apply Manual Discount Button | Enable Item level discount | Disable 
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_36 Apply Manual Discount Button | Enable Item level discount | Enable Item level discount list
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_36
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -439,7 +465,8 @@ Zwing_MD_36 Apply Manual Discount Button | Enable Item level discount | Enable I
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_37 Apply Manual Discount Button | Enable Item level discount | Enable Custom Item level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_37
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -450,7 +477,8 @@ Zwing_MD_37 Apply Manual Discount Button | Enable Item level discount | Enable C
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_38 Apply Manual Discount Button | Enable Item level discount | Disable Custom Item level discount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_38
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -461,7 +489,8 @@ Zwing_MD_38 Apply Manual Discount Button | Enable Item level discount | Disable 
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_39 Apply Manual Discount Button | Apply Item level discount percentage more than Limit on discount percentage(Item level)
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_39
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -473,7 +502,8 @@ Zwing_MD_39 Apply Manual Discount Button | Apply Item level discount percentage 
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_40 Apply Manual Discount Button | Apply Item level discount percentage less than or equal to Limit on discount percentage(Item level)
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_40
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -486,7 +516,8 @@ Zwing_MD_40 Apply Manual Discount Button | Apply Item level discount percentage 
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_41 Apply Manual Discount Button | Apply Item level discount amount more than the Limit on discount amount (Item level)
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_41
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -498,7 +529,8 @@ Zwing_MD_41 Apply Manual Discount Button | Apply Item level discount amount more
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_42 Apply Manual Discount Button | Apply Item level discount amount less than or equal to the Limit on discount amount (Item level)
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_42
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -511,7 +543,8 @@ Zwing_MD_42 Apply Manual Discount Button | Apply Item level discount amount less
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_43 Apply Manual Discount Button | Apply Bill level custom discount more than bill amount when limit is greater than Bill amount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_43
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -523,7 +556,8 @@ Zwing_MD_43 Apply Manual Discount Button | Apply Bill level custom discount more
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_44 Apply Manual Discount Button | Apply Bill level custom discount less than or equal to bill amount when limit is greater than Bill amount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_44
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -535,7 +569,8 @@ Zwing_MD_44 Apply Manual Discount Button | Apply Bill level custom discount less
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_45 Apply Manual Discount Button | Apply item level custom discount more than the line item amount when limit is greater than line item amount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_45
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
@@ -546,7 +581,8 @@ Zwing_MD_45 Apply Manual Discount Button | Apply item level custom discount more
      [Teardown]    Revoke Licence Key | API   ${response}      ${discount_data}
 
 Zwing_MD_46 Apply Manual Discount Button | Apply item level custom discount less than or equal to line item amount when limit is greater than line item amount
-      ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+      [Tags]    test:retry(1)
+     ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
      ${discount_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}     TC_46
     ${response}=  Login With Valid Username And Password | POS   ${discount_data}
      Open The Session    ${discount_data}
