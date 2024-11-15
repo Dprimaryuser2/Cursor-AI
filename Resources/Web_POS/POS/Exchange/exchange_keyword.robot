@@ -393,14 +393,7 @@ Verify Exchange Item Is Added In The Cart
 
 Verify Count of Items For Exchange After Payment
     [Arguments]     ${total_quantity}   ${total_quantity1}
-#    ${d1}    Create Dictionary    &{total_quantity}
-#    ${d2}    Create Dictionary    &{total_quantity1}
-#    ${clean_d1}    Remove Characters    ${d1.price}
-#    ${clean_d2}    Remove Characters    ${d2.price}
-#    ${clean_d1}    Convert To Number    ${clean_d1}
-#    ${clean_d2}    Convert To Number    ${clean_d2}
-#    Should Not Be Equal As Numbers    ${clean_d1}    ${clean_d2}
-    Should Not Be Equal As Strings    ${total_quantity}   ${total_quantity1}
+    Should Not Be Equal As Numbers        ${total_quantity}   ${total_quantity1}
 
 Verify Exchange Item Info In Cart Is Correct Or Not
     [Arguments]     ${exchange_item_info}
@@ -785,7 +778,11 @@ Add Exchange Items From Invoice
     Wait Until Page Contains Element    ${search_invoice_field}   timeout=10s
     Input Text    ${search_invoice_field}    ${my_dict.search_invoice}
     Press Keys   ${search_invoice_field}   ENTER
-    Wait Until Page Contains Element    ${first_row_invoice}    timeout=30s
+    ${add_item_button}    Run Keyword And Return Status    Page Should Contain Element    ${search_add_button}
+    IF    ${add_item_button}
+        Click Button    ${search_add_button}
+    END
+    Wait Until Page Contains Element    ${first_row_invoice}    timeout=10s
     ${invoice_number}=    Get Text    ${searched_invoice_number}
     ${customer_name}=    Get Text    ${searched_customer_name}
     ${phone_number}=    Get Text    ${searched_phone_number}

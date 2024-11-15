@@ -233,7 +233,7 @@ Zwing_ATC_19 Add item from previous session
     Change Billing Mode    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     ${customer_info}    Add Customer Details    ${pos_data}
-    Verify Billing Checkout
+    Verify Order Checkout
     Go Back To POS Dashboard
     Close The Session For Adding The Item From Previous Session    ${pos_data}
     Logout From The POS For Adding The Item From Previous Session
@@ -253,7 +253,7 @@ Zwing_ATC_20 Add item from previous session>> Discard Button
     Change Billing Mode    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     ${customer_info}    Add Customer Details    ${pos_data}
-    Verify Billing Checkout
+    Verify Order Checkout
     Go Back To POS Dashboard
     Close The Session For Adding The Item From Previous Session    ${pos_data}
     Logout From The POS For Adding The Item From Previous Session
@@ -273,7 +273,7 @@ Zwing_ATC_21 Add item from previous session>> Add item to cart
     Change Billing Mode    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
     ${customer_info}    Add Customer Details    ${pos_data}
-    Verify Billing Checkout
+    Verify Order Checkout
     Go Back To POS Dashboard
     Close The Session For Adding The Item From Previous Session    ${pos_data}
     Logout From The POS For Adding The Item From Previous Session

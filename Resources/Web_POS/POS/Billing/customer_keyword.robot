@@ -147,6 +147,7 @@ Add Existing UIN
     [Arguments]  ${details}
     ${uin_details}  Create Dictionary   &{details}
     Wait Until Page Contains Element    ${tax_invoice}
+    Wait Until Element Is Enabled    ${tax_invoice}    timeout=10s
     Click Element    ${tax_invoice}
     Wait Until Page Contains Element    ${cg_add_gst_button}    timeout=10s
     Click Element    ${cg_add_gst_button}
@@ -165,14 +166,14 @@ Add UIN Name And Number
     Wait Until Page Contains Element    ${tax_invoice}    timeout=10s
     Click Element    ${tax_invoice}
     Wait Until Page Contains Element    ${cg_add_gst_button}    timeout=10s
-    Sleep    0.5
+    Sleep    1
     Click Element    ${cg_add_gst_button}
-    Sleep    0.5
+    Sleep    1
     Wait Until Page Contains Element    ${cg_manage_gstin_header}    timeout=10s
     Wait Until Element Is Enabled    ${add_new_gstin_link}    timeout=10s
     Wait Until Page Contains Element    ${add_new_gstin_link}    timeout=10s
     Click Element    ${add_new_gstin_link}
-    Sleep    0.5
+    Sleep    1
     Wait Until Page Contains Element    ${add_gstin_window_header}    timeout=10s
     Wait Until Element Is Enabled    ${uin_radio}    timeout=10s
     Click Element    ${uin_radio}
@@ -500,7 +501,7 @@ Change Invoice Type From Sales To UIN In Customer Information
     Wait Until Element Is Enabled    ${customer_edit_info_button}    timeout=10s
     Click Element    ${customer_edit_info_button}
     Add UIN Name And Number    ${my_dict}
-    Sleep    0.5
+    Sleep    1
     ${add_line1}=    Generate Random Street Address
     Input Text    ${address_line1}    ${add_line1}
     ${add_line2}=    Generate Random Street Address
@@ -510,10 +511,9 @@ Change Invoice Type From Sales To UIN In Customer Information
     Sleep    2
     Input Text    ${pincode}    ${my_dict.pincode}
     Press Keys    ${pincode}    ENTER
-    Input Text    ${pincode}    ${my_dict.pincode}
     sleep  1s
-    Wait Until Element Is Enabled    ${update_product_button}    timeout=10s
-    Click Button    ${update_product_button}
+#    Wait Until Element Is Enabled    ${update_product_button}    timeout=10s
+#    Click Button    ${update_product_button}
     Wait Until Page Does Not Contain Element    ${update_product_button}   timeout=10s
     Wait Until Page Contains Element    ${customer_tagged_popup}    timeout=10s
     Wait Until Element Is Not Visible    ${customer_tagged_popup}     timeout=10s
@@ -571,8 +571,8 @@ Change Tax Invoice Type
     Wait Until Page Contains Element    ${pincode}
     Input Text    ${pincode}    ${gst_details.pincode}
     Press Keys    ${pincode}    ENTER
+    Sleep    2
     Select State And City    ${gst_details}
-    Sleep    2s
     Wait Until Element Is Enabled    ${update_product_button}    timeout=10s
     sleep  0.5
     Click Button    ${update_product_button}
@@ -883,7 +883,7 @@ Delete And Add Same UIN Number Again So That Next Time Test Case Doesnt Fail
     Click Element    ${customer_info_icon}
     Wait Until Page Contains Element  ${customer_edit_info_button}    timeout=10s
     Click Element    ${customer_edit_info_button}
-    Sleep    0.5
+    Sleep    2
     Wait Until Page Contains Element    ${tax_invoice}    timeout=10s
     Click Element    ${tax_invoice}
     ${add_gst_button_present}    Run Keyword And Return Status    Wait Until Page Contains Element     ${cg_add_gst_button}
@@ -894,7 +894,7 @@ Delete And Add Same UIN Number Again So That Next Time Test Case Doesnt Fail
         Wait Until Page Contains Element    ${cg_edit_gstin_icon}    timeout=10s
         Click Element    ${cg_edit_gstin_icon}
     END
-    Sleep    0.5
+    Sleep    2
     Wait Until Page Contains Element    //div[@class="col" and contains(text(),"${uin_details.uin_number}")]//following::div//*[name()='img']      timeout=10s
     Click Element    //div[@class="col" and contains(text(),"${uin_details.uin_number}")]//following::div//*[name()='img']
     Wait Until Page Does Not Contain Element    //div[@class="col" and contains(text(),"${uin_details.uin_number}")]//following::div//*[name()='img']            timeout=10s
@@ -916,9 +916,9 @@ Delete And Add Same UIN Number Again So That Next Time Test Case Doesnt Fail
     Wait Until Element Is Enabled    ${save_gstin_button}
     Click Element    ${save_gstin_button}
     Wait Until Page Does Not Contain Element    ${save_gstin_button}        timeout=10s
-    Sleep    0.5
+    Sleep    1
     Wait Until Page Contains Element    ${confirm_selected_button}        timeout=10s
-    Click Element    ${confirm_selected_button}
+    Wait Until Keyword Succeeds    3    3    Click Element    ${confirm_selected_button}
     Wait Until Page Does Not Contain Element    ${confirm_selected_button}        timeout=10s
     Wait Until Page Contains Element    ${pincode}
     Select State And City    ${uin_details}

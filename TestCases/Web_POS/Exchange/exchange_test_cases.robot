@@ -8,15 +8,13 @@ Resource    ../../../Resources/Web_POS/Prerequisites/prerequisite.robot
 Library    ../../../Resources/CustomKeywords/utilities.py
 Resource    ../../../Resources/Web_POS/POS/Billing/split_payment_keyword.robot
 Resource   ../../../Resources/Web_POS/POS/Billing/manual_discount_keyword.robot
+Resource    ../../../Resources/Web_POS/POS/Return/payment_return_keywords.robot
 Resource    ../../../Resources/Web_POS/POS/Exchange/exchange_keyword.robot
 Resource    ../../../Resources/Web_POS/POS/Return/adhoc_return_keywords.robot
 Resource   ../../../Resources/Web_POS/POS/Billing/mode_of_payment_keyword.robot
 Resource    ../../../Resources/AdminConsole/Allocation/allocation_keywords.robot
 Test Setup  Open Application | POS
 Test Teardown   Close Browser
-
-#*** Variables ***
-#${POS_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Web_POS${/}Exchange${/}exchange_test_data.xlsx
 
 *** Variables ***
 ${STAGING_TD}=    ${CURDIR}${/}..${/}..${/}..${/}TestData${/}Staging${/}Web_POS${/}Exchange${/}exchange_test_data.xlsx
@@ -337,6 +335,7 @@ Zwing_E_19 Search by previous name (sunil) in exchange module then check the res
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_E_20 Search for a already used exchange invoice in search bar then check the response
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_20
    ${response}     Login With Valid Username And Password | POS    ${pos_data}
    Open The Session    ${pos_data}
@@ -353,7 +352,6 @@ Zwing_E_20 Search for a already used exchange invoice in search bar then check t
    Scan Barcode To Add Item And Quantity To Cart By Name | Exchange     ${pos_data}
    ${value}    Get payable amount
    Verify Billing Checkout
-   No Payment Required | Checkout Page
    Get Customer Details | Checkout
    Click on New Bill Button
    Auto Switch To Billing
@@ -991,7 +989,6 @@ Zwing_E_60 check the behaviour of the system when payment amount is 0
    Scan Barcode To Add Item And Quantity To Cart By Name | Exchange     ${pos_data}
    ${value}    Get payable amount
    Verify Billing Checkout
-   No Payment Required | Checkout Page
    Automatic Invoice Generation
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
@@ -1576,7 +1573,7 @@ Zwing_E_89 Return sales invoice then select Return invoice for exchange then che
     Change Billing Mode    ${pos_data}
     Scan Barcode To Add Item And Quantity To Cart   ${pos_data}
     Add Customer Details for partial payment    ${pos_data}
-    Verify Billing Checkout
+    Verify Return Checkout
     Pay By Cash | Return Mode
     Click On Back Button | Checkout
     Change Billing Mode | From Return To Exchange
@@ -1606,7 +1603,7 @@ Zwing_E_90 Void sale invoice then select sales invoice for exchange then check t
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_E_91 Once invoice is exchange then enter invoice no. of exchange invoice then check the response
-    [[Tags]    test:retry(1)
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_91
     ${response}     Login With Valid Username And Password | POS    ${pos_data}
@@ -1628,7 +1625,6 @@ Zwing_E_91 Once invoice is exchange then enter invoice no. of exchange invoice t
     Add Product For Exchange
     Scan Barcode To Add Item And Quantity To Cart By Name | Exchange    ${pos_data}
     Verify Billing Checkout
-    No Payment Required | Checkout Page
     ${cust_info_checkout}    Get Customer Details | Checkout
     Click on New Bill Button
     Switch To Exchange Mode    ${pos_data}

@@ -190,7 +190,6 @@ Verify New PriceBook Product Is Visible
      Click Element    ${custom_category}
      ${price_book_name}=    Set Variable    ${product_dict.price_book_name}
      Wait Until Page Contains Element    ${product_catalog_body}    timeout=10s
-     Wait Until Page Does Not Contain    ${price_book_name}    timeout=10s
      Element Should Contain    ${product_catalog_body}     ${product_dict.price_book_name}
      ${custom_pricebook}=  Replace String    ${product_name_in_catalog}    Ranger Alex     ${product_dict.price_book_name}
      Wait Until Page Contains Element    ${custom_pricebook}  timeout=10s
@@ -212,7 +211,6 @@ Verify Items Allocated With 0 Inventory To Store Are Blur
      Click Element    ${custom_category}
      ${product_name}=    Set Variable    ${product_dict.product_name}
      Wait Until Page Contains Element    ${product_catalog_body}    timeout=10s
-     Wait Until Page Does Not Contain    ${product_name}    timeout=10s
      Element Should Contain    ${product_catalog_body}     ${product_dict.product_name}
      Page Should Contain Element    ${disabled_product}
 

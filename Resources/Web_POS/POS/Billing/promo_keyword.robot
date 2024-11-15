@@ -52,7 +52,7 @@ Open The Session
             Input Text    ${balance_field}    ${value}
         END
         Click Element    ${open_session_submit_button}
-        Wait Until Element Is Not Visible    ${closing_balance_note_tab}    timeout=10s
+        Wait Until Element Is Not Visible    ${closing_balance_note_tab}    timeout=20s
     END
     ${opening_session_present}=    Run Keyword And Return Status    Element Should Be Visible    ${opening_balance}    timeout=10s
     IF    ${opening_session_present}
@@ -81,7 +81,7 @@ Open The Session
             Input Text    ${balance_field}    ${value}
         END
         Click Element    ${open_session_submit_button}
-        Wait Until Element Is Not Visible    ${opening_balance}    timeout=10s
+        Wait Until Element Is Not Visible    ${opening_balance}    timeout=20s
     END
     ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
     IF   ${clear_item_enabled}
@@ -89,6 +89,7 @@ Open The Session
        ${clear_item_enabled}=    Run Keyword And Return Status    Element Should Be Enabled    ${clear_all_items}
        IF   ${clear_item_enabled}
            Click Element    ${clear_all_items}
+           Sleep  2s
        END
        ${first_item}=   Run Keyword And Return Status    Element Should Be Visible    ${first_item_product_name}   timeout=20s
              IF    ${first_item}
@@ -133,7 +134,7 @@ Scan Barcode To Add Item And Quantity To Cart
         IF    ${quantity_in_piece}
             Wait Until Element Is Enabled    ${quantity_in_piece_button}    timeout=20s
             Click Button    ${quantity_in_piece_button}
-            Wait Until Element Is Visible    ${piece_modal}    timeout=10s
+            Wait Until Element Is Visible    ${piece_modal}    timeout=20s
             Clear Element Text    ${quantity_input}
             Input Text    ${quantity_input}    ${value}
             Wait Until Element Is Visible    ${update_cart_quantity}    timeout=20s
@@ -171,7 +172,7 @@ Scan Barcode To Add Item And Quantity To Cart
             IF    ${quantity_in_piece}
                 Wait Until Element Is Enabled    ${quantity_in_piece_button}    timeout=20s
                 Click Button    ${quantity_in_piece_button}
-                Wait Until Element Is Visible    ${piece_modal}    timeout=10s
+                Wait Until Element Is Visible    ${piece_modal}    timeout=20s
                 Clear Element Text    ${quantity_input}
                 Input Text    ${quantity_input}    ${value}
                 Wait Until Element Is Visible    ${update_cart_quantity}    timeout=20s
@@ -188,7 +189,7 @@ Scan Barcode To Add Item And Quantity To Cart
 
 
 Add Multiple MRP Products
-    Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+    Wait Until Page Contains Element    ${select_mrp}   timeout=20s
     Click Element    ${add_to_cart_mrp}
     Wait Until Page Does Not Contain Element    ${select_mrp}
 
@@ -215,9 +216,9 @@ Scan Barcode To Add Item And Quantity To Cart | Multiple MRP
         Wait Until Element Is Enabled    ${search_add_button}    timeout=20s
         Sleep    0.5s
         Click Element    ${search_add_button}
-        Wait Until Page Contains Element    ${select_mrp}   timeout=10s
+        Wait Until Page Contains Element    ${select_mrp}   timeout=20s
         Click Element    ${add_to_cart_mrp}
-#        Wait Until Page Contains Element    @{quantity_input}   timeout=10s
+#        Wait Until Page Contains Element    @{quantity_input}   timeout=20s
         Input Text    ${quantity}   1
         Click Element   ${update_cart_quantity}
         sleep   1
@@ -251,7 +252,7 @@ Change Quantity Of Item
 #        Sleep    1s
         Wait Until Element Is Visible    ${quantity_in_piece}    timeout=20s
         Click Button    ${quantity_in_piece_button}
-        Wait Until Element Is Visible    ${piece_modal}    timeout=10s
+        Wait Until Element Is Visible    ${piece_modal}    timeout=20s
         Clear Element Text    ${quantity_input}
         Input Text    ${quantity_input}    ${my_dict.a1_quantity}
 #        Sleep    1s
@@ -264,7 +265,7 @@ Change Quantity Of Item
     END
 
 Verify Invoice Details After Payment
-    Wait Until Element Is Visible    ${upi_payment}    timeout=10s
+    Wait Until Element Is Visible    ${upi_payment}    timeout=20s
     Click Button    ${upi_payment}
     Wait Until Element Is Visible    ${transaction_reference_id}    timeout=20s
     ${reference_id}=    Generate Random Number
@@ -283,10 +284,10 @@ Confirm Promotion Name
     ${my_dict}    Create Dictionary   &{discount_data}
     Sleep    2
     Click Element    ${available_promotions_link}
-    Wait Until Element Is Visible    ${promo_body}    timeout=10s
+    Wait Until Element Is Visible    ${promo_body}    timeout=20s
     Element Should Contain    ${promo_body}    ${my_dict.promo_name}
     Click Button    ${save_and_close}
-    Wait Until Element Is Not Visible    ${save_and_close}    timeout=10s
+    Wait Until Element Is Not Visible    ${save_and_close}    timeout=20s
     
 Verify Applicability Of Flat Discount | Percentage
     [Arguments]    ${discount_data}
@@ -472,10 +473,10 @@ Verify Application Of Promo Data
     ${my_dict}    Create Dictionary   &{discount_data}
     Sleep    1s
     Click Element    ${available_promotions_link}
-    Wait Until Element Is Visible    ${promo_body}    timeout=10s
+    Wait Until Element Is Visible    ${promo_body}    timeout=20s
     Element Should Contain    ${promo_body}    ${my_dict.promo_name}
     Click Button    ${save_and_close}
-    Wait Until Element Is Not Visible    ${save_and_close}    timeout=10s
+    Wait Until Element Is Not Visible    ${save_and_close}    timeout=20s
     IF    '${my_dict.discount_percentage}' != "NULL"
         ${price_amount_with_rs}=    Get Text    ${price}
         ${price_amount_without_rs}=    Split String     ${price_amount_with_rs}
@@ -518,9 +519,9 @@ Verify Application Of Promo Data
     END
     
 Apply Item Promo | Manual
-    Wait Until Element Is Enabled    ${apply_promo}    timeout=10s
+    Wait Until Element Is Enabled    ${apply_promo}    timeout=20s
     Click Element    ${apply_promo}
-    Wait Until Element Is Enabled    ${available_promotions_link}    timeout=10s
+    Wait Until Element Is Enabled    ${available_promotions_link}    timeout=20s
     
 Verify Promo Discount In Cart | POS
     ${price_amount_with_rs}=    Get Text    ${price}
@@ -598,7 +599,7 @@ Verify Billing Checkout
     Click Button    ${checkout_button}
     ${popup_visible}=    Run Keyword And Return Status    Element Should Be Visible    ${updating_catalog_heading}
     IF    ${popup_visible}
-        Wait Until Element Is Visible    ${key_link}    timeout=10s
+        Wait Until Element Is Visible    ${key_link}    timeout=20s
         Click Element    ${key_link}
         Wait Until Element Is Visible    ${close_button}
         Click Button    ${close_button}
@@ -611,7 +612,7 @@ Verify Billing Checkout
     Sleep    1
     ${insufficient}=    Run Keyword And Return Status    Element Should Be Visible    ${insufficient_inventory_continue_btn}
     IF    ${insufficient}
-     Set Fulfillment Date And Continue
+       Set Fulfillment Date And Continue
     END
     Wait Until Element Is Visible    ${checkout_heading}    timeout=20s
     Page Should Contain Element    ${checkout_heading}

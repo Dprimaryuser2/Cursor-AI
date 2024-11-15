@@ -129,7 +129,7 @@ Verify Change Salesperson tagging for bill | Order
     Click Element    ${checkout_button}
     ${insufficient}=    Run Keyword And Return Status    Element Should Be Enabled    ${insufficient_inventory_continue_btn}
     IF    ${insufficient}
-     Set Fulfillment Date And Continue
+         Set Fulfillment Date And Continue
     END
     Wait Until Page Contains Element    ${checkout_heading}    timeout=10
     Page Should Contain Element    ${checkout_salesperson_name}

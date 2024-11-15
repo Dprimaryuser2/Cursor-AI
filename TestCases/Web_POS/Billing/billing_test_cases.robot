@@ -255,8 +255,7 @@ Zwing_B_21 Collect payment by cash
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_22 Collect payment by UPI
-    [Tags]    test:retry(1)[Tags]    test:retry(1)
-
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_22
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -270,8 +269,7 @@ Zwing_B_22 Collect payment by UPI
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_23 Collect payment by redeem voucher
-    [Tags]    test:retry(1)[Tags]    test:retry(1)
-
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_23
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -285,8 +283,7 @@ Zwing_B_23 Collect payment by redeem voucher
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_24 Collect payment using Credit Store
-   [Tags]    test:retry(1)[Tags]    test:retry(1)
-
+   [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_24
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -300,8 +297,7 @@ Zwing_B_24 Collect payment using Credit Store
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_25 Collect payment by on account sale
-    [Tags]    test:retry(1)[Tags]    test:retry(1)
-
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_25
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -316,8 +312,7 @@ Zwing_B_25 Collect payment by on account sale
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_26 Payable amount should become editable when split payment toggle is enabled.
-   [Tags]    test:retry(1)[Tags]    test:retry(1)
-
+   [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_26
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -331,8 +326,7 @@ Zwing_B_26 Payable amount should become editable when split payment toggle is en
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_27 Payable amount should be disabled when split payment toggle is disabled.
-    [Tags]    test:retry(1)[Tags]    test:retry(1)
-
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_27
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -345,8 +339,7 @@ Zwing_B_27 Payable amount should be disabled when split payment toggle is disabl
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_28 Pay Bill Amount With multiple MOP
-    [Tags]    test:retry(1)[Tags]    test:retry(1)
-
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_28
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -361,8 +354,7 @@ Zwing_B_28 Pay Bill Amount With multiple MOP
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_29 Pay Bill Amount With single MOP
-    [Tags]    test:retry(1)[Tags]    test:retry(1)
-
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_29
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -377,8 +369,7 @@ Zwing_B_29 Pay Bill Amount With single MOP
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_30 Discard Bill after Partial payment
-   [Tags]    test:retry(1)[Tags]    test:retry(1)
-
+   [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_30
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -395,8 +386,7 @@ Zwing_B_30 Discard Bill after Partial payment
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_31 Automatic Invoice Generation
-   [Tags]    test:retry(1)[Tags]    test:retry(1)
-
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_31
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -412,8 +402,7 @@ Zwing_B_31 Automatic Invoice Generation
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_32 Generate Invoice with Zero bill amount
-   [Tags]    test:retry(1)[Tags]    test:retry(1)
-
+   [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_32
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -426,14 +415,11 @@ Zwing_B_32 Generate Invoice with Zero bill amount
     ${value}    Get payable amount
     Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    No Payment Required | Checkout Page
     Verify If Payment is Complete Or Not
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
-
 Zwing_B_33 Apply Bill level Promos
-    [Tags]    test:retry(1)[Tags]    test:retry(1)
-
+    [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id   ${POS_TD}    TC_33
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -448,8 +434,7 @@ Zwing_B_33 Apply Bill level Promos
    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_34 Apply Bill level discount
-   [Tags]    test:retry(1)[Tags]    test:retry(1)
-
+   [Tags]    test:retry(1)
     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_34
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}
@@ -462,8 +447,7 @@ Zwing_B_34 Apply Bill level discount
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
 
 Zwing_B_35 Add Bill Remark
-   [Tags]    test:retry(1)[Tags]    test:retry(1)
-
+   [Tags]    test:retry(1)
    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
    ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    TC_35
     ${response}=  Login With Valid Username And Password | POS   ${pos_data}

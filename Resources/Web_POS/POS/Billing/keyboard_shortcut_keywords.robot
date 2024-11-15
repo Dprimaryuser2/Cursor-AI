@@ -136,10 +136,20 @@ Verify Shortcut Navigates To Checkout Page When Session Is Closed
     ${my_dict}    Create Dictionary    &{pos_data}
     Wait Until Page Contains Element    ${close_session_icon}  timeout=5s
     Click Element    ${close_session_icon}
-    Wait Until Page Contains Element    ${closing_balance_field}  timeout=5s
-    Input Text    ${closing_balance_field}    ${my_dict.closing_balance}
-    Wait Until Element Is Enabled    ${close_session_button}  timeout=5s
-    Click Element    ${close_session_button}
+    Wait Until Page Contains Element    ${closing_balance_money_field}  timeout=5s
+    Sleep  1s
+    ${items_list}=    Convert Items To List    ${my_dict.closing_balance}
+        ${items_dict} =    Convert Item List To Dictionary    ${my_dict.closing_balance}
+        FOR    ${item}    IN    @{items_dict.items()}
+            ${key}=    Set Variable    ${item}[0]
+            ${key}    Convert To String    ${key}
+            ${values}=    Set Variable    ${item}[1]
+            ${value}=    Convert To String    ${values}
+            ${balance_field}    Replace String    ${money_input_field}    AMOUNT      ${key}
+            Input Text    ${balance_field}    ${value}
+        END
+        Click Element    ${open_session_submit_button}
+        Wait Until Element Is Not Visible    ${closing_balance_note_tab}    timeout=20s
     Wait Until Element Is Enabled    ${session_close_button}  timeout=5s
     Click Element    ${session_close_button}
     Press Shortcut Key    ${pos_data}

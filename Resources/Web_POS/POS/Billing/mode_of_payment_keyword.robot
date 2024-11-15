@@ -176,6 +176,7 @@ Complete Payment Without Reference ID
 Verify Unable To Pay Via On Account Sale With Less Account Balance
     Click Button    ${account_on_sale}
     Wait Until Page Contains Element    ${on_account_sale_heading}    timeout=10s
+    Sleep  2s
     ${amount}    Get Text    ${minimum_payment_required}
     ${alert}=    Replace String    ${less_account_balance_alert}    AMOUNT    ${amount}
     Element Should Be Visible    ${alert}

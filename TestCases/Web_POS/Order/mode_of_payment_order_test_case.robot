@@ -34,7 +34,7 @@ Zwing_O_96 Customer Paid amount equal to payable amount
      Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
      ${customer_details}    Add Customer Details    ${mop_data}
      ${value}    Get Payable Amount
-     Verify Billing Checkout
+     Verify Order Checkout
      Payment By Cash    ${value}
      Verify If Payment Is Complete Or Not | Order
      Verify Successful Payment | Order    ${value}    ${customer_details}
@@ -49,7 +49,7 @@ Zwing_O_97 Customer Paid amount less than to payable amount(continue button rema
      Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
      ${customer_details}    Add Customer Details    ${mop_data}
      ${value}    Get Payable Amount
-     Verify Billing Checkout
+     Verify Order Checkout
      Collecting Payment Through Cash | Less Than Payable Amount    ${value}
      Verify Continue Button Is Disabled
      [Teardown]    Revoke Licence Key | API   ${response}    ${mop_data}
@@ -63,7 +63,7 @@ Zwing_O_98 Customer Paid amount more than to payable amount
      Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
      ${customer_details}    Add Customer Details    ${mop_data}
      ${value}    Get Payable Amount
-     Verify Billing Checkout
+     Verify Order Checkout
      Collecting Payment Through Cash | More Than Payable Amount    ${value}
      Verify If Payment Is Complete Or Not | Order
      Verify Successful Payment | Order    ${value}    ${customer_details}
@@ -80,7 +80,7 @@ Zwing_O_100 Redeem Store Credit using Vouhcer Code
      Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
      ${customer_details}    Add Customer Details    ${mop_data}
      ${value}    Get Payable Amount
-     Verify Billing Checkout
+     Verify Order Checkout
      Collect Payment Using Store Credit    ${mop_data}
      Verify If Payment Is Complete Or Not | Order
      Verify Successful Payment | Order    ${value}    ${customer_details}
@@ -96,7 +96,7 @@ Zwing_O_101 Collecting Payment by Redeem Store Credit using voucher code | Parti
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
-    Verify Billing Checkout
+    Verify Order Checkout
     Collect Payment Using Store Credit | Partial Redemption Allowed    ${mop_data}
     Verify Partial Redemption Allowed | Order
     Verify If Payment Is Complete Or Not | Order
@@ -112,7 +112,7 @@ Zwing_O_102 Collecting Payment by Redeem Store Credit using voucher | Partially 
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
-    Verify Billing Checkout
+    Verify Order Checkout
     Collect Payment Using Store Credit | Partial Redemption Not Allowed    ${mop_data}
     Verify Partial Redemption Not Allowed
     [Teardown]    Revoke Licence Key | API   ${response}    ${mop_data}
@@ -131,7 +131,7 @@ Zwing_O_106 Payment by using on Account Sale
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
-    Verify Billing Checkout
+    Verify Order Checkout
     Collect Payment Via On Account Sale
     Verify If Payment Is Complete Or Not | Order
     Verify Successful Payment | Order    ${value}    ${customer_details}
@@ -147,7 +147,7 @@ Zwing_O_107 Payment by using on Account Sale | Account Balance is Greater or Equ
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
-    Verify Billing Checkout
+    Verify Order Checkout
     Collect Payment Via On Account Sale
     Verify If Payment Is Complete Or Not | Order
     Verify Successful Payment | Order    ${value}    ${customer_details}
@@ -163,7 +163,7 @@ Zwing_O_108 Payment by using on Account Sale | Account Balance is less than paya
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
-    Verify Billing Checkout
+    Verify Order Checkout
     Verify Unable To Pay Via On Account Sale With Less Account Balance
     [Teardown]    Revoke Licence Key | API   ${response}    ${mop_data}
 
@@ -178,7 +178,7 @@ Zwing_O_109 Additional MOP's | Validate additional MOP's available
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
-    Verify Billing Checkout
+    Verify Order Checkout
     Payment Via Additional MOP
     Verify If Payment Is Complete Or Not | Order
     Verify Successful Payment | Order    ${value}    ${customer_details}
@@ -193,7 +193,7 @@ Zwing_O_110 Clicking on a MOP should open a popup to enter transaction reference
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
-    Verify Billing Checkout
+    Verify Order Checkout
     Verify Additional MOP Reference Id Popup
     [Teardown]    Revoke Licence Key | API   ${response}    ${mop_data}
 
@@ -207,7 +207,7 @@ Zwing_O_111 Additional MOP's | Enter transaction id
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
-    Verify Billing Checkout
+    Verify Order Checkout
     Verify Entered Transaction ID | Order
     Verify Successful Payment | Order    ${value}    ${customer_details}
     [Teardown]    Revoke Licence Key | API   ${response}    ${mop_data}
@@ -221,7 +221,7 @@ Zwing_O_112 Validate the amount auto-populated in customer paid field
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
-    Verify Billing Checkout
+    Verify Order Checkout
     Verify Additional MOP Reference Id Popup
 #    Verify Amount AutoPopulated    ${value}
     [Teardown]    Revoke Licence Key | API   ${response}    ${mop_data}
@@ -235,7 +235,7 @@ Zwing_O_113 Close the transaction reference id popup using X button
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
-    Verify Billing Checkout
+    Verify Order Checkout
     Verify Additional MOP Reference Id Popup
     Close The Transaction Popup
     Verify Close (X) Button Of Transaction Id
@@ -250,7 +250,7 @@ Zwing_O_114 Customer paid field should be non - editable
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
-    Verify Billing Checkout
+    Verify Order Checkout
     Verify Additional MOP Reference Id Popup
     Verify Customer Paid Field Is Non-editable
     [Teardown]    Revoke Licence Key | API   ${response}    ${mop_data}
@@ -264,7 +264,7 @@ Zwing_O_115 Complete payment by clicking on continue button, without entering tr
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
-    Verify Billing Checkout
+    Verify Order Checkout
     Complete Payment Without Reference ID
     Verify If Payment Is Complete Or Not | Order
     Verify Successful Payment | Order    ${value}    ${customer_details}
@@ -279,7 +279,7 @@ Zwing_O_116 complete payment by clicking on continue button after entering trans
     Scan Barcode To Add Item And Quantity To Cart    ${mop_data}
     ${customer_details}    Add Customer Details    ${mop_data}
     ${value}    Get Payable Amount
-    Verify Billing Checkout
+    Verify Order Checkout
     Payment Via Additional MOP
     Verify If Payment Is Complete Or Not | Order
     Verify Successful Payment | Order    ${value}    ${customer_details}

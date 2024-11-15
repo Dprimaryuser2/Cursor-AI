@@ -41,7 +41,7 @@ TC_C2 Customer Tagging is mandatory with Bill on POS
      Verify Customer Tagging Is Mandatory
      ${customer_info}    Add Customer Details    ${pos_data}
      Verify Customer Tagging    ${customer_info}
-     Verify Billing Checkout
+     Verify Order Checkout
      [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
      
 TC_C3 Customer Tagging is mandatory with non mandatory customer information
@@ -228,7 +228,6 @@ TC_C17 Edit UIN number
      Tag Existing Customer    ${pos_data}
      Discard Items If Present From Previous Session
      Verify GST Name Edited    ${pos_data}
-     
      [Teardown]    Revoke Licence Key | API   ${response}    ${pos_data}
 
 

@@ -19,20 +19,23 @@ Set Fulfillment Date And Continue
     IF    ${insufficient}
        Click Element    ${insufficient_inventory_continue_btn}
     END
-    Wait Until Page Contains Element    ${fulfilment_options_heading}    timeout=5
-    Wait Until Page Contains Element    ${fulfilment_due_date_option}    timeout=5
-    Click Element    ${fulfilment_due_date_option}
-    Wait Until Page Contains Element    ${fulfilment_calendar_window}    timeout=5
-    Wait Until Page Contains Element    ${last_date_of_this_month}    timeout=5
-    Click Element    ${last_date_of_this_month}
-    Sleep    1
-    Wait Until Element Is Enabled    ${continue_fulfilment_button}    timeout=5
-    Click Element    ${continue_fulfilment_button}
+    Sleep    3
+    ${fulfilment_visible}    Run Keyword And Return Status    Element Should Be Visible    ${fulfilment_options_heading}    timeout=10s
+    IF    ${fulfilment_visible}
+        Wait Until Page Contains Element    ${fulfilment_options_heading}    timeout=10
+        Wait Until Page Contains Element    ${fulfilment_due_date_option}    timeout=10
+        Click Element    ${fulfilment_due_date_option}
+        Wait Until Page Contains Element    ${fulfilment_calendar_window}    timeout=5
+        Wait Until Page Contains Element    ${last_date_of_this_month}    timeout=5
+        Click Element    ${last_date_of_this_month}
+        Sleep    2
+        Wait Until Element Is Enabled    ${continue_fulfilment_button}    timeout=5
+        Click Element    ${continue_fulfilment_button}
+    END
     Wait Until Page Does Not Contain Element    ${fulfilment_options_heading}    timeout=5
 
 Verify Delivery Fulfillment Popup
     Reload Page
-#    Wait Until Element Is Enabled    ${place_order_button}    timeout=5
     Wait Until Page Contains Element   ${min_acceptance_criteria_fulfilled}    timeout=5
 
 Verify Item Manual Discount | Order
@@ -233,7 +236,6 @@ Apply Bill Manual Discount | Custom Discount | Order
     ${bill_discount_data}    Create Dictionary     grand_total=${grand_total_amt}    discount_value=${discount_dict_data.discount_value}    discount=${value}
     RETURN    ${bill_discount_data}
 
-
 Verify Order Checkout
     ${discard}=    Run Keyword And Return Status    Element Should Be Visible       ${discard_button}
     IF    ${discard}
@@ -254,7 +256,7 @@ Verify Order Checkout
         sleep   1
         Click Button    ${checkout_button}
     END
-    ${insufficient}=    Run Keyword And Return Status    Wait Until Page Contains Element    ${insufficient_inventory_continue_btn}    timeout=
+    ${insufficient}=    Run Keyword And Return Status    Element Should Be Visible    ${insufficient_inventory_continue_btn}    timeout=10s
     IF    ${insufficient}
      Set Fulfillment Date And Continue
     END

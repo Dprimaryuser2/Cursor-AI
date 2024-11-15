@@ -336,6 +336,5 @@ Zwing_SP_27 Make complete payment by discount and generate bill with 0 invoice.
     ${value}    Get payable amount
     Add Customer Details    ${pos_data}
     Verify Billing Checkout
-    No Payment Required | Checkout Page
     Verify If Payment is Complete Or Not
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}

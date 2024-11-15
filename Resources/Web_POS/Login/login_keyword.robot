@@ -7,11 +7,9 @@ Resource    ../../../Resources/Web_POS/POS/Billing/add_to_cart_keyword.robot
 Library    RequestsLibrary
 
 *** Variables ***
-${ENV}    PROD
+${ENV}    STAGING
 ${STAGING_URL}=      ${pos_url_staging}
 ${PROD_URL}=    ${pos_url_prod}
-#${base_url_PROD}=    https://api.gozwing.com/
-#${base_url_STAGING}=     https://staging.api.gozwing.com
 
 *** Keywords ***
 Open Application | POS

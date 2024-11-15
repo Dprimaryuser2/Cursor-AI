@@ -23,8 +23,8 @@ ${response}=    'NULL'
 
 *** Test Cases ***
 Zwing_O_P_84 Allow to place Order without payment
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_84
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_84
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -34,8 +34,8 @@ Zwing_O_P_84 Allow to place Order without payment
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_85 Set Minimum Value in Amount
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id    ${DISCOUNT_TD}    O_P_85
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id     ${POS_TD}    O_P_85
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -46,8 +46,8 @@ Zwing_O_P_85 Set Minimum Value in Amount
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_86 Set Minimum Percentage Value
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_86
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_86
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -58,8 +58,8 @@ Zwing_O_P_86 Set Minimum Percentage Value
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_87 Both Minimum value in Amount and Percentage Value is configured | Advance collection is off
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_87
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_87
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -71,19 +71,19 @@ Zwing_O_P_87 Both Minimum value in Amount and Percentage Value is configured | A
 
 
 Zwing_O_P_89 Delivery Fulfillment option while its mandatory from policy
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_89
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_89
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
      Scan Barcode To Add Item And Quantity To Cart    ${pos_data}
-     Verify Billing Checkout
+     Verify Order Checkout
      Verify Delivery Fulfillment Popup
       [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_90 Delivery Fulfillment option while its non mandatory from policy
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_90
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_90
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -93,8 +93,8 @@ Zwing_O_P_90 Delivery Fulfillment option while its non mandatory from policy
       [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_91 Allow to place Order without payment
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_91
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_91
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -104,8 +104,8 @@ Zwing_O_P_91 Allow to place Order without payment
       [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_92 Set Minimum Value in Amount
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_92
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_92
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -115,8 +115,8 @@ Zwing_O_P_92 Set Minimum Value in Amount
       [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_93 Set Minimum Percentage Value
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_93
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_93
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -126,8 +126,8 @@ Zwing_O_P_93 Set Minimum Percentage Value
       [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_94 Both Minimum value in Amount and Percentage Value is configured
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_94
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_94
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -137,8 +137,8 @@ Zwing_O_P_94 Both Minimum value in Amount and Percentage Value is configured
       [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_95 Both Minimum value in Amount and Percentage Value is Zero But Advance Collection is Mandatory
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_95
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_95
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -149,8 +149,8 @@ Zwing_O_P_95 Both Minimum value in Amount and Percentage Value is Zero But Advan
 
 Zwing_O_P_119 Block order if the Ordered Product's Inventory is negative | Alert Message while inventory is not sufficient
     [Tags]     test:retry(1)
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_119
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_119
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -160,8 +160,8 @@ Zwing_O_P_119 Block order if the Ordered Product's Inventory is negative | Alert
 
 Zwing_O_P_120 Block order if the Ordered Product's Inventory is negative | Alert Message while inventory is not sufficient, cancel the message
     [Tags]     test:retry(1)
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_120
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_120
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -173,8 +173,8 @@ Zwing_O_P_120 Block order if the Ordered Product's Inventory is negative | Alert
 
 Zwing_O_P_121 Block order if the Ordered Product's Inventory is negative | Alert Message while inventory is not sufficient, continue the message
     [Tags]     test:retry(1)
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_121
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_121
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -185,8 +185,8 @@ Zwing_O_P_121 Block order if the Ordered Product's Inventory is negative | Alert
 
 Zwing_O_P_122 Block order if the Ordered Product's Inventory is negative | Order Blocking while, order is being created
     [Tags]     test:retry(1)
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_122
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_122
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -197,8 +197,8 @@ Zwing_O_P_122 Block order if the Ordered Product's Inventory is negative | Order
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_123 Block order if the Ordered Product's Inventory is negative | Order Blocking while, order is being confirmed
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_123
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_123
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -209,8 +209,8 @@ Zwing_O_P_123 Block order if the Ordered Product's Inventory is negative | Order
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_124 Block order if the Ordered Product's Inventory is negative | Order Blocking while, order is being packed
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_124
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_124
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -237,8 +237,8 @@ Zwing_O_P_125 Block order if the Ordered Product's Inventory is negative | Order
     [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_126 Add Bill Remark while placing order
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=  Fetch Testdata By Id    ${DISCOUNT_TD}   O_P_126
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id     ${POS_TD}   O_P_126
     ${response}     Login With Valid Username And Password | POS   ${pos_data}
     Open The Session    ${pos_data}
     Change Billing Mode    ${pos_data}
@@ -248,8 +248,8 @@ Zwing_O_126 Add Bill Remark while placing order
      [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_127 Add Bill Remark while placing order | Save Bill Remark
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_127
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_127
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -260,8 +260,8 @@ Zwing_O_127 Add Bill Remark while placing order | Save Bill Remark
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_128 Add Bill Remark while placing order | Clear bill remark
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_128
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_128
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -271,8 +271,8 @@ Zwing_O_128 Add Bill Remark while placing order | Clear bill remark
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_129 Check Conditions before placing order | Place Order
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_129
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_129
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -289,7 +289,7 @@ Zwing_O_129 Check Conditions before placing order | Place Order
 
 Zwing_O_P_146 Replace with product with higher value than ordered product
    [Tags]  Valid Failure
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    O_P_146
       ${response}   Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -306,7 +306,7 @@ Zwing_O_P_146 Replace with product with higher value than ordered product
 
 Zwing_O_P_147 Replace with product with less value than ordered product
    [Tags]  Valid Failure
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    O_P_147
       ${response}   Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -323,7 +323,7 @@ Zwing_O_P_147 Replace with product with less value than ordered product
 
 Zwing_O_P_148 Replace with product with same value of ordered product
     [Tags]  Valid Failure
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
     ${pos_data}=    Fetch Testdata By Id    ${POS_TD}    O_P_148
       ${response}   Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
@@ -339,8 +339,8 @@ Zwing_O_P_148 Replace with product with same value of ordered product
      [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_149 Discard product from order | Refund to pay if advance taken for discarded product
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_149
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_149
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -355,8 +355,8 @@ Zwing_O_P_149 Discard product from order | Refund to pay if advance taken for di
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_150 Discard product from order | Refund to pay if advance taken for discarded product | Refund Initiated by cash
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_150
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_150
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -371,8 +371,8 @@ Zwing_O_P_150 Discard product from order | Refund to pay if advance taken for di
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_151 Discard product from order | Refund to pay if advance taken for discarded product | Refund Initiated by credit note
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_151
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_151
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -387,8 +387,8 @@ Zwing_O_P_151 Discard product from order | Refund to pay if advance taken for di
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_152 Discard product from order | If advance is not taken for discarded product, no need to initiate refund
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=    Fetch Testdata By Id     ${DISCOUNT_TD}   O_P_152
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=    Fetch Testdata By Id      ${POS_TD}   O_P_152
      ${response}     Login With Valid Username And Password | POS   ${pos_data}
      Open The Session    ${pos_data}
      Change Billing Mode    ${pos_data}
@@ -400,8 +400,8 @@ Zwing_O_P_152 Discard product from order | If advance is not taken for discarded
        [Teardown]  Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_P_O_162 Set variance limit and enter price override less or more than total price but within variance limit
-    ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-    ${pos_data}=  Fetch Testdata By Id    ${DISCOUNT_TD}   O_P_162
+     ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id     ${POS_TD}   O_P_162
    ${response}     Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -412,8 +412,8 @@ Zwing_P_O_162 Set variance limit and enter price override less or more than tota
    [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_P_O_163 Set variance limit and enter price override less or more than total price but out of variance limit
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-   ${pos_data}=  Fetch Testdata By Id    ${DISCOUNT_TD}  O_P_163
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+   ${pos_data}=  Fetch Testdata By Id     ${POS_TD}  O_P_163
    ${response}     Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -424,8 +424,8 @@ Zwing_P_O_163 Set variance limit and enter price override less or more than tota
    [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_164 Set variance limit and enter price override less or more than total price but equal to variance limit
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-   ${pos_data}=  Fetch Testdata By Id    ${DISCOUNT_TD}   O_P_164
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+   ${pos_data}=  Fetch Testdata By Id     ${POS_TD}   O_P_164
    ${response}     Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -436,8 +436,8 @@ Zwing_O_P_164 Set variance limit and enter price override less or more than tota
    [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_165 Set variance limit and enter price override less or more than total price but within variance limit. Then try again price override and check the response
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-   ${pos_data}=  Fetch Testdata By Id    ${DISCOUNT_TD}     O_P_165
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+   ${pos_data}=  Fetch Testdata By Id     ${POS_TD}     O_P_165
    ${response}     Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -448,8 +448,8 @@ Zwing_O_P_165 Set variance limit and enter price override less or more than tota
    [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_166 Disable price override and try price overriding then check the response
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-   ${pos_data}=  Fetch Testdata By Id    ${DISCOUNT_TD}   O_P_166
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+   ${pos_data}=  Fetch Testdata By Id     ${POS_TD}   O_P_166
    ${response}     Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}
@@ -459,8 +459,8 @@ Zwing_O_P_166 Disable price override and try price overriding then check the res
    [Teardown]    Revoke Licence Key | API   ${response}       ${pos_data}
 
 Zwing_O_P_167 Update The fulfilment date
-   ${DISCOUNT_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
-   ${pos_data}=  Fetch Testdata By Id    ${DISCOUNT_TD}   O_P_167
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+   ${pos_data}=  Fetch Testdata By Id     ${POS_TD}   O_P_167
    ${response}     Login With Valid Username And Password | POS   ${pos_data}
    Open The Session    ${pos_data}
    Change Billing Mode    ${pos_data}

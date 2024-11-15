@@ -9,7 +9,7 @@ from email.mime.base import MIMEBase
 from email import encoders
 
 
-def load_email_config(config_file='notifier.json'):
+def load_email_config(config_file=os.path.join(os.path.dirname(__file__), 'notifier.json')):
     """
     Load email configuration from a JSON file.
     """
@@ -68,14 +68,12 @@ def create_html_summary(suite_summaries):
                 </tr>
     """
 
-    # Add a row to separate main suites from other suites
     suite_rows = []
     for summary in suite_summaries:
         total_tests = summary['total_tests']
         passed = summary['passed']
         failed = summary['failed']
 
-        # Calculate percentages
         if total_tests > 0:
             pass_percentage = (passed / total_tests) * 100
             fail_percentage = (failed / total_tests) * 100
@@ -83,12 +81,10 @@ def create_html_summary(suite_summaries):
             pass_percentage = 0
             fail_percentage = 0
 
-        # Create a combined percentage bar
         bar_width = 100
         pass_width = pass_percentage
         fail_width = fail_percentage
 
-        # Ensure percentages do not exceed 100%
         if pass_width + fail_width > bar_width:
             fail_width = bar_width - pass_width
 
@@ -99,7 +95,6 @@ def create_html_summary(suite_summaries):
         </div>
         '''
 
-        # Collect rows for main suites and other suites
         if summary['name'] in main_suites:
             suite_rows.append(f"""
             <tr>
@@ -119,7 +114,6 @@ def create_html_summary(suite_summaries):
         </tr>
         """)
 
-    # Add rows to the table
     html_content += "".join(suite_rows)
 
     html_content += """
@@ -140,7 +134,6 @@ def send_email(html_content, email_config, zip_path='attachments.zip'):
     msg["From"] = email_config['sender_email']
     msg["To"] = ", ".join(email_config['receiver_emails'])
 
-    # Attach the HTML content
     msg.attach(MIMEText(html_content, "html"))
 
     with open(zip_path, 'rb') as zip_file:
@@ -149,7 +142,7 @@ def send_email(html_content, email_config, zip_path='attachments.zip'):
         encoders.encode_base64(part)
         part.add_header('Content-Disposition', f'attachment; filename="{os.path.basename(zip_path)}"')
         msg.attach(part)
-    # Send the email
+
     with smtplib.SMTP(email_config['smtp_server'], email_config['smtp_port']) as server:
         server.starttls()
         server.login(email_config['smtp_username'], email_config['smtp_password'])
@@ -170,8 +163,11 @@ if __name__ == "__main__":
     # Load Email Data
     email_config = load_email_config()
 
+    # Define the output directory
+    output_dir = os.path.join(os.path.dirname(__file__), '..', 'output')
+
     # Specify the path to the output.xml
-    xml_path = os.path.join(r"", "../output.xml")
+    xml_path = os.path.join(output_dir, 'output.xml')
 
     # Extract suite-wise summary statistics
     suite_summaries = extract_suite_statistics(xml_path)
@@ -183,12 +179,14 @@ if __name__ == "__main__":
     # Create the HTML summary with suite-wise details
     html_summary = create_html_summary(suite_summaries)
 
-    # attachment files
+    # Define the attachment files
     attachment_files = [
-        '../log.html',
-        "../report.html",  # Add more file paths as needed
+        os.path.join(output_dir, 'log.html'),
+        os.path.join(output_dir, 'report.html')
     ]
 
-    # Send the summary via email
+    # Compress the attachment files
     zip_file_path = compress_files(attachment_files)
-    send_email(html_summary,email_config, zip_path=zip_file_path)
+
+    # Send the summary via email
+    send_email(html_summary, email_config, zip_path=zip_file_path)
