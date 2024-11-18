@@ -2104,3 +2104,134 @@ Zwing_E_131 Switching Between Exchange to Return Will Give Confirmation Popup
     Switch From Exchange Module    ${pos_data}
     Verify Confirmation Popup
     [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
+
+# Error Handling & Recovery
+Zwing_E_132 Verify system behavior when network disconnects during exchange process
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_132
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select The Invoice Option Type  ${pos_data}
+    Search Invoice | Exchange   ${pos_data}
+    Select Invoice From Search Options
+    Select Items For Exchange   ${pos_data}
+    Simulate Network Disconnection
+    Verify Error Message Is Displayed    ${pos_data}
+    Verify Exchange Data Is Not Lost
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
+
+Zwing_E_133 Verify exchange process resumes after session timeout
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_133
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Start Exchange Process With Items    ${pos_data}
+    Wait For Session Timeout
+    Verify Session Timeout Message
+    Login Again After Timeout    ${pos_data}
+    Verify Exchange Process State Is Maintained
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
+
+# Concurrent Operations
+Zwing_E_134 Verify exchange when same invoice is accessed by multiple users
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_134
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Start Exchange Process    ${pos_data}
+    Simulate Concurrent User Access    ${pos_data}
+    Verify Lock Mechanism
+    Verify Error Message For Second User
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
+
+# Data Validation
+Zwing_E_135 Verify exchange with maximum quantity limit
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_135
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Change Billing Mode    ${pos_data}
+    Click On +Add Exchange Items from Invoice Link
+    Select Invoice With Max Quantity    ${pos_data}
+    Verify Max Quantity Validation
+    Verify Error Message For Quantity Limit
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
+
+# Integration Testing
+Zwing_E_136 Verify inventory updates after exchange completion
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_136
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    ${initial_stock}=    Get Current Stock Levels    ${pos_data}
+    Complete Exchange Process    ${pos_data}
+    ${updated_stock}=    Get Current Stock Levels    ${pos_data}
+    Verify Stock Updates Are Correct    ${initial_stock}    ${updated_stock}    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
+
+# Security Testing
+Zwing_E_137 Verify exchange access for different user roles
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_137
+    FOR    ${role}    IN    @{user_roles}
+        ${response}     Login With Role    ${role}    ${pos_data}
+        Verify Exchange Access Permissions    ${role}    ${pos_data}
+        Logout User
+    END
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
+
+# Performance Testing
+Zwing_E_138 Verify system performance with large exchange data
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_138
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    ${start_time}=    Get Current Time
+    Load Large Exchange Dataset    ${pos_data}
+    ${response_time}=    Calculate Response Time    ${start_time}
+    Verify Response Time Within Limits    ${response_time}    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
+
+# Audit & Logging
+Zwing_E_139 Verify audit trail for exchange operations
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_139
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    ${exchange_details}=    Complete Exchange Process With Tracking    ${pos_data}
+    ${audit_logs}=    Get Audit Logs    ${exchange_details}
+    Verify Audit Trail Accuracy    ${exchange_details}    ${audit_logs}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
+
+# Cross-browser Testing
+Zwing_E_140 Verify exchange process in different browsers
+    [Template]    Verify Exchange In Browser
+    chrome    ${pos_data}
+    firefox    ${pos_data}
+    edge    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
+
+# Internationalization
+Zwing_E_141 Verify exchange with different currency formats
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_141
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
+    FOR    ${currency}    IN    @{currency_formats}
+        Change Currency Settings    ${currency}
+        Complete Exchange Process    ${pos_data}
+        Verify Currency Display Format    ${currency}    ${pos_data}
+    END
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
+
+# Report Generation
+Zwing_E_142 Verify exchange report generation
+    ${POS_TD}=    Get Test Data File    ${ENV}   ${STAGING_TD}  ${PROD_TD}
+    ${pos_data}=  Fetch Testdata By Id   ${POS_TD}    E_142
+    ${response}     Login With Valid Username And Password | POS    ${pos_data}
+    Open The Session    ${pos_data}
+    Complete Multiple Exchanges    ${pos_data}
+    Generate Exchange Report
+    Verify Report Content And Format    ${pos_data}
+    [Teardown]    Revoke Licence Key | API   ${response}      ${pos_data}
