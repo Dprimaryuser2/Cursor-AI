@@ -1,0 +1,934 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.1.1 (Python 3.12.4 on win32)" generated="20240814 18:19:11.214" rpa="false" schemaversion="4">
+<suite id="s1" name="Adhoc Return Test Cases" source="C:\Users\Mrunal\PycharmProjects\Zwing QA Automation\zwing-qa-automation\TestCases\Web_POS\Return\adhoc_return_test_cases.robot">
+<test id="s1-t1" name="Zwing_R_1 Return should be mark enable in policies" line="24">
+<kw name="Open Application | POS" library="login_keyword" type="SETUP">
+<kw name="Open Browser" library="SeleniumLibrary">
+<arg>${${ENV}_URL}</arg>
+<arg>${browser}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<msg timestamp="20240814 18:19:16.543" level="INFO">Opening browser 'chrome' to base url ' https://staging.app.gozwing.com/'.</msg>
+<status status="PASS" starttime="20240814 18:19:16.543" endtime="20240814 18:19:19.655"/>
+</kw>
+<kw name="Set Window Size" library="SeleniumLibrary">
+<arg>${window_width}</arg>
+<arg>${window_height}</arg>
+<doc>Sets current windows size to given ``width`` and ``height``.</doc>
+<status status="PASS" starttime="20240814 18:19:19.655" endtime="20240814 18:19:20.024"/>
+</kw>
+<status status="PASS" starttime="20240814 18:19:16.543" endtime="20240814 18:19:20.024"/>
+</kw>
+<kw name="Get Test Data File" library="login_keyword">
+<var>${POS_TD}</var>
+<arg>${ENV}</arg>
+<arg>${QA_TD}</arg>
+<arg>${PROD_TD}</arg>
+<kw name="Run Keyword If" library="BuiltIn">
+<var>${test_data_file}</var>
+<arg>'${env}' == 'PROD'</arg>
+<arg>Set Variable</arg>
+<arg>${PROD_TD}</arg>
+<arg>ELSE</arg>
+<arg>Set Variable</arg>
+<arg>${QA_TD}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<kw name="Set Variable" library="BuiltIn">
+<arg>${QA_TD}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" starttime="20240814 18:19:20.026" endtime="20240814 18:19:20.026"/>
+</kw>
+<msg timestamp="20240814 18:19:20.027" level="INFO">${test_data_file} = C:\Users\Mrunal\PycharmProjects\Zwing QA Automation\zwing-qa-automation\TestCases\Web_POS\Return\..\..\..\TestData\Web_POS\Staging\Return\adhoc_return_test_data_old.xlsx</msg>
+<status status="PASS" starttime="20240814 18:19:20.026" endtime="20240814 18:19:20.027"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${test_data_file}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240814 18:19:20.027" level="INFO">C:\Users\Mrunal\PycharmProjects\Zwing QA Automation\zwing-qa-automation\TestCases\Web_POS\Return\..\..\..\TestData\Web_POS\Staging\Return\adhoc_return_test_data_old.xlsx</msg>
+<status status="PASS" starttime="20240814 18:19:20.027" endtime="20240814 18:19:20.027"/>
+</kw>
+<msg timestamp="20240814 18:19:20.027" level="INFO">${POS_TD} = C:\Users\Mrunal\PycharmProjects\Zwing QA Automation\zwing-qa-automation\TestCases\Web_POS\Return\..\..\..\TestData\Web_POS\Staging\Return\adhoc_return_test_data_old.xlsx</msg>
+<status status="PASS" starttime="20240814 18:19:20.024" endtime="20240814 18:19:20.027"/>
+</kw>
+<kw name="Fetch Testdata By Id" library="utilities">
+<var>${pos_data}</var>
+<arg>${POS_TD}</arg>
+<arg>R_1</arg>
+<msg timestamp="20240814 18:19:20.046" level="INFO">${pos_data} = {'TC_Id': 'R_1', 'serial_key': '307260624P3E', 'username_admin': 'zwshashank.agrawal@teampureplay.com', 'password_admin': 123456, 'username_pos': 'userone_p1 ', 'password_pos': 123456, 'closing_balanc...</msg>
+<status status="PASS" starttime="20240814 18:19:20.027" endtime="20240814 18:19:20.046"/>
+</kw>
+<kw name="Login With Valid Username And Password | POS" library="login_keyword">
+<var>${response}</var>
+<arg>${pos_data}</arg>
+<kw name="Inject JavaScript For Fetch" library="login_keyword">
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>window._originalFetch = window.fetch;</arg>
+<arg>window.fetch = function() {</arg>
+<arg>return window._originalFetch.apply(this, arguments).then(function(response) {</arg>
+<arg>response.clone().json().then(function(data) {</arg>
+<arg>if (!window.apiLogs) window.apiLogs = [];</arg>
+<arg>window.apiLogs.push({</arg>
+<arg>type: 'fetch',</arg>
+<arg>request: arguments[1],</arg>
+<arg>response: data</arg>
+<arg>});</arg>
+<arg>});</arg>
+<arg>return response;</arg>
+<arg>});</arg>
+<arg>};</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240814 18:19:20.048" level="INFO">Executing JavaScript:
+window._originalFetch = window.fetch;window.fetch = function() {return window._originalFetch.apply(this, arguments).then(function(response) {response.clone().json().then(function(data) {if (!window.apiLogs) window.apiLogs = [];window.apiLogs.push({type: 'fetch',request: arguments[1],response: data});});return response;});};
+Without any arguments.</msg>
+<status status="PASS" starttime="20240814 18:19:20.047" endtime="20240814 18:19:20.058"/>
+</kw>
+<status status="PASS" starttime="20240814 18:19:20.047" endtime="20240814 18:19:20.058"/>
+</kw>
+<kw name="Inject JavaScript For XHR" library="login_keyword">
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>(function() {</arg>
+<arg>var originalXhrOpen = XMLHttpRequest.prototype.open;</arg>
+<arg>var originalXhrSend = XMLHttpRequest.prototype.send;</arg>
+<arg>XMLHttpRequest.prototype.open = function() {</arg>
+<arg>this._url = arguments[1];</arg>
+<arg>return originalXhrOpen.apply(this, arguments);</arg>
+<arg>};</arg>
+<arg>XMLHttpRequest.prototype.send = function() {</arg>
+<arg>this.addEventListener('load', function() {</arg>
+<arg>if (!window.apiLogs) window.apiLogs = [];</arg>
+<arg>window.apiLogs.push({</arg>
+<arg>type: 'xhr',</arg>
+<arg>request: this._url,</arg>
+<arg>response: this.responseText</arg>
+<arg>});</arg>
+<arg>});</arg>
+<arg>return originalXhrSend.apply(this, arguments);</arg>
+<arg>};</arg>
+<arg>})();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240814 18:19:20.059" level="INFO">Executing JavaScript:
+(function() {var originalXhrOpen = XMLHttpRequest.prototype.open;var originalXhrSend = XMLHttpRequest.prototype.send;XMLHttpRequest.prototype.open = function() {this._url = arguments[1];return originalXhrOpen.apply(this, arguments);};XMLHttpRequest.prototype.send = function() {this.addEventListener('load', function() {if (!window.apiLogs) window.apiLogs = [];window.apiLogs.push({type: 'xhr',request: this._url,response: this.responseText});});return originalXhrSend.apply(this, arguments);};})();
+Without any arguments.</msg>
+<status status="PASS" starttime="20240814 18:19:20.058" endtime="20240814 18:19:20.068"/>
+</kw>
+<status status="PASS" starttime="20240814 18:19:20.058" endtime="20240814 18:19:20.068"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${my_dict}</var>
+<arg>&amp;{search_data}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240814 18:19:20.068" level="INFO">${my_dict} = {'TC_Id': 'R_1', 'serial_key': '307260624P3E', 'username_admin': 'zwshashank.agrawal@teampureplay.com', 'password_admin': 123456, 'username_pos': 'userone_p1 ', 'password_pos': 123456, 'closing_balanc...</msg>
+<status status="PASS" starttime="20240814 18:19:20.068" endtime="20240814 18:19:20.068"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${serial_key}</arg>
+<arg>${my_dict.serial_key}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20240814 18:19:20.072" level="INFO">Typing text '307260624P3E' into text field '//input[@id="license-input"]'.</msg>
+<status status="PASS" starttime="20240814 18:19:20.069" endtime="20240814 18:19:20.245"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${register_button}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20240814 18:19:20.246" level="INFO">Clicking button '//button[@id="register-key"]'.</msg>
+<status status="PASS" starttime="20240814 18:19:20.245" endtime="20240814 18:19:20.778"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${pos_username}</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240814 18:19:20.778" endtime="20240814 18:19:21.268"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${pos_username}</arg>
+<arg>${my_dict.username_pos}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20240814 18:19:21.275" level="INFO">Typing text 'userone_p1 ' into text field '//input[@id="login-user"]'.</msg>
+<status status="PASS" starttime="20240814 18:19:21.269" endtime="20240814 18:19:21.401"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${pos_continue_button}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20240814 18:19:21.402" level="INFO">Clicking button '//button[@id="login-button"]'.</msg>
+<status status="PASS" starttime="20240814 18:19:21.401" endtime="20240814 18:19:21.477"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${pos_password}</arg>
+<arg>timeout=5s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="PASS" starttime="20240814 18:19:21.477" endtime="20240814 18:19:21.948"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${pos_password}</arg>
+<arg>${my_dict.password_pos}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<msg timestamp="20240814 18:19:21.953" level="INFO">Typing text '123456' into text field '//input[@id="login-password"]'.</msg>
+<status status="PASS" starttime="20240814 18:19:21.949" endtime="20240814 18:19:22.116"/>
+</kw>
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${pos_continue_button}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20240814 18:19:22.119" level="INFO">Clicking button '//button[@id="login-button"]'.</msg>
+<status status="PASS" starttime="20240814 18:19:22.118" endtime="20240814 18:19:22.195"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${in_store}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240814 18:19:22.196" endtime="20240814 18:19:23.948"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<var>${logs}</var>
+<arg>return window.apiLogs;</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240814 18:19:23.949" level="INFO">Executing JavaScript:
+return window.apiLogs;
+Without any arguments.</msg>
+<msg timestamp="20240814 18:19:24.034" level="INFO">${logs} = [{'request': 'https://staging.api.gozwing.com/cash-register/tag-licence', 'response': '{"status":"success","message":"Tagged successfully to cash-register.","udidtoken":"$2y$10$71tRKXw4unYcKe7t91BrFOd...</msg>
+<status status="PASS" starttime="20240814 18:19:23.949" endtime="20240814 18:19:24.034"/>
+</kw>
+<kw name="Extract Udidtoken" library="utilities">
+<var>${udidtoken}</var>
+<arg>${logs}</arg>
+<msg timestamp="20240814 18:19:24.038" level="INFO">${udidtoken} = $2y$10$71tRKXw4unYcKe7t91BrFOdpkMANtjnYUaapRd/Nm2DINBAbcr90e</msg>
+<status status="PASS" starttime="20240814 18:19:24.035" endtime="20240814 18:19:24.038"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<var>${token}</var>
+<arg>return localStorage.getItem('operations');</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240814 18:19:24.040" level="INFO">Executing JavaScript:
+return localStorage.getItem('operations');
+Without any arguments.</msg>
+<msg timestamp="20240814 18:19:24.134" level="INFO">${token} = {"sessions":{"organisation_id":"89","user_id":4831,"forceLogin":0,"loading":false,"syncLoading":true,"user":{"id":4831,"v_id":"89","employee_code":"123","sso_user_id":null,"gender":"0","dob":"1970-01-...</msg>
+<status status="PASS" starttime="20240814 18:19:24.039" endtime="20240814 18:19:24.134"/>
+</kw>
+<kw name="Extract Required Fields" library="utilities">
+<var>${extracted_data}</var>
+<arg>${token}</arg>
+<msg timestamp="20240814 18:19:24.135" level="INFO">${extracted_data} = {
+    "api_token": "3fcQtUbcOAR7rz0iKx7QtFdD7g0jsBFrFKxZGs56IBAGwKWLFx",
+    "v_id": "89",
+    "store_id": 577,
+    "licence": null,
+    "vu_id": 4831,
+    "terminal_id": null,
+    "url": "/revoke-lic...</msg>
+<status status="PASS" starttime="20240814 18:19:24.135" endtime="20240814 18:19:24.135"/>
+</kw>
+<kw name="Merge And Update Data With Json Output" library="utilities">
+<var>${updated_data}</var>
+<arg>${EXTRACTED_DATA}</arg>
+<arg>${udidtoken}</arg>
+<arg>${my_dict.serial_key}</arg>
+<msg timestamp="20240814 18:19:24.209" level="INFO">${updated_data} = {"api_token": "3fcQtUbcOAR7rz0iKx7QtFdD7g0jsBFrFKxZGs56IBAGwKWLFx", "v_id": "89", "store_id": 577, "licence": "307260624P3E", "vu_id": 4831, "terminal_id": null, "url": "/revoke-licence?", "trans_from...</msg>
+<status status="PASS" starttime="20240814 18:19:24.136" endtime="20240814 18:19:24.209"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>${updated_data}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240814 18:19:24.210" level="INFO">{"api_token": "3fcQtUbcOAR7rz0iKx7QtFdD7g0jsBFrFKxZGs56IBAGwKWLFx", "v_id": "89", "store_id": 577, "licence": "307260624P3E", "vu_id": 4831, "terminal_id": null, "url": "/revoke-licence?", "trans_from": "CLOUD_TAB_WEB", "session_id": 0, "udidtoken": "$2y$10$71tRKXw4unYcKe7t91BrFOdpkMANtjnYUaapRd/Nm2DINBAbcr90e"}</msg>
+<status status="PASS" starttime="20240814 18:19:24.209" endtime="20240814 18:19:24.210"/>
+</kw>
+<msg timestamp="20240814 18:19:24.210" level="INFO">${response} = {"api_token": "3fcQtUbcOAR7rz0iKx7QtFdD7g0jsBFrFKxZGs56IBAGwKWLFx", "v_id": "89", "store_id": 577, "licence": "307260624P3E", "vu_id": 4831, "terminal_id": null, "url": "/revoke-licence?", "trans_from...</msg>
+<status status="PASS" starttime="20240814 18:19:20.046" endtime="20240814 18:19:24.210"/>
+</kw>
+<kw name="Open The Session" library="promo_keyword">
+<arg>${pos_data}</arg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${my_dict}</var>
+<arg>&amp;{search_data}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240814 18:19:24.212" level="INFO">${my_dict} = {'TC_Id': 'R_1', 'serial_key': '307260624P3E', 'username_admin': 'zwshashank.agrawal@teampureplay.com', 'password_admin': 123456, 'username_pos': 'userone_p1 ', 'password_pos': 123456, 'closing_balanc...</msg>
+<status status="PASS" starttime="20240814 18:19:24.211" endtime="20240814 18:19:24.213"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${catalog_update_failed}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${catalog_update_failed_heading}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Visible" library="SeleniumLibrary">
+<arg>${catalog_update_failed_heading}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<msg timestamp="20240814 18:19:24.480" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-36.png"&gt;&lt;img src="selenium-screenshot-36.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20240814 18:19:24.481" level="FAIL">Element with locator '//h5[contains(text(),"Catalog Update Failed")]' not found.</msg>
+<status status="FAIL" starttime="20240814 18:19:24.214" endtime="20240814 18:19:24.497"/>
+</kw>
+<msg timestamp="20240814 18:19:24.498" level="INFO">${catalog_update_failed} = False</msg>
+<status status="PASS" starttime="20240814 18:19:24.213" endtime="20240814 18:19:24.498"/>
+</kw>
+<if>
+<branch type="IF" condition="${catalog_update_failed}">
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${catalog_close_button}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:24.499" endtime="20240814 18:19:24.499"/>
+</kw>
+<status status="NOT RUN" starttime="20240814 18:19:24.498" endtime="20240814 18:19:24.499"/>
+</branch>
+<status status="PASS" starttime="20240814 18:19:24.498" endtime="20240814 18:19:24.500"/>
+</if>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${catalog_update}</var>
+<arg>Wait Until Page Contains Element</arg>
+<arg>${done_progress}</arg>
+<arg>timeout=10</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${done_progress}</arg>
+<arg>timeout=10</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240814 18:19:24.501" endtime="20240814 18:19:24.518"/>
+</kw>
+<msg timestamp="20240814 18:19:24.518" level="INFO">${catalog_update} = True</msg>
+<status status="PASS" starttime="20240814 18:19:24.500" endtime="20240814 18:19:24.520"/>
+</kw>
+<if>
+<branch type="IF" condition="${catalog_update}">
+<kw name="Click Button" library="SeleniumLibrary">
+<arg>${done_progress}</arg>
+<doc>Clicks the button identified by ``locator``.</doc>
+<msg timestamp="20240814 18:19:24.523" level="INFO">Clicking button '//button[@id="done-progress"]'.</msg>
+<status status="PASS" starttime="20240814 18:19:24.522" endtime="20240814 18:19:24.606"/>
+</kw>
+<status status="PASS" starttime="20240814 18:19:24.521" endtime="20240814 18:19:24.607"/>
+</branch>
+<status status="PASS" starttime="20240814 18:19:24.521" endtime="20240814 18:19:24.607"/>
+</if>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${closing_balance_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${closing_balance}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Visible" library="SeleniumLibrary">
+<arg>${closing_balance}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<msg timestamp="20240814 18:19:24.874" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-37.png"&gt;&lt;img src="selenium-screenshot-37.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20240814 18:19:24.875" level="FAIL">Element with locator '//div//header//h5[@class="modal-title"and contains(text(),"Close Session")]//following::div[@class="col-md-12 col-lg-12"]//input[@class="w-100 form-control form-control-lg"]' not found.</msg>
+<status status="FAIL" starttime="20240814 18:19:24.609" endtime="20240814 18:19:24.877"/>
+</kw>
+<msg timestamp="20240814 18:19:24.877" level="INFO">${closing_balance_visible} = False</msg>
+<status status="PASS" starttime="20240814 18:19:24.608" endtime="20240814 18:19:24.878"/>
+</kw>
+<if>
+<branch type="IF" condition="${closing_balance_visible}">
+<kw name="Convert Items To List" library="utilities">
+<var>${items_list}</var>
+<arg>${my_dict.closing_balance}</arg>
+<status status="NOT RUN" starttime="20240814 18:19:24.879" endtime="20240814 18:19:24.879"/>
+</kw>
+<kw name="Convert Item List To Dictionary" library="utilities">
+<var>${items_dict}</var>
+<arg>${my_dict.closing_balance}</arg>
+<status status="NOT RUN" starttime="20240814 18:19:24.880" endtime="20240814 18:19:24.880"/>
+</kw>
+<for flavor="IN">
+<var>${item}</var>
+<value>@{items_dict.items()}</value>
+<iter>
+<var name="${item}"/>
+<kw name="Set Variable" library="BuiltIn">
+<var>${key}</var>
+<arg>${item}[0]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:24.882" endtime="20240814 18:19:24.882"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${key}</var>
+<arg>${key}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:24.883" endtime="20240814 18:19:24.883"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${values}</var>
+<arg>${item}[1]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:24.884" endtime="20240814 18:19:24.884"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${closing_balance}</arg>
+<arg>${key}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:24.884" endtime="20240814 18:19:24.885"/>
+</kw>
+<status status="NOT RUN" starttime="20240814 18:19:24.881" endtime="20240814 18:19:24.885"/>
+</iter>
+<status status="NOT RUN" starttime="20240814 18:19:24.881" endtime="20240814 18:19:24.885"/>
+</for>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${force_close_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:24.885" endtime="20240814 18:19:24.886"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" library="SeleniumLibrary">
+<arg>${force_close_button}</arg>
+<arg>timeout=20s</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:24.886" endtime="20240814 18:19:24.886"/>
+</kw>
+<kw name="Wait Until Element Is Visible" library="SeleniumLibrary">
+<arg>${opening_balance}</arg>
+<arg>timeout=20s</arg>
+<doc>Waits until the element ``locator`` is visible.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:24.886" endtime="20240814 18:19:24.886"/>
+</kw>
+<status status="NOT RUN" starttime="20240814 18:19:24.878" endtime="20240814 18:19:24.887"/>
+</branch>
+<status status="PASS" starttime="20240814 18:19:24.878" endtime="20240814 18:19:24.887"/>
+</if>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${closing_balance_specify_denomination_visible}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${closing_balance_note_tab}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Visible" library="SeleniumLibrary">
+<arg>${closing_balance_note_tab}</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<msg timestamp="20240814 18:19:25.072" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-38.png"&gt;&lt;img src="selenium-screenshot-38.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20240814 18:19:25.074" level="FAIL">Element with locator '//h5[text()="Close Session"]//ancestor::div//a[(contains(text(),"Notes")) and @role="tab"]' not found.</msg>
+<status status="FAIL" starttime="20240814 18:19:24.888" endtime="20240814 18:19:25.076"/>
+</kw>
+<msg timestamp="20240814 18:19:25.076" level="INFO">${closing_balance_specify_denomination_visible} = False</msg>
+<status status="PASS" starttime="20240814 18:19:24.887" endtime="20240814 18:19:25.077"/>
+</kw>
+<if>
+<branch type="IF" condition="${closing_balance_specify_denomination_visible}">
+<kw name="Convert Items To List" library="utilities">
+<var>${items_list}</var>
+<arg>${my_dict.closing_balance}</arg>
+<status status="NOT RUN" starttime="20240814 18:19:25.078" endtime="20240814 18:19:25.078"/>
+</kw>
+<kw name="Convert Item List To Dictionary" library="utilities">
+<var>${items_dict}</var>
+<arg>${my_dict.closing_balance}</arg>
+<status status="NOT RUN" starttime="20240814 18:19:25.078" endtime="20240814 18:19:25.078"/>
+</kw>
+<for flavor="IN">
+<var>${item}</var>
+<value>@{items_dict.items()}</value>
+<iter>
+<var name="${item}"/>
+<kw name="Set Variable" library="BuiltIn">
+<var>${key}</var>
+<arg>${item}[0]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.079" endtime="20240814 18:19:25.079"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${key}</var>
+<arg>${key}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.080" endtime="20240814 18:19:25.080"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${values}</var>
+<arg>${item}[1]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.080" endtime="20240814 18:19:25.081"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${value}</var>
+<arg>${values}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.081" endtime="20240814 18:19:25.081"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${balance_field}</var>
+<arg>${money_input_field}</arg>
+<arg>AMOUNT</arg>
+<arg>${key}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.081" endtime="20240814 18:19:25.081"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${balance_field}</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.082" endtime="20240814 18:19:25.082"/>
+</kw>
+<status status="NOT RUN" starttime="20240814 18:19:25.079" endtime="20240814 18:19:25.082"/>
+</iter>
+<status status="NOT RUN" starttime="20240814 18:19:25.079" endtime="20240814 18:19:25.082"/>
+</for>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${open_session_submit_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.084" endtime="20240814 18:19:25.084"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" library="SeleniumLibrary">
+<arg>${closing_balance_note_tab}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.084" endtime="20240814 18:19:25.084"/>
+</kw>
+<status status="NOT RUN" starttime="20240814 18:19:25.077" endtime="20240814 18:19:25.084"/>
+</branch>
+<status status="PASS" starttime="20240814 18:19:25.077" endtime="20240814 18:19:25.085"/>
+</if>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${opening_session_present}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${opening_balance}</arg>
+<arg>timeout=10s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Visible" library="SeleniumLibrary">
+<arg>${opening_balance}</arg>
+<arg>timeout=10s</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<msg timestamp="20240814 18:19:25.266" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-39.png"&gt;&lt;img src="selenium-screenshot-39.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20240814 18:19:25.266" level="FAIL">Element with locator '//div//header//h5[@class="modal-title"and contains(text(),"Open Session")]//following::div[@class="col-md-12 col-lg-12"]//input[@class="w-100 form-control form-control-lg"]' not found.</msg>
+<status status="FAIL" starttime="20240814 18:19:25.085" endtime="20240814 18:19:25.269"/>
+</kw>
+<msg timestamp="20240814 18:19:25.269" level="INFO">${opening_session_present} = False</msg>
+<status status="PASS" starttime="20240814 18:19:25.085" endtime="20240814 18:19:25.269"/>
+</kw>
+<if>
+<branch type="IF" condition="${opening_session_present}">
+<kw name="Clear Element Text" library="SeleniumLibrary">
+<arg>${opening_balance}</arg>
+<doc>Clears the value of the text-input-element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.271" endtime="20240814 18:19:25.271"/>
+</kw>
+<kw name="Convert Items To List" library="utilities">
+<var>${items_list}</var>
+<arg>${my_dict.opening_balance}</arg>
+<status status="NOT RUN" starttime="20240814 18:19:25.271" endtime="20240814 18:19:25.272"/>
+</kw>
+<kw name="Convert Item List To Dictionary" library="utilities">
+<var>${items_dict}</var>
+<arg>${my_dict.opening_balance}</arg>
+<status status="NOT RUN" starttime="20240814 18:19:25.272" endtime="20240814 18:19:25.272"/>
+</kw>
+<for flavor="IN">
+<var>${item}</var>
+<value>@{items_dict.items()}</value>
+<iter>
+<var name="${item}"/>
+<kw name="Set Variable" library="BuiltIn">
+<var>${key}</var>
+<arg>${item}[0]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.273" endtime="20240814 18:19:25.273"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${key}</var>
+<arg>${key}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.273" endtime="20240814 18:19:25.274"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${values}</var>
+<arg>${item}[1]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.274" endtime="20240814 18:19:25.274"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${opening_balance}</arg>
+<arg>${key}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.274" endtime="20240814 18:19:25.274"/>
+</kw>
+<status status="NOT RUN" starttime="20240814 18:19:25.272" endtime="20240814 18:19:25.274"/>
+</iter>
+<status status="NOT RUN" starttime="20240814 18:19:25.272" endtime="20240814 18:19:25.276"/>
+</for>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${open_session_submit_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.276" endtime="20240814 18:19:25.276"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" library="SeleniumLibrary">
+<arg>${opening_balance}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.276" endtime="20240814 18:19:25.277"/>
+</kw>
+<status status="NOT RUN" starttime="20240814 18:19:25.269" endtime="20240814 18:19:25.277"/>
+</branch>
+<status status="PASS" starttime="20240814 18:19:25.269" endtime="20240814 18:19:25.277"/>
+</if>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${opening_session_specify_denomination_present}</var>
+<arg>Element Should Be Visible</arg>
+<arg>${open_session_notes_tab}</arg>
+<arg>timeout=10s</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Visible" library="SeleniumLibrary">
+<arg>${open_session_notes_tab}</arg>
+<arg>timeout=10s</arg>
+<doc>Verifies that the element identified by ``locator`` is visible.</doc>
+<msg timestamp="20240814 18:19:25.444" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-40.png"&gt;&lt;img src="selenium-screenshot-40.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg timestamp="20240814 18:19:25.445" level="FAIL">Element with locator '//h5[text()="Open Session"]//ancestor::div//a[(contains(text(),"Notes")) and @role="tab"]' not found.</msg>
+<status status="FAIL" starttime="20240814 18:19:25.278" endtime="20240814 18:19:25.447"/>
+</kw>
+<msg timestamp="20240814 18:19:25.449" level="INFO">${opening_session_specify_denomination_present} = False</msg>
+<status status="PASS" starttime="20240814 18:19:25.277" endtime="20240814 18:19:25.449"/>
+</kw>
+<if>
+<branch type="IF" condition="${opening_session_specify_denomination_present}">
+<kw name="Convert Items To List" library="utilities">
+<var>${items_list}</var>
+<arg>${my_dict.opening_balance}</arg>
+<status status="NOT RUN" starttime="20240814 18:19:25.451" endtime="20240814 18:19:25.451"/>
+</kw>
+<kw name="Convert Item List To Dictionary" library="utilities">
+<var>${items_dict}</var>
+<arg>${my_dict.opening_balance}</arg>
+<status status="NOT RUN" starttime="20240814 18:19:25.451" endtime="20240814 18:19:25.452"/>
+</kw>
+<for flavor="IN">
+<var>${item}</var>
+<value>@{items_dict.items()}</value>
+<iter>
+<var name="${item}"/>
+<kw name="Set Variable" library="BuiltIn">
+<var>${key_int}</var>
+<arg>${item}[0]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.453" endtime="20240814 18:19:25.454"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${key}</var>
+<arg>${key_int}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.454" endtime="20240814 18:19:25.454"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${values}</var>
+<arg>${item}[1]</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.455" endtime="20240814 18:19:25.455"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${value}</var>
+<arg>${values}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.455" endtime="20240814 18:19:25.456"/>
+</kw>
+<kw name="Replace String" library="String">
+<var>${balance_field}</var>
+<arg>${money_input_field}</arg>
+<arg>AMOUNT</arg>
+<arg>${key}</arg>
+<doc>Replaces ``search_for`` in the given ``string`` with ``replace_with``.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.456" endtime="20240814 18:19:25.457"/>
+</kw>
+<kw name="Input Text" library="SeleniumLibrary">
+<arg>${balance_field}</arg>
+<arg>${value}</arg>
+<doc>Types the given ``text`` into the text field identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.457" endtime="20240814 18:19:25.457"/>
+</kw>
+<status status="NOT RUN" starttime="20240814 18:19:25.452" endtime="20240814 18:19:25.459"/>
+</iter>
+<status status="NOT RUN" starttime="20240814 18:19:25.452" endtime="20240814 18:19:25.459"/>
+</for>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${open_session_submit_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.460" endtime="20240814 18:19:25.460"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" library="SeleniumLibrary">
+<arg>${opening_balance}</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="NOT RUN" starttime="20240814 18:19:25.460" endtime="20240814 18:19:25.460"/>
+</kw>
+<status status="NOT RUN" starttime="20240814 18:19:25.450" endtime="20240814 18:19:25.461"/>
+</branch>
+<status status="PASS" starttime="20240814 18:19:25.450" endtime="20240814 18:19:25.461"/>
+</if>
+<status status="PASS" starttime="20240814 18:19:24.210" endtime="20240814 18:19:25.461"/>
+</kw>
+<kw name="Change Billing Mode" library="billing_keyword">
+<arg>${pos_data}</arg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${my_dict}</var>
+<arg>&amp;{mode}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240814 18:19:25.463" level="INFO">${my_dict} = {'TC_Id': 'R_1', 'serial_key': '307260624P3E', 'username_admin': 'zwshashank.agrawal@teampureplay.com', 'password_admin': 123456, 'username_pos': 'userone_p1 ', 'password_pos': 123456, 'closing_balanc...</msg>
+<status status="PASS" starttime="20240814 18:19:25.462" endtime="20240814 18:19:25.463"/>
+</kw>
+<kw name="Run Keyword And Return Status" library="BuiltIn">
+<var>${clear_item_enabled}</var>
+<arg>Element Should Be Enabled</arg>
+<arg>${clear_all_items}</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${clear_all_items}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240814 18:19:25.464" endtime="20240814 18:19:25.515"/>
+</kw>
+<msg timestamp="20240814 18:19:25.515" level="INFO">${clear_item_enabled} = True</msg>
+<status status="PASS" starttime="20240814 18:19:25.464" endtime="20240814 18:19:25.515"/>
+</kw>
+<if>
+<branch type="IF" condition="${clear_item_enabled}">
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${clear_all_items}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240814 18:19:25.517" level="INFO">Clicking element '(//button[@class='btn mr-1 btn-danger btn-block'])[2]'.</msg>
+<status status="PASS" starttime="20240814 18:19:25.516" endtime="20240814 18:19:25.846"/>
+</kw>
+<kw name="Wait Until Element Is Not Visible" library="SeleniumLibrary">
+<arg>${first_item_product_name}</arg>
+<arg>timeout=20s</arg>
+<doc>Waits until the element ``locator`` is not visible.</doc>
+<status status="PASS" starttime="20240814 18:19:25.847" endtime="20240814 18:19:26.755"/>
+</kw>
+<status status="PASS" starttime="20240814 18:19:25.516" endtime="20240814 18:19:26.755"/>
+</branch>
+<status status="PASS" starttime="20240814 18:19:25.515" endtime="20240814 18:19:26.757"/>
+</if>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${switch_billing_dropdown}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240814 18:19:26.757" endtime="20240814 18:19:26.779"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${switch_billing_dropdown}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240814 18:19:26.780" level="INFO">Clicking element '//div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]'.</msg>
+<status status="PASS" starttime="20240814 18:19:26.780" endtime="20240814 18:19:26.832"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//a[contains(text(),"${my_dict.Mode}")]</arg>
+<arg>timeout=10s</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240814 18:19:26.833" endtime="20240814 18:19:26.862"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>//a[contains(text(),"${my_dict.Mode}")]</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240814 18:19:26.874" level="INFO">Clicking element '//a[contains(text(),"Return")]'.</msg>
+<status status="PASS" starttime="20240814 18:19:26.862" endtime="20240814 18:19:26.947"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${switch_modal_text}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240814 18:19:26.947" endtime="20240814 18:19:26.964"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>${switch_confirm_button}</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240814 18:19:26.964" endtime="20240814 18:19:26.982"/>
+</kw>
+<kw name="Page Should Contain Element" library="SeleniumLibrary">
+<arg>${switch_modal_text}</arg>
+<doc>Verifies that element ``locator`` is found on the current page.</doc>
+<msg timestamp="20240814 18:19:26.997" level="INFO">Current page contains element '//div[@class="modal-body"]//span'.</msg>
+<status status="PASS" starttime="20240814 18:19:26.983" endtime="20240814 18:19:26.998"/>
+</kw>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${switch_confirm_button}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240814 18:19:26.998" endtime="20240814 18:19:27.036"/>
+</kw>
+<kw name="Element Should Be Enabled" library="SeleniumLibrary">
+<arg>${switch_cancel_button}</arg>
+<doc>Verifies that element identified by ``locator`` is enabled.</doc>
+<status status="PASS" starttime="20240814 18:19:27.037" endtime="20240814 18:19:27.080"/>
+</kw>
+<kw name="Click Element" library="SeleniumLibrary">
+<arg>${switch_confirm_button}</arg>
+<doc>Click the element identified by ``locator``.</doc>
+<msg timestamp="20240814 18:19:27.081" level="INFO">Clicking element '//button[@id="switch-mode-confirm"]'.</msg>
+<status status="PASS" starttime="20240814 18:19:27.080" endtime="20240814 18:19:27.155"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Mode}"]</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240814 18:19:27.155" endtime="20240814 18:19:27.187"/>
+</kw>
+<status status="PASS" starttime="20240814 18:19:25.461" endtime="20240814 18:19:27.188"/>
+</kw>
+<kw name="Verify Return mark enable in policies" library="adhoc_return_keywords">
+<arg>${pos_data}</arg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${my_dict}</var>
+<arg>&amp;{mode}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240814 18:19:27.190" level="INFO">${my_dict} = {'TC_Id': 'R_1', 'serial_key': '307260624P3E', 'username_admin': 'zwshashank.agrawal@teampureplay.com', 'password_admin': 123456, 'username_pos': 'userone_p1 ', 'password_pos': 123456, 'closing_balanc...</msg>
+<status status="PASS" starttime="20240814 18:19:27.188" endtime="20240814 18:19:27.190"/>
+</kw>
+<kw name="Wait Until Page Contains Element" library="SeleniumLibrary">
+<arg>//div[@class="dropdown b-dropdown switch-billing fs-12 float-right btn-group"]//button[text()="${my_dict.Mode}"]</arg>
+<doc>Waits until the element ``locator`` appears on the current page.</doc>
+<status status="PASS" starttime="20240814 18:19:27.191" endtime="20240814 18:19:27.214"/>
+</kw>
+<status status="PASS" starttime="20240814 18:19:27.188" endtime="20240814 18:19:27.214"/>
+</kw>
+<kw name="Revoke Licence Key | API" library="login_keyword">
+<arg>${response}</arg>
+<arg>${pos_data}</arg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${my_dict}</var>
+<arg>&amp;{pos_data}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240814 18:19:27.217" level="INFO">${my_dict} = {'TC_Id': 'R_1', 'serial_key': '307260624P3E', 'username_admin': 'zwshashank.agrawal@teampureplay.com', 'password_admin': 123456, 'username_pos': 'userone_p1 ', 'password_pos': 123456, 'closing_balanc...</msg>
+<status status="PASS" starttime="20240814 18:19:27.216" endtime="20240814 18:19:27.217"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${body}</var>
+<arg>${response}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240814 18:19:27.218" level="INFO">${body} = {"api_token": "3fcQtUbcOAR7rz0iKx7QtFdD7g0jsBFrFKxZGs56IBAGwKWLFx", "v_id": "89", "store_id": 577, "licence": "307260624P3E", "vu_id": 4831, "terminal_id": null, "url": "/revoke-licence?", "trans_from...</msg>
+<status status="PASS" starttime="20240814 18:19:27.217" endtime="20240814 18:19:27.218"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Connection=keep-alive</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240814 18:19:27.219" level="INFO">${header} = {'Content-Type': 'application/json', 'Connection': 'keep-alive'}</msg>
+<status status="PASS" starttime="20240814 18:19:27.218" endtime="20240814 18:19:27.219"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>revoke</arg>
+<arg>${base_url}</arg>
+<arg>headers=${header}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20240814 18:19:27.221" level="INFO">Creating Session using : alias=revoke, url=https://staging.api.gozwing.com, headers={'Content-Type': 'application/json', 'Connection': 'keep-alive'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20240814 18:19:27.220" endtime="20240814 18:19:27.222"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${api_response}</var>
+<arg>revoke</arg>
+<arg>/revoke-licence</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20240814 18:19:27.591" level="INFO">POST Request : url=https://staging.api.gozwing.com/revoke-licence 
+ path_url=/revoke-licence 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '313'} 
+ body={"api_token": "3fcQtUbcOAR7rz0iKx7QtFdD7g0jsBFrFKxZGs56IBAGwKWLFx", "v_id": "89", "store_id": 577, "licence": "307260624P3E", "vu_id": 4831, "terminal_id": null, "url": "/revoke-licence?", "trans_from": "CLOUD_TAB_WEB", "session_id": 0, "udidtoken": "$2y$10$71tRKXw4unYcKe7t91BrFOdpkMANtjnYUaapRd/Nm2DINBAbcr90e"} 
+ </msg>
+<msg timestamp="20240814 18:19:27.591" level="INFO">POST Response : url=https://staging.api.gozwing.com/revoke-licence 
+ status=200, reason=OK 
+ headers={'Date': 'Wed, 14 Aug 2024 12:49:27 GMT', 'Server': 'Apache/2.4.29 (Ubuntu)', 'Cache-Control': 'no-cache, private', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Transfer-Encoding': 'chunked', 'Content-Type': 'application/json'} 
+ body={"status":"success","message":"Device revoked successfully."} 
+ </msg>
+<msg timestamp="20240814 18:19:27.592" level="INFO">C:\Users\Mrunal\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1103: InsecureRequestWarning: Unverified HTTPS request is being made to host 'staging.api.gozwing.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg timestamp="20240814 18:19:27.592" level="INFO">${api_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240814 18:19:27.222" endtime="20240814 18:19:27.592"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${status_code}</var>
+<arg>${api_response.status_code}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20240814 18:19:27.606" level="INFO">${status_code} = 200</msg>
+<status status="PASS" starttime="20240814 18:19:27.593" endtime="20240814 18:19:27.607"/>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<arg>'${status_code}' != '200'</arg>
+<arg>Tear It Down If Test Case Failed</arg>
+<arg>${my_dict}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" starttime="20240814 18:19:27.607" endtime="20240814 18:19:27.609"/>
+</kw>
+<kw name="Reload Page" library="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" starttime="20240814 18:19:27.609" endtime="20240814 18:19:28.414"/>
+</kw>
+<kw name="Logout After Revoke" library="login_keyword">
+<arg>${response}</arg>
+<arg>${my_dict}</arg>
+<kw name="Modify Json Data" library="utilities">
+<var>${updated_response}</var>
+<arg>${response}</arg>
+<arg>${my_dict.user_mobile}</arg>
+<msg timestamp="20240814 18:19:28.421" level="INFO">${updated_response} = {"api_token": "3fcQtUbcOAR7rz0iKx7QtFdD7g0jsBFrFKxZGs56IBAGwKWLFx", "v_id": "89", "store_id": 577, "licence": "307260624P3E", "vu_id": 4831, "trans_from": "CLOUD_TAB_WEB", "session_id": 0, "mobile": 7...</msg>
+<status status="PASS" starttime="20240814 18:19:28.415" endtime="20240814 18:19:28.422"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${header}</var>
+<arg>Content-Type=application/json</arg>
+<arg>Connection=keep-alive</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20240814 18:19:28.422" level="INFO">${header} = {'Content-Type': 'application/json', 'Connection': 'keep-alive'}</msg>
+<status status="PASS" starttime="20240814 18:19:28.422" endtime="20240814 18:19:28.422"/>
+</kw>
+<kw name="Create Session" library="RequestsLibrary">
+<arg>logout</arg>
+<arg>${BASE_URL}</arg>
+<arg>headers=${header}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20240814 18:19:28.423" level="INFO">Creating Session using : alias=logout, url=https://staging.api.gozwing.com, headers={'Content-Type': 'application/json', 'Connection': 'keep-alive'},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20240814 18:19:28.422" endtime="20240814 18:19:28.423"/>
+</kw>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${api_response}</var>
+<arg>logout</arg>
+<arg>/vendor/logout</arg>
+<arg>data=${updated_response}</arg>
+<arg>headers=${header}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20240814 18:19:28.642" level="INFO">GET Request : url=https://staging.api.gozwing.com/vendor/logout 
+ path_url=/vendor/logout 
+ headers={'User-Agent': 'python-requests/2.32.3', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '239'} 
+ body={"api_token": "3fcQtUbcOAR7rz0iKx7QtFdD7g0jsBFrFKxZGs56IBAGwKWLFx", "v_id": "89", "store_id": 577, "licence": "307260624P3E", "vu_id": 4831, "trans_from": "CLOUD_TAB_WEB", "session_id": 0, "mobile": 7418529630, "url": "%2Fvendor%2Flogout"} 
+ </msg>
+<msg timestamp="20240814 18:19:28.642" level="INFO">GET Response : url=https://staging.api.gozwing.com/vendor/logout 
+ status=200, reason=OK 
+ headers={'Date': 'Wed, 14 Aug 2024 12:49:28 GMT', 'Server': 'Apache/2.4.29 (Ubuntu)', 'Cache-Control': 'no-cache, private', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Transfer-Encoding': 'chunked', 'Content-Type': 'application/json'} 
+ body={"status":"logout_redirect","message":"Logged Out Successfully"} 
+ </msg>
+<msg timestamp="20240814 18:19:28.643" level="INFO">C:\Users\Mrunal\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1103: InsecureRequestWarning: Unverified HTTPS request is being made to host 'staging.api.gozwing.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+  warnings.warn(</msg>
+<msg timestamp="20240814 18:19:28.643" level="INFO">${api_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240814 18:19:28.423" endtime="20240814 18:19:28.643"/>
+</kw>
+<kw name="Log" library="BuiltIn">
+<arg>API Response: ${api_response}</arg>
+<doc>Logs the given message with the given level.</doc>
+<msg timestamp="20240814 18:19:28.643" level="INFO">API Response: &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20240814 18:19:28.643" endtime="20240814 18:19:28.643"/>
+</kw>
+<status status="PASS" starttime="20240814 18:19:28.415" endtime="20240814 18:19:28.643"/>
+</kw>
+<kw name="Delete All Cookies" library="SeleniumLibrary">
+<doc>Deletes all cookies.</doc>
+<status status="PASS" starttime="20240814 18:19:28.643" endtime="20240814 18:19:28.710"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>window.localStorage.clear();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240814 18:19:28.711" level="INFO">Executing JavaScript:
+window.localStorage.clear();
+Without any arguments.</msg>
+<status status="PASS" starttime="20240814 18:19:28.710" endtime="20240814 18:19:28.718"/>
+</kw>
+<kw name="Execute Javascript" library="SeleniumLibrary">
+<arg>window.sessionStorage.clear();</arg>
+<doc>Executes the given JavaScript code with possible arguments.</doc>
+<msg timestamp="20240814 18:19:28.721" level="INFO">Executing JavaScript:
+window.sessionStorage.clear();
+Without any arguments.</msg>
+<status status="PASS" starttime="20240814 18:19:28.720" endtime="20240814 18:19:28.729"/>
+</kw>
+<kw name="Reload Page" library="SeleniumLibrary">
+<doc>Simulates user reloading page.</doc>
+<status status="PASS" starttime="20240814 18:19:28.729" endtime="20240814 18:19:28.951"/>
+</kw>
+<status status="PASS" starttime="20240814 18:19:27.215" endtime="20240814 18:19:28.952"/>
+</kw>
+<kw name="Close Browser" library="SeleniumLibrary" type="TEARDOWN">
+<doc>Closes the current browser.</doc>
+<status status="PASS" starttime="20240814 18:19:28.954" endtime="20240814 18:19:31.249"/>
+</kw>
+<status status="PASS" starttime="20240814 18:19:16.542" endtime="20240814 18:19:31.249"/>
+</test>
+<status status="PASS" starttime="20240814 18:19:11.250" endtime="20240814 18:19:31.250"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="Adhoc Return Test Cases">Adhoc Return Test Cases</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
